@@ -76,6 +76,38 @@ const Navigation = () => {
                 {link.label}
               </Link>
             ))}
+            
+            {/* Social Media Links */}
+            <div className="flex items-center space-x-3 border-l border-gray-200 pl-6">
+              <a
+                href="https://linkedin.com/company/orgainseconsulting"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-600 hover:text-orange-500 transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-4 w-4" />
+              </a>
+              <a
+                href="https://x.com/orgainse_ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-600 hover:text-orange-500 transition-colors"
+                aria-label="Twitter"
+              >
+                <Twitter className="h-4 w-4" />
+              </a>
+              <a
+                href="https://instagram.com/orgainse.consulting"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-600 hover:text-orange-500 transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-4 w-4" />
+              </a>
+            </div>
+            
             <Button className="bg-orange-500 hover:bg-orange-600 text-white">
               Book Free Consultation
             </Button>
