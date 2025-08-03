@@ -777,7 +777,7 @@ const About = () => {
                       </div>
                       <div>
                         <h3 className="text-2xl font-bold">The Foundation</h3>
-                        <p className="text-orange-100 font-medium">Strategy & Vision</p>
+                        <p className="text-orange-100 font-medium">AI Strategy & Vision</p>
                       </div>
                     </div>
                     
