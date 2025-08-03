@@ -346,8 +346,8 @@ const Home = () => {
   const handleAIAssessment = () => {
     // Track engagement
     trackLeadAction('ai_assessment_click');
-    // Could open a modal or redirect to assessment page
-    alert("🚀 AI Assessment feature coming soon! For now, book a free consultation to get your personalized AI readiness report.");
+    // Navigate to AI Assessment Tool
+    window.location.href = '/ai-assessment';
   };
 
   // Free Consultation handler
