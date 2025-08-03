@@ -126,6 +126,14 @@ const Navigation = () => {
 
 // Footer Component
 const Footer = () => {
+  const socialLinks = [
+    { icon: Linkedin, href: "https://linkedin.com/company/orgainseconsulting", label: "LinkedIn" },
+    { icon: Twitter, href: "https://x.com/orgainse_ai", label: "Twitter" },
+    { icon: Instagram, href: "https://instagram.com/orgainse.consulting", label: "Instagram" },
+    { icon: Facebook, href: "https://facebook.com/orgainseconsulting", label: "Facebook" },
+    { icon: Youtube, href: "https://youtube.com/@orgainse", label: "YouTube" },
+  ];
+
   return (
     <footer className="bg-slate-800 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -136,12 +144,28 @@ const Footer = () => {
               <img 
                 src="https://customer-assets.emergentagent.com/job_business-catalyst-1/artifacts/635v5nlb_OrgAInse%20Consulting%20%28Website%29.png" 
                 alt="Orgainse Consulting - Let us plan your SUCCESS!!" 
-                className="h-16 w-auto object-contain"
+                className="h-16 w-auto object-contain bg-white rounded-lg px-2 py-1"
               />
             </Link>
             <p className="text-gray-300 text-sm">
               AI-native consulting for innovative businesses. Let us plan your SUCCESS!
             </p>
+            
+            {/* Social Media Links */}
+            <div className="flex space-x-4 pt-4">
+              {socialLinks.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-orange-500 transition-colors"
+                  aria-label={social.label}
+                >
+                  <social.icon className="h-5 w-5" />
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Services */}
@@ -173,18 +197,38 @@ const Footer = () => {
           {/* Contact */}
           <div>
             <h3 className="font-semibold mb-4">Contact</h3>
-            <div className="space-y-2 text-sm text-gray-300">
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4" />
-                <span>+1 (555) 123-4567</span>
+            <div className="space-y-3 text-sm text-gray-300">
+              <div>
+                <div className="font-semibold text-white mb-1">Bangalore, India (HQ)</div>
+                <div className="flex items-center space-x-2 mb-1">
+                  <Phone className="h-4 w-4" />
+                  <span>+91-9740384683</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Phone className="h-4 w-4" />
+                  <span>+91-9740394863</span>
+                </div>
               </div>
-              <div className="flex items-center space-x-2">
-                <Mail className="h-4 w-4" />
-                <span>hello@orgainse.com</span>
+              
+              <div>
+                <div className="font-semibold text-white mb-1">Austin, USA (Corporate)</div>
+                <div className="text-gray-300">Corporate Office</div>
               </div>
+              
+              <div className="space-y-1">
+                <div className="flex items-center space-x-2">
+                  <Mail className="h-4 w-4" />
+                  <span>info@orgainse.com</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Mail className="h-4 w-4" />
+                  <span>support@orgainse.com</span>
+                </div>
+              </div>
+              
               <div className="flex items-center space-x-2">
-                <MapPin className="h-4 w-4" />
-                <span>Global Operations</span>
+                <Globe className="h-4 w-4" />
+                <span>www.orgainse.com</span>
               </div>
             </div>
           </div>
@@ -193,7 +237,10 @@ const Footer = () => {
         <Separator className="my-8 bg-slate-700" />
 
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-300">
-          <p>&copy; 2025 Orgainse Consulting. All rights reserved.</p>
+          <div className="text-center md:text-left">
+            <p>&copy; 2025 Orgainse Consulting. All rights reserved.</p>
+            <p className="text-xs mt-1">Nature of Business: Consultancy and Service Provider</p>
+          </div>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link to="/privacy" className="hover:text-white">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-white">Terms of Service</Link>
