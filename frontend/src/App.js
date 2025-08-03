@@ -817,8 +817,9 @@ const Contact = () => {
                       <Phone className="h-6 w-6 text-orange-600" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-slate-800">Phone</h3>
-                      <p className="text-slate-600">+1 (555) 123-4567</p>
+                      <h3 className="font-semibold text-slate-800">Phone - India (HQ)</h3>
+                      <p className="text-slate-600">+91-9740384683</p>
+                      <p className="text-slate-600">+91-9740394863</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -830,7 +831,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold text-slate-800">Email</h3>
-                      <p className="text-slate-600">hello@orgainse.com</p>
+                      <p className="text-slate-600">info@orgainse.com</p>
+                      <p className="text-slate-600">support@orgainse.com</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -850,11 +852,12 @@ const Contact = () => {
                 <Card>
                   <CardContent className="flex items-center space-x-4 p-6">
                     <div className="p-3 bg-orange-100 rounded-lg">
-                      <Globe className="h-6 w-6 text-orange-600" />
+                      <MapPin className="h-6 w-6 text-orange-600" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-slate-800">Global Reach</h3>
-                      <p className="text-slate-600">IN, US, UK, UAE, ZA, AU, NZ</p>
+                      <h3 className="font-semibold text-slate-800">Our Offices</h3>
+                      <p className="text-slate-600">Bangalore, India (HQ)</p>
+                      <p className="text-slate-600">Austin, USA (Corporate)</p>
                     </div>
                   </CardContent>
                 </Card>
