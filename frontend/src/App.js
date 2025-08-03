@@ -651,69 +651,67 @@ const Home = () => {
             {/* Newsletter Subscription Card */}
             <div className="group relative animate-fade-in" style={{ animationDelay: '200ms' }}>
               <div className="absolute -inset-2 bg-gradient-to-r from-orange-400 to-yellow-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 overflow-hidden rounded-2xl h-[520px] flex flex-col">
+              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 overflow-hidden rounded-2xl flex flex-col">
                 <div className="h-1 bg-gradient-to-r from-orange-400 to-yellow-500"></div>
-                <CardHeader className="p-6 flex-1 flex flex-col">
-                  <div className="flex items-center space-x-3 mb-4">
-                    <div className="p-3 bg-orange-100 rounded-xl group-hover:scale-105 group-hover:rotate-6 transition-all duration-500 shadow-md">
-                      <Mail className="h-6 w-6 text-orange-600" />
+                <CardHeader className="p-5 flex-1">
+                  <div className="flex items-center space-x-3 mb-3">
+                    <div className="p-2 bg-orange-100 rounded-lg group-hover:scale-105 group-hover:rotate-6 transition-all duration-500 shadow-md">
+                      <Mail className="h-5 w-5 text-orange-600" />
                     </div>
                     <div className="flex-1">
-                      <CardTitle className="text-lg text-slate-800 group-hover:text-orange-600 transition-colors leading-tight">
+                      <CardTitle className="text-base text-slate-800 group-hover:text-orange-600 transition-colors leading-tight">
                         AI Strategy Newsletter
                       </CardTitle>
                     </div>
                   </div>
-                  <CardDescription className="text-slate-700 group-hover:text-slate-800 transition-colors leading-relaxed mb-6 text-sm flex-1">
-                    Weekly insights on AI project management, digital transformation trends, and exclusive case studies from successful startups.
+                  <CardDescription className="text-slate-700 group-hover:text-slate-800 transition-colors leading-relaxed mb-4 text-sm">
+                    Weekly insights on AI project management, digital transformation trends, and exclusive case studies.
                   </CardDescription>
                   
                   {/* Newsletter Form */}
-                  <div className="mt-auto">
-                    <form onSubmit={handleNewsletterSubmit} className="space-y-4">
-                      <Input 
-                        type="email" 
-                        value={newsletterEmail}
-                        onChange={(e) => setNewsletterEmail(e.target.value)}
-                        placeholder="Enter your email address"
-                        className="bg-slate-50 border-slate-200 text-slate-800 placeholder-slate-500 focus:border-orange-400 focus:ring-orange-400"
-                        required
-                        disabled={isNewsletterLoading}
-                      />
-                      <button 
-                        type="submit"
-                        disabled={isNewsletterLoading || !newsletterEmail.trim()}
-                        className="w-full group relative px-6 py-3 bg-gradient-to-r from-orange-500 to-yellow-500 text-white font-bold rounded-xl shadow-xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-                      >
-                        <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <span className="relative z-10 flex items-center justify-center">
-                          {isNewsletterLoading ? "Subscribing..." : "Get Free AI Insights"}
-                          {!isNewsletterLoading && <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />}
-                        </span>
-                      </button>
-                      
-                      {/* Status Messages */}
-                      {newsletterStatus === "success" && (
-                        <p className="text-green-600 text-sm text-center font-medium">
-                          🎉 Welcome aboard! Check your email for the AI Transformation Checklist.
-                        </p>
-                      )}
-                      {newsletterStatus === "duplicate" && (
-                        <p className="text-yellow-600 text-sm text-center font-medium">
-                          📧 You're already subscribed! Check your email for resources.
-                        </p>
-                      )}
-                      {newsletterStatus === "error" && (
-                        <p className="text-red-500 text-sm text-center font-medium">
-                          ❌ Something went wrong. Please try again.
-                        </p>
-                      )}
-                      
-                      <p className="text-xs text-slate-600 text-center">
-                        🎁 Instant access to "AI Transformation Checklist" (worth $297)
+                  <form onSubmit={handleNewsletterSubmit} className="space-y-3">
+                    <Input 
+                      type="email" 
+                      value={newsletterEmail}
+                      onChange={(e) => setNewsletterEmail(e.target.value)}
+                      placeholder="Enter your email address"
+                      className="bg-slate-50 border-slate-200 text-slate-800 placeholder-slate-500 focus:border-orange-400 focus:ring-orange-400 h-10"
+                      required
+                      disabled={isNewsletterLoading}
+                    />
+                    <button 
+                      type="submit"
+                      disabled={isNewsletterLoading || !newsletterEmail.trim()}
+                      className="w-full group relative px-4 py-2.5 bg-gradient-to-r from-orange-500 to-yellow-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-sm"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <span className="relative z-10 flex items-center justify-center">
+                        {isNewsletterLoading ? "Subscribing..." : "Get Free AI Insights"}
+                        {!isNewsletterLoading && <ArrowRight className="ml-2 h-3 w-3 group-hover:translate-x-1 transition-transform" />}
+                      </span>
+                    </button>
+                    
+                    {/* Status Messages */}
+                    {newsletterStatus === "success" && (
+                      <p className="text-green-600 text-xs text-center font-medium">
+                        🎉 Welcome! Check your email for resources.
                       </p>
-                    </form>
-                  </div>
+                    )}
+                    {newsletterStatus === "duplicate" && (
+                      <p className="text-yellow-600 text-xs text-center font-medium">
+                        📧 Already subscribed! Check your email.
+                      </p>
+                    )}
+                    {newsletterStatus === "error" && (
+                      <p className="text-red-500 text-xs text-center font-medium">
+                        ❌ Something went wrong. Try again.
+                      </p>
+                    )}
+                    
+                    <p className="text-xs text-slate-600 text-center">
+                      🎁 Free "AI Transformation Checklist" (worth $297)
+                    </p>
+                  </form>
                 </CardHeader>
               </Card>
             </div>
@@ -721,39 +719,37 @@ const Home = () => {
             {/* Free AI Assessment Card */}
             <div className="group relative animate-fade-in" style={{ animationDelay: '400ms' }}>
               <div className="absolute -inset-2 bg-gradient-to-r from-green-400 to-blue-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 overflow-hidden rounded-2xl h-[520px] flex flex-col">
+              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 overflow-hidden rounded-2xl flex flex-col">
                 <div className="h-1 bg-gradient-to-r from-green-400 to-blue-500"></div>
-                <CardHeader className="p-6 flex-1 flex flex-col">
-                  <div className="flex items-center space-x-3 mb-4">
-                    <div className="p-3 bg-green-100 rounded-xl group-hover:scale-105 group-hover:rotate-6 transition-all duration-500 shadow-md">
-                      <Brain className="h-6 w-6 text-green-600" />
+                <CardHeader className="p-5 flex-1">
+                  <div className="flex items-center space-x-3 mb-3">
+                    <div className="p-2 bg-green-100 rounded-lg group-hover:scale-105 group-hover:rotate-6 transition-all duration-500 shadow-md">
+                      <Brain className="h-5 w-5 text-green-600" />
                     </div>
                     <div className="flex-1">
-                      <CardTitle className="text-lg text-slate-800 group-hover:text-green-600 transition-colors leading-tight">
+                      <CardTitle className="text-base text-slate-800 group-hover:text-green-600 transition-colors leading-tight">
                         Free AI Readiness Assessment
                       </CardTitle>
                     </div>
                   </div>
-                  <CardDescription className="text-slate-700 group-hover:text-slate-800 transition-colors leading-relaxed mb-6 text-sm flex-1">
+                  <CardDescription className="text-slate-700 group-hover:text-slate-800 transition-colors leading-relaxed mb-4 text-sm">
                     Discover your company's AI maturity score and get a personalized roadmap for digital transformation in just 5 minutes.
                   </CardDescription>
                   
-                  <div className="mt-auto">
-                    <button 
-                      onClick={handleAIAssessment}
-                      className="w-full group relative px-6 py-3 bg-gradient-to-r from-green-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-green-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden mb-4"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <span className="relative z-10 flex items-center justify-center">
-                        Start Free Assessment
-                        <Target className="ml-2 h-4 w-4 group-hover:rotate-180 transition-transform duration-500" />
-                      </span>
-                    </button>
-                    
-                    <div className="flex items-center justify-center space-x-4 text-xs text-slate-600">
-                      <span className="flex items-center"><CheckCircle className="h-3 w-3 mr-1 text-green-500" /> No signup required</span>
-                      <span className="flex items-center"><CheckCircle className="h-3 w-3 mr-1 text-green-500" /> Instant results</span>
-                    </div>
+                  <button 
+                    onClick={handleAIAssessment}
+                    className="w-full group relative px-4 py-2.5 bg-gradient-to-r from-green-500 to-blue-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-green-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden mb-3 text-sm"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span className="relative z-10 flex items-center justify-center">
+                      Start Free Assessment
+                      <Target className="ml-2 h-3 w-3 group-hover:rotate-180 transition-transform duration-500" />
+                    </span>
+                  </button>
+                  
+                  <div className="flex items-center justify-center space-x-4 text-xs text-slate-600">
+                    <span className="flex items-center"><CheckCircle className="h-3 w-3 mr-1 text-green-500" /> No signup required</span>
+                    <span className="flex items-center"><CheckCircle className="h-3 w-3 mr-1 text-green-500" /> Instant results</span>
                   </div>
                 </CardHeader>
               </Card>
@@ -762,44 +758,42 @@ const Home = () => {
             {/* Free Consultation Card */}
             <div className="group relative animate-fade-in" style={{ animationDelay: '600ms' }}>
               <div className="absolute -inset-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 overflow-hidden rounded-2xl h-[520px] flex flex-col">
+              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 overflow-hidden rounded-2xl flex flex-col">
                 <div className="h-1 bg-gradient-to-r from-purple-400 to-pink-500"></div>
-                <CardHeader className="p-6 flex-1 flex flex-col">
-                  <div className="flex items-center space-x-3 mb-4">
-                    <div className="p-3 bg-purple-100 rounded-xl group-hover:scale-105 group-hover:rotate-6 transition-all duration-500 shadow-md">
-                      <Calendar className="h-6 w-6 text-purple-600" />
+                <CardHeader className="p-5 flex-1">
+                  <div className="flex items-center space-x-3 mb-3">
+                    <div className="p-2 bg-purple-100 rounded-lg group-hover:scale-105 group-hover:rotate-6 transition-all duration-500 shadow-md">
+                      <Calendar className="h-5 w-5 text-purple-600" />
                     </div>
                     <div className="flex-1">
-                      <CardTitle className="text-lg text-slate-800 group-hover:text-purple-600 transition-colors leading-tight">
+                      <CardTitle className="text-base text-slate-800 group-hover:text-purple-600 transition-colors leading-tight">
                         Free Strategy Session
                       </CardTitle>
                     </div>
                   </div>
-                  <CardDescription className="text-slate-700 group-hover:text-slate-800 transition-colors leading-relaxed mb-6 text-sm flex-1">
+                  <CardDescription className="text-slate-700 group-hover:text-slate-800 transition-colors leading-relaxed mb-4 text-sm">
                     Book a 30-minute AI strategy consultation worth $500. Get expert insights on your digital transformation journey.
                   </CardDescription>
                   
-                  <div className="mt-auto">
-                    <button 
-                      onClick={handleFreeConsultation}
-                      className="w-full group relative px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-xl shadow-xl hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden mb-4"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <span className="relative z-10 flex items-center justify-center">
-                        Book Free Session
-                        <Calendar className="ml-2 h-4 w-4 group-hover:scale-110 transition-transform duration-300" />
-                      </span>
-                    </button>
-                    
-                    <div className="text-center">
-                      <div className="flex items-center justify-center space-x-2 text-xs text-slate-600 mb-2">
-                        <Star className="h-3 w-3 text-yellow-500" />
-                        <span>Limited slots available</span>
-                      </div>
-                      <p className="text-xs text-slate-600">
-                        💎 Usually $500/session - FREE for qualified startups
-                      </p>
+                  <button 
+                    onClick={handleFreeConsultation}
+                    className="w-full group relative px-4 py-2.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden mb-3 text-sm"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span className="relative z-10 flex items-center justify-center">
+                      Book Free Session
+                      <Calendar className="ml-2 h-3 w-3 group-hover:scale-110 transition-transform duration-300" />
+                    </span>
+                  </button>
+                  
+                  <div className="text-center">
+                    <div className="flex items-center justify-center space-x-2 text-xs text-slate-600 mb-1">
+                      <Star className="h-3 w-3 text-yellow-500" />
+                      <span>Limited slots available</span>
                     </div>
+                    <p className="text-xs text-slate-600">
+                      💎 Usually $500/session - FREE for qualified startups
+                    </p>
                   </div>
                 </CardHeader>
               </Card>
