@@ -895,9 +895,9 @@ const About = () => {
       <section className="relative bg-gradient-to-br from-slate-50 via-purple-50 to-blue-50 py-20 lg:py-32 overflow-hidden">
         {/* Optimized Background Elements */}
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-3xl animate-pulse will-change-transform"></div>
-          <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-orange-400 to-pink-500 rounded-full blur-3xl animate-pulse animation-delay-2000 will-change-transform"></div>
-          <div className="absolute top-1/2 left-1/4 w-6 h-16 bg-blue-400 rounded-full animate-pulse opacity-40"></div>
+          <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-blue-200 to-purple-200 rounded-full blur-3xl animate-pulse will-change-transform"></div>
+          <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-purple-200 to-pink-200 rounded-full blur-3xl animate-pulse will-change-transform animation-delay-2000"></div>
+          <div className="absolute top-1/2 left-1/4 w-6 h-16 bg-blue-300 rounded-full animate-pulse opacity-40"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
