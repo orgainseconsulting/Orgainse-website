@@ -1562,7 +1562,7 @@ const Contact = () => {
   return (
     <div id="contact" className="min-h-screen">
       {/* Revolutionary Hero Section with SEO */}
-      <section className="relative bg-gradient-to-br from-slate-50 via-green-50 to-blue-50 py-20 lg:py-32 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-slate-50 via-green-50 to-blue-50 py-12 lg:py-16 overflow-hidden">
         {/* Dynamic Background Elements */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-r from-blue-200 to-purple-200 rounded-full blur-3xl animate-pulse float-animation will-change-transform"></div>
