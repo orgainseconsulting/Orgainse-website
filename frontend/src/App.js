@@ -1277,7 +1277,7 @@ const Services = () => {
   const services = [
     {
       title: "AI Project Management Service (PMaaS)",
-      description: "Comprehensive AI project management service with GPT-powered SOW auto-generation, intelligent project planning, and automated risk assessment for startups and SMEs across India, USA, UK, UAE, and Australia.",
+      description: "Comprehensive AI project management service with GPT-powered SOW auto-generation, intelligent project planning, and automated risk assessment for startups and SMEs across India, USA, UK, UAE, Australia, New Zealand, and South Africa.",
       features: ["GPT-powered Project Planning & SOW Auto-generation", "Automated Risk Assessment & Scenario Modeling", "AI Resource Allocation & Timeline Optimization", "Intelligent Performance Analytics & Reporting"],
       icon: Target,
       image: "https://images.unsplash.com/photo-1523875194681-bedd468c58bf?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwyfHxidXNpbmVzcyUyMHN0cmF0ZWd5fGVufDB8fHx8MTc1NDIyNzg5MXww&ixlib=rb-4.1.0&q=85",
