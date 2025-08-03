@@ -307,6 +307,13 @@ const Home = () => {
   const [newsletterStatus, setNewsletterStatus] = useState("");
   const [isNewsletterLoading, setIsNewsletterLoading] = useState(false);
 
+  // Lead generation tracking state
+  const [leadActions, setLeadActions] = useState({
+    assessment: false,
+    consultation: false,
+    resources: []
+  });
+
   // Newsletter subscription handler
   const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
@@ -321,6 +328,8 @@ const Home = () => {
       if (response.status === 200) {
         setNewsletterStatus("success");
         setNewsletterEmail("");
+        // Track successful newsletter signup
+        trackLeadAction('newsletter_signup');
         // Show success message for 3 seconds
         setTimeout(() => setNewsletterStatus(""), 3000);
       }
@@ -335,6 +344,31 @@ const Home = () => {
     } finally {
       setIsNewsletterLoading(false);
     }
+  };
+
+  // AI Assessment handler
+  const handleAIAssessment = () => {
+    // Track engagement
+    trackLeadAction('ai_assessment_click');
+    // Could open a modal or redirect to assessment page
+    alert("🚀 AI Assessment feature coming soon! For now, book a free consultation to get your personalized AI readiness report.");
+  };
+
+  // Free Consultation handler
+  const handleFreeConsultation = () => {
+    // Track engagement
+    trackLeadAction('consultation_click');
+    // Scroll to contact form or open booking modal
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Lead action tracking
+  const trackLeadAction = (action) => {
+    console.log(`Lead action tracked: ${action}`);
+    // This could be enhanced to send to analytics
   };
 
   const stats = [
