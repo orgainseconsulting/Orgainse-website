@@ -721,9 +721,9 @@ const Home = () => {
             {/* Free AI Assessment Card */}
             <div className="group relative animate-fade-in" style={{ animationDelay: '400ms' }}>
               <div className="absolute -inset-2 bg-gradient-to-r from-green-400 to-blue-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-              <Card className="relative bg-white/10 backdrop-blur-lg border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-6 hover:rotate-1 overflow-hidden rounded-3xl">
+              <Card className="relative bg-white/10 backdrop-blur-lg border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-6 hover:rotate-1 overflow-hidden rounded-3xl min-h-[520px] flex flex-col">
                 <div className="h-2 bg-gradient-to-r from-green-400 to-blue-500"></div>
-                <CardHeader className="pb-4">
+                <CardHeader className="pb-4 flex-1 flex flex-col">
                   <div className="flex items-center space-x-4 mb-4">
                     <div className="p-4 bg-green-100 rounded-2xl group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
                       <Brain className="h-8 w-8 text-green-600" />
