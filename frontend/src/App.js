@@ -47,6 +47,7 @@ const Navigation = () => {
     { href: "/services", label: "Services" },
     { href: "/ai-assessment", label: "AI Assessment" },
     { href: "/roi-calculator", label: "ROI Calculator" },
+    { href: "/smart-calendar", label: "Book Consultation" },
     { href: "/contact", label: "Contact" },
   ];
 
