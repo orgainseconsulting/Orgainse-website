@@ -180,19 +180,19 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-slate-800 text-white">
+    <footer className="bg-white text-slate-800 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Company Info with Larger Logo */}
+          {/* Company Info with Much Larger Logo */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center">
               <img 
                 src="https://customer-assets.emergentagent.com/job_business-catalyst-1/artifacts/635v5nlb_OrgAInse%20Consulting%20%28Website%29.png" 
                 alt="Orgainse Consulting - AI-native Digital Transformation Consulting" 
-                className="h-20 w-auto object-contain bg-white rounded-lg px-3 py-2 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                className="h-28 w-auto object-contain bg-white rounded-lg px-4 py-3 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 border border-gray-100"
               />
             </Link>
-            <p className="text-gray-300 text-sm">
+            <p className="text-slate-600 text-sm">
               AI-native consulting for innovative businesses. Let us plan your SUCCESS!
             </p>
             
@@ -204,7 +204,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-orange-500 transition-all duration-300 transform hover:scale-125"
+                  className="text-slate-500 hover:text-orange-500 transition-all duration-300 transform hover:scale-125"
                   aria-label={social.label}
                 >
                   <social.icon className="h-6 w-6" />
@@ -215,8 +215,8 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="font-semibold mb-4">AI-Native Services</h3>
-            <ul className="space-y-2 text-sm text-gray-300">
+            <h3 className="font-semibold mb-4 text-slate-800">AI-Native Services</h3>
+            <ul className="space-y-2 text-sm text-slate-600">
               <li>Business Strategy Development</li>
               <li>Digital Transformation</li>
               <li>Operational Optimization</li>
@@ -228,8 +228,8 @@ const Footer = () => {
 
           {/* Industries */}
           <div>
-            <h3 className="font-semibold mb-4">Industries</h3>
-            <ul className="space-y-2 text-sm text-gray-300">
+            <h3 className="font-semibold mb-4 text-slate-800">Industries</h3>
+            <ul className="space-y-2 text-sm text-slate-600">
               <li>IT Services & Software Development</li>
               <li>EdTech & Education</li>
               <li>FinTech & Financial Services</li>
@@ -241,10 +241,10 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="font-semibold mb-4">Contact</h3>
-            <div className="space-y-3 text-sm text-gray-300">
+            <h3 className="font-semibold mb-4 text-slate-800">Contact</h3>
+            <div className="space-y-3 text-sm text-slate-600">
               <div>
-                <div className="font-semibold text-white mb-1">Bangalore, India (HQ)</div>
+                <div className="font-semibold text-slate-800 mb-1">Bangalore, India (HQ)</div>
                 <div className="flex items-center space-x-2 mb-1">
                   <Phone className="h-4 w-4" />
                   <span>+91-9740384683</span>
@@ -256,8 +256,8 @@ const Footer = () => {
               </div>
               
               <div>
-                <div className="font-semibold text-white mb-1">Austin, USA (Corporate)</div>
-                <div className="text-gray-300">Corporate Office</div>
+                <div className="font-semibold text-slate-800 mb-1">Austin, USA (Corporate)</div>
+                <div className="text-slate-600">Corporate Office</div>
               </div>
               
               <div className="space-y-1">
@@ -279,18 +279,18 @@ const Footer = () => {
           </div>
         </div>
 
-        <Separator className="my-8 bg-slate-700" />
+        <Separator className="my-8 bg-slate-300" />
 
-        <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-300">
+        <div className="flex flex-col md:flex-row justify-between items-center text-sm text-slate-600">
           <div className="text-center md:text-left">
             <p>&copy; 2025 Orgainse Consulting. All rights reserved.</p>
             <p className="text-xs mt-1">Nature of Business: Consultancy and Service Provider</p>
             <p className="text-xs mt-1">Global Compliance Ready: GDPR, HIPAA, SOC 2, ISO 27001</p>
           </div>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link to="/privacy" className="hover:text-white">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-white">Terms of Service</Link>
-            <Link to="/accessibility" className="hover:text-white">Accessibility</Link>
+            <Link to="/privacy" className="hover:text-slate-800">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-slate-800">Terms of Service</Link>
+            <Link to="/accessibility" className="hover:text-slate-800">Accessibility</Link>
           </div>
         </div>
       </div>
