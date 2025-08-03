@@ -433,7 +433,7 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Revolutionary Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-20 lg:py-32 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-12 lg:py-16 overflow-hidden">
         {/* Dynamic Background Elements */}
         <div className="absolute inset-0">
           <div className="absolute top-10 left-10 w-96 h-96 bg-gradient-to-r from-orange-200 to-yellow-200 rounded-full blur-3xl opacity-30 animate-pulse float-animation"></div>
