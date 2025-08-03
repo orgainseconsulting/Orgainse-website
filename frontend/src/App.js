@@ -476,7 +476,7 @@ const Home = () => {
                 <p className="text-xl text-slate-300 leading-relaxed">
                   GPT-powered project management, AI-driven strategy consulting, and intelligent 
                   operational optimization for <span className="text-yellow-400 font-bold">startups</span> and <span className="text-green-400 font-bold">SMEs</span> across 
-                  India, USA, UK, UAE, and Australia.
+                  India, USA, UK, UAE, Australia, New Zealand, and South Africa.
                 </p>
               </div>
 
