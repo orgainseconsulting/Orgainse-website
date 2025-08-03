@@ -52,7 +52,7 @@ const Navigation = () => {
             <img 
               src="https://customer-assets.emergentagent.com/job_business-catalyst-1/artifacts/635v5nlb_OrgAInse%20Consulting%20%28Website%29.png" 
               alt="Orgainse Consulting - Let us plan your SUCCESS!!" 
-              className="h-16 w-auto object-contain"
+              className="h-16 w-auto object-contain bg-white rounded-lg px-2 py-1"
             />
           </Link>
 
