@@ -45,6 +45,7 @@ const Navigation = () => {
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/services", label: "Services" },
+    { href: "/ai-assessment", label: "AI Assessment" },
     { href: "/contact", label: "Contact" },
   ];
 
