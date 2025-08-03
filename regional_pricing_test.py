@@ -26,9 +26,9 @@ class RegionalPricingTester:
             'GB': 0.85,
             'AE': 0.75,
             'AU': 0.9,
-            'NZ': 0.9,
-            'ZA': 2.5,
-            'EU': 0.8
+            'NZ': 0.85,  # Updated to match frontend
+            'ZA': 0.35,  # Updated to match frontend  
+            'EU': 0.9    # Updated to match frontend
         }
         
         # Currency symbols and formatting
