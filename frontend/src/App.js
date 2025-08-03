@@ -2797,9 +2797,12 @@ const ROICalculator = () => {
               ROI Calculator
             </span>
           </h1>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-4">
             Calculate your potential return on investment from AI transformation and digital optimization services
           </p>
+          <div className="flex justify-center">
+            <RegionSelector />
+          </div>
         </div>
 
         {/* ROI Form */}
