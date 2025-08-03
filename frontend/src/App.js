@@ -766,12 +766,12 @@ const Home = () => {
                       <Calendar className="h-6 w-6 text-purple-600" />
                     </div>
                     <div className="flex-1">
-                      <CardTitle className="text-lg text-white group-hover:text-purple-300 transition-colors leading-tight">
+                      <CardTitle className="text-lg text-slate-800 group-hover:text-purple-600 transition-colors leading-tight">
                         Free Strategy Session
                       </CardTitle>
                     </div>
                   </div>
-                  <CardDescription className="text-slate-300 group-hover:text-slate-200 transition-colors leading-relaxed mb-4 text-sm">
+                  <CardDescription className="text-slate-700 group-hover:text-slate-800 transition-colors leading-relaxed mb-4 text-sm">
                     Book a 30-minute AI strategy consultation worth $500. Get expert insights on your digital transformation journey.
                   </CardDescription>
                   
