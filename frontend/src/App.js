@@ -63,10 +63,9 @@ const Navigation = () => {
           {/* Logo - Zoomed and Cropped for Visibility */}
           <Link to="/" className="flex items-center">
             <img 
-              src="https://customer-assets.emergentagent.com/job_business-catalyst-1/artifacts/635v5nlb_OrgAInse%20Consulting%20%28Website%29.png" 
+              src="https://customer-assets.emergentagent.com/job_digital-presence-29/artifacts/xx6a5zd7_Copy%20of%20OrgAInse%20Consulting%20%28Website%29.png" 
               alt="Orgainse Consulting - AI Project Management Service & Digital Transformation" 
-              className="h-32 w-auto object-cover object-center bg-white rounded-lg px-4 py-3 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 border border-gray-100"
-              style={{objectPosition: '50% 30%'}}
+              className="h-20 w-auto object-contain bg-white rounded-xl px-3 py-2 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 border border-gray-100"
             />
           </Link>
 
