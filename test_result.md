@@ -126,11 +126,14 @@ backend:
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "Newsletter subscription endpoint implemented with email validation and duplicate prevention."
+      - working: true
+        agent: "testing"
+        comment: "✅ VERIFIED: Newsletter subscription API fully functional. Successfully tested POST /api/newsletter with valid email addresses. Duplicate prevention working correctly (409 error for existing emails). Data properly stored in MongoDB newsletter_subscriptions collection with unique email index. Email validation working properly."
 
   - task: "Consultation Booking API"
     implemented: true
