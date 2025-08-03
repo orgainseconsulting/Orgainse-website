@@ -371,7 +371,10 @@ metadata:
   run_ui: true
 
 test_plan:
-  current_focus: []
+  current_focus:
+    - "AI Assessment Tool Frontend"
+    - "ROI Calculator Frontend" 
+    - "Smart Calendar Frontend"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
