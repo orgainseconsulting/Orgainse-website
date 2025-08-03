@@ -436,7 +436,7 @@ const Home = () => {
   ];
 
   return (
-    <div id="contact" className="min-h-screen">
+    <div className="min-h-screen">
       {/* Revolutionary Hero Section */}
       <section className="relative bg-gradient-to-br from-slate-900 via-orange-900 to-green-900 py-20 lg:py-32 overflow-hidden">
         {/* Dynamic Background Elements */}
