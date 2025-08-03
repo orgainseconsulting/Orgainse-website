@@ -615,21 +615,21 @@ const Home = () => {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Header Section */}
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-5xl lg:text-6xl font-bold mb-6">
+          <div className="text-center mb-10 animate-fade-in">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
               <span className="text-slate-800">Accelerate Your </span>
               <span className="bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500 bg-clip-text text-transparent animate-gradient-text">
                 AI Transformation
               </span>
             </h2>
-            <p className="text-xl text-slate-700 max-w-4xl mx-auto mb-8 leading-relaxed">
+            <p className="text-lg text-slate-700 max-w-3xl mx-auto mb-6 leading-relaxed">
               Get exclusive insights, free resources, and expert guidance to transform your business with 
               <span className="text-orange-600 font-bold"> AI-native solutions</span>. Join 2,500+ startup leaders already accelerating their success.
             </p>
           </div>
 
           {/* Lead Generation Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             
             {/* Newsletter Subscription Card */}
             <div className="group relative animate-fade-in" style={{ animationDelay: '200ms' }}>
