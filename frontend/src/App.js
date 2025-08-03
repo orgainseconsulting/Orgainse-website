@@ -884,8 +884,9 @@ const About = () => {
                     </div>
                     
                     <p className="text-sm leading-relaxed text-slate-200">
-                      Transformation catalyst. Converts strategies into reality with surgical precision, 
-                      optimizing performance and maximizing ROI for unprecedented client success.
+                      Transformation catalyst with <span className="font-bold">GPT-based risk co-pilot</span>. Converts strategies into reality 
+                      with surgical precision, optimizing performance through <span className="font-bold">predictive maintenance AI agent</span> 
+                      and maximizing ROI for unprecedented client success.
                     </p>
                     
                     <div className="mt-6 flex items-center space-x-2">
