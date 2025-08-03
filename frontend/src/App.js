@@ -3469,23 +3469,25 @@ const SmartCalendar = () => {
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Navigation />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/ai-assessment" element={<AIAssessmentTool />} />
-            <Route path="/roi-calculator" element={<ROICalculator />} />
-            <Route path="/smart-calendar" element={<SmartCalendar />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<TermsOfService />} />
-          </Routes>
-        </main>
-        <Footer />
-      </BrowserRouter>
+      <RegionalPricingProvider>
+        <BrowserRouter>
+          <Navigation />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/ai-assessment" element={<AIAssessmentTool />} />
+              <Route path="/roi-calculator" element={<ROICalculator />} />
+              <Route path="/smart-calendar" element={<SmartCalendar />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsOfService />} />
+            </Routes>
+          </main>
+          <Footer />
+        </BrowserRouter>
+      </RegionalPricingProvider>
     </div>
   );
 }
