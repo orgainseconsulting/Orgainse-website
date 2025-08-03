@@ -31,12 +31,12 @@ class RegionalPricingTester:
             'EU': 0.9    # Updated to match frontend
         }
         
-        # Currency symbols and formatting
+        # Currency symbols and formatting (updated AE symbol)
         self.currency_config = {
             'US': {'symbol': '$', 'code': 'USD'},
             'IN': {'symbol': '₹', 'code': 'INR'},
             'GB': {'symbol': '£', 'code': 'GBP'},
-            'AE': {'symbol': 'د.إ', 'code': 'AED'},
+            'AE': {'symbol': 'AED', 'code': 'AED'},  # Updated to match frontend
             'AU': {'symbol': 'A$', 'code': 'AUD'},
             'NZ': {'symbol': 'NZ$', 'code': 'NZD'},
             'ZA': {'symbol': 'R', 'code': 'ZAR'},
