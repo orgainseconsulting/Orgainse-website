@@ -190,7 +190,8 @@ const Footer = () => {
               <img 
                 src="https://customer-assets.emergentagent.com/job_business-catalyst-1/artifacts/635v5nlb_OrgAInse%20Consulting%20%28Website%29.png" 
                 alt="Orgainse Consulting - AI-native Digital Transformation Consulting" 
-                className="h-28 w-auto object-contain bg-white rounded-lg px-4 py-3 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 border border-gray-100"
+                className="h-28 w-auto object-cover object-center bg-white rounded-lg px-4 py-3 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 border border-gray-100"
+                style={{objectPosition: '50% 30%'}}
               />
             </Link>
             <p className="text-slate-600 text-sm">
