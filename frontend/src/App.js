@@ -783,16 +783,16 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Lead Magnets Section */}
+          {/* Compact Resources Section */}
           <div className="text-center animate-fade-in" style={{ animationDelay: '800ms' }}>
-            <h3 className="text-3xl font-bold text-slate-800 mb-8">
+            <h3 className="text-2xl font-bold text-slate-800 mb-6">
               <span className="bg-gradient-to-r from-orange-500 to-yellow-500 bg-clip-text text-transparent">
                 Free Resources
               </span>
-              <span className="text-slate-800"> to Accelerate Your Growth</span>
+              <span className="text-slate-800"> to Accelerate Growth</span>
             </h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-6">
               {[
                 {
                   title: "AI Implementation Guide",
@@ -817,22 +817,22 @@ const Home = () => {
                 }
               ].map((resource, index) => (
                 <div key={index} className="group relative">
-                  <div className={`absolute -inset-1 bg-gradient-to-r ${resource.gradient} rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-500`}></div>
-                  <div className="relative bg-white/80 backdrop-blur-lg rounded-2xl p-6 border border-white/40 hover:border-orange-300 transition-all duration-300">
-                    <div className="flex items-center justify-between mb-3">
-                      <resource.icon className="h-6 w-6 text-slate-700" />
-                      <Badge className="bg-gradient-to-r from-orange-400 to-yellow-400 text-white font-bold">
+                  <div className={`absolute -inset-1 bg-gradient-to-r ${resource.gradient} rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-500`}></div>
+                  <div className="relative bg-white/80 backdrop-blur-lg rounded-xl p-4 border border-white/40 hover:border-orange-300 transition-all duration-300">
+                    <div className="flex items-center justify-between mb-2">
+                      <resource.icon className="h-5 w-5 text-slate-700" />
+                      <Badge className="bg-gradient-to-r from-orange-400 to-yellow-400 text-white font-bold text-xs">
                         Worth {resource.value}
                       </Badge>
                     </div>
-                    <h4 className="text-slate-800 font-semibold mb-2">{resource.title}</h4>
-                    <p className="text-slate-600 text-sm">{resource.description}</p>
+                    <h4 className="text-slate-800 font-semibold mb-1 text-sm">{resource.title}</h4>
+                    <p className="text-slate-600 text-xs">{resource.description}</p>
                   </div>
                 </div>
               ))}
             </div>
             
-            <p className="text-slate-700 mt-8 text-lg">
+            <p className="text-slate-700 text-base">
               Join our newsletter and get instant access to all resources - 
               <span className="text-orange-600 font-bold"> FREE ($421 value)</span>
             </p>
