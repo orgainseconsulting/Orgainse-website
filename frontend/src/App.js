@@ -640,23 +640,49 @@ const Home = () => {
                   </CardDescription>
                   
                   {/* Newsletter Form */}
-                  <div className="space-y-4">
+                  <form onSubmit={handleNewsletterSubmit} className="space-y-4">
                     <Input 
                       type="email" 
+                      value={newsletterEmail}
+                      onChange={(e) => setNewsletterEmail(e.target.value)}
                       placeholder="Enter your email address"
                       className="bg-white/20 border-white/30 text-white placeholder-slate-300 focus:border-orange-400 focus:ring-orange-400"
+                      required
+                      disabled={isNewsletterLoading}
                     />
-                    <button className="w-full group relative px-6 py-3 bg-gradient-to-r from-orange-500 to-yellow-500 text-white font-bold rounded-xl shadow-xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden">
+                    <button 
+                      type="submit"
+                      disabled={isNewsletterLoading || !newsletterEmail.trim()}
+                      className="w-full group relative px-6 py-3 bg-gradient-to-r from-orange-500 to-yellow-500 text-white font-bold rounded-xl shadow-xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                    >
                       <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       <span className="relative z-10 flex items-center justify-center">
-                        Get Free AI Insights
-                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        {isNewsletterLoading ? "Subscribing..." : "Get Free AI Insights"}
+                        {!isNewsletterLoading && <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />}
                       </span>
                     </button>
+                    
+                    {/* Status Messages */}
+                    {newsletterStatus === "success" && (
+                      <p className="text-green-400 text-sm text-center font-medium">
+                        🎉 Welcome aboard! Check your email for the AI Transformation Checklist.
+                      </p>
+                    )}
+                    {newsletterStatus === "duplicate" && (
+                      <p className="text-yellow-400 text-sm text-center font-medium">
+                        📧 You're already subscribed! Check your email for resources.
+                      </p>
+                    )}
+                    {newsletterStatus === "error" && (
+                      <p className="text-red-400 text-sm text-center font-medium">
+                        ❌ Something went wrong. Please try again.
+                      </p>
+                    )}
+                    
                     <p className="text-xs text-slate-400 text-center">
                       🎁 Instant access to "AI Transformation Checklist" (worth $297)
                     </p>
-                  </div>
+                  </form>
                 </CardHeader>
               </Card>
             </div>
