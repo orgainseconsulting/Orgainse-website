@@ -632,43 +632,69 @@ const About = () => {
 
   return (
     <div className="min-h-screen">
-      {/* SEO Optimized Hero Section */}
-      <section className="bg-gradient-to-br from-slate-50 to-orange-50 py-20 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Revolutionary Hero Section with SEO */}
+      <section className="relative bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 py-20 lg:py-32 overflow-hidden">
+        {/* Optimized Background Elements */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-3xl animate-pulse will-change-transform"></div>
+          <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-orange-400 to-pink-500 rounded-full blur-3xl animate-pulse animation-delay-2000 will-change-transform"></div>
+          <div className="absolute top-1/2 left-1/4 w-6 h-16 bg-blue-400 rounded-full animate-pulse opacity-40"></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
-              <h1 className="text-4xl lg:text-5xl font-bold text-slate-800 mb-6">
-                About Orgainse Consulting
+              <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                <span className="text-white">About </span>
+                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-text">
+                  Orgainse Consulting
+                </span>
               </h1>
-              <h2 className="text-xl text-orange-600 font-semibold mb-4">
-                AI-Native Digital Transformation Leaders
+              
+              <h2 className="text-2xl lg:text-3xl text-blue-300 font-bold mb-6">
+                AI-Native Digital Transformation Leaders & GPT-Powered Project Management Experts
               </h2>
-              <p className="text-xl text-slate-600 mb-8 leading-relaxed">
-                We are an AI-native consulting firm specializing in GPT-powered project management, 
-                intelligent business strategy, and automated operational optimization for startups and SMEs globally.
+              
+              <p className="text-xl text-slate-300 leading-relaxed mb-8">
+                We are an AI-native consulting firm specializing in <span className="text-yellow-400 font-bold">GPT-powered project management</span>, 
+                intelligent business strategy, and <span className="text-green-400 font-bold">automated operational optimization</span> for 
+                startups and SMEs across India, USA, UK, UAE, and Australia.
               </p>
+              
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  <span className="text-slate-700">Founded in 2019 with AI-first approach</span>
+                  <CheckCircle className="h-6 w-6 text-green-400" />
+                  <span className="text-slate-300">Founded in 2019 with <span className="text-blue-400 font-semibold">AI-first approach</span> and predictive risk analytics</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  <span className="text-slate-700">Global operations: India, USA, UK, UAE, Australia</span>
+                  <CheckCircle className="h-6 w-6 text-green-400" />
+                  <span className="text-slate-300">Global operations: <span className="text-orange-400 font-semibold">AI project management service</span> across 7 regions</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  <span className="text-slate-700">AI-powered methodologies with GPT integration</span>
+                  <CheckCircle className="h-6 w-6 text-green-400" />
+                  <span className="text-slate-300">AI-powered methodologies with <span className="text-purple-400 font-semibold">GPT implementation roadmap</span> integration</span>
                 </div>
               </div>
             </div>
 
             <div className="relative animate-fade-in animation-delay-500">
-              <img
-                src="https://images.unsplash.com/39/lIZrwvbeRuuzqOoWJUEn_Photoaday_CSD%20%281%20of%201%29-5.jpg?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHw0fHxidXNpbmVzcyUyMHN0cmF0ZWd5fGVufDB8fHx8MTc1NDIyNzg5MXww&ixlib=rb-4.1.0&q=85"
-                alt="AI-driven Business Strategy Consulting Team"
-                className="rounded-2xl shadow-2xl w-full h-[400px] object-cover transform hover:scale-105 transition-all duration-700"
-              />
+              <div className="relative group">
+                <div className="absolute -inset-4 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-3xl blur opacity-60 group-hover:opacity-80 transition duration-1000 animate-pulse"></div>
+                <img
+                  src="https://images.unsplash.com/39/lIZrwvbeRuuzqOoWJUEn_Photoaday_CSD%20%281%20of%201%29-5.jpg?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHw0fHxidXNpbmVzcyUyMHN0cmF0ZWd5fGVufDB8fHx8MTc1NDIyNzg5MXww&ixlib=rb-4.1.0&q=85"
+                  alt="AI-driven Business Strategy Consulting Team implementing GPT-powered solutions"
+                  className="relative rounded-2xl w-full h-[400px] object-cover transform group-hover:scale-105 transition-all duration-700 shadow-2xl"
+                  loading="lazy"
+                />
+                
+                {/* SEO-Optimized Floating Elements */}
+                <div className="absolute top-4 right-4 bg-blue-500 rounded-full p-3 animate-bounce will-change-transform">
+                  <Brain className="h-6 w-6 text-white" />
+                </div>
+                <div className="absolute bottom-4 left-4 bg-purple-500 rounded-full p-3 animate-pulse will-change-transform">
+                  <Target className="h-6 w-6 text-white" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
