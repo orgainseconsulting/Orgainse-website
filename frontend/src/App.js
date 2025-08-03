@@ -1598,7 +1598,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div id="contact" className="min-h-screen">
       {/* Revolutionary Hero Section with SEO */}
       <section className="relative bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 py-20 lg:py-32 overflow-hidden">
         {/* Dynamic Background Elements */}
