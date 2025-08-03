@@ -586,17 +586,17 @@ const Home = () => {
                   <div className={`h-1 bg-gradient-to-r ${service.gradient}`}></div>
                   
                   <CardHeader className="pb-3 flex-1 flex flex-col p-5">
-                    <div className="flex items-start space-x-4 mb-4">
-                      <div className={`p-4 ${service.iconBg} rounded-2xl group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg`}>
-                        <service.icon className={`h-8 w-8 ${service.iconColor}`} />
+                    <div className="flex items-start space-x-3 mb-3">
+                      <div className={`p-3 ${service.iconBg} rounded-xl group-hover:scale-105 group-hover:rotate-6 transition-all duration-500 shadow-md`}>
+                        <service.icon className={`h-6 w-6 ${service.iconColor}`} />
                       </div>
                       <div className="flex-1">
-                        <CardTitle className="text-xl group-hover:text-orange-600 transition-colors leading-tight">
+                        <CardTitle className="text-lg group-hover:text-orange-600 transition-colors leading-tight">
                           {service.title}
                         </CardTitle>
                       </div>
                     </div>
-                    <CardDescription className="text-slate-600 group-hover:text-slate-700 transition-colors leading-relaxed">
+                    <CardDescription className="text-slate-600 group-hover:text-slate-700 transition-colors leading-relaxed text-sm">
                       {service.description}
                     </CardDescription>
                   </CardHeader>
