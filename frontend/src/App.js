@@ -850,8 +850,9 @@ const About = () => {
                     </div>
                     
                     <p className="text-sm leading-relaxed text-green-50">
-                      Strategic navigation mastery. Guides intelligent decision-making through complex 
-                      markets, ensuring clients always stay ahead of industry curves.
+                      Strategic navigation mastery with <span className="font-bold">data-driven agile transformation</span>. Guides intelligent 
+                      decision-making through complex markets using <span className="font-bold">AI risk management consulting</span>, ensuring 
+                      clients always stay ahead of industry curves.
                     </p>
                     
                     <div className="mt-6 flex items-center space-x-2">
