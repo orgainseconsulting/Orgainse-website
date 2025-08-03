@@ -884,37 +884,37 @@ const About = () => {
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="animate-fade-in">
-              <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              <h1 className="text-4xl lg:text-5xl font-bold leading-tight mb-4">
                 <span className="text-slate-800">About </span>
                 <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient-text">
                   Orgainse Consulting
                 </span>
               </h1>
               
-              <h2 className="text-2xl lg:text-3xl text-blue-600 font-bold mb-6">
+              <h2 className="text-xl lg:text-2xl text-blue-600 font-bold mb-4">
                 AI-Native Digital Transformation Leaders & GPT-Powered Project Management Experts
               </h2>
               
-              <p className="text-xl text-slate-700 leading-relaxed mb-8">
+              <p className="text-lg text-slate-700 leading-relaxed mb-6">
                 We are an AI-native consulting firm specializing in <span className="text-orange-600 font-bold">GPT-powered project management</span>, 
                 intelligent business strategy, and <span className="text-green-600 font-bold">automated operational optimization</span> 
                 for startups and SMEs across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
               </p>
               
-              <div className="space-y-4">
+              <div className="space-y-3">
                 <div className="flex items-center space-x-3">
-                  <CheckCircle className="h-6 w-6 text-green-600" />
-                  <span className="text-slate-700">Founded in 2025 with <span className="text-blue-600 font-semibold">AI-first approach</span> and started branches in Bangalore, India and Austin, USA in 4 months</span>
+                  <CheckCircle className="h-5 w-5 text-green-600" />
+                  <span className="text-slate-700 text-sm">Founded in 2025 with <span className="text-blue-600 font-semibold">AI-first approach</span> and started branches in Bangalore, India and Austin, USA in 4 months</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <CheckCircle className="h-6 w-6 text-green-600" />
-                  <span className="text-slate-700">Global operations: <span className="text-orange-600 font-semibold">AI project management service</span> across 5 continents (7 countries)</span>
+                  <CheckCircle className="h-5 w-5 text-green-600" />
+                  <span className="text-slate-700 text-sm">Global operations: <span className="text-orange-600 font-semibold">AI project management service</span> across 5 continents (7 countries)</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <CheckCircle className="h-6 w-6 text-green-600" />
-                  <span className="text-slate-700">AI-powered methodologies with <span className="text-purple-600 font-semibold">GPT implementation roadmap</span> integration</span>
+                  <CheckCircle className="h-5 w-5 text-green-600" />
+                  <span className="text-slate-700 text-sm">AI-powered methodologies with <span className="text-purple-600 font-semibold">GPT implementation roadmap</span> integration</span>
                 </div>
               </div>
             </div>
