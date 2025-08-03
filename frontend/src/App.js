@@ -920,7 +920,7 @@ const About = () => {
               <p className="text-xl text-slate-300 leading-relaxed mb-8">
                 We are an AI-native consulting firm specializing in <span className="text-yellow-400 font-bold">GPT-powered project management</span>, 
                 intelligent business strategy, and <span className="text-green-400 font-bold">automated operational optimization</span> for 
-                startups and SMEs across India, USA, UK, UAE, and Australia.
+                startups and SMEs across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
               </p>
               
               <div className="space-y-4">
