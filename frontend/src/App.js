@@ -60,12 +60,13 @@ const Navigation = () => {
     <nav className="bg-white/95 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-32">
-          {/* Logo - Made Much Larger and More Prominent */}
+          {/* Logo - Zoomed and Cropped for Visibility */}
           <Link to="/" className="flex items-center">
             <img 
               src="https://customer-assets.emergentagent.com/job_business-catalyst-1/artifacts/635v5nlb_OrgAInse%20Consulting%20%28Website%29.png" 
               alt="Orgainse Consulting - AI Project Management Service & Digital Transformation" 
-              className="h-32 w-auto object-contain bg-white rounded-lg px-4 py-3 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 border border-gray-100"
+              className="h-32 w-auto object-cover object-center bg-white rounded-lg px-4 py-3 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 border border-gray-100"
+              style={{objectPosition: '50% 30%'}}
             />
           </Link>
 
