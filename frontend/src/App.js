@@ -33,6 +33,244 @@ import {
 } from "lucide-react";
 import axios from "axios";
 
+// Regional Pricing and Currency System
+const REGION_CONFIG = {
+  US: {
+    currency: 'USD',
+    symbol: '$',
+    pppMultiplier: 1.0,
+    locale: 'en-US',
+    name: 'United States'
+  },
+  IN: {
+    currency: 'INR',
+    symbol: '₹',
+    pppMultiplier: 0.22, // Based on PPP research: more affordable for Indian market
+    locale: 'en-IN',
+    name: 'India'
+  },
+  GB: {
+    currency: 'GBP',
+    symbol: '£',
+    pppMultiplier: 0.85, // Slightly lower than US due to economic conditions
+    locale: 'en-GB',
+    name: 'United Kingdom'
+  },
+  AE: {
+    currency: 'AED',
+    symbol: 'AED',
+    pppMultiplier: 0.75, // Competitive for UAE market
+    locale: 'ar-AE',
+    name: 'United Arab Emirates'
+  },
+  AU: {
+    currency: 'AUD',
+    symbol: 'A$',
+    pppMultiplier: 0.90, // Adjusted for Australian market
+    locale: 'en-AU',
+    name: 'Australia'
+  },
+  NZ: {
+    currency: 'NZD',
+    symbol: 'NZ$',
+    pppMultiplier: 0.85, // Competitive for New Zealand market
+    locale: 'en-NZ',
+    name: 'New Zealand'
+  },
+  ZA: {
+    currency: 'ZAR',
+    symbol: 'R',
+    pppMultiplier: 0.35, // More affordable for South African market
+    locale: 'en-ZA',
+    name: 'South Africa'
+  },
+  EU: {
+    currency: 'EUR',
+    symbol: '€',
+    pppMultiplier: 0.90, // Standard European pricing
+    locale: 'en-EU',
+    name: 'Europe'
+  }
+};
+
+// Default region if detection fails
+const DEFAULT_REGION = 'US';
+
+// Regional Pricing Context
+const RegionalPricingContext = React.createContext();
+
+// Custom hook for regional pricing
+const useRegionalPricing = () => {
+  const context = React.useContext(RegionalPricingContext);
+  if (!context) {
+    throw new Error('useRegionalPricing must be used within a RegionalPricingProvider');
+  }
+  return context;
+};
+
+// Regional Pricing Provider Component
+const RegionalPricingProvider = ({ children }) => {
+  const [currentRegion, setCurrentRegion] = useState(DEFAULT_REGION);
+  const [isLoading, setIsLoading] = useState(true);
+  const [userOverride, setUserOverride] = useState(false);
+
+  // Auto-detect user region on component mount
+  useEffect(() => {
+    const detectRegion = async () => {
+      try {
+        // Try multiple methods for region detection
+        
+        // Method 1: Try simple IP geolocation service (free tier)
+        try {
+          const response = await fetch('https://ipapi.co/json/');
+          const data = await response.json();
+          if (data.country_code) {
+            const detectedRegion = mapCountryToRegion(data.country_code);
+            if (detectedRegion && !userOverride) {
+              setCurrentRegion(detectedRegion);
+            }
+          }
+        } catch (error) {
+          console.log('Primary geolocation failed, trying fallback...');
+        }
+
+        // Method 2: Fallback to timezone-based detection
+        if (currentRegion === DEFAULT_REGION && !userOverride) {
+          const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          const regionFromTimezone = mapTimezoneToRegion(timezone);
+          if (regionFromTimezone) {
+            setCurrentRegion(regionFromTimezone);
+          }
+        }
+
+      } catch (error) {
+        console.log('Region detection failed, using default:', DEFAULT_REGION);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    detectRegion();
+  }, [userOverride]);
+
+  // Map country codes to our regions
+  const mapCountryToRegion = (countryCode) => {
+    const mapping = {
+      'US': 'US', 'CA': 'US', // North America
+      'IN': 'IN', // India
+      'GB': 'GB', // UK
+      'AE': 'AE', 'SA': 'AE', 'QA': 'AE', // Middle East
+      'AU': 'AU', // Australia
+      'NZ': 'NZ', // New Zealand
+      'ZA': 'ZA', // South Africa
+      // European countries
+      'DE': 'EU', 'FR': 'EU', 'IT': 'EU', 'ES': 'EU', 'NL': 'EU', 
+      'BE': 'EU', 'AT': 'EU', 'PT': 'EU', 'IE': 'EU', 'DK': 'EU',
+      'SE': 'EU', 'NO': 'EU', 'FI': 'EU', 'CH': 'EU', 'PL': 'EU'
+    };
+    return mapping[countryCode] || DEFAULT_REGION;
+  };
+
+  // Map timezone to region (fallback method)
+  const mapTimezoneToRegion = (timezone) => {
+    if (timezone.includes('America')) return 'US';
+    if (timezone.includes('India') || timezone.includes('Kolkata')) return 'IN';
+    if (timezone.includes('London')) return 'GB';
+    if (timezone.includes('Dubai')) return 'AE';
+    if (timezone.includes('Australia')) return 'AU';
+    if (timezone.includes('Auckland')) return 'NZ';
+    if (timezone.includes('Africa')) return 'ZA';
+    if (timezone.includes('Europe')) return 'EU';
+    return DEFAULT_REGION;
+  };
+
+  // Format currency with regional settings
+  const formatCurrency = (amount, region = currentRegion) => {
+    const config = REGION_CONFIG[region];
+    try {
+      return new Intl.NumberFormat(config.locale, {
+        style: 'currency',
+        currency: config.currency,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }).format(amount);
+    } catch (error) {
+      // Fallback formatting
+      return `${config.symbol}${Math.round(amount).toLocaleString()}`;
+    }
+  };
+
+  // Calculate regional price based on PPP
+  const calculateRegionalPrice = (basePrice, region = currentRegion) => {
+    const config = REGION_CONFIG[region];
+    return Math.round(basePrice * config.pppMultiplier);
+  };
+
+  // Get formatted regional price
+  const getRegionalPrice = (basePrice) => {
+    const adjustedPrice = calculateRegionalPrice(basePrice);
+    return formatCurrency(adjustedPrice);
+  };
+
+  // Manual region change by user
+  const changeRegion = (newRegion) => {
+    setCurrentRegion(newRegion);
+    setUserOverride(true);
+  };
+
+  const value = {
+    currentRegion,
+    regionConfig: REGION_CONFIG[currentRegion],
+    allRegions: REGION_CONFIG,
+    isLoading,
+    formatCurrency,
+    calculateRegionalPrice,
+    getRegionalPrice,
+    changeRegion,
+    userOverride
+  };
+
+  return (
+    <RegionalPricingContext.Provider value={value}>
+      {children}
+    </RegionalPricingContext.Provider>
+  );
+};
+
+// Region Selector Component
+const RegionSelector = () => {
+  const { currentRegion, allRegions, changeRegion, isLoading } = useRegionalPricing();
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center space-x-2 text-sm text-slate-600">
+        <Globe className="h-4 w-4 animate-spin" />
+        <span>Detecting location...</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-center space-x-3">
+      <div className="flex items-center space-x-2 text-sm text-slate-600">
+        <Globe className="h-4 w-4" />
+        <span>Region:</span>
+      </div>
+      <select
+        value={currentRegion}
+        onChange={(e) => changeRegion(e.target.value)}
+        className="px-3 py-1 bg-white border border-slate-200 rounded-lg text-sm focus:border-orange-400 focus:ring-orange-400 focus:outline-none"
+      >
+        {Object.entries(allRegions).map(([code, config]) => (
+          <option key={code} value={code}>
+            {config.name} ({config.symbol})
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
