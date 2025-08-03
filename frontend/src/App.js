@@ -127,12 +127,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">O</span>
-              </div>
-              <span className="text-xl font-bold">Orgainse Consulting</span>
-            </div>
+            <Link to="/" className="flex items-center">
+              <img 
+                src="https://customer-assets.emergentagent.com/job_business-catalyst-1/artifacts/635v5nlb_OrgAInse%20Consulting%20%28Website%29.png" 
+                alt="Orgainse Consulting - Let us plan your SUCCESS!!" 
+                className="h-16 w-auto object-contain"
+              />
+            </Link>
             <p className="text-gray-300 text-sm">
               AI-native consulting for innovative businesses. Let us plan your SUCCESS!
             </p>
