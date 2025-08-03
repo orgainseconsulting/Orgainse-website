@@ -80,7 +80,7 @@ const Navigation = () => {
             {/* Social Media Links */}
             <div className="flex items-center space-x-3 border-l border-gray-200 pl-6">
               <a
-                href="https://linkedin.com/company/orgainseconsulting"
+                href="https://linkedin.com/company/orgainse-consulting"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-600 hover:text-orange-500 transition-colors"
@@ -89,7 +89,7 @@ const Navigation = () => {
                 <Linkedin className="h-4 w-4" />
               </a>
               <a
-                href="https://x.com/orgainse_ai"
+                href="https://twitter.com/orgainseconsult"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-600 hover:text-orange-500 transition-colors"
@@ -98,7 +98,7 @@ const Navigation = () => {
                 <Twitter className="h-4 w-4" />
               </a>
               <a
-                href="https://instagram.com/orgainse.consulting"
+                href="https://instagram.com/orgainseconsulting"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-600 hover:text-orange-500 transition-colors"
