@@ -2537,6 +2537,7 @@ const AIAssessmentTool = () => {
 
 // ROI Calculator Tool Component
 const ROICalculator = () => {
+  const { getRegionalPrice, formatCurrency, regionConfig } = useRegionalPricing();
   const [formData, setFormData] = useState({
     company_name: '',
     email: '',
