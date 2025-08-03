@@ -1010,135 +1010,247 @@ const About = () => {
   );
 };
 
-// Enhanced Services Page with SEO
+// Revolutionary Services Page with Creative Design and SEO
 const Services = () => {
   const services = [
     {
       title: "AI Project Management Service (PMaaS)",
-      description: "Comprehensive AI project management service with GPT-powered SOW auto-generation, intelligent project planning, and automated risk assessment for startups and SMEs.",
-      features: ["GPT-powered Project Planning", "Automated SOW Generation", "AI Risk Assessment", "Intelligent Resource Allocation"],
+      description: "Comprehensive AI project management service with GPT-powered SOW auto-generation, intelligent project planning, and automated risk assessment for startups and SMEs across India, USA, UK, UAE, and Australia.",
+      features: ["GPT-powered Project Planning & SOW Auto-generation", "Automated Risk Assessment & Scenario Modeling", "AI Resource Allocation & Timeline Optimization", "Intelligent Performance Analytics & Reporting"],
       icon: Target,
       image: "https://images.unsplash.com/photo-1523875194681-bedd468c58bf?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwyfHxidXNpbmVzcyUyMHN0cmF0ZWd5fGVufDB8fHx8MTc1NDIyNzg5MXww&ixlib=rb-4.1.0&q=85",
-      keywords: "AI project management service, PMaaS for startups, GPT-powered project planning"
+      keywords: "AI project management service, PMaaS for startups, GPT-powered project planning",
+      gradient: "from-orange-400 to-red-500"
     },
     {
       title: "AI-Native Digital Transformation",
-      description: "Complete digital transformation consulting with AI maturity assessment, multi-agent orchestration platforms, and GPT implementation roadmaps tailored for your industry.",
-      features: ["AI Maturity Assessment", "Multi-agent Orchestration", "GPT Implementation", "Cloud-First Architecture"],
+      description: "Complete digital transformation consulting with AI maturity assessment, multi-agent orchestration platforms, and GPT implementation roadmap tailored for EdTech, FinTech, Healthcare, and Software Development industries.",
+      features: ["AI Maturity Assessment & Digital Readiness Audit", "Multi-agent Orchestration Platform Setup", "GPT Implementation Roadmap & Integration", "Cloud-First Architecture with AI-Powered Analytics"],
       icon: Zap,
       image: "https://images.unsplash.com/photo-1644329770639-1a20809b82a3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwyfHxkaWdpdGFsJTIwdHJhbnNmb3JtYXRpb258ZW58MHx8fHwxNzU0MjI3ODg1fDA&ixlib=rb-4.1.0&q=85",
-      keywords: "AI-native digital transformation, GPT implementation roadmap, digital transformation UAE SMEs"
+      keywords: "AI-native digital transformation, GPT implementation roadmap, digital transformation UAE SMEs",
+      gradient: "from-yellow-400 to-orange-500"
     },
     {
       title: "AI Operational Optimization", 
-      description: "Intelligent operational optimization using AI-driven workflow automation, predictive maintenance agents, and GPT process mining to reduce OPEX by 20%.",
-      features: ["AI Workflow Automation", "Predictive Maintenance", "GPT Process Mining", "Performance Analytics"],
+      description: "Intelligent operational optimization using AI-driven workflow automation, predictive maintenance agents, and GPT process mining to reduce OPEX by 20% for hospitality, healthcare, and manufacturing SMEs.",
+      features: ["AI Workflow Automation & Process Intelligence", "Predictive Maintenance AI Agent & Monitoring", "GPT Process Mining & Bottleneck Detection", "Real-time Performance Analytics & Cost Optimization"],
       icon: TrendingUp,
       image: "https://images.unsplash.com/photo-1649406458887-2b6561c36a4d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHw0fHxkaWdpdGFsJTIwdHJhbnNmb3JtYXRpb258ZW58MHx8fHwxNzU0MjI3ODg1fDA&ixlib=rb-4.1.0&q=85",
-      keywords: "AI operational optimization consulting, reduce OPEX with AI, GPT process mining"
+      keywords: "AI operational optimization consulting, reduce OPEX with AI, GPT process mining",
+      gradient: "from-green-400 to-emerald-500"
     },
     {
       title: "AI Agile & Scrum Coaching",
-      description: "Revolutionary agile coaching with GPT-powered Scrum assistance, automated sprint retrospectives, and AI backlog prioritization for enhanced team velocity.",
-      features: ["GPT-Powered Scrum Coaching", "Automated Sprint Retrospectives", "AI Backlog Prioritization", "Data-driven Team Analytics"],
+      description: "Revolutionary agile coaching with GPT-powered Scrum assistance, automated sprint retrospectives, and AI backlog prioritization for enhanced team velocity across UK startups, Australia agile teams, and India software companies.",
+      features: ["GPT-Powered Scrum Coaching & Team Mentoring", "Automated Sprint Retrospectives & Analysis", "AI Backlog Prioritization & Story Estimation", "Data-driven Team Performance Analytics"],
       icon: Users,
       image: "https://images.unsplash.com/photo-1657727534676-cac1bb160d64?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwyfHxBSSUyMGNvbnN1bHRpbmd8ZW58MHx8fHwxNzU0MjI3ODc4fDA&ixlib=rb-4.1.0&q=85",
-      keywords: "AI agile coaching service, GPT-powered Scrum coach, data-driven agile transformation"
+      keywords: "AI agile coaching service, GPT-powered Scrum coach, data-driven agile transformation",
+      gradient: "from-blue-400 to-indigo-500"
     },
     {
-      title: "AI-Driven Business Strategy",
-      description: "Advanced business strategy development using automated market intelligence GPT, competitive analysis AI, and scenario planning tools for faster go-to-market strategies.",
-      features: ["Automated Market Intelligence", "AI Competitive Analysis", "Scenario Planning Tools", "Growth Strategy Optimization"],
+      title: "AI-Driven Business Strategy Development",
+      description: "Advanced business strategy development using automated market intelligence GPT, competitive analysis AI, and scenario planning tools for faster go-to-market strategies across IT Services, EdTech startups, and FinTech SMEs.",
+      features: ["Automated Market Intelligence & Competitor Analysis", "AI-Powered Competitive Strategy & Positioning", "Scenario Planning Tools & Market Forecasting", "Growth Strategy Optimization & ROI Modeling"],
       icon: Globe,
       image: "https://images.unsplash.com/photo-1644325349124-d1756b79dd42?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwdHJhbnNmb3JtYXRpb258ZW58MHx8fHwxNzU0MjI3ODg1fDA&ixlib=rb-4.1.0&q=85",
-      keywords: "AI-driven business strategy consulting, GPT competitive analysis, strategy development India SMEs"
+      keywords: "AI-driven business strategy consulting, GPT competitive analysis, strategy development India SMEs",
+      gradient: "from-purple-400 to-pink-500"
     },
     {
       title: "AI Risk Management & Compliance",
-      description: "Comprehensive AI risk management with GPT-based risk co-pilots, automated scenario modeling, and real-time compliance monitoring for fintech and healthcare SMEs.",
-      features: ["GPT-Based Risk Assessment", "Automated Scenario Modeling", "Real-time Compliance Monitoring", "Predictive Risk Analytics"],
+      description: "Comprehensive AI risk management with GPT-based risk co-pilots, automated scenario modeling, and real-time compliance monitoring for fintech SMEs, healthcare organizations, and UAE regulatory compliance requirements.",
+      features: ["GPT-Based Risk Assessment & Co-pilot Support", "Automated Scenario Modeling & Stress Testing", "Real-time Compliance Monitoring & Reporting", "Predictive Risk Analytics & Mitigation Planning"],
       icon: Shield,
       image: "https://images.unsplash.com/photo-1644325349124-d1756b79dd42?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwdHJhbnNmb3JtYXRpb258ZW58MHx8fHwxNzU0MjI3ODg1fDA&ixlib=rb-4.1.0&q=85",
-      keywords: "AI risk management consulting, GPT-based risk co-pilot, predictive risk analytics SMEs"
+      keywords: "AI risk management consulting, GPT-based risk co-pilot, predictive risk analytics SMEs",
+      gradient: "from-slate-400 to-slate-600"
     },
   ];
 
   return (
     <div className="min-h-screen">
-      {/* SEO Optimized Hero Section */}
-      <section className="bg-gradient-to-br from-slate-50 to-orange-50 py-20 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-fade-in">
-          <h1 className="text-4xl lg:text-5xl font-bold text-slate-800 mb-6">
-            AI-Native Consulting Services
+      {/* Revolutionary Hero Section with SEO */}
+      <section className="relative bg-gradient-to-br from-slate-900 via-orange-900 to-red-900 py-20 lg:py-32 overflow-hidden">
+        {/* Dynamic Background Elements */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-r from-orange-400 to-yellow-500 rounded-full blur-3xl animate-pulse float-animation will-change-transform"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-green-400 to-blue-500 rounded-full blur-3xl animate-pulse float-animation animation-delay-2000 will-change-transform"></div>
+          <div className="absolute top-1/2 left-1/4 w-6 h-16 bg-yellow-400 rounded-full animate-pulse opacity-60"></div>
+          <div className="absolute bottom-1/4 right-1/3 w-8 h-8 bg-orange-400 rotate-45 animate-spin-slow opacity-40"></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 animate-fade-in">
+          <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6">
+            <span className="text-white">AI-Native </span>
+            <span className="bg-gradient-to-r from-orange-400 via-yellow-400 to-green-400 bg-clip-text text-transparent animate-gradient-text">
+              Consulting
+            </span>
+            <br />
+            <span className="text-white">Services</span>
           </h1>
-          <h2 className="text-xl text-orange-600 font-semibold mb-4">
-            GPT-Powered Solutions for Digital Transformation
+          
+          <h2 className="text-2xl lg:text-3xl text-orange-300 font-bold mb-6">
+            GPT-Powered Solutions for Digital Transformation & Project Management
           </h2>
-          <p className="text-xl text-slate-600 max-w-4xl mx-auto mb-8">
-            Comprehensive AI-native consulting services designed to transform your business 
-            with GPT-powered project management, intelligent automation, and AI-driven strategy 
-            across six key industries.
+          
+          <p className="text-xl text-slate-300 max-w-4xl mx-auto mb-8 leading-relaxed">
+            Comprehensive <span className="text-yellow-400 font-bold">AI-native consulting services</span> designed to transform your business 
+            with <span className="text-green-400 font-bold">GPT-powered project management</span>, intelligent automation, and 
+            <span className="text-orange-400 font-bold">AI-driven strategy</span> across six key industries and seven global regions.
           </p>
-          <div className="flex justify-center flex-wrap gap-3">
-            <Badge className="bg-orange-100 text-orange-700 transform hover:scale-105 transition-all">IT Services & Software</Badge>
-            <Badge className="bg-blue-100 text-blue-700 transform hover:scale-105 transition-all">EdTech & Education</Badge>
-            <Badge className="bg-green-100 text-green-700 transform hover:scale-105 transition-all">FinTech & Finance</Badge>
-            <Badge className="bg-purple-100 text-purple-700 transform hover:scale-105 transition-all">Healthcare & MedTech</Badge>
-            <Badge className="bg-pink-100 text-pink-700 transform hover:scale-105 transition-all">Hospitality & Tourism</Badge>
-            <Badge className="bg-indigo-100 text-indigo-700 transform hover:scale-105 transition-all">Startups & SMEs</Badge>
+          
+          <div className="flex justify-center flex-wrap gap-4 mb-12">
+            {[
+              { name: "IT Services & Software", color: "from-orange-400 to-red-500" },
+              { name: "EdTech & Education", color: "from-blue-400 to-indigo-500" },
+              { name: "FinTech & Finance", color: "from-green-400 to-emerald-500" },
+              { name: "Healthcare & MedTech", color: "from-purple-400 to-pink-500" },
+              { name: "Hospitality & Tourism", color: "from-pink-400 to-rose-500" },
+              { name: "Startups & SMEs", color: "from-indigo-400 to-purple-500" },
+            ].map((industry, index) => (
+              <div 
+                key={index}
+                className="group relative animate-fade-in"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className={`absolute inset-0 bg-gradient-to-r ${industry.color} rounded-2xl opacity-20 group-hover:opacity-40 transition-opacity blur-sm`}></div>
+                <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl px-6 py-3 border border-white/20 hover:border-white/40 transition-all duration-300 transform hover:scale-105">
+                  <span className="text-white font-medium text-sm">{industry.name}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Animated Divider */}
+          <div className="flex justify-center">
+            <div className="w-40 h-1 bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500 rounded-full animate-pulse"></div>
           </div>
         </div>
       </section>
 
-      {/* Services Grid with Enhanced Animations */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-20">
+      {/* Revolutionary Services Grid with Enhanced Animations */}
+      <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-orange-50 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 left-0 w-full h-full" style={{
+            backgroundImage: `radial-gradient(circle at 25% 25%, #f97316 0%, transparent 50%), radial-gradient(circle at 75% 75%, #10b981 0%, transparent 50%)`
+          }}></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="space-y-24">
             {services.map((service, index) => (
               <div 
                 key={index} 
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center animate-fade-in ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center animate-fade-in ${
+                  index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
+                }`}
                 style={{ animationDelay: `${index * 200}ms` }}
               >
-                <div className={`space-y-6 ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-                  <div className="flex items-center space-x-3">
-                    <div className="p-3 bg-orange-100 rounded-lg transform hover:rotate-12 transition-all duration-300">
-                      <service.icon className="h-8 w-8 text-orange-600" />
+                <div className={`space-y-8 ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                  <div className="flex items-center space-x-4">
+                    <div className="relative group">
+                      <div className={`absolute inset-0 bg-gradient-to-r ${service.gradient} rounded-2xl opacity-20 group-hover:opacity-40 transition-opacity blur-sm`}></div>
+                      <div className="relative p-4 bg-white rounded-2xl shadow-lg group-hover:shadow-xl transition-all duration-300 transform group-hover:rotate-12">
+                        <service.icon className="h-10 w-10 text-slate-600" />
+                      </div>
                     </div>
-                    <h2 className="text-3xl font-bold text-slate-800">{service.title}</h2>
+                    <div>
+                      <h2 className="text-3xl lg:text-4xl font-bold text-slate-800 leading-tight">
+                        {service.title}
+                      </h2>
+                      <div className={`h-1 w-20 bg-gradient-to-r ${service.gradient} rounded-full mt-2`}></div>
+                    </div>
                   </div>
                   
                   <p className="text-lg text-slate-600 leading-relaxed">
                     {service.description}
                   </p>
 
-                  <div className="space-y-3">
-                    <h3 className="font-semibold text-slate-800">What you'll get:</h3>
-                    <ul className="space-y-2">
+                  <div className="space-y-4">
+                    <h3 className="font-bold text-slate-800 text-lg">What you'll get:</h3>
+                    <div className="grid grid-cols-1 gap-3">
                       {service.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center space-x-3">
-                          <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
-                          <span className="text-slate-700">{feature}</span>
-                        </li>
+                        <div 
+                          key={featureIndex}
+                          className="group flex items-start space-x-3 p-3 rounded-xl hover:bg-white hover:shadow-md transition-all duration-300"
+                        >
+                          <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                          <span className="text-slate-700 group-hover:text-slate-800 transition-colors font-medium">
+                            {feature}
+                          </span>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
 
-                  <Button className="bg-orange-500 hover:bg-orange-600 text-white transform hover:scale-105 transition-all duration-300 hover:shadow-lg">
-                    Request AI Consultation
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  <div className="pt-4">
+                    <button className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <span className="relative z-10 flex items-center">
+                        Request AI Consultation
+                        <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform" />
+                      </span>
+                    </button>
+                  </div>
                 </div>
 
-                <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+                <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''} relative group`}>
+                  {/* Creative Image Container */}
+                  <div className={`absolute -inset-4 bg-gradient-to-r ${service.gradient} rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-1000 animate-pulse`}></div>
                   <img
                     src={service.image}
-                    alt={service.keywords}
-                    className="rounded-2xl shadow-xl w-full h-[400px] object-cover transform hover:scale-105 transition-all duration-700"
+                    alt={`${service.keywords} - ${service.title} for startups and SMEs`}
+                    className="relative rounded-2xl shadow-2xl w-full h-[400px] object-cover transform group-hover:scale-105 transition-all duration-700"
+                    loading="lazy"
                   />
+                  
+                  {/* Floating UI Elements */}
+                  <div className="absolute top-4 right-4 bg-orange-500 rounded-full p-3 animate-bounce will-change-transform">
+                    <Brain className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="absolute bottom-4 left-4 bg-green-500 rounded-full p-3 animate-pulse will-change-transform">
+                    <Zap className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="absolute top-1/2 -right-4 bg-purple-500 rounded-full p-4 transform rotate-12 animate-spin-slow will-change-transform">
+                    <service.icon className="h-8 w-8 text-white" />
+                  </div>
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Creative CTA Section */}
+          <div className="text-center mt-20 animate-fade-in">
+            <h3 className="text-3xl lg:text-4xl font-bold text-slate-800 mb-6">
+              Ready to Transform Your Business with{" "}
+              <span className="bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text text-transparent">
+                AI-Native Solutions?
+              </span>
+            </h3>
+            <p className="text-xl text-slate-600 mb-8 max-w-3xl mx-auto">
+              Join hundreds of successful startups and SMEs who have accelerated their growth with our 
+              <span className="font-bold text-orange-600"> GPT-powered consulting services</span>.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <button className="group relative px-10 py-5 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-full shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10 flex items-center text-lg">
+                  Explore Our AI Arsenal
+                  <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform" />
+                </span>
+              </button>
+              
+              <button className="group px-10 py-5 border-2 border-orange-500 text-orange-500 font-bold rounded-full hover:bg-orange-500 hover:text-white transition-all duration-300 transform hover:scale-105 hover:shadow-orange-500/25 hover:shadow-xl">
+                <span className="flex items-center text-lg">
+                  Get Free AI Readiness Audit
+                  <Star className="ml-3 h-6 w-6 group-hover:rotate-180 transition-transform duration-500" />
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </section>
