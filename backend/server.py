@@ -100,18 +100,46 @@ async def root():
 async def health_check():
     return {"status": "healthy", "timestamp": datetime.utcnow()}
 
-# Contact form endpoint
+# Contact form endpoint with Odoo CRM integration
 @api_router.post("/contact", response_model=ContactMessage)
 async def create_contact_message(input: ContactMessageCreate):
+    """Handle contact form submissions with Odoo CRM integration"""
     try:
         contact_dict = input.dict()
         contact_obj = ContactMessage(**contact_dict)
         
-        # Insert into MongoDB
+        # Insert into MongoDB for performance
         result = await db.contact_messages.insert_one(contact_obj.dict())
         
         if result.inserted_id:
-            logging.info(f"Contact message created: {contact_obj.id}")
+            logging.info(f"Contact message saved to MongoDB: {contact_obj.id}")
+            
+            # Sync to Odoo CRM as a lead
+            try:
+                odoo_lead_data = {
+                    'name': f"Contact Form: {contact_obj.subject}",
+                    'email': contact_obj.email,
+                    'phone': contact_obj.phone or '',
+                    'contact_name': contact_obj.name,
+                    'company': contact_obj.company or '',
+                    'message': contact_obj.message,
+                    'service_interest': contact_obj.subject
+                }
+                
+                odoo_lead_id = await odoo_integration.create_crm_lead(odoo_lead_data)
+                
+                if odoo_lead_id:
+                    # Update MongoDB record with Odoo ID
+                    await db.contact_messages.update_one(
+                        {"id": contact_obj.id},
+                        {"$set": {"odoo_lead_id": odoo_lead_id}}
+                    )
+                    logging.info(f"Contact synced to Odoo CRM with ID: {odoo_lead_id}")
+                
+            except Exception as odoo_error:
+                logging.error(f"Odoo CRM sync failed: {str(odoo_error)}")
+                # Continue without Odoo - MongoDB save was successful
+            
             return contact_obj
         else:
             raise HTTPException(status_code=500, detail="Failed to save contact message")
