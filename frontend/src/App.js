@@ -499,15 +499,15 @@ const Home = () => {
                 {stats.map((stat, index) => (
                   <div 
                     key={index} 
-                    className="group relative transform hover:scale-110 transition-all duration-500 animate-fade-in"
+                    className="group relative transform hover:scale-105 transition-all duration-500 animate-fade-in"
                     style={{ animationDelay: `${index * 200 + 1000}ms` }}
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} rounded-2xl opacity-20 group-hover:opacity-30 transition-opacity blur-sm`}></div>
-                    <div className="relative bg-white/90 backdrop-blur-lg rounded-2xl p-6 border border-white/40 hover:border-orange-300 transition-all duration-300 shadow-lg">
-                      <div className={`text-3xl lg:text-4xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent animate-counter mb-2`}>
+                    <div className="relative bg-white/90 backdrop-blur-lg rounded-2xl p-6 border border-white/40 hover:border-orange-300 transition-all duration-300 shadow-lg h-32 flex flex-col items-center justify-center text-center">
+                      <div className={`text-2xl lg:text-3xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent animate-counter mb-2`}>
                         {stat.value}
                       </div>
-                      <div className="text-sm text-slate-700 font-medium leading-tight">{stat.label}</div>
+                      <div className="text-xs text-slate-700 font-medium leading-tight max-w-full">{stat.label}</div>
                     </div>
                   </div>
                 ))}
