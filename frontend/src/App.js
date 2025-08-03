@@ -579,62 +579,99 @@ const About = () => {
         </div>
       </section>
 
-      {/* Founders & Co-Founders Section */}
+      {/* Leadership Structure Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-800 mb-4">
-              Meet Our Leadership Team
+              Meet the Driving Force Behind ORGAINSE
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              Our founders and co-founders bring together decades of experience in AI, consulting, 
-              and enterprise transformation to lead Orgainse Consulting.
+            <p className="text-xl text-slate-600 max-w-4xl mx-auto mb-8">
+              Our organization is powered by a unique leadership structure focused on innovation, delivery, and strategy – not hierarchy. 
+              Think <span className="font-bold text-slate-800">synergy over silos</span>, <span className="font-bold text-slate-800">execution over theory</span>, and <span className="font-bold text-slate-800">results over rhetoric</span>.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {founders.map((founder, index) => (
-              <Card 
-                key={index} 
-                className="group hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 animate-fade-in"
-                style={{ animationDelay: `${index * 200}ms` }}
-              >
-                <CardContent className="p-8">
-                  <div className="flex items-start space-x-6">
-                    <div className="relative">
-                      <img
-                        src={founder.image}
-                        alt={founder.name}
-                        className="w-24 h-24 rounded-full object-cover border-4 border-orange-200 group-hover:border-orange-400 transition-all duration-300"
-                      />
-                      <div className="absolute -bottom-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-bold">
-                        {founder.title}
-                      </div>
-                    </div>
-                    
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-slate-800 mb-1">{founder.name}</h3>
-                      <p className="text-orange-600 font-semibold mb-3">{founder.role}</p>
-                      <p className="text-slate-600 text-sm mb-4 leading-relaxed">
-                        {founder.description}
-                      </p>
-                      
-                      <div className="flex flex-wrap gap-2">
-                        {founder.expertise.map((skill, skillIndex) => (
-                          <Badge 
-                            key={skillIndex} 
-                            variant="outline" 
-                            className="text-xs border-orange-300 text-orange-700 hover:bg-orange-50 transition-all"
-                          >
-                            {skill}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* The Foundation */}
+            <Card 
+              className="group hover:shadow-xl transition-all duration-500 transform hover:-translate-y-4 animate-fade-in bg-gradient-to-br from-orange-400 to-orange-500 text-white border-none"
+              style={{ animationDelay: '0ms' }}
+            >
+              <CardContent className="p-8 h-full flex flex-col">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold mb-2 border-b-2 border-white pb-2 inline-block">The Foundation</h3>
+                  <p className="text-lg opacity-90 font-medium">Strategy & Vision</p>
+                </div>
+                
+                <div className="flex-1 space-y-4 text-center">
+                  <p className="text-sm leading-relaxed">
+                    Leads with purpose and principles. Sets the standard for every engagement, ensuring we deliver with 
+                    clarity, alignment, and excellence.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* The Engine */}
+            <Card 
+              className="group hover:shadow-xl transition-all duration-500 transform hover:-translate-y-4 animate-fade-in bg-gradient-to-br from-yellow-100 to-yellow-200 text-slate-800 border border-yellow-300"
+              style={{ animationDelay: '200ms' }}
+            >
+              <CardContent className="p-8 h-full flex flex-col">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold mb-2 border-b-2 border-slate-800 pb-2 inline-block">The Engine</h3>
+                  <p className="text-lg font-medium">Innovation & Growth</p>
+                </div>
+                
+                <div className="flex-1 space-y-4 text-center">
+                  <p className="text-sm leading-relaxed">
+                    Drives forward momentum using cutting-edge AI, emerging tech, and out-of-the-box thinking to fuel 
+                    client success.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* The Compass */}
+            <Card 
+              className="group hover:shadow-xl transition-all duration-500 transform hover:-translate-y-4 animate-fade-in bg-gradient-to-br from-green-400 to-green-500 text-white border-none"
+              style={{ animationDelay: '400ms' }}
+            >
+              <CardContent className="p-8 h-full flex flex-col">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold mb-2 border-b-2 border-white pb-2 inline-block">The Compass</h3>
+                  <p className="text-lg opacity-90 font-medium">Strategy & Direction</p>
+                </div>
+                
+                <div className="flex-1 space-y-4 text-center">
+                  <p className="text-sm leading-relaxed">
+                    Orchestrates intelligent decision-making and market navigation, ensuring clients stay focused and 
+                    ahead of the curve.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* The Spark */}
+            <Card 
+              className="group hover:shadow-xl transition-all duration-500 transform hover:-translate-y-4 animate-fade-in bg-gradient-to-br from-slate-700 to-slate-800 text-white border-none"
+              style={{ animationDelay: '600ms' }}
+            >
+              <CardContent className="p-8 h-full flex flex-col">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold mb-2 border-b-2 border-white pb-2 inline-block">The Spark</h3>
+                  <p className="text-lg opacity-90 font-medium">Operations & Delivery</p>
+                </div>
+                
+                <div className="flex-1 space-y-4 text-center">
+                  <p className="text-sm leading-relaxed">
+                    Transforms plans into action. Oversees execution with precision, optimizing performance and 
+                    maximizing ROI for our clients.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
