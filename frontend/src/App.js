@@ -1306,7 +1306,7 @@ const Services = () => {
       description: "Revolutionary agile coaching with GPT-powered Scrum assistance, automated sprint retrospectives, and AI backlog prioritization for enhanced team velocity across UK startups, Australia agile teams, and India software companies.",
       features: ["GPT-Powered Scrum Coaching & Team Mentoring", "Automated Sprint Retrospectives & Analysis", "AI Backlog Prioritization & Story Estimation", "Data-driven Team Performance Analytics"],
       icon: Users,
-      image: "https://images.unsplash.com/photo-1657727534676-cac1bb160d64?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwyfHxBSSUyMGNvbnN1bHRpbmd8ZW58MHx8fHwxNzU0MjI3ODc4fDA&ixlib=rb-4.1.0&q=85",
+      image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg",
       keywords: "AI agile coaching service, GPT-powered Scrum coach, data-driven agile transformation",
       gradient: "from-blue-400 to-indigo-500"
     },
