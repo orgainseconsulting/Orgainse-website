@@ -601,7 +601,7 @@ const Home = () => {
   );
 };
 
-// Enhanced About Page with Founders Information
+// Enhanced About Page with Revolutionary Creative Design and SEO
 const About = () => {
   const values = [
     {
