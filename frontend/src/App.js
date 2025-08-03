@@ -453,12 +453,12 @@ const Home = () => {
             <div className="space-y-8 animate-fade-in">
               <div className="space-y-6">
                 <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
-                  <span className="block text-white">Let us </span>
-                  <span className="block bg-gradient-to-r from-orange-400 via-yellow-400 to-green-400 bg-clip-text text-transparent animate-gradient-text text-6xl lg:text-8xl">
+                  <span className="block text-slate-800">Let us </span>
+                  <span className="block bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500 bg-clip-text text-transparent animate-gradient-text text-6xl lg:text-8xl">
                     plan
                   </span>
-                  <span className="block text-white">your </span>
-                  <span className="block bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-gradient-text text-6xl lg:text-8xl">
+                  <span className="block text-slate-800">your </span>
+                  <span className="block bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient-text text-6xl lg:text-8xl">
                     SUCCESS!!
                   </span>
                 </h1>
