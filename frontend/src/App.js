@@ -1342,22 +1342,22 @@ const Services = () => {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 animate-fade-in">
           <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6">
-            <span className="text-white">AI-Native </span>
-            <span className="bg-gradient-to-r from-orange-400 via-yellow-400 to-green-400 bg-clip-text text-transparent animate-gradient-text">
+            <span className="text-slate-800">AI-Native </span>
+            <span className="bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500 bg-clip-text text-transparent animate-gradient-text">
               Consulting
             </span>
             <br />
-            <span className="text-white">Services</span>
+            <span className="text-slate-800">Arsenal</span>
           </h1>
           
-          <h2 className="text-2xl lg:text-3xl text-orange-300 font-bold mb-6">
+          <h2 className="text-2xl lg:text-3xl text-orange-600 font-bold mb-6">
             GPT-Powered Solutions for Digital Transformation & Project Management
           </h2>
           
-          <p className="text-xl text-slate-300 max-w-4xl mx-auto mb-8 leading-relaxed">
-            Comprehensive <span className="text-yellow-400 font-bold">AI-native consulting services</span> designed to transform your business 
-            with <span className="text-green-400 font-bold">GPT-powered project management</span>, intelligent automation, and 
-            <span className="text-orange-400 font-bold">AI-driven strategy</span> across six key industries and seven global regions.
+          <p className="text-xl text-slate-700 max-w-4xl mx-auto mb-8 leading-relaxed">
+            Comprehensive <span className="text-orange-600 font-bold">AI-native consulting services</span> designed to transform your business 
+            with <span className="text-green-600 font-bold">GPT-powered project management</span>, intelligent automation, and 
+            <span className="text-purple-600 font-bold">AI-driven strategy</span> across six key industries and seven global regions.
           </p>
           
           <div className="flex justify-center flex-wrap gap-4 mb-12">
