@@ -143,6 +143,41 @@ const Navigation = () => {
                   {link.label}
                 </Link>
               ))}
+              
+              {/* Mobile Social Links */}
+              <div className="px-3 py-2 border-t border-gray-200 mt-2">
+                <div className="flex items-center space-x-4">
+                  <span className="text-sm text-slate-600 font-medium">Follow us:</span>
+                  <a
+                    href="https://linkedin.com/company/orgainseconsulting"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-slate-600 hover:text-orange-500"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin className="h-5 w-5" />
+                  </a>
+                  <a
+                    href="https://x.com/orgainse_ai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-slate-600 hover:text-orange-500"
+                    aria-label="Twitter"
+                  >
+                    <Twitter className="h-5 w-5" />
+                  </a>
+                  <a
+                    href="https://instagram.com/orgainse.consulting"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-slate-600 hover:text-orange-500"
+                    aria-label="Instagram"
+                  >
+                    <Instagram className="h-5 w-5" />
+                  </a>
+                </div>
+              </div>
+              
               <div className="px-3 py-2">
                 <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white">
                   Book Free Consultation
