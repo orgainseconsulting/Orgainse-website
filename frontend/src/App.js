@@ -782,8 +782,9 @@ const About = () => {
                     </div>
                     
                     <p className="text-sm leading-relaxed text-orange-50">
-                      The bedrock of excellence. Sets unwavering standards, builds strategic frameworks, 
-                      and ensures every engagement delivers measurable impact with crystal-clear alignment.
+                      The bedrock of <span className="font-bold">AI-driven business strategy consulting</span>. Sets unwavering standards, builds 
+                      strategic frameworks with <span className="font-bold">automated market intelligence GPT</span>, and ensures every engagement 
+                      delivers measurable impact with crystal-clear alignment.
                     </p>
                     
                     <div className="mt-6 flex items-center space-x-2">
