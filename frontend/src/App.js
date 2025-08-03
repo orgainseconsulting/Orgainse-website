@@ -581,11 +581,11 @@ const Home = () => {
                 <div className={`absolute -inset-2 bg-gradient-to-r ${service.gradient} rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000`}></div>
                 
                 {/* Main Card */}
-                <Card className="relative bg-white/80 backdrop-blur-lg border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-6 hover:rotate-1 group overflow-hidden rounded-3xl min-h-[420px] flex flex-col">
+                <Card className="relative bg-white/80 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 group overflow-hidden rounded-2xl flex flex-col">
                   {/* Top Gradient Bar */}
-                  <div className={`h-2 bg-gradient-to-r ${service.gradient}`}></div>
+                  <div className={`h-1 bg-gradient-to-r ${service.gradient}`}></div>
                   
-                  <CardHeader className="pb-4 flex-1 flex flex-col">
+                  <CardHeader className="pb-3 flex-1 flex flex-col p-5">
                     <div className="flex items-start space-x-4 mb-4">
                       <div className={`p-4 ${service.iconBg} rounded-2xl group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg`}>
                         <service.icon className={`h-8 w-8 ${service.iconColor}`} />
