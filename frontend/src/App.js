@@ -556,44 +556,207 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Enhanced Global Compliance Section */}
-      <section className="py-20 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
-        {/* Background Elements */}
+      {/* Revolutionary Lead Generation Hub */}
+      <section className="py-20 bg-gradient-to-br from-slate-900 via-orange-900 to-green-900 relative overflow-hidden">
+        {/* Dynamic Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-64 h-64 bg-green-400 rounded-full blur-3xl opacity-10 animate-pulse"></div>
-          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-blue-400 rounded-full blur-3xl opacity-10 animate-pulse animation-delay-2000"></div>
+          <div className="absolute top-10 left-1/4 w-80 h-80 bg-gradient-to-r from-orange-400 to-yellow-500 rounded-full blur-3xl opacity-15 animate-pulse float-animation"></div>
+          <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-gradient-to-r from-green-400 to-blue-500 rounded-full blur-3xl opacity-15 animate-pulse float-animation animation-delay-2000"></div>
+          <div className="absolute top-1/2 left-1/3 w-4 h-12 bg-yellow-400 rounded-full animate-pulse opacity-30"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-6 h-6 bg-orange-400 rotate-45 animate-spin-slow opacity-40"></div>
         </div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 animate-fade-in">
-          <h3 className="text-4xl font-bold text-white mb-4">
-            <span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-              Global Compliance
-            </span>
-            <span className="text-white"> Ready</span>
-          </h3>
-          <p className="text-xl text-slate-300 mb-12 max-w-4xl mx-auto">
-            Orgainse Consulting complies with all global compliance standards to ensure your business security and data protection across all international markets.
-          </p>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { name: "GDPR Compliant", color: "from-green-400 to-green-600", icon: Shield },
-              { name: "HIPAA Ready", color: "from-blue-400 to-blue-600", icon: Award },
-              { name: "ISO 27001", color: "from-purple-400 to-purple-600", icon: Globe },
-              { name: "SOC 2 Compliant", color: "from-orange-400 to-orange-600", icon: CheckCircle },
-            ].map((badge, index) => (
-              <div 
-                key={index}
-                className="group relative transform hover:scale-110 transition-all duration-300 animate-fade-in"
-                style={{ animationDelay: `${index * 200}ms` }}
-              >
-                <div className={`absolute inset-0 bg-gradient-to-r ${badge.color} rounded-2xl opacity-20 group-hover:opacity-40 transition-opacity blur-sm`}></div>
-                <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:border-white/40 transition-all duration-300">
-                  <badge.icon className="h-8 w-8 text-white mx-auto mb-3" />
-                  <div className="text-white font-semibold text-sm">{badge.name}</div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Header Section */}
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-5xl lg:text-6xl font-bold mb-6">
+              <span className="text-white">Accelerate Your </span>
+              <span className="bg-gradient-to-r from-orange-400 via-yellow-400 to-green-400 bg-clip-text text-transparent animate-gradient-text">
+                AI Transformation
+              </span>
+            </h2>
+            <p className="text-xl text-slate-300 max-w-4xl mx-auto mb-8 leading-relaxed">
+              Get exclusive insights, free resources, and expert guidance to transform your business with 
+              <span className="text-yellow-400 font-bold"> AI-native solutions</span>. Join 2,500+ startup leaders already accelerating their success.
+            </p>
+          </div>
+
+          {/* Lead Generation Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            
+            {/* Newsletter Subscription Card */}
+            <div className="group relative animate-fade-in" style={{ animationDelay: '200ms' }}>
+              <div className="absolute -inset-2 bg-gradient-to-r from-orange-400 to-yellow-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+              <Card className="relative bg-white/10 backdrop-blur-lg border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-6 hover:rotate-1 overflow-hidden rounded-3xl">
+                <div className="h-2 bg-gradient-to-r from-orange-400 to-yellow-500"></div>
+                <CardHeader className="pb-4">
+                  <div className="flex items-center space-x-4 mb-4">
+                    <div className="p-4 bg-orange-100 rounded-2xl group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
+                      <Mail className="h-8 w-8 text-orange-600" />
+                    </div>
+                    <div className="flex-1">
+                      <CardTitle className="text-xl text-white group-hover:text-orange-300 transition-colors leading-tight">
+                        AI Strategy Newsletter
+                      </CardTitle>
+                    </div>
+                  </div>
+                  <CardDescription className="text-slate-300 group-hover:text-slate-200 transition-colors leading-relaxed mb-6">
+                    Weekly insights on AI project management, digital transformation trends, and exclusive case studies from successful startups.
+                  </CardDescription>
+                  
+                  {/* Newsletter Form */}
+                  <div className="space-y-4">
+                    <Input 
+                      type="email" 
+                      placeholder="Enter your email address"
+                      className="bg-white/20 border-white/30 text-white placeholder-slate-300 focus:border-orange-400 focus:ring-orange-400"
+                    />
+                    <button className="w-full group relative px-6 py-3 bg-gradient-to-r from-orange-500 to-yellow-500 text-white font-bold rounded-xl shadow-xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <span className="relative z-10 flex items-center justify-center">
+                        Get Free AI Insights
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </button>
+                    <p className="text-xs text-slate-400 text-center">
+                      🎁 Instant access to "AI Transformation Checklist" (worth $297)
+                    </p>
+                  </div>
+                </CardHeader>
+              </Card>
+            </div>
+
+            {/* Free AI Assessment Card */}
+            <div className="group relative animate-fade-in" style={{ animationDelay: '400ms' }}>
+              <div className="absolute -inset-2 bg-gradient-to-r from-green-400 to-blue-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+              <Card className="relative bg-white/10 backdrop-blur-lg border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-6 hover:rotate-1 overflow-hidden rounded-3xl">
+                <div className="h-2 bg-gradient-to-r from-green-400 to-blue-500"></div>
+                <CardHeader className="pb-4">
+                  <div className="flex items-center space-x-4 mb-4">
+                    <div className="p-4 bg-green-100 rounded-2xl group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
+                      <Brain className="h-8 w-8 text-green-600" />
+                    </div>
+                    <div className="flex-1">
+                      <CardTitle className="text-xl text-white group-hover:text-green-300 transition-colors leading-tight">
+                        Free AI Readiness Assessment
+                      </CardTitle>
+                    </div>
+                  </div>
+                  <CardDescription className="text-slate-300 group-hover:text-slate-200 transition-colors leading-relaxed mb-6">
+                    Discover your company's AI maturity score and get a personalized roadmap for digital transformation in just 5 minutes.
+                  </CardDescription>
+                  
+                  <button className="w-full group relative px-6 py-3 bg-gradient-to-r from-green-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-green-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span className="relative z-10 flex items-center justify-center">
+                      Start Free Assessment
+                      <Target className="ml-2 h-4 w-4 group-hover:rotate-180 transition-transform duration-500" />
+                    </span>
+                  </button>
+                  
+                  <div className="mt-4 flex items-center justify-center space-x-4 text-xs text-slate-400">
+                    <span className="flex items-center"><CheckCircle className="h-3 w-3 mr-1 text-green-400" /> No signup required</span>
+                    <span className="flex items-center"><CheckCircle className="h-3 w-3 mr-1 text-green-400" /> Instant results</span>
+                  </div>
+                </CardHeader>
+              </Card>
+            </div>
+
+            {/* Free Consultation Card */}
+            <div className="group relative animate-fade-in md:col-span-2 lg:col-span-1" style={{ animationDelay: '600ms' }}>
+              <div className="absolute -inset-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+              <Card className="relative bg-white/10 backdrop-blur-lg border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-6 hover:rotate-1 overflow-hidden rounded-3xl">
+                <div className="h-2 bg-gradient-to-r from-purple-400 to-pink-500"></div>
+                <CardHeader className="pb-4">
+                  <div className="flex items-center space-x-4 mb-4">
+                    <div className="p-4 bg-purple-100 rounded-2xl group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
+                      <Calendar className="h-8 w-8 text-purple-600" />
+                    </div>
+                    <div className="flex-1">
+                      <CardTitle className="text-xl text-white group-hover:text-purple-300 transition-colors leading-tight">
+                        Free Strategy Session
+                      </CardTitle>
+                    </div>
+                  </div>
+                  <CardDescription className="text-slate-300 group-hover:text-slate-200 transition-colors leading-relaxed mb-6">
+                    Book a 30-minute AI strategy consultation worth $500. Get expert insights on your digital transformation journey.
+                  </CardDescription>
+                  
+                  <button className="w-full group relative px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-xl shadow-xl hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span className="relative z-10 flex items-center justify-center">
+                      Book Free Session
+                      <Calendar className="ml-2 h-4 w-4 group-hover:scale-110 transition-transform duration-300" />
+                    </span>
+                  </button>
+                  
+                  <div className="mt-4 text-center">
+                    <div className="flex items-center justify-center space-x-2 text-xs text-slate-400 mb-2">
+                      <Star className="h-3 w-3 text-yellow-400" />
+                      <span>Limited slots available</span>
+                    </div>
+                    <p className="text-xs text-slate-400">
+                      💎 Usually $500/session - FREE for qualified startups
+                    </p>
+                  </div>
+                </CardHeader>
+              </Card>
+            </div>
+          </div>
+
+          {/* Lead Magnets Section */}
+          <div className="text-center animate-fade-in" style={{ animationDelay: '800ms' }}>
+            <h3 className="text-3xl font-bold text-white mb-8">
+              <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+                Free Resources
+              </span>
+              <span className="text-white"> to Accelerate Your Growth</span>
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {[
+                {
+                  title: "AI Implementation Guide",
+                  description: "Step-by-step roadmap for AI adoption",
+                  value: "$197",
+                  icon: Target,
+                  gradient: "from-orange-400 to-yellow-500"
+                },
+                {
+                  title: "ROI Calculator Template",
+                  description: "Calculate AI project ROI instantly",
+                  value: "$97",
+                  icon: TrendingUp,
+                  gradient: "from-green-400 to-blue-500"
+                },
+                {
+                  title: "Digital Transformation Checklist",
+                  description: "25-point transformation checklist",
+                  value: "$127",
+                  icon: CheckCircle,
+                  gradient: "from-purple-400 to-pink-500"
+                }
+              ].map((resource, index) => (
+                <div key={index} className="group relative">
+                  <div className={`absolute -inset-1 bg-gradient-to-r ${resource.gradient} rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-500`}></div>
+                  <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:border-white/40 transition-all duration-300">
+                    <div className="flex items-center justify-between mb-3">
+                      <resource.icon className="h-6 w-6 text-white" />
+                      <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-slate-900 font-bold">
+                        Worth {resource.value}
+                      </Badge>
+                    </div>
+                    <h4 className="text-white font-semibold mb-2">{resource.title}</h4>
+                    <p className="text-slate-300 text-sm">{resource.description}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            
+            <p className="text-slate-300 mt-8 text-lg">
+              Join our newsletter and get instant access to all resources - 
+              <span className="text-yellow-400 font-bold"> FREE ($421 value)</span>
+            </p>
           </div>
         </div>
       </section>
