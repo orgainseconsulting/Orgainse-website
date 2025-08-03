@@ -1590,22 +1590,22 @@ const Contact = () => {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 animate-fade-in">
           <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6">
-            <span className="text-white">Contact </span>
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-text">
+            <span className="text-slate-800">Contact </span>
+            <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient-text">
               Orgainse
             </span>
             <br />
-            <span className="text-white">Consulting</span>
+            <span className="text-slate-800">Consulting</span>
           </h1>
           
-          <h2 className="text-2xl lg:text-3xl text-blue-300 font-bold mb-6">
+          <h2 className="text-2xl lg:text-3xl text-blue-600 font-bold mb-6">
             Get Your Free AI Consultation & GPT-Powered Strategy Session
           </h2>
           
-          <p className="text-xl text-slate-300 max-w-4xl mx-auto mb-8 leading-relaxed">
-            Ready to transform your business with <span className="text-yellow-400 font-bold">AI-native consulting</span>? Let's discuss how our 
-            <span className="text-green-400 font-bold"> GPT-powered solutions</span> can drive your success across 
-            <span className="text-orange-400 font-bold"> project management</span>, digital transformation, 
+          <p className="text-xl text-slate-700 max-w-4xl mx-auto mb-8 leading-relaxed">
+            Ready to transform your business with <span className="text-orange-600 font-bold">AI-native consulting</span>? Let's discuss how our 
+            <span className="text-green-600 font-bold"> GPT-powered solutions</span> can drive your success across 
+            <span className="text-purple-600 font-bold"> project management</span>, digital transformation, 
             and operational optimization for startups and SMEs globally.
           </p>
           
