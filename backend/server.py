@@ -1,12 +1,12 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
-from pydantic import BaseModel, Field
-from typing import List
+from pydantic import BaseModel, Field, EmailStr
+from typing import List, Optional
 import uuid
 from datetime import datetime
 
@@ -20,7 +20,11 @@ client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
 # Create the main app without a prefix
-app = FastAPI()
+app = FastAPI(
+    title="Orgainse Consulting API",
+    description="AI-native consulting services API",
+    version="1.0.0"
+)
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
@@ -35,26 +39,204 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
-# Add your routes to the router instead of directly to app
+class ContactMessage(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    company: Optional[str] = None
+    subject: str
+    message: str
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    status: str = "new"
+
+class ContactMessageCreate(BaseModel):
+    name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    company: Optional[str] = None
+    subject: str
+    message: str
+
+class NewsletterSubscription(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    email: EmailStr
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    status: str = "active"
+
+class NewsletterSubscriptionCreate(BaseModel):
+    email: EmailStr
+
+class ConsultationRequest(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    company: Optional[str] = None
+    service_type: str
+    preferred_date: Optional[str] = None
+    message: Optional[str] = None
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    status: str = "pending"
+
+class ConsultationRequestCreate(BaseModel):
+    name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    company: Optional[str] = None
+    service_type: str
+    preferred_date: Optional[str] = None
+    message: Optional[str] = None
+
+
+# API Routes
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Orgainse Consulting API - Let us plan your SUCCESS!", "version": "1.0.0"}
 
+@api_router.get("/health")
+async def health_check():
+    return {"status": "healthy", "timestamp": datetime.utcnow()}
+
+# Contact form endpoint
+@api_router.post("/contact", response_model=ContactMessage)
+async def create_contact_message(input: ContactMessageCreate):
+    try:
+        contact_dict = input.dict()
+        contact_obj = ContactMessage(**contact_dict)
+        
+        # Insert into MongoDB
+        result = await db.contact_messages.insert_one(contact_obj.dict())
+        
+        if result.inserted_id:
+            logging.info(f"Contact message created: {contact_obj.id}")
+            return contact_obj
+        else:
+            raise HTTPException(status_code=500, detail="Failed to save contact message")
+    
+    except Exception as e:
+        logging.error(f"Error creating contact message: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@api_router.get("/contact", response_model=List[ContactMessage])
+async def get_contact_messages():
+    try:
+        messages = await db.contact_messages.find().sort("timestamp", -1).to_list(100)
+        return [ContactMessage(**message) for message in messages]
+    except Exception as e:
+        logging.error(f"Error fetching contact messages: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+# Newsletter subscription endpoint
+@api_router.post("/newsletter", response_model=NewsletterSubscription)
+async def subscribe_newsletter(input: NewsletterSubscriptionCreate):
+    try:
+        # Check if email already exists
+        existing_sub = await db.newsletter_subscriptions.find_one({"email": input.email})
+        if existing_sub:
+            raise HTTPException(status_code=409, detail="Email already subscribed")
+        
+        subscription_dict = input.dict()
+        subscription_obj = NewsletterSubscription(**subscription_dict)
+        
+        result = await db.newsletter_subscriptions.insert_one(subscription_obj.dict())
+        
+        if result.inserted_id:
+            logging.info(f"Newsletter subscription created: {subscription_obj.id}")
+            return subscription_obj
+        else:
+            raise HTTPException(status_code=500, detail="Failed to save subscription")
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logging.error(f"Error creating newsletter subscription: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+# Consultation booking endpoint
+@api_router.post("/consultation", response_model=ConsultationRequest)
+async def book_consultation(input: ConsultationRequestCreate):
+    try:
+        consultation_dict = input.dict()
+        consultation_obj = ConsultationRequest(**consultation_dict)
+        
+        result = await db.consultation_requests.insert_one(consultation_obj.dict())
+        
+        if result.inserted_id:
+            logging.info(f"Consultation request created: {consultation_obj.id}")
+            return consultation_obj
+        else:
+            raise HTTPException(status_code=500, detail="Failed to save consultation request")
+    
+    except Exception as e:
+        logging.error(f"Error creating consultation request: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@api_router.get("/consultation", response_model=List[ConsultationRequest])
+async def get_consultation_requests():
+    try:
+        consultations = await db.consultation_requests.find().sort("timestamp", -1).to_list(100)
+        return [ConsultationRequest(**consultation) for consultation in consultations]
+    except Exception as e:
+        logging.error(f"Error fetching consultation requests: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+# Legacy status check endpoints (keeping for compatibility)
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.dict()
-    status_obj = StatusCheck(**status_dict)
-    _ = await db.status_checks.insert_one(status_obj.dict())
-    return status_obj
+    try:
+        status_dict = input.dict()
+        status_obj = StatusCheck(**status_dict)
+        result = await db.status_checks.insert_one(status_obj.dict())
+        
+        if result.inserted_id:
+            return status_obj
+        else:
+            raise HTTPException(status_code=500, detail="Failed to save status check")
+    
+    except Exception as e:
+        logging.error(f"Error creating status check: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 @api_router.get("/status", response_model=List[StatusCheck])
 async def get_status_checks():
-    status_checks = await db.status_checks.find().to_list(1000)
-    return [StatusCheck(**status_check) for status_check in status_checks]
+    try:
+        status_checks = await db.status_checks.find().to_list(1000)
+        return [StatusCheck(**status_check) for status_check in status_checks]
+    except Exception as e:
+        logging.error(f"Error fetching status checks: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+# Analytics endpoints
+@api_router.get("/analytics/overview")
+async def get_analytics_overview():
+    try:
+        # Get counts from different collections
+        contact_count = await db.contact_messages.count_documents({})
+        newsletter_count = await db.newsletter_subscriptions.count_documents({})
+        consultation_count = await db.consultation_requests.count_documents({})
+        
+        # Get recent activity
+        recent_contacts = await db.contact_messages.count_documents({
+            "timestamp": {"$gte": datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)}
+        })
+        
+        return {
+            "total_contacts": contact_count,
+            "total_newsletter_subscribers": newsletter_count,
+            "total_consultations": consultation_count,
+            "today_contacts": recent_contacts,
+            "timestamp": datetime.utcnow()
+        }
+    
+    except Exception as e:
+        logging.error(f"Error fetching analytics: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 # Include the router in the main app
 app.include_router(api_router)
 
+# CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
@@ -70,6 +252,21 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Application events
+@app.on_event("startup")
+async def startup_event():
+    logger.info("Orgainse Consulting API starting up...")
+    
+    # Create indexes for better performance
+    try:
+        await db.contact_messages.create_index("timestamp")
+        await db.newsletter_subscriptions.create_index("email", unique=True)
+        await db.consultation_requests.create_index("timestamp")
+        logger.info("Database indexes created successfully")
+    except Exception as e:
+        logger.error(f"Error creating indexes: {str(e)}")
+
 @app.on_event("shutdown")
 async def shutdown_db_client():
+    logger.info("Shutting down database connection...")
     client.close()
