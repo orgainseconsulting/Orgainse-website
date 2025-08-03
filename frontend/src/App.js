@@ -286,8 +286,6 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-slate-600">
           <div className="text-center md:text-left">
             <p>&copy; 2025 Orgainse Consulting. All rights reserved.</p>
-            <p className="text-xs mt-1">Nature of Business: Consultancy and Service Provider</p>
-            <p className="text-xs mt-1">Trusted by 500+ startups and SMEs across India, USA, UK, UAE, and Australia</p>
           </div>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link to="/privacy" className="hover:text-slate-800">Privacy Policy</Link>
