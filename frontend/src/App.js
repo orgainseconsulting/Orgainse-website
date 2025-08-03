@@ -45,7 +45,7 @@ const REGION_CONFIG = {
   IN: {
     currency: 'INR',
     symbol: '₹',
-    pppMultiplier: 0.22, // Based on PPP research: more affordable for Indian market
+    pppMultiplier: 5.5, // Adjusted to make Indian prices more eye-catching in thousands (₹1000+ range)
     locale: 'en-IN',
     name: 'India'
   },
