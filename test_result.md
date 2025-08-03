@@ -370,7 +370,7 @@ frontend:
         agent: "main"
         comment: "✅ IMPLEMENTED: ROI Calculator frontend fully functional with comprehensive business information form, interactive efficiency slider, multi-service selection checkboxes, and complete results dashboard with 4 key metrics cards (ROI percentage, annual savings, payback period, investment cost), recommended services display, and backend integration. Features: Professional UI matching site design, currency formatting, gradient metric cards, responsive layout."
 
-  - task: "Regional Pricing & PPP System"
+  - task: "Navigation Restructure & Body Integration"
     implemented: true
     working: true
     file: "/app/frontend/src/App.js"
@@ -380,7 +380,7 @@ frontend:
     status_history:
       - working: true
         agent: "main"
-        comment: "✅ IMPLEMENTED: Sophisticated regional pricing system with IP geolocation auto-detection, manual region selection, PPP-adjusted pricing for 8 regions (US, IN, GB, AE, AU, NZ, ZA, EU), intelligent currency formatting, and comprehensive business logic. Features: Multi-method region detection (IP + timezone fallback), research-based PPP multipliers (India 0.22x, UAE 0.75x, etc.), professional currency symbols, RegionalPricingProvider context, and seamless integration across all tools."
+        comment: "✅ IMPLEMENTED: Successfully moved AI Assessment, ROI Calculator, and Smart Calendar from header navigation to prominent body sections on homepage. Features: Clean 4-item navigation (Home, About, Services, Contact), enhanced lead generation grid with 3 interactive cards (Newsletter, AI Assessment, ROI Calculator), dedicated Smart Calendar CTA section, professional design with benefits highlighting (Regional pricing, PPP adjusted, No signup required)."
 
 metadata:
   created_by: "main_agent"
