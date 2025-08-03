@@ -758,7 +758,7 @@ const Home = () => {
             {/* Free Consultation Card */}
             <div className="group relative animate-fade-in md:col-span-2 lg:col-span-1" style={{ animationDelay: '600ms' }}>
               <div className="absolute -inset-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-              <Card className="relative bg-white/10 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 overflow-hidden rounded-2xl flex flex-col">
+              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 overflow-hidden rounded-2xl flex flex-col">
                 <div className="h-1 bg-gradient-to-r from-purple-400 to-pink-500"></div>
                 <CardHeader className="pb-3 flex-1 flex flex-col p-5">
                   <div className="flex items-center space-x-3 mb-3">
