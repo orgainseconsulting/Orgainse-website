@@ -24,7 +24,12 @@ import {
   Phone,
   Mail,
   Calendar,
-  Star
+  Star,
+  Linkedin,
+  Twitter,
+  Instagram,
+  Facebook,
+  Youtube
 } from "lucide-react";
 import axios from "axios";
 
