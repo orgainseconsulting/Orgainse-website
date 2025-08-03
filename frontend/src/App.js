@@ -904,19 +904,19 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
               <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                <span className="text-white">About </span>
-                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-text">
+                <span className="text-slate-800">About </span>
+                <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient-text">
                   Orgainse Consulting
                 </span>
               </h1>
               
-              <h2 className="text-2xl lg:text-3xl text-blue-300 font-bold mb-6">
+              <h2 className="text-2xl lg:text-3xl text-blue-600 font-bold mb-6">
                 AI-Native Digital Transformation Leaders & GPT-Powered Project Management Experts
               </h2>
               
-              <p className="text-xl text-slate-300 leading-relaxed mb-8">
-                We are an AI-native consulting firm specializing in <span className="text-yellow-400 font-bold">GPT-powered project management</span>, 
-                intelligent business strategy, and <span className="text-green-400 font-bold">automated operational optimization</span> 
+              <p className="text-xl text-slate-700 leading-relaxed mb-8">
+                We are an AI-native consulting firm specializing in <span className="text-orange-600 font-bold">GPT-powered project management</span>, 
+                intelligent business strategy, and <span className="text-green-600 font-bold">automated operational optimization</span> 
                 for startups and SMEs across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
               </p>
               
