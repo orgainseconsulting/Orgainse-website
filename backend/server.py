@@ -157,9 +157,10 @@ async def get_contact_messages():
         logging.error(f"Error fetching contact messages: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
-# Newsletter subscription endpoint
+# Newsletter subscription endpoint with Odoo Marketing integration
 @api_router.post("/newsletter", response_model=NewsletterSubscription)
 async def subscribe_newsletter(input: NewsletterSubscriptionCreate):
+    """Handle newsletter subscriptions with Odoo Email Marketing integration"""
     try:
         # Check if email already exists
         existing_sub = await db.newsletter_subscriptions.find_one({"email": input.email})
@@ -169,10 +170,34 @@ async def subscribe_newsletter(input: NewsletterSubscriptionCreate):
         subscription_dict = input.dict()
         subscription_obj = NewsletterSubscription(**subscription_dict)
         
+        # Save to MongoDB for performance
         result = await db.newsletter_subscriptions.insert_one(subscription_obj.dict())
         
         if result.inserted_id:
-            logging.info(f"Newsletter subscription created: {subscription_obj.id}")
+            logging.info(f"Newsletter subscription saved to MongoDB: {subscription_obj.id}")
+            
+            # Sync to Odoo Email Marketing
+            try:
+                marketing_contact_data = {
+                    'email': subscription_obj.email,
+                    'name': subscription_obj.email.split('@')[0].title(),
+                    'company': ''
+                }
+                
+                odoo_contact_id = await odoo_integration.create_marketing_contact(marketing_contact_data)
+                
+                if odoo_contact_id:
+                    # Update MongoDB record with Odoo ID
+                    await db.newsletter_subscriptions.update_one(
+                        {"id": subscription_obj.id},
+                        {"$set": {"odoo_contact_id": odoo_contact_id}}
+                    )
+                    logging.info(f"Newsletter subscription synced to Odoo Marketing with ID: {odoo_contact_id}")
+                
+            except Exception as odoo_error:
+                logging.error(f"Odoo Marketing sync failed: {str(odoo_error)}")
+                # Continue without Odoo - MongoDB save was successful
+            
             return subscription_obj
         else:
             raise HTTPException(status_code=500, detail="Failed to save subscription")
