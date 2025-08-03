@@ -1258,7 +1258,7 @@ const Services = () => {
   );
 };
 
-// Enhanced Contact Page
+// Revolutionary Contact Page with Creative Design and SEO
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -1273,7 +1273,7 @@ const Contact = () => {
     e.preventDefault();
     try {
       await axios.post(`${API}/contact`, formData);
-      alert("Message sent successfully! We'll get back to you within 24 hours.");
+      alert("Message sent successfully! We'll get back to you within 24 hours with a customized AI consultation plan.");
       setFormData({
         name: "",
         email: "",
@@ -1283,7 +1283,7 @@ const Contact = () => {
         message: "",
       });
     } catch (error) {
-      alert("Error sending message. Please try again.");
+      alert("Error sending message. Please try again or contact us directly at info@orgainse.com");
     }
   };
 
@@ -1295,230 +1295,320 @@ const Contact = () => {
   };
 
   const socialLinks = [
-    { icon: Linkedin, href: "https://linkedin.com/company/orgainse-consulting", label: "LinkedIn" },
-    { icon: Twitter, href: "https://twitter.com/orgainseconsult", label: "Twitter" },
-    { icon: Instagram, href: "https://instagram.com/orgainseconsulting", label: "Instagram" },
-    { icon: Facebook, href: "https://facebook.com/orgainseconsulting", label: "Facebook" },
-    { icon: Youtube, href: "https://youtube.com/@orgainseconsulting", label: "YouTube" },
+    { icon: Linkedin, href: "https://linkedin.com/company/orgainse-consulting", label: "LinkedIn", color: "from-blue-400 to-blue-600" },
+    { icon: Twitter, href: "https://twitter.com/orgainseconsult", label: "Twitter", color: "from-sky-400 to-blue-500" },
+    { icon: Instagram, href: "https://instagram.com/orgainseconsulting", label: "Instagram", color: "from-pink-400 to-rose-500" },
+    { icon: Facebook, href: "https://facebook.com/orgainseconsulting", label: "Facebook", color: "from-blue-500 to-indigo-600" },
+    { icon: Youtube, href: "https://youtube.com/@orgainseconsulting", label: "YouTube", color: "from-red-400 to-red-600" },
+  ];
+
+  const contactMethods = [
+    {
+      title: "Phone - India (HQ)",
+      description: "Direct consultation with our AI specialists",
+      details: ["+91-9740384683", "+91-9740394863"],
+      icon: Phone,
+      gradient: "from-green-400 to-emerald-500"
+    },
+    {
+      title: "Email Support",
+      description: "24/7 AI-powered support and consultation",
+      details: ["info@orgainse.com", "support@orgainse.com"],
+      icon: Mail,
+      gradient: "from-blue-400 to-indigo-500"
+    },
+    {
+      title: "Book AI Consultation",
+      description: "Schedule your free GPT-powered strategy session",
+      details: ["Free 30-min consultation", "Customized AI roadmap"],
+      icon: Calendar,
+      gradient: "from-orange-400 to-red-500"
+    },
+    {
+      title: "Global Offices",
+      description: "AI-native consulting across regions",
+      details: ["Bangalore, India (HQ)", "Austin, USA (Corporate)"],
+      icon: MapPin,
+      gradient: "from-purple-400 to-pink-500"
+    }
   ];
 
   return (
     <div className="min-h-screen">
-      {/* SEO Optimized Hero Section */}
-      <section className="bg-gradient-to-br from-slate-50 to-orange-50 py-20 overflow-hidden animate-fade-in">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl lg:text-5xl font-bold text-slate-800 mb-6">
-            Contact Orgainse Consulting
+      {/* Revolutionary Hero Section with SEO */}
+      <section className="relative bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 py-20 lg:py-32 overflow-hidden">
+        {/* Dynamic Background Elements */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-3xl animate-pulse float-animation will-change-transform"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full blur-3xl animate-pulse float-animation animation-delay-2000 will-change-transform"></div>
+          <div className="absolute top-1/2 left-1/4 w-8 h-8 bg-blue-400 rotate-45 animate-spin-slow opacity-60"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-6 h-16 bg-purple-400 rounded-full animate-pulse opacity-50"></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 animate-fade-in">
+          <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6">
+            <span className="text-white">Contact </span>
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-text">
+              Orgainse
+            </span>
+            <br />
+            <span className="text-white">Consulting</span>
           </h1>
-          <h2 className="text-xl text-orange-600 font-semibold mb-4">
-            Get Your Free AI Consultation Today
+          
+          <h2 className="text-2xl lg:text-3xl text-blue-300 font-bold mb-6">
+            Get Your Free AI Consultation & GPT-Powered Strategy Session
           </h2>
-          <p className="text-xl text-slate-600 max-w-4xl mx-auto">
-            Ready to transform your business with AI-native consulting? Let's discuss how our 
-            GPT-powered solutions can drive your success across project management, digital transformation, 
-            and operational optimization.
+          
+          <p className="text-xl text-slate-300 max-w-4xl mx-auto mb-8 leading-relaxed">
+            Ready to transform your business with <span className="text-yellow-400 font-bold">AI-native consulting</span>? Let's discuss how our 
+            <span className="text-green-400 font-bold"> GPT-powered solutions</span> can drive your success across 
+            <span className="text-orange-400 font-bold"> project management</span>, digital transformation, 
+            and operational optimization for startups and SMEs globally.
           </p>
+          
+          {/* Animated Divider */}
+          <div className="flex justify-center mb-8">
+            <div className="w-40 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full animate-pulse"></div>
+          </div>
         </div>
       </section>
 
-      {/* Contact Form & Info with Social Links */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Revolutionary Contact Form & Info with Enhanced Design */}
+      <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 left-0 w-full h-full" style={{
+            backgroundImage: `radial-gradient(circle at 25% 25%, #3b82f6 0%, transparent 50%), radial-gradient(circle at 75% 75%, #8b5cf6 0%, transparent 50%)`
+          }}></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Contact Form */}
+            {/* Enhanced Contact Form */}
             <div className="animate-fade-in">
-              <Card className="shadow-xl">
-                <CardHeader>
-                  <CardTitle className="text-2xl">Send us a message</CardTitle>
-                  <CardDescription>
-                    Fill out the form below and we'll get back to you within 24 hours with a customized AI consultation plan.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="relative group">
+                <div className="absolute -inset-4 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-1000"></div>
+                
+                <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 rounded-3xl overflow-hidden">
+                  {/* Top Gradient Bar */}
+                  <div className="h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+                  
+                  <CardHeader className="pb-6">
+                    <CardTitle className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                      Send us a message
+                    </CardTitle>
+                    <CardDescription className="text-lg text-slate-600">
+                      Fill out the form below and we'll get back to you within 24 hours with a customized 
+                      <span className="font-bold text-blue-600"> AI consultation plan</span> and 
+                      <span className="font-bold text-purple-600"> GPT-powered strategy recommendations</span>.
+                    </CardDescription>
+                  </CardHeader>
+                  
+                  <CardContent>
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="text-sm font-semibold text-slate-700">Name *</label>
+                          <Input
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                            className="mt-2 border-2 border-slate-200 focus:border-blue-500 transition-colors duration-300"
+                            placeholder="Your full name"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-sm font-semibold text-slate-700">Email *</label>
+                          <Input
+                            name="email"
+                            type="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                            className="mt-2 border-2 border-slate-200 focus:border-blue-500 transition-colors duration-300"
+                            placeholder="your@email.com"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="text-sm font-semibold text-slate-700">Phone</label>
+                          <Input
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            className="mt-2 border-2 border-slate-200 focus:border-blue-500 transition-colors duration-300"
+                            placeholder="+91-9740384683"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-sm font-semibold text-slate-700">Company</label>
+                          <Input
+                            name="company"
+                            value={formData.company}
+                            onChange={handleChange}
+                            className="mt-2 border-2 border-slate-200 focus:border-blue-500 transition-colors duration-300"
+                            placeholder="Your company name"
+                          />
+                        </div>
+                      </div>
+
                       <div>
-                        <label className="text-sm font-medium text-slate-700">Name *</label>
+                        <label className="text-sm font-semibold text-slate-700">Subject *</label>
                         <Input
-                          name="name"
-                          value={formData.name}
+                          name="subject"
+                          value={formData.subject}
                           onChange={handleChange}
                           required
-                          className="mt-1"
-                          placeholder="Your full name"
+                          className="mt-2 border-2 border-slate-200 focus:border-blue-500 transition-colors duration-300"
+                          placeholder="AI Consulting Inquiry - Project Management/Digital Transformation"
                         />
                       </div>
+
                       <div>
-                        <label className="text-sm font-medium text-slate-700">Email *</label>
-                        <Input
-                          name="email"
-                          type="email"
-                          value={formData.email}
+                        <label className="text-sm font-semibold text-slate-700">Message *</label>
+                        <Textarea
+                          name="message"
+                          value={formData.message}
                           onChange={handleChange}
                           required
-                          className="mt-1"
-                          placeholder="your@email.com"
+                          rows={6}
+                          className="mt-2 border-2 border-slate-200 focus:border-blue-500 transition-colors duration-300"
+                          placeholder="Tell us about your AI transformation needs, GPT-powered project management requirements, operational optimization goals, or how we can help accelerate your business growth with our AI-native consulting services..."
                         />
                       </div>
-                    </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-sm font-medium text-slate-700">Phone</label>
-                        <Input
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          className="mt-1"
-                          placeholder="+91-9740384683"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium text-slate-700">Company</label>
-                        <Input
-                          name="company"
-                          value={formData.company}
-                          onChange={handleChange}
-                          className="mt-1"
-                          placeholder="Your company name"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="text-sm font-medium text-slate-700">Subject *</label>
-                      <Input
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        required
-                        className="mt-1"
-                        placeholder="AI Consulting Inquiry"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="text-sm font-medium text-slate-700">Message *</label>
-                      <Textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        rows={6}
-                        className="mt-1"
-                        placeholder="Tell us about your AI transformation needs, project requirements, or how we can help optimize your operations..."
-                      />
-                    </div>
-
-                    <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600 text-white transform hover:scale-105 transition-all duration-300 hover:shadow-lg">
-                      Send Message
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
+                      <button 
+                        type="submit" 
+                        className="group w-full relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <span className="relative z-10 flex items-center justify-center text-lg">
+                          Send Message & Get AI Consultation
+                          <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform" />
+                        </span>
+                      </button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
 
-            {/* Contact Info with Social Links */}
+            {/* Enhanced Contact Info with Creative Cards */}
             <div className="space-y-8 animate-fade-in animation-delay-300">
               <div>
-                <h2 className="text-2xl font-bold text-slate-800 mb-6">
-                  Let's Start Your AI Transformation
+                <h2 className="text-3xl lg:text-4xl font-bold mb-6">
+                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    Let's Start Your AI Transformation
+                  </span>
                 </h2>
-                <p className="text-lg text-slate-600 mb-8">
-                  Whether you're looking to implement AI project management, optimize operations with GPT, 
-                  or accelerate digital transformation, we're here to help you succeed with our AI-native approach.
+                <p className="text-xl text-slate-600 mb-8 leading-relaxed">
+                  Whether you're looking to implement <span className="font-bold text-blue-600">AI project management</span>, 
+                  optimize operations with <span className="font-bold text-purple-600">GPT-powered solutions</span>, 
+                  or accelerate <span className="font-bold text-orange-600">digital transformation</span>, we're here to help you succeed 
+                  with our AI-native approach across India, USA, UK, UAE, and Australia.
                 </p>
               </div>
 
-              {/* Contact Cards */}
-              <div className="space-y-4">
-                <Card className="transform hover:scale-105 transition-all duration-300 hover:shadow-lg">
-                  <CardContent className="flex items-center space-x-4 p-6">
-                    <div className="p-3 bg-orange-100 rounded-lg">
-                      <Phone className="h-6 w-6 text-orange-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-slate-800">Phone - India (HQ)</h3>
-                      <p className="text-slate-600">+91-9740384683</p>
-                      <p className="text-slate-600">+91-9740394863</p>
-                    </div>
-                  </CardContent>
-                </Card>
+              {/* Creative Contact Method Cards */}
+              <div className="space-y-6">
+                {contactMethods.map((method, index) => (
+                  <div 
+                    key={index}
+                    className="group relative animate-fade-in"
+                    style={{ animationDelay: `${index * 150 + 400}ms` }}
+                  >
+                    {/* Floating Background */}
+                    <div className={`absolute -inset-2 bg-gradient-to-r ${method.gradient} rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000`}></div>
+                    
+                    <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 rounded-3xl overflow-hidden">
+                      {/* Top Gradient Bar */}
+                      <div className={`h-1 bg-gradient-to-r ${method.gradient}`}></div>
+                      
+                      <CardContent className="p-6">
+                        <div className="flex items-start space-x-4">
+                          <div className={`p-4 bg-white rounded-2xl shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-500`}>
+                            <method.icon className="h-8 w-8 text-slate-600" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="text-xl font-bold text-slate-800 mb-2">{method.title}</h3>
+                            <p className="text-slate-600 text-sm mb-3">{method.description}</p>
+                            <div className="space-y-1">
+                              {method.details.map((detail, detailIndex) => (
+                                <p key={detailIndex} className="text-slate-700 font-medium">
+                                  {detail}
+                                </p>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                ))}
 
-                <Card className="transform hover:scale-105 transition-all duration-300 hover:shadow-lg">
-                  <CardContent className="flex items-center space-x-4 p-6">
-                    <div className="p-3 bg-orange-100 rounded-lg">
-                      <Mail className="h-6 w-6 text-orange-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-slate-800">Email</h3>
-                      <p className="text-slate-600">info@orgainse.com</p>
-                      <p className="text-slate-600">support@orgainse.com</p>
-                    </div>
-                  </CardContent>
-                </Card>
+                {/* Enhanced Social Media Card */}
+                <div className="group relative animate-fade-in" style={{ animationDelay: '800ms' }}>
+                  <div className="absolute -inset-2 bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                  
+                  <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 rounded-3xl overflow-hidden">
+                    <div className="h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"></div>
+                    
+                    <CardContent className="p-6">
+                      <h3 className="text-xl font-bold text-slate-800 mb-4 text-center">
+                        Connect With Our AI Community
+                      </h3>
+                      <p className="text-slate-600 text-center mb-6">
+                        Follow us for the latest insights on AI-native consulting and GPT-powered business transformation
+                      </p>
+                      
+                      <div className="flex justify-center space-x-4">
+                        {socialLinks.map((social, index) => (
+                          <div 
+                            key={index}
+                            className="group/social relative"
+                          >
+                            <div className={`absolute inset-0 bg-gradient-to-r ${social.color} rounded-2xl opacity-20 group-hover/social:opacity-40 transition-opacity blur-sm`}></div>
+                            <a
+                              href={social.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="relative flex items-center justify-center w-12 h-12 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-125 hover:-translate-y-2"
+                              aria-label={social.label}
+                            >
+                              <social.icon className="h-6 w-6 text-slate-600" />
+                            </a>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
 
-                <Card className="transform hover:scale-105 transition-all duration-300 hover:shadow-lg">
-                  <CardContent className="flex items-center space-x-4 p-6">
-                    <div className="p-3 bg-orange-100 rounded-lg">
-                      <Calendar className="h-6 w-6 text-orange-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-slate-800">Book a Call</h3>
-                      <p className="text-slate-600">Schedule a free AI consultation</p>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="transform hover:scale-105 transition-all duration-300 hover:shadow-lg">
-                  <CardContent className="flex items-center space-x-4 p-6">
-                    <div className="p-3 bg-orange-100 rounded-lg">
-                      <MapPin className="h-6 w-6 text-orange-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-slate-800">Our Offices</h3>
-                      <p className="text-slate-600">Bangalore, India (HQ)</p>
-                      <p className="text-slate-600">Austin, USA (Corporate)</p>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Social Media Links */}
-                <Card className="transform hover:scale-105 transition-all duration-300 hover:shadow-lg">
-                  <CardContent className="p-6">
-                    <h3 className="font-semibold text-slate-800 mb-4">Connect With Us</h3>
-                    <div className="flex space-x-4">
-                      {socialLinks.map((social, index) => (
-                        <a
-                          key={index}
-                          href={social.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-slate-600 hover:text-orange-500 transform hover:scale-125 transition-all duration-300"
-                          aria-label={social.label}
-                        >
-                          <social.icon className="h-6 w-6" />
-                        </a>
-                      ))}
-                    </div>
+              {/* Revolutionary CTA Card */}
+              <div className="group relative animate-fade-in" style={{ animationDelay: '1000ms' }}>
+                <div className="absolute -inset-4 bg-gradient-to-r from-orange-400 via-pink-400 to-purple-500 rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-1000 animate-pulse"></div>
+                
+                <Card className="relative bg-gradient-to-br from-orange-500 to-purple-600 text-white border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-4 rounded-3xl overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full transform translate-x-8 -translate-y-8 animate-pulse"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full transform -translate-x-4 translate-y-4 animate-pulse animation-delay-500"></div>
+                  
+                  <CardContent className="p-8 text-center relative z-10">
+                    <h3 className="text-2xl font-bold mb-4">Ready to Get Started?</h3>
+                    <p className="mb-6 text-orange-100">
+                      Book a free AI consultation call and let's discuss your digital transformation goals 
+                      with our <span className="font-bold">GPT-powered strategy development</span>.
+                    </p>
+                    <button className="group/btn bg-white text-orange-600 hover:bg-orange-50 px-8 py-4 rounded-full font-bold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                      <Calendar className="inline-block mr-2 h-5 w-5" />
+                      Schedule Free AI Consultation
+                    </button>
                   </CardContent>
                 </Card>
               </div>
-
-              {/* CTA */}
-              <Card className="bg-gradient-to-br from-orange-500 to-orange-600 text-white transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
-                <CardContent className="p-8 text-center">
-                  <h3 className="text-xl font-bold mb-4">Ready to Get Started?</h3>
-                  <p className="mb-6">
-                    Book a free AI consultation call and let's discuss your digital transformation goals.
-                  </p>
-                  <Button variant="secondary" className="bg-white text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all">
-                    <Calendar className="mr-2 h-4 w-4" />
-                    Schedule Free AI Consultation
-                  </Button>
-                </CardContent>
-              </Card>
             </div>
           </div>
         </div>
