@@ -1389,124 +1389,108 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Revolutionary Services Grid with Enhanced Animations */}
-      <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-orange-50 relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
+      {/* Modern Services Grid Layout */}
+      <section className="py-20 bg-gradient-to-br from-white via-slate-50 to-orange-50 relative overflow-hidden">
+        {/* Subtle Background Pattern */}
+        <div className="absolute inset-0 opacity-3">
           <div className="absolute top-0 left-0 w-full h-full" style={{
-            backgroundImage: `radial-gradient(circle at 25% 25%, #f97316 0%, transparent 50%), radial-gradient(circle at 75% 75%, #10b981 0%, transparent 50%)`
+            backgroundImage: `radial-gradient(circle at 20% 20%, #f97316 0%, transparent 40%), radial-gradient(circle at 80% 80%, #10b981 0%, transparent 40%)`
           }}></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="space-y-24">
+          {/* Section Header */}
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              <span className="text-slate-800">Our </span>
+              <span className="bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text text-transparent">
+                AI Arsenal
+              </span>
+            </h2>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+              Cutting-edge AI solutions designed to transform your business operations and accelerate growth
+            </p>
+          </div>
+
+          {/* Modern Grid Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <div 
                 key={index} 
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center animate-fade-in ${
-                  index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
-                }`}
-                style={{ animationDelay: `${index * 200}ms` }}
+                className="group relative animate-fade-in"
+                style={{ animationDelay: `${index * 150}ms` }}
               >
-                <div className={`space-y-8 ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-                  <div className="flex items-center space-x-4">
-                    <div className="relative group">
-                      <div className={`absolute inset-0 bg-gradient-to-r ${service.gradient} rounded-2xl opacity-20 group-hover:opacity-40 transition-opacity blur-sm`}></div>
-                      <div className="relative p-4 bg-white rounded-2xl shadow-lg group-hover:shadow-xl transition-all duration-300 transform group-hover:rotate-12">
-                        <service.icon className="h-10 w-10 text-slate-600" />
-                      </div>
+                {/* Card Glow Effect */}
+                <div className={`absolute -inset-1 bg-gradient-to-r ${service.gradient} rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000`}></div>
+                
+                {/* Main Card */}
+                <div className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 overflow-hidden h-full flex flex-col">
+                  
+                  {/* Service Image */}
+                  <div className="relative mb-6 overflow-hidden rounded-2xl">
+                    <img 
+                      src={service.image} 
+                      alt={service.title}
+                      className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+
+                  {/* Icon and Title */}
+                  <div className="flex items-start space-x-4 mb-4">
+                    <div className={`p-3 rounded-2xl bg-gradient-to-r ${service.gradient} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                      <service.icon className="h-6 w-6 text-white" />
                     </div>
-                    <div>
-                      <h2 className="text-3xl lg:text-4xl font-bold text-slate-800 leading-tight">
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-slate-800 group-hover:text-orange-600 transition-colors leading-tight">
                         {service.title}
-                      </h2>
-                      <div className={`h-1 w-20 bg-gradient-to-r ${service.gradient} rounded-full mt-2`}></div>
+                      </h3>
                     </div>
                   </div>
-                  
-                  <p className="text-lg text-slate-600 leading-relaxed">
+
+                  {/* Description */}
+                  <p className="text-slate-600 leading-relaxed mb-6 flex-1 text-sm">
                     {service.description}
                   </p>
 
-                  <div className="space-y-4">
-                    <h3 className="font-bold text-slate-800 text-lg">What you'll get:</h3>
-                    <div className="grid grid-cols-1 gap-3">
-                      {service.features.map((feature, featureIndex) => (
-                        <div 
-                          key={featureIndex}
-                          className="group flex items-start space-x-3 p-3 rounded-xl hover:bg-white hover:shadow-md transition-all duration-300"
-                        >
-                          <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
-                          <span className="text-slate-700 group-hover:text-slate-800 transition-colors font-medium">
-                            {feature}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+                  {/* Features List */}
+                  <div className="space-y-2 mb-6">
+                    {service.features.slice(0, 3).map((feature, featureIndex) => (
+                      <div key={featureIndex} className="flex items-start space-x-2">
+                        <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span className="text-xs text-slate-600 leading-relaxed">{feature}</span>
+                      </div>
+                    ))}
                   </div>
 
-                  <div className="pt-4">
-                    <button className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <span className="relative z-10 flex items-center">
-                        Request AI Consultation
-                        <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform" />
-                      </span>
-                    </button>
-                  </div>
-                </div>
-
-                <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''} relative group`}>
-                  {/* Creative Image Container */}
-                  <div className={`absolute -inset-4 bg-gradient-to-r ${service.gradient} rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-1000 animate-pulse`}></div>
-                  <img
-                    src={service.image}
-                    alt={`${service.keywords} - ${service.title} for startups and SMEs`}
-                    className="relative rounded-2xl shadow-2xl w-full h-[400px] object-cover transform group-hover:scale-105 transition-all duration-700"
-                    loading="lazy"
-                  />
-                  
-                  {/* Floating UI Elements */}
-                  <div className="absolute top-4 right-4 bg-orange-500 rounded-full p-3 animate-bounce will-change-transform">
-                    <Brain className="h-6 w-6 text-white" />
-                  </div>
-                  <div className="absolute bottom-4 left-4 bg-green-500 rounded-full p-3 animate-pulse will-change-transform">
-                    <Zap className="h-6 w-6 text-white" />
-                  </div>
-                  <div className="absolute top-1/2 -right-4 bg-purple-500 rounded-full p-4 transform rotate-12 animate-spin-slow will-change-transform">
-                    <service.icon className="h-8 w-8 text-white" />
-                  </div>
+                  {/* Action Button */}
+                  <button className={`w-full group relative px-6 py-3 bg-gradient-to-r ${service.gradient} text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 overflow-hidden`}>
+                    <div className={`absolute inset-0 bg-gradient-to-r ${service.gradient.split(' ').reverse().join(' ')} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                    <span className="relative z-10 flex items-center justify-center text-sm">
+                      Learn More
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </button>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Creative CTA Section */}
-          <div className="text-center mt-20 animate-fade-in">
-            <h3 className="text-3xl lg:text-4xl font-bold text-slate-800 mb-6">
-              Ready to Transform Your Business with{" "}
-              <span className="bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text text-transparent">
-                AI-Native Solutions?
-              </span>
-            </h3>
-            <p className="text-xl text-slate-600 mb-8 max-w-3xl mx-auto">
-              Join hundreds of successful startups and SMEs who have accelerated their growth with our 
-              <span className="font-bold text-orange-600"> GPT-powered consulting services</span>.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button className="group relative px-10 py-5 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-full shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative z-10 flex items-center text-lg">
-                  Explore Our AI Arsenal
-                  <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform" />
-                </span>
-              </button>
-              
-              <button className="group px-10 py-5 border-2 border-orange-500 text-orange-500 font-bold rounded-full hover:bg-orange-500 hover:text-white transition-all duration-300 transform hover:scale-105 hover:shadow-orange-500/25 hover:shadow-xl">
-                <span className="flex items-center text-lg">
-                  Get Free AI Readiness Audit
-                  <Star className="ml-3 h-6 w-6 group-hover:rotate-180 transition-transform duration-500" />
+          {/* Call to Action */}
+          <div className="text-center mt-16 animate-fade-in" style={{ animationDelay: '1000ms' }}>
+            <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 max-w-4xl mx-auto">
+              <h3 className="text-3xl font-bold text-slate-800 mb-4">
+                Ready to Transform Your Business with AI?
+              </h3>
+              <p className="text-slate-600 mb-6 text-lg">
+                Get a personalized consultation and discover how our AI-native solutions can accelerate your growth
+              </p>
+              <button className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10 flex items-center justify-center">
+                  Start Your AI Journey
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </button>
             </div>
