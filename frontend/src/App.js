@@ -194,11 +194,11 @@ const Navigation = () => {
 // Footer Component
 const Footer = () => {
   const socialLinks = [
-    { icon: Linkedin, href: "https://linkedin.com/company/orgainseconsulting", label: "LinkedIn" },
-    { icon: Twitter, href: "https://x.com/orgainse_ai", label: "Twitter" },
-    { icon: Instagram, href: "https://instagram.com/orgainse.consulting", label: "Instagram" },
+    { icon: Linkedin, href: "https://linkedin.com/company/orgainse-consulting", label: "LinkedIn" },
+    { icon: Twitter, href: "https://twitter.com/orgainseconsult", label: "Twitter" },
+    { icon: Instagram, href: "https://instagram.com/orgainseconsulting", label: "Instagram" },
     { icon: Facebook, href: "https://facebook.com/orgainseconsulting", label: "Facebook" },
-    { icon: Youtube, href: "https://youtube.com/@orgainse", label: "YouTube" },
+    { icon: Youtube, href: "https://youtube.com/@orgainseconsulting", label: "YouTube" },
   ];
 
   return (
