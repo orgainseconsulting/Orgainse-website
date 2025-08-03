@@ -1082,21 +1082,21 @@ const Home = () => {
                 {
                   title: "AI Implementation Guide",
                   description: "Step-by-step roadmap for AI adoption",
-                  value: "$197",
+                  baseValue: resourceBasePrices.aiGuide,
                   icon: Target,
                   gradient: "from-orange-400 to-yellow-500"
                 },
                 {
                   title: "ROI Calculator Template",
                   description: "Calculate AI project ROI instantly",
-                  value: "$97",
+                  baseValue: resourceBasePrices.roiTemplate,
                   icon: TrendingUp,
                   gradient: "from-green-400 to-blue-500"
                 },
                 {
                   title: "Digital Transformation Checklist",
                   description: "25-point transformation checklist",
-                  value: "$127",
+                  baseValue: resourceBasePrices.checklist,
                   icon: CheckCircle,
                   gradient: "from-purple-400 to-pink-500"
                 }
@@ -1107,7 +1107,7 @@ const Home = () => {
                     <div className="flex items-center justify-between mb-2">
                       <resource.icon className="h-5 w-5 text-slate-700" />
                       <Badge className="bg-gradient-to-r from-orange-400 to-yellow-400 text-white font-bold text-xs">
-                        Worth {resource.value}
+                        Worth {getRegionalPrice(resource.baseValue)}
                       </Badge>
                     </div>
                     <h4 className="text-slate-800 font-semibold mb-1 text-sm">{resource.title}</h4>
