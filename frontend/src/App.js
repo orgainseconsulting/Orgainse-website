@@ -958,7 +958,7 @@ const Home = () => {
                   </CardDescription>
                   
                   <button 
-                    onClick={handleAIAssessment}
+                    onClick={() => window.location.href = '/ai-assessment'}
                     className="w-full group relative px-4 py-2.5 bg-gradient-to-r from-green-500 to-blue-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-green-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden mb-3 text-sm"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -976,7 +976,7 @@ const Home = () => {
               </Card>
             </div>
 
-            {/* Free Consultation Card */}
+            {/* ROI Calculator Card */}
             <div className="group relative animate-fade-in" style={{ animationDelay: '600ms' }}>
               <div className="absolute -inset-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
               <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 overflow-hidden rounded-2xl flex flex-col">
@@ -984,37 +984,73 @@ const Home = () => {
                 <CardHeader className="p-5 flex-1">
                   <div className="flex items-center space-x-3 mb-3">
                     <div className="p-2 bg-purple-100 rounded-lg group-hover:scale-105 group-hover:rotate-6 transition-all duration-500 shadow-md">
-                      <Calendar className="h-5 w-5 text-purple-600" />
+                      <TrendingUp className="h-5 w-5 text-purple-600" />
                     </div>
                     <div className="flex-1">
                       <CardTitle className="text-base text-slate-800 group-hover:text-purple-600 transition-colors leading-tight">
-                        Free Strategy Session
+                        ROI Calculator
                       </CardTitle>
                     </div>
                   </div>
                   <CardDescription className="text-slate-700 group-hover:text-slate-800 transition-colors leading-relaxed mb-4 text-sm">
-                    Book a 30-minute AI strategy consultation worth $500. Get expert insights on your digital transformation journey.
+                    Calculate your potential return on investment with region-specific pricing and see your transformation savings.
                   </CardDescription>
                   
                   <button 
-                    onClick={handleFreeConsultation}
+                    onClick={() => window.location.href = '/roi-calculator'}
                     className="w-full group relative px-4 py-2.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden mb-3 text-sm"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <span className="relative z-10 flex items-center justify-center">
-                      Book Free Session
-                      <Calendar className="ml-2 h-3 w-3 group-hover:scale-110 transition-transform duration-300" />
+                      Calculate ROI
+                      <TrendingUp className="ml-2 h-3 w-3 group-hover:scale-110 transition-transform duration-500" />
                     </span>
                   </button>
                   
-                  <div className="text-center">
-                    <div className="flex items-center justify-center space-x-2 text-xs text-slate-600 mb-1">
-                      <Star className="h-3 w-3 text-yellow-500" />
-                      <span>Limited slots available</span>
+                  <div className="flex items-center justify-center space-x-4 text-xs text-slate-600">
+                    <span className="flex items-center"><CheckCircle className="h-3 w-3 mr-1 text-purple-500" /> Regional pricing</span>
+                    <span className="flex items-center"><CheckCircle className="h-3 w-3 mr-1 text-purple-500" /> PPP adjusted</span>
+                  </div>
+                </CardHeader>
+              </Card>
+            </div>
+          </div>
+
+          {/* Smart Calendar Section */}
+          <div className="text-center animate-fade-in mb-10" style={{ animationDelay: '800ms' }}>
+            <div className="group relative">
+              <div className="absolute -inset-2 bg-gradient-to-r from-orange-400 to-green-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden rounded-2xl">
+                <div className="h-1 bg-gradient-to-r from-orange-400 to-green-500"></div>
+                <CardHeader className="p-8">
+                  <div className="flex items-center justify-center space-x-3 mb-4">
+                    <div className="p-3 bg-gradient-to-r from-orange-100 to-green-100 rounded-xl">
+                      <Calendar className="h-6 w-6 text-orange-600" />
                     </div>
-                    <p className="text-xs text-slate-600">
-                      💎 Usually $500/session - FREE for qualified startups
-                    </p>
+                    <CardTitle className="text-xl text-slate-800">
+                      Ready for Your Free Strategy Session?
+                    </CardTitle>
+                  </div>
+                  <CardDescription className="text-slate-700 mb-6 max-w-2xl mx-auto">
+                    Book a personalized 30-minute consultation with our AI transformation experts. 
+                    Discuss your specific challenges and get a custom roadmap for success.
+                  </CardDescription>
+                  
+                  <button 
+                    onClick={() => window.location.href = '/smart-calendar'}
+                    className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span className="relative z-10 flex items-center justify-center">
+                      Book Free Consultation
+                      <Calendar className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                    </span>
+                  </button>
+                  
+                  <div className="flex items-center justify-center space-x-6 mt-4 text-sm text-slate-600">
+                    <span className="flex items-center"><CheckCircle className="h-4 w-4 mr-1 text-green-500" /> 30-minute session</span>
+                    <span className="flex items-center"><CheckCircle className="h-4 w-4 mr-1 text-green-500" /> Global timezones</span>
+                    <span className="flex items-center"><CheckCircle className="h-4 w-4 mr-1 text-green-500" /> No commitment</span>
                   </div>
                 </CardHeader>
               </Card>
