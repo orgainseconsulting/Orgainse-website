@@ -390,12 +390,11 @@ metadata:
 
 test_plan:
   current_focus:
-    - "AI Assessment Tool Frontend"
-    - "ROI Calculator Frontend" 
-    - "Smart Calendar Frontend"
+    - "Odoo SaaS 18.3 Integration"
+    - "Production Deployment Preparation"
   stuck_tasks: []
   test_all: false
-  test_priority: "high_first"
+  test_priority: "production_ready"
 
 agent_communication:
   - agent: "main"
