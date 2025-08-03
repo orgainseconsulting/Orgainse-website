@@ -1373,7 +1373,7 @@ const Services = () => {
       </section>
 
       {/* Modern Services Grid Layout */}
-      <section className="py-20 bg-gradient-to-br from-white via-slate-50 to-orange-50 relative overflow-hidden">
+      <section className="py-12 bg-gradient-to-br from-white via-slate-50 to-orange-50 relative overflow-hidden">
         {/* Subtle Background Pattern */}
         <div className="absolute inset-0 opacity-3">
           <div className="absolute top-0 left-0 w-full h-full" style={{
