@@ -816,7 +816,8 @@ const About = () => {
                     </div>
                     
                     <p className="text-sm leading-relaxed text-amber-900">
-                      Pure momentum. Harnesses cutting-edge AI, breakthrough technologies, and 
+                      Pure momentum through <span className="font-bold">GPT-powered project planning</span>. Harnesses cutting-edge 
+                      <span className="font-bold">AI operational optimization</span>, breakthrough technologies, and 
                       revolutionary thinking to propel clients beyond their competition.
                     </p>
                     
