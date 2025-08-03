@@ -149,7 +149,7 @@ const Navigation = () => {
                 <div className="flex items-center space-x-4">
                   <span className="text-sm text-slate-600 font-medium">Follow us:</span>
                   <a
-                    href="https://linkedin.com/company/orgainseconsulting"
+                    href="https://linkedin.com/company/orgainse-consulting"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-slate-600 hover:text-orange-500"
@@ -158,7 +158,7 @@ const Navigation = () => {
                     <Linkedin className="h-5 w-5" />
                   </a>
                   <a
-                    href="https://x.com/orgainse_ai"
+                    href="https://twitter.com/orgainseconsult"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-slate-600 hover:text-orange-500"
@@ -167,7 +167,7 @@ const Navigation = () => {
                     <Twitter className="h-5 w-5" />
                   </a>
                   <a
-                    href="https://instagram.com/orgainse.consulting"
+                    href="https://instagram.com/orgainseconsulting"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-slate-600 hover:text-orange-500"
