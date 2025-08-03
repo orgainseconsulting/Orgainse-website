@@ -722,17 +722,17 @@ const Home = () => {
               <Card className="relative bg-white/10 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 overflow-hidden rounded-2xl flex flex-col">
                 <div className="h-1 bg-gradient-to-r from-green-400 to-blue-500"></div>
                 <CardHeader className="pb-3 flex-1 flex flex-col p-5">
-                  <div className="flex items-center space-x-4 mb-4">
-                    <div className="p-4 bg-green-100 rounded-2xl group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
-                      <Brain className="h-8 w-8 text-green-600" />
+                  <div className="flex items-center space-x-3 mb-3">
+                    <div className="p-3 bg-green-100 rounded-xl group-hover:scale-105 group-hover:rotate-6 transition-all duration-500 shadow-md">
+                      <Brain className="h-6 w-6 text-green-600" />
                     </div>
                     <div className="flex-1">
-                      <CardTitle className="text-xl text-white group-hover:text-green-300 transition-colors leading-tight">
+                      <CardTitle className="text-lg text-white group-hover:text-green-300 transition-colors leading-tight">
                         Free AI Readiness Assessment
                       </CardTitle>
                     </div>
                   </div>
-                  <CardDescription className="text-slate-300 group-hover:text-slate-200 transition-colors leading-relaxed mb-6">
+                  <CardDescription className="text-slate-300 group-hover:text-slate-200 transition-colors leading-relaxed mb-4 text-sm">
                     Discover your company's AI maturity score and get a personalized roadmap for digital transformation in just 5 minutes.
                   </CardDescription>
                   
