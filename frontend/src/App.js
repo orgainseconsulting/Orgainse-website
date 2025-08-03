@@ -535,10 +535,21 @@ const Footer = () => {
 
 // Home Page Component with Revolutionary Creative Design
 const Home = () => {
+  const { getRegionalPrice, regionConfig } = useRegionalPricing();
   // Newsletter subscription state
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterStatus, setNewsletterStatus] = useState("");
   const [isNewsletterLoading, setIsNewsletterLoading] = useState(false);
+
+  // Base prices for resources (in USD)
+  const resourceBasePrices = {
+    aiGuide: 197,
+    roiTemplate: 97,
+    checklist: 127
+  };
+
+  // Calculate total value
+  const totalValue = resourceBasePrices.aiGuide + resourceBasePrices.roiTemplate + resourceBasePrices.checklist;
 
   // Lead generation tracking state
   const [leadActions, setLeadActions] = useState({
