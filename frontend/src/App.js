@@ -544,99 +544,215 @@ const About = () => {
         </div>
       </section>
 
-      {/* Leadership Structure Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-3xl lg:text-4xl font-bold text-slate-800 mb-4">
-              Meet the Driving Force Behind ORGAINSE
+      {/* Creative Leadership Ecosystem Section */}
+      <section className="py-20 bg-gradient-to-br from-slate-50 via-orange-50 to-green-50 relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-10 left-10 w-32 h-32 bg-orange-400 rounded-full blur-3xl animate-pulse float-animation"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-green-400 rounded-full blur-2xl animate-pulse float-animation animation-delay-2000"></div>
+          <div className="absolute bottom-20 left-1/4 w-28 h-28 bg-yellow-400 rounded-full blur-3xl animate-pulse float-animation animation-delay-500"></div>
+          <div className="absolute bottom-40 right-1/3 w-20 h-20 bg-slate-400 rounded-full blur-2xl animate-pulse float-animation animation-delay-300"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Header Section */}
+          <div className="text-center mb-20 animate-fade-in">
+            <h2 className="text-5xl lg:text-6xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-orange-500 via-green-500 to-slate-700 bg-clip-text text-transparent">
+                The ORGAINSE
+              </span>
+              <br />
+              <span className="text-slate-800">Ecosystem</span>
             </h2>
-            <p className="text-xl text-slate-600 max-w-4xl mx-auto mb-8">
-              Our organization is powered by a unique leadership structure focused on innovation, delivery, and strategy – not hierarchy. 
-              Think <span className="font-bold text-slate-800">synergy over silos</span>, <span className="font-bold text-slate-800">execution over theory</span>, and <span className="font-bold text-slate-800">results over rhetoric</span>.
+            <p className="text-xl text-slate-600 max-w-4xl mx-auto mb-8 leading-relaxed">
+              Four interconnected forces working in perfect harmony. Not hierarchy, but 
+              <span className="font-bold text-orange-600"> synergy</span>. Not theory, but 
+              <span className="font-bold text-green-600"> execution</span>. Not rhetoric, but 
+              <span className="font-bold text-slate-700"> results</span>.
             </p>
+            
+            {/* Visual Connection Lines */}
+            <div className="relative w-32 h-8 mx-auto mb-8">
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-green-500 to-slate-700 rounded-full opacity-30 animate-pulse"></div>
+              <div className="absolute inset-1 bg-white rounded-full"></div>
+              <div className="absolute inset-2 bg-gradient-to-r from-orange-500 via-green-500 to-slate-700 rounded-full"></div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* The Foundation */}
-            <Card 
-              className="group hover:shadow-xl transition-all duration-500 transform hover:-translate-y-4 animate-fade-in bg-gradient-to-br from-orange-400 to-orange-500 text-white border-none"
-              style={{ animationDelay: '0ms' }}
-            >
-              <CardContent className="p-8 h-full flex flex-col">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold mb-2 border-b-2 border-white pb-2 inline-block">The Foundation</h3>
-                  <p className="text-lg opacity-90 font-medium">Strategy & Vision</p>
+          {/* Creative Central Hub Design */}
+          <div className="relative">
+            {/* Central Connection Point */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
+              <div className="w-24 h-24 bg-gradient-to-br from-orange-400 to-green-500 rounded-full shadow-2xl flex items-center justify-center animate-spin-slow">
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-inner">
+                  <div className="w-8 h-8 bg-gradient-to-br from-slate-600 to-slate-800 rounded-full"></div>
                 </div>
-                
-                <div className="flex-1 space-y-4 text-center">
-                  <p className="text-sm leading-relaxed">
-                    Leads with purpose and principles. Sets the standard for every engagement, ensuring we deliver with 
-                    clarity, alignment, and excellence.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
 
-            {/* The Engine */}
-            <Card 
-              className="group hover:shadow-xl transition-all duration-500 transform hover:-translate-y-4 animate-fade-in bg-gradient-to-br from-yellow-100 to-yellow-200 text-slate-800 border border-yellow-300"
-              style={{ animationDelay: '200ms' }}
-            >
-              <CardContent className="p-8 h-full flex flex-col">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold mb-2 border-b-2 border-slate-800 pb-2 inline-block">The Engine</h3>
-                  <p className="text-lg font-medium">Innovation & Growth</p>
-                </div>
-                
-                <div className="flex-1 space-y-4 text-center">
-                  <p className="text-sm leading-relaxed">
-                    Drives forward momentum using cutting-edge AI, emerging tech, and out-of-the-box thinking to fuel 
-                    client success.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+            {/* Connection Lines */}
+            <svg className="absolute inset-0 w-full h-full z-10" viewBox="0 0 800 600">
+              <defs>
+                <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#F97316" stopOpacity="0.6"/>
+                  <stop offset="50%" stopColor="#10B981" stopOpacity="0.6"/>
+                  <stop offset="100%" stopColor="#475569" stopOpacity="0.6"/>
+                </linearGradient>
+              </defs>
+              <path d="M 200 150 Q 400 200 600 150" stroke="url(#connectionGradient)" strokeWidth="3" fill="none" strokeDasharray="10,5" className="animate-pulse"/>
+              <path d="M 200 450 Q 400 400 600 450" stroke="url(#connectionGradient)" strokeWidth="3" fill="none" strokeDasharray="10,5" className="animate-pulse"/>
+              <path d="M 150 200 Q 200 300 150 400" stroke="url(#connectionGradient)" strokeWidth="3" fill="none" strokeDasharray="10,5" className="animate-pulse"/>
+              <path d="M 650 200 Q 600 300 650 400" stroke="url(#connectionGradient)" strokeWidth="3" fill="none" strokeDasharray="10,5" className="animate-pulse"/>
+            </svg>
 
-            {/* The Compass */}
-            <Card 
-              className="group hover:shadow-xl transition-all duration-500 transform hover:-translate-y-4 animate-fade-in bg-gradient-to-br from-green-400 to-green-500 text-white border-none"
-              style={{ animationDelay: '400ms' }}
-            >
-              <CardContent className="p-8 h-full flex flex-col">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold mb-2 border-b-2 border-white pb-2 inline-block">The Compass</h3>
-                  <p className="text-lg opacity-90 font-medium">Strategy & Direction</p>
-                </div>
-                
-                <div className="flex-1 space-y-4 text-center">
-                  <p className="text-sm leading-relaxed">
-                    Orchestrates intelligent decision-making and market navigation, ensuring clients stay focused and 
-                    ahead of the curve.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+            {/* The Four Pillars - Creative Positioned Layout */}
+            <div className="grid grid-cols-2 gap-8 lg:gap-16 relative z-20">
+              
+              {/* The Foundation - Top Left */}
+              <div className="relative animate-fade-in" style={{ animationDelay: '200ms' }}>
+                <div className="absolute -top-4 -left-4 w-full h-full bg-gradient-to-br from-orange-400 to-orange-600 rounded-3xl transform rotate-3 opacity-20"></div>
+                <Card className="relative bg-gradient-to-br from-orange-400 to-orange-600 text-white border-none shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-2 group overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full transform translate-x-8 -translate-y-8"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full transform -translate-x-4 translate-y-4"></div>
+                  
+                  <CardContent className="p-8 relative z-10">
+                    <div className="flex items-center space-x-4 mb-6">
+                      <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform duration-500">
+                        <Target className="h-8 w-8 text-orange-500" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold">The Foundation</h3>
+                        <p className="text-orange-100 font-medium">Strategy & Vision</p>
+                      </div>
+                    </div>
+                    
+                    <p className="text-sm leading-relaxed text-orange-50">
+                      The bedrock of excellence. Sets unwavering standards, builds strategic frameworks, 
+                      and ensures every engagement delivers measurable impact with crystal-clear alignment.
+                    </p>
+                    
+                    <div className="mt-6 flex items-center space-x-2">
+                      <div className="flex-1 h-2 bg-orange-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-white rounded-full animate-pulse" style={{width: '85%'}}></div>
+                      </div>
+                      <span className="text-xs text-orange-100">Impact: 85%</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
 
-            {/* The Spark */}
-            <Card 
-              className="group hover:shadow-xl transition-all duration-500 transform hover:-translate-y-4 animate-fade-in bg-gradient-to-br from-slate-700 to-slate-800 text-white border-none"
-              style={{ animationDelay: '600ms' }}
-            >
-              <CardContent className="p-8 h-full flex flex-col">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold mb-2 border-b-2 border-white pb-2 inline-block">The Spark</h3>
-                  <p className="text-lg opacity-90 font-medium">Operations & Delivery</p>
+              {/* The Engine - Top Right */}
+              <div className="relative animate-fade-in" style={{ animationDelay: '400ms' }}>
+                <div className="absolute -top-4 -right-4 w-full h-full bg-gradient-to-br from-yellow-300 to-yellow-500 rounded-3xl transform -rotate-3 opacity-20"></div>
+                <Card className="relative bg-gradient-to-br from-yellow-200 via-yellow-300 to-amber-400 text-slate-800 border-none shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-4 hover:-rotate-2 group overflow-hidden">
+                  <div className="absolute top-0 left-0 w-28 h-28 bg-amber-500 opacity-20 rounded-full transform -translate-x-4 -translate-y-4"></div>
+                  <div className="absolute bottom-0 right-0 w-36 h-36 bg-yellow-500 opacity-20 rounded-full transform translate-x-6 translate-y-6"></div>
+                  
+                  <CardContent className="p-8 relative z-10">
+                    <div className="flex items-center space-x-4 mb-6">
+                      <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:-rotate-12 transition-transform duration-500">
+                        <Zap className="h-8 w-8 text-amber-600" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold">The Engine</h3>
+                        <p className="text-amber-800 font-medium">Innovation & Growth</p>
+                      </div>
+                    </div>
+                    
+                    <p className="text-sm leading-relaxed text-amber-900">
+                      Pure momentum. Harnesses cutting-edge AI, breakthrough technologies, and 
+                      revolutionary thinking to propel clients beyond their competition.
+                    </p>
+                    
+                    <div className="mt-6 flex items-center space-x-2">
+                      <div className="flex-1 h-2 bg-amber-300 rounded-full overflow-hidden">
+                        <div className="h-full bg-amber-600 rounded-full animate-pulse" style={{width: '92%'}}></div>
+                      </div>
+                      <span className="text-xs text-amber-800">Power: 92%</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* The Compass - Bottom Left */}
+              <div className="relative animate-fade-in" style={{ animationDelay: '600ms' }}>
+                <div className="absolute -bottom-4 -left-4 w-full h-full bg-gradient-to-br from-green-400 to-green-600 rounded-3xl transform rotate-2 opacity-20"></div>
+                <Card className="relative bg-gradient-to-br from-green-400 to-green-600 text-white border-none shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 group overflow-hidden">
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-emerald-300 opacity-20 rounded-full transform translate-x-10 -translate-y-10"></div>
+                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-green-300 opacity-20 rounded-full transform -translate-x-6 translate-y-6"></div>
+                  
+                  <CardContent className="p-8 relative z-10">
+                    <div className="flex items-center space-x-4 mb-6">
+                      <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-180 transition-transform duration-700">
+                        <Globe className="h-8 w-8 text-green-500" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold">The Compass</h3>
+                        <p className="text-green-100 font-medium">Navigation & Direction</p>
+                      </div>
+                    </div>
+                    
+                    <p className="text-sm leading-relaxed text-green-50">
+                      Strategic navigation mastery. Guides intelligent decision-making through complex 
+                      markets, ensuring clients always stay ahead of industry curves.
+                    </p>
+                    
+                    <div className="mt-6 flex items-center space-x-2">
+                      <div className="flex-1 h-2 bg-green-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-white rounded-full animate-pulse" style={{width: '88%'}}></div>
+                      </div>
+                      <span className="text-xs text-green-100">Accuracy: 88%</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* The Spark - Bottom Right */}
+              <div className="relative animate-fade-in" style={{ animationDelay: '800ms' }}>
+                <div className="absolute -bottom-4 -right-4 w-full h-full bg-gradient-to-br from-slate-600 to-slate-800 rounded-3xl transform -rotate-2 opacity-20"></div>
+                <Card className="relative bg-gradient-to-br from-slate-700 to-slate-900 text-white border-none shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-4 hover:-rotate-1 group overflow-hidden">
+                  <div className="absolute top-0 left-0 w-44 h-44 bg-slate-500 opacity-10 rounded-full transform -translate-x-12 -translate-y-12"></div>
+                  <div className="absolute bottom-0 right-0 w-28 h-28 bg-slate-400 opacity-10 rounded-full transform translate-x-8 translate-y-8"></div>
+                  
+                  <CardContent className="p-8 relative z-10">
+                    <div className="flex items-center space-x-4 mb-6">
+                      <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        <Users className="h-8 w-8 text-slate-700" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold">The Spark</h3>
+                        <p className="text-slate-300 font-medium">Execution & Delivery</p>
+                      </div>
+                    </div>
+                    
+                    <p className="text-sm leading-relaxed text-slate-200">
+                      Transformation catalyst. Converts strategies into reality with surgical precision, 
+                      optimizing performance and maximizing ROI for unprecedented client success.
+                    </p>
+                    
+                    <div className="mt-6 flex items-center space-x-2">
+                      <div className="flex-1 h-2 bg-slate-400 rounded-full overflow-hidden">
+                        <div className="h-full bg-white rounded-full animate-pulse" style={{width: '95%'}}></div>
+                      </div>
+                      <span className="text-xs text-slate-300">Delivery: 95%</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
+            {/* Interactive Elements */}
+            <div className="mt-16 text-center animate-fade-in" style={{ animationDelay: '1000ms' }}>
+              <div className="inline-flex items-center space-x-4 bg-white rounded-full px-8 py-4 shadow-2xl">
+                <div className="flex space-x-2">
+                  <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></div>
+                  <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse animation-delay-300"></div>
+                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse animation-delay-500"></div>
+                  <div className="w-3 h-3 bg-slate-700 rounded-full animate-pulse animation-delay-700"></div>
                 </div>
-                
-                <div className="flex-1 space-y-4 text-center">
-                  <p className="text-sm leading-relaxed">
-                    Transforms plans into action. Oversees execution with precision, optimizing performance and 
-                    maximizing ROI for our clients.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+                <span className="text-slate-600 font-medium">Working in Perfect Harmony</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
