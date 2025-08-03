@@ -624,10 +624,10 @@ const Home = () => {
       <section className="py-20 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
         {/* Dynamic Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-10 left-1/4 w-80 h-80 bg-gradient-to-r from-orange-400 to-yellow-500 rounded-full blur-3xl opacity-15 animate-pulse float-animation"></div>
-          <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-gradient-to-r from-green-400 to-blue-500 rounded-full blur-3xl opacity-15 animate-pulse float-animation animation-delay-2000"></div>
-          <div className="absolute top-1/2 left-1/3 w-4 h-12 bg-yellow-400 rounded-full animate-pulse opacity-30"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-6 h-6 bg-orange-400 rotate-45 animate-spin-slow opacity-40"></div>
+          <div className="absolute top-10 left-1/4 w-80 h-80 bg-gradient-to-r from-orange-200 to-yellow-200 rounded-full blur-3xl opacity-20 animate-pulse float-animation"></div>
+          <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-gradient-to-r from-green-200 to-blue-200 rounded-full blur-3xl opacity-20 animate-pulse float-animation animation-delay-2000"></div>
+          <div className="absolute top-1/2 left-1/3 w-4 h-12 bg-yellow-300 rounded-full animate-pulse opacity-30"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-6 h-6 bg-orange-300 rotate-45 animate-spin-slow opacity-30"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
