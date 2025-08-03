@@ -606,23 +606,27 @@ const About = () => {
   const values = [
     {
       title: "Collaborative",
-      description: "We work as an extension of your team with AI-powered collaboration tools",
+      description: "We work as an extension of your team with AI-powered collaboration tools and GPT-powered project management",
       icon: Users,
+      gradient: "from-blue-400 to-indigo-500"
     },
     {
       title: "Outcomes-focused", 
-      description: "Results that matter to your business with measurable AI-driven improvements",
+      description: "Results that matter to your business with measurable AI-driven improvements and data-backed growth planning",
       icon: Target,
+      gradient: "from-green-400 to-emerald-500"
     },
     {
       title: "Reliable",
-      description: "Consistent delivery and 24/7 AI-powered support across global time zones",
+      description: "Consistent delivery and 24/7 AI-powered support across global time zones with predictive maintenance",
       icon: Shield,
+      gradient: "from-orange-400 to-red-500"
     },
     {
       title: "Excellence",
-      description: "Best-in-class AI-native solutions and world-class service delivery",
+      description: "Best-in-class AI-native solutions and world-class service delivery with automated scenario modeling",
       icon: Award,
+      gradient: "from-purple-400 to-pink-500"
     },
   ];
 
