@@ -245,11 +245,7 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus:
-    - "Contact Form API Endpoint"
-    - "Newsletter Subscription API"
-    - "Consultation Booking API"
-    - "Database Integration"
+  current_focus: []
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
