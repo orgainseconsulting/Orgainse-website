@@ -12,10 +12,11 @@ class RegionalPricingTester:
     
     def __init__(self):
         # Base prices in USD (from the frontend implementation)
+        # These should result in ₹1,084, ₹534, ₹699 for India (₹2,316 total)
         self.base_prices = {
-            'ai_project_management': 149,
-            'digital_transformation': 89,
-            'operational_optimization': 119
+            'ai_project_management': 197,  # 197 * 5.5 = ₹1,084
+            'digital_transformation': 97,  # 97 * 5.5 = ₹534  
+            'operational_optimization': 127  # 127 * 5.5 = ₹699
         }
         
         # PPP multipliers for each region (from frontend implementation)
