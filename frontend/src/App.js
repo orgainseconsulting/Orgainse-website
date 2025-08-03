@@ -702,12 +702,12 @@ const About = () => {
 
       {/* Creative Leadership Ecosystem Section */}
       <section className="py-20 bg-gradient-to-br from-slate-50 via-orange-50 to-green-50 relative overflow-hidden">
-        {/* Animated Background Elements */}
+        {/* Optimized Background Elements */}
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-orange-400 rounded-full blur-3xl animate-pulse float-animation"></div>
-          <div className="absolute top-40 right-20 w-24 h-24 bg-green-400 rounded-full blur-2xl animate-pulse float-animation animation-delay-2000"></div>
-          <div className="absolute bottom-20 left-1/4 w-28 h-28 bg-yellow-400 rounded-full blur-3xl animate-pulse float-animation animation-delay-500"></div>
-          <div className="absolute bottom-40 right-1/3 w-20 h-20 bg-slate-400 rounded-full blur-2xl animate-pulse float-animation animation-delay-300"></div>
+          <div className="absolute top-10 left-10 w-32 h-32 bg-orange-400 rounded-full blur-3xl animate-pulse float-animation will-change-transform"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-green-400 rounded-full blur-2xl animate-pulse float-animation animation-delay-2000 will-change-transform"></div>
+          <div className="absolute bottom-20 left-1/4 w-28 h-28 bg-yellow-400 rounded-full blur-3xl animate-pulse float-animation animation-delay-500 will-change-transform"></div>
+          <div className="absolute bottom-40 right-1/3 w-20 h-20 bg-slate-400 rounded-full blur-2xl animate-pulse float-animation animation-delay-300 will-change-transform"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
