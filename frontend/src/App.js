@@ -2793,6 +2793,7 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/ai-assessment" element={<AIAssessmentTool />} />
             <Route path="/roi-calculator" element={<ROICalculator />} />
+            <Route path="/smart-calendar" element={<SmartCalendar />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
