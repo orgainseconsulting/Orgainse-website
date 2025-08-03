@@ -449,62 +449,66 @@ const Home = () => {
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8 animate-fade-in">
-              <div className="space-y-6">
-                <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div className="animate-fade-in">
+              <div className="mb-6">
+                <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
                   <span className="block text-slate-800">Let us </span>
-                  <span className="block bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500 bg-clip-text text-transparent animate-gradient-text text-6xl lg:text-8xl">
+                  <span className="block bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500 bg-clip-text text-transparent animate-gradient-text text-5xl lg:text-7xl">
                     plan
                   </span>
                   <span className="block text-slate-800">your </span>
-                  <span className="block bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient-text text-6xl lg:text-8xl">
+                  <span className="block bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient-text text-5xl lg:text-7xl">
                     SUCCESS!!
                   </span>
                 </h1>
-                
-                <div className="relative">
-                  <h2 className="text-2xl lg:text-3xl text-orange-600 font-bold mb-4">
-                    AI-Native Business & Digital Transformation
-                  </h2>
-                  <div className="absolute -left-4 top-0 w-2 h-full bg-gradient-to-b from-orange-500 to-green-500 rounded-full animate-pulse"></div>
-                </div>
-                
-                <p className="text-xl text-slate-700 leading-relaxed">
-                  GPT-powered project management, AI-driven strategy consulting, 
-                  and intelligent operational optimization for <span className="text-orange-600 font-bold">startups</span> and <span className="text-green-600 font-bold">SMEs</span> 
-                  across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
-                </p>
               </div>
+              
+              <div className="relative mb-6">
+                <h2 className="text-xl lg:text-2xl text-orange-600 font-bold mb-3">
+                  AI-Native Business & Digital Transformation
+                </h2>
+                <div className="absolute -left-4 top-0 w-2 h-full bg-gradient-to-b from-orange-500 to-green-500 rounded-full animate-pulse"></div>
+              </div>
+              
+              <p className="text-lg text-slate-700 leading-relaxed mb-6">
+                GPT-powered project management, AI-driven strategy consulting, 
+                and intelligent operational optimization for <span className="text-orange-600 font-bold">startups</span> and <span className="text-green-600 font-bold">SMEs</span> 
+                across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
+              </p>
+              
+              <p className="text-base text-slate-600 mb-6">
+                Transforming businesses with GPT-powered solutions across IT Services, EdTech, FinTech, 
+                Healthcare, Hospitality, and Software Development industries.
+              </p>
 
-              <div className="flex flex-col sm:flex-row gap-6">
-                <button className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <span className="relative z-10 flex items-center">
+              <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                <button className="group relative px-6 py-3 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <span className="relative z-10 flex items-center justify-center">
                     Book Free AI Consultation
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform" />
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </button>
-                
-                <button className="group px-8 py-4 border-2 border-green-400 text-green-400 font-bold rounded-2xl hover:bg-green-400 hover:text-white transition-all duration-300 transform hover:scale-105 hover:shadow-green-400/25 hover:shadow-xl">
-                  <span className="flex items-center">
+                <button className="group relative px-6 py-3 bg-transparent border-2 border-green-500 text-green-600 font-bold rounded-xl hover:bg-green-50 transition-all duration-300 transform hover:scale-105">
+                  <span className="flex items-center justify-center">
                     View Success Stories
-                    <Star className="ml-2 h-5 w-5 group-hover:rotate-180 transition-transform duration-500" />
+                    <Star className="ml-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
                   </span>
                 </button>
               </div>
 
-              {/* Revolutionary Stats Display */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8">
+              {/* Compact Stats Display */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {stats.map((stat, index) => (
                   <div 
                     key={index} 
                     className="group relative transform hover:scale-105 transition-all duration-500 animate-fade-in"
                     style={{ animationDelay: `${index * 200 + 1000}ms` }}
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} rounded-2xl opacity-20 group-hover:opacity-30 transition-opacity blur-sm`}></div>
-                    <div className="relative bg-white/90 backdrop-blur-lg rounded-2xl p-6 border border-white/40 hover:border-orange-300 transition-all duration-300 shadow-lg h-32 flex flex-col items-center justify-center text-center">
-                      <div className={`text-2xl lg:text-3xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent animate-counter mb-2`}>
+                    <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} rounded-xl opacity-20 group-hover:opacity-30 transition-opacity blur-sm`}></div>
+                    <div className="relative bg-white/90 backdrop-blur-lg rounded-xl p-4 border border-white/40 hover:border-orange-300 transition-all duration-300 shadow-lg h-24 flex flex-col items-center justify-center text-center">
+                      <div className={`text-xl lg:text-2xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent animate-counter mb-1`}>
                         {stat.value}
                       </div>
                       <div className="text-xs text-slate-700 font-medium leading-tight max-w-full">{stat.label}</div>
