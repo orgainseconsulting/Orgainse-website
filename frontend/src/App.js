@@ -1119,7 +1119,7 @@ const Home = () => {
             
             <p className="text-slate-700 text-base">
               Join our newsletter and get instant access to all resources - 
-              <span className="text-orange-600 font-bold"> FREE ($421 value)</span>
+              <span className="text-orange-600 font-bold"> FREE ({getRegionalPrice(totalValue)} value)</span>
             </p>
           </div>
         </div>
