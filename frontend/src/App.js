@@ -849,9 +849,9 @@ const Home = () => {
               ))}
             </div>
             
-            <p className="text-slate-300 mt-8 text-lg">
+            <p className="text-slate-700 mt-8 text-lg">
               Join our newsletter and get instant access to all resources - 
-              <span className="text-yellow-400 font-bold"> FREE ($421 value)</span>
+              <span className="text-orange-600 font-bold"> FREE ($421 value)</span>
             </p>
           </div>
         </div>
