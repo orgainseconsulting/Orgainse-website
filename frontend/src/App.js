@@ -604,7 +604,7 @@ const Home = () => {
       </section>
 
       {/* Revolutionary Lead Generation Hub */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
+      <section className="py-12 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
         {/* Dynamic Background Elements */}
         <div className="absolute inset-0">
           <div className="absolute top-10 left-1/4 w-80 h-80 bg-gradient-to-r from-orange-200 to-yellow-200 rounded-full blur-3xl opacity-20 animate-pulse float-animation"></div>
