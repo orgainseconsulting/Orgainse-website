@@ -1770,7 +1770,7 @@ const Contact = () => {
                   Whether you're looking to implement <span className="font-bold text-blue-600">AI project management</span>, 
                   optimize operations with <span className="font-bold text-purple-600">GPT-powered solutions</span>, 
                   or accelerate <span className="font-bold text-orange-600">digital transformation</span>, we're here to help you succeed 
-                  with our AI-native approach across India, USA, UK, UAE, and Australia.
+                  with our AI-native approach across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
                 </p>
               </div>
 
