@@ -711,7 +711,7 @@ const About = () => {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Header Section */}
+          {/* Enhanced Header Section with SEO */}
           <div className="text-center mb-20 animate-fade-in">
             <h2 className="text-5xl lg:text-6xl font-bold mb-6">
               <span className="bg-gradient-to-r from-orange-500 via-green-500 to-slate-700 bg-clip-text text-transparent">
@@ -721,10 +721,9 @@ const About = () => {
               <span className="text-slate-800">Ecosystem</span>
             </h2>
             <p className="text-xl text-slate-600 max-w-4xl mx-auto mb-8 leading-relaxed">
-              Four interconnected forces working in perfect harmony. Not hierarchy, but 
-              <span className="font-bold text-orange-600"> synergy</span>. Not theory, but 
-              <span className="font-bold text-green-600"> execution</span>. Not rhetoric, but 
-              <span className="font-bold text-slate-700"> results</span>.
+              Four interconnected forces delivering <span className="font-bold text-orange-600">AI-driven business strategy consulting</span> and 
+              <span className="font-bold text-green-600">GPT-powered agile coaching</span>. Not hierarchy, but 
+              <span className="font-bold text-slate-700">predictive risk analytics</span>.
             </p>
             
             {/* Visual Connection Lines */}
