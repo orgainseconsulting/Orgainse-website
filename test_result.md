@@ -328,6 +328,42 @@ frontend:
         agent: "testing"
         comment: "✅ VERIFIED: All call-to-action buttons working perfectly. Found 1 'Book Free Consultation' button, 'Book Free AI Consultation' hero button, 'View Success Stories' button, and 'Explore Our AI Arsenal' button. All buttons have proper hover effects and styling. Hero button displays stunning gradient animations and transform effects on hover."
 
+  - task: "AI Assessment Tool Frontend"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Need to implement AI Assessment Tool frontend with multi-step questionnaire, progress indicator, scoring visualization, and backend integration to /api/ai-assessment endpoint."
+
+  - task: "ROI Calculator Frontend"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Need to implement ROI Calculator frontend with business metrics input form, results visualization with charts, and backend integration to /api/roi-calculator endpoint."
+
+  - task: "Smart Calendar Frontend"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Need to enhance consultation booking with real-time availability, improved date/time selection UI, and enhanced UX for /api/book-consultation endpoint."
+
 metadata:
   created_by: "main_agent"
   version: "1.0"
