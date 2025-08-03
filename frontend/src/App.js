@@ -952,33 +952,56 @@ const About = () => {
         </div>
       </section>
 
-      {/* C.O.R.E. Values */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Revolutionary C.O.R.E. Values Section */}
+      <section className="py-20 bg-gradient-to-br from-slate-50 via-orange-50 to-green-50 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-full h-full" style={{
+            backgroundImage: `radial-gradient(circle at 25% 25%, #f97316 0%, transparent 50%), radial-gradient(circle at 75% 75%, #10b981 0%, transparent 50%)`
+          }}></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-3xl lg:text-4xl font-bold text-slate-800 mb-4">
-              Our C.O.R.E. Values
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-orange-500 via-green-500 to-purple-500 bg-clip-text text-transparent">
+                Our C.O.R.E. Values
+              </span>
             </h2>
-            <p className="text-xl text-slate-600">
-              The AI-powered principles that guide everything we do
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+              The AI-powered principles that guide our <span className="font-bold text-orange-600">multi-agent orchestration platform</span> approach
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
-              <Card 
-                key={index} 
-                className="text-center hover:shadow-xl transition-all duration-500 transform hover:-translate-y-4 animate-fade-in"
+              <div 
+                key={index}
+                className="group relative animate-fade-in"
                 style={{ animationDelay: `${index * 150}ms` }}
               >
-                <CardHeader>
-                  <div className="mx-auto p-4 bg-orange-100 rounded-full w-20 h-20 flex items-center justify-center mb-4 group-hover:bg-orange-200 transition-all group-hover:rotate-12">
-                    <value.icon className="h-8 w-8 text-orange-600" />
-                  </div>
-                  <CardTitle className="text-xl mb-2">{value.title}</CardTitle>
-                  <CardDescription className="leading-relaxed">{value.description}</CardDescription>
-                </CardHeader>
-              </Card>
+                {/* Floating Background */}
+                <div className={`absolute -inset-2 bg-gradient-to-r ${value.gradient} rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000`}></div>
+                
+                {/* Main Card */}
+                <Card className="relative text-center hover:shadow-xl transition-all duration-500 transform hover:-translate-y-4 bg-white/90 backdrop-blur-lg border-0 shadow-2xl rounded-3xl overflow-hidden">
+                  {/* Top Gradient Bar */}
+                  <div className={`h-2 bg-gradient-to-r ${value.gradient}`}></div>
+                  
+                  <CardHeader className="pb-6">
+                    <div className="mx-auto p-4 bg-white rounded-2xl w-20 h-20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
+                      <value.icon className="h-10 w-10 text-slate-600" />
+                    </div>
+                    <CardTitle className="text-xl mb-3 group-hover:text-orange-600 transition-colors">{value.title}</CardTitle>
+                    <CardDescription className="leading-relaxed text-slate-600 group-hover:text-slate-700 transition-colors">
+                      {value.description}
+                    </CardDescription>
+                  </CardHeader>
+                  
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-3xl"></div>
+                </Card>
+              </div>
             ))}
           </div>
         </div>
