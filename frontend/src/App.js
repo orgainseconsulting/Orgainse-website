@@ -500,41 +500,6 @@ const About = () => {
     },
   ];
 
-  const founders = [
-    {
-      name: "Rajesh Kumar",
-      role: "Founder & CEO",
-      title: "Foundation",
-      description: "20+ years in enterprise consulting and AI strategy. Former McKinsey consultant with expertise in digital transformation across Fortune 500 companies.",
-      expertise: ["AI Strategy", "Digital Transformation", "Enterprise Consulting"],
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGxlYWRlcnxlbnwwfHx8fDE3NTQyMjc4OTF8MA&ixlib=rb-4.1.0&q=85"
-    },
-    {
-      name: "Priya Sharma",
-      role: "Co-Founder & CTO",
-      title: "Engine",
-      description: "AI/ML expert with 15+ years at Google and Microsoft. Specialized in building scalable AI platforms and GPT-powered enterprise solutions.",
-      expertise: ["AI/ML Engineering", "Platform Architecture", "GPT Solutions"],
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b647?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHdvbWFufGVufDB8fHx8MTc1NDIyNzg5MXww&ixlib=rb-4.1.0&q=85"
-    },
-    {
-      name: "Michael Chen",
-      role: "Co-Founder & COO",
-      title: "Compass",
-      description: "Operations excellence expert with background at Amazon and Uber. Drives operational efficiency through AI-powered process optimization.",
-      expertise: ["Operations Excellence", "Process Optimization", "Global Scaling"],
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMG1hbnxlbnwwfHx8fDE3NTQyMjc4OTF8MA&ixlib=rb-4.1.0&q=85"
-    },
-    {
-      name: "Sarah Williams",
-      role: "Co-Founder & Chief Innovation Officer",
-      title: "Spark",
-      description: "Innovation catalyst with startup and corporate experience. Leads our AI research initiatives and emerging technology adoption strategies.",
-      expertise: ["Innovation Strategy", "AI Research", "Emerging Technologies"],
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHdvbWFuJTIwcHJvZmVzc2lvbmFsfGVufDB8fHx8MTc1NDIyNzg5MXww&ixlib=rb-4.1.0&q=85"
-    },
-  ];
-
   return (
     <div className="min-h-screen">
       {/* SEO Optimized Hero Section */}
