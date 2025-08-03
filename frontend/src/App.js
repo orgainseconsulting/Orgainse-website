@@ -634,14 +634,14 @@ const Home = () => {
           {/* Header Section */}
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-5xl lg:text-6xl font-bold mb-6">
-              <span className="text-white">Accelerate Your </span>
-              <span className="bg-gradient-to-r from-orange-400 via-yellow-400 to-green-400 bg-clip-text text-transparent animate-gradient-text">
+              <span className="text-slate-800">Accelerate Your </span>
+              <span className="bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500 bg-clip-text text-transparent animate-gradient-text">
                 AI Transformation
               </span>
             </h2>
-            <p className="text-xl text-slate-300 max-w-4xl mx-auto mb-8 leading-relaxed">
+            <p className="text-xl text-slate-700 max-w-4xl mx-auto mb-8 leading-relaxed">
               Get exclusive insights, free resources, and expert guidance to transform your business with 
-              <span className="text-yellow-400 font-bold"> AI-native solutions</span>. Join 2,500+ startup leaders already accelerating their success.
+              <span className="text-orange-600 font-bold"> AI-native solutions</span>. Join 2,500+ startup leaders already accelerating their success.
             </p>
           </div>
 
