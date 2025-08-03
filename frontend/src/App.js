@@ -464,15 +464,15 @@ const Home = () => {
                 </h1>
                 
                 <div className="relative">
-                  <h2 className="text-2xl lg:text-3xl text-orange-300 font-bold mb-4">
+                  <h2 className="text-2xl lg:text-3xl text-orange-600 font-bold mb-4">
                     AI-Native Business & Digital Transformation
                   </h2>
-                  <div className="absolute -left-4 top-0 w-2 h-full bg-gradient-to-b from-orange-400 to-green-400 rounded-full animate-pulse"></div>
+                  <div className="absolute -left-4 top-0 w-2 h-full bg-gradient-to-b from-orange-500 to-green-500 rounded-full animate-pulse"></div>
                 </div>
                 
-                <p className="text-xl text-slate-300 leading-relaxed">
+                <p className="text-xl text-slate-700 leading-relaxed">
                   GPT-powered project management, AI-driven strategy consulting, 
-                  and intelligent operational optimization for <span className="text-yellow-400 font-bold">startups</span> and <span className="text-green-400 font-bold">SMEs</span> 
+                  and intelligent operational optimization for <span className="text-orange-600 font-bold">startups</span> and <span className="text-green-600 font-bold">SMEs</span> 
                   across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
                 </p>
               </div>
