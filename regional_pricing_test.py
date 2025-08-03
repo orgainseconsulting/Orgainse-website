@@ -140,13 +140,13 @@ class RegionalPricingTester:
             
             print(f"   🎯 Total Package: {total_formatted}")
             
-            # Verify India shows impressive thousands
-            if total_price >= 2000:  # Should be around ₹2,316
+            # Verify India shows impressive thousands (should be ₹2,316)
+            if total_price >= 2300:  # Should be around ₹2,316
                 print(f"   ✅ Eye-catching thousands achieved: {total_formatted}")
                 self.tests_passed += 1
                 return True
             else:
-                print(f"   ❌ Not impressive enough: {total_formatted}")
+                print(f"   ❌ Not impressive enough: {total_formatted} (expected ≥₹2,300)")
                 return False
                 
         except Exception as e:
