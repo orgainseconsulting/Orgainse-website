@@ -2780,6 +2780,457 @@ const ROICalculator = () => {
   );
 };
 
+// Smart Calendar Component
+const SmartCalendar = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    service_type: '',
+    preferred_datetime: '',
+    timezone: 'America/New_York',
+    message: ''
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [bookingResult, setBookingResult] = useState(null);
+
+  // Service types
+  const serviceTypes = [
+    'AI Project Management Service (PMaaS)',
+    'Digital Transformation Consulting',
+    'AI Operational Optimization',
+    'Business Strategy Development',
+    'Agile & Scrum Coaching',
+    'Risk Management & Compliance',
+    'General Consultation'
+  ];
+
+  // Timezone options
+  const timezones = [
+    { value: 'America/New_York', label: 'Eastern Time (ET)' },
+    { value: 'America/Chicago', label: 'Central Time (CT)' },
+    { value: 'America/Denver', label: 'Mountain Time (MT)' },
+    { value: 'America/Los_Angeles', label: 'Pacific Time (PT)' },
+    { value: 'Europe/London', label: 'London (GMT)' },
+    { value: 'Europe/Berlin', label: 'Berlin (CET)' },
+    { value: 'Asia/Dubai', label: 'Dubai (GST)' },
+    { value: 'Asia/Kolkata', label: 'India (IST)' },
+    { value: 'Australia/Sydney', label: 'Sydney (AEDT)' },
+    { value: 'Pacific/Auckland', label: 'Auckland (NZDT)' }
+  ];
+
+  // Available time slots for next 14 days (excluding weekends)
+  const generateTimeSlots = () => {
+    const slots = [];
+    const today = new Date();
+    
+    for (let i = 1; i <= 14; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() + i);
+      
+      // Skip weekends
+      if (date.getDay() === 0 || date.getDay() === 6) continue;
+      
+      // Business hours: 9 AM - 5 PM
+      const businessHours = [
+        '09:00', '10:00', '11:00', '14:00', '15:00', '16:00'
+      ];
+      
+      businessHours.forEach(hour => {
+        const datetime = new Date(date);
+        const [hours, minutes] = hour.split(':');
+        datetime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+        
+        slots.push({
+          datetime: datetime.toISOString(),
+          display: `${date.toLocaleDateString('en-US', { 
+            weekday: 'long', 
+            month: 'short', 
+            day: 'numeric' 
+          })} at ${hour}`,
+          available: Math.random() > 0.3 // 70% availability simulation
+        });
+      });
+    }
+    
+    return slots.filter(slot => slot.available);
+  };
+
+  const [availableSlots] = useState(generateTimeSlots());
+
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
+    try {
+      const bookingData = {
+        ...formData,
+        preferred_datetime: new Date(formData.preferred_datetime).toISOString()
+      };
+
+      const response = await axios.post(`${API}/book-consultation`, bookingData);
+      
+      if (response.status === 200) {
+        setBookingResult(response.data);
+        setIsSubmitted(true);
+      }
+    } catch (error) {
+      console.error('Booking failed:', error);
+      alert('Failed to book consultation. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Success View
+  if (isSubmitted && bookingResult) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-12">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Success Header */}
+          <div className="text-center mb-10 animate-fade-in">
+            <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 mb-6 mx-auto">
+              <CheckCircle className="h-12 w-12 text-white" />
+            </div>
+            <h1 className="text-4xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent">
+                Consultation Booked Successfully!
+              </span>
+            </h1>
+            <p className="text-lg text-slate-600">
+              We're excited to discuss your AI transformation journey
+            </p>
+          </div>
+
+          {/* Booking Details */}
+          <div className="group relative animate-fade-in mb-10" style={{ animationDelay: '200ms' }}>
+            <div className="absolute -inset-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl rounded-2xl overflow-hidden">
+              <CardHeader className="p-8">
+                <CardTitle className="text-2xl mb-6 text-center text-slate-800">
+                  Booking Confirmation
+                </CardTitle>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-sm font-medium text-slate-600">Name</label>
+                      <p className="text-lg font-semibold text-slate-800">{bookingResult.name}</p>
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-slate-600">Email</label>
+                      <p className="text-lg font-semibold text-slate-800">{bookingResult.email}</p>
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-slate-600">Service Type</label>
+                      <p className="text-lg font-semibold text-slate-800">{bookingResult.service_type}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-sm font-medium text-slate-600">Date & Time</label>
+                      <p className="text-lg font-semibold text-slate-800">
+                        {new Date(bookingResult.preferred_datetime).toLocaleDateString('en-US', {
+                          weekday: 'long',
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}<br />
+                        {new Date(bookingResult.preferred_datetime).toLocaleTimeString('en-US', {
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })}
+                      </p>
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-slate-600">Timezone</label>
+                      <p className="text-lg font-semibold text-slate-800">
+                        {timezones.find(tz => tz.value === bookingResult.timezone)?.label || bookingResult.timezone}
+                      </p>
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-slate-600">Status</label>
+                      <Badge className="bg-green-100 text-green-700">
+                        {bookingResult.status || 'Confirmed'}
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+
+                {bookingResult.message && (
+                  <div className="mt-6">
+                    <label className="text-sm font-medium text-slate-600">Message</label>
+                    <p className="text-slate-700 bg-slate-50 p-3 rounded-lg mt-1">
+                      {bookingResult.message}
+                    </p>
+                  </div>
+                )}
+              </CardHeader>
+            </Card>
+          </div>
+
+          {/* Next Steps */}
+          <div className="text-center animate-fade-in" style={{ animationDelay: '400ms' }}>
+            <div className="bg-white/90 backdrop-blur-lg rounded-2xl p-8 shadow-xl">
+              <h3 className="text-2xl font-bold mb-4 text-slate-800">
+                What Happens Next?
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div className="text-center">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 mb-3">
+                    <Mail className="h-6 w-6 text-orange-600" />
+                  </div>
+                  <h4 className="font-semibold text-slate-800 mb-2">Email Confirmation</h4>
+                  <p className="text-sm text-slate-600">You'll receive a detailed confirmation email with meeting link</p>
+                </div>
+                <div className="text-center">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 mb-3">
+                    <Calendar className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <h4 className="font-semibold text-slate-800 mb-2">Calendar Invite</h4>
+                  <p className="text-sm text-slate-600">Meeting invite will be sent to your calendar</p>
+                </div>
+                <div className="text-center">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-100 mb-3">
+                    <Users className="h-6 w-6 text-green-600" />
+                  </div>
+                  <h4 className="font-semibold text-slate-800 mb-2">Expert Consultation</h4>
+                  <p className="text-sm text-slate-600">Meet with our AI transformation specialists</p>
+                </div>
+              </div>
+              <p className="text-slate-600 mb-6">
+                Have questions? Contact us at <strong>info@orgainse.com</strong> or call <strong>+91-9740384683</strong>
+              </p>
+              <button 
+                onClick={() => window.location.href = '/'}
+                className="group relative px-6 py-3 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10 flex items-center justify-center">
+                  Back to Home
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Header */}
+        <div className="text-center mb-10 animate-fade-in">
+          <h1 className="text-4xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text text-transparent">
+              Book Your AI Consultation
+            </span>
+          </h1>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            Schedule a free 30-minute consultation with our AI transformation experts. 
+            Discuss your challenges and discover how AI can accelerate your business growth.
+          </p>
+        </div>
+
+        {/* Booking Form */}
+        <div className="group relative animate-fade-in" style={{ animationDelay: '200ms' }}>
+          <div className="absolute -inset-2 bg-gradient-to-r from-orange-400 to-green-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+          <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl rounded-2xl overflow-hidden">
+            <CardHeader className="p-8">
+              <CardTitle className="text-2xl mb-4 text-center">
+                Consultation Details
+              </CardTitle>
+              <CardDescription className="text-center mb-6">
+                Fill in your details and select your preferred time slot
+              </CardDescription>
+              
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Personal Information */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Full Name *
+                    </label>
+                    <Input
+                      value={formData.name}
+                      onChange={(e) => handleInputChange('name', e.target.value)}
+                      placeholder="Enter your full name"
+                      className="bg-slate-50 border-slate-200 focus:border-orange-400 focus:ring-orange-400"
+                      required
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Email Address *
+                    </label>
+                    <Input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      placeholder="Enter your email address"
+                      className="bg-slate-50 border-slate-200 focus:border-orange-400 focus:ring-orange-400"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Phone Number (Optional)
+                    </label>
+                    <Input
+                      value={formData.phone}
+                      onChange={(e) => handleInputChange('phone', e.target.value)}
+                      placeholder="Enter your phone number"
+                      className="bg-slate-50 border-slate-200 focus:border-orange-400 focus:ring-orange-400"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Company Name (Optional)
+                    </label>
+                    <Input
+                      value={formData.company}
+                      onChange={(e) => handleInputChange('company', e.target.value)}
+                      placeholder="Enter your company name"
+                      className="bg-slate-50 border-slate-200 focus:border-orange-400 focus:ring-orange-400"
+                    />
+                  </div>
+                </div>
+
+                {/* Service and Scheduling */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Service Type *
+                  </label>
+                  <select
+                    value={formData.service_type}
+                    onChange={(e) => handleInputChange('service_type', e.target.value)}
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:border-orange-400 focus:ring-orange-400 focus:outline-none"
+                    required
+                  >
+                    <option value="">Select service type</option>
+                    {serviceTypes.map((service) => (
+                      <option key={service} value={service}>{service}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Preferred Date & Time *
+                    </label>
+                    <select
+                      value={formData.preferred_datetime}
+                      onChange={(e) => handleInputChange('preferred_datetime', e.target.value)}
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:border-orange-400 focus:ring-orange-400 focus:outline-none"
+                      required
+                    >
+                      <option value="">Select date and time</option>
+                      {availableSlots.map((slot, index) => (
+                        <option key={index} value={slot.datetime}>
+                          {slot.display}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Timezone *
+                    </label>
+                    <select
+                      value={formData.timezone}
+                      onChange={(e) => handleInputChange('timezone', e.target.value)}
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:border-orange-400 focus:ring-orange-400 focus:outline-none"
+                      required
+                    >
+                      {timezones.map((tz) => (
+                        <option key={tz.value} value={tz.value}>{tz.label}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Message */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Additional Message (Optional)
+                  </label>
+                  <Textarea
+                    value={formData.message}
+                    onChange={(e) => handleInputChange('message', e.target.value)}
+                    placeholder="Tell us about your specific needs, challenges, or questions..."
+                    className="bg-slate-50 border-slate-200 focus:border-orange-400 focus:ring-orange-400 min-h-[100px]"
+                    rows="4"
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <div className="flex justify-center pt-6">
+                  <button
+                    type="submit"
+                    disabled={isLoading || !formData.name || !formData.email || !formData.service_type || !formData.preferred_datetime}
+                    className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span className="relative z-10 flex items-center justify-center">
+                      {isLoading ? 'Booking...' : 'Book Free Consultation'}
+                      {!isLoading && <Calendar className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />}
+                    </span>
+                  </button>
+                </div>
+              </form>
+
+              {/* Benefits Section */}
+              <div className="mt-8 pt-6 border-t border-slate-200">
+                <h3 className="text-lg font-semibold text-slate-800 mb-4 text-center">
+                  What You'll Get From This Consultation
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="text-center">
+                    <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-orange-100 mb-2">
+                      <Brain className="h-5 w-5 text-orange-600" />
+                    </div>
+                    <p className="text-sm text-slate-700 font-medium">AI Readiness Assessment</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-100 mb-2">
+                      <Target className="h-5 w-5 text-green-600" />
+                    </div>
+                    <p className="text-sm text-slate-700 font-medium">Custom Strategy Roadmap</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 mb-2">
+                      <Award className="h-5 w-5 text-blue-600" />
+                    </div>
+                    <p className="text-sm text-slate-700 font-medium">ROI Projections</p>
+                  </div>
+                </div>
+              </div>
+            </CardHeader>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Main App Component with SEO Meta Tags
 function App() {
   return (
