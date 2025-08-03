@@ -802,11 +802,11 @@ const Home = () => {
 
           {/* Lead Magnets Section */}
           <div className="text-center animate-fade-in" style={{ animationDelay: '800ms' }}>
-            <h3 className="text-3xl font-bold text-white mb-8">
-              <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+            <h3 className="text-3xl font-bold text-slate-800 mb-8">
+              <span className="bg-gradient-to-r from-orange-500 to-yellow-500 bg-clip-text text-transparent">
                 Free Resources
               </span>
-              <span className="text-white"> to Accelerate Your Growth</span>
+              <span className="text-slate-800"> to Accelerate Your Growth</span>
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
