@@ -356,8 +356,8 @@ frontend:
         comment: "✅ IMPLEMENTED: AI Assessment Tool frontend fully functional with multi-step questionnaire (5 questions), progress indicator, user info collection, scoring visualization, personalized recommendations display, and complete backend integration. Features: Professional UI matching site design, animated progress bar, radio button selection, results page with score circle and recommendations, CTA for consultation booking."
 
   - task: "ROI Calculator Frontend"
-    implemented: false
-    working: "NA"
+    implemented: true
+    working: true
     file: "/app/frontend/src/App.js"
     stuck_count: 0
     priority: "high"
@@ -366,6 +366,9 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "Need to implement ROI Calculator frontend with business metrics input form, results visualization with charts, and backend integration to /api/roi-calculator endpoint."
+      - working: true
+        agent: "main"
+        comment: "✅ IMPLEMENTED: ROI Calculator frontend fully functional with comprehensive business information form, interactive efficiency slider, multi-service selection checkboxes, and complete results dashboard with 4 key metrics cards (ROI percentage, annual savings, payback period, investment cost), recommended services display, and backend integration. Features: Professional UI matching site design, currency formatting, gradient metric cards, responsive layout."
 
   - task: "Smart Calendar Frontend"
     implemented: false
