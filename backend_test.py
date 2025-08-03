@@ -241,6 +241,219 @@ class OrgainseAPITester:
             data=invalid_data
         )
 
+    # ================================
+    # INTERACTIVE TOOLS TESTS
+    # ================================
+
+    def test_ai_assessment_tool(self):
+        """Test AI Assessment Tool API"""
+        test_data = {
+            "name": "Sarah Johnson",
+            "email": "sarah.johnson@techcorp.com",
+            "company": "TechCorp Solutions",
+            "phone": "+1-555-234-5678",
+            "responses": [
+                {
+                    "question_id": "ai_readiness",
+                    "answer": "We have basic automation in place",
+                    "score": 6
+                },
+                {
+                    "question_id": "data_management",
+                    "answer": "We collect data but struggle with analysis",
+                    "score": 4
+                },
+                {
+                    "question_id": "team_skills",
+                    "answer": "Some team members have AI knowledge",
+                    "score": 5
+                },
+                {
+                    "question_id": "budget_allocation",
+                    "answer": "We have allocated budget for AI initiatives",
+                    "score": 7
+                },
+                {
+                    "question_id": "strategic_vision",
+                    "answer": "AI is part of our 3-year strategy",
+                    "score": 8
+                }
+            ]
+        }
+        
+        success, response = self.run_test(
+            "AI Assessment Tool",
+            "POST",
+            "ai-assessment",
+            200,
+            data=test_data
+        )
+        
+        if success:
+            # Verify response structure
+            expected_fields = ['id', 'ai_maturity_score', 'recommendations', 'timestamp']
+            for field in expected_fields:
+                if field not in response:
+                    print(f"⚠️  Missing field in response: {field}")
+                    return False, response
+            
+            # Verify score calculation (should be around 60% based on scores)
+            expected_score = int((30 / 50) * 100)  # 30 total score out of 50 max
+            actual_score = response.get('ai_maturity_score', 0)
+            if abs(actual_score - expected_score) > 10:  # Allow 10% variance
+                print(f"⚠️  Score calculation seems off. Expected ~{expected_score}, got {actual_score}")
+            
+            print(f"   AI Maturity Score: {actual_score}/100")
+            print(f"   Recommendations: {len(response.get('recommendations', []))} items")
+        
+        return success, response
+
+    def test_roi_calculator(self):
+        """Test ROI Calculator API"""
+        test_data = {
+            "company_name": "InnovateTech Ltd",
+            "email": "ceo@innovatetech.com",
+            "phone": "+1-555-345-6789",
+            "industry": "Technology",
+            "company_size": "51-200",
+            "current_project_cost": 50000.0,
+            "project_duration_months": 6,
+            "current_efficiency_rating": 6,
+            "desired_services": [
+                "AI Project Management",
+                "Digital Transformation",
+                "Operational Optimization"
+            ]
+        }
+        
+        success, response = self.run_test(
+            "ROI Calculator",
+            "POST",
+            "roi-calculator",
+            200,
+            data=test_data
+        )
+        
+        if success:
+            # Verify response structure
+            expected_fields = ['id', 'potential_savings', 'roi_percentage', 'payback_period_months', 
+                             'recommended_services', 'estimated_project_cost', 'timestamp']
+            for field in expected_fields:
+                if field not in response:
+                    print(f"⚠️  Missing field in response: {field}")
+                    return False, response
+            
+            # Verify calculations make sense
+            potential_savings = response.get('potential_savings', 0)
+            roi_percentage = response.get('roi_percentage', 0)
+            estimated_cost = response.get('estimated_project_cost', 0)
+            
+            print(f"   Potential Savings: ${potential_savings:,.2f}")
+            print(f"   ROI Percentage: {roi_percentage:.1f}%")
+            print(f"   Estimated Project Cost: ${estimated_cost:,.2f}")
+            print(f"   Recommended Services: {len(response.get('recommended_services', []))} items")
+        
+        return success, response
+
+    def test_calendar_booking_enhanced(self):
+        """Test Enhanced Calendar Booking API"""
+        from datetime import datetime, timedelta
+        
+        # Book for next week
+        booking_datetime = datetime.now() + timedelta(days=7)
+        booking_datetime = booking_datetime.replace(hour=14, minute=0, second=0, microsecond=0)
+        
+        test_data = {
+            "name": "Michael Chen",
+            "email": "michael.chen@startupventure.com",
+            "phone": "+1-555-456-7890",
+            "company": "StartupVenture Inc",
+            "service_type": "AI Project Management",
+            "preferred_datetime": booking_datetime.isoformat(),
+            "timezone": "America/New_York",
+            "message": "Looking to implement AI-powered project management for our growing team"
+        }
+        
+        success, response = self.run_test(
+            "Enhanced Calendar Booking",
+            "POST",
+            "book-consultation",
+            200,
+            data=test_data
+        )
+        
+        if success:
+            # Verify response structure
+            expected_fields = ['id', 'name', 'email', 'service_type', 'preferred_datetime', 
+                             'timezone', 'status', 'timestamp']
+            for field in expected_fields:
+                if field not in response:
+                    print(f"⚠️  Missing field in response: {field}")
+                    return False, response
+            
+            print(f"   Booking ID: {response.get('id')}")
+            print(f"   Service: {response.get('service_type')}")
+            print(f"   Status: {response.get('status')}")
+            print(f"   Scheduled: {response.get('preferred_datetime')}")
+        
+        return success, response
+
+    def test_ai_assessment_invalid_data(self):
+        """Test AI Assessment with invalid data"""
+        invalid_data = {
+            "name": "Test User",
+            "email": "invalid-email",  # Invalid email
+            "company": "Test Company",
+            "responses": []  # Empty responses
+        }
+        
+        return self.run_test(
+            "AI Assessment Invalid Data",
+            "POST",
+            "ai-assessment",
+            422,  # Validation error
+            data=invalid_data
+        )
+
+    def test_roi_calculator_invalid_data(self):
+        """Test ROI Calculator with invalid data"""
+        invalid_data = {
+            "company_name": "",  # Empty name
+            "email": "test@example.com",
+            "industry": "Technology",
+            "company_size": "invalid-size",  # Invalid size
+            "current_project_cost": -1000,  # Negative cost
+            "project_duration_months": 0,  # Zero duration
+            "current_efficiency_rating": 15,  # Out of range
+            "desired_services": []
+        }
+        
+        return self.run_test(
+            "ROI Calculator Invalid Data",
+            "POST",
+            "roi-calculator",
+            422,  # Validation error
+            data=invalid_data
+        )
+
+    def test_calendar_booking_invalid_datetime(self):
+        """Test Calendar Booking with invalid datetime"""
+        invalid_data = {
+            "name": "Test User",
+            "email": "test@example.com",
+            "service_type": "Test Service",
+            "preferred_datetime": "invalid-datetime",  # Invalid datetime format
+            "timezone": "Invalid/Timezone"
+        }
+        
+        return self.run_test(
+            "Calendar Booking Invalid DateTime",
+            "POST",
+            "book-consultation",
+            422,  # Validation error
+            data=invalid_data
+        )
+
     def run_all_tests(self):
         """Run all API tests"""
         print("🚀 Starting Orgainse Consulting API Tests")
