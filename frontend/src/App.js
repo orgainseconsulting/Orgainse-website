@@ -544,58 +544,39 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Revolutionary Services Preview */}
-      <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-orange-50 relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 left-0 w-full h-full" style={{
-            backgroundImage: `radial-gradient(circle at 25% 25%, #f97316 0%, transparent 50%), radial-gradient(circle at 75% 75%, #10b981 0%, transparent 50%)`
-          }}></div>
-        </div>
-        
+      {/* Compact Services Preview */}
+      <section className="py-12 bg-gradient-to-br from-slate-50 via-white to-orange-50 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-20 animate-fade-in">
-            <h2 className="text-5xl lg:text-6xl font-bold mb-6">
+          <div className="text-center mb-10 animate-fade-in">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
               <span className="bg-gradient-to-r from-slate-800 via-orange-600 to-green-600 bg-clip-text text-transparent">
                 Our AI-Native
               </span>
-              <br />
-              <span className="text-slate-800">Consulting Arsenal</span>
+              <span className="text-slate-800"> Consulting Arsenal</span>
             </h2>
-            <p className="text-xl text-slate-600 max-w-4xl mx-auto mb-8">
-              Transforming businesses with GPT-powered solutions across IT Services, EdTech, FinTech, 
-              Healthcare, Hospitality, and Software Development industries.
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+              Transforming businesses with GPT-powered solutions across key industries.
             </p>
-            
-            {/* Animated Divider */}
-            <div className="flex justify-center">
-              <div className="w-32 h-1 bg-gradient-to-r from-orange-500 via-green-500 to-purple-500 rounded-full animate-pulse"></div>
-            </div>
           </div>
 
-          {/* Creative Services Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Compact Services Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
               <div 
                 key={index}
                 className="group relative animate-fade-in"
-                style={{ animationDelay: `${index * 150}ms` }}
+                style={{ animationDelay: `${index * 100}ms` }}
               >
-                {/* Floating Background */}
-                <div className={`absolute -inset-2 bg-gradient-to-r ${service.gradient} rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000`}></div>
-                
-                {/* Main Card */}
                 <Card className="relative bg-white/80 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 group overflow-hidden rounded-2xl flex flex-col">
-                  {/* Top Gradient Bar */}
                   <div className={`h-1 bg-gradient-to-r ${service.gradient}`}></div>
                   
-                  <CardHeader className="pb-3 flex-1 flex flex-col p-5">
+                  <CardHeader className="p-4 flex-1">
                     <div className="flex items-start space-x-3 mb-3">
-                      <div className={`p-3 ${service.iconBg} rounded-xl group-hover:scale-105 group-hover:rotate-6 transition-all duration-500 shadow-md`}>
-                        <service.icon className={`h-6 w-6 ${service.iconColor}`} />
+                      <div className={`p-2 ${service.iconBg} rounded-xl group-hover:scale-105 group-hover:rotate-6 transition-all duration-500 shadow-md`}>
+                        <service.icon className={`h-5 w-5 ${service.iconColor}`} />
                       </div>
                       <div className="flex-1">
-                        <CardTitle className="text-lg group-hover:text-orange-600 transition-colors leading-tight">
+                        <CardTitle className="text-base group-hover:text-orange-600 transition-colors leading-tight">
                           {service.title}
                         </CardTitle>
                       </div>
@@ -604,20 +585,18 @@ const Home = () => {
                       {service.description}
                     </CardDescription>
                   </CardHeader>
-                  
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-3xl"></div>
                 </Card>
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-16 animate-fade-in">
-            <button className="group relative px-10 py-5 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-full shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <span className="relative z-10 flex items-center text-lg">
+          {/* Compact CTA Section */}
+          <div className="text-center mt-10 animate-fade-in">
+            <button className="group relative px-6 py-3 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <span className="relative z-10 flex items-center justify-center">
                 Explore Our AI Arsenal
-                <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform" />
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </button>
           </div>
