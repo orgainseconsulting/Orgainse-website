@@ -2076,26 +2076,4 @@ const TermsOfService = () => {
   );
 };
 
-// Main App Component with SEO Meta Tags
-function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Navigation />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<TermsOfService />} />
-          </Routes>
-        </main>
-        <Footer />
-      </BrowserRouter>
-    </div>
-  );
-}
-
 export default App;
