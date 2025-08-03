@@ -200,7 +200,7 @@ class RegionalPricingTester:
                 'US': '$',
                 'IN': '₹',
                 'GB': '£',
-                'AE': 'د.إ',
+                'AE': 'AED',  # Updated to match frontend
                 'AU': 'A$',
                 'NZ': 'NZ$',
                 'ZA': 'R',
