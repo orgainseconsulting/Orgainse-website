@@ -1375,8 +1375,8 @@ const Services = () => {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className={`absolute inset-0 bg-gradient-to-r ${industry.color} rounded-2xl opacity-20 group-hover:opacity-40 transition-opacity blur-sm`}></div>
-                <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl px-6 py-3 border border-white/20 hover:border-white/40 transition-all duration-300 transform hover:scale-105">
-                  <span className="text-white font-medium text-sm">{industry.name}</span>
+                <div className="relative bg-white/80 backdrop-blur-lg rounded-2xl px-4 py-2 border border-orange-200 hover:border-orange-400 transition-all duration-300 transform hover:scale-105 shadow-sm">
+                  <span className="text-slate-700 font-medium text-sm">{industry.name}</span>
                 </div>
               </div>
             ))}
