@@ -1898,7 +1898,7 @@ function App() {
       </BrowserRouter>
     </div>
   );
-};
+}
 
 // Privacy Policy Component
 const PrivacyPolicy = () => {
