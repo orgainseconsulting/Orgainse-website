@@ -745,8 +745,8 @@ const About = () => {
               </div>
             </div>
 
-            {/* Connection Lines */}
-            <svg className="absolute inset-0 w-full h-full z-10" viewBox="0 0 800 600">
+            {/* Optimized Connection Lines */}
+            <svg className="absolute inset-0 w-full h-full z-10 will-change-transform" viewBox="0 0 800 600">
               <defs>
                 <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stopColor="#F97316" stopOpacity="0.6"/>
