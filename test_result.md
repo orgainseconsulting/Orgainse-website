@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Complete the final verification and optimization of Orgainse Consulting website with revolutionary design implementation, performance optimization, and SEO keyword integration. Ensure all pages have consistent eye-catching design with advanced CSS animations, verify no graphics lag, and integrate SEO keywords throughout content."
+user_problem_statement: "Build frontend for interactive lead generation tools: AI Assessment Tool, ROI Calculator, and Smart Calendar Integration. These tools should integrate with the existing Odoo-compatible backend APIs and maintain the revolutionary design consistency of the website."
 
 backend:
   - task: "Contact Form API Endpoint"
