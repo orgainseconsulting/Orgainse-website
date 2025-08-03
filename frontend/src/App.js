@@ -916,25 +916,36 @@ const About = () => {
         </div>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Enhanced Mission & Vision with Creative Design */}
+      <section className="py-20 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-20 left-1/4 w-72 h-72 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-3xl animate-pulse will-change-transform"></div>
+          <div className="absolute bottom-20 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full blur-3xl animate-pulse animation-delay-2000 will-change-transform"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div className="space-y-6 animate-fade-in">
-              <h2 className="text-3xl font-bold text-slate-800">Our Mission</h2>
-              <p className="text-lg text-slate-600 leading-relaxed">
-                To democratize access to world-class AI-native business consulting through 
-                GPT-powered solutions, enabling organizations of all sizes to achieve 
-                breakthrough performance and sustainable growth with intelligent automation.
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Our Mission</span>
+              </h2>
+              <p className="text-xl text-slate-200 leading-relaxed">
+                To democratize access to world-class <span className="text-yellow-400 font-bold">AI-native digital transformation consulting</span> through 
+                <span className="text-green-400 font-bold">GPT-powered solutions</span>, enabling organizations of all sizes to achieve 
+                breakthrough performance and sustainable growth with <span className="text-blue-400 font-bold">intelligent automation</span> and 
+                <span className="text-purple-400 font-bold">real-time compliance monitoring</span>.
               </p>
             </div>
 
             <div className="space-y-6 animate-fade-in animation-delay-300">
-              <h2 className="text-3xl font-bold text-slate-800">Our Vision</h2>
-              <p className="text-lg text-slate-600 leading-relaxed">
-                To be the global leader in AI-native consulting, setting the standard 
-                for innovation, excellence, and measurable business outcomes across 
-                all industries we serve through cutting-edge GPT and AI technologies.
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Our Vision</span>
+              </h2>
+              <p className="text-xl text-slate-200 leading-relaxed">
+                To be the global leader in <span className="text-orange-400 font-bold">AI-native consulting</span>, setting the standard 
+                for innovation, excellence, and measurable business outcomes through <span className="text-green-400 font-bold">cutting-edge GPT</span> and 
+                <span className="text-blue-400 font-bold">AI technologies</span> across all industries we serve with <span className="text-pink-400 font-bold">outcome-based AI strategy consulting</span>.
               </p>
             </div>
           </div>
