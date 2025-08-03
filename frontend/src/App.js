@@ -436,16 +436,16 @@ const Home = () => {
       <section className="relative bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-20 lg:py-32 overflow-hidden">
         {/* Dynamic Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-96 h-96 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-full blur-3xl opacity-20 animate-pulse float-animation"></div>
-          <div className="absolute top-40 right-20 w-80 h-80 bg-gradient-to-r from-green-500 to-blue-500 rounded-full blur-3xl opacity-20 animate-pulse float-animation animation-delay-2000"></div>
-          <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-3xl opacity-20 animate-pulse float-animation animation-delay-500"></div>
-          <div className="absolute bottom-40 right-1/3 w-64 h-64 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-3xl opacity-20 animate-pulse float-animation animation-delay-1000"></div>
+          <div className="absolute top-10 left-10 w-96 h-96 bg-gradient-to-r from-orange-200 to-yellow-200 rounded-full blur-3xl opacity-30 animate-pulse float-animation"></div>
+          <div className="absolute top-40 right-20 w-80 h-80 bg-gradient-to-r from-green-200 to-blue-200 rounded-full blur-3xl opacity-30 animate-pulse float-animation animation-delay-2000"></div>
+          <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-gradient-to-r from-purple-200 to-pink-200 rounded-full blur-3xl opacity-30 animate-pulse float-animation animation-delay-500"></div>
+          <div className="absolute bottom-40 right-1/3 w-64 h-64 bg-gradient-to-r from-blue-200 to-cyan-200 rounded-full blur-3xl opacity-30 animate-pulse float-animation animation-delay-1000"></div>
           
           {/* Floating Geometric Shapes */}
-          <div className="absolute top-1/4 left-1/3 w-8 h-8 bg-orange-400 rotate-45 animate-spin-slow opacity-60"></div>
-          <div className="absolute top-3/4 right-1/4 w-12 h-12 bg-green-400 rounded-full animate-bounce opacity-60"></div>
-          <div className="absolute top-1/2 left-1/4 w-6 h-16 bg-yellow-400 rounded-full animate-pulse opacity-60"></div>
-          <div className="absolute bottom-1/4 right-1/3 w-10 h-10 bg-purple-400 rotate-12 animate-spin-slow opacity-60"></div>
+          <div className="absolute top-1/4 left-1/3 w-8 h-8 bg-orange-300 rotate-45 animate-spin-slow opacity-40"></div>
+          <div className="absolute top-3/4 right-1/4 w-12 h-12 bg-green-300 rounded-full animate-bounce opacity-40"></div>
+          <div className="absolute top-1/2 left-1/4 w-6 h-16 bg-yellow-300 rounded-full animate-pulse opacity-40"></div>
+          <div className="absolute bottom-1/4 right-1/3 w-10 h-10 bg-purple-300 rotate-12 animate-spin-slow opacity-40"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
