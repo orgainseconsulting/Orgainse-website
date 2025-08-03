@@ -1844,6 +1844,460 @@ const Contact = () => {
   );
 };
 
+// AI Assessment Tool Component
+const AIAssessmentTool = () => {
+  const [currentStep, setCurrentStep] = useState(0);
+  const [responses, setResponses] = useState({});
+  const [userInfo, setUserInfo] = useState({
+    name: '',
+    email: '',
+    company: '',
+    phone: ''
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [results, setResults] = useState(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Assessment questions with scoring
+  const questions = [
+    {
+      id: 'ai_readiness',
+      title: 'AI Readiness & Current State',
+      question: 'How would you describe your organization\'s current AI adoption level?',
+      options: [
+        { text: 'No AI implementation - completely traditional processes', score: 1 },
+        { text: 'Aware of AI potential but no concrete plans', score: 3 },
+        { text: 'Basic automation tools in use (Excel macros, simple workflows)', score: 5 },
+        { text: 'Some AI tools implemented (chatbots, basic analytics)', score: 7 },
+        { text: 'Advanced AI integration across multiple departments', score: 9 },
+        { text: 'AI-native organization with comprehensive AI strategy', score: 10 }
+      ]
+    },
+    {
+      id: 'data_management',
+      title: 'Data Infrastructure & Management',
+      question: 'How effectively does your organization collect, store, and analyze data?',
+      options: [
+        { text: 'Manual data collection with limited storage systems', score: 1 },
+        { text: 'Basic spreadsheet-based data management', score: 3 },
+        { text: 'Database systems with some automated collection', score: 5 },
+        { text: 'Integrated data platforms with analytics capabilities', score: 7 },
+        { text: 'Advanced data lakes/warehouses with real-time analytics', score: 9 },
+        { text: 'AI-powered data management with predictive analytics', score: 10 }
+      ]
+    },
+    {
+      id: 'team_skills',
+      title: 'Team Capabilities & Skills',
+      question: 'What is your team\'s current AI and technology skill level?',
+      options: [
+        { text: 'Limited technical skills - primarily traditional business roles', score: 1 },
+        { text: 'Basic computer literacy with willingness to learn', score: 3 },
+        { text: 'Some team members with technical backgrounds', score: 5 },
+        { text: 'Dedicated IT/tech team with AI awareness', score: 7 },
+        { text: 'AI specialists and data scientists on staff', score: 9 },
+        { text: 'AI-first organization with comprehensive AI expertise', score: 10 }
+      ]
+    },
+    {
+      id: 'budget_allocation',
+      title: 'Budget & Investment Readiness',
+      question: 'How prepared is your organization to invest in AI transformation?',
+      options: [
+        { text: 'Very limited budget - looking for low-cost solutions', score: 1 },
+        { text: 'Small budget allocated for technology improvements', score: 3 },
+        { text: 'Moderate budget with approval for proven ROI solutions', score: 5 },
+        { text: 'Significant budget allocated for digital transformation', score: 7 },
+        { text: 'Substantial investment ready for comprehensive AI implementation', score: 9 },
+        { text: 'Enterprise-level budget with dedicated AI transformation fund', score: 10 }
+      ]
+    },
+    {
+      id: 'strategic_vision',
+      title: 'Strategic Vision & Leadership Support',
+      question: 'How committed is your leadership to AI transformation?',
+      options: [
+        { text: 'Leadership is skeptical about AI benefits', score: 1 },
+        { text: 'Leadership is curious but cautious about AI', score: 3 },
+        { text: 'Leadership supports AI initiatives with proper business case', score: 5 },
+        { text: 'Leadership actively champions AI transformation', score: 7 },
+        { text: 'Leadership has comprehensive AI strategy for next 3 years', score: 9 },
+        { text: 'Leadership views AI as core competitive advantage', score: 10 }
+      ]
+    }
+  ];
+
+  const handleUserInfoChange = (field, value) => {
+    setUserInfo(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleResponse = (questionId, option) => {
+    setResponses(prev => ({
+      ...prev,
+      [questionId]: {
+        answer: option.text,
+        score: option.score
+      }
+    }));
+  };
+
+  const handleNext = () => {
+    if (currentStep < questions.length) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const submitAssessment = async () => {
+    setIsLoading(true);
+    
+    try {
+      // Prepare responses for API
+      const formattedResponses = Object.entries(responses).map(([questionId, response]) => ({
+        question_id: questionId,
+        answer: response.answer,
+        score: response.score
+      }));
+
+      const assessmentData = {
+        ...userInfo,
+        responses: formattedResponses
+      };
+
+      const response = await axios.post(`${API}/ai-assessment`, assessmentData);
+      
+      if (response.status === 200) {
+        setResults(response.data);
+        setIsSubmitted(true);
+      }
+    } catch (error) {
+      console.error('Assessment submission failed:', error);
+      alert('Failed to submit assessment. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const getScoreColor = (score) => {
+    if (score >= 80) return 'from-green-500 to-emerald-600';
+    if (score >= 60) return 'from-yellow-500 to-orange-500';
+    if (score >= 40) return 'from-orange-500 to-red-500';
+    return 'from-red-500 to-red-600';
+  };
+
+  const getScoreLabel = (score) => {
+    if (score >= 80) return 'AI Advanced';
+    if (score >= 60) return 'AI Ready';
+    if (score >= 40) return 'AI Developing';
+    return 'AI Beginner';
+  };
+
+  // Results View
+  if (isSubmitted && results) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-12">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Results Header */}
+          <div className="text-center mb-10 animate-fade-in">
+            <h1 className="text-4xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text text-transparent">
+                Your AI Readiness Report
+              </span>
+            </h1>
+            <p className="text-lg text-slate-600">
+              Based on your responses, here's your personalized AI transformation roadmap
+            </p>
+          </div>
+
+          {/* Score Display */}
+          <div className="group relative animate-fade-in mb-10" style={{ animationDelay: '200ms' }}>
+            <div className="absolute -inset-2 bg-gradient-to-r from-orange-400 to-green-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl rounded-2xl overflow-hidden">
+              <CardHeader className="text-center p-8">
+                <div className={`inline-flex items-center justify-center w-32 h-32 rounded-full bg-gradient-to-r ${getScoreColor(results.ai_maturity_score)} mb-4 mx-auto`}>
+                  <span className="text-4xl font-bold text-white">
+                    {results.ai_maturity_score}
+                  </span>
+                </div>
+                <CardTitle className="text-2xl mb-2">
+                  AI Maturity Score: {getScoreLabel(results.ai_maturity_score)}
+                </CardTitle>
+                <CardDescription className="text-lg">
+                  You scored {results.ai_maturity_score} out of 100
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          </div>
+
+          {/* Recommendations */}
+          <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
+            <h2 className="text-2xl font-bold mb-6 text-slate-800">
+              Personalized Recommendations
+            </h2>
+            <div className="grid gap-4">
+              {results.recommendations.map((recommendation, index) => (
+                <div 
+                  key={index}
+                  className="group relative"
+                  style={{ animationDelay: `${600 + index * 100}ms` }}
+                >
+                  <div className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-green-500 rounded-xl blur opacity-20 group-hover:opacity-30 transition duration-500"></div>
+                  <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl">
+                    <CardHeader className="p-4">
+                      <div className="flex items-start space-x-3">
+                        <div className="p-2 bg-orange-100 rounded-lg">
+                          <CheckCircle className="h-5 w-5 text-orange-600" />
+                        </div>
+                        <CardDescription className="text-slate-700 leading-relaxed">
+                          {recommendation}
+                        </CardDescription>
+                      </div>
+                    </CardHeader>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Next Steps CTA */}
+          <div className="text-center mt-10 animate-fade-in" style={{ animationDelay: '800ms' }}>
+            <div className="bg-white/90 backdrop-blur-lg rounded-2xl p-8 shadow-xl">
+              <h3 className="text-2xl font-bold mb-4 text-slate-800">
+                Ready to Transform Your Business?
+              </h3>
+              <p className="text-slate-600 mb-6">
+                Get a free consultation to discuss how we can help implement these recommendations
+              </p>
+              <button 
+                onClick={() => window.location.href = '/contact'}
+                className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10 flex items-center justify-center">
+                  Book Free Consultation
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Header */}
+        <div className="text-center mb-10 animate-fade-in">
+          <h1 className="text-4xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text text-transparent">
+              AI Readiness Assessment
+            </span>
+          </h1>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            Discover your organization's AI maturity level and get a personalized transformation roadmap in just 5 minutes
+          </p>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="mb-8 animate-fade-in" style={{ animationDelay: '200ms' }}>
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm text-slate-600">Progress</span>
+            <span className="text-sm text-slate-600">
+              {currentStep === 0 ? 'User Info' : `Question ${currentStep}/${questions.length}`}
+            </span>
+          </div>
+          <div className="w-full bg-slate-200 rounded-full h-2">
+            <div 
+              className="bg-gradient-to-r from-orange-500 to-green-500 h-2 rounded-full transition-all duration-500"
+              style={{ width: `${((currentStep) / (questions.length + 1)) * 100}%` }}
+            ></div>
+          </div>
+        </div>
+
+        {/* User Information Step */}
+        {currentStep === 0 && (
+          <div className="group relative animate-fade-in">
+            <div className="absolute -inset-2 bg-gradient-to-r from-orange-400 to-green-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl rounded-2xl overflow-hidden">
+              <CardHeader className="p-8">
+                <CardTitle className="text-2xl mb-4 text-center">
+                  Let's Get Started
+                </CardTitle>
+                <CardDescription className="text-center mb-6">
+                  Please provide your information to receive personalized recommendations
+                </CardDescription>
+                
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Full Name *
+                    </label>
+                    <Input
+                      value={userInfo.name}
+                      onChange={(e) => handleUserInfoChange('name', e.target.value)}
+                      placeholder="Enter your full name"
+                      className="bg-slate-50 border-slate-200 focus:border-orange-400 focus:ring-orange-400"
+                      required
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Email Address *
+                    </label>
+                    <Input
+                      type="email"
+                      value={userInfo.email}
+                      onChange={(e) => handleUserInfoChange('email', e.target.value)}
+                      placeholder="Enter your email address"
+                      className="bg-slate-50 border-slate-200 focus:border-orange-400 focus:ring-orange-400"
+                      required
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Company Name *
+                    </label>
+                    <Input
+                      value={userInfo.company}
+                      onChange={(e) => handleUserInfoChange('company', e.target.value)}
+                      placeholder="Enter your company name"
+                      className="bg-slate-50 border-slate-200 focus:border-orange-400 focus:ring-orange-400"
+                      required
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Phone Number (Optional)
+                    </label>
+                    <Input
+                      value={userInfo.phone}
+                      onChange={(e) => handleUserInfoChange('phone', e.target.value)}
+                      placeholder="Enter your phone number"
+                      className="bg-slate-50 border-slate-200 focus:border-orange-400 focus:ring-orange-400"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex justify-end mt-6">
+                  <button
+                    onClick={handleNext}
+                    disabled={!userInfo.name || !userInfo.email || !userInfo.company}
+                    className="group relative px-6 py-3 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span className="relative z-10 flex items-center justify-center">
+                      Start Assessment
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </button>
+                </div>
+              </CardHeader>
+            </Card>
+          </div>
+        )}
+
+        {/* Question Steps */}
+        {currentStep > 0 && currentStep <= questions.length && (
+          <div className="group relative animate-fade-in">
+            <div className="absolute -inset-2 bg-gradient-to-r from-orange-400 to-green-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl rounded-2xl overflow-hidden">
+              <CardHeader className="p-8">
+                <div className="text-center mb-6">
+                  <Badge className="bg-orange-100 text-orange-700 mb-4">
+                    {questions[currentStep - 1].title}
+                  </Badge>
+                  <CardTitle className="text-2xl mb-4">
+                    {questions[currentStep - 1].question}
+                  </CardTitle>
+                  <CardDescription>
+                    Select the option that best describes your organization
+                  </CardDescription>
+                </div>
+
+                <div className="space-y-3">
+                  {questions[currentStep - 1].options.map((option, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handleResponse(questions[currentStep - 1].id, option)}
+                      className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-300 ${
+                        responses[questions[currentStep - 1].id]?.answer === option.text
+                          ? 'border-orange-500 bg-orange-50'
+                          : 'border-slate-200 bg-white hover:border-orange-300 hover:bg-orange-25'
+                      }`}
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className={`w-4 h-4 rounded-full border-2 ${
+                          responses[questions[currentStep - 1].id]?.answer === option.text
+                            ? 'border-orange-500 bg-orange-500'
+                            : 'border-slate-300'
+                        }`}>
+                          {responses[questions[currentStep - 1].id]?.answer === option.text && (
+                            <div className="w-full h-full rounded-full bg-white scale-50"></div>
+                          )}
+                        </div>
+                        <span className="flex-1 text-slate-700">{option.text}</span>
+                        <div className="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded">
+                          {option.score}/10
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="flex justify-between mt-8">
+                  <button
+                    onClick={handlePrevious}
+                    className="px-6 py-3 border-2 border-slate-300 text-slate-600 font-medium rounded-xl hover:border-slate-400 hover:bg-slate-50 transition-all duration-300"
+                  >
+                    Previous
+                  </button>
+                  
+                  {currentStep === questions.length ? (
+                    <button
+                      onClick={submitAssessment}
+                      disabled={!responses[questions[currentStep - 1].id] || isLoading}
+                      className="group relative px-6 py-3 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <span className="relative z-10 flex items-center justify-center">
+                        {isLoading ? 'Analyzing...' : 'Get My Results'}
+                        {!isLoading && <Target className="ml-2 h-4 w-4 group-hover:rotate-180 transition-transform duration-500" />}
+                      </span>
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleNext}
+                      disabled={!responses[questions[currentStep - 1].id]}
+                      className="group relative px-6 py-3 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <span className="relative z-10 flex items-center justify-center">
+                        Next Question
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </button>
+                  )}
+                </div>
+              </CardHeader>
+            </Card>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 // Main App Component with SEO Meta Tags
 function App() {
   return (
