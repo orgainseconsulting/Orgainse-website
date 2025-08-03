@@ -503,11 +503,11 @@ const Home = () => {
                     style={{ animationDelay: `${index * 200 + 1000}ms` }}
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} rounded-2xl opacity-20 group-hover:opacity-30 transition-opacity blur-sm`}></div>
-                    <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:border-white/40 transition-all duration-300">
+                    <div className="relative bg-white/90 backdrop-blur-lg rounded-2xl p-6 border border-white/40 hover:border-orange-300 transition-all duration-300 shadow-lg">
                       <div className={`text-3xl lg:text-4xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent animate-counter mb-2`}>
                         {stat.value}
                       </div>
-                      <div className="text-sm text-slate-300 leading-tight">{stat.label}</div>
+                      <div className="text-sm text-slate-700 font-medium leading-tight">{stat.label}</div>
                     </div>
                   </div>
                 ))}
