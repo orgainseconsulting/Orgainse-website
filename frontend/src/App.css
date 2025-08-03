@@ -25,12 +25,20 @@
   opacity: 0;
 }
 
+.animate-spin-slow {
+  animation: spinSlow 8s linear infinite;
+}
+
 .animation-delay-300 {
   animation-delay: 0.3s;
 }
 
 .animation-delay-500 {
   animation-delay: 0.5s;
+}
+
+.animation-delay-700 {
+  animation-delay: 0.7s;
 }
 
 .animation-delay-2000 {
@@ -45,6 +53,15 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
