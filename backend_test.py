@@ -476,6 +476,18 @@ class OrgainseAPITester:
         self.test_consultation_booking()
         self.test_get_consultation_requests()
         
+        # Interactive Tools Tests (NEW)
+        print("\n🔧 Testing Interactive Tools APIs...")
+        self.test_ai_assessment_tool()
+        self.test_roi_calculator()
+        self.test_calendar_booking_enhanced()
+        
+        # Interactive Tools Validation Tests
+        print("\n🔍 Testing Interactive Tools Validation...")
+        self.test_ai_assessment_invalid_data()
+        self.test_roi_calculator_invalid_data()
+        self.test_calendar_booking_invalid_datetime()
+        
         # Legacy status tests
         self.test_status_check_legacy()
         self.test_get_status_checks()
