@@ -2299,6 +2299,486 @@ const AIAssessmentTool = () => {
   );
 };
 
+// ROI Calculator Tool Component
+const ROICalculator = () => {
+  const [formData, setFormData] = useState({
+    company_name: '',
+    email: '',
+    phone: '',
+    industry: '',
+    company_size: '',
+    current_project_cost: '',
+    project_duration_months: '',
+    current_efficiency_rating: 5,
+    desired_services: []
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [results, setResults] = useState(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Industry options
+  const industries = [
+    'IT Services & Software Development',
+    'EdTech & Education',
+    'FinTech & Financial Services',
+    'Healthcare & MedTech',
+    'Hospitality & Tourism',
+    'Manufacturing',
+    'E-commerce & Retail',
+    'Consulting Services',
+    'Other'
+  ];
+
+  // Company size options
+  const companySizes = [
+    '1-10',
+    '11-50',
+    '51-200',
+    '200+'
+  ];
+
+  // Service options
+  const serviceOptions = [
+    'AI Project Management',
+    'Digital Transformation',
+    'Operational Optimization',
+    'Business Strategy Development',
+    'Agile & Scrum Coaching',
+    'Risk Management & Compliance'
+  ];
+
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleServiceToggle = (service) => {
+    setFormData(prev => ({
+      ...prev,
+      desired_services: prev.desired_services.includes(service)
+        ? prev.desired_services.filter(s => s !== service)
+        : [...prev.desired_services, service]
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
+    try {
+      const calculationData = {
+        ...formData,
+        current_project_cost: parseFloat(formData.current_project_cost),
+        project_duration_months: parseInt(formData.project_duration_months),
+        current_efficiency_rating: parseInt(formData.current_efficiency_rating)
+      };
+
+      const response = await axios.post(`${API}/roi-calculator`, calculationData);
+      
+      if (response.status === 200) {
+        setResults(response.data);
+        setIsSubmitted(true);
+      }
+    } catch (error) {
+      console.error('ROI calculation failed:', error);
+      alert('Failed to calculate ROI. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
+  };
+
+  const getROIColor = (roi) => {
+    if (roi >= 300) return 'from-green-500 to-emerald-600';
+    if (roi >= 200) return 'from-blue-500 to-green-500';
+    if (roi >= 100) return 'from-yellow-500 to-blue-500';
+    return 'from-orange-500 to-yellow-500';
+  };
+
+  // Results View
+  if (isSubmitted && results) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Results Header */}
+          <div className="text-center mb-10 animate-fade-in">
+            <h1 className="text-4xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text text-transparent">
+                Your ROI Analysis Report
+              </span>
+            </h1>
+            <p className="text-lg text-slate-600">
+              Based on your business metrics, here's your potential return on investment
+            </p>
+          </div>
+
+          {/* Key Metrics Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            {/* ROI Percentage */}
+            <div className="group relative animate-fade-in" style={{ animationDelay: '200ms' }}>
+              <div className="absolute -inset-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl rounded-2xl overflow-hidden">
+                <CardHeader className="text-center p-6">
+                  <div className={`inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r ${getROIColor(results.roi_percentage)} mb-3 mx-auto`}>
+                    <TrendingUp className="h-8 w-8 text-white" />
+                  </div>
+                  <CardTitle className="text-lg mb-1">ROI Percentage</CardTitle>
+                  <CardDescription className="text-2xl font-bold text-green-600">
+                    {results.roi_percentage.toFixed(0)}%
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </div>
+
+            {/* Potential Savings */}
+            <div className="group relative animate-fade-in" style={{ animationDelay: '300ms' }}>
+              <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 to-green-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl rounded-2xl overflow-hidden">
+                <CardHeader className="text-center p-6">
+                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-blue-500 to-green-500 mb-3 mx-auto">
+                    <Award className="h-8 w-8 text-white" />
+                  </div>
+                  <CardTitle className="text-lg mb-1">Annual Savings</CardTitle>
+                  <CardDescription className="text-2xl font-bold text-blue-600">
+                    {formatCurrency(results.potential_savings)}
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </div>
+
+            {/* Payback Period */}
+            <div className="group relative animate-fade-in" style={{ animationDelay: '400ms' }}>
+              <div className="absolute -inset-2 bg-gradient-to-r from-purple-400 to-blue-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl rounded-2xl overflow-hidden">
+                <CardHeader className="text-center p-6">
+                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 mb-3 mx-auto">
+                    <Calendar className="h-8 w-8 text-white" />
+                  </div>
+                  <CardTitle className="text-lg mb-1">Payback Period</CardTitle>
+                  <CardDescription className="text-2xl font-bold text-purple-600">
+                    {results.payback_period_months} months
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </div>
+
+            {/* Investment */}
+            <div className="group relative animate-fade-in" style={{ animationDelay: '500ms' }}>
+              <div className="absolute -inset-2 bg-gradient-to-r from-orange-400 to-red-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl rounded-2xl overflow-hidden">
+                <CardHeader className="text-center p-6">
+                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-orange-500 to-red-500 mb-3 mx-auto">
+                    <Target className="h-8 w-8 text-white" />
+                  </div>
+                  <CardTitle className="text-lg mb-1">Investment</CardTitle>
+                  <CardDescription className="text-2xl font-bold text-orange-600">
+                    {formatCurrency(results.estimated_project_cost)}
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </div>
+          </div>
+
+          {/* Recommended Services */}
+          <div className="animate-fade-in mb-10" style={{ animationDelay: '600ms' }}>
+            <h2 className="text-2xl font-bold mb-6 text-slate-800">
+              Recommended Services for Your Business
+            </h2>
+            <div className="grid gap-6 md:grid-cols-2">
+              {results.recommended_services.map((service, index) => (
+                <div 
+                  key={index}
+                  className="group relative"
+                  style={{ animationDelay: `${700 + index * 100}ms` }}
+                >
+                  <div className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-green-500 rounded-xl blur opacity-20 group-hover:opacity-30 transition duration-500"></div>
+                  <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl">
+                    <CardHeader className="p-6">
+                      <div className="flex items-start justify-between mb-3">
+                        <CardTitle className="text-lg text-slate-800">
+                          {service.name}
+                        </CardTitle>
+                        <Badge className="bg-green-100 text-green-700">
+                          {service.duration}
+                        </Badge>
+                      </div>
+                      <CardDescription className="text-slate-700 mb-4 leading-relaxed">
+                        {service.description}
+                      </CardDescription>
+                      <div className="flex items-center justify-between">
+                        <span className="text-2xl font-bold text-orange-600">
+                          {formatCurrency(service.price)}
+                        </span>
+                        <div className="flex items-center text-sm text-slate-600">
+                          <CheckCircle className="h-4 w-4 mr-1 text-green-500" />
+                          ROI Focused
+                        </div>
+                      </div>
+                    </CardHeader>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA Section */}
+          <div className="text-center animate-fade-in" style={{ animationDelay: '900ms' }}>
+            <div className="bg-white/90 backdrop-blur-lg rounded-2xl p-8 shadow-xl">
+              <h3 className="text-2xl font-bold mb-4 text-slate-800">
+                Ready to Achieve These Results?
+              </h3>
+              <p className="text-slate-600 mb-6">
+                Let's discuss how we can help you implement these solutions and achieve your ROI goals
+              </p>
+              <button 
+                onClick={() => window.location.href = '/contact'}
+                className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10 flex items-center justify-center">
+                  Schedule Strategy Session
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Header */}
+        <div className="text-center mb-10 animate-fade-in">
+          <h1 className="text-4xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text text-transparent">
+              ROI Calculator
+            </span>
+          </h1>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            Calculate your potential return on investment from AI transformation and digital optimization services
+          </p>
+        </div>
+
+        {/* ROI Form */}
+        <div className="group relative animate-fade-in" style={{ animationDelay: '200ms' }}>
+          <div className="absolute -inset-2 bg-gradient-to-r from-orange-400 to-green-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+          <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl rounded-2xl overflow-hidden">
+            <CardHeader className="p-8">
+              <CardTitle className="text-2xl mb-4 text-center">
+                Business Information
+              </CardTitle>
+              <CardDescription className="text-center mb-6">
+                Provide your business details to get accurate ROI calculations
+              </CardDescription>
+              
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Basic Information */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Company Name *
+                    </label>
+                    <Input
+                      value={formData.company_name}
+                      onChange={(e) => handleInputChange('company_name', e.target.value)}
+                      placeholder="Enter your company name"
+                      className="bg-slate-50 border-slate-200 focus:border-orange-400 focus:ring-orange-400"
+                      required
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Email Address *
+                    </label>
+                    <Input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      placeholder="Enter your email address"
+                      className="bg-slate-50 border-slate-200 focus:border-orange-400 focus:ring-orange-400"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Phone Number (Optional)
+                    </label>
+                    <Input
+                      value={formData.phone}
+                      onChange={(e) => handleInputChange('phone', e.target.value)}
+                      placeholder="Enter your phone number"
+                      className="bg-slate-50 border-slate-200 focus:border-orange-400 focus:ring-orange-400"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Industry *
+                    </label>
+                    <select
+                      value={formData.industry}
+                      onChange={(e) => handleInputChange('industry', e.target.value)}
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:border-orange-400 focus:ring-orange-400 focus:outline-none"
+                      required
+                    >
+                      <option value="">Select your industry</option>
+                      {industries.map((industry) => (
+                        <option key={industry} value={industry}>{industry}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Business Metrics */}
+                <div>
+                  <h3 className="text-lg font-semibold text-slate-800 mb-4">Business Metrics</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-2">
+                        Company Size *
+                      </label>
+                      <select
+                        value={formData.company_size}
+                        onChange={(e) => handleInputChange('company_size', e.target.value)}
+                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:border-orange-400 focus:ring-orange-400 focus:outline-none"
+                        required
+                      >
+                        <option value="">Select company size</option>
+                        {companySizes.map((size) => (
+                          <option key={size} value={size}>{size} employees</option>
+                        ))}
+                      </select>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-2">
+                        Current Project Cost ($) *
+                      </label>
+                      <Input
+                        type="number"
+                        value={formData.current_project_cost}
+                        onChange={(e) => handleInputChange('current_project_cost', e.target.value)}
+                        placeholder="50000"
+                        className="bg-slate-50 border-slate-200 focus:border-orange-400 focus:ring-orange-400"
+                        required
+                        min="1000"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Project Duration (Months) *
+                    </label>
+                    <Input
+                      type="number"
+                      value={formData.project_duration_months}
+                      onChange={(e) => handleInputChange('project_duration_months', e.target.value)}
+                      placeholder="6"
+                      className="bg-slate-50 border-slate-200 focus:border-orange-400 focus:ring-orange-400"
+                      required
+                      min="1"
+                      max="36"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Current Efficiency Rating (1-10)
+                    </label>
+                    <div className="flex items-center space-x-3">
+                      <span className="text-sm text-slate-600">1</span>
+                      <input
+                        type="range"
+                        min="1"
+                        max="10"
+                        value={formData.current_efficiency_rating}
+                        onChange={(e) => handleInputChange('current_efficiency_rating', e.target.value)}
+                        className="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"
+                        style={{
+                          background: `linear-gradient(to right, #f97316 0%, #f97316 ${(formData.current_efficiency_rating - 1) * 11.11}%, #e2e8f0 ${(formData.current_efficiency_rating - 1) * 11.11}%, #e2e8f0 100%)`
+                        }}
+                      />
+                      <span className="text-sm text-slate-600">10</span>
+                      <Badge className="bg-orange-100 text-orange-700 ml-2">
+                        {formData.current_efficiency_rating}
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Desired Services */}
+                <div>
+                  <h3 className="text-lg font-semibold text-slate-800 mb-4">Services of Interest</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {serviceOptions.map((service) => (
+                      <button
+                        key={service}
+                        type="button"
+                        onClick={() => handleServiceToggle(service)}
+                        className={`p-3 rounded-lg border-2 text-left transition-all duration-300 ${
+                          formData.desired_services.includes(service)
+                            ? 'border-orange-500 bg-orange-50 text-orange-700'
+                            : 'border-slate-200 bg-white hover:border-orange-300 hover:bg-orange-25 text-slate-700'
+                        }`}
+                      >
+                        <div className="flex items-center space-x-3">
+                          <div className={`w-4 h-4 rounded border-2 ${
+                            formData.desired_services.includes(service)
+                              ? 'border-orange-500 bg-orange-500'
+                              : 'border-slate-300'
+                          }`}>
+                            {formData.desired_services.includes(service) && (
+                              <CheckCircle className="h-3 w-3 text-white" />
+                            )}
+                          </div>
+                          <span className="text-sm font-medium">{service}</span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Submit Button */}
+                <div className="flex justify-center pt-6">
+                  <button
+                    type="submit"
+                    disabled={isLoading || !formData.company_name || !formData.email || !formData.industry || !formData.company_size || !formData.current_project_cost || !formData.project_duration_months}
+                    className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span className="relative z-10 flex items-center justify-center">
+                      {isLoading ? 'Calculating...' : 'Calculate My ROI'}
+                      {!isLoading && <TrendingUp className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />}
+                    </span>
+                  </button>
+                </div>
+              </form>
+            </CardHeader>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Main App Component with SEO Meta Tags
 function App() {
   return (
