@@ -741,7 +741,10 @@ const Home = () => {
                     Discover your company's AI maturity score and get a personalized roadmap for digital transformation in just 5 minutes.
                   </CardDescription>
                   
-                  <button className="w-full group relative px-6 py-3 bg-gradient-to-r from-green-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-green-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden">
+                  <button 
+                    onClick={handleAIAssessment}
+                    className="w-full group relative px-6 py-3 bg-gradient-to-r from-green-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-green-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden"
+                  >
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <span className="relative z-10 flex items-center justify-center">
                       Start Free Assessment
