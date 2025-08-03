@@ -941,7 +941,7 @@ const Home = () => {
                     )}
                     
                     <p className="text-xs text-slate-600 text-center">
-                      🎁 Free "AI Transformation Checklist" (worth {getRegionalPrice(297)})
+                      🎁 Free "AI Transformation Checklist" (worth {getRegionalPrice(2970)})
                     </p>
                   </form>
                 </CardHeader>
