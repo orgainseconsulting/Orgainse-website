@@ -727,12 +727,12 @@ const Home = () => {
                       <Brain className="h-6 w-6 text-green-600" />
                     </div>
                     <div className="flex-1">
-                      <CardTitle className="text-lg text-white group-hover:text-green-300 transition-colors leading-tight">
+                      <CardTitle className="text-lg text-slate-800 group-hover:text-green-600 transition-colors leading-tight">
                         Free AI Readiness Assessment
                       </CardTitle>
                     </div>
                   </div>
-                  <CardDescription className="text-slate-300 group-hover:text-slate-200 transition-colors leading-relaxed mb-4 text-sm">
+                  <CardDescription className="text-slate-700 group-hover:text-slate-800 transition-colors leading-relaxed mb-4 text-sm">
                     Discover your company's AI maturity score and get a personalized roadmap for digital transformation in just 5 minutes.
                   </CardDescription>
                   
