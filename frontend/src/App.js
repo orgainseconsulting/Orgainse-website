@@ -541,11 +541,11 @@ const Home = () => {
   const [newsletterStatus, setNewsletterStatus] = useState("");
   const [isNewsletterLoading, setIsNewsletterLoading] = useState(false);
 
-  // Base prices for resources (in USD)
+  // Base prices for resources (in USD) - Adjusted for more impressive regional pricing
   const resourceBasePrices = {
-    aiGuide: 197,
-    roiTemplate: 97,
-    checklist: 127
+    aiGuide: 1970,    // Increased from 197 to make regional prices more impressive
+    roiTemplate: 970,  // Increased from 97
+    checklist: 1270    // Increased from 127
   };
 
   // Calculate total value
