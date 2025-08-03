@@ -835,15 +835,15 @@ const Home = () => {
               ].map((resource, index) => (
                 <div key={index} className="group relative">
                   <div className={`absolute -inset-1 bg-gradient-to-r ${resource.gradient} rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-500`}></div>
-                  <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:border-white/40 transition-all duration-300">
+                  <div className="relative bg-white/80 backdrop-blur-lg rounded-2xl p-6 border border-white/40 hover:border-orange-300 transition-all duration-300">
                     <div className="flex items-center justify-between mb-3">
-                      <resource.icon className="h-6 w-6 text-white" />
-                      <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-slate-900 font-bold">
+                      <resource.icon className="h-6 w-6 text-slate-700" />
+                      <Badge className="bg-gradient-to-r from-orange-400 to-yellow-400 text-white font-bold">
                         Worth {resource.value}
                       </Badge>
                     </div>
-                    <h4 className="text-white font-semibold mb-2">{resource.title}</h4>
-                    <p className="text-slate-300 text-sm">{resource.description}</p>
+                    <h4 className="text-slate-800 font-semibold mb-2">{resource.title}</h4>
+                    <p className="text-slate-600 text-sm">{resource.description}</p>
                   </div>
                 </div>
               ))}
