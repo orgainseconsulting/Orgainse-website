@@ -302,6 +302,41 @@ const Footer = () => {
 
 // Home Page Component with Revolutionary Creative Design
 const Home = () => {
+  // Newsletter subscription state
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterStatus, setNewsletterStatus] = useState("");
+  const [isNewsletterLoading, setIsNewsletterLoading] = useState(false);
+
+  // Newsletter subscription handler
+  const handleNewsletterSubmit = async (e) => {
+    e.preventDefault();
+    setIsNewsletterLoading(true);
+    setNewsletterStatus("");
+
+    try {
+      const response = await axios.post(`${API}/newsletter`, {
+        email: newsletterEmail
+      });
+
+      if (response.status === 200) {
+        setNewsletterStatus("success");
+        setNewsletterEmail("");
+        // Show success message for 3 seconds
+        setTimeout(() => setNewsletterStatus(""), 3000);
+      }
+    } catch (error) {
+      if (error.response?.status === 409) {
+        setNewsletterStatus("duplicate");
+      } else {
+        setNewsletterStatus("error");
+      }
+      // Show error message for 3 seconds
+      setTimeout(() => setNewsletterStatus(""), 3000);
+    } finally {
+      setIsNewsletterLoading(false);
+    }
+  };
+
   const stats = [
     { value: "25%", label: "Faster Project Delivery", color: "from-orange-400 to-orange-600" },
     { value: "45%", label: "Cost Reduction in Operations", color: "from-green-400 to-green-600" },
