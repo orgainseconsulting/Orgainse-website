@@ -922,16 +922,16 @@ const About = () => {
               
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                  <CheckCircle className="h-6 w-6 text-green-400" />
-                  <span className="text-slate-300">Founded in 2025 with <span className="text-blue-400 font-semibold">AI-first approach</span> and started branches in Bangalore, India and Austin, USA in 4 months</span>
+                  <CheckCircle className="h-6 w-6 text-green-600" />
+                  <span className="text-slate-700">Founded in 2025 with <span className="text-blue-600 font-semibold">AI-first approach</span> and started branches in Bangalore, India and Austin, USA in 4 months</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <CheckCircle className="h-6 w-6 text-green-400" />
-                  <span className="text-slate-300">Global operations: <span className="text-orange-400 font-semibold">AI project management service</span> across 5 continents (7 countries)</span>
+                  <CheckCircle className="h-6 w-6 text-green-600" />
+                  <span className="text-slate-700">Global operations: <span className="text-orange-600 font-semibold">AI project management service</span> across 5 continents (7 countries)</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <CheckCircle className="h-6 w-6 text-green-400" />
-                  <span className="text-slate-300">AI-powered methodologies with <span className="text-purple-400 font-semibold">GPT implementation roadmap</span> integration</span>
+                  <CheckCircle className="h-6 w-6 text-green-600" />
+                  <span className="text-slate-700">AI-powered methodologies with <span className="text-purple-600 font-semibold">GPT implementation roadmap</span> integration</span>
                 </div>
               </div>
             </div>
