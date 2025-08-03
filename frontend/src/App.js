@@ -659,12 +659,12 @@ const Home = () => {
                       <Mail className="h-6 w-6 text-orange-600" />
                     </div>
                     <div className="flex-1">
-                      <CardTitle className="text-lg text-white group-hover:text-orange-300 transition-colors leading-tight">
+                      <CardTitle className="text-lg text-slate-800 group-hover:text-orange-600 transition-colors leading-tight">
                         AI Strategy Newsletter
                       </CardTitle>
                     </div>
                   </div>
-                  <CardDescription className="text-slate-300 group-hover:text-slate-200 transition-colors leading-relaxed mb-4 text-sm">
+                  <CardDescription className="text-slate-700 group-hover:text-slate-800 transition-colors leading-relaxed mb-4 text-sm">
                     Weekly insights on AI project management, digital transformation trends, and exclusive case studies from successful startups.
                   </CardDescription>
                   
