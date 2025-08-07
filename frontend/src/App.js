@@ -1585,7 +1585,7 @@ const Services = () => {
       description: "Advanced business strategy development using automated market intelligence GPT, competitive analysis AI, and scenario planning tools for faster go-to-market strategies across IT Services, EdTech startups, and FinTech SMEs.",
       features: ["Automated Market Intelligence & Competitor Analysis", "AI-Powered Competitive Strategy & Positioning", "Scenario Planning Tools & Market Forecasting", "Growth Strategy Optimization & ROI Modeling"],
       icon: Globe,
-      image: "https://images.unsplash.com/photo-1650978810653-112cb6018092?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHN0cmF0ZWd5fGVufDB8fHx8MTc1NDI0MDE4Mnww&ixlib=rb-4.1.0&q=85",
+      image: "https://images.unsplash.com/photo-1573164574230-db1d5e960238?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwxfHxjb25zdWx0aW5nfGVufDB8fHxibHVlfDE3NTQ1ODg0NDR8MA&ixlib=rb-4.1.0&q=85",
       keywords: "AI-driven business strategy consulting, GPT competitive analysis, strategy development India SMEs",
       gradient: "from-purple-400 to-pink-500"
     },
