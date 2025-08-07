@@ -772,7 +772,7 @@ const Home = () => {
               <div className="relative group">
                 <div className="absolute -inset-4 bg-gradient-to-r from-orange-400 via-yellow-400 to-green-400 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
                 <img
-                  src="https://images.unsplash.com/photo-1644325349124-d1756b79dd42?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwdHJhbnNmb3JtYXRpb258ZW58MHx8fHwxNzU0MjI3ODg1fDA&ixlib=rb-4.1.0&q=85"
+                  src="https://images.unsplash.com/photo-1655393001768-d946c97d6fd1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwxfHxBSSUyMGFydGlmaWNpYWwlMjBpbnRlbGxpZ2VuY2V8ZW58MHx8fGJsdWV8MTc1NDU4ODI5OHww&ixlib=rb-4.1.0&q=85"
                   alt="AI-native Digital Transformation and Project Management Consulting"
                   className="relative rounded-2xl w-full h-[500px] object-cover transform group-hover:scale-105 transition-all duration-700 shadow-2xl"
                 />
