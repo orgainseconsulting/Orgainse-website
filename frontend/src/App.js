@@ -1549,7 +1549,7 @@ const Services = () => {
       description: "Comprehensive AI project management service with GPT-powered SOW auto-generation, intelligent project planning, and automated risk assessment for startups and SMEs across India, USA, UK, UAE, Australia, New Zealand, and South Africa.",
       features: ["GPT-powered Project Planning & SOW Auto-generation", "Automated Risk Assessment & Scenario Modeling", "AI Resource Allocation & Timeline Optimization", "Intelligent Performance Analytics & Reporting"],
       icon: Target,
-      image: "https://images.unsplash.com/photo-1657727534676-cac1bb160d64?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHxBSSUyMGNvbnN1bHRpbmd8ZW58MHx8fHwxNzU0MjQwMTc1fDA&ixlib=rb-4.1.0&q=85",
+      image: "https://images.pexels.com/photos/16053029/pexels-photo-16053029.jpeg",
       keywords: "AI project management service, PMaaS for startups, GPT-powered project planning",
       gradient: "from-orange-400 to-red-500"
     },
