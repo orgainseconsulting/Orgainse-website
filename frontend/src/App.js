@@ -1567,7 +1567,7 @@ const Services = () => {
       description: "Intelligent operational optimization using AI-driven workflow automation, predictive maintenance agents, and GPT process mining to reduce OPEX by 20% for hospitality, healthcare, and manufacturing SMEs.",
       features: ["AI Workflow Automation & Process Intelligence", "Predictive Maintenance AI Agent & Monitoring", "GPT Process Mining & Bottleneck Detection", "Real-time Performance Analytics & Cost Optimization"],
       icon: TrendingUp,
-      image: "https://images.unsplash.com/photo-1649406458887-2b6561c36a4d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHw0fHxkaWdpdGFsJTIwdHJhbnNmb3JtYXRpb258ZW58MHx8fHwxNzU0MjQwMTkwfDA&ixlib=rb-4.1.0&q=85",
+      image: "https://images.pexels.com/photos/8728559/pexels-photo-8728559.jpeg",
       keywords: "AI operational optimization consulting, reduce OPEX with AI, GPT process mining",
       gradient: "from-green-400 to-emerald-500"
     },
