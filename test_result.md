@@ -393,7 +393,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Production Deployment Complete"
+    - "Clean Backend Verification Complete"
   stuck_tasks: []
   test_all: false
   test_priority: "production_ready"
