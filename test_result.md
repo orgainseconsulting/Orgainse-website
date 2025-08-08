@@ -135,6 +135,7 @@ metadata:
 test_plan:
   current_focus:
     - "Google Calendar OAuth Login Endpoint"
+    - "Google Calendar OAuth Callback Endpoint"
     - "Google Calendar Available Slots Endpoint"
     - "Google Calendar Book Consultation Endpoint"
     - "Google Calendar Bookings Retrieval Endpoint"
