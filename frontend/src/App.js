@@ -860,7 +860,11 @@ const Home = () => {
           {/* Compact Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
-              <Link to="/services" key={index} className="block">
+              <Link 
+                to={`/services#${service.title.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '').replace('--', '-')}`} 
+                key={index} 
+                className="block"
+              >
                 <div 
                   className="group relative animate-fade-in"
                   style={{ animationDelay: `${index * 100}ms` }}
