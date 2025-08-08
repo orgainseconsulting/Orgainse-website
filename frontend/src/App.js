@@ -547,6 +547,9 @@ const Home = () => {
   const [newsletterStatus, setNewsletterStatus] = useState("");
   const [isNewsletterLoading, setIsNewsletterLoading] = useState(false);
 
+  // Google Calendar booking state
+  const [isGoogleCalendarOpen, setIsGoogleCalendarOpen] = useState(false);
+
   // Base prices for resources (in USD)
   const resourceBasePrices = {
     aiGuide: 197,    // Back to original values
