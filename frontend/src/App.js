@@ -583,13 +583,12 @@ const Footer = () => {
 // Home Page Component with Revolutionary Creative Design
 const Home = () => {
   const { getRegionalPrice, regionConfig } = useRegionalPricing();
+  const { openGoogleCalendar } = useGoogleCalendar();
+  
   // Newsletter subscription state
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterStatus, setNewsletterStatus] = useState("");
   const [isNewsletterLoading, setIsNewsletterLoading] = useState(false);
-
-  // Google Calendar booking state
-  const [isGoogleCalendarOpen, setIsGoogleCalendarOpen] = useState(false);
 
   // Base prices for resources (in USD)
   const resourceBasePrices = {
