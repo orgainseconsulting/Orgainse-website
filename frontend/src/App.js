@@ -317,6 +317,7 @@ const API = `${BACKEND_URL}/api`;
 // Navigation Component
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { openGoogleCalendar } = useGoogleCalendar();
   const location = useLocation();
 
   const navLinks = [
