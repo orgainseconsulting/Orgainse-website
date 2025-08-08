@@ -849,15 +849,17 @@ async def get_service_inquiries():
         logging.error(f"Error fetching service inquiries: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
 # Google Calendar Integration Endpoints
-@api_router.get("/calendar/auth/login", response_model=CalendarAuthResponse)
-async def google_calendar_login():
-    """Initiate Google Calendar OAuth flow"""
+
+# Admin-only endpoint to set up organization calendar
+@api_router.get("/calendar/admin/auth/login", response_model=CalendarAuthResponse)
+async def admin_google_calendar_login():
+    """Admin-only: Initiate Google Calendar OAuth flow for organization calendar"""
     try:
         flow = create_flow()
         flow.redirect_uri = GOOGLE_REDIRECT_URI
         
         # Generate secure state parameter
-        state = generate_secure_state()
+        state = generate_secure_state('admin')
         
         authorization_url, _ = flow.authorization_url(
             access_type='offline',
@@ -872,12 +874,14 @@ async def google_calendar_login():
         )
     
     except Exception as e:
-        logging.error(f"Error initiating OAuth flow: {str(e)}")
-        raise HTTPException(status_code=500, detail="Failed to initiate authentication")
+        logging.error(f"Error initiating admin OAuth flow: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to initiate admin authentication")
 
-@api_router.get("/calendar/auth/callback", response_model=CalendarAuthCallback)
-async def google_calendar_callback(code: str, state: str):
-    """Handle OAuth callback from Google"""
+@api_router.get("/calendar/admin/auth/callback", response_model=CalendarAuthCallback)
+async def admin_google_calendar_callback(code: str, state: str):
+    """Admin-only: Handle OAuth callback and set up organization calendar"""
+    global ORG_CALENDAR_CREDENTIALS
+    
     try:
         # Validate state parameter
         if not validate_state(state):
@@ -888,28 +892,24 @@ async def google_calendar_callback(code: str, state: str):
         
         # Exchange authorization code for credentials
         flow.fetch_token(code=code)
-        credentials = flow.credentials
+        ORG_CALENDAR_CREDENTIALS = flow.credentials
         
-        # Generate user ID and store credentials
-        user_id = "user_" + str(len(user_credentials) + 1) + "_" + str(int(datetime.utcnow().timestamp()))
-        user_credentials[user_id] = credentials
-        
-        logging.info(f"User authenticated successfully: {user_id}")
+        logging.info("Organization calendar authenticated successfully")
         
         return CalendarAuthCallback(
-            user_id=user_id,
+            user_id="organization",
             status="authenticated"
         )
     
     except Exception as e:
-        logging.error(f"Error handling OAuth callback: {str(e)}")
-        raise HTTPException(status_code=400, detail=f"Authentication failed: {str(e)}")
+        logging.error(f"Error handling admin OAuth callback: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Admin authentication failed: {str(e)}")
 
 @api_router.get("/calendar/available-slots", response_model=AvailableSlotsResponse)
-async def get_available_slots(user_id: str, date: str = None, duration: int = 30):
-    """Get available time slots for booking consultations"""
+async def get_available_slots(date: str = None, duration: int = 30):
+    """Get available time slots from organization calendar for customer booking"""
     try:
-        service = get_calendar_service(user_id)
+        service = get_org_calendar_service()
         
         # Set date range (default: next 7 days)
         if date:
@@ -919,7 +919,7 @@ async def get_available_slots(user_id: str, date: str = None, duration: int = 30
         
         end_date = start_date + timedelta(days=7)
         
-        # Get existing events from calendar
+        # Get existing events from organization calendar
         events_result = service.events().list(
             calendarId='primary',
             timeMin=start_date.isoformat() + 'Z',
@@ -949,10 +949,10 @@ async def get_available_slots(user_id: str, date: str = None, duration: int = 30
         raise HTTPException(status_code=500, detail="Failed to fetch available slots")
 
 @api_router.post("/calendar/book-consultation", response_model=GoogleCalendarBooking)
-async def book_google_calendar_consultation(booking: GoogleCalendarBookingCreate, user_id: str):
-    """Book consultation using Google Calendar"""
+async def book_google_calendar_consultation(booking: GoogleCalendarBookingCreate):
+    """Book consultation on organization calendar (public endpoint for customers)"""
     try:
-        service = get_calendar_service(user_id)
+        service = get_org_calendar_service()
         
         # Create event object
         event = {
@@ -976,6 +976,7 @@ This is a free 30-minute consultation session.''',
             },
             'attendees': [
                 {'email': booking.email},
+                {'email': ADMIN_EMAIL}  # Add organization email as attendee
             ],
             'reminders': {
                 'useDefault': False,
@@ -992,7 +993,7 @@ This is a free 30-minute consultation session.''',
             }
         }
         
-        # Create the event
+        # Create the event on organization calendar
         created_event = service.events().insert(
             calendarId='primary',
             body=event,
@@ -1082,12 +1083,23 @@ This is a free 30-minute consultation session.''',
     except HttpError as error:
         logging.error(f"Google Calendar API error: {str(error)}")
         if error.resp.status == 403:
-            raise HTTPException(status_code=403, detail="Calendar access forbidden. Please re-authenticate.")
+            raise HTTPException(status_code=403, detail="Calendar access forbidden. Admin must re-authenticate.")
         else:
             raise HTTPException(status_code=400, detail=f"Calendar API error: {str(error)}")
     except Exception as e:
         logging.error(f"Error creating Google Calendar booking: {str(e)}")
         raise HTTPException(status_code=500, detail="Failed to create booking")
+
+# Legacy endpoints for admin management (keep for backwards compatibility)
+@api_router.get("/calendar/auth/login", response_model=CalendarAuthResponse)
+async def google_calendar_login():
+    """Legacy: Redirect to admin login"""
+    return await admin_google_calendar_login()
+
+@api_router.get("/calendar/auth/callback", response_model=CalendarAuthCallback)
+async def google_calendar_callback(code: str, state: str):
+    """Legacy: Handle admin callback"""
+    return await admin_google_calendar_callback(code, state)
 
 @api_router.get("/calendar/bookings", response_model=List[GoogleCalendarBooking])
 async def get_google_calendar_bookings():
