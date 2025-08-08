@@ -2077,7 +2077,7 @@ const Services = () => {
                   {/* Action Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4">
                     <button 
-                      onClick={() => handleServiceInquiry(selectedService.id, selectedService.title)}
+                      onClick={openGoogleCalendar}
                       className={`flex-1 bg-gradient-to-r ${selectedService.gradient} text-white px-8 py-4 rounded-xl font-bold hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
                     >
                       Book Free Consultation
