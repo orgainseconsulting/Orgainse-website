@@ -816,31 +816,39 @@ const Home = () => {
           {/* Compact Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
-              <div 
-                key={index}
-                className="group relative animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <Card className="relative bg-white/80 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 group overflow-hidden rounded-2xl flex flex-col">
-                  <div className={`h-1 bg-gradient-to-r ${service.gradient}`}></div>
-                  
-                  <CardHeader className="p-4 flex-1">
-                    <div className="flex items-start space-x-3 mb-3">
-                      <div className={`p-2 ${service.iconBg} rounded-xl group-hover:scale-105 group-hover:rotate-6 transition-all duration-500 shadow-md`}>
-                        <service.icon className={`h-5 w-5 ${service.iconColor}`} />
+              <Link to="/services" key={index} className="block">
+                <div 
+                  className="group relative animate-fade-in"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <Card className="relative bg-white/80 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 group overflow-hidden rounded-2xl flex flex-col cursor-pointer">
+                    <div className={`h-1 bg-gradient-to-r ${service.gradient}`}></div>
+                    
+                    <CardHeader className="p-4 flex-1">
+                      <div className="flex items-start space-x-3 mb-3">
+                        <div className={`p-2 ${service.iconBg} rounded-xl group-hover:scale-105 group-hover:rotate-6 transition-all duration-500 shadow-md`}>
+                          <service.icon className={`h-5 w-5 ${service.iconColor}`} />
+                        </div>
+                        <div className="flex-1">
+                          <CardTitle className="text-base group-hover:text-orange-600 transition-colors leading-tight">
+                            {service.title}
+                          </CardTitle>
+                        </div>
+                        <ExternalLink className="h-4 w-4 text-slate-400 group-hover:text-orange-500 transition-colors opacity-0 group-hover:opacity-100" />
                       </div>
-                      <div className="flex-1">
-                        <CardTitle className="text-base group-hover:text-orange-600 transition-colors leading-tight">
-                          {service.title}
-                        </CardTitle>
+                      <CardDescription className="text-slate-600 group-hover:text-slate-700 transition-colors leading-relaxed text-sm">
+                        {service.description}
+                      </CardDescription>
+                      
+                      <div className="mt-3 pt-3 border-t border-slate-100">
+                        <span className="text-xs text-orange-600 font-medium group-hover:text-orange-700 transition-colors">
+                          Click to learn more →
+                        </span>
                       </div>
-                    </div>
-                    <CardDescription className="text-slate-600 group-hover:text-slate-700 transition-colors leading-relaxed text-sm">
-                      {service.description}
-                    </CardDescription>
-                  </CardHeader>
-                </Card>
-              </div>
+                    </CardHeader>
+                  </Card>
+                </div>
+              </Link>
             ))}
           </div>
 
