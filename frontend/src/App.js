@@ -1602,6 +1602,7 @@ const About = () => {
 const Services = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const { openGoogleCalendar } = useGoogleCalendar();
 
   const services = [
     {
