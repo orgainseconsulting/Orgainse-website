@@ -1185,12 +1185,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      {/* Google Calendar Booking Modal */}
-      <GoogleCalendarBooking 
-        isOpen={isGoogleCalendarOpen}
-        onClose={() => setIsGoogleCalendarOpen(false)}
-      />
     </div>
   );
 };
