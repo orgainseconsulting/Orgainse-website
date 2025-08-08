@@ -1554,64 +1554,202 @@ const About = () => {
   );
 };
 
-// Revolutionary Services Page with Creative Design and SEO
+// Revolutionary Services Page with Enhanced Popups and SEO
 const Services = () => {
+  const [selectedService, setSelectedService] = useState(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   const services = [
     {
+      id: 'ai-project-management',
       title: "AI Project Management Service (PMaaS)",
       description: "Comprehensive AI project management service with GPT-powered SOW auto-generation, intelligent project planning, and automated risk assessment for startups and SMEs across India, USA, UK, UAE, Australia, New Zealand, and South Africa.",
       features: ["GPT-powered Project Planning & SOW Auto-generation", "Automated Risk Assessment & Scenario Modeling", "AI Resource Allocation & Timeline Optimization", "Intelligent Performance Analytics & Reporting"],
       icon: Target,
       image: "https://images.pexels.com/photos/16053029/pexels-photo-16053029.jpeg",
       keywords: "AI project management service, PMaaS for startups, GPT-powered project planning",
-      gradient: "from-orange-400 to-red-500"
+      gradient: "from-orange-400 to-red-500",
+      detailedInfo: {
+        whatItDoes: "Our AI Project Management Service (PMaaS) revolutionizes how you manage projects by leveraging GPT-powered automation. We create intelligent SOWs, automate risk assessments, optimize resource allocation, and provide real-time analytics that increase project success rates by 45%.",
+        whyChooseUs: "Unlike traditional project management, our AI-native approach reduces planning time by 60%, eliminates scope creep through intelligent boundary detection, and provides predictive insights that prevent 80% of common project failures before they occur.",
+        whatYouGet: "Complete AI-powered project ecosystem including automated project planning, intelligent resource allocation, real-time risk monitoring, GPT-generated documentation, predictive analytics dashboard, and 24/7 AI project assistant.",
+        benefits: ["60% reduction in project planning time", "45% increase in project success rates", "80% reduction in scope creep", "Real-time predictive insights", "Automated documentation generation", "24/7 AI project support"],
+        industries: ["Software Development", "EdTech", "FinTech", "Healthcare", "Startups", "SMEs"],
+        pricing: "Starting from $2,500/month",
+        timeline: "2-week setup, immediate results"
+      }
     },
     {
+      id: 'digital-transformation',
       title: "AI-Native Digital Transformation",
       description: "Complete digital transformation consulting with AI maturity assessment, multi-agent orchestration platforms, and GPT implementation roadmap tailored for EdTech, FinTech, Healthcare, and Software Development industries.",
       features: ["AI Maturity Assessment & Digital Readiness Audit", "Multi-agent Orchestration Platform Setup", "GPT Implementation Roadmap & Integration", "Cloud-First Architecture with AI-Powered Analytics"],
       icon: Zap,
       image: "https://images.unsplash.com/photo-1530825894095-9c184b068fcb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHw0fHxkaWdpdGFsJTIwdHJhbnNmb3JtYXRpb258ZW58MHx8fGJsdWV8MTc1NDU4ODMwN3ww&ixlib=rb-4.1.0&q=85",
       keywords: "AI-native digital transformation, GPT implementation roadmap, digital transformation UAE SMEs",
-      gradient: "from-yellow-400 to-orange-500"
+      gradient: "from-yellow-400 to-orange-500",
+      detailedInfo: {
+        whatItDoes: "Transform your entire business operations with our AI-native digital transformation service. We conduct comprehensive AI maturity assessments, design multi-agent orchestration platforms, and create custom GPT implementation roadmaps that digitize and optimize every aspect of your business.",
+        whyChooseUs: "Our transformations are 70% faster than traditional approaches because we use AI to design, implement, and optimize simultaneously. We don't just digitize - we intelligentize your operations with AI agents that continuously improve your processes.",
+        whatYouGet: "Complete digital ecosystem transformation including AI maturity assessment, custom multi-agent platform, GPT integration roadmap, cloud-first architecture, AI-powered analytics suite, and ongoing optimization support.",
+        benefits: ["70% faster transformation timeline", "50% reduction in operational costs", "300% improvement in process efficiency", "AI-powered continuous optimization", "Future-ready scalable architecture", "Real-time business intelligence"],
+        industries: ["EdTech", "FinTech", "Healthcare", "Manufacturing", "Retail", "Professional Services"],
+        pricing: "Starting from $15,000 (3-6 month engagement)",
+        timeline: "1-week assessment, 12-week transformation"
+      }
     },
     {
+      id: 'operational-optimization',
       title: "AI Operational Optimization", 
       description: "Intelligent operational optimization using AI-driven workflow automation, predictive maintenance agents, and GPT process mining to reduce OPEX by 20% for hospitality, healthcare, and manufacturing SMEs.",
       features: ["AI Workflow Automation & Process Intelligence", "Predictive Maintenance AI Agent & Monitoring", "GPT Process Mining & Bottleneck Detection", "Real-time Performance Analytics & Cost Optimization"],
       icon: TrendingUp,
       image: "https://images.pexels.com/photos/8728559/pexels-photo-8728559.jpeg",
       keywords: "AI operational optimization consulting, reduce OPEX with AI, GPT process mining",
-      gradient: "from-green-400 to-emerald-500"
+      gradient: "from-green-400 to-emerald-500",
+      detailedInfo: {
+        whatItDoes: "Optimize your operations with AI agents that continuously monitor, analyze, and improve your business processes. Our system uses GPT-powered process mining to identify bottlenecks, implements predictive maintenance, and automates workflows to reduce operational expenses by up to 35%.",
+        whyChooseUs: "Our AI optimization is proactive, not reactive. While others optimize after problems occur, our AI agents predict and prevent operational issues, resulting in 90% fewer disruptions and continuous cost savings that compound over time.",
+        whatYouGet: "Comprehensive operational intelligence platform with AI workflow automation, predictive maintenance system, GPT process mining tools, real-time analytics dashboard, automated cost optimization, and performance monitoring suite.",
+        benefits: ["35% reduction in operational costs", "90% fewer operational disruptions", "Automated process optimization", "Predictive maintenance alerts", "Real-time performance insights", "Continuous improvement automation"],
+        industries: ["Hospitality", "Healthcare", "Manufacturing", "Logistics", "Retail", "Professional Services"],
+        pricing: "Starting from $8,000/month",
+        timeline: "3-week implementation, immediate optimization"
+      }
     },
     {
+      id: 'agile-coaching',
       title: "AI Agile & Scrum Coaching",
       description: "Revolutionary agile coaching with GPT-powered Scrum assistance, automated sprint retrospectives, and AI backlog prioritization for enhanced team velocity across UK startups, Australia agile teams, and India software companies.",
       features: ["GPT-Powered Scrum Coaching & Team Mentoring", "Automated Sprint Retrospectives & Analysis", "AI Backlog Prioritization & Story Estimation", "Data-driven Team Performance Analytics"],
       icon: Users,
       image: "https://images.unsplash.com/photo-1585846328761-acbf5a12beea?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwyfHxjb25zdWx0aW5nfGVufDB8fHxibHVlfDE3NTQ1ODg0NDR8MA&ixlib=rb-4.1.0&q=85",
       keywords: "AI agile coaching service, GPT-powered Scrum coach, data-driven agile transformation",
-      gradient: "from-blue-400 to-indigo-500"
+      gradient: "from-blue-400 to-indigo-500",
+      detailedInfo: {
+        whatItDoes: "Supercharge your agile teams with AI-powered Scrum coaching that provides real-time guidance, automated retrospectives, intelligent backlog prioritization, and predictive sprint planning. Our GPT coach works alongside your teams to optimize velocity and delivery quality.",
+        whyChooseUs: "Traditional agile coaching is limited by human availability and subjective insights. Our AI coach provides 24/7 support, data-driven recommendations, and objective performance analysis that improves team velocity by 65% while reducing burnout.",
+        whatYouGet: "Complete agile acceleration platform including GPT-powered Scrum coach, automated retrospective analysis, AI backlog prioritization engine, sprint planning optimization, team performance analytics, and continuous improvement recommendations.",
+        benefits: ["65% improvement in team velocity", "50% reduction in sprint planning time", "24/7 AI coaching availability", "Data-driven performance insights", "Automated administrative tasks", "Predictive delivery forecasting"],
+        industries: ["Software Development", "Technology Startups", "Digital Agencies", "Product Teams", "IT Services", "Innovation Labs"],
+        pricing: "Starting from $3,500/month per team",
+        timeline: "1-week onboarding, immediate velocity improvements"
+      }
     },
     {
+      id: 'business-strategy',
       title: "AI-Driven Business Strategy Development",
       description: "Advanced business strategy development using automated market intelligence GPT, competitive analysis AI, and scenario planning tools for faster go-to-market strategies across IT Services, EdTech startups, and FinTech SMEs.",
       features: ["Automated Market Intelligence & Competitor Analysis", "AI-Powered Competitive Strategy & Positioning", "Scenario Planning Tools & Market Forecasting", "Growth Strategy Optimization & ROI Modeling"],
       icon: Globe,
       image: "https://images.unsplash.com/photo-1573164574230-db1d5e960238?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwxfHxjb25zdWx0aW5nfGVufDB8fHxibHVlfDE3NTQ1ODg0NDR8MA&ixlib=rb-4.1.0&q=85",
       keywords: "AI-driven business strategy consulting, GPT competitive analysis, strategy development India SMEs",
-      gradient: "from-purple-400 to-pink-500"
+      gradient: "from-purple-400 to-pink-500",
+      detailedInfo: {
+        whatItDoes: "Develop winning business strategies using AI-powered market intelligence, competitive analysis, and scenario planning. Our GPT-driven approach analyzes thousands of data points to create strategies that are 85% more likely to succeed than traditional consulting approaches.",
+        whyChooseUs: "While traditional strategy consulting takes months and relies on historical data, our AI-driven approach delivers real-time insights and predictive strategies in weeks. We analyze 1000x more data points to identify opportunities others miss.",
+        whatYouGet: "Comprehensive strategy development suite including automated market intelligence system, AI competitive analysis platform, scenario planning tools, growth optimization roadmap, ROI modeling dashboard, and strategic implementation support.",
+        benefits: ["85% higher strategy success rate", "75% faster strategy development", "Real-time market intelligence", "Predictive opportunity identification", "Data-driven decision making", "Continuous strategy optimization"],
+        industries: ["IT Services", "EdTech", "FinTech", "SaaS", "E-commerce", "Professional Services"],
+        pricing: "Starting from $12,000 (6-8 week engagement)",
+        timeline: "2-week analysis, 6-week strategy development"
+      }
     },
     {
+      id: 'risk-management',
       title: "AI Risk Management & Compliance",
       description: "Comprehensive AI risk management with GPT-based risk co-pilots, automated scenario modeling, and real-time compliance monitoring for fintech SMEs, healthcare organizations, and UAE regulatory compliance requirements.",
       features: ["GPT-Based Risk Assessment & Co-pilot Support", "Automated Scenario Modeling & Stress Testing", "Real-time Compliance Monitoring & Reporting", "Predictive Risk Analytics & Mitigation Planning"],
       icon: Shield,
       image: "https://images.unsplash.com/photo-1497409988347-cbfaac2f0b12?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxhZ2lsZSUyMHNjcnVtfGVufDB8fHxibHVlfDE3NTQ1ODg0Mzl8MA&ixlib=rb-4.1.0&q=85",
       keywords: "AI risk management consulting, GPT-based risk co-pilot, predictive risk analytics SMEs",
-      gradient: "from-slate-400 to-slate-600"
+      gradient: "from-slate-400 to-slate-600",
+      detailedInfo: {
+        whatItDoes: "Protect your business with AI-powered risk management that predicts, prevents, and mitigates risks before they impact your operations. Our GPT-based risk co-pilot continuously monitors your business environment and provides real-time risk assessment and compliance monitoring.",
+        whyChooseUs: "Traditional risk management is reactive and manual. Our AI approach is predictive and automated, identifying 95% of potential risks before they materialize and ensuring continuous compliance with changing regulations across multiple jurisdictions.",
+        whatYouGet: "Complete risk intelligence platform including GPT-based risk co-pilot, automated scenario modeling system, real-time compliance monitoring dashboard, predictive risk analytics, automated reporting suite, and mitigation planning tools.",
+        benefits: ["95% early risk detection rate", "80% reduction in compliance violations", "Real-time regulatory updates", "Automated risk reporting", "Predictive risk modeling", "24/7 compliance monitoring"],
+        industries: ["FinTech", "Healthcare", "Insurance", "Banking", "Regulated Industries", "Government"],
+        pricing: "Starting from $6,500/month",
+        timeline: "2-week setup, immediate risk monitoring"
+      }
     },
   ];
+
+  const openServicePopup = (service) => {
+    setSelectedService(service);
+    setIsPopupOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeServicePopup = () => {
+    setIsPopupOpen(false);
+    setSelectedService(null);
+    document.body.style.overflow = 'unset';
+  };
+
+  // Service-specific inquiry tracking
+  const handleServiceInquiry = async (serviceId, serviceName) => {
+    try {
+      const inquiryData = {
+        service_id: serviceId,
+        service_name: serviceName,
+        inquiry_type: 'service_interest',
+        timestamp: new Date().toISOString(),
+        source: 'services_page_popup'
+      };
+
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/service-inquiry`, inquiryData);
+      
+      // Redirect to consultation booking with pre-filled service
+      window.location.href = `/smart-calendar?service=${encodeURIComponent(serviceName)}`;
+    } catch (error) {
+      console.error('Error tracking service inquiry:', error);
+      // Still redirect even if tracking fails
+      window.location.href = `/smart-calendar?service=${encodeURIComponent(serviceName)}`;
+    }
+  };
+
+  const faqData = [
+    {
+      question: "What is AI-native consulting and how is it different from traditional consulting?",
+      answer: "AI-native consulting integrates artificial intelligence into every aspect of our consulting process, from analysis to implementation. Unlike traditional consulting that relies solely on human expertise, we use GPT-powered tools, automated analysis, and AI-driven insights to deliver faster, more accurate, and continuously optimized solutions. This approach reduces project timelines by 60-70% while improving outcomes."
+    },
+    {
+      question: "How quickly can I see results from AI project management services?",
+      answer: "Most clients see immediate improvements within 2 weeks of implementation. Our AI Project Management Service (PMaaS) provides instant benefits like automated project planning, real-time risk assessment, and intelligent resource allocation. Full optimization typically occurs within 4-6 weeks, with 45% improvement in project success rates and 60% reduction in planning time."
+    },
+    {
+      question: "What industries do you serve and what's your success rate?",
+      answer: "We serve IT Services, EdTech, FinTech, Healthcare, Hospitality, and Manufacturing across 7 global regions (India, USA, UK, UAE, Australia, New Zealand, South Africa). Our AI-driven approach achieves 85% higher success rates than traditional consulting, with 95% client satisfaction and measurable ROI within 90 days."
+    },
+    {
+      question: "How much do AI consulting services cost and what's the ROI?",
+      answer: "Our services start from $2,500/month for AI Project Management to $15,000 for comprehensive Digital Transformation. Most clients achieve 3-5x ROI within 6 months through operational cost reductions (20-35%), improved efficiency (45-70%), and accelerated growth. We offer regional PPP-adjusted pricing to ensure accessibility across all markets."
+    },
+    {
+      question: "Do you provide ongoing support and what does it include?",
+      answer: "Yes, all our services include ongoing AI-powered support. This includes 24/7 AI assistant access, continuous system optimization, regular performance analytics, quarterly strategy reviews, and immediate issue resolution. Our AI systems continuously learn and improve your operations even after initial implementation."
+    },
+    {
+      question: "How do you ensure data security and compliance in AI implementations?",
+      answer: "We maintain enterprise-grade security with end-to-end encryption, compliance with GDPR, SOC 2, and regional data protection laws. Our AI Risk Management service provides real-time compliance monitoring, automated reporting, and predictive risk assessment with 95% early detection rate for potential security issues."
+    },
+    {
+      question: "Can your AI solutions integrate with existing business systems?",
+      answer: "Absolutely. Our AI solutions are designed for seamless integration with existing CRM, ERP, project management, and communication systems. We support 200+ popular business tools and can create custom integrations. Most integrations are completed within 1-2 weeks with zero downtime."
+    },
+    {
+      question: "What makes Orgainse different from other AI consulting firms?",
+      answer: "We're the only truly AI-native consulting firm that uses GPT-powered automation in every service delivery aspect. While others offer AI consulting, we ARE AI consulting - using autonomous agents, predictive analytics, and continuous optimization. This results in 60-70% faster delivery, 85% higher success rates, and ongoing value creation."
+    }
+  ];
+
+  const [openFaq, setOpenFaq] = useState(null);
+
+  const toggleFaq = (index) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
 
   return (
     <div className="min-h-screen">
