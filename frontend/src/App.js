@@ -3465,6 +3465,7 @@ const SmartCalendar = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [bookingResult, setBookingResult] = useState(null);
+  const { openGoogleCalendar } = useGoogleCalendar();
 
   // Service types
   const serviceTypes = [
