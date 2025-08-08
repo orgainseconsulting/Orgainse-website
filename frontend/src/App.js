@@ -380,7 +380,10 @@ const Navigation = () => {
               ))}
             </div>
             
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white transform hover:scale-105 transition-all duration-300">
+            <Button 
+              onClick={openGoogleCalendar}
+              className="bg-orange-500 hover:bg-orange-600 text-white transform hover:scale-105 transition-all duration-300"
+            >
               Book Free Consultation
             </Button>
           </div>
