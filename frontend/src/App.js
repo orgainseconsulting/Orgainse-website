@@ -2529,6 +2529,7 @@ const AIAssessmentTool = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { openGoogleCalendar } = useGoogleCalendar();
 
   // Assessment questions with scoring
   const questions = [
