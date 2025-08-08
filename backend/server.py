@@ -36,6 +36,19 @@ EMAIL_USER = os.environ.get('EMAIL_USER', '')
 EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD', '')
 ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL', 'info@orgainse.com')
 
+# Google Calendar API configuration
+GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
+GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
+GOOGLE_REDIRECT_URI = os.environ.get('GOOGLE_REDIRECT_URI')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
+
+# OAuth 2.0 scopes for Google Calendar
+SCOPES = ['https://www.googleapis.com/auth/calendar.events']
+
+# In-memory storage for user credentials (use database in production)
+user_credentials = {}
+csrf_states = {}
+
 # Create the main app without a prefix
 app = FastAPI(
     title="Orgainse Consulting API",
