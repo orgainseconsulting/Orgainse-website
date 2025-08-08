@@ -1065,7 +1065,7 @@ const Home = () => {
                   </CardDescription>
                   
                   <button 
-                    onClick={() => window.location.href = '/smart-calendar'}
+                    onClick={() => setIsGoogleCalendarOpen(true)}
                     className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
