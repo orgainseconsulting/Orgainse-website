@@ -556,7 +556,53 @@ async def book_consultation_slot(input: CalendarBookingCreate):
         logging.error(f"Error creating calendar booking: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
-# Analytics endpoints
+# Service Inquiry Tracking Endpoint
+@api_router.post("/service-inquiry", response_model=ServiceInquiry)
+async def track_service_inquiry(input: ServiceInquiryCreate):
+    """Track service-specific inquiries for CRM analytics"""
+    try:
+        inquiry_dict = input.dict()
+        inquiry_obj = ServiceInquiry(**inquiry_dict)
+        
+        # Save to MongoDB
+        result = await db.service_inquiries.insert_one(inquiry_obj.dict())
+        
+        if result.inserted_id:
+            logging.info(f"Service inquiry tracked: {inquiry_obj.id} for service {inquiry_obj.service_name}")
+            
+            # Send email notification to admin with service-specific details
+            email_subject = f"Service Interest: {inquiry_obj.service_name}"
+            email_body = f"""
+            <h2>New Service Interest Tracked</h2>
+            <p><strong>Service:</strong> {inquiry_obj.service_name}</p>
+            <p><strong>Service ID:</strong> {inquiry_obj.service_id}</p>
+            <p><strong>Inquiry Type:</strong> {inquiry_obj.inquiry_type}</p>
+            <p><strong>Source:</strong> {inquiry_obj.source}</p>
+            <p><strong>Timestamp:</strong> {inquiry_obj.timestamp}</p>
+            <p><strong>Additional Data:</strong> {inquiry_obj.user_data or 'None'}</p>
+            <hr>
+            <p><em>This indicates strong interest in this specific service. Consider prioritizing follow-up.</em></p>
+            """
+            
+            await send_email_notification(email_subject, email_body)
+            
+            return inquiry_obj
+        else:
+            raise HTTPException(status_code=500, detail="Failed to track service inquiry")
+    
+    except Exception as e:
+        logging.error(f"Error tracking service inquiry: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@api_router.get("/service-inquiries", response_model=List[ServiceInquiry])
+async def get_service_inquiries():
+    """Get all service inquiries for analytics"""
+    try:
+        inquiries = await db.service_inquiries.find().sort("timestamp", -1).to_list(100)
+        return [ServiceInquiry(**inquiry) for inquiry in inquiries]
+    except Exception as e:
+        logging.error(f"Error fetching service inquiries: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
 @api_router.get("/analytics/overview")
 async def get_analytics_overview():
     try:
