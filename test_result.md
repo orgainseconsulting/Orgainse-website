@@ -15,6 +15,18 @@ backend:
         agent: "testing"
         comment: "GET /api/calendar/auth/login endpoint working correctly. Returns proper authorization URL and secure state parameter for Google OAuth flow. Auth URL contains correct Google OAuth endpoints and client_id."
 
+  - task: "Google Calendar OAuth Callback Endpoint"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "GET /api/calendar/auth/callback endpoint working correctly. Properly validates required parameters (code, state) and returns 422 for missing parameters, 400 for invalid/expired state. CSRF protection working as expected."
+
   - task: "Google Calendar Available Slots Endpoint"
     implemented: true
     working: true
