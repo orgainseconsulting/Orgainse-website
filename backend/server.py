@@ -309,8 +309,28 @@ def validate_state(state: str) -> bool:
     state_info['used'] = True
     return True
 
+# Global organization calendar credentials
+ORG_CALENDAR_CREDENTIALS = None
+
+def get_org_calendar_service():
+    """Get Google Calendar service using organization credentials"""
+    global ORG_CALENDAR_CREDENTIALS
+    
+    if not ORG_CALENDAR_CREDENTIALS:
+        raise HTTPException(status_code=503, detail="Organization calendar not configured. Admin must authenticate first.")
+    
+    # Refresh credentials if expired
+    if ORG_CALENDAR_CREDENTIALS.expired and ORG_CALENDAR_CREDENTIALS.refresh_token:
+        try:
+            ORG_CALENDAR_CREDENTIALS.refresh(Request())
+        except Exception as e:
+            logging.error(f"Failed to refresh organization credentials: {str(e)}")
+            raise HTTPException(status_code=503, detail="Organization calendar authentication expired. Admin must re-authenticate.")
+    
+    return build('calendar', 'v3', credentials=ORG_CALENDAR_CREDENTIALS)
+
 def get_calendar_service(user_id: str):
-    """Get Google Calendar service for user"""
+    """Get Google Calendar service for user (legacy function for admin auth only)"""
     if user_id not in user_credentials:
         raise HTTPException(status_code=401, detail="User not authenticated")
     
