@@ -828,6 +828,258 @@ async def get_service_inquiries():
     except Exception as e:
         logging.error(f"Error fetching service inquiries: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
+# Google Calendar Integration Endpoints
+@api_router.get("/calendar/auth/login", response_model=CalendarAuthResponse)
+async def google_calendar_login():
+    """Initiate Google Calendar OAuth flow"""
+    try:
+        flow = create_flow()
+        flow.redirect_uri = GOOGLE_REDIRECT_URI
+        
+        # Generate secure state parameter
+        state = generate_secure_state()
+        
+        authorization_url, _ = flow.authorization_url(
+            access_type='offline',
+            include_granted_scopes='true',
+            prompt='consent',
+            state=state
+        )
+        
+        return CalendarAuthResponse(
+            authorization_url=authorization_url,
+            state=state
+        )
+    
+    except Exception as e:
+        logging.error(f"Error initiating OAuth flow: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to initiate authentication")
+
+@api_router.get("/calendar/auth/callback", response_model=CalendarAuthCallback)
+async def google_calendar_callback(code: str, state: str):
+    """Handle OAuth callback from Google"""
+    try:
+        # Validate state parameter
+        if not validate_state(state):
+            raise HTTPException(status_code=400, detail="Invalid or expired authentication state")
+        
+        flow = create_flow()
+        flow.redirect_uri = GOOGLE_REDIRECT_URI
+        
+        # Exchange authorization code for credentials
+        flow.fetch_token(code=code)
+        credentials = flow.credentials
+        
+        # Generate user ID and store credentials
+        user_id = "user_" + str(len(user_credentials) + 1) + "_" + str(int(datetime.utcnow().timestamp()))
+        user_credentials[user_id] = credentials
+        
+        logging.info(f"User authenticated successfully: {user_id}")
+        
+        return CalendarAuthCallback(
+            user_id=user_id,
+            status="authenticated"
+        )
+    
+    except Exception as e:
+        logging.error(f"Error handling OAuth callback: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Authentication failed: {str(e)}")
+
+@api_router.get("/calendar/available-slots", response_model=AvailableSlotsResponse)
+async def get_available_slots(user_id: str, date: str = None, duration: int = 30):
+    """Get available time slots for booking consultations"""
+    try:
+        service = get_calendar_service(user_id)
+        
+        # Set date range (default: next 7 days)
+        if date:
+            start_date = datetime.fromisoformat(date + 'T00:00:00')
+        else:
+            start_date = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+        
+        end_date = start_date + timedelta(days=7)
+        
+        # Get existing events from calendar
+        events_result = service.events().list(
+            calendarId='primary',
+            timeMin=start_date.isoformat() + 'Z',
+            timeMax=end_date.isoformat() + 'Z',
+            singleEvents=True,
+            orderBy='startTime'
+        ).execute()
+        
+        existing_events = events_result.get('items', [])
+        
+        # Generate potential slots based on business hours
+        potential_slots = generate_available_slots(start_date, end_date, duration)
+        
+        # Filter out conflicts with existing events
+        available_slots = filter_available_slots(potential_slots, existing_events)
+        
+        return AvailableSlotsResponse(
+            slots=available_slots[:20],  # Limit to 20 slots for performance
+            timezone="UTC",
+            date_range=f"{start_date.date()} to {end_date.date()}"
+        )
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logging.error(f"Error fetching available slots: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to fetch available slots")
+
+@api_router.post("/calendar/book-consultation", response_model=GoogleCalendarBooking)
+async def book_google_calendar_consultation(booking: GoogleCalendarBookingCreate, user_id: str):
+    """Book consultation using Google Calendar"""
+    try:
+        service = get_calendar_service(user_id)
+        
+        # Create event object
+        event = {
+            'summary': f'Free Consultation - {booking.name}',
+            'description': f'''Consultation Details:
+- Name: {booking.name}
+- Email: {booking.email}
+- Phone: {booking.phone or 'Not provided'}
+- Company: {booking.company or 'Not provided'}
+- Service Type: {booking.service_type}
+- Message: {booking.message or 'No additional message'}
+
+This is a free 30-minute consultation session.''',
+            'start': {
+                'dateTime': booking.start_datetime,
+                'timeZone': booking.timezone,
+            },
+            'end': {
+                'dateTime': booking.end_datetime,
+                'timeZone': booking.timezone,
+            },
+            'attendees': [
+                {'email': booking.email},
+            ],
+            'reminders': {
+                'useDefault': False,
+                'overrides': [
+                    {'method': 'email', 'minutes': 24 * 60},
+                    {'method': 'popup', 'minutes': 15},
+                ],
+            },
+            'conferenceData': {
+                'createRequest': {
+                    'requestId': f"consultation-{booking.email}-{int(datetime.utcnow().timestamp())}",
+                    'conferenceSolutionKey': {'type': 'hangoutsMeet'}
+                }
+            }
+        }
+        
+        # Create the event
+        created_event = service.events().insert(
+            calendarId='primary',
+            body=event,
+            conferenceDataVersion=1
+        ).execute()
+        
+        # Extract meeting link
+        meet_link = None
+        if 'conferenceData' in created_event and 'entryPoints' in created_event['conferenceData']:
+            for entry_point in created_event['conferenceData']['entryPoints']:
+                if entry_point.get('entryPointType') == 'video':
+                    meet_link = entry_point.get('uri')
+                    break
+        
+        # Create booking object
+        booking_obj = GoogleCalendarBooking(
+            event_id=created_event['id'],
+            html_link=created_event['htmlLink'],
+            meet_link=meet_link,
+            name=booking.name,
+            email=booking.email,
+            phone=booking.phone,
+            company=booking.company,
+            service_type=booking.service_type,
+            start_datetime=booking.start_datetime,
+            end_datetime=booking.end_datetime,
+            timezone=booking.timezone,
+            message=booking.message
+        )
+        
+        # Save to MongoDB
+        result = await db.google_calendar_bookings.insert_one(booking_obj.dict())
+        
+        if result.inserted_id:
+            logging.info(f"Google Calendar booking saved: {booking_obj.id}")
+            
+            # Send confirmation email to client
+            start_dt = datetime.fromisoformat(booking.start_datetime.replace('Z', '+00:00'))
+            client_subject = "Consultation Confirmed - Orgainse Consulting"
+            client_body = f"""
+            <h2>Your Consultation is Confirmed!</h2>
+            <p>Dear {booking.name},</p>
+            <p>Thank you for booking a consultation with Orgainse Consulting. Your meeting has been scheduled and added to your calendar.</p>
+            
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <h3 style="color: #1f2937; margin-top: 0;">Meeting Details:</h3>
+                <p><strong>Service:</strong> {booking.service_type}</p>
+                <p><strong>Date & Time:</strong> {start_dt.strftime('%B %d, %Y at %I:%M %p')} ({booking.timezone})</p>
+                <p><strong>Duration:</strong> 30 minutes</p>
+                <p><strong>Meeting Type:</strong> Virtual via Google Meet</p>
+                {f'<p><strong>Join Meeting:</strong> <a href="{meet_link}" style="color: #059669;">{meet_link}</a></p>' if meet_link else ''}
+                <p><strong>Calendar Link:</strong> <a href="{created_event['htmlLink']}" style="color: #059669;">View in Google Calendar</a></p>
+            </div>
+            
+            <p>You'll receive calendar reminders 24 hours and 15 minutes before the meeting.</p>
+            <p>We look forward to discussing your AI transformation journey!</p>
+            
+            <p>Best regards,<br/>
+            <strong>The Orgainse Consulting Team</strong><br/>
+            AI-Native Business Transformation Experts</p>
+            """
+            
+            await send_email_notification(client_subject, client_body, booking.email)
+            
+            # Notify admin
+            admin_subject = f"New Consultation Booked - {booking.service_type}"
+            admin_body = f"""
+            <h2>New Google Calendar Consultation Booked</h2>
+            <p><strong>Client:</strong> {booking.name}</p>
+            <p><strong>Email:</strong> {booking.email}</p>
+            <p><strong>Phone:</strong> {booking.phone or 'Not provided'}</p>
+            <p><strong>Company:</strong> {booking.company or 'Not provided'}</p>
+            <p><strong>Service Type:</strong> {booking.service_type}</p>
+            <p><strong>Date & Time:</strong> {start_dt.strftime('%B %d, %Y at %I:%M %p')} ({booking.timezone})</p>
+            <p><strong>Message:</strong> {booking.message or 'No additional message'}</p>
+            <p><strong>Calendar Link:</strong> <a href="{created_event['htmlLink']}">View in Google Calendar</a></p>
+            {f'<p><strong>Meet Link:</strong> <a href="{meet_link}">Join Meeting</a></p>' if meet_link else ''}
+            <p><strong>Event ID:</strong> {created_event['id']}</p>
+            """
+            
+            await send_email_notification(admin_subject, admin_body)
+            
+        return booking_obj
+    
+    except HTTPException:
+        raise
+    except HttpError as error:
+        logging.error(f"Google Calendar API error: {str(error)}")
+        if error.resp.status == 403:
+            raise HTTPException(status_code=403, detail="Calendar access forbidden. Please re-authenticate.")
+        else:
+            raise HTTPException(status_code=400, detail=f"Calendar API error: {str(error)}")
+    except Exception as e:
+        logging.error(f"Error creating Google Calendar booking: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to create booking")
+
+@api_router.get("/calendar/bookings", response_model=List[GoogleCalendarBooking])
+async def get_google_calendar_bookings():
+    """Get all Google Calendar bookings"""
+    try:
+        bookings = await db.google_calendar_bookings.find().sort("timestamp", -1).to_list(100)
+        return [GoogleCalendarBooking(**booking) for booking in bookings]
+    except Exception as e:
+        logging.error(f"Error fetching Google Calendar bookings: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+
 # Analytics endpoints
 @api_router.get("/analytics/overview")
 async def get_analytics_overview():
