@@ -20,7 +20,7 @@ class OdooLiveIntegrationTester:
     """Test live Odoo SaaS 18.3 integration"""
     
     def __init__(self):
-        self.base_url = "https://90b13770-ead2-4e15-acab-2d51fff9a1f3.preview.emergentagent.com"
+        self.base_url = "https://7c69cdcc-af61-4b21-b080-a4ba16bce50b.preview.emergentagent.com"
         self.api_url = f"{self.base_url}/api"
         
         # Odoo credentials from environment
