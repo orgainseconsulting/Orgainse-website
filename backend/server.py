@@ -603,6 +603,7 @@ async def get_service_inquiries():
     except Exception as e:
         logging.error(f"Error fetching service inquiries: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
+# Analytics endpoints
 @api_router.get("/analytics/overview")
 async def get_analytics_overview():
     try:
@@ -613,11 +614,18 @@ async def get_analytics_overview():
         ai_assessment_count = await db.ai_assessments.count_documents({})
         roi_calculation_count = await db.roi_calculations.count_documents({})
         calendar_booking_count = await db.calendar_bookings.count_documents({})
+        service_inquiry_count = await db.service_inquiries.count_documents({})
         
         # Get recent activity
         recent_contacts = await db.contact_messages.count_documents({
             "timestamp": {"$gte": datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)}
         })
+        
+        # Service-specific analytics
+        service_interest_stats = await db.service_inquiries.aggregate([
+            {"$group": {"_id": "$service_name", "count": {"$sum": 1}}},
+            {"$sort": {"count": -1}}
+        ]).to_list(10)
         
         return {
             "total_contacts": contact_count,
@@ -626,7 +634,9 @@ async def get_analytics_overview():
             "total_ai_assessments": ai_assessment_count,
             "total_roi_calculations": roi_calculation_count,
             "total_calendar_bookings": calendar_booking_count,
+            "total_service_inquiries": service_inquiry_count,
             "today_contacts": recent_contacts,
+            "service_interest_breakdown": service_interest_stats,
             "timestamp": datetime.utcnow()
         }
     
