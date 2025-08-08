@@ -203,6 +203,53 @@ class CalendarBooking(BaseModel):
     status: str = "scheduled"
     timestamp: datetime = Field(default_factory=datetime.utcnow)
 
+# Google Calendar Integration Models
+class GoogleCalendarBookingCreate(BaseModel):
+    name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    company: Optional[str] = None
+    service_type: str
+    start_datetime: str
+    end_datetime: str
+    timezone: str = "UTC"
+    message: Optional[str] = None
+
+class GoogleCalendarBooking(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    event_id: str
+    html_link: str
+    meet_link: Optional[str] = None
+    name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    company: Optional[str] = None
+    service_type: str
+    start_datetime: str
+    end_datetime: str
+    timezone: str
+    message: Optional[str] = None
+    status: str = "confirmed"
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+
+class CalendarAuthResponse(BaseModel):
+    authorization_url: str
+    state: str
+
+class CalendarAuthCallback(BaseModel):
+    user_id: str
+    status: str
+
+class AvailableSlot(BaseModel):
+    start_datetime: str
+    end_datetime: str
+    available: bool
+
+class AvailableSlotsResponse(BaseModel):
+    slots: List[AvailableSlot]
+    timezone: str
+    date_range: str
+
 
 # Email notification helper
 async def send_email_notification(subject: str, body: str, to_email: str = None):
