@@ -1889,6 +1889,7 @@ const Services = () => {
             {services.map((service, index) => (
               <div 
                 key={index} 
+                id={service.title.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '').replace('--', '-')}
                 className="group relative animate-fade-in cursor-pointer"
                 style={{ animationDelay: `${index * 150}ms` }}
                 onMouseEnter={() => setSelectedService(service)}
