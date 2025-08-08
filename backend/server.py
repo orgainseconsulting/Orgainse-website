@@ -4,14 +4,14 @@ from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from pathlib import Path
 from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional, Dict, Any
 import uuid
 from datetime import datetime, timedelta
-
-# Import Odoo integration
-from odoo_integration import odoo_integration
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -20,6 +20,13 @@ load_dotenv(ROOT_DIR / '.env')
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
+
+# Email configuration (optional - for notifications)
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', '587'))
+EMAIL_USER = os.environ.get('EMAIL_USER', '')
+EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD', '')
+ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL', 'info@orgainse.com')
 
 # Create the main app without a prefix
 app = FastAPI(
@@ -90,6 +97,105 @@ class ConsultationRequestCreate(BaseModel):
     preferred_date: Optional[str] = None
     message: Optional[str] = None
 
+# AI Assessment Tool Models
+class AIAssessmentResponse(BaseModel):
+    question_id: str
+    answer: str
+    score: Optional[int] = None
+
+class AIAssessmentCreate(BaseModel):
+    name: str
+    email: EmailStr
+    company: str
+    phone: Optional[str] = None
+    responses: List[AIAssessmentResponse]
+    
+class AIAssessment(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    email: EmailStr
+    company: str
+    phone: Optional[str] = None
+    responses: List[AIAssessmentResponse]
+    ai_maturity_score: int
+    recommendations: List[str]
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+
+# ROI Calculator Models
+class ROICalculatorInput(BaseModel):
+    company_name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    industry: str
+    company_size: str
+    current_project_cost: float
+    project_duration_months: int
+    current_efficiency_rating: int
+    desired_services: List[str]
+
+class ROICalculatorResult(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    input_data: ROICalculatorInput
+    potential_savings: float
+    roi_percentage: float
+    payback_period_months: int
+    recommended_services: List[Dict[str, Any]]
+    estimated_project_cost: float
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+
+# Calendar Booking Models
+class CalendarBookingCreate(BaseModel):
+    name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    company: Optional[str] = None
+    service_type: str
+    preferred_datetime: datetime
+    timezone: str
+    message: Optional[str] = None
+
+class CalendarBooking(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    company: Optional[str] = None
+    service_type: str
+    preferred_datetime: datetime
+    timezone: str
+    message: Optional[str] = None
+    status: str = "scheduled"
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+
+
+# Email notification helper
+async def send_email_notification(subject: str, body: str, to_email: str = None):
+    """Send email notification"""
+    if not EMAIL_USER or not EMAIL_PASSWORD:
+        logging.warning("Email credentials not configured - skipping email notification")
+        return False
+    
+    try:
+        msg = MIMEMultipart()
+        msg['From'] = EMAIL_USER
+        msg['To'] = to_email or ADMIN_EMAIL
+        msg['Subject'] = subject
+        
+        msg.attach(MIMEText(body, 'html'))
+        
+        server = smtplib.SMTP(EMAIL_HOST, EMAIL_PORT)
+        server.starttls()
+        server.login(EMAIL_USER, EMAIL_PASSWORD)
+        text = msg.as_string()
+        server.sendmail(EMAIL_USER, to_email or ADMIN_EMAIL, text)
+        server.quit()
+        
+        logging.info(f"Email sent successfully to {to_email or ADMIN_EMAIL}")
+        return True
+    except Exception as e:
+        logging.error(f"Email sending failed: {str(e)}")
+        return False
+
 
 # API Routes
 @api_router.get("/")
@@ -100,45 +206,35 @@ async def root():
 async def health_check():
     return {"status": "healthy", "timestamp": datetime.utcnow()}
 
-# Contact form endpoint with Odoo CRM integration
+# Contact form endpoint
 @api_router.post("/contact", response_model=ContactMessage)
 async def create_contact_message(input: ContactMessageCreate):
-    """Handle contact form submissions with Odoo CRM integration"""
+    """Handle contact form submissions"""
     try:
         contact_dict = input.dict()
         contact_obj = ContactMessage(**contact_dict)
         
-        # Insert into MongoDB for performance
+        # Insert into MongoDB
         result = await db.contact_messages.insert_one(contact_obj.dict())
         
         if result.inserted_id:
             logging.info(f"Contact message saved to MongoDB: {contact_obj.id}")
             
-            # Sync to Odoo CRM as a lead
-            try:
-                odoo_lead_data = {
-                    'name': f"Contact Form: {contact_obj.subject}",
-                    'email': contact_obj.email,
-                    'phone': contact_obj.phone or '',
-                    'contact_name': contact_obj.name,
-                    'company': contact_obj.company or '',
-                    'message': contact_obj.message,
-                    'service_interest': contact_obj.subject
-                }
-                
-                odoo_lead_id = await odoo_integration.create_crm_lead(odoo_lead_data)
-                
-                if odoo_lead_id:
-                    # Update MongoDB record with Odoo ID
-                    await db.contact_messages.update_one(
-                        {"id": contact_obj.id},
-                        {"$set": {"odoo_lead_id": odoo_lead_id}}
-                    )
-                    logging.info(f"Contact synced to Odoo CRM with ID: {odoo_lead_id}")
-                
-            except Exception as odoo_error:
-                logging.error(f"Odoo CRM sync failed: {str(odoo_error)}")
-                # Continue without Odoo - MongoDB save was successful
+            # Send email notification to admin
+            email_subject = f"New Contact Form Submission - {contact_obj.subject}"
+            email_body = f"""
+            <h2>New Contact Form Submission</h2>
+            <p><strong>Name:</strong> {contact_obj.name}</p>
+            <p><strong>Email:</strong> {contact_obj.email}</p>
+            <p><strong>Phone:</strong> {contact_obj.phone or 'Not provided'}</p>
+            <p><strong>Company:</strong> {contact_obj.company or 'Not provided'}</p>
+            <p><strong>Subject:</strong> {contact_obj.subject}</p>
+            <p><strong>Message:</strong></p>
+            <p>{contact_obj.message}</p>
+            <p><strong>Timestamp:</strong> {contact_obj.timestamp}</p>
+            """
+            
+            await send_email_notification(email_subject, email_body)
             
             return contact_obj
         else:
@@ -157,10 +253,10 @@ async def get_contact_messages():
         logging.error(f"Error fetching contact messages: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
-# Newsletter subscription endpoint with Odoo Marketing integration
+# Newsletter subscription endpoint
 @api_router.post("/newsletter", response_model=NewsletterSubscription)
 async def subscribe_newsletter(input: NewsletterSubscriptionCreate):
-    """Handle newsletter subscriptions with Odoo Email Marketing integration"""
+    """Handle newsletter subscriptions"""
     try:
         # Check if email already exists
         existing_sub = await db.newsletter_subscriptions.find_one({"email": input.email})
@@ -170,33 +266,38 @@ async def subscribe_newsletter(input: NewsletterSubscriptionCreate):
         subscription_dict = input.dict()
         subscription_obj = NewsletterSubscription(**subscription_dict)
         
-        # Save to MongoDB for performance
+        # Save to MongoDB
         result = await db.newsletter_subscriptions.insert_one(subscription_obj.dict())
         
         if result.inserted_id:
             logging.info(f"Newsletter subscription saved to MongoDB: {subscription_obj.id}")
             
-            # Sync to Odoo Email Marketing
-            try:
-                marketing_contact_data = {
-                    'email': subscription_obj.email,
-                    'name': subscription_obj.email.split('@')[0].title(),
-                    'company': ''
-                }
-                
-                odoo_contact_id = await odoo_integration.create_marketing_contact(marketing_contact_data)
-                
-                if odoo_contact_id:
-                    # Update MongoDB record with Odoo ID
-                    await db.newsletter_subscriptions.update_one(
-                        {"id": subscription_obj.id},
-                        {"$set": {"odoo_contact_id": odoo_contact_id}}
-                    )
-                    logging.info(f"Newsletter subscription synced to Odoo Marketing with ID: {odoo_contact_id}")
-                
-            except Exception as odoo_error:
-                logging.error(f"Odoo Marketing sync failed: {str(odoo_error)}")
-                # Continue without Odoo - MongoDB save was successful
+            # Send welcome email to subscriber
+            welcome_subject = "Welcome to Orgainse Consulting Newsletter!"
+            welcome_body = f"""
+            <h2>Welcome to Orgainse Consulting!</h2>
+            <p>Thank you for subscribing to our newsletter.</p>
+            <p>You'll receive updates about:</p>
+            <ul>
+                <li>AI-native business transformation insights</li>
+                <li>Project management best practices</li>
+                <li>Industry trends and case studies</li>
+                <li>Exclusive offers and resources</li>
+            </ul>
+            <p>Best regards,<br/>The Orgainse Team</p>
+            """
+            
+            await send_email_notification(welcome_subject, welcome_body, subscription_obj.email)
+            
+            # Notify admin
+            admin_subject = f"New Newsletter Subscription: {subscription_obj.email}"
+            admin_body = f"""
+            <h2>New Newsletter Subscription</h2>
+            <p><strong>Email:</strong> {subscription_obj.email}</p>
+            <p><strong>Timestamp:</strong> {subscription_obj.timestamp}</p>
+            """
+            
+            await send_email_notification(admin_subject, admin_body)
             
             return subscription_obj
         else:
@@ -219,6 +320,24 @@ async def book_consultation(input: ConsultationRequestCreate):
         
         if result.inserted_id:
             logging.info(f"Consultation request created: {consultation_obj.id}")
+            
+            # Send email notification to admin
+            email_subject = f"New Consultation Request - {consultation_obj.service_type}"
+            email_body = f"""
+            <h2>New Consultation Request</h2>
+            <p><strong>Name:</strong> {consultation_obj.name}</p>
+            <p><strong>Email:</strong> {consultation_obj.email}</p>
+            <p><strong>Phone:</strong> {consultation_obj.phone or 'Not provided'}</p>
+            <p><strong>Company:</strong> {consultation_obj.company or 'Not provided'}</p>
+            <p><strong>Service Type:</strong> {consultation_obj.service_type}</p>
+            <p><strong>Preferred Date:</strong> {consultation_obj.preferred_date or 'Not specified'}</p>
+            <p><strong>Message:</strong></p>
+            <p>{consultation_obj.message or 'No additional message'}</p>
+            <p><strong>Timestamp:</strong> {consultation_obj.timestamp}</p>
+            """
+            
+            await send_email_notification(email_subject, email_body)
+            
             return consultation_obj
         else:
             raise HTTPException(status_code=500, detail="Failed to save consultation request")
@@ -262,114 +381,10 @@ async def get_status_checks():
         logging.error(f"Error fetching status checks: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
-# Analytics endpoints
-@api_router.get("/analytics/overview")
-async def get_analytics_overview():
-    try:
-        # Get counts from different collections
-        contact_count = await db.contact_messages.count_documents({})
-        newsletter_count = await db.newsletter_subscriptions.count_documents({})
-        consultation_count = await db.consultation_requests.count_documents({})
-        
-        # Get recent activity
-        recent_contacts = await db.contact_messages.count_documents({
-            "timestamp": {"$gte": datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)}
-        })
-        
-        return {
-            "total_contacts": contact_count,
-            "total_newsletter_subscribers": newsletter_count,
-            "total_consultations": consultation_count,
-            "today_contacts": recent_contacts,
-            "timestamp": datetime.utcnow()
-        }
-    
-    except Exception as e:
-        logging.error(f"Error fetching analytics: {str(e)}")
-        raise HTTPException(status_code=500, detail="Internal server error")
-
-# ================================
-# INTERACTIVE TOOLS - ODOO INTEGRATED
-# ================================
-
-# AI Assessment Tool Models
-class AIAssessmentResponse(BaseModel):
-    question_id: str
-    answer: str
-    score: Optional[int] = None
-
-class AIAssessmentCreate(BaseModel):
-    name: str
-    email: EmailStr
-    company: str
-    phone: Optional[str] = None
-    responses: List[AIAssessmentResponse]
-    
-class AIAssessment(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    name: str
-    email: EmailStr
-    company: str
-    phone: Optional[str] = None
-    responses: List[AIAssessmentResponse]
-    ai_maturity_score: int
-    recommendations: List[str]
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
-    odoo_lead_id: Optional[int] = None
-
-# ROI Calculator Models
-class ROICalculatorInput(BaseModel):
-    company_name: str
-    email: EmailStr
-    phone: Optional[str] = None
-    industry: str
-    company_size: str
-    current_project_cost: float
-    project_duration_months: int
-    current_efficiency_rating: int
-    desired_services: List[str]
-
-class ROICalculatorResult(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    input_data: ROICalculatorInput
-    potential_savings: float
-    roi_percentage: float
-    payback_period_months: int
-    recommended_services: List[Dict[str, Any]]
-    estimated_project_cost: float
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
-    odoo_quote_id: Optional[int] = None
-
-# Calendar Booking Models
-class CalendarBookingCreate(BaseModel):
-    name: str
-    email: EmailStr
-    phone: Optional[str] = None
-    company: Optional[str] = None
-    service_type: str
-    preferred_datetime: datetime
-    timezone: str
-    message: Optional[str] = None
-
-class CalendarBooking(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    name: str
-    email: EmailStr
-    phone: Optional[str] = None
-    company: Optional[str] = None
-    service_type: str
-    preferred_datetime: datetime
-    timezone: str
-    message: Optional[str] = None
-    status: str = "scheduled"
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
-    odoo_event_id: Optional[int] = None
-    odoo_opportunity_id: Optional[int] = None
-
 # AI Assessment Tool Endpoint
 @api_router.post("/ai-assessment", response_model=AIAssessment)
 async def create_ai_assessment(input: AIAssessmentCreate):
-    """Create AI Assessment with scoring and Odoo CRM integration"""
+    """Create AI Assessment with scoring"""
     try:
         # Calculate AI maturity score
         total_score = sum([resp.score or 0 for resp in input.responses])
@@ -393,32 +408,23 @@ async def create_ai_assessment(input: AIAssessmentCreate):
         if result.inserted_id:
             logging.info(f"AI Assessment saved to MongoDB: {assessment_obj.id}")
             
-            # Sync to Odoo CRM as qualified lead
-            try:
-                odoo_lead_data = {
-                    'name': f"AI Assessment - {input.company}",
-                    'email': input.email,
-                    'phone': input.phone or '',
-                    'contact_name': input.name,
-                    'company': input.company,
-                    'message': f"AI Maturity Score: {ai_maturity_score}/100",
-                    'ai_score': ai_maturity_score,
-                    'service_interest': 'AI Assessment'
-                }
-                
-                odoo_lead_id = await odoo_integration.create_crm_lead(odoo_lead_data)
-                
-                if odoo_lead_id:
-                    # Update MongoDB with Odoo ID
-                    await db.ai_assessments.update_one(
-                        {"id": assessment_obj.id},
-                        {"$set": {"odoo_lead_id": odoo_lead_id}}
-                    )
-                    assessment_obj.odoo_lead_id = odoo_lead_id
-                    logging.info(f"AI Assessment synced to Odoo CRM with ID: {odoo_lead_id}")
-                
-            except Exception as odoo_error:
-                logging.error(f"Odoo CRM sync failed for AI Assessment: {str(odoo_error)}")
+            # Send email notification to admin
+            email_subject = f"New AI Assessment Completed - {input.company}"
+            email_body = f"""
+            <h2>New AI Assessment Completed</h2>
+            <p><strong>Name:</strong> {input.name}</p>
+            <p><strong>Email:</strong> {input.email}</p>
+            <p><strong>Company:</strong> {input.company}</p>
+            <p><strong>Phone:</strong> {input.phone or 'Not provided'}</p>
+            <p><strong>AI Maturity Score:</strong> {ai_maturity_score}/100</p>
+            <p><strong>Recommendations:</strong></p>
+            <ul>
+                {''.join([f'<li>{rec}</li>' for rec in recommendations])}
+            </ul>
+            <p><strong>Timestamp:</strong> {assessment_obj.timestamp}</p>
+            """
+            
+            await send_email_notification(email_subject, email_body)
             
             return assessment_obj
         else:
@@ -431,7 +437,7 @@ async def create_ai_assessment(input: AIAssessmentCreate):
 # ROI Calculator Endpoint
 @api_router.post("/roi-calculator", response_model=ROICalculatorResult)
 async def calculate_roi(input: ROICalculatorInput):
-    """Calculate ROI and create Odoo Sales quotation"""
+    """Calculate ROI"""
     try:
         # Calculate potential savings and ROI
         roi_results = calculate_business_roi(input)
@@ -448,27 +454,26 @@ async def calculate_roi(input: ROICalculatorInput):
         if result.inserted_id:
             logging.info(f"ROI Calculation saved to MongoDB: {roi_result_obj.id}")
             
-            # Create Odoo Sales quotation
-            try:
-                quote_data = {
-                    'email': input.email,
-                    'services': roi_result_obj.recommended_services,
-                    'note': f"Generated from ROI Calculator - Potential savings: ${roi_result_obj.potential_savings:,.2f}"
-                }
-                
-                odoo_quote_id = await odoo_integration.create_sales_quotation(quote_data)
-                
-                if odoo_quote_id:
-                    # Update MongoDB with Odoo ID
-                    await db.roi_calculations.update_one(
-                        {"id": roi_result_obj.id},
-                        {"$set": {"odoo_quote_id": odoo_quote_id}}
-                    )
-                    roi_result_obj.odoo_quote_id = odoo_quote_id
-                    logging.info(f"ROI Calculator quote synced to Odoo Sales with ID: {odoo_quote_id}")
-                
-            except Exception as odoo_error:
-                logging.error(f"Odoo Sales sync failed for ROI Calculator: {str(odoo_error)}")
+            # Send email notification to admin
+            email_subject = f"New ROI Calculation - {input.company_name}"
+            email_body = f"""
+            <h2>New ROI Calculation Completed</h2>
+            <p><strong>Company:</strong> {input.company_name}</p>
+            <p><strong>Email:</strong> {input.email}</p>
+            <p><strong>Industry:</strong> {input.industry}</p>
+            <p><strong>Company Size:</strong> {input.company_size}</p>
+            <p><strong>Current Project Cost:</strong> ${input.current_project_cost:,.2f}</p>
+            <p><strong>Potential Savings:</strong> ${roi_result_obj.potential_savings:,.2f}</p>
+            <p><strong>ROI Percentage:</strong> {roi_result_obj.roi_percentage:.1f}%</p>
+            <p><strong>Payback Period:</strong> {roi_result_obj.payback_period_months} months</p>
+            <p><strong>Recommended Services:</strong></p>
+            <ul>
+                {''.join([f'<li>{service["name"]} - ${service["price"]:,.2f}</li>' for service in roi_result_obj.recommended_services])}
+            </ul>
+            <p><strong>Timestamp:</strong> {roi_result_obj.timestamp}</p>
+            """
+            
+            await send_email_notification(email_subject, email_body)
             
             return roi_result_obj
         else:
@@ -481,7 +486,7 @@ async def calculate_roi(input: ROICalculatorInput):
 # Calendar Booking Endpoint
 @api_router.post("/book-consultation", response_model=CalendarBooking)
 async def book_consultation_slot(input: CalendarBookingCreate):
-    """Book consultation with Odoo Calendar integration"""
+    """Book consultation"""
     try:
         # Create booking object
         booking_dict = input.dict()
@@ -493,51 +498,40 @@ async def book_consultation_slot(input: CalendarBookingCreate):
         if result.inserted_id:
             logging.info(f"Calendar booking saved to MongoDB: {booking_obj.id}")
             
-            # Create Odoo Calendar event and CRM opportunity
-            try:
-                # Prepare event data
-                end_datetime = input.preferred_datetime + timedelta(minutes=30)
-                event_data = {
-                    'name': f"AI Consultation - {input.company or input.name}",
-                    'email': input.email,
-                    'start_datetime': input.preferred_datetime.isoformat(),
-                    'end_datetime': end_datetime.isoformat(),
-                    'location': 'Virtual Meeting',
-                    'description': f"Service: {input.service_type}\nMessage: {input.message or 'N/A'}"
-                }
-                
-                odoo_event_id = await odoo_integration.create_calendar_event(event_data)
-                
-                # Create CRM opportunity
-                opportunity_data = {
-                    'name': f"Consultation - {input.company or input.name}",
-                    'email': input.email,
-                    'expected_revenue': get_service_estimated_value(input.service_type),
-                    'probability': 25,
-                    'description': f"Consultation for {input.service_type}"
-                }
-                
-                odoo_opportunity_id = await odoo_integration.create_crm_opportunity(opportunity_data)
-                
-                if odoo_event_id or odoo_opportunity_id:
-                    # Update MongoDB with Odoo IDs
-                    update_data = {}
-                    if odoo_event_id:
-                        update_data["odoo_event_id"] = odoo_event_id
-                        booking_obj.odoo_event_id = odoo_event_id
-                    if odoo_opportunity_id:
-                        update_data["odoo_opportunity_id"] = odoo_opportunity_id
-                        booking_obj.odoo_opportunity_id = odoo_opportunity_id
-                    
-                    await db.calendar_bookings.update_one(
-                        {"id": booking_obj.id},
-                        {"$set": update_data}
-                    )
-                    
-                    logging.info(f"Calendar booking synced to Odoo - Event: {odoo_event_id}, Opportunity: {odoo_opportunity_id}")
-                
-            except Exception as odoo_error:
-                logging.error(f"Odoo Calendar/CRM sync failed for booking: {str(odoo_error)}")
+            # Send confirmation email to client
+            client_subject = "Consultation Booking Confirmed - Orgainse Consulting"
+            client_body = f"""
+            <h2>Consultation Booking Confirmed</h2>
+            <p>Dear {input.name},</p>
+            <p>Thank you for booking a consultation with Orgainse Consulting.</p>
+            <p><strong>Booking Details:</strong></p>
+            <ul>
+                <li><strong>Service:</strong> {input.service_type}</li>
+                <li><strong>Date & Time:</strong> {input.preferred_datetime.strftime('%B %d, %Y at %I:%M %p')} ({input.timezone})</li>
+                <li><strong>Duration:</strong> 30 minutes</li>
+                <li><strong>Meeting Type:</strong> Virtual (link will be provided)</li>
+            </ul>
+            <p>We'll send you the meeting link 24 hours before the consultation.</p>
+            <p>Best regards,<br/>The Orgainse Team</p>
+            """
+            
+            await send_email_notification(client_subject, client_body, input.email)
+            
+            # Send notification to admin
+            admin_subject = f"New Consultation Booking - {input.service_type}"
+            admin_body = f"""
+            <h2>New Consultation Booking</h2>
+            <p><strong>Name:</strong> {input.name}</p>
+            <p><strong>Email:</strong> {input.email}</p>
+            <p><strong>Phone:</strong> {input.phone or 'Not provided'}</p>
+            <p><strong>Company:</strong> {input.company or 'Not provided'}</p>
+            <p><strong>Service Type:</strong> {input.service_type}</p>
+            <p><strong>Preferred Date & Time:</strong> {input.preferred_datetime.strftime('%B %d, %Y at %I:%M %p')} ({input.timezone})</p>
+            <p><strong>Message:</strong> {input.message or 'No additional message'}</p>
+            <p><strong>Timestamp:</strong> {booking_obj.timestamp}</p>
+            """
+            
+            await send_email_notification(admin_subject, admin_body)
             
             return booking_obj
         else:
@@ -545,6 +539,38 @@ async def book_consultation_slot(input: CalendarBookingCreate):
     
     except Exception as e:
         logging.error(f"Error creating calendar booking: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+# Analytics endpoints
+@api_router.get("/analytics/overview")
+async def get_analytics_overview():
+    try:
+        # Get counts from different collections
+        contact_count = await db.contact_messages.count_documents({})
+        newsletter_count = await db.newsletter_subscriptions.count_documents({})
+        consultation_count = await db.consultation_requests.count_documents({})
+        ai_assessment_count = await db.ai_assessments.count_documents({})
+        roi_calculation_count = await db.roi_calculations.count_documents({})
+        calendar_booking_count = await db.calendar_bookings.count_documents({})
+        
+        # Get recent activity
+        recent_contacts = await db.contact_messages.count_documents({
+            "timestamp": {"$gte": datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)}
+        })
+        
+        return {
+            "total_contacts": contact_count,
+            "total_newsletter_subscribers": newsletter_count,
+            "total_consultations": consultation_count,
+            "total_ai_assessments": ai_assessment_count,
+            "total_roi_calculations": roi_calculation_count,
+            "total_calendar_bookings": calendar_booking_count,
+            "today_contacts": recent_contacts,
+            "timestamp": datetime.utcnow()
+        }
+    
+    except Exception as e:
+        logging.error(f"Error fetching analytics: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
 # Helper Functions
@@ -649,18 +675,6 @@ def get_recommended_services(input: ROICalculatorInput) -> List[Dict[str, Any]]:
     
     return services
 
-def get_service_estimated_value(service_type: str) -> float:
-    """Get estimated value for service type"""
-    service_values = {
-        'AI Project Management': 10000,
-        'Digital Transformation': 20000,
-        'Operational Optimization': 15000,
-        'Business Strategy': 12000,
-        'Risk Management': 8000,
-        'General Consultation': 5000
-    }
-    return service_values.get(service_type, 5000)
-
 # Include the router in the main app
 app.include_router(api_router)
 
@@ -690,6 +704,9 @@ async def startup_event():
         await db.contact_messages.create_index("timestamp")
         await db.newsletter_subscriptions.create_index("email", unique=True)
         await db.consultation_requests.create_index("timestamp")
+        await db.ai_assessments.create_index("timestamp")
+        await db.roi_calculations.create_index("timestamp") 
+        await db.calendar_bookings.create_index("timestamp")
         logger.info("Database indexes created successfully")
     except Exception as e:
         logger.error(f"Error creating indexes: {str(e)}")
