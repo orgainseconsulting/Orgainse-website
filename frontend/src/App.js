@@ -1835,19 +1835,22 @@ const Services = () => {
             </p>
           </div>
 
-          {/* Modern Grid Layout */}
+          {/* Enhanced Services Grid with Popup Functionality */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
               <div 
                 key={index} 
-                className="group relative animate-fade-in"
+                className="group relative animate-fade-in cursor-pointer"
                 style={{ animationDelay: `${index * 150}ms` }}
+                onMouseEnter={() => setSelectedService(service)}
+                onMouseLeave={() => setSelectedService(null)}
+                onClick={() => openServicePopup(service)}
               >
                 {/* Card Glow Effect */}
-                <div className={`absolute -inset-1 bg-gradient-to-r ${service.gradient} rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000`}></div>
+                <div className={`absolute -inset-1 bg-gradient-to-r ${service.gradient} rounded-3xl blur opacity-25 group-hover:opacity-60 transition duration-1000`}></div>
                 
                 {/* Main Card */}
-                <div className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 overflow-hidden h-full flex flex-col">
+                <div className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 border border-gray-100 overflow-hidden h-full flex flex-col">
                   
                   {/* Service Image */}
                   <div className="relative mb-6 overflow-hidden rounded-2xl">
@@ -1857,12 +1860,17 @@ const Services = () => {
                       className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="bg-white/90 backdrop-blur-sm rounded-full p-2">
+                        <ExternalLink className="h-4 w-4 text-orange-600" />
+                      </div>
+                    </div>
                   </div>
 
                   {/* Icon and Title */}
                   <div className="flex items-start space-x-4 mb-4">
-                    <div className={`p-3 rounded-2xl bg-gradient-to-r ${service.gradient} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`p-3 rounded-2xl bg-gradient-to-r ${service.gradient} shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
                       <service.icon className="h-6 w-6 text-white" />
                     </div>
                     <div className="flex-1">
@@ -1873,8 +1881,8 @@ const Services = () => {
                   </div>
 
                   {/* Description */}
-                  <p className="text-slate-600 leading-relaxed mb-6 flex-1 text-sm">
-                    {service.description}
+                  <p className="text-slate-600 leading-relaxed mb-6 flex-1 text-sm group-hover:text-slate-700 transition-colors">
+                    {service.description.substring(0, 150)}...
                   </p>
 
                   {/* Features List */}
@@ -1887,17 +1895,197 @@ const Services = () => {
                     ))}
                   </div>
 
+                  {/* Hover Overlay with Action Buttons */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-3xl flex items-end justify-center pb-8">
+                    <div className="text-center transform translate-y-8 group-hover:translate-y-0 transition-transform duration-300">
+                      <h4 className="text-white font-bold text-lg mb-2">Learn More</h4>
+                      <p className="text-white/90 text-sm mb-4 px-4">
+                        Discover detailed benefits, pricing, and how this service transforms your business
+                      </p>
+                      <button 
+                        className="bg-white text-slate-800 px-6 py-2 rounded-lg font-semibold hover:bg-orange-100 transition-colors"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openServicePopup(service);
+                        }}
+                      >
+                        View Details
+                      </button>
+                    </div>
+                  </div>
+
                   {/* Action Button */}
-                  <button className={`w-full group relative px-6 py-3 bg-gradient-to-r ${service.gradient} text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 overflow-hidden`}>
-                    <div className={`absolute inset-0 bg-gradient-to-r ${service.gradient.split(' ').reverse().join(' ')} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                  <button 
+                    className={`w-full group/btn relative px-6 py-3 bg-gradient-to-r ${service.gradient} text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 overflow-hidden`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openServicePopup(service);
+                    }}
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-r ${service.gradient.split(' ').reverse().join(' ')} opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300`}></div>
                     <span className="relative z-10 flex items-center justify-center text-sm">
                       Learn More
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                     </span>
                   </button>
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Service Detail Popup Modal */}
+          {isPopupOpen && selectedService && (
+            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+              <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto animate-fade-in">
+                <div className="relative p-8">
+                  {/* Close Button */}
+                  <button 
+                    onClick={closeServicePopup}
+                    className="absolute top-6 right-6 p-2 hover:bg-slate-100 rounded-full transition-colors"
+                  >
+                    <X className="h-6 w-6 text-slate-600" />
+                  </button>
+
+                  {/* Header */}
+                  <div className="flex items-start space-x-6 mb-8">
+                    <div className={`p-4 rounded-2xl bg-gradient-to-r ${selectedService.gradient} shadow-xl`}>
+                      <selectedService.icon className="h-8 w-8 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h2 className="text-3xl font-bold text-slate-800 mb-3">
+                        {selectedService.title}
+                      </h2>
+                      <p className="text-slate-600 text-lg">
+                        {selectedService.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Detailed Information Sections */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    {/* What It Does */}
+                    <div className="bg-slate-50 rounded-2xl p-6">
+                      <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                        <Brain className="h-5 w-5 mr-2 text-orange-600" />
+                        What This Service Does
+                      </h3>
+                      <p className="text-slate-600 leading-relaxed">
+                        {selectedService.detailedInfo.whatItDoes}
+                      </p>
+                    </div>
+
+                    {/* Why Choose Us */}
+                    <div className="bg-orange-50 rounded-2xl p-6">
+                      <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                        <Award className="h-5 w-5 mr-2 text-orange-600" />
+                        Why Choose Orgainse
+                      </h3>
+                      <p className="text-slate-600 leading-relaxed">
+                        {selectedService.detailedInfo.whyChooseUs}
+                      </p>
+                    </div>
+
+                    {/* What You Get */}
+                    <div className="bg-green-50 rounded-2xl p-6">
+                      <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                        <CheckCircle className="h-5 w-5 mr-2 text-green-600" />
+                        What You Get
+                      </h3>
+                      <p className="text-slate-600 leading-relaxed mb-4">
+                        {selectedService.detailedInfo.whatYouGet}
+                      </p>
+                    </div>
+
+                    {/* Key Benefits */}
+                    <div className="bg-blue-50 rounded-2xl p-6">
+                      <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                        <TrendingUp className="h-5 w-5 mr-2 text-blue-600" />
+                        Key Benefits
+                      </h3>
+                      <ul className="space-y-2">
+                        {selectedService.detailedInfo.benefits.map((benefit, index) => (
+                          <li key={index} className="flex items-start space-x-2">
+                            <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                            <span className="text-slate-600 text-sm">{benefit}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Pricing and Timeline */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div className="text-center p-6 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl">
+                      <h4 className="font-bold text-slate-800 mb-2">Investment</h4>
+                      <p className="text-2xl font-bold text-orange-600">{selectedService.detailedInfo.pricing}</p>
+                    </div>
+                    <div className="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl">
+                      <h4 className="font-bold text-slate-800 mb-2">Timeline</h4>
+                      <p className="text-lg font-semibold text-green-600">{selectedService.detailedInfo.timeline}</p>
+                    </div>
+                    <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl">
+                      <h4 className="font-bold text-slate-800 mb-2">Industries</h4>
+                      <p className="text-sm text-slate-600">{selectedService.detailedInfo.industries.join(', ')}</p>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <button 
+                      onClick={() => handleServiceInquiry(selectedService.id, selectedService.title)}
+                      className={`flex-1 bg-gradient-to-r ${selectedService.gradient} text-white px-8 py-4 rounded-xl font-bold hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
+                    >
+                      Book Free Consultation
+                    </button>
+                    <button 
+                      onClick={closeServicePopup}
+                      className="flex-1 bg-slate-100 text-slate-700 px-8 py-4 rounded-xl font-semibold hover:bg-slate-200 transition-colors"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* FAQ Section */}
+          <div className="mt-16 bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl font-bold text-slate-800 mb-4">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-slate-600 max-w-2xl mx-auto">
+                Get answers to the most common questions about our AI-native consulting services
+              </p>
+            </div>
+
+            <div className="max-w-4xl mx-auto space-y-4">
+              {faqData.map((faq, index) => (
+                <div key={index} className="border border-slate-200 rounded-2xl overflow-hidden">
+                  <button
+                    onClick={() => toggleFaq(index)}
+                    className="w-full text-left p-6 hover:bg-slate-50 transition-colors flex items-center justify-between"
+                  >
+                    <h3 className="text-lg font-semibold text-slate-800 pr-4">
+                      {faq.question}
+                    </h3>
+                    {openFaq === index ? (
+                      <ChevronUp className="h-5 w-5 text-orange-600 flex-shrink-0" />
+                    ) : (
+                      <ChevronDown className="h-5 w-5 text-slate-400 flex-shrink-0" />
+                    )}
+                  </button>
+                  {openFaq === index && (
+                    <div className="px-6 pb-6 animate-fade-in">
+                      <p className="text-slate-600 leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Call to Action */}
