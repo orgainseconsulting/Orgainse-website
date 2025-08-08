@@ -251,6 +251,163 @@ class AvailableSlotsResponse(BaseModel):
     date_range: str
 
 
+# Google Calendar Helper Functions
+def create_flow():
+    """Create OAuth flow for Google Calendar"""
+    return Flow.from_client_config(
+        client_config={
+            "web": {
+                "client_id": GOOGLE_CLIENT_ID,
+                "client_secret": GOOGLE_CLIENT_SECRET,
+                "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+                "token_uri": "https://oauth2.googleapis.com/token",
+                "redirect_uris": [GOOGLE_REDIRECT_URI]
+            }
+        },
+        scopes=SCOPES
+    )
+
+def generate_secure_state(user_session_id: str = None) -> str:
+    """Generate cryptographically secure state parameter for CSRF protection"""
+    timestamp = int(datetime.utcnow().timestamp())
+    random_component = secrets.token_urlsafe(32)
+    
+    state_data = f"{user_session_id or 'anonymous'}:{timestamp}:{random_component}"
+    state_hash = hashlib.sha256(state_data.encode()).hexdigest()[:16]
+    
+    final_state = f"{state_hash}:{timestamp}"
+    
+    # Store state with expiration (10 minutes)
+    csrf_states[final_state] = {
+        'user_session': user_session_id or 'anonymous',
+        'created': datetime.utcnow(),
+        'used': False
+    }
+    
+    return final_state
+
+def validate_state(state: str) -> bool:
+    """Validate CSRF state parameter"""
+    if state not in csrf_states:
+        logging.warning(f"Invalid OAuth state attempted: {state[:16]}...")
+        return False
+    
+    state_info = csrf_states[state]
+    
+    # Check if already used
+    if state_info['used']:
+        logging.warning(f"OAuth state replay attempted: {state[:16]}...")
+        return False
+    
+    # Check expiration (10 minutes)
+    if datetime.utcnow() - state_info['created'] > timedelta(minutes=10):
+        logging.warning(f"Expired OAuth state attempted: {state[:16]}...")
+        del csrf_states[state]
+        return False
+    
+    # Mark as used
+    state_info['used'] = True
+    return True
+
+def get_calendar_service(user_id: str):
+    """Get Google Calendar service for user"""
+    if user_id not in user_credentials:
+        raise HTTPException(status_code=401, detail="User not authenticated")
+    
+    credentials = user_credentials[user_id]
+    
+    # Refresh credentials if expired
+    if credentials.expired and credentials.refresh_token:
+        try:
+            credentials.refresh(Request())
+            user_credentials[user_id] = credentials
+        except Exception as e:
+            logging.error(f"Failed to refresh credentials: {str(e)}")
+            raise HTTPException(status_code=401, detail="Authentication expired, please re-authenticate")
+    
+    return build('calendar', 'v3', credentials=credentials)
+
+def get_business_hours():
+    """Get business hours configuration"""
+    return {
+        'monday': {'start': '09:00', 'end': '17:00'},
+        'tuesday': {'start': '09:00', 'end': '17:00'},
+        'wednesday': {'start': '09:00', 'end': '17:00'},
+        'thursday': {'start': '09:00', 'end': '17:00'},
+        'friday': {'start': '09:00', 'end': '17:00'},
+        'saturday': None,  # Closed
+        'sunday': None,   # Closed
+    }
+
+def generate_available_slots(start_date: datetime, end_date: datetime, duration_minutes: int = 30) -> List[Dict]:
+    """Generate potential time slots based on business hours"""
+    slots = []
+    current_date = start_date.date()
+    end_date_only = end_date.date()
+    
+    business_hours = get_business_hours()
+    
+    while current_date <= end_date_only:
+        day_name = current_date.strftime('%A').lower()
+        
+        if day_name in business_hours and business_hours[day_name]:
+            day_hours = business_hours[day_name]
+            
+            # Parse business hours for the day
+            start_time = datetime.strptime(day_hours['start'], '%H:%M').time()
+            end_time = datetime.strptime(day_hours['end'], '%H:%M').time()
+            
+            # Generate slots for the day
+            current_datetime = datetime.combine(current_date, start_time)
+            end_datetime = datetime.combine(current_date, end_time)
+            
+            while current_datetime + timedelta(minutes=duration_minutes) <= end_datetime:
+                slot_end = current_datetime + timedelta(minutes=duration_minutes)
+                slots.append({
+                    'start': current_datetime,
+                    'end': slot_end,
+                    'duration': duration_minutes
+                })
+                current_datetime += timedelta(minutes=duration_minutes)
+        
+        current_date += timedelta(days=1)
+    
+    return slots
+
+def filter_available_slots(potential_slots: List[Dict], existing_events: List[Dict]) -> List[Dict]:
+    """Filter out slots that conflict with existing events"""
+    available_slots = []
+    
+    for slot in potential_slots:
+        is_available = True
+        
+        for event in existing_events:
+            event_start = parse_event_datetime(event['start'])
+            event_end = parse_event_datetime(event['end'])
+            
+            # Check for overlap
+            if (slot['start'] < event_end and slot['end'] > event_start):
+                is_available = False
+                break
+        
+        if is_available:
+            available_slots.append({
+                'start_datetime': slot['start'].isoformat(),
+                'end_datetime': slot['end'].isoformat(),
+                'available': True
+            })
+    
+    return available_slots
+
+def parse_event_datetime(event_datetime: Dict) -> datetime:
+    """Parse event datetime from Google Calendar API response"""
+    if 'dateTime' in event_datetime:
+        return datetime.fromisoformat(event_datetime['dateTime'].replace('Z', '+00:00'))
+    else:
+        # All-day event
+        return datetime.fromisoformat(event_datetime['date'] + 'T00:00:00')
+
+
 # Email notification helper
 async def send_email_notification(subject: str, body: str, to_email: str = None):
     """Send email notification"""
