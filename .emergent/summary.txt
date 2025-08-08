@@ -1,33 +1,41 @@
 <analysis>
-The previous AI engineer successfully evolved the Orgainse Consulting website from an MVP to a sophisticated lead-generation platform. Initial work focused on a comprehensive UI/UX overhaul and backend Odoo API integrations. Subsequently, the engineer built and integrated the frontend for the AI Assessment Tool, ROI Calculator, and Smart Calendar. A significant enhancement involved developing a dynamic regional pricing system, adjusting values by Purchasing Power Parity (PPP) across global regions, and notably scaling Indian prices into thousands for better impact. All website images were updated to be unique and brand-aligned. The Odoo SaaS 18.3 integration was completed, and comprehensive backend tests confirmed functionality. The process included iterative user feedback on UI/UX, pricing adjustments, and deployment methods. The engineer faced challenges with direct Odoo content upload and Vercel GitHub authorization, leading to exploring and offering various deployment solutions, with the current focus on guiding the user through Netlify Drop.
+The previous AI engineer meticulously transformed the Orgainse Consulting website from an MVP into a sophisticated lead-generation platform. The initial phase focused on UI/UX, Odoo API integration, and building interactive tools like the AI Assessment and ROI Calculator, alongside a regional pricing system. A major challenge involved deployment, with multiple attempts and platform changes (Vercel, Netlify, Railway) ultimately leading to a complete rollback of deployment-specific files to a clean, Odoo-free, and fully functional codebase. The engineer successfully removed all Odoo dependencies, transitioning lead management to direct MongoDB storage with email notifications. The work culminated in the start of implementing significant new features, including service card linking, detailed service popups, service-specific CRM tracking, Google Calendar integration for consultations, and an SEO-focused FAQ section. The process was iterative, responding directly to user feedback and troubleshooting persistent deployment hurdles.
 </analysis>
 
 <product_requirements>
-The core objective for Orgainse Consulting, an AI-native firm, is a pixel-perfect, WCAG 2.2 AA compliant, multilingual-ready website. This platform must drive B2B lead generation across 7 regions and 6 specializations, converting visitors via an AI chatbot, calendared consultations, a newsletter, and e-commerce.
+The primary goal for Orgainse Consulting, an AI-native firm, is to establish a pixel-perfect, WCAG 2.2 AA compliant, and multilingual-ready website. This platform must effectively generate B2B leads across 7 global regions and 6 specializations. Lead conversion mechanisms include an AI chatbot, calendared consultations, a newsletter, and e-commerce functionalities.
 
-The previous engineer delivered:
-*   **Core Pages**: Homepage (hero, stats, services teaser), About (mission, values, ORGAINSE Ecosystem), Services, Contact (MongoDB integrated).
-*   **Branding & UI**: Specific color palette, typography, high-quality AI-generated imagery, professional logo, social media integration.
-*   **Company Info**: Corrected company name, tagline, registered offices, website, emails, phone numbers, nature of business. Founding details updated to 2025, with branches in Bangalore/Austin, global operations across 5 continents (India, USA, UK, UAE, Australia, New Zealand, South Africa).
-*   **Lead Generation**: Global Compliance Ready section replaced by a Lead Generation Hub (newsletter, AI assessment, strategy session), all connected to the backend.
-*   **Design**: Advanced gradients, animations, 3D/glass-morphism effects, consistent lighter color gradients, content-adaptive card sizing, improved spacing, and business-aligned images.
-*   **Legal & SEO**: Privacy Policy, Terms of Service pages; meta-tag and keyword optimization.
-*   **Odoo Compatibility**: Ensured current application and planned interactive tools are compatible with Odoo SaaS 18.3 for seamless integration with Odoo Business Suite for CRM, Marketing, and Calendar.
-*   **Latest Feature**: Implemented a region-based currency and PPP-adjusted pricing system (auto-detect with manual override) for 7 regions + Europe, with Indian prices specifically adjusted to be in thousands. Interactive tools (AI Assessment, ROI Calculator, Smart Calendar) moved from the header to the body section. All website images replaced with unique, brand-aligned visuals.
+Key implementations to date include:
+*   **Core Pages**: Homepage, About, Services, and Contact pages with MongoDB integration.
+*   **Branding & UI**: Adherence to a specific color palette, typography, AI-generated imagery, professional logo, and social media integration.
+*   **Company Information**: Updated founding details (2025), branches in Bangalore/Austin, and global operations across five continents.
+*   **Lead Generation Hub**: Replaced Global Compliance Ready with a Lead Generation Hub featuring a newsletter, AI assessment, and strategy sessions, all backend-connected.
+*   **Design**: Advanced gradients, animations, 3D/glass-morphism effects, consistent lighter color gradients, content-adaptive card sizing, and business-aligned images.
+*   **Legal & SEO**: Implementation of Privacy Policy and Terms of Service pages, with meta-tag and keyword optimization.
+*   **Interactive Tools & Pricing**: Fully integrated AI Assessment, ROI Calculator, and Smart Calendar tools, moved from header to homepage body. A region-based, PPP-adjusted pricing system was implemented, specifically scaling Indian prices into thousands.
+*   **Backend Integration**: Previously, integration with Odoo SaaS 18.3 for CRM, Marketing, and Calendar was completed. However, this has been recently removed, and lead management now relies on direct MongoDB storage with email notifications, and UUID-based records for professional data management.
+
+New features explicitly requested:
+1.  **Service Card Linking**: Homepage service cards should link to corresponding sections on the Services page.
+2.  **Service Popups**: On the Services page, hovering or clicking Learn more on service cards should open a popup detailing What the service will do, Why choose it, and What the customer will get.
+3.  **CRM Segregation**: Clicks and inquiries on service cards must be separately registered in the CRM.
+4.  **Google Calendar Integration**: All Book Free Consultation buttons should integrate with Google Calendar for customer booking convenience.
+5.  **FAQ Section**: Addition of an FAQ section on the Services page, featuring high-ranking search volume questions with Orgainse Consulting-specific answers to persuade customers and improve SEO.
+6.  **SEO Ranking**: All new features must contribute to increasing the website's search engine ranking.
 </product_requirements>
 
 <key_technical_concepts>
--   **Full-Stack**: React 18/19 (Frontend), FastAPI (Backend), MongoDB (Database).
--   **Styling**: Tailwind CSS, Shadcn UI, Custom CSS (animations, 3D, glass-morphism).
--   **Backend Integration**: Odoo Website module (SaaS 18.3), XML-RPC via .
+-   **Full-Stack**: React (Frontend), FastAPI (Backend), MongoDB (Database).
+-   **Styling**: Tailwind CSS, Shadcn UI, Custom CSS.
 -   **API Management**: FastAPI ( prefix), environment variables.
--   **Image Sourcing**:  for AI-generated images.
--   **State Management**: React Context (for Regional Pricing).
--   **Deployment**: Vercel, Netlify, GitHub Pages, Firebase Hosting (explored options).
+-   **State Management**: React Context ().
+-   **Deployment**: Explored Vercel, Netlify, Railway.
+-   **Backend Features**: Email notifications, UUIDs for data.
+-   **Upcoming Integration**: Google Calendar (via ).
 </key_technical_concepts>
 
 <code_architecture>
-The application follows a standard full-stack architecture with separate frontend and backend directories:
+The application utilizes a standard full-stack architecture with distinct frontend and backend components.
 
 
 
@@ -35,55 +43,48 @@ The application follows a standard full-stack architecture with separate fronten
 
 *   :
     *   **Importance**: Centralizes backend logic and API endpoints.
-    *   **Changes**: Updated to handle newsletter subscriptions and consultation bookings, and most recently integrated with Odoo CRM/Marketing/Calendar for these operations. Includes new endpoints for AI Assessment (), ROI Calculator (), and Calendar Integration (), all syncing with Odoo via .
+    *   **Changes**: Initially integrated with Odoo for newsletter and consultation bookings. Most recently, all Odoo dependencies and calls (including from  which was deleted) were removed. It now directly handles lead storage in MongoDB, email notifications, and uses UUIDs. New endpoints for AI Assessment, ROI Calculator, and Calendar Integration remain. Currently being updated to include an endpoint for service-specific inquiry tracking.
 *   :
-    *   **Importance**: Abstracts all communication with the Odoo 18.3 SaaS instance using XML-RPC.
-    *   **Changes**: Implements functions to establish connections, and create/update records (leads, contacts, opportunities, calendar events) in Odoo. Configured to use live Odoo credentials provided by the user.
+    *   **Importance**: Lists all Python dependencies for the backend.
+    *   **Changes**:  (for Odoo) and related dependencies were removed, simplifying the project's dependencies significantly.
 *   :
-    *   **Importance**: Stores environment variables for database connection and Odoo credentials.
-    *   **Changes**: Updated to include , , , and  for live Odoo synchronization.
+    *   **Importance**: Stores environment variables for database connection and email service.
+    *   **Changes**: , , , and  were removed. New variables for email (e.g., , , ) were added to support direct email notifications.
 *   :
-    *   **Importance**: The primary React component managing the website's structure, navigation, and content.
-    *   **Changes**: Heavily modified for UI/UX overhauls. Recently, it integrated  and  for global regional pricing. It now includes . The  component was restructured to display the interactive tools (AI Assessment, ROI Calculator, Smart Calendar) directly in the body, moving them from the header navigation. Image  attributes for Hero, About, and all 6 Services sections were updated to new AI-generated images.
+    *   **Importance**: The primary React component managing website structure, navigation, and content.
+    *   **Changes**: Heavily modified for UI/UX, regional pricing (, , ), and displaying interactive tools (AI Assessment, ROI Calculator, Smart Calendar) directly in the  component body. Currently undergoing significant modifications to implement service card linking from the homepage to the Services page, and to display detailed service popups on hover/click for service cards on the Services page. Service data structures are being extended to include detailed content for these popups.
 *   :
-    *   **Importance**: Houses custom CSS rules and animations complementing Tailwind for the unique design.
-    *   **Changes**: Evolved to support complex gradients, 3D transformations, floating elements, glass-morphism effects, and performance optimizations. It was updated to adapt to lighter color schemes and ensure smooth animations.
+    *   **Importance**: Houses custom CSS rules and animations.
+    *   **Changes**: Evolved to support complex gradients, 3D transformations, floating elements, and glass-morphism effects. Adaptations for lighter color schemes and smooth animations were made.
 *   :
     *   **Importance**: Main entry point for the React application, crucial for SEO and global metadata.
-    *   **Changes**: Updated with comprehensive SEO meta tags (title, description, keywords, Open Graph, Twitter Cards) to reflect AI-native consulting, regional pricing, and lead generation focus. Includes a basic loading fallback.
+    *   **Changes**: Updated with comprehensive SEO meta tags to reflect AI-native consulting, regional pricing, and lead generation.
 *   :
-    *   **Importance**: Configures Tailwind CSS utility classes and custom themes.
-    *   **Changes**: Added custom  and  colors and defined custom animations (, ) with their keyframes.
+    *   **Importance**: Provides professional documentation and setup instructions for the codebase.
+    *   **Changes**: Has been cleaned up to reflect the current Odoo-free, production-ready state of the application, removing all deployment-specific guides.
 *   :
-    *   **Importance**: Enables advanced configuration for Create React App, allowing custom PostCSS and Tailwind processing.
-    *   **Changes**: Configured PostCSS with  and  plugins for efficient CSS processing.
-*   :
-    *   **Importance**: Documents the testing protocol and execution results.
-    *   **Changes**: Continuously updated to record the outcomes of backend API tests, frontend UI and functionality tests for AI Assessment, ROI Calculator, Smart Calendar, Regional Pricing, and Odoo integration tests. It also tracks pending tasks and test plans.
+    *   **Importance**: Documents the testing protocol and results.
+    *   **Changes**: Continuously updated to record outcomes of backend API tests (especially after Odoo removal) and to track pending tasks and test plans.
 </code_architecture>
 
 <pending_tasks>
-The AI engineer has completed the interactive tools' frontend and backend integration, as well as the regional pricing system. The immediate pending task is the deployment of the application.
--   Guide the user through the **Netlify Drop** deployment process for the frontend application.
+-   Integrate Book Free Consultation buttons with Google Calendar.
+-   Add a comprehensive FAQ section on the Services page with SEO-optimized questions and answers.
+-   Ensure all new features collectively increase the website's Search Engine Ranking.
 </pending_tasks>
 
 <current_work>
-Immediately before this summary request, the AI engineer was in the final stages of deploying the Orgainse Consulting website, which is now fully developed, production-ready, and feature-rich.
+Immediately before this summary request, the AI engineer was actively implementing several new features for the Orgainse Consulting website, focusing heavily on enhancing user engagement and SEO.
 
-**Key achievements in the latest phase:**
-*   **Interactive Lead Generation Tools**: The frontend for the AI Assessment Tool, ROI Calculator, and Smart Calendar have been fully implemented and integrated. These tools are now prominently displayed in the main body of the  component, within a dedicated Lead Generation Hub section, aligning with a prominent lead generation strategy.
-*   **Regional Pricing System**: A sophisticated regional pricing and currency system has been implemented. This system automatically detects the user's region and adjusts service and resource prices based on Purchasing Power Parity (PPP), with an option for manual region selection via a  component. Notably, the pricing for the Indian market has been specifically adjusted to appear in thousands (e.g., ₹2,316 for a previously 21 value), making it significantly more eye-catching and valuable to the local audience, while other regions maintain reasonable pricing.
-*   **Brand-Aligned Imagery**: All static images across the website (Hero, About, and all 6 Services sections) have been replaced with unique, professional, AI-generated visuals that perfectly align with Orgainse's AI-native consulting brand, featuring futuristic and tech-forward aesthetics.
-*   **Odoo SaaS 18.3 Integration**: The backend is fully integrated with Odoo CRM, Marketing, Calendar, and Sales modules. Odoo credentials provided by the user (https://orgainse.odoo.com, database: orgainse, username: orgainse@gmail.com, password: Orgainse25%swag) were successfully configured, and a 100% verified live connection ensures all form submissions and interactive tool data seamlessly syncs with Odoo.
-*   **Comprehensive Testing**: Extensive backend tests were conducted, confirming the functionality of all APIs (contact form, newsletter, AI assessment, ROI calculator, smart calendar) and the Odoo integration, achieving a 90% success rate overall and 100% for Odoo integration specific tests.
+The current work revolves around:
+1.  **Service Card Linking**: Ensuring that service cards displayed on the homepage correctly link to their respective detailed sections or popups on the dedicated Services page. This involves modifying the  component to add  or  functionality.
+2.  **Service Detail Popups**: Developing a system where, on the Services page, hovering over or clicking a Learn more button on a service card triggers a popup modal. This popup will provide in-depth information, specifically detailing What the service will do to them, Why they should choose it, and What they will get from the service. This requires significant modifications to the  to define the popup component, manage its state (open/close), and populate it dynamically with service-specific content. The data structure for services is being enhanced to store this detailed information.
+3.  **Service-Specific CRM Tracking**: Implementing a new backend API endpoint in  to capture and segregate clicks and inquiries originating from specific service cards. This ensures that CRM data provides granular insights into customer interest per service. The backend modifications include defining a new FastAPI route and associated logic to store this data in MongoDB.
+4.  **Google Calendar Integration**: The engineer has just successfully called the  to get a detailed guide for integrating Google Calendar. The next immediate step is to implement this integration for all Book Free Consultation buttons across the site, making it easier for customers to schedule appointments directly.
 
-**Current State & Nuances:**
-The entire application (frontend and backend) is functional and stable. The frontend includes a  context () to manage regional settings globally, and a  component to allow users to switch regions. The  component dynamically renders the interactive tool cards and free resources with region-adjusted worth values. All design elements are consistent with the revolutionary UI.
-
-**Deployment Nuances:**
-The AI engineer encountered issues with direct Odoo content upload and Vercel's GitHub authentication. Consequently, multiple deployment options (Odoo HTML upload, domain redirect, Vercel, Netlify, GitHub Pages, Firebase Hosting) were explored and presented to the user. The current immediate task involves guiding the user through the **Netlify Drop** deployment process, which was chosen by the user as the easiest alternative given the previous issues. The  command has been successfully executed, and the necessary  folder containing the optimized frontend assets is ready for deployment.
+The website's core functionality is stable and Odoo-free. The backend now manages leads directly in MongoDB with email notifications. The frontend handles regional pricing and displays all interactive tools. The codebase has been thoroughly cleaned of all previous deployment-related files and configurations, making it ready for a fresh deployment strategy. The focus is currently on the  file for frontend UI/UX changes and  for backend API updates and data handling.
 </current_work>
 
 <optional_next_step>
-Guide the user to download the  folder from their GitHub repository and drag it to Netlify Drop for immediate deployment.
+Implement the Google Calendar integration for Book Free Consultation buttons using the playbook just obtained.
 </optional_next_step>
