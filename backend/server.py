@@ -1257,6 +1257,8 @@ async def startup_event():
         await db.ai_assessments.create_index("timestamp")
         await db.roi_calculations.create_index("timestamp") 
         await db.calendar_bookings.create_index("timestamp")
+        await db.google_calendar_bookings.create_index("timestamp")
+        await db.google_calendar_bookings.create_index("event_id")
         logger.info("Database indexes created successfully")
     except Exception as e:
         logger.error(f"Error creating indexes: {str(e)}")
