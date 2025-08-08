@@ -6,8 +6,14 @@ Tests actual connection to Odoo instance and module access
 
 import sys
 import os
-sys.path.append('/app/backend')
+from pathlib import Path
+from dotenv import load_dotenv
 
+# Load environment variables
+backend_dir = Path('/app/backend')
+load_dotenv(backend_dir / '.env')
+
+sys.path.append('/app/backend')
 from odoo_integration import OdooIntegration
 import asyncio
 from datetime import datetime
