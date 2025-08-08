@@ -19,14 +19,10 @@ import {
 } from 'lucide-react';
 
 const GoogleCalendarBooking = ({ isOpen, onClose }) => {
-  const [step, setStep] = useState('auth'); // auth, slots, booking, confirmation
+  const [step, setStep] = useState('slots'); // slots, booking, confirmation
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  
-  // Auth state
-  const [userToken, setUserToken] = useState(null);
-  const [authUrl, setAuthUrl] = useState('');
   
   // Slots state
   const [availableSlots, setAvailableSlots] = useState([]);
@@ -47,101 +43,21 @@ const GoogleCalendarBooking = ({ isOpen, onClose }) => {
 
   const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
 
-  // Initialize Google Calendar authentication
-  const initiateAuth = async () => {
-    try {
-      setIsLoading(true);
-      setError('');
-      
-      const response = await axios.get(`${API_BASE_URL}/api/calendar/auth/login`);
-      
-      if (response.data.authorization_url) {
-        // Open authentication in new window
-        const authWindow = window.open(
-          response.data.authorization_url,
-          'googleAuth',
-          'width=500,height=600,scrollbars=yes,resizable=yes'
-        );
-        
-        // Listen for authentication completion
-        const checkAuth = setInterval(async () => {
-          try {
-            if (authWindow.closed) {
-              clearInterval(checkAuth);
-              // Check URL for callback parameters
-              const urlParams = new URLSearchParams(window.location.search);
-              const code = urlParams.get('code');
-              const state = urlParams.get('state');
-              
-              if (code && state) {
-                await handleAuthCallback(code, state);
-              } else {
-                setError('Authentication was cancelled or failed.');
-                setIsLoading(false);
-              }
-            }
-          } catch (error) {
-            clearInterval(checkAuth);
-            setError('Authentication failed. Please try again.');
-            setIsLoading(false);
-          }
-        }, 1000);
-        
-        setTimeout(() => {
-          clearInterval(checkAuth);
-          if (!authWindow.closed) {
-            authWindow.close();
-          }
-          if (!userToken) {
-            setError('Authentication timeout. Please try again.');
-            setIsLoading(false);
-          }
-        }, 300000); // 5 minutes timeout
-        
-      } else {
-        throw new Error('No authorization URL received');
-      }
-    } catch (error) {
-      console.error('Auth initiation failed:', error);
-      setError('Failed to start authentication. Please try again.');
-      setIsLoading(false);
+  // Fetch available time slots when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      fetchAvailableSlots();
     }
-  };
+  }, [isOpen]);
 
-  // Handle OAuth callback
-  const handleAuthCallback = async (code, state) => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/api/calendar/auth/callback`, {
-        params: { code, state }
-      });
-      
-      if (response.data.user_id) {
-        setUserToken(response.data.user_id);
-        setStep('slots');
-        await fetchAvailableSlots(response.data.user_id);
-        
-        // Clean up URL
-        window.history.replaceState({}, document.title, window.location.pathname);
-      } else {
-        throw new Error('No user ID received');
-      }
-    } catch (error) {
-      console.error('Auth callback failed:', error);
-      setError('Authentication failed. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // Fetch available time slots
-  const fetchAvailableSlots = async (token) => {
+  // Fetch available time slots from organization calendar
+  const fetchAvailableSlots = async () => {
     try {
       setIsLoading(true);
       setError('');
       
       const response = await axios.get(`${API_BASE_URL}/api/calendar/available-slots`, {
         params: { 
-          user_id: token,
           duration: 30
         }
       });
@@ -150,7 +66,11 @@ const GoogleCalendarBooking = ({ isOpen, onClose }) => {
       setIsLoading(false);
     } catch (error) {
       console.error('Failed to fetch slots:', error);
-      setError('Failed to load available time slots. Please try again.');
+      if (error.response?.status === 503) {
+        setError('Organization calendar not available. Please try again later or contact support.');
+      } else {
+        setError('Failed to load available time slots. Please try again.');
+      }
       setIsLoading(false);
     }
   };
@@ -165,8 +85,8 @@ const GoogleCalendarBooking = ({ isOpen, onClose }) => {
   const handleBooking = async (e) => {
     e.preventDefault();
     
-    if (!selectedSlot || !userToken) {
-      setError('Please select a time slot and authenticate.');
+    if (!selectedSlot) {
+      setError('Please select a time slot.');
       return;
     }
 
@@ -188,10 +108,7 @@ const GoogleCalendarBooking = ({ isOpen, onClose }) => {
 
       const response = await axios.post(
         `${API_BASE_URL}/api/calendar/book-consultation`,
-        bookingRequest,
-        {
-          params: { user_id: userToken }
-        }
+        bookingRequest
       );
 
       setBookingResult(response.data);
@@ -199,10 +116,14 @@ const GoogleCalendarBooking = ({ isOpen, onClose }) => {
       setSuccess('Consultation booked successfully!');
     } catch (error) {
       console.error('Booking failed:', error);
-      setError(
-        error.response?.data?.detail || 
-        'Failed to book consultation. Please try again.'
-      );
+      if (error.response?.status === 503) {
+        setError('Organization calendar not available. Please try again later or contact support.');
+      } else {
+        setError(
+          error.response?.data?.detail || 
+          'Failed to book consultation. Please try again.'
+        );
+      }
     } finally {
       setIsLoading(false);
     }
@@ -249,20 +170,20 @@ const GoogleCalendarBooking = ({ isOpen, onClose }) => {
           
           {/* Progress Steps */}
           <div className="flex items-center mt-4 space-x-2">
-            {['auth', 'slots', 'booking', 'confirmation'].map((stepName, index) => (
+            {['slots', 'booking', 'confirmation'].map((stepName, index) => (
               <div key={stepName} className="flex items-center">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
                   step === stepName ? 'bg-orange-600 text-white' :
-                  ['auth', 'slots', 'booking', 'confirmation'].indexOf(step) > index ? 'bg-green-500 text-white' :
+                  ['slots', 'booking', 'confirmation'].indexOf(step) > index ? 'bg-green-500 text-white' :
                   'bg-gray-200 text-gray-600'
                 }`}>
-                  {['auth', 'slots', 'booking', 'confirmation'].indexOf(step) > index ? 
+                  {['slots', 'booking', 'confirmation'].indexOf(step) > index ? 
                     <CheckCircle className="h-4 w-4" /> : index + 1
                   }
                 </div>
-                {index < 3 && (
+                {index < 2 && (
                   <div className={`w-12 h-1 ml-2 ${
-                    ['auth', 'slots', 'booking', 'confirmation'].indexOf(step) > index ? 'bg-green-500' : 'bg-gray-200'
+                    ['slots', 'booking', 'confirmation'].indexOf(step) > index ? 'bg-green-500' : 'bg-gray-200'
                   }`} />
                 )}
               </div>
@@ -288,45 +209,7 @@ const GoogleCalendarBooking = ({ isOpen, onClose }) => {
             </div>
           )}
 
-          {/* Step 1: Authentication */}
-          {step === 'auth' && (
-            <div className="text-center">
-              <div className="mb-6">
-                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Calendar className="h-8 w-8 text-orange-600" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Connect Google Calendar</h3>
-                <p className="text-gray-600 max-w-md mx-auto">
-                  To book your consultation, we need to connect with your Google Calendar to find available times and create the meeting.
-                </p>
-              </div>
-              
-              <Button
-                onClick={initiateAuth}
-                disabled={isLoading}
-                className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 text-lg"
-              >
-                {isLoading ? (
-                  <>
-                    <Loader className="h-5 w-5 mr-2 animate-spin" />
-                    Connecting...
-                  </>
-                ) : (
-                  <>
-                    <Calendar className="h-5 w-5 mr-2" />
-                    Connect Google Calendar
-                  </>
-                )}
-              </Button>
-              
-              <div className="mt-6 text-sm text-gray-500">
-                <p>🔒 Secure OAuth 2.0 authentication</p>
-                <p>We only access your calendar to schedule meetings</p>
-              </div>
-            </div>
-          )}
-
-          {/* Step 2: Available Slots */}
+          {/* Step 1: Available Slots */}
           {step === 'slots' && (
             <div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">Choose Available Time</h3>
@@ -359,7 +242,7 @@ const GoogleCalendarBooking = ({ isOpen, onClose }) => {
                   <Calendar className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                   <p className="text-gray-600 mb-4">No available slots found for the next 7 days.</p>
                   <Button 
-                    onClick={() => fetchAvailableSlots(userToken)}
+                    onClick={fetchAvailableSlots}
                     variant="outline"
                   >
                     Refresh Slots
@@ -369,7 +252,7 @@ const GoogleCalendarBooking = ({ isOpen, onClose }) => {
             </div>
           )}
 
-          {/* Step 3: Booking Form */}
+          {/* Step 2: Booking Form */}
           {step === 'booking' && selectedSlot && (
             <div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">Booking Details</h3>
@@ -507,7 +390,7 @@ const GoogleCalendarBooking = ({ isOpen, onClose }) => {
             </div>
           )}
 
-          {/* Step 4: Confirmation */}
+          {/* Step 3: Confirmation */}
           {step === 'confirmation' && bookingResult && (
             <div className="text-center">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
