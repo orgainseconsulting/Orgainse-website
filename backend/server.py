@@ -143,7 +143,22 @@ class ROICalculatorResult(BaseModel):
     estimated_project_cost: float
     timestamp: datetime = Field(default_factory=datetime.utcnow)
 
-# Calendar Booking Models
+# Service Inquiry Tracking Models
+class ServiceInquiry(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    service_id: str
+    service_name: str
+    inquiry_type: str
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    source: str
+    user_data: Optional[Dict[str, Any]] = None
+
+class ServiceInquiryCreate(BaseModel):
+    service_id: str
+    service_name: str
+    inquiry_type: str
+    source: str
+    user_data: Optional[Dict[str, Any]] = None
 class CalendarBookingCreate(BaseModel):
     name: str
     email: EmailStr
