@@ -2285,64 +2285,6 @@ const Services = () => {
             </div>
           )}
 
-          {/* FAQ Section */}
-          <div className="mt-16 bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl font-bold text-slate-800 mb-4">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-slate-600 max-w-2xl mx-auto">
-                Get answers to the most common questions about our AI-native consulting services
-              </p>
-            </div>
-
-            <div className="max-w-4xl mx-auto space-y-4">
-              {faqData.map((faq, index) => (
-                <div key={index} className="border border-slate-200 rounded-2xl overflow-hidden">
-                  <button
-                    onClick={() => toggleFaq(index)}
-                    className="w-full text-left p-6 hover:bg-slate-50 transition-colors flex items-center justify-between"
-                  >
-                    <h3 className="text-lg font-semibold text-slate-800 pr-4">
-                      {faq.question}
-                    </h3>
-                    {openFaq === index ? (
-                      <ChevronUp className="h-5 w-5 text-orange-600 flex-shrink-0" />
-                    ) : (
-                      <ChevronDown className="h-5 w-5 text-slate-400 flex-shrink-0" />
-                    )}
-                  </button>
-                  {openFaq === index && (
-                    <div className="px-6 pb-6 animate-fade-in">
-                      <p className="text-slate-600 leading-relaxed">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Call to Action */}
-          <div className="text-center mt-10 animate-fade-in" style={{ animationDelay: '1000ms' }}>
-            <div className="bg-white rounded-2xl p-6 shadow-xl border border-gray-100 max-w-3xl mx-auto">
-              <h3 className="text-2xl font-bold text-slate-800 mb-3">
-                Ready to Transform Your Business with AI?
-              </h3>
-              <p className="text-slate-600 mb-4 text-base">
-                Get a personalized consultation and discover how our AI-native solutions can accelerate your growth
-              </p>
-              <button className="group relative px-6 py-3 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative z-10 flex items-center justify-center">
-                  Start Your AI Journey
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </button>
-            </div>
-          </div>
-
         {/* Comprehensive FAQ Section for SEO */}
         <section className="py-20 bg-gradient-to-br from-slate-50 to-orange-50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
