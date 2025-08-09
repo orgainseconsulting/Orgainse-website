@@ -1679,9 +1679,7 @@ const Services = () => {
         whyChooseUs: "Traditional agile coaching is limited by human availability and subjective insights. Our AI coach provides 24/7 support, data-driven recommendations, and objective performance analysis that improves team velocity by 65% while reducing burnout.",
         whatYouGet: "Complete agile acceleration platform including GPT-powered Scrum coach, automated retrospective analysis, AI backlog prioritization engine, sprint planning optimization, team performance analytics, and continuous improvement recommendations.",
         benefits: ["65% improvement in team velocity", "50% reduction in sprint planning time", "24/7 AI coaching availability", "Data-driven performance insights", "Automated administrative tasks", "Predictive delivery forecasting"],
-        industries: ["Software Development", "Technology Startups", "Digital Agencies", "Product Teams", "IT Services", "Innovation Labs"],
-        pricing: "Starting from $3,500/month per team",
-        timeline: "1-week onboarding, immediate velocity improvements"
+        industries: ["Software Development", "Technology Startups", "Digital Agencies", "Product Teams", "IT Services", "Innovation Labs"]
       }
     },
     {
