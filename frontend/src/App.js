@@ -1602,6 +1602,15 @@ const About = () => {
 const Services = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [showContactForm, setShowContactForm] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    message: ''
+  });
   const { openGoogleCalendar } = useGoogleCalendar();
 
   const services = [
