@@ -1910,17 +1910,13 @@ const Services = () => {
             </p>
           </div>
 
-          {/* Enhanced Services Grid with Popup Functionality */}
+          {/* Enhanced Services Grid with Fixed Popup Functionality */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
               <div 
                 key={index} 
-                id={service.title.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '').replace('--', '-')}
-                className="group relative animate-fade-in cursor-pointer"
+                className="group relative animate-fade-in"
                 style={{ animationDelay: `${index * 150}ms` }}
-                onMouseEnter={() => setSelectedService(service)}
-                onMouseLeave={() => setSelectedService(null)}
-                onClick={() => openServicePopup(service)}
               >
                 {/* Card Glow Effect */}
                 <div className={`absolute -inset-1 bg-gradient-to-r ${service.gradient} rounded-3xl blur opacity-25 group-hover:opacity-60 transition duration-1000`}></div>
@@ -1937,11 +1933,6 @@ const Services = () => {
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="bg-white/90 backdrop-blur-sm rounded-full p-2">
-                        <ExternalLink className="h-4 w-4 text-orange-600" />
-                      </div>
-                    </div>
                   </div>
 
                   {/* Icon and Title */}
@@ -1971,33 +1962,21 @@ const Services = () => {
                     ))}
                   </div>
 
-                  {/* Hover Overlay with Action Buttons */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-3xl flex items-end justify-center pb-8">
-                    <div className="text-center transform translate-y-8 group-hover:translate-y-0 transition-transform duration-300">
-                      <h4 className="text-white font-bold text-lg mb-2">Learn More</h4>
-                      <p className="text-white/90 text-sm mb-4 px-4">
-                        Discover detailed benefits, pricing, and how this service transforms your business
-                      </p>
-                      <button 
-                        className="bg-white text-slate-800 px-6 py-2 rounded-lg font-semibold hover:bg-orange-100 transition-colors"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          openServicePopup(service);
-                        }}
-                      >
-                        View Details
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Action Button */}
+                  {/* Learn More Button */}
                   <button 
-                    className={`w-full group/btn relative px-6 py-3 bg-gradient-to-r ${service.gradient} text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 overflow-hidden`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openServicePopup(service);
-                    }}
+                    className={`w-full relative px-6 py-3 bg-gradient-to-r ${service.gradient} text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 overflow-hidden`}
+                    onClick={() => openServicePopup(service)}
                   >
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                    <span className="relative z-10 flex items-center justify-center">
+                      Learn More
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
                     <div className={`absolute inset-0 bg-gradient-to-r ${service.gradient.split(' ').reverse().join(' ')} opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300`}></div>
                     <span className="relative z-10 flex items-center justify-center text-sm">
                       Learn More
