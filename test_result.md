@@ -176,7 +176,7 @@ frontend:
     implemented: true
     working: false
     file: "frontend/src/App.js"
-    stuck_count: 1
+    stuck_count: 2
     priority: "high"
     needs_retesting: true
     status_history:
@@ -186,12 +186,15 @@ frontend:
       - working: false
         agent: "testing"
         comment: "❌ CRITICAL ISSUE: Found 12 FAQ sections instead of 1 - there are multiple duplicate FAQ sections on the Services page. This contradicts the previous test results and indicates that duplicate FAQ sections have been added or are being rendered multiple times. Only ONE FAQ section should exist on the Services page."
+      - working: false
+        agent: "testing"
+        comment: "❌ CRITICAL ISSUE CONFIRMED: Found 1 FAQ heading but 2 FAQ sections on Services page. There are duplicate FAQ sections that need to be removed. Only ONE FAQ section should exist. The FAQ functionality appears to work but the duplication issue persists."
 
   - task: "Services Page - Learn More Popups"
     implemented: true
     working: false
     file: "frontend/src/App.js"
-    stuck_count: 1
+    stuck_count: 2
     priority: "high"
     needs_retesting: true
     status_history:
@@ -201,6 +204,9 @@ frontend:
       - working: false
         agent: "testing"
         comment: "❌ CRITICAL ISSUE: Found 33 Investment/Timeline sections in service popups - these should be COMPLETELY REMOVED as per review request. While the required 3 sections (What/Why/What You'll Get) are present and contact forms work properly, the Investment and Timeline sections that were supposed to be removed are still showing in the popups. This is a critical requirement that must be fixed."
+      - working: false
+        agent: "testing"
+        comment: "❌ CRITICAL ISSUE CONFIRMED: Found 3 Investment/Timeline section headers in the first service popup tested. These sections should be COMPLETELY REMOVED as per review request. All required sections (What This Service Does, Why Choose This Service, What You'll Get) are present and contact forms work properly, but the Investment/Timeline sections that were supposed to be removed are still showing in the popups. This is a deployment-blocking issue."
 
   - task: "Google Calendar Integration - Book Free Consultation Buttons"
     implemented: true
