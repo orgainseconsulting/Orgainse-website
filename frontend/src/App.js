@@ -2015,118 +2015,278 @@ const Services = () => {
             ))}
           </div>
 
-          {/* Service Detail Popup Modal */}
+          {/* Enhanced Service Detail Popup Modal */}
           {isPopupOpen && selectedService && (
-            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-              <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto animate-fade-in">
-                <div className="relative p-8">
-                  {/* Close Button */}
-                  <button 
-                    onClick={closeServicePopup}
-                    className="absolute top-6 right-6 p-2 hover:bg-slate-100 rounded-full transition-colors"
-                  >
-                    <X className="h-6 w-6 text-slate-600" />
-                  </button>
-
-                  {/* Header */}
-                  <div className="flex items-start space-x-6 mb-8">
-                    <div className={`p-4 rounded-2xl bg-gradient-to-r ${selectedService.gradient} shadow-xl`}>
-                      <selectedService.icon className="h-8 w-8 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h2 className="text-3xl font-bold text-slate-800 mb-3">
-                        {selectedService.title}
-                      </h2>
-                      <p className="text-slate-600 text-lg">
-                        {selectedService.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Detailed Information Sections */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                    {/* What It Does */}
-                    <div className="bg-slate-50 rounded-2xl p-6">
-                      <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
-                        <Brain className="h-5 w-5 mr-2 text-orange-600" />
-                        What This Service Does
-                      </h3>
-                      <p className="text-slate-600 leading-relaxed">
-                        {selectedService.detailedInfo.whatItDoes}
-                      </p>
-                    </div>
-
-                    {/* Why Choose Us */}
-                    <div className="bg-orange-50 rounded-2xl p-6">
-                      <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
-                        <Award className="h-5 w-5 mr-2 text-orange-600" />
-                        Why Choose Orgainse
-                      </h3>
-                      <p className="text-slate-600 leading-relaxed">
-                        {selectedService.detailedInfo.whyChooseUs}
-                      </p>
-                    </div>
-
-                    {/* What You Get */}
-                    <div className="bg-green-50 rounded-2xl p-6">
-                      <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
-                        <CheckCircle className="h-5 w-5 mr-2 text-green-600" />
-                        What You Get
-                      </h3>
-                      <p className="text-slate-600 leading-relaxed mb-4">
-                        {selectedService.detailedInfo.whatYouGet}
-                      </p>
-                    </div>
-
-                    {/* Key Benefits */}
-                    <div className="bg-blue-50 rounded-2xl p-6">
-                      <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
-                        <TrendingUp className="h-5 w-5 mr-2 text-blue-600" />
-                        Key Benefits
-                      </h3>
-                      <ul className="space-y-2">
-                        {selectedService.detailedInfo.benefits.map((benefit, index) => (
-                          <li key={index} className="flex items-start space-x-2">
-                            <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                            <span className="text-slate-600 text-sm">{benefit}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  {/* Pricing and Timeline */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div className="text-center p-6 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl">
-                      <h4 className="font-bold text-slate-800 mb-2">Investment</h4>
-                      <p className="text-2xl font-bold text-orange-600">{selectedService.detailedInfo.pricing}</p>
-                    </div>
-                    <div className="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl">
-                      <h4 className="font-bold text-slate-800 mb-2">Timeline</h4>
-                      <p className="text-lg font-semibold text-green-600">{selectedService.detailedInfo.timeline}</p>
-                    </div>
-                    <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl">
-                      <h4 className="font-bold text-slate-800 mb-2">Industries</h4>
-                      <p className="text-sm text-slate-600">{selectedService.detailedInfo.industries.join(', ')}</p>
-                    </div>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <button 
-                      onClick={openGoogleCalendar}
-                      className={`flex-1 bg-gradient-to-r ${selectedService.gradient} text-white px-8 py-4 rounded-xl font-bold hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
-                    >
-                      Book Free Consultation
-                    </button>
+            <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+              <div className="bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto animate-fade-in shadow-2xl">
+                
+                {!isSubmitted ? (
+                  <div className="relative">
+                    {/* Close Button */}
                     <button 
                       onClick={closeServicePopup}
-                      className="flex-1 bg-slate-100 text-slate-700 px-8 py-4 rounded-xl font-semibold hover:bg-slate-200 transition-colors"
+                      className="absolute top-6 right-6 p-2 hover:bg-slate-100 rounded-full transition-colors z-10"
                     >
-                      Close
+                      <X className="h-6 w-6 text-slate-600" />
                     </button>
+
+                    {/* Header Section */}
+                    <div className={`bg-gradient-to-r ${selectedService.gradient} p-8 rounded-t-3xl text-white`}>
+                      <div className="flex items-center space-x-4 mb-4">
+                        <div className="p-3 bg-white/20 rounded-2xl backdrop-blur-sm">
+                          <selectedService.icon className="h-8 w-8 text-white" />
+                        </div>
+                        <div>
+                          <h2 className="text-3xl font-bold mb-2">
+                            {selectedService.title}
+                          </h2>
+                          <p className="text-white/90 text-lg">
+                            {selectedService.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {!showContactForm ? (
+                      // Service Information View
+                      <div className="p-8">
+                        {/* Main Content Grid */}
+                        <div className="grid md:grid-cols-2 gap-8 mb-8">
+                          {/* What This Service Does */}
+                          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100">
+                            <h3 className="text-2xl font-bold text-slate-800 mb-4 flex items-center">
+                              <Target className="h-6 w-6 mr-3 text-blue-600" />
+                              What This Service Does
+                            </h3>
+                            <p className="text-slate-700 leading-relaxed text-lg">
+                              {selectedService.detailedInfo.whatItDoes}
+                            </p>
+                          </div>
+
+                          {/* Why Choose This Service */}
+                          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100">
+                            <h3 className="text-2xl font-bold text-slate-800 mb-4 flex items-center">
+                              <CheckCircle className="h-6 w-6 mr-3 text-green-600" />
+                              Why Choose This Service
+                            </h3>
+                            <p className="text-slate-700 leading-relaxed text-lg">
+                              {selectedService.detailedInfo.whyChooseUs}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* What You'll Get */}
+                        <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-6 border border-orange-100 mb-8">
+                          <h3 className="text-2xl font-bold text-slate-800 mb-4 flex items-center">
+                            <Award className="h-6 w-6 mr-3 text-orange-600" />
+                            What You'll Get
+                          </h3>
+                          <p className="text-slate-700 leading-relaxed text-lg mb-4">
+                            {selectedService.detailedInfo.whatYouGet}
+                          </p>
+                          
+                          {/* Benefits List */}
+                          <div className="grid md:grid-cols-2 gap-4 mt-4">
+                            {selectedService.detailedInfo.benefits.map((benefit, index) => (
+                              <div key={index} className="flex items-center space-x-3">
+                                <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+                                <span className="text-slate-700 font-medium">{benefit}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Pricing and Timeline */}
+                        <div className="grid md:grid-cols-2 gap-6 mb-8">
+                          <div className="bg-slate-100 rounded-2xl p-6">
+                            <h4 className="text-xl font-bold text-slate-800 mb-2 flex items-center">
+                              <TrendingUp className="h-5 w-5 mr-2 text-purple-600" />
+                              Investment
+                            </h4>
+                            <p className="text-2xl font-bold text-purple-600">
+                              {selectedService.detailedInfo.pricing}
+                            </p>
+                          </div>
+                          
+                          <div className="bg-slate-100 rounded-2xl p-6">
+                            <h4 className="text-xl font-bold text-slate-800 mb-2 flex items-center">
+                              <Calendar className="h-5 w-5 mr-2 text-blue-600" />
+                              Timeline
+                            </h4>
+                            <p className="text-xl font-semibold text-blue-600">
+                              {selectedService.detailedInfo.timeline}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Call-to-Action */}
+                        <div className="text-center">
+                          <h3 className="text-2xl font-bold text-slate-800 mb-4">
+                            Ready to Transform Your Business?
+                          </h3>
+                          <p className="text-slate-600 mb-6 text-lg">
+                            Get a personalized consultation and detailed proposal for your project
+                          </p>
+                          
+                          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button
+                              onClick={() => setShowContactForm(true)}
+                              className={`px-8 py-4 bg-gradient-to-r ${selectedService.gradient} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105`}
+                            >
+                              Get Custom Proposal
+                            </button>
+                            
+                            <button
+                              onClick={openGoogleCalendar}
+                              className="px-8 py-4 bg-white border-2 border-slate-300 text-slate-700 font-bold rounded-xl hover:border-slate-400 transition-all transform hover:scale-105"
+                            >
+                              Book Free Consultation
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      // Contact Form View
+                      <div className="p-8">
+                        <div className="max-w-2xl mx-auto">
+                          <div className="text-center mb-8">
+                            <h3 className="text-3xl font-bold text-slate-800 mb-4">
+                              Get Your Custom Proposal
+                            </h3>
+                            <p className="text-slate-600 text-lg">
+                              Tell us about your specific needs and we'll create a tailored proposal for your <strong>{selectedService.title}</strong> project
+                            </p>
+                          </div>
+
+                          <form onSubmit={handleContactFormSubmit} className="space-y-6">
+                            <div className="grid md:grid-cols-2 gap-6">
+                              <div>
+                                <label className="block text-sm font-bold text-slate-700 mb-2">
+                                  Full Name *
+                                </label>
+                                <Input
+                                  type="text"
+                                  value={formData.name}
+                                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                                  required
+                                  className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                  placeholder="Your full name"
+                                />
+                              </div>
+                              
+                              <div>
+                                <label className="block text-sm font-bold text-slate-700 mb-2">
+                                  Email Address *
+                                </label>
+                                <Input
+                                  type="email"
+                                  value={formData.email}
+                                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                  required
+                                  className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                  placeholder="your.email@company.com"
+                                />
+                              </div>
+                            </div>
+
+                            <div className="grid md:grid-cols-2 gap-6">
+                              <div>
+                                <label className="block text-sm font-bold text-slate-700 mb-2">
+                                  Phone Number
+                                </label>
+                                <Input
+                                  type="tel"
+                                  value={formData.phone}
+                                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                                  className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                  placeholder="+1 (555) 123-4567"
+                                />
+                              </div>
+                              
+                              <div>
+                                <label className="block text-sm font-bold text-slate-700 mb-2">
+                                  Company
+                                </label>
+                                <Input
+                                  type="text"
+                                  value={formData.company}
+                                  onChange={(e) => setFormData({...formData, company: e.target.value})}
+                                  className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                  placeholder="Your company name"
+                                />
+                              </div>
+                            </div>
+
+                            <div>
+                              <label className="block text-sm font-bold text-slate-700 mb-2">
+                                Project Details & Requirements
+                              </label>
+                              <Textarea
+                                value={formData.message}
+                                onChange={(e) => setFormData({...formData, message: e.target.value})}
+                                className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                rows={4}
+                                placeholder="Tell us about your specific needs, goals, timeline, and any questions you have about this service..."
+                              />
+                            </div>
+
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                              <button
+                                type="button"
+                                onClick={() => setShowContactForm(false)}
+                                className="px-6 py-3 bg-slate-200 text-slate-700 font-semibold rounded-lg hover:bg-slate-300 transition-colors"
+                              >
+                                ← Back to Details
+                              </button>
+                              
+                              <button
+                                type="submit"
+                                className={`px-8 py-3 bg-gradient-to-r ${selectedService.gradient} text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105`}
+                              >
+                                Send My Proposal Request
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                </div>
+                ) : (
+                  // Thank You Message
+                  <div className="p-12 text-center">
+                    <div className="mb-8">
+                      <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <CheckCircle className="h-12 w-12 text-green-600" />
+                      </div>
+                      
+                      <h3 className="text-4xl font-bold text-slate-800 mb-4">
+                        Thank You!
+                      </h3>
+                      
+                      <p className="text-xl text-slate-600 mb-6 max-w-2xl mx-auto">
+                        Your request for <strong>{selectedService.title}</strong> has been received. 
+                        Our team will contact you within 24 hours with a customized proposal and next steps.
+                      </p>
+                      
+                      <div className="bg-slate-50 rounded-2xl p-6 mb-8 max-w-md mx-auto">
+                        <h4 className="font-bold text-slate-800 mb-2">What happens next?</h4>
+                        <ul className="text-slate-600 text-sm space-y-1 text-left">
+                          <li>• We'll review your requirements within 4 hours</li>
+                          <li>• Our specialists will prepare your custom proposal</li>
+                          <li>• We'll schedule a detailed consultation call</li>
+                          <li>• You'll receive a comprehensive project plan</li>
+                        </ul>
+                      </div>
+                      
+                      <Button
+                        onClick={closeServicePopup}
+                        className="bg-slate-600 hover:bg-slate-700 text-white px-8 py-3 text-lg font-bold rounded-xl"
+                      >
+                        Close
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           )}
