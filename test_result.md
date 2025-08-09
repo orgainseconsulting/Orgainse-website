@@ -174,15 +174,18 @@ frontend:
 
   - task: "Services Page - Single FAQ Section"
     implemented: true
-    working: true
+    working: false
     file: "frontend/src/App.js"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: true
         agent: "testing"
         comment: "✅ VERIFIED: Services page has exactly ONE FAQ section (not duplicate). Found 1 FAQ heading element with 'Frequently Asked Questions' title. No duplicate FAQ sections detected."
+      - working: false
+        agent: "testing"
+        comment: "❌ CRITICAL ISSUE: Found 12 FAQ sections instead of 1 - there are multiple duplicate FAQ sections on the Services page. This contradicts the previous test results and indicates that duplicate FAQ sections have been added or are being rendered multiple times. Only ONE FAQ section should exist on the Services page."
 
   - task: "Services Page - Learn More Popups"
     implemented: true
