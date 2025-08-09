@@ -228,12 +228,11 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Google Calendar OAuth Login Endpoint"
-    - "Google Calendar OAuth Callback Endpoint"
-    - "Google Calendar Available Slots Endpoint"
-    - "Google Calendar Book Consultation Endpoint"
-    - "Google Calendar Bookings Retrieval Endpoint"
-    - "Analytics Integration with Google Calendar Data"
+    - "Home Page Service Cards - No Problematic Links"
+    - "Services Page - Single FAQ Section"
+    - "Services Page - Learn More Popups"
+    - "Google Calendar Integration - Book Free Consultation Buttons"
+    - "Navigation and Mobile Responsiveness"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
