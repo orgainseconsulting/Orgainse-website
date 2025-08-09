@@ -1894,89 +1894,65 @@ const Services = () => {
       </section>
 
       {/* Modern Services Grid Layout */}
-      <section className="py-12 bg-gradient-to-br from-white via-slate-50 to-orange-50 relative overflow-hidden">
-        {/* Subtle Background Pattern */}
-        <div className="absolute inset-0 opacity-3">
-          <div className="absolute top-0 left-0 w-full h-full" style={{
-            backgroundImage: `radial-gradient(circle at 20% 20%, #f97316 0%, transparent 40%), radial-gradient(circle at 80% 80%, #10b981 0%, transparent 40%)`
-          }}></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section className="py-16 bg-gradient-to-br from-white to-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="text-center mb-10 animate-fade-in">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="text-4xl font-bold mb-6">
               <span className="text-slate-800">Our </span>
               <span className="bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text text-transparent">
-                AI Arsenal
+                AI-Powered Services
               </span>
             </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Cutting-edge AI solutions designed to transform your business operations and accelerate growth
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+              Comprehensive AI solutions designed to transform your business operations, optimize processes, and accelerate sustainable growth
             </p>
           </div>
 
-          {/* Enhanced Services Grid with Fixed Popup Functionality */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Clean Services Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <div 
                 key={index} 
-                className="group relative animate-fade-in"
+                className="group animate-fade-in"
                 style={{ animationDelay: `${index * 150}ms` }}
               >
-                {/* Card Glow Effect */}
-                <div className={`absolute -inset-1 bg-gradient-to-r ${service.gradient} rounded-3xl blur opacity-25 group-hover:opacity-60 transition duration-1000`}></div>
-                
-                {/* Main Card */}
-                <div className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 border border-gray-100 overflow-hidden h-full flex flex-col">
+                {/* Service Card */}
+                <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 h-full flex flex-col">
                   
-                  {/* Service Image */}
-                  <div className="relative mb-6 overflow-hidden rounded-2xl">
-                    <img 
-                      src={service.image} 
-                      alt={service.title}
-                      className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-
-                  {/* Icon and Title */}
-                  <div className="flex items-start space-x-4 mb-4">
-                    <div className={`p-3 rounded-2xl bg-gradient-to-r ${service.gradient} shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
+                  {/* Card Header */}
+                  <div className="flex items-center space-x-4 mb-4">
+                    <div className={`p-3 rounded-xl bg-gradient-to-r ${service.gradient} shadow-md`}>
                       <service.icon className="h-6 w-6 text-white" />
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-slate-800 group-hover:text-orange-600 transition-colors leading-tight">
-                        {service.title}
-                      </h3>
-                    </div>
+                    <h3 className="text-xl font-bold text-slate-800 leading-tight">
+                      {service.title}
+                    </h3>
                   </div>
 
-                  {/* Description */}
-                  <p className="text-slate-600 leading-relaxed mb-6 flex-1 text-sm group-hover:text-slate-700 transition-colors">
-                    {service.description.substring(0, 150)}...
+                  {/* Service Description */}
+                  <p className="text-slate-600 leading-relaxed mb-6 flex-1">
+                    {service.description}
                   </p>
 
-                  {/* Features List */}
+                  {/* Key Features */}
                   <div className="space-y-2 mb-6">
                     {service.features.slice(0, 3).map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-start space-x-2">
                         <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                        <span className="text-xs text-slate-600 leading-relaxed">{feature}</span>
+                        <span className="text-sm text-slate-600">{feature}</span>
                       </div>
                     ))}
                   </div>
 
                   {/* Learn More Button */}
                   <button 
-                    className={`w-full relative px-6 py-3 bg-gradient-to-r ${service.gradient} text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 overflow-hidden`}
                     onClick={() => openServicePopup(service)}
+                    className={`w-full px-6 py-3 bg-gradient-to-r ${service.gradient} text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105`}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
-                    <span className="relative z-10 flex items-center justify-center">
+                    <span className="flex items-center justify-center">
                       Learn More
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="ml-2 h-4 w-4" />
                     </span>
                   </button>
                 </div>
