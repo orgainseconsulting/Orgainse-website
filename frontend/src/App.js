@@ -1779,47 +1779,6 @@ const Services = () => {
     }
   };
 
-  const faqData = [
-    {
-      question: "What is AI-native consulting and how is it different from traditional consulting?",
-      answer: "AI-native consulting integrates artificial intelligence into every aspect of our consulting process, from analysis to implementation. Unlike traditional consulting that relies solely on human expertise, we use GPT-powered tools, automated analysis, and AI-driven insights to deliver faster, more accurate, and continuously optimized solutions. This approach reduces project timelines by 60-70% while improving outcomes."
-    },
-    {
-      question: "How quickly can I see results from AI project management services?",
-      answer: "Most clients see immediate improvements within 2 weeks of implementation. Our AI Project Management Service (PMaaS) provides instant benefits like automated project planning, real-time risk assessment, and intelligent resource allocation. Full optimization typically occurs within 4-6 weeks, with 45% improvement in project success rates and 60% reduction in planning time."
-    },
-    {
-      question: "What industries do you serve and what's your success rate?",
-      answer: "We serve IT Services, EdTech, FinTech, Healthcare, Hospitality, and Manufacturing across 7 global regions (India, USA, UK, UAE, Australia, New Zealand, South Africa). Our AI-driven approach achieves 85% higher success rates than traditional consulting, with 95% client satisfaction and measurable ROI within 90 days."
-    },
-    {
-      question: "How much do AI consulting services cost and what's the ROI?",
-      answer: "Our services start from $2,500/month for AI Project Management to $15,000 for comprehensive Digital Transformation. Most clients achieve 3-5x ROI within 6 months through operational cost reductions (20-35%), improved efficiency (45-70%), and accelerated growth. We offer regional PPP-adjusted pricing to ensure accessibility across all markets."
-    },
-    {
-      question: "Do you provide ongoing support and what does it include?",
-      answer: "Yes, all our services include ongoing AI-powered support. This includes 24/7 AI assistant access, continuous system optimization, regular performance analytics, quarterly strategy reviews, and immediate issue resolution. Our AI systems continuously learn and improve your operations even after initial implementation."
-    },
-    {
-      question: "How do you ensure data security and compliance in AI implementations?",
-      answer: "We maintain enterprise-grade security with end-to-end encryption, compliance with GDPR, SOC 2, and regional data protection laws. Our AI Risk Management service provides real-time compliance monitoring, automated reporting, and predictive risk assessment with 95% early detection rate for potential security issues."
-    },
-    {
-      question: "Can your AI solutions integrate with existing business systems?",
-      answer: "Absolutely. Our AI solutions are designed for seamless integration with existing CRM, ERP, project management, and communication systems. We support 200+ popular business tools and can create custom integrations. Most integrations are completed within 1-2 weeks with zero downtime."
-    },
-    {
-      question: "What makes Orgainse different from other AI consulting firms?",
-      answer: "We're the only truly AI-native consulting firm that uses GPT-powered automation in every service delivery aspect. While others offer AI consulting, we ARE AI consulting - using autonomous agents, predictive analytics, and continuous optimization. This results in 60-70% faster delivery, 85% higher success rates, and ongoing value creation."
-    }
-  ];
-
-  const [openFaq, setOpenFaq] = useState(null);
-
-  const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
-
   return (
     <div className="min-h-screen">
       {/* Revolutionary Hero Section with SEO */}
