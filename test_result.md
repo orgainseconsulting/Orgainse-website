@@ -234,12 +234,11 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Home Page Service Cards - No Problematic Links"
-    - "Services Page - Single FAQ Section"
     - "Services Page - Learn More Popups"
-    - "Google Calendar Integration - Book Free Consultation Buttons"
-    - "Navigation and Mobile Responsiveness"
-  stuck_tasks: []
+    - "Services Page - Single FAQ Section"
+  stuck_tasks:
+    - "Services Page - Learn More Popups"
+    - "Services Page - Single FAQ Section"
   test_all: false
   test_priority: "high_first"
 
