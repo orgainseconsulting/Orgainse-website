@@ -1628,9 +1628,7 @@ const Services = () => {
         whyChooseUs: "Unlike traditional project management, our AI-native approach reduces planning time by 60%, eliminates scope creep through intelligent boundary detection, and provides predictive insights that prevent 80% of common project failures before they occur.",
         whatYouGet: "Complete AI-powered project ecosystem including automated project planning, intelligent resource allocation, real-time risk monitoring, GPT-generated documentation, predictive analytics dashboard, and 24/7 AI project assistant.",
         benefits: ["60% reduction in project planning time", "45% increase in project success rates", "80% reduction in scope creep", "Real-time predictive insights", "Automated documentation generation", "24/7 AI project support"],
-        industries: ["Software Development", "EdTech", "FinTech", "Healthcare", "Startups", "SMEs"],
-        pricing: "Starting from $2,500/month",
-        timeline: "2-week setup, immediate results"
+        industries: ["Software Development", "EdTech", "FinTech", "Healthcare", "Startups", "SMEs"]
       }
     },
     {
