@@ -160,7 +160,65 @@ backend:
         comment: "POST /api/service-inquiry endpoint working correctly. Successfully tracks service-specific inquiries for CRM analytics with proper UUID generation and data persistence."
 
 frontend:
-  # Frontend testing not performed by testing agent
+  - task: "Home Page Service Cards - No Problematic Links"
+    implemented: true
+    working: "NA"
+    file: "frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Need to test that service cards on home page display properly without problematic links to Services page"
+
+  - task: "Services Page - Single FAQ Section"
+    implemented: true
+    working: "NA"
+    file: "frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Need to verify Services page has only ONE FAQ section (not duplicate)"
+
+  - task: "Services Page - Learn More Popups"
+    implemented: true
+    working: "NA"
+    file: "frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Need to test service cards have clean 'Learn More' buttons that open detailed popups with contact forms and thank you messages"
+
+  - task: "Google Calendar Integration - Book Free Consultation Buttons"
+    implemented: true
+    working: "NA"
+    file: "frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Need to test all 'Book Free Consultation' buttons open Google Calendar booking modal properly"
+
+  - task: "Navigation and Mobile Responsiveness"
+    implemented: true
+    working: "NA"
+    file: "frontend/src/App.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Need to test navigation works smoothly and mobile responsiveness is maintained"
 
 metadata:
   created_by: "testing_agent"
