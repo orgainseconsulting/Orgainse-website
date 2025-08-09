@@ -1645,9 +1645,7 @@ const Services = () => {
         whyChooseUs: "Our transformations are 70% faster than traditional approaches because we use AI to design, implement, and optimize simultaneously. We don't just digitize - we intelligentize your operations with AI agents that continuously improve your processes.",
         whatYouGet: "Complete digital ecosystem transformation including AI maturity assessment, custom multi-agent platform, GPT integration roadmap, cloud-first architecture, AI-powered analytics suite, and ongoing optimization support.",
         benefits: ["70% faster transformation timeline", "50% reduction in operational costs", "300% improvement in process efficiency", "AI-powered continuous optimization", "Future-ready scalable architecture", "Real-time business intelligence"],
-        industries: ["EdTech", "FinTech", "Healthcare", "Manufacturing", "Retail", "Professional Services"],
-        pricing: "Starting from $15,000 (3-6 month engagement)",
-        timeline: "1-week assessment, 12-week transformation"
+        industries: ["EdTech", "FinTech", "Healthcare", "Manufacturing", "Retail", "Professional Services"]
       }
     },
     {
