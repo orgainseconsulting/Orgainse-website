@@ -1662,9 +1662,7 @@ const Services = () => {
         whyChooseUs: "Our AI optimization is proactive, not reactive. While others optimize after problems occur, our AI agents predict and prevent operational issues, resulting in 90% fewer disruptions and continuous cost savings that compound over time.",
         whatYouGet: "Comprehensive operational intelligence platform with AI workflow automation, predictive maintenance system, GPT process mining tools, real-time analytics dashboard, automated cost optimization, and performance monitoring suite.",
         benefits: ["35% reduction in operational costs", "90% fewer operational disruptions", "Automated process optimization", "Predictive maintenance alerts", "Real-time performance insights", "Continuous improvement automation"],
-        industries: ["Hospitality", "Healthcare", "Manufacturing", "Logistics", "Retail", "Professional Services"],
-        pricing: "Starting from $8,000/month",
-        timeline: "3-week implementation, immediate optimization"
+        industries: ["Hospitality", "Healthcare", "Manufacturing", "Logistics", "Retail", "Professional Services"]
       }
     },
     {
