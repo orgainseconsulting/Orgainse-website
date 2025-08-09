@@ -1610,6 +1610,9 @@ const Services = () => {
   });
   const { openGoogleCalendar } = useGoogleCalendar();
 
+  // Backend URL for API calls
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+
   const services = [
     {
       id: 'ai-project-management',
