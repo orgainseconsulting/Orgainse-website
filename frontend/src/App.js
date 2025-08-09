@@ -2152,6 +2152,139 @@ const Services = () => {
               </button>
             </div>
           </div>
+
+        {/* Comprehensive FAQ Section for SEO */}
+        <section className="py-20 bg-gradient-to-br from-slate-50 to-orange-50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-slate-900 mb-6">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+                Get answers to common questions about our AI consulting services, pricing, and implementation process
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {[
+                {
+                  category: "AI Consulting Services",
+                  questions: [
+                    {
+                      question: "What is AI-native consulting and how does it differ from traditional consulting?",
+                      answer: "AI-native consulting integrates artificial intelligence tools and methodologies from the ground up to enhance business strategies, optimize processes, and drive innovation. Unlike traditional consulting that relies primarily on human analysis, AI-native consulting leverages machine learning, predictive analytics, and automation to deliver faster, more accurate insights and solutions with measurable ROI."
+                    },
+                    {
+                      question: "Which industries benefit most from AI consulting services?",
+                      answer: "Our AI consulting services are particularly transformative for FinTech, Healthcare, E-commerce, Manufacturing, Professional Services, and SaaS companies. These industries see the highest ROI due to their data-rich environments and process-intensive operations that can be significantly optimized through AI implementation."
+                    },
+                    {
+                      question: "How do I know if my business is ready for AI transformation?",
+                      answer: "Your business is ready for AI transformation if you have: consistent data collection processes, manual tasks that consume significant time, need for faster decision-making, scaling challenges, or desire to improve customer experience. Our free AI Assessment tool can evaluate your readiness and provide a custom roadmap."
+                    }
+                  ]
+                },
+                {
+                  category: "Implementation & Timeline",
+                  questions: [
+                    {
+                      question: "How long does a typical AI implementation project take?",
+                      answer: "Implementation timelines vary based on project scope: Simple automation (2-4 weeks), Process optimization (1-3 months), Complete digital transformation (3-12 months). Our PMaaS approach ensures projects stay on schedule with weekly progress updates and milestone-based delivery."
+                    },
+                    {
+                      question: "What is PMaaS (Project Management as a Service) and why do you use it?",
+                      answer: "PMaaS is our dedicated project management service that provides expert project managers, proven methodologies, and advanced tools to ensure successful AI implementation. It eliminates the need to hire internal PM resources and guarantees projects are delivered on time, within budget, and with full accountability."
+                    },
+                    {
+                      question: "How do you ensure smooth integration with our existing systems?",
+                      answer: "We conduct comprehensive system audits, use API-based integrations, implement gradual rollouts, and provide extensive testing before full deployment. Our team has experience with 200+ software platforms and ensures zero disruption to your current operations during the transition."
+                    }
+                  ]
+                },
+                {
+                  category: "Pricing & ROI",
+                  questions: [
+                    {
+                      question: "How do you calculate ROI for AI consulting projects?",
+                      answer: "Our ROI calculation considers multiple factors: cost savings from automation, revenue increases from improved processes, time savings for employees, reduced error rates, and enhanced customer satisfaction. Most clients see 200-500% ROI within 12 months, with payback periods typically ranging from 3-9 months."
+                    },
+                    {
+                      question: "What factors influence the pricing of AI consulting services?",
+                      answer: "Pricing depends on: project complexity and scope, required technology integrations, implementation timeline, ongoing support needs, and team size. We offer flexible pricing models including fixed-price projects, monthly retainers, and performance-based pricing aligned with your budget and goals."
+                    },
+                    {
+                      question: "Do you offer guarantees on project outcomes?",
+                      answer: "Yes, we provide performance guarantees based on agreed KPIs and success metrics. If we don't achieve the promised results within the specified timeframe, we continue working at no additional cost until targets are met or provide a full refund. This reflects our confidence in delivering measurable value."
+                    }
+                  ]
+                },
+                {
+                  category: "Support & Maintenance",
+                  questions: [
+                    {
+                      question: "What kind of ongoing support do you provide after implementation?",
+                      answer: "We provide comprehensive post-implementation support including: 24/7 technical monitoring, monthly performance reviews, continuous optimization, staff training sessions, priority support tickets, and regular updates to keep your AI systems current with the latest technologies."
+                    },
+                    {
+                      question: "How do you handle data security and compliance?",
+                      answer: "We maintain enterprise-grade security with SOC 2 compliance, GDPR adherence, encrypted data transmission, regular security audits, and strict access controls. Your data never leaves your infrastructure during analysis, and we provide detailed compliance reporting for regulated industries."
+                    },
+                    {
+                      question: "Can you scale the AI solutions as our business grows?",
+                      answer: "Absolutely. Our AI solutions are designed with scalability in mind, using cloud-native architectures and modular components. We provide capacity planning, performance monitoring, and automatic scaling capabilities to ensure your AI systems grow seamlessly with your business needs."
+                    }
+                  ]
+                }
+              ].map((category, categoryIndex) => (
+                <div key={categoryIndex} className="space-y-6">
+                  <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
+                    <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-green-500 rounded-lg flex items-center justify-center mr-3">
+                      <span className="text-white font-bold text-sm">{categoryIndex + 1}</span>
+                    </div>
+                    {category.category}
+                  </h3>
+                  
+                  {category.questions.map((faq, faqIndex) => (
+                    <div key={faqIndex} className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+                      <details className="group">
+                        <summary className="flex items-center justify-between p-6 cursor-pointer hover:bg-slate-50 transition-colors">
+                          <h4 className="text-lg font-semibold text-slate-900 pr-4">
+                            {faq.question}
+                          </h4>
+                          <div className="flex-shrink-0">
+                            <Plus className="h-5 w-5 text-orange-600 group-open:hidden transition-transform" />
+                            <Minus className="h-5 w-5 text-orange-600 hidden group-open:block transition-transform" />
+                          </div>
+                        </summary>
+                        <div className="px-6 pb-6">
+                          <p className="text-slate-600 leading-relaxed">
+                            {faq.answer}
+                          </p>
+                        </div>
+                      </details>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            {/* CTA Section */}
+            <div className="text-center mt-16">
+              <div className="bg-gradient-to-r from-orange-500 to-green-500 rounded-3xl p-8 text-white">
+                <h3 className="text-3xl font-bold mb-4">Still Have Questions?</h3>
+                <p className="text-xl mb-6 text-orange-100">
+                  Get personalized answers and a free consultation with our AI experts
+                </p>
+                <Button 
+                  onClick={openGoogleCalendar}
+                  className="bg-white text-slate-900 hover:bg-orange-100 px-8 py-4 text-lg font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                >
+                  Book Free Consultation
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
         </div>
       </section>
     </div>
