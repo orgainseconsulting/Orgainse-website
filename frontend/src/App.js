@@ -1713,9 +1713,7 @@ const Services = () => {
         whyChooseUs: "Traditional risk management is reactive and manual. Our AI approach is predictive and automated, identifying 95% of potential risks before they materialize and ensuring continuous compliance with changing regulations across multiple jurisdictions.",
         whatYouGet: "Complete risk intelligence platform including GPT-based risk co-pilot, automated scenario modeling system, real-time compliance monitoring dashboard, predictive risk analytics, automated reporting suite, and mitigation planning tools.",
         benefits: ["95% early risk detection rate", "80% reduction in compliance violations", "Real-time regulatory updates", "Automated risk reporting", "Predictive risk modeling", "24/7 compliance monitoring"],
-        industries: ["FinTech", "Healthcare", "Insurance", "Banking", "Regulated Industries", "Government"],
-        pricing: "Starting from $6,500/month",
-        timeline: "2-week setup, immediate risk monitoring"
+        industries: ["FinTech", "Healthcare", "Insurance", "Banking", "Regulated Industries", "Government"]
       }
     },
   ];
