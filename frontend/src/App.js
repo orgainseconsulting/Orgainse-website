@@ -1733,13 +1733,40 @@ const Services = () => {
   const openServicePopup = (service) => {
     setSelectedService(service);
     setIsPopupOpen(true);
+    setShowContactForm(false);
+    setIsSubmitted(false);
     document.body.style.overflow = 'hidden';
   };
 
   const closeServicePopup = () => {
     setIsPopupOpen(false);
     setSelectedService(null);
+    setShowContactForm(false);
+    setIsSubmitted(false);
+    setFormData({ name: '', email: '', phone: '', company: '', message: '' });
     document.body.style.overflow = 'unset';
+  };
+
+  const handleContactFormSubmit = async (e) => {
+    e.preventDefault();
+    
+    try {
+      const inquiryData = {
+        service_id: selectedService.id,
+        service_name: selectedService.title,
+        inquiry_type: 'service_interest',
+        ...formData,
+        timestamp: new Date().toISOString()
+      };
+
+      // Submit service inquiry
+      await axios.post(`${BACKEND_URL}/api/service-inquiry`, inquiryData);
+      
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Error submitting service inquiry:', error);
+      alert('Error submitting inquiry. Please try again.');
+    }
   };
 
   // Service-specific inquiry tracking
