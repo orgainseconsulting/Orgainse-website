@@ -321,9 +321,6 @@ const Navigation = () => {
 
   // Backend URL for API calls  
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
-
-  // Backend URL for API calls
-  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
   const location = useLocation();
 
   const navLinks = [
