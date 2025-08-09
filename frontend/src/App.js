@@ -860,7 +860,7 @@ const Home = () => {
           {/* Compact Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
-              <Link to="/services" key={index} className="block">
+              <div key={index} className="block">
                 <div 
                   className="group relative animate-fade-in"
                   style={{ animationDelay: `${index * 100}ms` }}
@@ -883,16 +883,10 @@ const Home = () => {
                       <CardDescription className="text-slate-600 group-hover:text-slate-700 transition-colors leading-relaxed text-sm">
                         {service.description}
                       </CardDescription>
-                      
-                      <div className="mt-3 pt-3 border-t border-slate-100">
-                        <span className="text-xs text-orange-600 font-medium group-hover:text-orange-700 transition-colors">
-                          Click to learn more →
-                        </span>
-                      </div>
                     </CardHeader>
                   </Card>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
 
