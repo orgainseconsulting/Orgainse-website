@@ -1983,16 +1983,6 @@ const Services = () => {
               </div>
             ))}
           </div>
-                    <div className={`absolute inset-0 bg-gradient-to-r ${service.gradient.split(' ').reverse().join(' ')} opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300`}></div>
-                    <span className="relative z-10 flex items-center justify-center text-sm">
-                      Learn More
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </span>
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
 
           {/* Enhanced Service Detail Popup Modal */}
           {isPopupOpen && selectedService && (
