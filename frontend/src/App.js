@@ -1696,9 +1696,7 @@ const Services = () => {
         whyChooseUs: "While traditional strategy consulting takes months and relies on historical data, our AI-driven approach delivers real-time insights and predictive strategies in weeks. We analyze 1000x more data points to identify opportunities others miss.",
         whatYouGet: "Comprehensive strategy development suite including automated market intelligence system, AI competitive analysis platform, scenario planning tools, growth optimization roadmap, ROI modeling dashboard, and strategic implementation support.",
         benefits: ["85% higher strategy success rate", "75% faster strategy development", "Real-time market intelligence", "Predictive opportunity identification", "Data-driven decision making", "Continuous strategy optimization"],
-        industries: ["IT Services", "EdTech", "FinTech", "SaaS", "E-commerce", "Professional Services"],
-        pricing: "Starting from $12,000 (6-8 week engagement)",
-        timeline: "2-week analysis, 6-week strategy development"
+        industries: ["IT Services", "EdTech", "FinTech", "SaaS", "E-commerce", "Professional Services"]
       }
     },
     {
