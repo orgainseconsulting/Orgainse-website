@@ -186,15 +186,18 @@ frontend:
 
   - task: "Services Page - Learn More Popups"
     implemented: true
-    working: true
+    working: false
     file: "frontend/src/App.js"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: true
         agent: "testing"
         comment: "✅ VERIFIED: Service cards have clean 'Learn More' buttons that open detailed popups. Found 6 Learn More buttons. Popup contains 3 information sections: 'What This Service Does', 'Why Choose This Service', 'What You'll Get'. Contact form with name, email, phone, company, message fields works properly. Form submission shows thank you message with next steps information."
+      - working: false
+        agent: "testing"
+        comment: "❌ CRITICAL ISSUE: Found 33 Investment/Timeline sections in service popups - these should be COMPLETELY REMOVED as per review request. While the required 3 sections (What/Why/What You'll Get) are present and contact forms work properly, the Investment and Timeline sections that were supposed to be removed are still showing in the popups. This is a critical requirement that must be fixed."
 
   - task: "Google Calendar Integration - Book Free Consultation Buttons"
     implemented: true
