@@ -2065,29 +2065,6 @@ const Services = () => {
                           </div>
                         </div>
 
-                        {/* Pricing and Timeline */}
-                        <div className="grid md:grid-cols-2 gap-6 mb-8">
-                          <div className="bg-slate-100 rounded-2xl p-6">
-                            <h4 className="text-xl font-bold text-slate-800 mb-2 flex items-center">
-                              <TrendingUp className="h-5 w-5 mr-2 text-purple-600" />
-                              Investment
-                            </h4>
-                            <p className="text-2xl font-bold text-purple-600">
-                              {selectedService.detailedInfo.pricing}
-                            </p>
-                          </div>
-                          
-                          <div className="bg-slate-100 rounded-2xl p-6">
-                            <h4 className="text-xl font-bold text-slate-800 mb-2 flex items-center">
-                              <Calendar className="h-5 w-5 mr-2 text-blue-600" />
-                              Timeline
-                            </h4>
-                            <p className="text-xl font-semibold text-blue-600">
-                              {selectedService.detailedInfo.timeline}
-                            </p>
-                          </div>
-                        </div>
-
                         {/* Call-to-Action */}
                         <div className="text-center">
                           <h3 className="text-2xl font-bold text-slate-800 mb-4">
