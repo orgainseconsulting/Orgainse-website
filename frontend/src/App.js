@@ -1360,9 +1360,9 @@ const About = () => {
             
             {/* Visual Connection Lines */}
             <div className="relative w-32 h-8 mx-auto mb-8">
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-green-500 to-slate-700 rounded-full opacity-30 animate-pulse"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-green-500 to-blue-500 rounded-full opacity-30 animate-pulse"></div>
               <div className="absolute inset-1 bg-white rounded-full"></div>
-              <div className="absolute inset-2 bg-gradient-to-r from-orange-500 via-green-500 to-slate-700 rounded-full"></div>
+              <div className="absolute inset-2 bg-gradient-to-r from-orange-500 via-green-500 to-blue-500 rounded-full"></div>
             </div>
           </div>
 
