@@ -16,53 +16,77 @@ const ServicePopup = ({
   onSubmit,
   openGoogleCalendar
 }) => {
-  const [isPopupHovered, setIsPopupHovered] = useState(false);
+  const [scrollMode, setScrollMode] = useState('cursor'); // 'cursor' or 'sync'
 
-  // Advanced scroll management - cursor-based scrolling
+  // Advanced scroll management with two modes
   useEffect(() => {
     if (!isOpen) return;
 
-    const handleWheel = (e) => {
-      const popup = document.querySelector('.service-popup-content');
-      const isOverPopup = popup && popup.contains(e.target);
-      
-      if (isOverPopup || isPopupHovered) {
-        // Allow popup to scroll, prevent page scroll
-        const popupScrollContainer = popup.querySelector('.popup-scroll-container');
-        if (popupScrollContainer) {
-          e.preventDefault();
-          popupScrollContainer.scrollTop += e.deltaY;
+    if (scrollMode === 'cursor') {
+      // CURSOR-BASED SCROLLING: Popup scrolls when cursor is over it, page scrolls when cursor is over background
+      const handleWheel = (e) => {
+        const popup = document.querySelector('.service-popup-content');
+        const isOverPopup = popup && popup.contains(e.target);
+        
+        if (isOverPopup) {
+          // Cursor is over popup - scroll popup content, prevent page scroll
+          const popupScrollContainer = popup.querySelector('.popup-scroll-container');
+          if (popupScrollContainer) {
+            e.preventDefault();
+            popupScrollContainer.scrollTop += e.deltaY;
+          }
         }
-      }
-      // If not over popup, allow normal page scrolling (do nothing)
-    };
+        // If cursor is over background - allow normal page scrolling (do nothing)
+      };
 
-    // Add wheel event listener
-    document.addEventListener('wheel', handleWheel, { passive: false });
+      document.addEventListener('wheel', handleWheel, { passive: false });
+      return () => document.removeEventListener('wheel', handleWheel);
+      
+    } else if (scrollMode === 'sync') {
+      // SYNCHRONIZED SCROLLING: Both popup and page scroll together smoothly
+      const handleWheel = (e) => {
+        const popup = document.querySelector('.service-popup-content');
+        const popupScrollContainer = popup?.querySelector('.popup-scroll-container');
+        
+        if (popupScrollContainer) {
+          // Don't prevent default - allow page to scroll naturally
+          // Also scroll popup content proportionally
+          const scrollRatio = 0.7; // Popup scrolls at 70% of page scroll speed
+          popupScrollContainer.scrollTop += e.deltaY * scrollRatio;
+        }
+      };
 
-    return () => {
-      document.removeEventListener('wheel', handleWheel);
-    };
-  }, [isOpen, isPopupHovered]);
+      document.addEventListener('wheel', handleWheel, { passive: true });
+      return () => document.removeEventListener('wheel', handleWheel);
+    }
+  }, [isOpen, scrollMode]);
 
   if (!isOpen || !service) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Background overlay - allows page scrolling when hovered */}
+      {/* Background overlay */}
       <div 
         className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-all duration-300"
         onClick={onClose}
       />
       
-      {/* Popup container with cursor-based scroll detection */}
-      <div 
-        className="service-popup-content relative bg-white rounded-3xl max-w-6xl w-[95%] max-h-[95vh] overflow-hidden shadow-2xl transform transition-all duration-300 scale-100"
-        onMouseEnter={() => setIsPopupHovered(true)}
-        onMouseLeave={() => setIsPopupHovered(false)}
-      >
+      {/* Scroll Mode Toggle (for testing - can be removed in production) */}
+      <div className="absolute top-4 left-4 z-20">
+        <div className="bg-white/90 rounded-lg p-2 shadow-lg">
+          <button
+            onClick={() => setScrollMode(scrollMode === 'cursor' ? 'sync' : 'cursor')}
+            className="text-xs px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+          >
+            {scrollMode === 'cursor' ? 'Cursor Mode' : 'Sync Mode'} (Click to toggle)
+          </button>
+        </div>
+      </div>
+      
+      {/* Popup container */}
+      <div className="service-popup-content relative bg-white rounded-3xl max-w-6xl w-[95%] max-h-[95vh] overflow-hidden shadow-2xl transform transition-all duration-300 scale-100">
         
-        {/* Close Button - Enhanced */}
+        {/* Close Button */}
         <button 
           onClick={onClose}
           className="absolute top-6 right-6 z-10 p-3 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 transform hover:scale-110"
@@ -87,11 +111,17 @@ const ServicePopup = ({
               <p className="text-white/90 text-xl leading-relaxed max-w-3xl">
                 {service.description}
               </p>
+              <div className="mt-3 text-white/70 text-sm">
+                {scrollMode === 'cursor' 
+                  ? '💡 Hover over popup to scroll content, hover over background to scroll page' 
+                  : '💡 Scroll wheel moves both popup and page together'
+                }
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Scrollable content with proper cursor-based scroll handling */}
+        {/* Scrollable content with mode-aware scroll handling */}
         <div className="popup-scroll-container h-[calc(95vh-280px)] overflow-y-auto" style={{scrollBehavior: 'smooth'}}>
           <div className="p-8">
             {!isSubmitted ? (
