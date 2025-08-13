@@ -1942,6 +1942,20 @@ const Services = () => {
             openGoogleCalendar={openGoogleCalendar}
           />
 
+          {/* Enhanced Design Transition Section */}
+          <div className="mt-20 mb-16">
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent mb-12"></div>
+              <h2 className="text-2xl font-semibold text-slate-600 mb-4">
+                Have Questions About Our Services?
+              </h2>
+              <p className="text-slate-500 text-lg mb-8">
+                Find answers to commonly asked questions about our AI consulting services
+              </p>
+              <div className="h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent"></div>
+            </div>
+          </div>
+
 
         {/* Comprehensive FAQ Section for SEO */}
         <section className="py-20 bg-gradient-to-br from-slate-50 to-orange-50">
