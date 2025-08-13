@@ -535,17 +535,27 @@ class BackendTester:
         
         # Test Google Calendar integration endpoints
         self.test_google_calendar_auth_login()
+        self.test_google_calendar_auth_callback()
+        self.test_new_google_calendar_available_slots()
+        self.test_new_google_calendar_book_consultation()
+        self.test_google_calendar_bookings()
+        
+        # Test legacy Google Calendar endpoints (for backwards compatibility)
         self.test_google_calendar_available_slots()
         self.test_google_calendar_book_consultation()
-        self.test_google_calendar_bookings()
         
         # Test analytics with calendar data
         self.test_analytics_with_calendar_data()
         
-        # Test other core endpoints
+        # Test core business endpoints
         self.test_contact_form_endpoint()
         self.test_newsletter_subscription()
         self.test_consultation_request()
+        
+        # Test interactive tools
+        self.test_ai_assessment_api()
+        self.test_roi_calculator_api()
+        self.test_service_inquiry_api()
         
         # Print summary
         print("\n" + "=" * 60)
