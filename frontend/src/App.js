@@ -1718,13 +1718,26 @@ const Services = () => {
     },
   ];
 
+  // Enhanced scroll management for popup
+  const [scrollPosition, setScrollPosition] = useState(0);
+
   const openServicePopup = (service) => {
     console.log('Opening popup for service:', service.title, 'ID:', service.id); // Debug log
+    
+    // Save current scroll position
+    const currentScrollY = window.scrollY;
+    setScrollPosition(currentScrollY);
+    
     setSelectedService(service);
     setIsPopupOpen(true);
     setShowContactForm(false);
     setIsSubmitted(false);
+    
+    // Enhanced scroll lock with position fixing
     document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${currentScrollY}px`;
+    document.body.style.width = '100%';
   };
 
   const closeServicePopup = () => {
@@ -1733,7 +1746,13 @@ const Services = () => {
     setShowContactForm(false);
     setIsSubmitted(false);
     setFormData({ name: '', email: '', phone: '', company: '', message: '' });
-    document.body.style.overflow = 'unset';
+    
+    // Restore scroll position and body scrolling
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, scrollPosition);
   };
 
   const handleContactFormSubmit = async (e) => {
