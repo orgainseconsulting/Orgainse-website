@@ -1914,25 +1914,25 @@ const Services = () => {
                 
                 {!isSubmitted ? (
                   <div className="relative">
-                    {/* Close Button */}
+                    {/* Close Button - Responsive */}
                     <button 
                       onClick={closeServicePopup}
-                      className="absolute top-6 right-6 p-2 hover:bg-slate-100 rounded-full transition-colors z-10"
+                      className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 hover:bg-slate-100 rounded-full transition-colors z-10"
                     >
-                      <X className="h-6 w-6 text-slate-600" />
+                      <X className="h-5 w-5 sm:h-6 sm:w-6 text-slate-600" />
                     </button>
 
-                    {/* Header Section */}
-                    <div className={`bg-gradient-to-r ${selectedService.gradient} p-8 rounded-t-3xl text-white`}>
-                      <div className="flex items-center space-x-4 mb-4">
-                        <div className="p-3 bg-white/20 rounded-2xl backdrop-blur-sm">
-                          <selectedService.icon className="h-8 w-8 text-white" />
+                    {/* Header Section - Responsive */}
+                    <div className={`bg-gradient-to-r ${selectedService.gradient} p-4 sm:p-6 lg:p-8 rounded-t-2xl sm:rounded-t-3xl text-white`}>
+                      <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-4">
+                        <div className="p-2 sm:p-3 bg-white/20 rounded-xl sm:rounded-2xl backdrop-blur-sm self-start">
+                          <selectedService.icon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                         </div>
-                        <div>
-                          <h2 className="text-3xl font-bold mb-2">
+                        <div className="flex-1">
+                          <h2 className="text-2xl sm:text-3xl font-bold mb-2 leading-tight">
                             {selectedService.title}
                           </h2>
-                          <p className="text-white/90 text-lg">
+                          <p className="text-white/90 text-base sm:text-lg leading-relaxed">
                             {selectedService.description}
                           </p>
                         </div>
