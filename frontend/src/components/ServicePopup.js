@@ -1,6 +1,8 @@
 import React from 'react';
 import { X, Target, CheckCircle, Award } from 'lucide-react';
-import { Input, Textarea, Button } from '@/components/ui/input';
+import { Input } from './ui/input';
+import { Textarea } from './ui/textarea';
+import { Button } from './ui/button';
 
 const ServicePopup = ({
   isOpen,
