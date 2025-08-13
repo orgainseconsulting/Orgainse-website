@@ -1688,7 +1688,7 @@ const Services = () => {
       description: "Complete digital transformation consulting with AI maturity assessment, multi-agent orchestration platforms, and GPT implementation roadmap tailored for EdTech, FinTech, Healthcare, and Software Development industries.",
       features: ["AI Maturity Assessment & Digital Readiness Audit", "Multi-agent Orchestration Platform Setup", "GPT Implementation Roadmap & Integration", "Cloud-First Architecture with AI-Powered Analytics"],
       icon: Zap,
-      image: "https://images.unsplash.com/photo-1530825894095-9c184b068fcb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHw0fHxkaWdpdGFsJTIwdHJhbnNmb3JtYXRpb258ZW58MHx8fGJsdWV8MTc1NDU4ODMwN3ww&ixlib=rb-4.1.0&q=85",
+      image: "https://images.unsplash.com/photo-1530825894095-9c184b068fcb?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHw0fHxkaWdpdGFsJTIwdHJhbnNmb3JtYXRpb258ZW58MHx8fGJsdWV8MTc1NDU4ODMwN3ww&ixlib=rb-4.1.0&q=75&w=400&h=300",
       keywords: "AI-native digital transformation, GPT implementation roadmap, digital transformation UAE SMEs",
       gradient: "from-yellow-400 to-orange-500",
       detailedInfo: {
