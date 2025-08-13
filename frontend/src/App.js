@@ -432,6 +432,11 @@ const Navigation = () => {
             >
               Book Free Consultation
             </Button>
+            
+            {/* Currency Display in Desktop Nav */}
+            <div className="text-xs text-slate-500 font-medium px-2 py-1 bg-slate-50 rounded">
+              {region} • {currency}
+            </div>
           </div>
 
           {/* Mobile menu button */}
