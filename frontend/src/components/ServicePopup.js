@@ -270,6 +270,8 @@ const ServicePopup = ({
             </div>
           )}
         </div>
+
+        </div>
       </div>
     </div>
   );
