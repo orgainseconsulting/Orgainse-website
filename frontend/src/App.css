@@ -19,8 +19,8 @@
   border-color: var(--sage);
 }
 
-/* Performance Optimizations for Lag-Free Loading */
-* {
+/* Performance Optimizations for Critical Elements Only */
+.critical-animation {
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
   -ms-transform: translateZ(0);
@@ -28,12 +28,10 @@
   transform: translateZ(0);
 }
 
-/* GPU Acceleration for Smooth Animations */
+/* GPU Acceleration for Specific Animations Only */
 .animate-fade-in,
 .animate-spin-slow,
-.float-animation,
-.animate-pulse,
-.animate-bounce {
+.float-animation {
   will-change: transform, opacity;
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
@@ -43,9 +41,6 @@
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   backface-visibility: hidden;
-  -webkit-perspective: 1000;
-  -moz-perspective: 1000;
-  perspective: 1000;
 }
 
 /* Optimized Background Elements */
