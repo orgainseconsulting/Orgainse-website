@@ -1539,7 +1539,6 @@ const About = () => {
                   <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></div>
                   <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse animation-delay-300"></div>
                   <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse animation-delay-500"></div>
-                  <div className="w-3 h-3 bg-slate-700 rounded-full animate-pulse animation-delay-700"></div>
                 </div>
                 <span className="text-slate-600 font-medium">Working in Perfect Harmony</span>
               </div>
