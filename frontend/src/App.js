@@ -1930,12 +1930,13 @@ const Services = () => {
           {/* Enhanced Service Detail Popup Modal - Fixed Scroll Behavior */}
           {isPopupOpen && selectedService && (
             <div key={selectedService.id} className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50">
-              {/* Scrollable container with proper positioning */}
+              {/* Popup container with proper centering */}
               <div className="fixed inset-0 flex items-center justify-center p-2 sm:p-4">
-                <div className="bg-white rounded-2xl sm:rounded-3xl max-w-5xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden animate-fade-in shadow-2xl">
-                  {/* Fixed header */}
+                <div className="bg-white rounded-2xl sm:rounded-3xl max-w-5xl w-full max-h-[95vh] sm:max-h-[90vh] flex flex-col animate-fade-in shadow-2xl">
+                  
+                  {/* Fixed Header */}
                   <div className="relative flex-shrink-0">
-                    {/* Close Button - Fixed position */}
+                    {/* Close Button */}
                     <button 
                       onClick={closeServicePopup}
                       className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 hover:bg-white/20 rounded-full transition-colors z-20 bg-white/10"
@@ -1943,9 +1944,9 @@ const Services = () => {
                       <X className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                     </button>
 
-                    {/* Header Section - Fixed */}
+                    {/* Header Section */}
                     <div className={`bg-gradient-to-r ${selectedService.gradient} p-4 sm:p-6 lg:p-8 rounded-t-2xl sm:rounded-t-3xl text-white`}>
-                      <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
                         <div className="p-2 sm:p-3 bg-white/20 rounded-xl sm:rounded-2xl backdrop-blur-sm self-start">
                           <selectedService.icon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                         </div>
@@ -1961,53 +1962,10 @@ const Services = () => {
                     </div>
                   </div>
 
-                  {/* Scrollable content area */}
-                  <div className="overflow-y-auto max-h-[calc(95vh-200px)] sm:max-h-[calc(90vh-200px)]" style={{scrollBehavior: 'smooth'}}>
+                  {/* Scrollable Content Area */}
+                  <div className="flex-1 overflow-y-auto" style={{scrollBehavior: 'smooth'}}>
                 
                 {!isSubmitted ? (
-                  <div className="relative">
-                    {/* Close Button - Responsive */}
-                    <button 
-                      onClick={closeServicePopup}
-                      className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 hover:bg-slate-100 rounded-full transition-colors z-10"
-                    >
-                      <X className="h-5 w-5 sm:h-6 sm:w-6 text-slate-600" />
-                    </button>
-
-                    {/* Header Section - Responsive */}
-                    <div className={`bg-gradient-to-r ${selectedService.gradient} p-4 sm:p-6 lg:p-8 rounded-t-2xl sm:rounded-t-3xl text-white`}>
-                      <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-4">
-                        <div className="p-2 sm:p-3 bg-white/20 rounded-xl sm:rounded-2xl backdrop-blur-sm self-start">
-                          <selectedService.icon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
-                        </div>
-                        <div className="flex-1">
-                          <h2 className="text-2xl sm:text-3xl font-bold mb-2 leading-tight">
-                            {selectedService.title}
-                          </h2>
-                          <p className="text-white/90 text-base sm:text-lg leading-relaxed">
-                            {selectedService.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {!showContactForm ? (
-                      // Service Information View - Responsive
-                      <div className="p-4 sm:p-6 lg:p-8">
-                        {/* Main Content Grid - Responsive */}
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
-                          {/* What This Service Does */}
-                          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-blue-100">
-                            <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-3 sm:mb-4 flex items-center">
-                              <Target className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3 text-blue-600 flex-shrink-0" />
-                              What This Service Does
-                            </h3>
-                            <p className="text-slate-700 leading-relaxed text-base sm:text-lg">
-                              {selectedService.detailedInfo.whatItDoes}
-                            </p>
-                          </div>
-
-                          {/* Why Choose This Service */}
                           <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-green-100">
                             <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-3 sm:mb-4 flex items-center">
                               <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3 text-green-600 flex-shrink-0" />
