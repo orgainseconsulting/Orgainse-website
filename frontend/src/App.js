@@ -1928,8 +1928,19 @@ const Services = () => {
             ))}
           </div>
 
-          {/* Enhanced Service Detail Popup Modal - Fixed Scroll Behavior */}
-          {isPopupOpen && selectedService && (
+          {/* Import and use the new ServicePopup component */}
+          <ServicePopup
+            isOpen={isPopupOpen}
+            service={selectedService}
+            showContactForm={showContactForm}
+            setShowContactForm={setShowContactForm}
+            isSubmitted={isSubmitted}
+            formData={formData}
+            setFormData={setFormData}
+            onClose={closeServicePopup}
+            onSubmit={handleContactFormSubmit}
+            openGoogleCalendar={openGoogleCalendar}
+          />
             <div key={selectedService.id} className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50">
               {/* Popup container with proper centering */}
               <div className="fixed inset-0 flex items-center justify-center p-2 sm:p-4">
