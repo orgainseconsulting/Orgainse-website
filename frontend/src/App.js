@@ -2015,20 +2015,20 @@ const Services = () => {
                         </div>
                       </div>
                     ) : (
-                      // Contact Form View
-                      <div className="p-8">
+                      // Contact Form View - Responsive
+                      <div className="p-4 sm:p-6 lg:p-8">
                         <div className="max-w-2xl mx-auto">
-                          <div className="text-center mb-8">
-                            <h3 className="text-3xl font-bold text-slate-800 mb-4">
+                          <div className="text-center mb-6 sm:mb-8">
+                            <h3 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-3 sm:mb-4">
                               Get Your Custom Proposal
                             </h3>
-                            <p className="text-slate-600 text-lg">
+                            <p className="text-slate-600 text-base sm:text-lg">
                               Tell us about your specific needs and we'll create a tailored proposal for your <strong>{selectedService.title}</strong> project
                             </p>
                           </div>
 
-                          <form onSubmit={handleContactFormSubmit} className="space-y-6">
-                            <div className="grid md:grid-cols-2 gap-6">
+                          <form onSubmit={handleContactFormSubmit} className="space-y-4 sm:space-y-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                               <div>
                                 <label className="block text-sm font-bold text-slate-700 mb-2">
                                   Full Name *
@@ -2038,7 +2038,7 @@ const Services = () => {
                                   value={formData.name}
                                   onChange={(e) => setFormData({...formData, name: e.target.value})}
                                   required
-                                  className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                  className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm sm:text-base"
                                   placeholder="Your full name"
                                 />
                               </div>
