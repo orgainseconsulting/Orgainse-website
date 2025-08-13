@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, Suspense, lazy } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
 import { Button } from "./components/ui/button";
@@ -7,8 +7,10 @@ import { Input } from "./components/ui/input";
 import { Textarea } from "./components/ui/textarea";
 import { Badge } from "./components/ui/badge";
 import { Separator } from "./components/ui/separator";
-import GoogleCalendarBooking from "./components/GoogleCalendarBooking";
-import ServicePopup from "./components/ServicePopup";
+
+// Lazy load components that are not immediately visible
+const GoogleCalendarBooking = lazy(() => import("./components/GoogleCalendarBooking"));
+const ServicePopup = lazy(() => import("./components/ServicePopup"));
 import { 
   Menu, 
   X, 
