@@ -4075,8 +4075,8 @@ const TermsOfService = () => {
                 For questions regarding these Terms of Service, please contact us at:
               </p>
               <div className="mt-4 space-y-2">
-                <p>Email: info@orgainse.com</p>
-                <p>Phone: +91-9740384683 (India) | +1-XXX-XXX-XXXX (USA)</p>
+                <p>Email: info@orgainse.com | support@orgainse.com</p>
+                <p>Phone: +91-9740384683 | +91-9740394863</p>
                 <p>Headquarters: Bangalore, India | Austin, USA</p>
               </div>
             </section>
