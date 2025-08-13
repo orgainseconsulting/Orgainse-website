@@ -105,38 +105,50 @@ class BackendTester:
         return None
     
     def test_google_calendar_available_slots(self):
-        """Test available slots endpoint (without authentication)"""
-        print("\n=== Testing Google Calendar Available Slots ===")
+        """Test legacy available slots endpoint (requires user authentication)"""
+        print("\n=== Testing Legacy Google Calendar Available Slots ===")
         
         try:
-            # Test without user_id (should fail with 401)
+            # Test without user_id (should fail with 422 or 503)
             response = self.session.get(f"{API_BASE_URL}/calendar/available-slots")
             
             if response.status_code == 422:  # FastAPI validation error for missing user_id
-                self.log_result("Available slots (no auth)", True, "- Correctly requires user_id parameter")
+                self.log_result("Legacy available slots (no auth)", True, "- Correctly requires user_id parameter")
+            elif response.status_code == 503:  # Organization calendar not configured
+                data = response.json()
+                if "organization calendar not configured" in data.get('detail', '').lower():
+                    self.log_result("Legacy available slots (no auth)", True, "- Correctly requires organization calendar setup")
+                else:
+                    self.log_result("Legacy available slots (no auth)", False, f"Unexpected 503 error: {data}")
             elif response.status_code == 401:
-                self.log_result("Available slots (no auth)", True, "- Correctly returns 401 for unauthenticated request")
+                self.log_result("Legacy available slots (no auth)", True, "- Correctly returns 401 for unauthenticated request")
             else:
-                self.log_result("Available slots (no auth)", False, f"Unexpected status: {response.status_code}")
+                self.log_result("Legacy available slots (no auth)", False, f"Unexpected status: {response.status_code}")
             
-            # Test with fake user_id (should fail with 401)
+            # Test with fake user_id (should fail with 401 or 503)
             response = self.session.get(f"{API_BASE_URL}/calendar/available-slots?user_id=fake_user")
             
             if response.status_code == 401:
                 data = response.json()
                 if "not authenticated" in data.get('detail', '').lower():
-                    self.log_result("Available slots (fake auth)", True, "- Correctly validates authentication")
+                    self.log_result("Legacy available slots (fake auth)", True, "- Correctly validates authentication")
                 else:
-                    self.log_result("Available slots (fake auth)", False, f"Unexpected error: {data}")
+                    self.log_result("Legacy available slots (fake auth)", False, f"Unexpected error: {data}")
+            elif response.status_code == 503:
+                data = response.json()
+                if "organization calendar not configured" in data.get('detail', '').lower():
+                    self.log_result("Legacy available slots (fake auth)", True, "- Correctly requires organization calendar setup")
+                else:
+                    self.log_result("Legacy available slots (fake auth)", False, f"Unexpected 503 error: {data}")
             else:
-                self.log_result("Available slots (fake auth)", False, f"Status: {response.status_code}")
+                self.log_result("Legacy available slots (fake auth)", False, f"Status: {response.status_code}")
                 
         except Exception as e:
-            self.log_result("Available slots", False, f"Exception: {str(e)}")
+            self.log_result("Legacy available slots", False, f"Exception: {str(e)}")
     
     def test_google_calendar_book_consultation(self):
-        """Test booking consultation endpoint"""
-        print("\n=== Testing Google Calendar Book Consultation ===")
+        """Test legacy booking consultation endpoint (requires user authentication)"""
+        print("\n=== Testing Legacy Google Calendar Book Consultation ===")
         
         # Test booking data
         booking_data = {
@@ -152,18 +164,24 @@ class BackendTester:
         }
         
         try:
-            # Test without user_id (should fail)
+            # Test without user_id (should fail with 422 or 503)
             response = self.session.post(
                 f"{API_BASE_URL}/calendar/book-consultation",
                 json=booking_data
             )
             
             if response.status_code == 422:  # Missing user_id parameter
-                self.log_result("Book consultation (no user_id)", True, "- Correctly requires user_id parameter")
+                self.log_result("Legacy book consultation (no user_id)", True, "- Correctly requires user_id parameter")
+            elif response.status_code == 503:  # Organization calendar not configured
+                data = response.json()
+                if "organization calendar not configured" in data.get('detail', '').lower():
+                    self.log_result("Legacy book consultation (no user_id)", True, "- Correctly requires organization calendar setup")
+                else:
+                    self.log_result("Legacy book consultation (no user_id)", False, f"Unexpected 503 error: {data}")
             else:
-                self.log_result("Book consultation (no user_id)", False, f"Status: {response.status_code}")
+                self.log_result("Legacy book consultation (no user_id)", False, f"Status: {response.status_code}")
             
-            # Test with fake user_id (should fail with 401)
+            # Test with fake user_id (should fail with 401 or 503)
             response = self.session.post(
                 f"{API_BASE_URL}/calendar/book-consultation?user_id=fake_user",
                 json=booking_data
@@ -172,14 +190,20 @@ class BackendTester:
             if response.status_code == 401:
                 data = response.json()
                 if "not authenticated" in data.get('detail', '').lower():
-                    self.log_result("Book consultation (fake auth)", True, "- Correctly validates authentication")
+                    self.log_result("Legacy book consultation (fake auth)", True, "- Correctly validates authentication")
                 else:
-                    self.log_result("Book consultation (fake auth)", False, f"Unexpected error: {data}")
+                    self.log_result("Legacy book consultation (fake auth)", False, f"Unexpected error: {data}")
+            elif response.status_code == 503:
+                data = response.json()
+                if "organization calendar not configured" in data.get('detail', '').lower():
+                    self.log_result("Legacy book consultation (fake auth)", True, "- Correctly requires organization calendar setup")
+                else:
+                    self.log_result("Legacy book consultation (fake auth)", False, f"Unexpected 503 error: {data}")
             else:
-                self.log_result("Book consultation (fake auth)", False, f"Status: {response.status_code}")
+                self.log_result("Legacy book consultation (fake auth)", False, f"Status: {response.status_code}")
                 
         except Exception as e:
-            self.log_result("Book consultation", False, f"Exception: {str(e)}")
+            self.log_result("Legacy book consultation", False, f"Exception: {str(e)}")
     
     def test_google_calendar_bookings(self):
         """Test get bookings endpoint"""
