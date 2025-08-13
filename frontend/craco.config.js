@@ -13,6 +13,26 @@ module.exports = {
     },
     configure: (webpackConfig) => {
       
+      // Performance optimizations
+      webpackConfig.optimization = {
+        ...webpackConfig.optimization,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all',
+            },
+          },
+        },
+      };
+
+      // Add compression and minification
+      if (webpackConfig.mode === 'production') {
+        webpackConfig.optimization.minimize = true;
+      }
+      
       // Disable hot reload completely if environment variable is set
       if (config.disableHotReload) {
         // Remove hot reload related plugins
