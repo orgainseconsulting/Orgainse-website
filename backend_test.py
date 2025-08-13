@@ -317,6 +317,213 @@ class BackendTester:
         except Exception as e:
             self.log_result("Consultation request", False, f"Exception: {str(e)}")
     
+    def test_ai_assessment_api(self):
+        """Test AI Assessment API endpoint"""
+        print("\n=== Testing AI Assessment API ===")
+        
+        assessment_data = {
+            "name": "Sarah Wilson",
+            "email": "sarah.wilson@example.com",
+            "company": "AI Innovations Ltd",
+            "phone": "+1-555-0321",
+            "responses": [
+                {"question_id": "q1", "answer": "Intermediate", "score": 5},
+                {"question_id": "q2", "answer": "Advanced", "score": 8},
+                {"question_id": "q3", "answer": "Basic", "score": 3},
+                {"question_id": "q4", "answer": "Intermediate", "score": 5},
+                {"question_id": "q5", "answer": "Advanced", "score": 7}
+            ]
+        }
+        
+        try:
+            response = self.session.post(f"{API_BASE_URL}/ai-assessment", json=assessment_data)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if (data.get('name') == assessment_data['name'] and 
+                    'ai_maturity_score' in data and 
+                    'recommendations' in data):
+                    score = data.get('ai_maturity_score')
+                    recommendations_count = len(data.get('recommendations', []))
+                    self.log_result("AI Assessment API", True, f"- Assessment created with score: {score}%, recommendations: {recommendations_count}")
+                else:
+                    self.log_result("AI Assessment API", False, f"Missing required fields: {data}")
+            else:
+                self.log_result("AI Assessment API", False, f"Status: {response.status_code}, Response: {response.text}")
+                
+        except Exception as e:
+            self.log_result("AI Assessment API", False, f"Exception: {str(e)}")
+    
+    def test_roi_calculator_api(self):
+        """Test ROI Calculator API endpoint"""
+        print("\n=== Testing ROI Calculator API ===")
+        
+        roi_data = {
+            "company_name": "Growth Enterprises",
+            "email": "ceo@growthenterprises.com",
+            "phone": "+1-555-0654",
+            "industry": "Technology",
+            "company_size": "51-200",
+            "current_project_cost": 100000.0,
+            "project_duration_months": 6,
+            "current_efficiency_rating": 6,
+            "desired_services": ["AI Project Management", "Digital Transformation"]
+        }
+        
+        try:
+            response = self.session.post(f"{API_BASE_URL}/roi-calculator", json=roi_data)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if ('potential_savings' in data and 
+                    'roi_percentage' in data and 
+                    'payback_period_months' in data and
+                    'recommended_services' in data):
+                    savings = data.get('potential_savings')
+                    roi = data.get('roi_percentage')
+                    payback = data.get('payback_period_months')
+                    services_count = len(data.get('recommended_services', []))
+                    self.log_result("ROI Calculator API", True, f"- Savings: ${savings:,.0f}, ROI: {roi:.1f}%, Payback: {payback} months, Services: {services_count}")
+                else:
+                    self.log_result("ROI Calculator API", False, f"Missing required fields: {data}")
+            else:
+                self.log_result("ROI Calculator API", False, f"Status: {response.status_code}, Response: {response.text}")
+                
+        except Exception as e:
+            self.log_result("ROI Calculator API", False, f"Exception: {str(e)}")
+    
+    def test_service_inquiry_api(self):
+        """Test Service Inquiry Tracking API endpoint"""
+        print("\n=== Testing Service Inquiry API ===")
+        
+        inquiry_data = {
+            "service_id": "ai-project-management",
+            "service_name": "AI Project Management Service",
+            "inquiry_type": "learn_more",
+            "source": "website_popup",
+            "user_data": {
+                "page": "services",
+                "session_id": "test_session_123"
+            }
+        }
+        
+        try:
+            response = self.session.post(f"{API_BASE_URL}/service-inquiry", json=inquiry_data)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if (data.get('service_name') == inquiry_data['service_name'] and 
+                    data.get('inquiry_type') == inquiry_data['inquiry_type']):
+                    self.log_result("Service Inquiry API", True, f"- Inquiry tracked with ID: {data.get('id')}")
+                else:
+                    self.log_result("Service Inquiry API", False, f"Data mismatch: {data}")
+            else:
+                self.log_result("Service Inquiry API", False, f"Status: {response.status_code}, Response: {response.text}")
+                
+        except Exception as e:
+            self.log_result("Service Inquiry API", False, f"Exception: {str(e)}")
+    
+    def test_google_calendar_auth_callback(self):
+        """Test Google Calendar OAuth callback endpoint"""
+        print("\n=== Testing Google Calendar Auth Callback ===")
+        
+        try:
+            # Test callback without required parameters (should fail with 422)
+            response = self.session.get(f"{API_BASE_URL}/calendar/auth/callback")
+            
+            if response.status_code == 422:
+                self.log_result("Calendar auth callback (no params)", True, "- Correctly requires code and state parameters")
+            else:
+                self.log_result("Calendar auth callback (no params)", False, f"Status: {response.status_code}")
+            
+            # Test callback with invalid state (should fail with 400)
+            response = self.session.get(f"{API_BASE_URL}/calendar/auth/callback?code=fake_code&state=invalid_state")
+            
+            if response.status_code == 400:
+                data = response.json()
+                if "invalid" in data.get('detail', '').lower() or "expired" in data.get('detail', '').lower():
+                    self.log_result("Calendar auth callback (invalid state)", True, "- Correctly validates state parameter")
+                else:
+                    self.log_result("Calendar auth callback (invalid state)", False, f"Unexpected error: {data}")
+            else:
+                self.log_result("Calendar auth callback (invalid state)", False, f"Status: {response.status_code}")
+                
+        except Exception as e:
+            self.log_result("Calendar auth callback", False, f"Exception: {str(e)}")
+    
+    def test_new_google_calendar_available_slots(self):
+        """Test new Google Calendar available slots endpoint (organization calendar)"""
+        print("\n=== Testing New Google Calendar Available Slots ===")
+        
+        try:
+            # Test the new organization calendar endpoint
+            response = self.session.get(f"{API_BASE_URL}/calendar/available-slots")
+            
+            # This should return 503 if organization calendar is not configured
+            if response.status_code == 503:
+                data = response.json()
+                if "organization calendar not configured" in data.get('detail', '').lower():
+                    self.log_result("New available slots (no org auth)", True, "- Correctly requires organization calendar setup")
+                else:
+                    self.log_result("New available slots (no org auth)", False, f"Unexpected 503 error: {data}")
+            elif response.status_code == 200:
+                # If organization is authenticated, should return slots
+                data = response.json()
+                if 'slots' in data and 'timezone' in data:
+                    slots_count = len(data.get('slots', []))
+                    self.log_result("New available slots (org authenticated)", True, f"- Retrieved {slots_count} available slots")
+                else:
+                    self.log_result("New available slots (org authenticated)", False, f"Missing required fields: {data}")
+            else:
+                self.log_result("New available slots", False, f"Status: {response.status_code}, Response: {response.text}")
+                
+        except Exception as e:
+            self.log_result("New available slots", False, f"Exception: {str(e)}")
+    
+    def test_new_google_calendar_book_consultation(self):
+        """Test new Google Calendar book consultation endpoint (organization calendar)"""
+        print("\n=== Testing New Google Calendar Book Consultation ===")
+        
+        # Test booking data for organization calendar
+        booking_data = {
+            "name": "Alex Thompson",
+            "email": "alex.thompson@example.com",
+            "phone": "+1-555-0987",
+            "company": "Digital Solutions Co",
+            "service_type": "AI Transformation Consulting",
+            "start_datetime": (datetime.utcnow() + timedelta(days=2)).isoformat() + "Z",
+            "end_datetime": (datetime.utcnow() + timedelta(days=2, minutes=30)).isoformat() + "Z",
+            "timezone": "UTC",
+            "message": "Excited to discuss AI implementation strategy"
+        }
+        
+        try:
+            response = self.session.post(
+                f"{API_BASE_URL}/calendar/book-consultation",
+                json=booking_data
+            )
+            
+            # This should return 503 if organization calendar is not configured
+            if response.status_code == 503:
+                data = response.json()
+                if "organization calendar not configured" in data.get('detail', '').lower():
+                    self.log_result("New book consultation (no org auth)", True, "- Correctly requires organization calendar setup")
+                else:
+                    self.log_result("New book consultation (no org auth)", False, f"Unexpected 503 error: {data}")
+            elif response.status_code == 200:
+                # If organization is authenticated, should create booking
+                data = response.json()
+                if ('event_id' in data and 'html_link' in data and 
+                    data.get('name') == booking_data['name']):
+                    self.log_result("New book consultation (org authenticated)", True, f"- Booking created with event ID: {data.get('event_id')}")
+                else:
+                    self.log_result("New book consultation (org authenticated)", False, f"Missing required fields: {data}")
+            else:
+                self.log_result("New book consultation", False, f"Status: {response.status_code}, Response: {response.text}")
+                
+        except Exception as e:
+            self.log_result("New book consultation", False, f"Exception: {str(e)}")
+    
     def run_all_tests(self):
         """Run all backend tests"""
         print("🚀 Starting Backend API Tests for Orgainse Consulting")
