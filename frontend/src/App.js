@@ -3323,7 +3323,7 @@ const ROICalculator = () => {
                     
                     <div>
                       <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Current Project Cost ({symbol}) *
+                        Current Project Cost ({regionConfig.symbol}) *
                       </label>
                       <Input
                         type="number"
