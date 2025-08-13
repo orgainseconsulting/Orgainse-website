@@ -1372,7 +1372,7 @@ const About = () => {
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
               <div className="w-24 h-24 bg-gradient-to-br from-orange-400 to-green-500 rounded-full shadow-2xl flex items-center justify-center animate-spin-slow will-change-transform">
                 <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-inner">
-                  <div className="w-8 h-8 bg-gradient-to-br from-slate-600 to-slate-800 rounded-full"></div>
+                  <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-green-500 rounded-full"></div>
                 </div>
               </div>
             </div>
