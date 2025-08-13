@@ -1940,74 +1940,74 @@ const Services = () => {
                     </div>
 
                     {!showContactForm ? (
-                      // Service Information View
-                      <div className="p-8">
-                        {/* Main Content Grid */}
-                        <div className="grid md:grid-cols-2 gap-8 mb-8">
+                      // Service Information View - Responsive
+                      <div className="p-4 sm:p-6 lg:p-8">
+                        {/* Main Content Grid - Responsive */}
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
                           {/* What This Service Does */}
-                          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100">
-                            <h3 className="text-2xl font-bold text-slate-800 mb-4 flex items-center">
-                              <Target className="h-6 w-6 mr-3 text-blue-600" />
+                          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-blue-100">
+                            <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-3 sm:mb-4 flex items-center">
+                              <Target className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3 text-blue-600 flex-shrink-0" />
                               What This Service Does
                             </h3>
-                            <p className="text-slate-700 leading-relaxed text-lg">
+                            <p className="text-slate-700 leading-relaxed text-base sm:text-lg">
                               {selectedService.detailedInfo.whatItDoes}
                             </p>
                           </div>
 
                           {/* Why Choose This Service */}
-                          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100">
-                            <h3 className="text-2xl font-bold text-slate-800 mb-4 flex items-center">
-                              <CheckCircle className="h-6 w-6 mr-3 text-green-600" />
+                          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-green-100">
+                            <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-3 sm:mb-4 flex items-center">
+                              <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3 text-green-600 flex-shrink-0" />
                               Why Choose This Service
                             </h3>
-                            <p className="text-slate-700 leading-relaxed text-lg">
+                            <p className="text-slate-700 leading-relaxed text-base sm:text-lg">
                               {selectedService.detailedInfo.whyChooseUs}
                             </p>
                           </div>
                         </div>
 
                         {/* What You'll Get */}
-                        <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-6 border border-orange-100 mb-8">
-                          <h3 className="text-2xl font-bold text-slate-800 mb-4 flex items-center">
-                            <Award className="h-6 w-6 mr-3 text-orange-600" />
+                        <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-orange-100 mb-6 sm:mb-8">
+                          <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-3 sm:mb-4 flex items-center">
+                            <Award className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3 text-orange-600 flex-shrink-0" />
                             What You'll Get
                           </h3>
-                          <p className="text-slate-700 leading-relaxed text-lg mb-4">
+                          <p className="text-slate-700 leading-relaxed text-base sm:text-lg mb-4">
                             {selectedService.detailedInfo.whatYouGet}
                           </p>
                           
-                          {/* Benefits List */}
-                          <div className="grid md:grid-cols-2 gap-4 mt-4">
+                          {/* Benefits List - Responsive */}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-4">
                             {selectedService.detailedInfo.benefits.map((benefit, index) => (
-                              <div key={index} className="flex items-center space-x-3">
-                                <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
-                                <span className="text-slate-700 font-medium">{benefit}</span>
+                              <div key={index} className="flex items-start space-x-3">
+                                <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                                <span className="text-slate-700 font-medium text-sm sm:text-base">{benefit}</span>
                               </div>
                             ))}
                           </div>
                         </div>
 
-                        {/* Call-to-Action */}
+                        {/* Call-to-Action - Responsive */}
                         <div className="text-center">
-                          <h3 className="text-2xl font-bold text-slate-800 mb-4">
+                          <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-3 sm:mb-4">
                             Ready to Transform Your Business?
                           </h3>
-                          <p className="text-slate-600 mb-6 text-lg">
+                          <p className="text-slate-600 mb-4 sm:mb-6 text-base sm:text-lg">
                             Get a personalized consultation and detailed proposal for your project
                           </p>
                           
-                          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                             <button
                               onClick={() => setShowContactForm(true)}
-                              className={`px-8 py-4 bg-gradient-to-r ${selectedService.gradient} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105`}
+                              className={`px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r ${selectedService.gradient} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105 text-sm sm:text-base`}
                             >
                               Get Custom Proposal
                             </button>
                             
                             <button
                               onClick={openGoogleCalendar}
-                              className="px-8 py-4 bg-white border-2 border-slate-300 text-slate-700 font-bold rounded-xl hover:border-slate-400 transition-all transform hover:scale-105"
+                              className="px-6 sm:px-8 py-3 sm:py-4 bg-white border-2 border-slate-300 text-slate-700 font-bold rounded-xl hover:border-slate-400 transition-all transform hover:scale-105 text-sm sm:text-base"
                             >
                               Book Free Consultation
                             </button>
