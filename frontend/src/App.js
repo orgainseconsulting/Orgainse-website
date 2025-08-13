@@ -1965,9 +1965,11 @@ const Services = () => {
 
                   {/* Scrollable Content Area */}
                   <div className="flex-1 overflow-y-auto" style={{scrollBehavior: 'smooth'}}>
-                
-                {!isSubmitted ? (
-                          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-green-100">
+                    <div className="p-4 sm:p-6 lg:p-8">
+                      {!isSubmitted ? (
+                        <div>
+                          {/* Why Choose This Service */}
+                          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-green-100 mb-6 sm:mb-8">
                             <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-3 sm:mb-4 flex items-center">
                               <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3 text-green-600 flex-shrink-0" />
                               Why Choose This Service
@@ -1976,7 +1978,6 @@ const Services = () => {
                               {selectedService.detailedInfo.whyChooseUs}
                             </p>
                           </div>
-                        </div>
 
                         {/* What You'll Get */}
                         <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-orange-100 mb-6 sm:mb-8">
