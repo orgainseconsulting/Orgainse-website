@@ -1967,18 +1967,20 @@ const Services = () => {
           </div>
 
           {/* Import and use the new ServicePopup component */}
-          <ServicePopup
-            isOpen={isPopupOpen}
-            service={selectedService}
-            showContactForm={showContactForm}
-            setShowContactForm={setShowContactForm}
-            isSubmitted={isSubmitted}
-            formData={formData}
-            setFormData={setFormData}
-            onClose={closeServicePopup}
-            onSubmit={handleContactFormSubmit}
-            openGoogleCalendar={openGoogleCalendar}
-          />
+          <Suspense fallback={<div className="loading-placeholder">Loading...</div>}>
+            <ServicePopup
+              isOpen={isPopupOpen}
+              service={selectedService}
+              showContactForm={showContactForm}
+              setShowContactForm={setShowContactForm}
+              isSubmitted={isSubmitted}
+              formData={formData}
+              setFormData={setFormData}
+              onClose={closeServicePopup}
+              onSubmit={handleContactFormSubmit}
+              openGoogleCalendar={openGoogleCalendar}
+            />
+          </Suspense>
 
           {/* Creative Section Separator */}
           <div className="mt-20 mb-16">
