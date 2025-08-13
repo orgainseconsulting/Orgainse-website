@@ -40,34 +40,44 @@ const ServicePopup = ({
   if (!isOpen || !service) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 overflow-y-auto">
-      <div className="min-h-full flex items-center justify-center p-2 sm:p-4">
-        <div className="bg-white rounded-2xl sm:rounded-3xl max-w-5xl w-full my-4 animate-fade-in shadow-2xl relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Background overlay with smooth transition */}
+      <div 
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-all duration-300"
+        onClick={onClose}
+      />
+      
+      {/* Popup container with enhanced design */}
+      <div className="relative bg-white rounded-3xl max-w-6xl w-[95%] max-h-[95vh] overflow-hidden shadow-2xl transform transition-all duration-300 scale-100">
         
-          {/* Close Button - Fixed Position */}
-          <button 
-            onClick={onClose}
-            className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 hover:bg-slate-100 rounded-full transition-colors z-30 bg-white shadow-md"
-          >
-            <X className="h-5 w-5 sm:h-6 sm:w-6 text-slate-600" />
-          </button>
+        {/* Close Button - Enhanced */}
+        <button 
+          onClick={onClose}
+          className="absolute top-6 right-6 z-10 p-3 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 transform hover:scale-110"
+        >
+          <X className="h-6 w-6 text-slate-700" />
+        </button>
 
-          {/* Fixed Header */}
-          <div className={`bg-gradient-to-r ${service.gradient} p-4 sm:p-6 lg:p-8 rounded-t-2xl sm:rounded-t-3xl text-white`}>
-            <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <div className="p-2 sm:p-3 bg-white/20 rounded-xl sm:rounded-2xl backdrop-blur-sm self-start">
-                <service.icon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
-              </div>
-              <div className="flex-1 pr-8 sm:pr-12">
-                <h2 className="text-2xl sm:text-3xl font-bold mb-2 leading-tight">
-                  {service.title}
-                </h2>
-                <p className="text-white/90 text-base sm:text-lg leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
+        {/* Header with improved gradient design */}
+        <div className={`bg-gradient-to-r ${service.gradient} px-8 py-10 text-white relative overflow-hidden`}>
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-32 translate-x-32"></div>
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-24 -translate-x-24"></div>
+          
+          <div className="relative z-10 flex items-center space-x-6">
+            <div className="p-4 bg-white/20 rounded-2xl backdrop-blur-sm">
+              <service.icon className="h-12 w-12 text-white" />
+            </div>
+            <div className="flex-1">
+              <h2 className="text-4xl font-bold mb-3 leading-tight">
+                {service.title}
+              </h2>
+              <p className="text-white/90 text-xl leading-relaxed max-w-3xl">
+                {service.description}
+              </p>
             </div>
           </div>
+        </div>
 
           {/* Scrollable Content */}
           <div className="max-h-[70vh] overflow-y-auto" style={{scrollBehavior: 'smooth'}}>
