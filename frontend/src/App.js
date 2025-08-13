@@ -1719,6 +1719,7 @@ const Services = () => {
   ];
 
   const openServicePopup = (service) => {
+    console.log('Opening popup for service:', service.title, 'ID:', service.id); // Debug log
     setSelectedService(service);
     setIsPopupOpen(true);
     setShowContactForm(false);
