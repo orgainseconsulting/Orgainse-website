@@ -2289,7 +2289,7 @@ const Contact = () => {
             </p>
           </div>
 
-          {/* Main Contact Cards - Aligned Layout */}
+          {/* Main Contact Section - Form + Contact Methods */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
             {/* Enhanced Contact Form */}
             <div className="animate-fade-in">
@@ -2403,44 +2403,103 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Phone Contact Card - Aligned with Form */}
-            <div className="animate-fade-in animation-delay-300">
-              <div className="relative group h-full">
-                <div className="absolute -inset-4 bg-gradient-to-r from-green-400 to-emerald-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+            {/* Contact Methods Grid */}
+            <div className="space-y-6 animate-fade-in animation-delay-300">
+              {/* Phone Card */}
+              <div className="group relative">
+                <div className="absolute -inset-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
                 
-                <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 rounded-3xl overflow-hidden h-full flex flex-col justify-center">
-                  {/* Top Gradient Bar */}
-                  <div className="h-2 bg-gradient-to-r from-green-400 to-emerald-500"></div>
+                <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 rounded-3xl overflow-hidden">
+                  <div className="h-1 bg-gradient-to-r from-green-400 to-emerald-500"></div>
                   
-                  <CardContent className="p-8 text-center flex-grow flex flex-col justify-center">
-                    <div className="flex justify-center mb-6">
-                      <div className="p-6 bg-gradient-to-br from-green-100 to-emerald-100 rounded-3xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-                        <Phone className="h-12 w-12 text-green-600" />
+                  <CardContent className="p-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="p-4 bg-white rounded-2xl shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+                        <Phone className="h-8 w-8 text-slate-600" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-slate-800 mb-2">Phone • India (HQ)</h3>
+                        <p className="text-slate-600 text-sm mb-3">Direct consultation with our AI specialists</p>
+                        <div className="space-y-1">
+                          <p className="text-slate-700 font-medium">+91-9740384683</p>
+                          <p className="text-slate-700 font-medium">+91-9740394863</p>
+                        </div>
                       </div>
                     </div>
-                    
-                    <h3 className="text-3xl font-bold text-slate-800 mb-4">
-                      Phone • India (HQ)
-                    </h3>
-                    <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                      Direct consultation with our AI specialists
-                    </p>
-                    
-                    <div className="space-y-4 mb-8">
-                      <div className="flex items-center justify-center space-x-3 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl border border-green-100">
-                        <Phone className="h-5 w-5 text-green-600" />
-                        <span className="text-xl font-bold text-slate-700">+91-9740384683</span>
-                      </div>
-                      <div className="flex items-center justify-center space-x-3 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl border border-green-100">
-                        <Phone className="h-5 w-5 text-green-600" />
-                        <span className="text-xl font-bold text-slate-700">+91-9740394863</span>
-                      </div>
-                    </div>
+                  </CardContent>
+                </Card>
+              </div>
 
-                    <div className="space-y-3 text-center">
-                      <p className="text-sm text-slate-500">Available 24/7 for urgent consultations</p>
-                      <p className="text-sm text-slate-500">Global timezone support available</p>
-                      <p className="text-sm text-green-600 font-semibold">Free initial consultation call</p>
+              {/* Email Support Card */}
+              <div className="group relative">
+                <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                
+                <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 rounded-3xl overflow-hidden">
+                  <div className="h-1 bg-gradient-to-r from-blue-400 to-indigo-500"></div>
+                  
+                  <CardContent className="p-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="p-4 bg-white rounded-2xl shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+                        <Mail className="h-8 w-8 text-slate-600" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-slate-800 mb-2">Email Support</h3>
+                        <p className="text-slate-600 text-sm mb-3">24/7 AI-powered support and consultation</p>
+                        <div className="space-y-1">
+                          <p className="text-slate-700 font-medium">info@orgainse.com</p>
+                          <p className="text-slate-700 font-medium">support@orgainse.com</p>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Book Consultation Card */}
+              <div className="group relative">
+                <div className="absolute -inset-2 bg-gradient-to-r from-orange-400 to-red-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                
+                <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 rounded-3xl overflow-hidden">
+                  <div className="h-1 bg-gradient-to-r from-orange-400 to-red-500"></div>
+                  
+                  <CardContent className="p-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="p-4 bg-white rounded-2xl shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+                        <Calendar className="h-8 w-8 text-slate-600" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-slate-800 mb-2">Book AI Consultation</h3>
+                        <p className="text-slate-600 text-sm mb-3">Schedule your free GPT-powered strategy session</p>
+                        <div className="space-y-1">
+                          <p className="text-slate-700 font-medium">Free 30-min consultation</p>
+                          <p className="text-slate-700 font-medium">Customized AI roadmap</p>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Global Offices Card */}
+              <div className="group relative">
+                <div className="absolute -inset-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                
+                <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 rounded-3xl overflow-hidden">
+                  <div className="h-1 bg-gradient-to-r from-purple-400 to-pink-500"></div>
+                  
+                  <CardContent className="p-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="p-4 bg-white rounded-2xl shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+                        <MapPin className="h-8 w-8 text-slate-600" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-slate-800 mb-2">Global Offices</h3>
+                        <p className="text-slate-600 text-sm mb-3">AI-native consulting across regions</p>
+                        <div className="space-y-1">
+                          <p className="text-slate-700 font-medium">Bangalore, India (HQ)</p>
+                          <p className="text-slate-700 font-medium">Austin, USA (Corporate)</p>
+                        </div>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -2448,145 +2507,68 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Additional Contact Methods */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Email Support Card */}
-            <div className="group relative animate-fade-in" style={{ animationDelay: '600ms' }}>
-              <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-              
-              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 rounded-3xl overflow-hidden">
-                <div className="h-1 bg-gradient-to-r from-blue-400 to-indigo-500"></div>
-                
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="p-4 bg-white rounded-2xl shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
-                      <Mail className="h-8 w-8 text-slate-600" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-slate-800 mb-2">Email Support</h3>
-                      <p className="text-slate-600 text-sm mb-3">24/7 AI-powered support and consultation</p>
-                      <div className="space-y-1">
-                        <p className="text-slate-700 font-medium">info@orgainse.com</p>
-                        <p className="text-slate-700 font-medium">support@orgainse.com</p>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Book Consultation Card */}
+          {/* Bottom Section - Social Media and CTA */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Enhanced Social Media Card */}
             <div className="group relative animate-fade-in" style={{ animationDelay: '800ms' }}>
-              <div className="absolute -inset-2 bg-gradient-to-r from-orange-400 to-red-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+              <div className="absolute -inset-2 bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
               
-              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 rounded-3xl overflow-hidden">
-                <div className="h-1 bg-gradient-to-r from-orange-400 to-red-500"></div>
+              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 rounded-3xl overflow-hidden h-full">
+                <div className="h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"></div>
                 
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="p-4 bg-white rounded-2xl shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
-                      <Calendar className="h-8 w-8 text-slate-600" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-slate-800 mb-2">Book AI Consultation</h3>
-                      <p className="text-slate-600 text-sm mb-3">Schedule your free GPT-powered strategy session</p>
-                      <div className="space-y-1">
-                        <p className="text-slate-700 font-medium">Free 30-min consultation</p>
-                        <p className="text-slate-700 font-medium">Customized AI roadmap</p>
+                <CardContent className="p-6 h-full flex flex-col justify-center">
+                  <h3 className="text-xl font-bold text-slate-800 mb-4 text-center">
+                    Connect With Our AI Community
+                  </h3>
+                  <p className="text-slate-600 text-center mb-6">
+                    Follow us for the latest insights on AI-native consulting and GPT-powered business transformation
+                  </p>
+                  
+                  <div className="flex justify-center space-x-4">
+                    {socialLinks.map((social, index) => (
+                      <div 
+                        key={index}
+                        className="group/social relative"
+                      >
+                        <div className={`absolute inset-0 bg-gradient-to-r ${social.color} rounded-2xl opacity-20 group-hover/social:opacity-40 transition-opacity blur-sm`}></div>
+                        <a
+                          href={social.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="relative flex items-center justify-center w-12 h-12 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-125 hover:-translate-y-2"
+                          aria-label={social.label}
+                        >
+                          <social.icon className="h-6 w-6 text-slate-600" />
+                        </a>
                       </div>
-                    </div>
+                    ))}
                   </div>
                 </CardContent>
               </Card>
             </div>
 
-            {/* Global Offices Card */}
+            {/* Revolutionary CTA Card */}
             <div className="group relative animate-fade-in" style={{ animationDelay: '1000ms' }}>
-              <div className="absolute -inset-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+              <div className="absolute -inset-4 bg-gradient-to-r from-orange-400 via-pink-400 to-purple-500 rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-1000 animate-pulse"></div>
               
-              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 rounded-3xl overflow-hidden">
-                <div className="h-1 bg-gradient-to-r from-purple-400 to-pink-500"></div>
+              <Card className="relative bg-gradient-to-br from-orange-500 to-purple-600 text-white border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-4 rounded-3xl overflow-hidden h-full">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full transform translate-x-8 -translate-y-8 animate-pulse"></div>
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full transform -translate-x-4 translate-y-4 animate-pulse animation-delay-500"></div>
                 
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="p-4 bg-white rounded-2xl shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
-                      <MapPin className="h-8 w-8 text-slate-600" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-slate-800 mb-2">Global Offices</h3>
-                      <p className="text-slate-600 text-sm mb-3">AI-native consulting across regions</p>
-                      <div className="space-y-1">
-                        <p className="text-slate-700 font-medium">Bangalore, India (HQ)</p>
-                        <p className="text-slate-700 font-medium">Austin, USA (Corporate)</p>
-                      </div>
-                    </div>
-                  </div>
+                <CardContent className="p-8 text-center relative z-10 h-full flex flex-col justify-center">
+                  <h3 className="text-2xl font-bold mb-4">Ready to Get Started?</h3>
+                  <p className="mb-6 text-orange-100">
+                    Book a free AI consultation call and let's discuss your digital transformation goals 
+                    with our <span className="font-bold">GPT-powered strategy development</span>.
+                  </p>
+                  <button className="group/btn bg-white text-orange-600 hover:bg-orange-50 px-8 py-4 rounded-full font-bold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                    <Calendar className="inline-block mr-2 h-5 w-5" />
+                    Schedule Free AI Consultation
+                  </button>
                 </CardContent>
               </Card>
             </div>
           </div>
-
-          {/* Social Media and CTA Section */}
-          <div className="mt-16 space-y-8">{/* Enhanced Social Media Card */}
-                <div className="group relative animate-fade-in" style={{ animationDelay: '1200ms' }}>
-                  <div className="absolute -inset-2 bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-                  
-                  <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 rounded-3xl overflow-hidden">
-                    <div className="h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"></div>
-                    
-                    <CardContent className="p-6">
-                      <h3 className="text-xl font-bold text-slate-800 mb-4 text-center">
-                        Connect With Our AI Community
-                      </h3>
-                      <p className="text-slate-600 text-center mb-6">
-                        Follow us for the latest insights on AI-native consulting and GPT-powered business transformation
-                      </p>
-                      
-                      <div className="flex justify-center space-x-4">
-                        {socialLinks.map((social, index) => (
-                          <div 
-                            key={index}
-                            className="group/social relative"
-                          >
-                            <div className={`absolute inset-0 bg-gradient-to-r ${social.color} rounded-2xl opacity-20 group-hover/social:opacity-40 transition-opacity blur-sm`}></div>
-                            <a
-                              href={social.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="relative flex items-center justify-center w-12 h-12 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-125 hover:-translate-y-2"
-                              aria-label={social.label}
-                            >
-                              <social.icon className="h-6 w-6 text-slate-600" />
-                            </a>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-
-              {/* Revolutionary CTA Card */}
-              <div className="group relative animate-fade-in" style={{ animationDelay: '1400ms' }}>
-                <div className="absolute -inset-4 bg-gradient-to-r from-orange-400 via-pink-400 to-purple-500 rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-1000 animate-pulse"></div>
-                
-                <Card className="relative bg-gradient-to-br from-orange-500 to-purple-600 text-white border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-4 rounded-3xl overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full transform translate-x-8 -translate-y-8 animate-pulse"></div>
-                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full transform -translate-x-4 translate-y-4 animate-pulse animation-delay-500"></div>
-                  
-                  <CardContent className="p-8 text-center relative z-10">
-                    <h3 className="text-2xl font-bold mb-4">Ready to Get Started?</h3>
-                    <p className="mb-6 text-orange-100">
-                      Book a free AI consultation call and let's discuss your digital transformation goals 
-                      with our <span className="font-bold">GPT-powered strategy development</span>.
-                    </p>
-                    <button className="group/btn bg-white text-orange-600 hover:bg-orange-50 px-8 py-4 rounded-full font-bold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-                      <Calendar className="inline-block mr-2 h-5 w-5" />
-                      Schedule Free AI Consultation
-                    </button>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
         </div>
       </section>
     </div>
