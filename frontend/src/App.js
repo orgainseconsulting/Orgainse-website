@@ -2052,13 +2052,13 @@ const Services = () => {
                                   value={formData.email}
                                   onChange={(e) => setFormData({...formData, email: e.target.value})}
                                   required
-                                  className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                  className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm sm:text-base"
                                   placeholder="your.email@company.com"
                                 />
                               </div>
                             </div>
 
-                            <div className="grid md:grid-cols-2 gap-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                               <div>
                                 <label className="block text-sm font-bold text-slate-700 mb-2">
                                   Phone Number
@@ -2067,7 +2067,7 @@ const Services = () => {
                                   type="tel"
                                   value={formData.phone}
                                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                                  className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                  className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm sm:text-base"
                                   placeholder="+1 (555) 123-4567"
                                 />
                               </div>
@@ -2080,7 +2080,7 @@ const Services = () => {
                                   type="text"
                                   value={formData.company}
                                   onChange={(e) => setFormData({...formData, company: e.target.value})}
-                                  className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                  className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm sm:text-base"
                                   placeholder="Your company name"
                                 />
                               </div>
@@ -2093,24 +2093,24 @@ const Services = () => {
                               <Textarea
                                 value={formData.message}
                                 onChange={(e) => setFormData({...formData, message: e.target.value})}
-                                className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm sm:text-base"
                                 rows={4}
                                 placeholder="Tell us about your specific needs, goals, timeline, and any questions you have about this service..."
                               />
                             </div>
 
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                               <button
                                 type="button"
                                 onClick={() => setShowContactForm(false)}
-                                className="px-6 py-3 bg-slate-200 text-slate-700 font-semibold rounded-lg hover:bg-slate-300 transition-colors"
+                                className="px-6 py-3 bg-slate-200 text-slate-700 font-semibold rounded-lg hover:bg-slate-300 transition-colors text-sm sm:text-base"
                               >
                                 ← Back to Details
                               </button>
                               
                               <button
                                 type="submit"
-                                className={`px-8 py-3 bg-gradient-to-r ${selectedService.gradient} text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105`}
+                                className={`px-6 sm:px-8 py-3 bg-gradient-to-r ${selectedService.gradient} text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 text-sm sm:text-base`}
                               >
                                 Send My Proposal Request
                               </button>
