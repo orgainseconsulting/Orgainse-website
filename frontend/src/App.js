@@ -315,14 +315,44 @@ const RegionSelector = () => {
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-// Navigation Component
+// Navigation Component with Shrinking Header
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { openGoogleCalendar } = useGoogleCalendar();
+  const { region, currency } = useRegionalPricing();
 
   // Backend URL for API calls  
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
   const location = useLocation();
+
+  // Scroll detection for shrinking header
+  useEffect(() => {
+    let timeoutId = null;
+    
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      
+      // Clear any existing timeout
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      
+      // Debounce scroll events for better performance
+      timeoutId = setTimeout(() => {
+        setIsScrolled(scrollTop > 100);
+      }, 10);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, []);
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -340,16 +370,28 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className="bg-white/95 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
+    <nav className={`bg-white/95 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50 transition-all duration-300 ${
+      isScrolled ? 'shadow-lg' : 'shadow-sm'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-32">
-          {/* Logo - Zoomed and Cropped for Visibility */}
-          <Link to="/" className="flex items-center">
+        <div className={`flex justify-between items-center transition-all duration-300 ${
+          isScrolled ? 'h-20' : 'h-32'
+        }`}>
+          {/* Logo with Home Link - Shrinks on Scroll */}
+          <Link to="/" className="flex items-center group">
             <img 
               src="https://customer-assets.emergentagent.com/job_digital-presence-29/artifacts/xx6a5zd7_Copy%20of%20OrgAInse%20Consulting%20%28Website%29.png" 
               alt="Orgainse Consulting - AI Project Management Service & Digital Transformation" 
-              className="h-20 w-auto object-contain bg-white rounded-xl px-3 py-2 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 border border-gray-100"
+              className={`w-auto object-contain bg-white rounded-xl px-3 py-2 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 border border-gray-100 ${
+                isScrolled ? 'h-12' : 'h-20'
+              }`}
             />
+            {/* Currency Display */}
+            <div className={`ml-3 transition-all duration-300 ${isScrolled ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100'}`}>
+              <div className="text-xs text-slate-500 font-medium">
+                {region} • {currency}
+              </div>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
