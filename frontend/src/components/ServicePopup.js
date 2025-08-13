@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X, Target, CheckCircle, Award } from 'lucide-react';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
@@ -16,39 +16,51 @@ const ServicePopup = ({
   onSubmit,
   openGoogleCalendar
 }) => {
-  // Proper scroll management
+  const [isPopupHovered, setIsPopupHovered] = useState(false);
+
+  // Advanced scroll management - cursor-based scrolling
   useEffect(() => {
-    if (isOpen) {
-      // Save current scroll position
-      const scrollY = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-      document.body.style.overflow = 'hidden';
+    if (!isOpen) return;
+
+    const handleWheel = (e) => {
+      const popup = document.querySelector('.service-popup-content');
+      const isOverPopup = popup && popup.contains(e.target);
       
-      return () => {
-        // Restore scroll position when popup closes
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        document.body.style.overflow = '';
-        window.scrollTo(0, scrollY);
-      };
-    }
-  }, [isOpen]);
+      if (isOverPopup || isPopupHovered) {
+        // Allow popup to scroll, prevent page scroll
+        const popupScrollContainer = popup.querySelector('.popup-scroll-container');
+        if (popupScrollContainer) {
+          e.preventDefault();
+          popupScrollContainer.scrollTop += e.deltaY;
+        }
+      }
+      // If not over popup, allow normal page scrolling (do nothing)
+    };
+
+    // Add wheel event listener
+    document.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      document.removeEventListener('wheel', handleWheel);
+    };
+  }, [isOpen, isPopupHovered]);
 
   if (!isOpen || !service) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Background overlay with smooth transition */}
+      {/* Background overlay - allows page scrolling when hovered */}
       <div 
         className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-all duration-300"
         onClick={onClose}
       />
       
-      {/* Popup container with enhanced design */}
-      <div className="relative bg-white rounded-3xl max-w-6xl w-[95%] max-h-[95vh] overflow-hidden shadow-2xl transform transition-all duration-300 scale-100">
+      {/* Popup container with cursor-based scroll detection */}
+      <div 
+        className="service-popup-content relative bg-white rounded-3xl max-w-6xl w-[95%] max-h-[95vh] overflow-hidden shadow-2xl transform transition-all duration-300 scale-100"
+        onMouseEnter={() => setIsPopupHovered(true)}
+        onMouseLeave={() => setIsPopupHovered(false)}
+      >
         
         {/* Close Button - Enhanced */}
         <button 
@@ -79,8 +91,8 @@ const ServicePopup = ({
           </div>
         </div>
 
-        {/* Scrollable content with proper height management */}
-        <div className="h-[calc(95vh-280px)] overflow-y-auto">
+        {/* Scrollable content with proper cursor-based scroll handling */}
+        <div className="popup-scroll-container h-[calc(95vh-280px)] overflow-y-auto" style={{scrollBehavior: 'smooth'}}>
           <div className="p-8">
             {!isSubmitted ? (
               <>
