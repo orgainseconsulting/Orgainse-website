@@ -1856,50 +1856,50 @@ const Services = () => {
             </p>
           </div>
 
-          {/* Clean Services Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Responsive Services Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {services.map((service, index) => (
               <div 
-                key={index} 
+                key={service.id || index} 
                 className="group animate-fade-in"
                 style={{ animationDelay: `${index * 150}ms` }}
               >
-                {/* Service Card */}
-                <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 h-full flex flex-col">
+                {/* Service Card - Responsive */}
+                <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 h-full flex flex-col">
                   
-                  {/* Card Header */}
-                  <div className="flex items-center space-x-4 mb-4">
-                    <div className={`p-3 rounded-xl bg-gradient-to-r ${service.gradient} shadow-md`}>
-                      <service.icon className="h-6 w-6 text-white" />
+                  {/* Card Header - Responsive */}
+                  <div className="flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 mb-4">
+                    <div className={`p-2.5 sm:p-3 rounded-xl bg-gradient-to-r ${service.gradient} shadow-md self-start`}>
+                      <service.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold text-slate-800 leading-tight">
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-800 leading-tight">
                       {service.title}
                     </h3>
                   </div>
 
                   {/* Service Description */}
-                  <p className="text-slate-600 leading-relaxed mb-6 flex-1">
+                  <p className="text-slate-600 leading-relaxed mb-4 sm:mb-6 flex-1 text-sm sm:text-base">
                     {service.description}
                   </p>
 
                   {/* Key Features */}
-                  <div className="space-y-2 mb-6">
+                  <div className="space-y-2 mb-4 sm:mb-6">
                     {service.features.slice(0, 3).map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-start space-x-2">
-                        <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm text-slate-600">{feature}</span>
+                        <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span className="text-xs sm:text-sm text-slate-600 leading-tight">{feature}</span>
                       </div>
                     ))}
                   </div>
 
-                  {/* Learn More Button */}
+                  {/* Learn More Button - Responsive */}
                   <button 
                     onClick={() => openServicePopup(service)}
-                    className={`w-full px-6 py-3 bg-gradient-to-r ${service.gradient} text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105`}
+                    className={`w-full px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r ${service.gradient} text-white font-semibold rounded-lg sm:rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 text-sm sm:text-base`}
                   >
                     <span className="flex items-center justify-center">
                       Learn More
-                      <ArrowRight className="ml-2 h-4 w-4" />
+                      <ArrowRight className="ml-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
                     </span>
                   </button>
                 </div>
