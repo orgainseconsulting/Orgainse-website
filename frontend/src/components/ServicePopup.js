@@ -16,37 +16,19 @@ const ServicePopup = ({
   onSubmit,
   openGoogleCalendar
 }) => {
-  // Simple scroll lock without complex cursor detection
-  useEffect(() => {
-    if (isOpen) {
-      // Save scroll position and lock body
-      const scrollY = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-      
-      return () => {
-        // Restore scroll position
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        window.scrollTo(0, scrollY);
-      };
-    }
-  }, [isOpen]);
-
   if (!isOpen || !service) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Background overlay */}
+    // Changed from fixed to absolute - popup moves with page scroll
+    <div className="absolute top-0 left-0 w-full min-h-screen z-50 flex items-center justify-center p-4" style={{minHeight: '100vh'}}>
+      {/* Background overlay that covers entire page */}
       <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        className="fixed inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
       
-      {/* Smaller, more manageable popup */}
-      <div className="relative bg-white rounded-2xl w-full max-w-4xl max-h-[85vh] overflow-hidden shadow-2xl animate-fade-in">
+      {/* Popup that moves with scroll */}
+      <div className="relative bg-white rounded-2xl w-full max-w-4xl max-h-[85vh] overflow-hidden shadow-2xl animate-fade-in" style={{marginTop: '50px'}}>
         
         {/* Close Button */}
         <button 
@@ -106,7 +88,7 @@ const ServicePopup = ({
                       </div>
 
                       {/* What You'll Get */}
-                      <div className="bg-orange-50 rounded-xl p-4 border border-orange-100">
+                      <div className="bg-orange-50 rounded-xl p-4 border border-green-100">
                         <div className="flex items-center mb-3">
                           <Award className="h-5 w-5 text-orange-600 mr-2" />
                           <h3 className="font-bold text-slate-800">What You Get</h3>
