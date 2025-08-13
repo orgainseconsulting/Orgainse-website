@@ -122,10 +122,12 @@ const GoogleCalendarProvider = ({ children }) => {
       closeGoogleCalendar
     }}>
       {children}
-      <GoogleCalendarBooking 
-        isOpen={isGoogleCalendarOpen}
-        onClose={closeGoogleCalendar}
-      />
+      <Suspense fallback={<div className="loading-placeholder">Loading...</div>}>
+        <GoogleCalendarBooking 
+          isOpen={isGoogleCalendarOpen}
+          onClose={closeGoogleCalendar}
+        />
+      </Suspense>
     </GoogleCalendarContext.Provider>
   );
 };
