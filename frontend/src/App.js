@@ -1910,7 +1910,7 @@ const Services = () => {
 
           {/* Enhanced Service Detail Popup Modal - Responsive Design */}
           {isPopupOpen && selectedService && (
-            <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4 overflow-y-auto">
+            <div key={selectedService.id} className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4 overflow-y-auto">
               <div className="bg-white rounded-2xl sm:rounded-3xl max-w-5xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto animate-fade-in shadow-2xl my-2 sm:my-4">
                 
                 {!isSubmitted ? (
