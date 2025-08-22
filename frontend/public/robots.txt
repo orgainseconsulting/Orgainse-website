@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# Important pages for better indexing
+Allow: /about
+Allow: /services  
+Allow: /contact
+Allow: /ai-assessment
+Allow: /roi-calculator
+Allow: /smart-calendar
+Allow: /privacy
+Allow: /terms
+
+# Block unnecessary paths
+Disallow: /static/
+Disallow: /_next/
+Disallow: /api/
+Disallow: *.json$
+
+# Sitemap location
+Sitemap: https://orgainse.com/sitemap.xml
+Sitemap: https://www.orgainse.com/sitemap.xml
+
+# Crawl delay for better server performance
+Crawl-delay: 1
