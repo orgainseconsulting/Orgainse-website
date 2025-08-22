@@ -1,0 +1,16 @@
+# Handle React Router routes
+/*    /index.html   200
+
+# Redirect common patterns
+/home /  301
+/index /  301
+/index.html /  301
+
+# Handle www redirects (if needed)
+https://www.orgainse.com/* https://orgainse.com/:splat 301!
+
+# Security headers
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
