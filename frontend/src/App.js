@@ -782,6 +782,12 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead 
+        title="Orgainse Consulting - AI Project Management Service & Digital Transformation | PMaaS for Startups"
+        description="AI-native consulting firm offering GPT-powered project management, digital transformation, and operational optimization for startups & SMEs in India, USA, UK, UAE, Australia. Get 25% faster delivery with AI PMaaS."
+        canonical="https://orgainse.com/"
+      />
+      
       {/* Revolutionary Hero Section */}
       <section className="relative bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-12 lg:py-16 overflow-hidden">
         {/* Dynamic Background Elements */}
