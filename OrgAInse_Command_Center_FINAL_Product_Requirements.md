@@ -128,8 +128,8 @@ The OrgAInse Command Center™ is a revolutionary, cross-platform on-premises Bu
 - **Minimum:** 8GB RAM, 4 CPU cores, 100GB storage
 - **Recommended:** 16GB RAM, 8 CPU cores, 500GB storage
 - **Operating Systems:** 
-  - **Windows:** Windows 11 Pro/Enterprise (64-bit) - Latest builds only
-  - **macOS:** macOS 13.0 Ventura or later (Intel/Apple Silicon M1/M2/M3)
+  - **Windows:** Windows 11 and above (Home/Pro/Enterprise - 64-bit)
+  - **macOS:** macOS 13.0 Ventura or later (Intel/Apple Silicon M1/M2/M3/M4)
   - **Linux:** Ubuntu 22.04 LTS+, Rocky Linux 9+, RHEL 9+, Debian 12+
 - **Dependencies:** Docker Desktop 4.15+ (Windows/Mac) or Docker Engine 24+ (Linux), Docker Compose 2.15+
 
