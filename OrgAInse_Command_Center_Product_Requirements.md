@@ -570,11 +570,12 @@ cd command-center
 - **Security Tests:** Penetration testing and vulnerability scans
 
 ### **Manual Testing:**
-- **User Experience Testing:** Complete workflow testing
-- **Browser Compatibility:** Chrome, Firefox, Safari, Edge
+- **Cross-Platform Testing:** Complete workflow testing on Windows, macOS, and Linux
+- **Browser Compatibility:** Chrome, Firefox, Safari, Edge across all operating systems
 - **Mobile Responsiveness:** iOS and Android devices
-- **Accessibility Testing:** Screen readers and keyboard navigation
-- **Data Migration Testing:** Import/export workflows
+- **OS-Specific Features:** Native OS integrations and file system access
+- **Performance Testing:** Resource usage optimization for each operating system
+- **Data Migration Testing:** Import/export workflows across different OS environments
 
 ### **Quality Assurance:**
 - **Code Reviews:** All changes reviewed by 2+ developers
