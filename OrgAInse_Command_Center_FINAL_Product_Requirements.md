@@ -144,7 +144,7 @@ Internet → Docker Network → React Frontend (Port 3000)
                         ↘ Ollama API (Port 11434)
 
 Platform-Specific Optimizations:
-- Windows 11: Docker Desktop with WSL2 backend + native Windows containers
+- Windows 11+: Docker Desktop with WSL2 backend + native Windows containers (Home/Pro/Enterprise)
 - macOS 13+: Docker Desktop with Apple Silicon optimization + native virtualization
 - Linux: Docker Engine with native containers + systemd integration
 ```
