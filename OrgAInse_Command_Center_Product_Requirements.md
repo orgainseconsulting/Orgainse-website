@@ -676,18 +676,36 @@ cd command-center
 - **Demand-Based Pricing:** Increase prices in high-demand regions/industries
 
 ### **Revenue Streams:**
-1. **Direct Sales Only:** Sold exclusively by OrgAInse Consulting
-2. **Professional Services:** Implementation and customization by OrgAInse team
-3. **Training Programs:** OrgAInse certified user and admin training courses
-4. **Patent Licensing:** Potential future licensing of specific innovations
-5. **Maintenance Contracts:** Ongoing support and updates exclusively through OrgAInse
+1. **Tiered Global Sales:** Geographic and demographic pricing optimization
+2. **Industry-Specific Licensing:** Premium pricing for high-value sectors
+3. **Customer Size Scaling:** Revenue maximization based on organization size
+4. **Professional Services:** Implementation and customization by OrgAInse team
+5. **Training & Certification:** OrgAInse certified user and admin training courses
+6. **Patent Licensing:** Future licensing of specific innovations to enterprise clients
+7. **Maintenance Contracts:** Recurring revenue through mandatory annual maintenance
+8. **Custom Development:** Bespoke features for Fortune 500 clients
 
-### **Target Markets:**
-- **Small-Medium Businesses:** 10-500 employees seeking proprietary BI solutions
-- **Digital Agencies:** Marketing and web development firms requiring advanced analytics
-- **Consultancy Services:** Business and technology consultants needing comprehensive BI
-- **Enterprise Departments:** Marketing, finance, operations teams requiring patent-protected solutions
-- **High-Security Organizations:** Companies requiring on-premises, patent-protected BI solutions
+### **Target Markets by Revenue Potential:**
+
+#### **High-Value Targets (Premium Pricing):**
+- **Fortune 500 Companies:** Maximum revenue potential with custom pricing
+- **Financial Institutions:** Banks, hedge funds, insurance companies seeking secure BI
+- **Healthcare Networks:** Hospital systems, pharmaceutical companies
+- **Technology Giants:** Software companies, AI/ML firms requiring on-premises BI
+- **Government Agencies:** High-security requirements, budget availability
+
+#### **Volume Targets (Standard Pricing):**
+- **Mid-Market Enterprises:** 200-1000 employees, predictable revenue
+- **Digital Agencies:** Marketing and web development firms needing analytics
+- **Consulting Services:** Business and technology consultants requiring comprehensive BI
+- **Manufacturing Companies:** Production, automotive, industrial companies
+- **Professional Services:** Legal, accounting, engineering firms
+
+#### **Growth Markets (Competitive Pricing):**
+- **Emerging Market SMBs:** High-growth potential in developing countries
+- **Startup Ecosystems:** Fast-growing companies with scaling needs
+- **Educational Institutions:** Universities, research institutions, training centers
+- **Non-Profit Organizations:** NGOs, charities with data analysis needs
 
 ---
 
