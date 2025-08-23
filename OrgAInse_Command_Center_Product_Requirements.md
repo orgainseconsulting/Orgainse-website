@@ -509,23 +509,47 @@ Required Columns:
 
 ## 🚀 DEPLOYMENT SPECIFICATIONS
 
-### **Installation Method:**
-```bash
-# One-command installation
-curl -sSL https://install.orgainse.com/command-center | bash
+### **Cross-Platform Installation Methods:**
+
+#### **Windows Installation:**
+```powershell
+# One-command installation (PowerShell)
+Invoke-WebRequest -Uri "https://install.orgainse.com/command-center-windows.ps1" | Invoke-Expression
 
 # Or manual installation
 git clone https://github.com/orgainse/command-center
 cd command-center
-./install.sh
+.\install-windows.bat
 ```
 
-### **System Requirements Check:**
-- Automated hardware requirement validation
-- Docker dependency installation
-- Network port availability check
-- Storage space verification
-- Operating system compatibility
+#### **macOS Installation:**
+```bash
+# One-command installation (Terminal)
+curl -sSL https://install.orgainse.com/command-center-macos.sh | bash
+
+# Or manual installation
+git clone https://github.com/orgainse/command-center
+cd command-center
+./install-macos.sh
+```
+
+#### **Linux Installation:**
+```bash
+# One-command installation (Terminal)
+curl -sSL https://install.orgainse.com/command-center-linux.sh | bash
+
+# Or manual installation
+git clone https://github.com/orgainse/command-center
+cd command-center
+./install-linux.sh
+```
+
+### **Automated System Requirements Check:**
+- **Cross-Platform Hardware Validation:** RAM, CPU, storage across all OS
+- **Docker Installation:** Automatic Docker Desktop (Windows/Mac) or Docker Engine (Linux) setup
+- **Network Port Availability:** Check ports 3000, 8000, 5432, 6379, 9000, 11434
+- **Storage Space Verification:** Ensure sufficient disk space for containers and data
+- **OS Compatibility Check:** Verify Windows 10+, macOS 12+, or Linux kernel 5.0+
 
 ### **Post-Installation:**
 - Automated SSL certificate generation
