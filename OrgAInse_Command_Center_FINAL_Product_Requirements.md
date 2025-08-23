@@ -382,7 +382,7 @@ Required Columns (Cross-Platform Standard):
 - White-label theming engine for all operating systems
 
 **Testing Criteria:**
-- Setup wizard completes successfully on Windows 11, macOS 13+, Linux modern distros
+- Setup wizard completes successfully on Windows 11+ (Home/Pro/Enterprise), macOS 13+, Linux modern distros
 - Database encryption verified across all platforms
 - Multiple tenant configurations work on any OS
 - Basic login/logout functionality universal
