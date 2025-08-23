@@ -89,22 +89,22 @@ Internet → Nginx (SSL) → React Frontend (Port 3000)
 
 ## 🎯 CORE FEATURES SPECIFICATION
 
-### **1. Multi-Tenant Setup System**
+### **1. OrgAInse Setup System**
 
 **Initial Setup Wizard:**
-- Company name and branding customization
-- Domain configuration (e.g., @customercompany.com)
+- Company name and branding customization (OrgAInse branded)
+- Domain configuration (customer's domain but OrgAInse powered)
 - Logo upload and color scheme selection
 - Admin user creation
 - Google Workspace OAuth setup
 - Database initialization with encryption
 
-**White-Label Capabilities:**
-- Complete UI theming (colors, fonts, logos)
-- Custom application name
-- Branded login pages
-- Custom email templates
-- Configurable navigation menus
+**OrgAInse Branding:**
+- Powered by OrgAInse Consulting branding
+- Custom customer application name with OrgAInse attribution
+- OrgAInse branded login pages
+- OrgAInse email templates with customer customization
+- Configurable navigation menus with OrgAInse footer
 
 ### **2. Social Media Analytics Engine**
 
