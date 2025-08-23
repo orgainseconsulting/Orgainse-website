@@ -592,7 +592,7 @@ sudo ./install-linux.sh
 ## 📞 SUPPORT & MAINTENANCE
 
 ### **Documentation Requirements (Cross-Platform):**
-- **Installation Guides:** Step-by-step setup instructions for Windows 11, macOS 13+, Linux modern
+- **Installation Guides:** Step-by-step setup instructions for Windows 11+ (all editions), macOS 13+, Linux modern
 - **User Manual:** Complete feature documentation with OS-specific screenshots
 - **Admin Guide:** System administration and maintenance across all platforms
 - **API Documentation:** Developer integration guides with universal compatibility
