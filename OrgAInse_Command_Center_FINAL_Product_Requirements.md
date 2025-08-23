@@ -574,7 +574,7 @@ sudo ./install-linux.sh
 - **Security Tests:** Penetration testing and vulnerability scans on all operating systems
 
 ### **Manual Testing (Universal):**
-- **Cross-Platform Testing:** Complete workflow testing on Windows 11, macOS 13+, Linux modern
+- **Cross-Platform Testing:** Complete workflow testing on Windows 11+ (Home/Pro/Enterprise), macOS 13+, Linux modern
 - **Browser Compatibility:** Chrome, Firefox, Safari, Edge across all operating systems
 - **Mobile Responsiveness:** iOS and Android devices with universal web interface
 - **OS-Specific Features:** Native OS integrations and file system access optimization
