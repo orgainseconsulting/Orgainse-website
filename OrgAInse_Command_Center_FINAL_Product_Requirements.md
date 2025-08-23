@@ -553,7 +553,7 @@ sudo ./install-linux.sh
 - **Docker Installation:** Automatic Docker Desktop (Windows/Mac) or Docker Engine (Linux) setup
 - **Network Port Availability:** Check ports 3000, 8000, 5432, 6379, 9000, 11434 across platforms
 - **Storage Space Verification:** Ensure sufficient disk space for containers and data on any filesystem
-- **OS Compatibility Check:** Verify Windows 11+, macOS 13+, or Linux modern kernel 5.15+
+- **OS Compatibility Check:** Verify Windows 11+ (all editions), macOS 13+, or Linux modern kernel 5.15+
 
 ### **Cross-Platform Post-Installation:**
 - **Universal SSL Certificate Generation:** Works across Windows, macOS, Linux with Let's Encrypt
