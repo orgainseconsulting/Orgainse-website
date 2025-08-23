@@ -130,14 +130,20 @@ The OrgAInse Command Center is a revolutionary, on-premises Business Intelligenc
   - **Linux:** Ubuntu 20.04+, CentOS 8+, RHEL 8+, Debian 11+
 - **Dependencies:** Docker Desktop (Windows/Mac) or Docker Engine (Linux) 24+, Docker Compose 2.0+
 
-### **Network Architecture**
+### **Cross-Platform Network Architecture**
 ```
-Internet → Nginx (SSL) → React Frontend (Port 3000)
-                      ↘ FastAPI Backend (Port 8000)
-                      ↘ MinIO Storage (Port 9000)
-                      ↘ PostgreSQL (Port 5432)
-                      ↘ Redis (Port 6379)
-                      ↘ Ollama API (Port 11434)
+All Operating Systems (Windows/Mac/Linux):
+Internet → Docker Network → React Frontend (Port 3000)
+                        ↘ FastAPI Backend (Port 8000)
+                        ↘ MinIO Storage (Port 9000)
+                        ↘ PostgreSQL (Port 5432)
+                        ↘ Redis (Port 6379)
+                        ↘ Ollama API (Port 11434)
+
+Platform-Specific:
+- Windows: Docker Desktop with WSL2 backend
+- macOS: Docker Desktop with native virtualization
+- Linux: Docker Engine with native containers
 ```
 
 ---
