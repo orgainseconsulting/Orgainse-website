@@ -514,9 +514,9 @@ Required Columns (Cross-Platform Standard):
 
 ### **Cross-Platform Installation Methods:**
 
-#### **Windows 11 Installation:**
+#### **Windows 11+ Installation:**
 ```powershell
-# One-command installation (PowerShell Admin)
+# One-command installation (PowerShell Admin) - Works on Home/Pro/Enterprise
 Set-ExecutionPolicy Bypass -Scope Process -Force; 
 Invoke-WebRequest -Uri "https://install.orgainse.com/command-center-windows.ps1" | Invoke-Expression
 
