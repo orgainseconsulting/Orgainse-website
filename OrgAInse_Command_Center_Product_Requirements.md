@@ -551,12 +551,12 @@ cd command-center
 - **Storage Space Verification:** Ensure sufficient disk space for containers and data
 - **OS Compatibility Check:** Verify Windows 10+, macOS 12+, or Linux kernel 5.0+
 
-### **Post-Installation:**
-- Automated SSL certificate generation
-- Database initialization with encryption
-- Default admin user creation
-- System health check
-- First-time setup wizard launch
+### **Cross-Platform Post-Installation:**
+- **Universal SSL Certificate Generation:** Works across Windows, macOS, Linux
+- **Database Initialization:** PostgreSQL setup with encryption on all platforms
+- **Default Admin User Creation:** Cross-platform user management
+- **System Health Check:** OS-specific resource monitoring and optimization
+- **Platform-Specific Setup Wizard:** Optimized for Windows GUI, macOS native, Linux terminal
 
 ---
 
