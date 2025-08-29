@@ -125,7 +125,7 @@ const ServicePopup = ({
                           Get Custom Proposal
                         </button>
                         <button
-                          onClick={openGoogleCalendar}
+                          onClick={openCalendly}
                           className="px-6 py-3 bg-white border-2 border-slate-300 text-slate-700 font-bold rounded-xl hover:border-slate-400 hover:shadow-lg transition-all transform hover:scale-105"
                         >
                           Book Free Consultation
