@@ -1167,13 +1167,13 @@ const Home = () => {
                   </CardDescription>
                   
                   <button 
-                    onClick={openGoogleCalendar}
-                    className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden"
+                    onClick={openCalendly}
+                    className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden w-full sm:w-auto"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <span className="relative z-10 flex items-center justify-center">
+                    <span className="relative z-10 flex items-center justify-center text-sm sm:text-base">
                       Book Free Consultation
-                      <Calendar className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                      <Calendar className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:scale-110 transition-transform" />
                     </span>
                   </button>
                   
