@@ -1973,12 +1973,27 @@ const Services = () => {
         {/* Creative Section Separator */}
         <div className="mt-20 mb-16">
           <div className="max-w-6xl mx-auto">
-            {/* Clean Professional Separator */}
-            <div className="relative flex items-center justify-center py-8">
-              <div className="flex items-center space-x-3">
-                <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-orange-400 to-green-500 rounded-full"></div>
-                <div className="w-2 h-2 bg-gradient-to-r from-orange-500 to-green-500 rounded-full"></div>
-                <div className="w-16 h-0.5 bg-gradient-to-r from-green-500 via-orange-400 to-transparent rounded-full"></div>
+            {/* AI-Themed Compact Separator */}
+            <div className="flex items-center justify-center py-4">
+              <div className="flex items-center space-x-2">
+                {/* AI Circuit Pattern */}
+                <div className="w-4 h-0.5 bg-gradient-to-r from-orange-400 to-orange-500"></div>
+                <div className="w-1 h-1 bg-orange-500 rounded-full animate-pulse"></div>
+                <div className="w-2 h-0.5 bg-gradient-to-r from-orange-500 to-green-500"></div>
+                
+                {/* AI Brain Icon */}
+                <div className="relative">
+                  <div className="w-6 h-6 bg-gradient-to-br from-orange-500 to-green-500 rounded-full flex items-center justify-center">
+                    <div className="w-3 h-3 bg-white rounded-full flex items-center justify-center">
+                      <div className="w-1.5 h-1.5 bg-gradient-to-br from-orange-400 to-green-400 rounded-full animate-pulse"></div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* AI Circuit Pattern */}
+                <div className="w-2 h-0.5 bg-gradient-to-r from-green-500 to-orange-500"></div>
+                <div className="w-1 h-1 bg-green-500 rounded-full animate-pulse animation-delay-500"></div>
+                <div className="w-4 h-0.5 bg-gradient-to-r from-green-500 to-green-400"></div>
               </div>
             </div>
           </div>
