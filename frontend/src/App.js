@@ -491,13 +491,6 @@ const Navigation = () => {
                   Book Free Consultation
                 </Button>
               </div>
-
-              {/* Mobile Currency Display */}
-              <div className="px-3 py-2 text-center">
-                <div className="text-xs text-slate-500 font-medium">
-                  {regionConfig?.name} • {regionConfig?.symbol}
-                </div>
-              </div>
             </div>
           </div>
         )}
