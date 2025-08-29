@@ -1712,7 +1712,7 @@ const About = () => {
                 <div className={`absolute -inset-2 bg-gradient-to-r ${value.gradient} rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000`}></div>
                 
                 {/* Main Card */}
-                <Card className="relative text-center hover:shadow-xl transition-all duration-500 transform hover:-translate-y-4 bg-white/90 backdrop-blur-lg border-0 shadow-2xl rounded-3xl overflow-hidden">
+                <Card className="relative text-center hover:shadow-xl transition-all duration-500 transform hover:-translate-y-4 bg-white/90 backdrop-blur-lg border-0 shadow-2xl rounded-3xl overflow-hidden h-full flex flex-col">
                   {/* Top Gradient Bar */}
                   <div className={`h-2 bg-gradient-to-r ${value.gradient}`}></div>
                   
