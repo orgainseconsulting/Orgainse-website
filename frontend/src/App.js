@@ -1987,7 +1987,7 @@ const Services = () => {
             setFormData={setFormData}
             onClose={closeServicePopup}
             onSubmit={handleContactFormSubmit}
-            openGoogleCalendar={openGoogleCalendar}
+            openGoogleCalendar={openCalendly}
           />
 
           {/* Creative Section Separator */}
