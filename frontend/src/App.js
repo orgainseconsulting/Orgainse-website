@@ -1858,10 +1858,43 @@ const Services = () => {
       <section className="relative bg-gradient-to-br from-slate-50 via-orange-50 to-green-50 py-12 lg:py-16 overflow-hidden">
         {/* Dynamic Background Elements */}
         <div className="absolute inset-0 opacity-20">
+          {/* AI Neural Network Backgrounds */}
           <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-r from-orange-200 to-yellow-200 rounded-full blur-3xl animate-pulse float-animation will-change-transform"></div>
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-green-200 to-blue-200 rounded-full blur-3xl animate-pulse float-animation animation-delay-2000 will-change-transform"></div>
-          <div className="absolute top-1/4 left-1/3 w-6 h-16 bg-yellow-300 rounded-full animate-pulse opacity-40"></div>
-          <div className="absolute bottom-1/4 right-1/3 w-8 h-8 bg-orange-300 rotate-45 animate-spin-slow opacity-40"></div>
+          
+          {/* AI Robots Scattered */}
+          <div className="absolute top-1/4 left-1/3 w-6 h-16 bg-gradient-to-b from-yellow-300 to-orange-400 rounded-full animate-pulse opacity-40">
+            <div className="absolute top-1 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white rounded-full opacity-80">
+              <div className="absolute inset-1 bg-yellow-400 rounded-full animate-ping"></div>
+            </div>
+            <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-2 h-4 bg-orange-500 rounded-sm"></div>
+          </div>
+          
+          {/* AI Processing Units */}
+          <div className="absolute bottom-1/4 right-1/3 w-8 h-8 bg-gradient-to-br from-orange-300 to-green-400 rotate-45 animate-spin-slow opacity-40 rounded-sm">
+            <div className="absolute inset-1 bg-white rounded-sm opacity-60"></div>
+            <div className="absolute inset-2 bg-gradient-to-br from-orange-400 to-green-400 rounded-full animate-pulse"></div>
+          </div>
+          
+          {/* AI Data Particles */}
+          <div className="absolute top-3/4 left-1/4">
+            <div className="flex items-center space-x-2 animate-bounce">
+              <div className="w-1 h-1 bg-blue-400 rounded-full animate-ping"></div>
+              <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-ping animation-delay-200"></div>
+              <div className="w-1 h-1 bg-orange-400 rounded-full animate-ping animation-delay-400"></div>
+            </div>
+          </div>
+          
+          {/* AI Circuit Board Pattern */}
+          <div className="absolute top-1/2 right-1/4">
+            <div className="relative w-12 h-12 opacity-40">
+              <div className="absolute top-0 left-1/2 w-0.5 h-6 bg-gradient-to-b from-green-400 to-transparent"></div>
+              <div className="absolute bottom-0 left-1/2 w-0.5 h-6 bg-gradient-to-t from-orange-400 to-transparent"></div>
+              <div className="absolute top-1/2 left-0 w-6 h-0.5 bg-gradient-to-r from-blue-400 to-transparent"></div>
+              <div className="absolute top-1/2 right-0 w-6 h-0.5 bg-gradient-to-l from-purple-400 to-transparent"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-gradient-to-br from-orange-400 to-green-400 rounded-full animate-pulse"></div>
+            </div>
+          </div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 animate-fade-in">
