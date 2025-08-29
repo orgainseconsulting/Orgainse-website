@@ -2160,8 +2160,7 @@ const Services = () => {
             </div>
           </div>
         </section>
-        </div>
-      </section>
+      </div>
     </div>
   );
 };
