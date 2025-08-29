@@ -1867,6 +1867,8 @@ const Services = () => {
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-r from-orange-200 to-yellow-200 rounded-full blur-3xl animate-pulse float-animation will-change-transform"></div>
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-green-200 to-blue-200 rounded-full blur-3xl animate-pulse float-animation animation-delay-2000 will-change-transform"></div>
+          <div className="absolute top-1/4 left-1/3 w-6 h-16 bg-yellow-300 rounded-full animate-pulse opacity-40"></div>
+          <div className="absolute bottom-1/4 right-1/3 w-8 h-8 bg-orange-300 rotate-45 animate-spin-slow opacity-40"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 animate-fade-in">
