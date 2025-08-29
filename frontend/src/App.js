@@ -307,12 +307,12 @@ const RegionSelector = () => {
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-// Navigation Component with Shrinking Header
+// Navigation Component with Improved Mobile Responsiveness
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { openGoogleCalendar } = useGoogleCalendar();
-  const { region, currency } = useRegionalPricing();
+  const { openCalendly } = useCalendly();
+  const { regionConfig } = useRegionalPricing();
 
   // Backend URL for API calls  
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
@@ -332,7 +332,7 @@ const Navigation = () => {
       
       // Debounce scroll events for better performance
       timeoutId = setTimeout(() => {
-        setIsScrolled(scrollTop > 100);
+        setIsScrolled(scrollTop > 50);
       }, 10);
     };
 
@@ -367,27 +367,27 @@ const Navigation = () => {
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`flex justify-between items-center transition-all duration-300 ${
-          isScrolled ? 'h-20' : 'h-32'
+          isScrolled ? 'h-16 sm:h-20' : 'h-20 sm:h-24 lg:h-32'
         }`}>
-          {/* Logo with Home Link - Shrinks on Scroll */}
+          {/* Logo with Home Link - Better Mobile Sizing */}
           <Link to="/" className="flex items-center group">
             <img 
               src="https://customer-assets.emergentagent.com/job_digital-presence-29/artifacts/xx6a5zd7_Copy%20of%20OrgAInse%20Consulting%20%28Website%29.png" 
               alt="Orgainse Consulting - AI Project Management Service & Digital Transformation" 
-              className={`w-auto object-contain bg-white rounded-xl px-3 py-2 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 border border-gray-100 ${
-                isScrolled ? 'h-12' : 'h-20'
+              className={`w-auto object-contain bg-white rounded-xl px-2 py-1 sm:px-3 sm:py-2 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 border border-gray-100 ${
+                isScrolled ? 'h-8 sm:h-10 lg:h-12' : 'h-10 sm:h-14 lg:h-20'
               }`}
             />
-            {/* Currency Display */}
-            <div className={`ml-3 transition-all duration-300 ${isScrolled ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100'}`}>
-              <div className="text-xs text-slate-500 font-medium">
-                {region} • {currency}
+            {/* Currency Display - Hidden on small screens */}
+            <div className={`ml-2 sm:ml-3 transition-all duration-300 ${isScrolled ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100'}`}>
+              <div className="text-xs text-slate-500 font-medium hidden sm:block">
+                {regionConfig?.name} • {regionConfig?.symbol}
               </div>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -402,8 +402,8 @@ const Navigation = () => {
               </Link>
             ))}
             
-            {/* All Social Media Links in Header */}
-            <div className="flex items-center space-x-3 border-l border-gray-200 pl-6">
+            {/* Social Media Links - Hidden on smaller desktop screens */}
+            <div className="hidden xl:flex items-center space-x-3 border-l border-gray-200 pl-6">
               {socialLinks.map((social, index) => (
                 <a
                   key={index}
@@ -419,24 +419,27 @@ const Navigation = () => {
             </div>
             
             <Button 
-              onClick={openGoogleCalendar}
-              className="bg-orange-500 hover:bg-orange-600 text-white transform hover:scale-105 transition-all duration-300"
+              onClick={openCalendly}
+              className="bg-orange-500 hover:bg-orange-600 text-white transform hover:scale-105 transition-all duration-300 text-sm px-4 py-2"
             >
-              Book Free Consultation
+              Book Consultation
             </Button>
             
-            {/* Currency Display in Desktop Nav */}
-            <div className="text-xs text-slate-500 font-medium px-2 py-1 bg-slate-50 rounded">
-              {region} • {currency}
+            {/* Currency Display in Desktop Nav - Responsive */}
+            <div className={`text-xs text-slate-500 font-medium px-2 py-1 bg-slate-50 rounded transition-all duration-300 ${
+              isScrolled ? 'hidden' : 'block'
+            }`}>
+              {regionConfig?.symbol}
             </div>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="h-10 w-10 p-0"
             >
               {isMobileMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -447,47 +450,59 @@ const Navigation = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation - Improved */}
         {isMobileMenuOpen && (
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="block px-3 py-2 text-base font-medium text-slate-600 hover:text-orange-500"
+                  className="block px-3 py-2 text-base font-medium text-slate-600 hover:text-orange-500 hover:bg-gray-50 rounded-md"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
               
-              {/* All Mobile Social Links */}
+              {/* Mobile Social Links */}
               <div className="px-3 py-2 border-t border-gray-200 mt-2">
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center justify-between">
                   <span className="text-sm text-slate-600 font-medium">Follow us:</span>
-                  {socialLinks.map((social, index) => (
-                    <a
-                      key={index}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-slate-600 hover:text-orange-500"
-                      aria-label={social.label}
-                    >
-                      <social.icon className="h-5 w-5" />
-                    </a>
-                  ))}
+                  <div className="flex items-center space-x-3">
+                    {socialLinks.map((social, index) => (
+                      <a
+                        key={index}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-slate-600 hover:text-orange-500"
+                        aria-label={social.label}
+                      >
+                        <social.icon className="h-5 w-5" />
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
               
               <div className="px-3 py-2">
                 <Button 
-                  onClick={openGoogleCalendar}
+                  onClick={() => {
+                    openCalendly();
+                    setIsMobileMenuOpen(false);
+                  }}
                   className="w-full bg-orange-500 hover:bg-orange-600 text-white"
                 >
                   Book Free Consultation
                 </Button>
+              </div>
+
+              {/* Mobile Currency Display */}
+              <div className="px-3 py-2 text-center">
+                <div className="text-xs text-slate-500 font-medium">
+                  {regionConfig?.name} • {regionConfig?.symbol}
+                </div>
               </div>
             </div>
           </div>
