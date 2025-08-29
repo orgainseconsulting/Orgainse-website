@@ -895,15 +895,38 @@ const Home = () => {
                   height="500"
                 />
                 
-                {/* Floating UI Elements */}
-                <div className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-orange-500 rounded-full p-2 sm:p-3 animate-bounce">
+                {/* AI-Enhanced Floating UI Elements */}
+                <div className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full p-2 sm:p-3 animate-bounce ai-robot-element">
                   <Brain className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
+                  <div className="absolute -top-1 -right-1 w-2 h-2 bg-yellow-400 rounded-full animate-ping"></div>
                 </div>
-                <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 bg-green-500 rounded-full p-2 sm:p-3 animate-pulse">
+                
+                <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 bg-gradient-to-br from-green-500 to-green-600 rounded-full p-2 sm:p-3 animate-pulse ai-neural-node">
                   <Zap className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
+                  <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-blue-400 rounded-full animate-ping animation-delay-500"></div>
                 </div>
-                <div className="hidden sm:block absolute top-1/2 -right-2 sm:-right-4 bg-purple-500 rounded-full p-3 sm:p-4 transform rotate-12 animate-spin-slow">
+                
+                <div className="hidden sm:block absolute top-1/2 -right-2 sm:-right-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full p-3 sm:p-4 transform rotate-12 animate-spin-slow ai-circuit-element">
                   <Target className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
+                  <div className="absolute top-0 right-0 w-3 h-3 bg-pink-400 rounded-full animate-pulse animation-delay-1000"></div>
+                </div>
+                
+                {/* AI Data Streams */}
+                <div className="hidden lg:block absolute top-1/4 left-4">
+                  <div className="flex flex-col space-y-1 ai-data-particle">
+                    <div className="w-8 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></div>
+                    <div className="w-6 h-0.5 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animation-delay-200"></div>
+                    <div className="w-4 h-0.5 bg-gradient-to-r from-orange-400 to-red-500 rounded-full animation-delay-400"></div>
+                  </div>
+                </div>
+                
+                {/* AI Circuit Connections */}
+                <div className="hidden lg:block absolute bottom-1/4 right-4">
+                  <div className="relative w-8 h-8 ai-neural-node">
+                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full"></div>
+                    <div className="absolute inset-1 bg-white rounded-full opacity-80"></div>
+                    <div className="absolute inset-3 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full animate-pulse"></div>
+                  </div>
                 </div>
               </div>
             </div>
