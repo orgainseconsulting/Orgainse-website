@@ -369,7 +369,7 @@ const Navigation = () => {
         <div className={`flex justify-between items-center transition-all duration-300 ${
           isScrolled ? 'h-16 sm:h-20' : 'h-20 sm:h-24 lg:h-32'
         }`}>
-          {/* Logo with Home Link - Better Mobile Sizing */}
+            {/* Logo with Home Link - Better Mobile Sizing */}
           <Link to="/" className="flex items-center group">
             <img 
               src="https://customer-assets.emergentagent.com/job_digital-presence-29/artifacts/xx6a5zd7_Copy%20of%20OrgAInse%20Consulting%20%28Website%29.png" 
@@ -378,12 +378,6 @@ const Navigation = () => {
                 isScrolled ? 'h-8 sm:h-10 lg:h-12' : 'h-10 sm:h-14 lg:h-20'
               }`}
             />
-            {/* Currency Display - Hidden on small screens */}
-            <div className={`ml-2 sm:ml-3 transition-all duration-300 ${isScrolled ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100'}`}>
-              <div className="text-xs text-slate-500 font-medium hidden sm:block">
-                {regionConfig?.name} • {regionConfig?.symbol}
-              </div>
-            </div>
           </Link>
 
           {/* Desktop Navigation */}
