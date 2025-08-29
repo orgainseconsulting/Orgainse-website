@@ -1673,7 +1673,7 @@ const Services = () => {
     company: '',
     message: ''
   });
-  const { openGoogleCalendar } = useGoogleCalendar();
+  const { openCalendly } = useCalendly();
 
   // Backend URL for API calls
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
