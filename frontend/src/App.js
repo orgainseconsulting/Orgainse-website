@@ -1716,7 +1716,7 @@ const About = () => {
                   {/* Top Gradient Bar */}
                   <div className={`h-2 bg-gradient-to-r ${value.gradient}`}></div>
                   
-                  <CardHeader className="pb-6">
+                  <CardHeader className="pb-6 flex-1 flex flex-col justify-between">
                     <div className="mx-auto p-4 bg-white rounded-2xl w-20 h-20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
                       <value.icon className="h-10 w-10 text-slate-600" />
                     </div>
