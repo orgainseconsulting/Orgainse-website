@@ -14,7 +14,7 @@ const ServicePopup = ({
   setFormData,
   onClose,
   onSubmit,
-  openGoogleCalendar
+  openCalendly
 }) => {
   if (!isOpen || !service) return null;
 
