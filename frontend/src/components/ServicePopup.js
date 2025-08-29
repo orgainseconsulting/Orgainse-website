@@ -55,8 +55,8 @@ const ServicePopup = ({
           </div>
         </div>
 
-        {/* Compact scrollable content */}
-        <div className="overflow-y-auto max-h-[calc(85vh-140px)]">
+        {/* Scrollable content with better height calculation */}
+        <div className="overflow-y-auto max-h-[calc(90vh-140px)]">
           <div className="p-6">
             {!isSubmitted ? (
               <>
