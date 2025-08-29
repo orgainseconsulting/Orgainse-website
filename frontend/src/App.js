@@ -2151,7 +2151,7 @@ const Services = () => {
                   Get personalized answers and a free consultation with our AI experts
                 </p>
                 <Button 
-                  onClick={openGoogleCalendar}
+                  onClick={openCalendly}
                   className="bg-white text-slate-900 hover:bg-orange-100 px-8 py-4 text-lg font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
                 >
                   Book Free Consultation
