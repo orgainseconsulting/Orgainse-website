@@ -794,74 +794,75 @@ const Home = () => {
         canonical="https://orgainse.com/"
       />
       
-      {/* Revolutionary Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-12 lg:py-16 overflow-hidden">
-        {/* Dynamic Background Elements */}
+      {/* Mobile-Optimized Hero Section */}
+      <section className="relative bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-8 sm:py-12 lg:py-16 overflow-hidden">
+        {/* Mobile-Optimized Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-96 h-96 bg-gradient-to-r from-orange-200 to-yellow-200 rounded-full blur-3xl opacity-30 animate-pulse float-animation"></div>
-          <div className="absolute top-40 right-20 w-80 h-80 bg-gradient-to-r from-green-200 to-blue-200 rounded-full blur-3xl opacity-30 animate-pulse float-animation animation-delay-2000"></div>
-          <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-gradient-to-r from-purple-200 to-pink-200 rounded-full blur-3xl opacity-30 animate-pulse float-animation animation-delay-500"></div>
-          <div className="absolute bottom-40 right-1/3 w-64 h-64 bg-gradient-to-r from-blue-200 to-cyan-200 rounded-full blur-3xl opacity-30 animate-pulse float-animation animation-delay-1000"></div>
+          {/* Reduced size for mobile */}
+          <div className="absolute top-10 left-5 sm:left-10 w-48 h-48 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-gradient-to-r from-orange-200 to-yellow-200 rounded-full blur-3xl opacity-20 sm:opacity-30 animate-pulse float-animation"></div>
+          <div className="absolute top-20 right-5 sm:right-20 w-40 h-40 sm:w-64 sm:h-64 lg:w-80 lg:h-80 bg-gradient-to-r from-green-200 to-blue-200 rounded-full blur-3xl opacity-20 sm:opacity-30 animate-pulse float-animation animation-delay-2000"></div>
+          <div className="absolute bottom-20 left-1/4 w-32 h-32 sm:w-56 sm:h-56 lg:w-72 lg:h-72 bg-gradient-to-r from-purple-200 to-pink-200 rounded-full blur-3xl opacity-20 sm:opacity-30 animate-pulse float-animation animation-delay-500"></div>
           
-          {/* Floating Geometric Shapes */}
-          <div className="absolute top-1/4 left-1/3 w-8 h-8 bg-orange-300 rotate-45 animate-spin-slow opacity-40"></div>
-          <div className="absolute top-3/4 right-1/4 w-12 h-12 bg-green-300 rounded-full animate-bounce opacity-40"></div>
-          <div className="absolute top-1/2 left-1/4 w-6 h-16 bg-yellow-300 rounded-full animate-pulse opacity-40"></div>
-          <div className="absolute bottom-1/4 right-1/3 w-10 h-10 bg-purple-300 rotate-12 animate-spin-slow opacity-40"></div>
+          {/* Smaller floating shapes for mobile */}
+          <div className="hidden sm:block absolute top-1/4 left-1/3 w-6 h-6 lg:w-8 lg:h-8 bg-orange-300 rotate-45 animate-spin-slow opacity-30 lg:opacity-40"></div>
+          <div className="hidden sm:block absolute top-3/4 right-1/4 w-8 h-8 lg:w-12 lg:h-12 bg-green-300 rounded-full animate-bounce opacity-30 lg:opacity-40"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div className="animate-fade-in">
-              <div className="mb-6">
-                <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-center">
+            <div className="animate-fade-in text-center lg:text-left">
+              <div className="mb-4 sm:mb-6">
+                <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight">
                   <span className="block text-slate-800">Let us </span>
-                  <span className="block bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500 bg-clip-text text-transparent animate-gradient-text text-5xl lg:text-7xl">
+                  <span className="block bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500 bg-clip-text text-transparent animate-gradient-text text-4xl sm:text-5xl lg:text-7xl">
                     plan
                   </span>
                   <span className="block text-slate-800">your </span>
-                  <span className="block bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient-text text-5xl lg:text-7xl">
+                  <span className="block bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient-text text-4xl sm:text-5xl lg:text-7xl">
                     SUCCESS!!
                   </span>
                 </h1>
               </div>
               
-              <div className="relative mb-6">
-                <h2 className="text-xl lg:text-2xl text-orange-600 font-bold mb-3">
+              <div className="relative mb-4 sm:mb-6">
+                <h2 className="text-lg sm:text-xl lg:text-2xl text-orange-600 font-bold mb-2 sm:mb-3">
                   AI-Native Business & Digital Transformation
                 </h2>
-                <div className="absolute -left-4 top-0 w-2 h-full bg-gradient-to-b from-orange-500 to-green-500 rounded-full animate-pulse"></div>
+                <div className="hidden lg:block absolute -left-4 top-0 w-2 h-full bg-gradient-to-b from-orange-500 to-green-500 rounded-full animate-pulse"></div>
               </div>
               
-              <p className="text-lg text-slate-700 leading-relaxed mb-6">
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-4 sm:mb-6 max-w-2xl mx-auto lg:mx-0">
                 GPT-powered project management, AI-driven strategy consulting, 
                 and intelligent operational optimization for <span className="text-orange-600 font-bold">startups</span> and <span className="text-green-600 font-bold">SMEs</span> 
                 across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
               </p>
               
-              <p className="text-base text-slate-600 mb-6">
+              <p className="text-sm sm:text-base text-slate-600 mb-4 sm:mb-6 max-w-xl mx-auto lg:mx-0">
                 Transforming businesses with GPT-powered solutions across IT Services, EdTech, FinTech, 
                 Healthcare, Hospitality, and Software Development industries.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                <button className="group relative px-6 py-3 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4 sm:mb-6 items-center">
+                <button 
+                  onClick={openCalendly}
+                  className="group relative px-4 sm:px-6 py-3 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden w-full sm:w-auto"
+                >
                   <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <span className="relative z-10 flex items-center justify-center">
+                  <span className="relative z-10 flex items-center justify-center text-sm sm:text-base">
                     Book Free AI Consultation
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </button>
-                <button className="group relative px-6 py-3 bg-transparent border-2 border-green-500 text-green-600 font-bold rounded-xl hover:bg-green-50 transition-all duration-300 transform hover:scale-105">
-                  <span className="flex items-center justify-center">
+                <button className="group relative px-4 sm:px-6 py-3 bg-transparent border-2 border-green-500 text-green-600 font-bold rounded-xl hover:bg-green-50 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto">
+                  <span className="flex items-center justify-center text-sm sm:text-base">
                     View Success Stories
                     <Star className="ml-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
                   </span>
                 </button>
               </div>
 
-              {/* Compact Stats Display */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {/* Mobile-Optimized Stats Display */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 {stats.map((stat, index) => (
                   <div 
                     key={index} 
@@ -869,39 +870,39 @@ const Home = () => {
                     style={{ animationDelay: `${index * 200 + 1000}ms` }}
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} rounded-xl opacity-20 group-hover:opacity-30 transition-opacity blur-sm`}></div>
-                    <div className="relative bg-white/90 backdrop-blur-lg rounded-xl p-4 border border-white/40 hover:border-orange-300 transition-all duration-300 shadow-lg h-24 flex flex-col items-center justify-center text-center">
-                      <div className={`text-xl lg:text-2xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent animate-counter mb-1`}>
+                    <div className="relative bg-white/90 backdrop-blur-lg rounded-xl p-3 sm:p-4 border border-white/40 hover:border-orange-300 transition-all duration-300 shadow-lg h-20 sm:h-24 flex flex-col items-center justify-center text-center">
+                      <div className={`text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent animate-counter mb-1`}>
                         {stat.value}
                       </div>
-                      <div className="text-xs text-slate-700 font-medium leading-tight max-w-full">{stat.label}</div>
+                      <div className="text-xs sm:text-xs text-slate-700 font-medium leading-tight max-w-full">{stat.label}</div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="relative animate-fade-in animation-delay-500">
-              {/* Creative Image Container */}
+            <div className="relative animate-fade-in animation-delay-500 mt-6 lg:mt-0">
+              {/* Mobile-Optimized Image Container */}
               <div className="relative group">
-                <div className="absolute -inset-4 bg-gradient-to-r from-orange-400 via-yellow-400 to-green-400 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
+                <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-orange-400 via-yellow-400 to-green-400 rounded-2xl sm:rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
                 <img
                   src="https://images.unsplash.com/photo-1655393001768-d946c97d6fd1?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwxfHxBSSUyMGFydGlmaWNpYWwlMjBpbnRlbGxpZ2VuY2V8ZW58MHx8fGJsdWV8MTc1NDU4ODI5OHww&ixlib=rb-4.1.0&q=80&w=800"
                   alt="AI-native Digital Transformation and Project Management Consulting"
-                  className="relative rounded-2xl w-full h-[500px] object-cover transform group-hover:scale-105 transition-all duration-700 shadow-2xl"
+                  className="relative rounded-xl sm:rounded-2xl w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover transform group-hover:scale-105 transition-all duration-700 shadow-2xl"
                   loading="lazy"
                   width="800"
                   height="500"
                 />
                 
-                {/* Floating UI Elements */}
-                <div className="absolute top-4 right-4 bg-orange-500 rounded-full p-3 animate-bounce">
-                  <Brain className="h-6 w-6 text-white" />
+                {/* Mobile-Optimized Floating UI Elements */}
+                <div className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-orange-500 rounded-full p-2 sm:p-3 animate-bounce">
+                  <Brain className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
                 </div>
-                <div className="absolute bottom-4 left-4 bg-green-500 rounded-full p-3 animate-pulse">
-                  <Zap className="h-6 w-6 text-white" />
+                <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 bg-green-500 rounded-full p-2 sm:p-3 animate-pulse">
+                  <Zap className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
                 </div>
-                <div className="absolute top-1/2 -right-4 bg-purple-500 rounded-full p-4 transform rotate-12 animate-spin-slow">
-                  <Target className="h-8 w-8 text-white" />
+                <div className="hidden sm:block absolute top-1/2 -right-2 sm:-right-4 bg-purple-500 rounded-full p-3 sm:p-4 transform rotate-12 animate-spin-slow">
+                  <Target className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                 </div>
               </div>
             </div>
