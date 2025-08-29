@@ -19,16 +19,16 @@ const ServicePopup = ({
   if (!isOpen || !service) return null;
 
   return (
-    // Changed from fixed to absolute - popup moves with page scroll
-    <div className="absolute top-0 left-0 w-full min-h-screen z-50 flex items-center justify-center p-4" style={{minHeight: '100vh'}}>
-      {/* Background overlay that covers entire page */}
+    // Fixed positioning for proper centering regardless of scroll position
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Background overlay */}
       <div 
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
       
-      {/* Popup that moves with scroll */}
-      <div className="relative bg-white rounded-2xl w-full max-w-4xl max-h-[85vh] overflow-hidden shadow-2xl animate-fade-in" style={{marginTop: '50px'}}>
+      {/* Centered popup modal */}
+      <div className="relative bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden shadow-2xl animate-fade-in transform">
         
         {/* Close Button */}
         <button 
