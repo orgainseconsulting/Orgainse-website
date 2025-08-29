@@ -312,12 +312,14 @@ frontend:
 
 metadata:
   created_by: "main_agent"  
-  version: "3.0"
-  test_sequence: 3
+  version: "4.0"
+  test_sequence: 4
   run_ui: false
   critical_fix_applied: "backend_url_configuration"
-  final_deployment_validation: "completed"
-  vercel_deployment_ready: true
+  final_deployment_validation: "completed_with_critical_issues"
+  vercel_deployment_ready: false
+  critical_blockers: 2
+  deployment_status: "blocked"
 
 agent_communication:
   - agent: "troubleshoot"
