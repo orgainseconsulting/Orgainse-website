@@ -2299,7 +2299,8 @@ const Services = () => {
 };
 
 // Revolutionary Contact Page with Creative Design and SEO
-const Contact = ({ openCalendly }) => {
+const Contact = () => {
+  const { openCalendly } = useCalendly();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
