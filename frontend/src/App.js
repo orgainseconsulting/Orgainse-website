@@ -641,7 +641,7 @@ const Footer = () => {
 // Home Page Component with Revolutionary Creative Design
 const Home = () => {
   const { getRegionalPrice, regionConfig } = useRegionalPricing();
-  const { openGoogleCalendar } = useGoogleCalendar();
+  const { openCalendly } = useCalendly();
   
   // Newsletter subscription state
   const [newsletterEmail, setNewsletterEmail] = useState("");
