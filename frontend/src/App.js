@@ -110,7 +110,7 @@ const CalendlyContext = React.createContext();
 const CalendlyProvider = ({ children }) => {
   const openCalendly = () => {
     // Open Calendly in new window or embed
-    window.open('https://calendly.com/orgainse-consulting/consultation', '_blank', 'width=800,height=600');
+    window.open('https://calendly.com/orgainse-info', '_blank', 'width=800,height=600');
   };
   
   return (
