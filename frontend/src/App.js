@@ -3982,7 +3982,7 @@ const SmartCalendar = () => {
 function App() {
   return (
     <div className="App">
-      <GoogleCalendarProvider>
+      <CalendlyProvider>
         <RegionalPricingProvider>
           <BrowserRouter>
             <Navigation />
@@ -4003,7 +4003,7 @@ function App() {
             <Footer />
           </BrowserRouter>
         </RegionalPricingProvider>
-      </GoogleCalendarProvider>
+      </CalendlyProvider>
     </div>
   );
 }
