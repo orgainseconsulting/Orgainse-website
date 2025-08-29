@@ -802,6 +802,10 @@ const Home = () => {
           <div className="absolute top-10 left-5 sm:left-10 w-48 h-48 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-gradient-to-r from-orange-200 to-yellow-200 rounded-full blur-3xl opacity-20 sm:opacity-30 animate-pulse float-animation"></div>
           <div className="absolute top-20 right-5 sm:right-20 w-40 h-40 sm:w-64 sm:h-64 lg:w-80 lg:h-80 bg-gradient-to-r from-green-200 to-blue-200 rounded-full blur-3xl opacity-20 sm:opacity-30 animate-pulse float-animation animation-delay-2000"></div>
           <div className="absolute bottom-20 left-1/4 w-32 h-32 sm:w-56 sm:h-56 lg:w-72 lg:h-72 bg-gradient-to-r from-purple-200 to-pink-200 rounded-full blur-3xl opacity-20 sm:opacity-30 animate-pulse float-animation animation-delay-500"></div>
+          
+          {/* Smaller floating shapes for mobile */}
+          <div className="hidden sm:block absolute top-1/4 left-1/3 w-6 h-6 lg:w-8 lg:h-8 bg-orange-300 rotate-45 animate-spin-slow opacity-30 lg:opacity-40"></div>
+          <div className="hidden sm:block absolute top-3/4 right-1/4 w-8 h-8 lg:w-12 lg:h-12 bg-green-300 rounded-full animate-bounce opacity-30 lg:opacity-40"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
