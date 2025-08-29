@@ -874,17 +874,6 @@ const Home = () => {
                   height="500"
                 />
                 
-                {/* Floating UI Elements on Hero Image */}
-                <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-orange-400 via-yellow-400 to-green-400 rounded-2xl sm:rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
-                <img
-                  src="https://images.unsplash.com/photo-1655393001768-d946c97d6fd1?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwxfHxBSSUyMGFydGlmaWNpYWwlMjBpbnRlbGxpZ2VuY2V8ZW58MHx8fGJsdWV8MTc1NDU4ODI5OHww&ixlib=rb-4.1.0&q=80&w=800"
-                  alt="AI-native Digital Transformation and Project Management Consulting"
-                  className="relative rounded-xl sm:rounded-2xl w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover transform group-hover:scale-105 transition-all duration-700 shadow-2xl"
-                  loading="lazy"
-                  width="800"
-                  height="500"
-                />
-                
                 {/* Floating UI Elements */}
                 <div className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-orange-500 rounded-full p-2 sm:p-3 animate-bounce">
                   <Brain className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
