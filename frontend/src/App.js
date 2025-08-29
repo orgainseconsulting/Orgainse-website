@@ -3931,7 +3931,7 @@ const SmartCalendar = () => {
                 {/* Submit Button */}
                 <div className="flex justify-center pt-6">
                   <button 
-                    onClick={openGoogleCalendar}
+                    onClick={openCalendly}
                     disabled={false}
                     className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   >
