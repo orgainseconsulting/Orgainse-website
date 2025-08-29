@@ -418,13 +418,6 @@ const Navigation = () => {
             >
               Book Consultation
             </Button>
-            
-            {/* Currency Display in Desktop Nav - Responsive */}
-            <div className={`text-xs text-slate-500 font-medium px-2 py-1 bg-slate-50 rounded transition-all duration-300 ${
-              isScrolled ? 'hidden' : 'block'
-            }`}>
-              {regionConfig?.symbol}
-            </div>
           </div>
 
           {/* Mobile menu button */}
