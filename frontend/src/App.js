@@ -1973,35 +1973,12 @@ const Services = () => {
         {/* Creative Section Separator */}
         <div className="mt-20 mb-16">
           <div className="max-w-6xl mx-auto">
-            {/* Modern Geometric Separator */}
-            <div className="relative flex items-center justify-center py-12">
-              {/* Left Side Pattern */}
-              <div className="absolute left-0 flex items-center space-x-2">
-                <div className="w-3 h-3 bg-gradient-to-r from-orange-400 to-yellow-500 rounded-full animate-pulse"></div>
-                <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-blue-500 rounded-full animate-pulse animation-delay-500"></div>
-                <div className="w-1 h-1 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full animate-pulse animation-delay-1000"></div>
-              </div>
-              
-              {/* Center Content */}
-              <div className="text-center px-8">
-                <div className="flex items-center justify-center space-x-4 mb-4">
-                  <div className="w-12 h-1 bg-gradient-to-r from-orange-400 to-green-500 rounded-full"></div>
-                  <div className="w-4 h-4 bg-gradient-to-r from-orange-500 to-green-500 rounded-full rotate-45 animate-spin-slow"></div>
-                  <div className="w-12 h-1 bg-gradient-to-r from-green-400 to-orange-500 rounded-full"></div>
-                </div>
-                <h2 className="text-2xl font-semibold text-slate-600 mb-4">
-                  Have Questions About Our Services?
-                </h2>
-                <p className="text-slate-500 text-lg">
-                  Find answers to commonly asked questions about our AI consulting services
-                </p>
-              </div>
-              
-              {/* Right Side Pattern */}
-              <div className="absolute right-0 flex items-center space-x-2">
-                <div className="w-1 h-1 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full animate-pulse animation-delay-1000"></div>
-                <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-blue-500 rounded-full animate-pulse animation-delay-500"></div>
-                <div className="w-3 h-3 bg-gradient-to-r from-orange-400 to-yellow-500 rounded-full animate-pulse"></div>
+            {/* Clean Professional Separator */}
+            <div className="relative flex items-center justify-center py-8">
+              <div className="flex items-center space-x-3">
+                <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-orange-400 to-green-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-gradient-to-r from-orange-500 to-green-500 rounded-full"></div>
+                <div className="w-16 h-0.5 bg-gradient-to-r from-green-500 via-orange-400 to-transparent rounded-full"></div>
               </div>
             </div>
           </div>
