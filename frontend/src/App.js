@@ -103,36 +103,28 @@ const REGION_CONFIG = {
 // Default region if detection fails
 const DEFAULT_REGION = 'US';
 
-// Google Calendar Booking Context
-const GoogleCalendarContext = React.createContext();
+// Google Calendar Booking Context - REPLACED WITH CALENDLY
+const CalendlyContext = React.createContext();
 
-// Google Calendar Booking Provider
-const GoogleCalendarProvider = ({ children }) => {
-  const [isGoogleCalendarOpen, setIsGoogleCalendarOpen] = useState(false);
-  
-  const openGoogleCalendar = () => setIsGoogleCalendarOpen(true);
-  const closeGoogleCalendar = () => setIsGoogleCalendarOpen(false);
+// Calendly Provider
+const CalendlyProvider = ({ children }) => {
+  const openCalendly = () => {
+    // Open Calendly in new window or embed
+    window.open('https://calendly.com/orgainse-consulting/consultation', '_blank', 'width=800,height=600');
+  };
   
   return (
-    <GoogleCalendarContext.Provider value={{
-      isGoogleCalendarOpen,
-      openGoogleCalendar,
-      closeGoogleCalendar
-    }}>
+    <CalendlyContext.Provider value={{ openCalendly }}>
       {children}
-      <GoogleCalendarBooking 
-        isOpen={isGoogleCalendarOpen}
-        onClose={closeGoogleCalendar}
-      />
-    </GoogleCalendarContext.Provider>
+    </CalendlyContext.Provider>
   );
 };
 
-// Hook to use Google Calendar context
-const useGoogleCalendar = () => {
-  const context = useContext(GoogleCalendarContext);
+// Hook to use Calendly context
+const useCalendly = () => {
+  const context = useContext(CalendlyContext);
   if (!context) {
-    throw new Error('useGoogleCalendar must be used within a GoogleCalendarProvider');
+    throw new Error('useCalendly must be used within a CalendlyProvider');
   }
   return context;
 };
