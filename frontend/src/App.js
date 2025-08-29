@@ -2299,7 +2299,7 @@ const Services = () => {
 };
 
 // Revolutionary Contact Page with Creative Design and SEO
-const Contact = () => {
+const Contact = ({ openCalendly }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
