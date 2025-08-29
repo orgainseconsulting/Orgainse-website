@@ -2710,7 +2710,10 @@ const Contact = () => {
                     Book a free AI consultation call and let's discuss your digital transformation goals 
                     with our <span className="font-bold">GPT-powered strategy development</span>.
                   </p>
-                  <button className="group/btn bg-white text-orange-600 hover:bg-orange-50 px-8 py-4 rounded-full font-bold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                  <button 
+                    onClick={openCalendly}
+                    className="group/btn bg-white text-orange-600 hover:bg-orange-50 px-8 py-4 rounded-full font-bold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                  >
                     <Calendar className="inline-block mr-2 h-5 w-5" />
                     Schedule Free AI Consultation
                   </button>
