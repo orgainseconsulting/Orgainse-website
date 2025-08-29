@@ -4,7 +4,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://orgainse.com/</loc>
-    <lastmod>2025-08-13</lastmod>
+    <lastmod>2024-12-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -12,7 +12,7 @@
   <!-- About Page -->
   <url>
     <loc>https://orgainse.com/about</loc>
-    <lastmod>2025-08-13</lastmod>
+    <lastmod>2024-12-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -20,7 +20,7 @@
   <!-- Services Page -->
   <url>
     <loc>https://orgainse.com/services</loc>
-    <lastmod>2025-08-13</lastmod>
+    <lastmod>2024-12-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -28,7 +28,7 @@
   <!-- AI Assessment Tool -->
   <url>
     <loc>https://orgainse.com/ai-assessment</loc>
-    <lastmod>2025-08-13</lastmod>
+    <lastmod>2024-12-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -36,23 +36,15 @@
   <!-- ROI Calculator -->
   <url>
     <loc>https://orgainse.com/roi-calculator</loc>
-    <lastmod>2025-08-13</lastmod>
+    <lastmod>2024-12-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-  
-  <!-- Smart Calendar -->
-  <url>
-    <loc>https://orgainse.com/smart-calendar</loc>
-    <lastmod>2025-08-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   
   <!-- Contact Page -->
   <url>
     <loc>https://orgainse.com/contact</loc>
-    <lastmod>2025-08-13</lastmod>
+    <lastmod>2024-12-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -60,7 +52,7 @@
   <!-- Privacy Policy -->
   <url>
     <loc>https://orgainse.com/privacy</loc>
-    <lastmod>2025-08-13</lastmod>
+    <lastmod>2024-12-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -68,7 +60,7 @@
   <!-- Terms of Service -->
   <url>
     <loc>https://orgainse.com/terms</loc>
-    <lastmod>2025-08-13</lastmod>
+    <lastmod>2024-12-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
