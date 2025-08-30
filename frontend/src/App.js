@@ -1501,7 +1501,7 @@ const About = () => {
                   
                   <CardContent className="p-4 sm:p-6 lg:p-8 relative z-10">
                     <div className="flex items-center space-x-3 sm:space-x-4 mb-4 sm:mb-6">
-                      <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform duration-500">
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform duration-500">
                         <Target className="h-8 w-8 text-orange-500" />
                       </div>
                       <div>
