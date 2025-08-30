@@ -1539,7 +1539,7 @@ const About = () => {
                         <Zap className="h-8 w-8 text-amber-600" />
                       </div>
                       <div>
-                        <h3 className="text-2xl font-bold">The Engine</h3>
+                        <h3 className="text-xl sm:text-2xl font-bold">The Engine</h3>
                         <p className="text-amber-800 font-medium">Innovation & Growth</p>
                       </div>
                     </div>
