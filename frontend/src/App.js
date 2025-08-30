@@ -652,24 +652,40 @@ const Home = () => {
     setNewsletterStatus("");
 
     try {
-      const response = await axios.post(`${API}/newsletter`, {
-        email: newsletterEmail
+      // Google Apps Script Web App URL (replace with your actual URL)
+      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API || 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+      
+      const leadData = {
+        leadType: 'Newsletter Subscription',
+        name: 'Newsletter Subscriber',
+        email: newsletterEmail,
+        company: '',
+        phone: '',
+        message: 'Newsletter subscription request',
+        source: 'orgainse.com/newsletter',
+        timestamp: new Date().toISOString()
+      };
+
+      const response = await fetch(GOOGLE_SHEETS_API, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(leadData)
       });
 
-      if (response.status === 200) {
+      if (response.ok) {
         setNewsletterStatus("success");
         setNewsletterEmail("");
         // Track successful newsletter signup
         trackLeadAction('newsletter_signup');
         // Show success message for 3 seconds
         setTimeout(() => setNewsletterStatus(""), 3000);
+      } else {
+        throw new Error('Network response was not ok');
       }
     } catch (error) {
-      if (error.response?.status === 409) {
-        setNewsletterStatus("duplicate");
-      } else {
-        setNewsletterStatus("error");
-      }
+      setNewsletterStatus("error");
       // Show error message for 3 seconds
       setTimeout(() => setNewsletterStatus(""), 3000);
     } finally {
