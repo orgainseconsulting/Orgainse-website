@@ -1490,7 +1490,7 @@ const About = () => {
             </svg>
 
             {/* The Four Pillars - Creative Positioned Layout */}
-            <div className="grid grid-cols-2 gap-8 lg:gap-16 relative z-20">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 relative z-20">
               
               {/* The Foundation - Top Left */}
               <div className="relative animate-fade-in" style={{ animationDelay: '200ms' }}>
