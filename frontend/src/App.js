@@ -3287,19 +3287,42 @@ const ROICalculator = () => {
     setIsLoading(true);
     
     try {
-      const calculationData = {
-        ...formData,
+      // Google Apps Script Web App URL
+      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API || 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+      
+      const leadData = {
+        leadType: 'ROI Calculator',
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        role: formData.role,
+        company_size: formData.company_size,
+        industry: formData.industry,
         current_project_cost: parseFloat(formData.current_project_cost),
         project_duration_months: parseInt(formData.project_duration_months),
-        current_efficiency_rating: parseInt(formData.current_efficiency_rating)
+        current_efficiency_rating: parseInt(formData.current_efficiency_rating),
+        desired_services: formData.desired_services,
+        source: 'orgainse.com/roi-calculator',
+        timestamp: new Date().toISOString()
       };
 
-      const response = await axios.post(`${API}/roi-calculator`, calculationData);
+      await fetch(GOOGLE_SHEETS_API, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(leadData)
+      });
       
-      if (response.status === 200) {
-        setResults(response.data);
-        setIsSubmitted(true);
-      }
+      // Calculate ROI for display (simplified calculation)
+      const calculatedROI = {
+        potential_savings: formData.current_project_cost * 0.3,
+        efficiency_improvement: (10 - formData.current_efficiency_rating) * 15,
+        roi_percentage: 250 + (formData.current_efficiency_rating * 10)
+      };
+      
+      setResults(calculatedROI);
+      setIsSubmitted(true);
     } catch (error) {
       console.error('ROI calculation failed:', error);
       alert('Failed to calculate ROI. Please try again.');
