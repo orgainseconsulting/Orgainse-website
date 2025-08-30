@@ -1573,7 +1573,7 @@ const About = () => {
                         <Globe className="h-8 w-8 text-green-500" />
                       </div>
                       <div>
-                        <h3 className="text-2xl font-bold">The Compass</h3>
+                        <h3 className="text-xl sm:text-2xl font-bold">The Compass</h3>
                         <p className="text-green-100 font-medium">Navigation & Direction</p>
                       </div>
                     </div>
