@@ -1607,7 +1607,7 @@ const About = () => {
                         <Users className="h-8 w-8 text-slate-700" />
                       </div>
                       <div>
-                        <h3 className="text-2xl font-bold">The Spark</h3>
+                        <h3 className="text-xl sm:text-2xl font-bold">The Spark</h3>
                         <p className="text-slate-300 font-medium">Execution & Delivery</p>
                       </div>
                     </div>
