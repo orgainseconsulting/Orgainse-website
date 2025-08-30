@@ -2313,7 +2313,28 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${API}/contact`, formData);
+      // Google Apps Script Web App URL (replace with your actual URL)
+      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API || 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+      
+      const leadData = {
+        leadType: 'Contact Form',
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        message: `Subject: ${formData.subject}\n\nMessage: ${formData.message}`,
+        source: 'orgainse.com/contact',
+        timestamp: new Date().toISOString()
+      };
+
+      await fetch(GOOGLE_SHEETS_API, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(leadData)
+      });
+      
       alert("Message sent successfully! We'll get back to you within 24 hours with a customized AI consultation plan.");
       setFormData({
         name: "",
