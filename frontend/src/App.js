@@ -1602,7 +1602,7 @@ const About = () => {
                   <div className="absolute bottom-0 right-0 w-28 h-28 bg-slate-400 opacity-10 rounded-full transform translate-x-8 translate-y-8"></div>
                   
                   <CardContent className="p-4 sm:p-6 lg:p-8 relative z-10">
-                    <div className="flex items-center space-x-4 mb-6">
+                    <div className="flex items-center space-x-3 sm:space-x-4 mb-4 sm:mb-6">
                       <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500">
                         <Users className="h-8 w-8 text-slate-700" />
                       </div>
