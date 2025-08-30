@@ -1505,7 +1505,7 @@ const About = () => {
                         <Target className="h-8 w-8 text-orange-500" />
                       </div>
                       <div>
-                        <h3 className="text-2xl font-bold">The Foundation</h3>
+                        <h3 className="text-xl sm:text-2xl font-bold">The Foundation</h3>
                         <p className="text-orange-100 font-medium">AI Strategy & Vision</p>
                       </div>
                     </div>
