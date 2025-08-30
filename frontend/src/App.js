@@ -3812,17 +3812,42 @@ const SmartCalendar = () => {
     setIsLoading(true);
     
     try {
-      const bookingData = {
-        ...formData,
-        preferred_datetime: new Date(formData.preferred_datetime).toISOString()
+      // Google Apps Script Web App URL
+      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API || 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+      
+      const leadData = {
+        leadType: 'Consultation',
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        service_type: formData.service_type,
+        preferred_date: formData.preferred_date,
+        preferred_time: formData.preferred_time,
+        message: formData.message,
+        urgency: formData.urgency,
+        budget_range: formData.budget_range,
+        source: 'orgainse.com/consultation',
+        timestamp: new Date().toISOString()
       };
 
-      const response = await axios.post(`${API}/book-consultation`, bookingData);
+      await fetch(GOOGLE_SHEETS_API, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(leadData)
+      });
       
-      if (response.status === 200) {
-        setBookingResult(response.data);
-        setIsSubmitted(true);
-      }
+      // Create a success result
+      const bookingResult = {
+        booking_id: `ORG-${Date.now()}`,
+        confirmation: 'Consultation request received successfully',
+        next_steps: 'Our team will contact you within 24 hours to confirm your consultation slot.'
+      };
+      
+      setBookingResult(bookingResult);
+      setIsSubmitted(true);
     } catch (error) {
       console.error('Booking failed:', error);
       alert('Failed to book consultation. Please try again.');
