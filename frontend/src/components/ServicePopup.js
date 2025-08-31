@@ -64,7 +64,7 @@ const ServicePopup = ({
                   // Condensed Service Information
                   <div className="space-y-6">
                     {/* Compact 3-section layout */}
-                    <div className="grid md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                       {/* What This Service Does */}
                       <div className="bg-blue-50 rounded-xl p-4 border border-blue-100">
                         <div className="flex items-center mb-3">
