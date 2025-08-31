@@ -3975,7 +3975,7 @@ const SmartCalendar = () => {
     
     try {
       // Google Apps Script Web App URL with debugging
-      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API;
+      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API || import.meta.env?.REACT_APP_GOOGLE_SHEETS_API;
       
       console.log('🔧 Consultation Debug Info:');
       console.log('📋 Environment Variable:', GOOGLE_SHEETS_API);
