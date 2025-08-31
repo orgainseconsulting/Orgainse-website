@@ -1933,7 +1933,7 @@ const Services = () => {
       };
 
       // Google Apps Script Web App URL
-      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API;
+      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API || import.meta.env?.REACT_APP_GOOGLE_SHEETS_API;
       
       if (!GOOGLE_SHEETS_API) {
         console.error('❌ Google Sheets API URL not configured');
