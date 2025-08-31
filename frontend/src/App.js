@@ -652,8 +652,20 @@ const Home = () => {
     setNewsletterStatus("");
 
     try {
-      // Google Apps Script Web App URL (replace with your actual URL)
-      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API || 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+      // Google Apps Script Web App URL with debugging
+      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API;
+      
+      console.log('🔧 Newsletter Debug Info:');
+      console.log('📋 Environment Variable:', GOOGLE_SHEETS_API);
+      console.log('✉️ Email:', newsletterEmail);
+      
+      if (!GOOGLE_SHEETS_API || GOOGLE_SHEETS_API.includes('YOUR_GOOGLE_APPS_SCRIPT_URL')) {
+        console.error('❌ Google Sheets API URL not configured');
+        alert('Configuration error: Google Sheets API not set up. Please check environment variables.');
+        setNewsletterStatus("error");
+        setIsNewsletterLoading(false);
+        return;
+      }
       
       const leadData = {
         leadType: 'Newsletter Subscription',
@@ -662,9 +674,12 @@ const Home = () => {
         company: '',
         phone: '',
         message: 'Newsletter subscription request',
-        source: 'orgainse.com/newsletter',
+        source: window.location.origin + '/newsletter',
         timestamp: new Date().toISOString()
       };
+
+      console.log('📤 Sending lead data:', leadData);
+      console.log('🌐 Sending to:', GOOGLE_SHEETS_API);
 
       const response = await fetch(GOOGLE_SHEETS_API, {
         method: 'POST',
@@ -674,19 +689,26 @@ const Home = () => {
         body: JSON.stringify(leadData)
       });
 
+      console.log('📥 Response status:', response.status);
+      console.log('📄 Response ok:', response.ok);
+
       if (response.ok) {
+        const responseData = await response.text();
+        console.log('✅ Success response:', responseData);
+        
         setNewsletterStatus("success");
         setNewsletterEmail("");
-        // Track successful newsletter signup
         trackLeadAction('newsletter_signup');
-        // Show success message for 3 seconds
         setTimeout(() => setNewsletterStatus(""), 3000);
       } else {
-        throw new Error('Network response was not ok');
+        const errorText = await response.text();
+        console.error('❌ Response error:', errorText);
+        throw new Error(`Server error: ${response.status} - ${errorText}`);
       }
     } catch (error) {
+      console.error('❌ Newsletter submission error:', error);
+      alert(`Newsletter submission failed: ${error.message}`);
       setNewsletterStatus("error");
-      // Show error message for 3 seconds
       setTimeout(() => setNewsletterStatus(""), 3000);
     } finally {
       setIsNewsletterLoading(false);
