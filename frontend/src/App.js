@@ -2351,8 +2351,18 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Google Apps Script Web App URL (replace with your actual URL)
-      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API || 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+      // Google Apps Script Web App URL with debugging
+      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API;
+      
+      console.log('🔧 Contact Form Debug Info:');
+      console.log('📋 Environment Variable:', GOOGLE_SHEETS_API);
+      console.log('📝 Form Data:', formData);
+      
+      if (!GOOGLE_SHEETS_API || GOOGLE_SHEETS_API.includes('YOUR_GOOGLE_APPS_SCRIPT_URL')) {
+        console.error('❌ Google Sheets API URL not configured');
+        alert('Configuration error: Google Sheets API not set up. Please check environment variables.');
+        return;
+      }
       
       const leadData = {
         leadType: 'Contact Form',
@@ -2361,11 +2371,14 @@ const Contact = () => {
         phone: formData.phone,
         company: formData.company,
         message: `Subject: ${formData.subject}\n\nMessage: ${formData.message}`,
-        source: 'orgainse.com/contact',
+        source: window.location.origin + '/contact',
         timestamp: new Date().toISOString()
       };
 
-      await fetch(GOOGLE_SHEETS_API, {
+      console.log('📤 Sending contact lead:', leadData);
+      console.log('🌐 API Endpoint:', GOOGLE_SHEETS_API);
+
+      const response = await fetch(GOOGLE_SHEETS_API, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -2373,17 +2386,30 @@ const Contact = () => {
         body: JSON.stringify(leadData)
       });
       
-      alert("Message sent successfully! We'll get back to you within 24 hours with a customized AI consultation plan.");
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        company: "",
-        subject: "",
-        message: "",
-      });
+      console.log('📥 Contact Response Status:', response.status);
+      console.log('📄 Contact Response OK:', response.ok);
+      
+      if (response.ok) {
+        const responseData = await response.text();
+        console.log('✅ Contact Success:', responseData);
+        
+        alert("Message sent successfully! We'll get back to you within 24 hours with a customized AI consultation plan.");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          company: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        const errorText = await response.text();
+        console.error('❌ Contact Response Error:', errorText);
+        throw new Error(`Server error: ${response.status} - ${errorText}`);
+      }
     } catch (error) {
-      alert("Error sending message. Please try again or contact us directly at info@orgainse.com");
+      console.error('❌ Contact Form Error:', error);
+      alert(`Error sending message: ${error.message}. Please try again or contact us directly at info@orgainse.com`);
     }
   };
 
