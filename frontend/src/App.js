@@ -3974,8 +3974,18 @@ const SmartCalendar = () => {
     setIsLoading(true);
     
     try {
-      // Google Apps Script Web App URL
-      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API || 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+      // Google Apps Script Web App URL with debugging
+      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API;
+      
+      console.log('🔧 Consultation Debug Info:');
+      console.log('📋 Environment Variable:', GOOGLE_SHEETS_API);
+      
+      if (!GOOGLE_SHEETS_API) {
+        console.error('❌ Google Sheets API URL not configured');
+        alert('Configuration error: Google Sheets API not set up.');
+        setIsLoading(false);
+        return;
+      }
       
       const leadData = {
         leadType: 'Consultation',
