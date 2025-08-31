@@ -20,6 +20,25 @@ const CONFIG = {
   }
 };
 
+/**
+ * Handle preflight OPTIONS requests for CORS
+ */
+function doGet(e) {
+  return ContentService
+    .createTextOutput(JSON.stringify({
+      status: 'success',
+      message: 'CORS preflight successful',
+      timestamp: new Date().toISOString()
+    }))
+    .setMimeType(ContentService.MimeType.JSON)
+    .setHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      'Access-Control-Max-Age': '86400'
+    });
+}
+
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
@@ -42,7 +61,12 @@ function doPost(e) {
         leadType: data.leadType,
         sheet: result.sheetName
       }))
-      .setMimeType(ContentService.MimeType.JSON);
+      .setMimeType(ContentService.MimeType.JSON)
+      .setHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+      });
       
   } catch (error) {
     console.error('Lead capture error:', error);
@@ -52,7 +76,12 @@ function doPost(e) {
         status: 'error',
         message: 'Failed to capture lead: ' + error.toString()
       }))
-      .setMimeType(ContentService.MimeType.JSON);
+      .setMimeType(ContentService.MimeType.JSON)
+      .setHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+      });
   }
 }
 
