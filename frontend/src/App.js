@@ -1537,7 +1537,7 @@ const About = () => {
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full transform translate-x-8 -translate-y-8"></div>
                   <div className="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full transform -translate-x-4 translate-y-4"></div>
                   
-                  <CardContent className="p-4 sm:p-6 lg:p-8 relative z-10">
+                  <CardContent className="p-6 sm:p-6 md:p-8 relative z-10">
                     <div className="flex items-center space-x-3 sm:space-x-4 mb-4 sm:mb-6">
                       <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform duration-500">
                         <Target className="h-8 w-8 text-orange-500" />
