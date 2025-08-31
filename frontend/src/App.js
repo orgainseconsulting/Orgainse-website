@@ -1984,7 +1984,31 @@ const Services = () => {
         source: 'services_page_popup'
       };
 
-      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/service-inquiry`, inquiryData);
+      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API;
+      
+      if (GOOGLE_SHEETS_API) {
+        const leadData = {
+          leadType: 'Service Inquiry',
+          service_name: serviceName,
+          name: 'Service Interest',
+          email: '',
+          company: '',
+          phone: '',
+          message: `Interested in ${serviceName} service`,
+          budget: '',
+          timeline: '',
+          source: window.location.origin + '/services-popup',
+          timestamp: new Date().toISOString()
+        };
+
+        await fetch(GOOGLE_SHEETS_API, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(leadData)
+        });
+      }
       
       // Redirect to consultation booking with pre-filled service
       window.location.href = `/smart-calendar?service=${encodeURIComponent(serviceName)}`;
