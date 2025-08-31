@@ -28,7 +28,7 @@ const ServicePopup = ({
       />
       
       {/* Centered popup modal */}
-      <div className="relative bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden shadow-2xl animate-fade-in transform">
+      <div className="relative bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden shadow-2xl animate-fade-in transform mx-2 sm:mx-4">
         
         {/* Close Button */}
         <button 
