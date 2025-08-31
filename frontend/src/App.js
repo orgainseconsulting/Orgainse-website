@@ -1932,8 +1932,39 @@ const Services = () => {
         timestamp: new Date().toISOString()
       };
 
-      // Submit service inquiry
-      await axios.post(`${BACKEND_URL}/api/service-inquiry`, inquiryData);
+      // Google Apps Script Web App URL
+      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API;
+      
+      if (!GOOGLE_SHEETS_API) {
+        console.error('❌ Google Sheets API URL not configured');
+        alert('Configuration error: Google Sheets API not set up.');
+        return;
+      }
+
+      const leadData = {
+        leadType: 'Service Inquiry',
+        service_name: inquiryData.service_name || 'Unknown Service',
+        name: inquiryData.name || '',
+        email: inquiryData.email || '',
+        company: inquiryData.company || '',
+        phone: inquiryData.phone || '',
+        message: inquiryData.message || 'Service inquiry from popup',
+        budget: inquiryData.budget || '',
+        timeline: inquiryData.timeline || '',
+        source: window.location.origin + '/services',
+        timestamp: new Date().toISOString()
+      };
+
+      console.log('📤 Sending service inquiry:', leadData);
+
+      // Submit service inquiry to Google Sheets
+      await fetch(GOOGLE_SHEETS_API, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(leadData)
+      });
       
       setIsSubmitted(true);
     } catch (error) {
