@@ -102,7 +102,7 @@ const ServicePopup = ({
                     {/* Compact Benefits List */}
                     <div className="bg-slate-50 rounded-xl p-4">
                       <h4 className="font-bold text-slate-800 mb-3">Key Benefits:</h4>
-                      <div className="grid md:grid-cols-2 gap-2">
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
                         {service.detailedInfo.benefits.map((benefit, index) => (
                           <div key={index} className="flex items-start space-x-2">
                             <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
