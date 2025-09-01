@@ -54,7 +54,7 @@ Your repository should contain:
 ```
 your-repo/
 ├── package.json
-├── vercel.json
+├── vercel.json (FIXED - no routes/redirects conflict)
 ├── requirements.txt
 ├── .env
 ├── .env.production
