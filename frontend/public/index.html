@@ -12,7 +12,14 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-F48RFBBEP7');
+    gtag('config', 'G-F48RFBBEP7', {
+      page_title: document.title,
+      page_location: window.location.href
+    });
+    
+    // Debug: Log when GA loads
+    console.log('Google Analytics initialized with ID: G-F48RFBBEP7');
+    console.log('Current page:', window.location.href);
   </script>
   
   <!-- Cache-busting meta tags -->
