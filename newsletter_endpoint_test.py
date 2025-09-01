@@ -69,9 +69,9 @@ def test_newsletter_endpoint():
     try:
         start_time = time.time()
         
-        # Use realistic test data as specified in review request
+        # Use realistic test data as specified in review request with unique email
         test_data = {
-            "email": "test@orgainse.com"
+            "email": f"test_{uuid.uuid4().hex[:8]}@orgainse.com"
         }
         
         response = requests.post(f"{API_URL}/newsletter", json=test_data)
