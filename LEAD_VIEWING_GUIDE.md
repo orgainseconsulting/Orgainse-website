@@ -127,7 +127,7 @@ ls -la admin_dashboard.py
 1. Open the file `/app/admin_dashboard.html` in your web browser
 2. Or visit the API endpoint directly for JSON data:
    ```
-   https://mobile-lead-system.preview.emergentagent.com/api/admin/leads
+   https://cache-refresh-web.preview.emergentagent.com/api/admin/leads
    ```
 
 ### **Features**
@@ -142,7 +142,7 @@ ls -la admin_dashboard.py
 
 ### **View Statistics**
 ```bash
-curl https://mobile-lead-system.preview.emergentagent.com/api/admin/stats
+curl https://cache-refresh-web.preview.emergentagent.com/api/admin/stats
 ```
 
 **Response:**
@@ -159,7 +159,7 @@ curl https://mobile-lead-system.preview.emergentagent.com/api/admin/stats
 
 ### **View All Leads**
 ```bash
-curl https://mobile-lead-system.preview.emergentagent.com/api/admin/leads
+curl https://cache-refresh-web.preview.emergentagent.com/api/admin/leads
 ```
 
 **Response:**

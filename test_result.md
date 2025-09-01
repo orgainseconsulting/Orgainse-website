@@ -331,7 +331,7 @@ metadata:
 
 agent_communication:
   - agent: "troubleshoot"
-    message: "🚨 CRITICAL ROOT CAUSE IDENTIFIED: Frontend .env contained hardcoded preview URL 'https://mobile-lead-system.preview.emergentagent.com' causing all backend API calls to fail in production. This prevented service popups from working despite correct implementation. Classic preview-to-production deployment issue where backend communication layer was misconfigured."
+    message: "🚨 CRITICAL ROOT CAUSE IDENTIFIED: Frontend .env contained hardcoded preview URL 'https://cache-refresh-web.preview.emergentagent.com' causing all backend API calls to fail in production. This prevented service popups from working despite correct implementation. Classic preview-to-production deployment issue where backend communication layer was misconfigured."
   - agent: "main"
     message: "✅ CRITICAL FIX APPLIED: Updated /app/frontend/.env to use relative URL (removed hardcoded preview URL). Restarted frontend service. All 6 service popups now working correctly with unique content. Comprehensive testing confirms: Service 1: AI Project Management Service (PMaaS), Service 2: AI-Native Digital Transformation, Service 3: AI Operational Optimization, Service 4: AI Agile & Scrum Coaching, Service 5: AI-Driven Business Strategy Development, Service 6: AI Risk Management & Compliance. Scroll functionality, responsive design, and CTA buttons all working. Business-critical functionality restored."
   - agent: "testing"
