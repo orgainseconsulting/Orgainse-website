@@ -1,16 +1,14 @@
-# Handle React Router routes
-/*    /index.html   200
+# Redirect old URLs to new structure
+/about-us-1 /about 301
+/contactus /contact 301
+/shop/* /services 301
+/helpdesk/* /contact 301
+/profile/* / 301
+/forum/* / 301
 
-# Redirect common patterns
-/home /  301
-/index /  301
-/index.html /  301
+# Force HTTPS and www
+http://orgainse.com/* https://www.orgainse.com/:splat 301!
+https://orgainse.com/* https://www.orgainse.com/:splat 301!
 
-# Handle www redirects (if needed)
-https://www.orgainse.com/* https://orgainse.com/:splat 301!
-
-# Security headers
-/*
-  X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
+# SPA fallback
+/* /index.html 200
