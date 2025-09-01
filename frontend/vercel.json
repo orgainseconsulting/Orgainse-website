@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "name": "orgainse-consulting",
   "builds": [
     {
       "src": "package.json",
@@ -70,8 +71,5 @@
       "destination": "/$1",
       "permanent": true
     }
-  ],
-  "env": {
-    "REACT_APP_BACKEND_URL": "@react_app_backend_url"
-  }
+  ]
 }
