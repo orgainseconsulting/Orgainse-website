@@ -462,6 +462,60 @@ async def send_email_notification(subject: str, body: str, to_email: str = None)
 async def root():
     return {"message": "Orgainse Consulting API - Let us plan your SUCCESS!", "version": "1.0.0"}
 
+@app.get("/api/admin/leads")
+async def get_all_leads():
+    """Get all captured leads for admin dashboard"""
+    try:
+        # Get newsletter subscribers
+        newsletter_collection = db.newsletter
+        newsletters = list(newsletter_collection.find().sort("timestamp", -1).limit(100))
+        
+        # Convert ObjectId to string for JSON serialization
+        for item in newsletters:
+            if '_id' in item:
+                item['_id'] = str(item['_id'])
+        
+        return {
+            "success": True,
+            "data": {
+                "newsletters": newsletters,
+                "total_count": newsletter_collection.count_documents({})
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to fetch leads: {str(e)}")
+
+@app.get("/api/admin/stats")
+async def get_lead_stats():
+    """Get lead statistics for admin dashboard"""
+    try:
+        newsletter_count = db.newsletter.count_documents({})
+        
+        # Get today's leads
+        from datetime import datetime, timedelta
+        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        today_count = db.newsletter.count_documents({
+            "timestamp": {"$gte": today}
+        })
+        
+        # Get this week's leads
+        week_ago = today - timedelta(days=7)
+        week_count = db.newsletter.count_documents({
+            "timestamp": {"$gte": week_ago}
+        })
+        
+        return {
+            "success": True,
+            "stats": {
+                "total_leads": newsletter_count,
+                "today_leads": today_count,
+                "week_leads": week_count
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to fetch stats: {str(e)}")
+
+# Health check endpoint
 @api_router.get("/health")
 async def health_check():
     return {"status": "healthy", "timestamp": datetime.utcnow()}
