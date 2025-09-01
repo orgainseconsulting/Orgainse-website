@@ -135,6 +135,16 @@
         }
       };
     }
+    
+    // Force cache refresh for deployment
+    if (performance.navigation && performance.navigation.type === 1) {
+      // Force reload once on page refresh to bypass cache
+      const cacheVersion = '20250831_v2';
+      if (!sessionStorage.getItem('cache_cleared_' + cacheVersion)) {
+        sessionStorage.setItem('cache_cleared_' + cacheVersion, 'true');
+        window.location.reload(true);
+      }
+    }
   </script>
   
   <div id="root"></div>
