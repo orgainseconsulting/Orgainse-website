@@ -683,6 +683,7 @@ const Home = () => {
 
       const response = await fetch(GOOGLE_SHEETS_API, {
         method: 'POST',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
         },
