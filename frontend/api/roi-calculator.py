@@ -40,23 +40,23 @@ def calculate_roi(annual_revenue, current_efficiency, target_efficiency, impleme
     except Exception as e:
         raise ValueError(f"ROI calculation error: {str(e)}")
 
-async def handler(request):
-    """ROI Calculator endpoint"""
+def handler(event, context):
+    """ROI Calculator endpoint - Vercel compatible"""
     
     # Handle CORS preflight
-    if request.method == 'OPTIONS':
+    if event.get('httpMethod') == 'OPTIONS':
         return {
             'statusCode': 200,
             'headers': CORS_HEADERS,
             'body': ''
         }
     
-    if request.method != 'POST':
+    if event.get('httpMethod') != 'POST':
         return error_response('Method not allowed', 405)
     
     try:
         # Parse request body
-        body = json.loads(request.body) if hasattr(request, 'body') else request
+        body = json.loads(event.get('body', '{}'))
         
         company_name = body.get('company_name', '').strip()
         industry = body.get('industry', '').strip()
@@ -70,6 +70,10 @@ async def handler(request):
         # Validation
         if not email or annual_revenue <= 0:
             return error_response('Email and valid annual revenue are required', 400)
+        
+        # Basic email validation
+        if '@' not in email or '.' not in email:
+            return error_response('Invalid email format', 400)
         
         if current_efficiency >= target_efficiency:
             return error_response('Target efficiency must be higher than current efficiency', 400)
@@ -102,7 +106,7 @@ async def handler(request):
         }
         
         # Save to database
-        await db.roi_calculations.insert_one(roi_calculation)
+        db.roi_calculations.insert_one(roi_calculation)
         
         return json_response({
             'calculation_id': roi_calculation['id'],
@@ -116,9 +120,3 @@ async def handler(request):
         return error_response('Invalid JSON data', 400)
     except Exception as e:
         return error_response(f'Internal server error: {str(e)}', 500)
-
-# For Vercel runtime
-def main(request):
-    """Vercel function entry point"""
-    import asyncio
-    return asyncio.run(handler(request))

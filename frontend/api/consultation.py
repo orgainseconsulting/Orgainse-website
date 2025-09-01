@@ -3,23 +3,23 @@ import uuid
 from datetime import datetime
 from ._db import get_database, json_response, error_response, CORS_HEADERS
 
-async def handler(request):
-    """Consultation booking endpoint"""
+def handler(event, context):
+    """Consultation booking endpoint - Vercel compatible"""
     
     # Handle CORS preflight
-    if request.method == 'OPTIONS':
+    if event.get('httpMethod') == 'OPTIONS':
         return {
             'statusCode': 200,
             'headers': CORS_HEADERS,
             'body': ''
         }
     
-    if request.method != 'POST':
+    if event.get('httpMethod') != 'POST':
         return error_response('Method not allowed', 405)
     
     try:
         # Parse request body
-        body = json.loads(request.body) if hasattr(request, 'body') else request
+        body = json.loads(event.get('body', '{}'))
         
         name = body.get('name', '').strip()
         email = body.get('email', '').strip().lower()
@@ -62,7 +62,7 @@ async def handler(request):
         }
         
         # Save to database
-        await db.consultation_requests.insert_one(consultation)
+        db.consultation_requests.insert_one(consultation)
         
         return json_response({
             'message': 'Consultation request submitted successfully',
@@ -74,9 +74,3 @@ async def handler(request):
         return error_response('Invalid JSON data', 400)
     except Exception as e:
         return error_response(f'Internal server error: {str(e)}', 500)
-
-# For Vercel runtime
-def main(request):
-    """Vercel function entry point"""
-    import asyncio
-    return asyncio.run(handler(request))

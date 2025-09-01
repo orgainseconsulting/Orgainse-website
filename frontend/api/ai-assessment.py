@@ -49,23 +49,23 @@ def generate_recommendations(score, responses):
     
     return recommendations[:4]  # Return top 4 recommendations
 
-async def handler(request):
-    """AI Assessment endpoint"""
+def handler(event, context):
+    """AI Assessment endpoint - Vercel compatible"""
     
     # Handle CORS preflight
-    if request.method == 'OPTIONS':
+    if event.get('httpMethod') == 'OPTIONS':
         return {
             'statusCode': 200,
             'headers': CORS_HEADERS,
             'body': ''
         }
     
-    if request.method != 'POST':
+    if event.get('httpMethod') != 'POST':
         return error_response('Method not allowed', 405)
     
     try:
         # Parse request body
-        body = json.loads(request.body) if hasattr(request, 'body') else request
+        body = json.loads(event.get('body', '{}'))
         
         company_name = body.get('company_name', '').strip()
         industry = body.get('industry', '').strip()
@@ -77,6 +77,10 @@ async def handler(request):
         # Validation
         if not email or not responses:
             return error_response('Email and assessment responses are required', 400)
+        
+        # Basic email validation
+        if '@' not in email or '.' not in email:
+            return error_response('Invalid email format', 400)
         
         # Calculate AI maturity score
         score = calculate_ai_maturity_score(responses)
@@ -114,7 +118,7 @@ async def handler(request):
         }
         
         # Save to database
-        await db.ai_assessments.insert_one(assessment)
+        db.ai_assessments.insert_one(assessment)
         
         return json_response({
             'assessment_id': assessment['id'],
@@ -128,9 +132,3 @@ async def handler(request):
         return error_response('Invalid JSON data', 400)
     except Exception as e:
         return error_response(f'Internal server error: {str(e)}', 500)
-
-# For Vercel runtime
-def main(request):
-    """Vercel function entry point"""
-    import asyncio
-    return asyncio.run(handler(request))
