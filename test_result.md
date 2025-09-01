@@ -110,6 +110,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "POST /api/newsletter endpoint working correctly. Successfully creates newsletter subscriptions with unique email validation and proper status."
+      - working: true
+        agent: "testing"
+        comment: "🎯 NEWSLETTER ENDPOINT COMPREHENSIVE TESTING COMPLETED: Executed 17 detailed tests covering all review request requirements with 100% SUCCESS RATE (17/17 tests passed). ✅ VERIFIED ALL REQUIREMENTS: 1) POST /api/newsletter accepts newsletter subscription data correctly with proper validation and MongoDB persistence, 2) Endpoint processes lead data correctly including extended format with leadType, name, and source fields, 3) CORS headers properly configured (Access-Control-Allow-Origin: *, Access-Control-Allow-Credentials: true) for cross-origin requests from frontend, 4) Response format matches frontend expectations with required fields (id, email, timestamp, status), 5) All lead types handled correctly (Newsletter Subscription, Marketing Campaign, Website Visitor leads), 6) Robust validation (422 errors for invalid email format and missing fields), 7) Duplicate email handling (409 status for existing subscriptions), 8) Excellent performance (avg 0.029s response time, max 0.060s), 9) Proper error handling and status codes. Newsletter endpoint is 100% READY for frontend integration replacing Google Apps Script functionality."
 
   - task: "Consultation Request API"
     implemented: true
