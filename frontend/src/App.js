@@ -1986,7 +1986,7 @@ const Services = () => {
         source: 'services_page_popup'
       };
 
-      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API || import.meta.env?.REACT_APP_GOOGLE_SHEETS_API;
+      const GOOGLE_SHEETS_API = process.env.REACT_APP_BACKEND_URL + '/api/newsletter' || import.meta.env?.REACT_APP_BACKEND_URL + '/api/newsletter';
       
       if (GOOGLE_SHEETS_API) {
         const leadData = {
