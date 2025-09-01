@@ -8,6 +8,39 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./com
 import { Input } from "./components/ui/input";
 import { Textarea } from "./components/ui/textarea";
 import { Badge } from "./components/ui/badge";
+
+// Debug Analytics Component
+const AnalyticsDebug = () => {
+  useEffect(() => {
+    console.log('✅ Vercel Analytics component mounted');
+    
+    // Test if gtag is available
+    if (typeof window !== 'undefined' && window.gtag) {
+      console.log('✅ Google Analytics gtag function available');
+      
+      // Send a test event
+      window.gtag('event', 'page_view', {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+      console.log('📊 Sent page_view event to GA');
+    } else {
+      console.log('❌ Google Analytics gtag not found');
+    }
+    
+    // Check for Vercel Analytics
+    setTimeout(() => {
+      const vaScript = document.querySelector('script[src*="vitals.vercel-analytics.com"]');
+      if (vaScript) {
+        console.log('✅ Vercel Analytics script loaded');
+      } else {
+        console.log('❌ Vercel Analytics script not found');
+      }
+    }, 2000);
+  }, []);
+  
+  return null;
+};
 import { Separator } from "./components/ui/separator";
 import ServicePopup from "./components/ServicePopup";
 import SEOHead from "./components/SEOHead";
