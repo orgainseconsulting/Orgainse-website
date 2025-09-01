@@ -4406,6 +4406,8 @@ function App() {
           </BrowserRouter>
         </RegionalPricingProvider>
       </CalendlyProvider>
+      <Analytics />
+      <SpeedInsights />
     </div>
   );
 }
