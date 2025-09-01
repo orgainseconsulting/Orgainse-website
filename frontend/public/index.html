@@ -14,12 +14,20 @@
     gtag('js', new Date());
     gtag('config', 'G-F48RFBBEP7', {
       page_title: document.title,
-      page_location: window.location.href
+      page_location: window.location.href,
+      custom_map: {'dimension1': 'deployment_env'}
     });
     
-    // Debug: Log when GA loads
-    console.log('Google Analytics initialized with ID: G-F48RFBBEP7');
-    console.log('Current page:', window.location.href);
+    // Send deployment environment
+    gtag('event', 'page_view', {
+      'deployment_env': window.location.hostname.includes('orgainse.com') ? 'production' : 'development'
+    });
+    
+    // Debug: Log when GA loads (only in development)
+    if (window.location.hostname.includes('preview.emergentagent.com')) {
+      console.log('Google Analytics initialized with ID: G-F48RFBBEP7');
+      console.log('Current page:', window.location.href);
+    }
   </script>
   
   <!-- Cache-busting meta tags -->
