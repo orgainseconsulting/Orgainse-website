@@ -1,5 +1,6 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "buildDate": "2025-01-09",
-  "lastUpdate": "Rating update and newsletter text changes"
+  "lastUpdate": "PRODUCTION FIX: Rating update 4.9→4.6 and backend URL correction",
+  "timestamp": 1736442716000
 }
