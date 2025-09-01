@@ -1,9 +1,9 @@
 import os
-from motor.motor_asyncio import AsyncIOMotorClient
+from pymongo import MongoClient
 from typing import Optional
 
 # Global database connection
-_client: Optional[AsyncIOMotorClient] = None
+_client: Optional[MongoClient] = None
 _db = None
 
 def get_database():
@@ -11,11 +11,11 @@ def get_database():
     global _client, _db
     
     if _client is None:
-        # MongoDB connection for serverless
+        # MongoDB connection for serverless (synchronous)
         mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
         db_name = os.environ.get('DB_NAME', 'orgainse_consulting')
         
-        _client = AsyncIOMotorClient(mongo_url)
+        _client = MongoClient(mongo_url)
         _db = _client[db_name]
     
     return _db
@@ -25,6 +25,7 @@ CORS_HEADERS = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Content-Type': 'application/json'
 }
 
 def json_response(data, status_code=200):
