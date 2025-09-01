@@ -3,23 +3,23 @@ import uuid
 from datetime import datetime
 from ._db import get_database, json_response, error_response, CORS_HEADERS
 
-async def handler(request):
-    """Newsletter subscription endpoint"""
+def handler(event, context):
+    """Newsletter subscription endpoint - Vercel compatible"""
     
     # Handle CORS preflight
-    if request.method == 'OPTIONS':
+    if event.get('httpMethod') == 'OPTIONS':
         return {
             'statusCode': 200,
             'headers': CORS_HEADERS,
             'body': ''
         }
     
-    if request.method != 'POST':
+    if event.get('httpMethod') != 'POST':
         return error_response('Method not allowed', 405)
     
     try:
         # Parse request body
-        body = json.loads(request.body) if hasattr(request, 'body') else request
+        body = json.loads(event.get('body', '{}'))
         
         email = body.get('email', '').strip().lower()
         first_name = body.get('first_name', '').strip()
@@ -29,11 +29,15 @@ async def handler(request):
         if not email:
             return error_response('Email is required', 400)
         
+        # Basic email validation
+        if '@' not in email or '.' not in email:
+            return error_response('Invalid email format', 400)
+        
         # Get database
         db = get_database()
         
         # Check for existing subscription
-        existing = await db.newsletter_subscriptions.find_one({'email': email})
+        existing = db.newsletter_subscriptions.find_one({'email': email})
         if existing:
             return error_response('Email already subscribed', 409)
         
@@ -54,7 +58,7 @@ async def handler(request):
         }
         
         # Save to database
-        await db.newsletter_subscriptions.insert_one(subscription)
+        db.newsletter_subscriptions.insert_one(subscription)
         
         return json_response({
             'message': 'Successfully subscribed to newsletter',
@@ -66,9 +70,3 @@ async def handler(request):
         return error_response('Invalid JSON data', 400)
     except Exception as e:
         return error_response(f'Internal server error: {str(e)}', 500)
-
-# For Vercel runtime
-def main(request):
-    """Vercel function entry point"""
-    import asyncio
-    return asyncio.run(handler(request))
