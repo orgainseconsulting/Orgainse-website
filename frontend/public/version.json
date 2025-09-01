@@ -1,6 +1,12 @@
 {
-  "version": "1.0.2",
+  "version": "1.0.3",
   "buildDate": "2025-01-09",
-  "lastUpdate": "PRODUCTION FIX: Rating update 4.9→4.6 and backend URL correction",
-  "timestamp": 1736442716000
+  "lastUpdate": "CRITICAL FIX: Backend URL corrected + Cache busting implemented",
+  "timestamp": 1736443034000,
+  "changes": [
+    "Rating changed from 4.9★ to 4.6★",
+    "Newsletter text updated",
+    "Backend URL fixed from preview to production",
+    "Cache-busting headers implemented"
+  ]
 }
