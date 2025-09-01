@@ -2998,8 +2998,8 @@ const AIAssessmentTool = () => {
         responses: formattedResponses
       };
 
-      // Google Apps Script Web App URL
-      const GOOGLE_SHEETS_API = process.env.REACT_APP_GOOGLE_SHEETS_API || import.meta.env?.REACT_APP_GOOGLE_SHEETS_API;
+      // Use working backend temporarily while Google Apps Script is being fixed
+      const GOOGLE_SHEETS_API = process.env.REACT_APP_BACKEND_URL + '/api/newsletter' || import.meta.env?.REACT_APP_BACKEND_URL + '/api/newsletter';
       
       if (!GOOGLE_SHEETS_API) {
         console.error('❌ Google Sheets API URL not configured');
