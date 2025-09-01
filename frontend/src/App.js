@@ -744,7 +744,7 @@ const Home = () => {
   const stats = [
     { value: "25%", label: "Faster Project Delivery", color: "from-orange-400 to-orange-600" },
     { value: "45%", label: "Cost Reduction in Operations", color: "from-green-400 to-green-600" },
-    { value: "4.9★", label: "Client Satisfaction Rating", color: "from-yellow-400 to-yellow-600" },
+    { value: "4.6★", label: "Client Satisfaction Rating", color: "from-yellow-400 to-yellow-600" },
     { value: "90", label: "Days Average Implementation", color: "from-purple-400 to-purple-600" },
   ];
 
