@@ -1,21 +1,28 @@
+from http.server import BaseHTTPRequestHandler
 import json
 from datetime import datetime
-from ._db import json_response, CORS_HEADERS
 
-def handler(event, context):
-    """Health check endpoint - Vercel compatible"""
-    
-    # Handle CORS preflight
-    if event.get('httpMethod') == 'OPTIONS':
-        return {
-            'statusCode': 200,
-            'headers': CORS_HEADERS,
-            'body': ''
+class handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+        self.end_headers()
+        
+        response = {
+            'status': 'healthy',
+            'timestamp': datetime.utcnow().isoformat(),
+            'service': 'Orgainse Consulting API',
+            'version': '1.0.0'
         }
-    
-    return json_response({
-        'status': 'healthy',
-        'timestamp': datetime.utcnow().isoformat(),
-        'service': 'Orgainse Consulting API',
-        'version': '1.0.0'
-    })
+        
+        self.wfile.write(json.dumps(response).encode('utf-8'))
+
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+        self.end_headers()

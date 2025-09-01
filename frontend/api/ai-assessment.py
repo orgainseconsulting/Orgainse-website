@@ -1,7 +1,9 @@
+from http.server import BaseHTTPRequestHandler
 import json
 import uuid
+import os
 from datetime import datetime
-from ._db import get_database, json_response, error_response, CORS_HEADERS
+from pymongo import MongoClient
 
 def calculate_ai_maturity_score(responses):
     """Calculate AI maturity score based on responses"""
@@ -49,86 +51,102 @@ def generate_recommendations(score, responses):
     
     return recommendations[:4]  # Return top 4 recommendations
 
-def handler(event, context):
-    """AI Assessment endpoint - Vercel compatible"""
+class handler(BaseHTTPRequestHandler):
+    def do_POST(self):
+        try:
+            # Get request body
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+            body = json.loads(post_data.decode('utf-8'))
+            
+            company_name = body.get('company_name', '').strip()
+            industry = body.get('industry', '').strip()
+            company_size = body.get('company_size', '').strip()
+            current_ai_usage = body.get('current_ai_usage', '').strip()
+            email = body.get('email', '').strip().lower()
+            responses = body.get('responses', [])
+            
+            # Validation
+            if not email or not responses:
+                self.send_error_response('Email and assessment responses are required', 400)
+                return
+            
+            if '@' not in email or '.' not in email:
+                self.send_error_response('Invalid email format', 400)
+                return
+            
+            # Calculate AI maturity score
+            score = calculate_ai_maturity_score(responses)
+            
+            # Generate recommendations
+            recommendations = generate_recommendations(score, responses)
+            
+            # Determine maturity level
+            if score < 25:
+                level = "Beginner"
+            elif score < 50:
+                level = "Developing"
+            elif score < 75:
+                level = "Intermediate"
+            else:
+                level = "Advanced"
+            
+            # Database connection
+            mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+            db_name = os.environ.get('DB_NAME', 'orgainse_consulting')
+            
+            client = MongoClient(mongo_url)
+            db = client[db_name]
+            
+            # Create assessment record
+            assessment = {
+                'id': str(uuid.uuid4()),
+                'company_name': company_name,
+                'industry': industry,
+                'company_size': company_size,
+                'current_ai_usage': current_ai_usage,
+                'email': email,
+                'responses': responses,
+                'score': round(score, 1),
+                'level': level,
+                'recommendations': recommendations,
+                'completed_at': datetime.utcnow(),
+                'source': 'website_ai_assessment'
+            }
+            
+            # Save to database
+            db.ai_assessments.insert_one(assessment)
+            client.close()
+            
+            # Send success response
+            self.send_json_response({
+                'assessment_id': assessment['id'],
+                'score': assessment['score'],
+                'level': assessment['level'],
+                'recommendations': assessment['recommendations'],
+                'message': 'AI Assessment completed successfully'
+            })
+            
+        except json.JSONDecodeError:
+            self.send_error_response('Invalid JSON data', 400)
+        except Exception as e:
+            self.send_error_response(f'Internal server error: {str(e)}', 500)
     
-    # Handle CORS preflight
-    if event.get('httpMethod') == 'OPTIONS':
-        return {
-            'statusCode': 200,
-            'headers': CORS_HEADERS,
-            'body': ''
-        }
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+        self.end_headers()
     
-    if event.get('httpMethod') != 'POST':
-        return error_response('Method not allowed', 405)
+    def send_json_response(self, data, status_code=200):
+        self.send_response(status_code)
+        self.send_header('Content-type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+        self.end_headers()
+        self.wfile.write(json.dumps(data, default=str).encode('utf-8'))
     
-    try:
-        # Parse request body
-        body = json.loads(event.get('body', '{}'))
-        
-        company_name = body.get('company_name', '').strip()
-        industry = body.get('industry', '').strip()
-        company_size = body.get('company_size', '').strip()
-        current_ai_usage = body.get('current_ai_usage', '').strip()
-        email = body.get('email', '').strip().lower()
-        responses = body.get('responses', [])
-        
-        # Validation
-        if not email or not responses:
-            return error_response('Email and assessment responses are required', 400)
-        
-        # Basic email validation
-        if '@' not in email or '.' not in email:
-            return error_response('Invalid email format', 400)
-        
-        # Calculate AI maturity score
-        score = calculate_ai_maturity_score(responses)
-        
-        # Generate recommendations
-        recommendations = generate_recommendations(score, responses)
-        
-        # Determine maturity level
-        if score < 25:
-            level = "Beginner"
-        elif score < 50:
-            level = "Developing"
-        elif score < 75:
-            level = "Intermediate"
-        else:
-            level = "Advanced"
-        
-        # Get database
-        db = get_database()
-        
-        # Create assessment record
-        assessment = {
-            'id': str(uuid.uuid4()),
-            'company_name': company_name,
-            'industry': industry,
-            'company_size': company_size,
-            'current_ai_usage': current_ai_usage,
-            'email': email,
-            'responses': responses,
-            'score': round(score, 1),
-            'level': level,
-            'recommendations': recommendations,
-            'completed_at': datetime.utcnow(),
-            'source': 'website_ai_assessment'
-        }
-        
-        # Save to database
-        db.ai_assessments.insert_one(assessment)
-        
-        return json_response({
-            'assessment_id': assessment['id'],
-            'score': assessment['score'],
-            'level': assessment['level'],
-            'recommendations': assessment['recommendations'],
-            'message': 'AI Assessment completed successfully'
-        })
-        
-    except json.JSONDecodeError:
-        return error_response('Invalid JSON data', 400)
-    except Exception as e:
-        return error_response(f'Internal server error: {str(e)}', 500)
+    def send_error_response(self, message, status_code=500):
+        self.send_json_response({'error': message}, status_code)

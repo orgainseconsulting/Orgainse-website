@@ -1,7 +1,9 @@
+from http.server import BaseHTTPRequestHandler
 import json
 import uuid
+import os
 from datetime import datetime
-from ._db import get_database, json_response, error_response, CORS_HEADERS
+from pymongo import MongoClient
 
 def calculate_roi(annual_revenue, current_efficiency, target_efficiency, implementation_cost, annual_operating_cost):
     """Calculate ROI based on efficiency improvements"""
@@ -40,83 +42,100 @@ def calculate_roi(annual_revenue, current_efficiency, target_efficiency, impleme
     except Exception as e:
         raise ValueError(f"ROI calculation error: {str(e)}")
 
-def handler(event, context):
-    """ROI Calculator endpoint - Vercel compatible"""
+class handler(BaseHTTPRequestHandler):
+    def do_POST(self):
+        try:
+            # Get request body
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+            body = json.loads(post_data.decode('utf-8'))
+            
+            company_name = body.get('company_name', '').strip()
+            industry = body.get('industry', '').strip()
+            annual_revenue = float(body.get('annual_revenue', 0))
+            current_efficiency = float(body.get('current_efficiency', 0))
+            target_efficiency = float(body.get('target_efficiency', 0))
+            implementation_cost = float(body.get('implementation_cost', 0))
+            annual_operating_cost = float(body.get('annual_operating_cost', 0))
+            email = body.get('email', '').strip().lower()
+            
+            # Validation
+            if not email or annual_revenue <= 0:
+                self.send_error_response('Email and valid annual revenue are required', 400)
+                return
+            
+            if '@' not in email or '.' not in email:
+                self.send_error_response('Invalid email format', 400)
+                return
+            
+            if current_efficiency >= target_efficiency:
+                self.send_error_response('Target efficiency must be higher than current efficiency', 400)
+                return
+            
+            # Calculate ROI
+            roi_results = calculate_roi(
+                annual_revenue, current_efficiency, target_efficiency,
+                implementation_cost, annual_operating_cost
+            )
+            
+            # Database connection
+            mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+            db_name = os.environ.get('DB_NAME', 'orgainse_consulting')
+            
+            client = MongoClient(mongo_url)
+            db = client[db_name]
+            
+            # Create ROI calculation record
+            roi_calculation = {
+                'id': str(uuid.uuid4()),
+                'company_name': company_name,
+                'industry': industry,
+                'email': email,
+                'inputs': {
+                    'annual_revenue': annual_revenue,
+                    'current_efficiency': current_efficiency,
+                    'target_efficiency': target_efficiency,
+                    'implementation_cost': implementation_cost,
+                    'annual_operating_cost': annual_operating_cost
+                },
+                'results': roi_results,
+                'calculated_at': datetime.utcnow(),
+                'source': 'website_roi_calculator'
+            }
+            
+            # Save to database
+            db.roi_calculations.insert_one(roi_calculation)
+            client.close()
+            
+            # Send success response
+            self.send_json_response({
+                'calculation_id': roi_calculation['id'],
+                'results': roi_results,
+                'message': 'ROI calculation completed successfully'
+            })
+            
+        except (ValueError, TypeError) as e:
+            self.send_error_response(f'Invalid input data: {str(e)}', 400)
+        except json.JSONDecodeError:
+            self.send_error_response('Invalid JSON data', 400)
+        except Exception as e:
+            self.send_error_response(f'Internal server error: {str(e)}', 500)
     
-    # Handle CORS preflight
-    if event.get('httpMethod') == 'OPTIONS':
-        return {
-            'statusCode': 200,
-            'headers': CORS_HEADERS,
-            'body': ''
-        }
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+        self.end_headers()
     
-    if event.get('httpMethod') != 'POST':
-        return error_response('Method not allowed', 405)
+    def send_json_response(self, data, status_code=200):
+        self.send_response(status_code)
+        self.send_header('Content-type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+        self.end_headers()
+        self.wfile.write(json.dumps(data, default=str).encode('utf-8'))
     
-    try:
-        # Parse request body
-        body = json.loads(event.get('body', '{}'))
-        
-        company_name = body.get('company_name', '').strip()
-        industry = body.get('industry', '').strip()
-        annual_revenue = float(body.get('annual_revenue', 0))
-        current_efficiency = float(body.get('current_efficiency', 0))
-        target_efficiency = float(body.get('target_efficiency', 0))
-        implementation_cost = float(body.get('implementation_cost', 0))
-        annual_operating_cost = float(body.get('annual_operating_cost', 0))
-        email = body.get('email', '').strip().lower()
-        
-        # Validation
-        if not email or annual_revenue <= 0:
-            return error_response('Email and valid annual revenue are required', 400)
-        
-        # Basic email validation
-        if '@' not in email or '.' not in email:
-            return error_response('Invalid email format', 400)
-        
-        if current_efficiency >= target_efficiency:
-            return error_response('Target efficiency must be higher than current efficiency', 400)
-        
-        # Calculate ROI
-        roi_results = calculate_roi(
-            annual_revenue, current_efficiency, target_efficiency,
-            implementation_cost, annual_operating_cost
-        )
-        
-        # Get database
-        db = get_database()
-        
-        # Create ROI calculation record
-        roi_calculation = {
-            'id': str(uuid.uuid4()),
-            'company_name': company_name,
-            'industry': industry,
-            'email': email,
-            'inputs': {
-                'annual_revenue': annual_revenue,
-                'current_efficiency': current_efficiency,
-                'target_efficiency': target_efficiency,
-                'implementation_cost': implementation_cost,
-                'annual_operating_cost': annual_operating_cost
-            },
-            'results': roi_results,
-            'calculated_at': datetime.utcnow(),
-            'source': 'website_roi_calculator'
-        }
-        
-        # Save to database
-        db.roi_calculations.insert_one(roi_calculation)
-        
-        return json_response({
-            'calculation_id': roi_calculation['id'],
-            'results': roi_results,
-            'message': 'ROI calculation completed successfully'
-        })
-        
-    except (ValueError, TypeError) as e:
-        return error_response(f'Invalid input data: {str(e)}', 400)
-    except json.JSONDecodeError:
-        return error_response('Invalid JSON data', 400)
-    except Exception as e:
-        return error_response(f'Internal server error: {str(e)}', 500)
+    def send_error_response(self, message, status_code=500):
+        self.send_json_response({'error': message}, status_code)
