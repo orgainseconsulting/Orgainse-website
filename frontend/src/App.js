@@ -4441,6 +4441,7 @@ function App() {
       </CalendlyProvider>
       <Analytics />
       <SpeedInsights />
+      <AnalyticsDebug />
     </div>
   );
 }
