@@ -7,6 +7,7 @@ Allow: /services
 Allow: /contact
 Allow: /ai-assessment
 Allow: /roi-calculator
+Allow: /smart-calendar
 Allow: /privacy
 Allow: /terms
 
@@ -15,10 +16,15 @@ Disallow: /static/
 Disallow: /_next/
 Disallow: /api/
 Disallow: *.json$
-Disallow: /smart-calendar
+
+# Block old paths that should redirect
+Disallow: /shop/
+Disallow: /helpdesk/
+Disallow: /profile/
+Disallow: /forum/
 
 # Sitemap location
-Sitemap: https://orgainse.com/sitemap.xml
+Sitemap: https://www.orgainse.com/sitemap.xml
 
 # Crawl delay for better server performance
 Crawl-delay: 1
