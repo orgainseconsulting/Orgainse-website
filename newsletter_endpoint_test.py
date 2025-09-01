@@ -149,10 +149,14 @@ def test_newsletter_cors_headers():
     print("-" * 50)
     
     try:
+        # Test OPTIONS request for CORS preflight with proper headers
         start_time = time.time()
-        
-        # Test OPTIONS request for CORS preflight
-        response = requests.options(f"{API_URL}/newsletter")
+        headers = {
+            'Origin': 'https://orgainse.com',
+            'Access-Control-Request-Method': 'POST',
+            'Access-Control-Request-Headers': 'Content-Type'
+        }
+        response = requests.options(f"{API_URL}/newsletter", headers=headers)
         response_time = time.time() - start_time
         
         cors_headers = {
@@ -170,16 +174,22 @@ def test_newsletter_cors_headers():
             log_test("CORS Headers - OPTIONS Request", False,
                     "Missing CORS headers in OPTIONS response", response_time)
             
-        # Test actual POST request CORS headers
+        # Test actual POST request CORS headers with Origin header
         start_time = time.time()
         test_data = {"email": f"cors_test_{uuid.uuid4().hex[:8]}@orgainse.com"}
-        response = requests.post(f"{API_URL}/newsletter", json=test_data)
+        headers = {
+            'Origin': 'https://orgainse.com',
+            'Content-Type': 'application/json'
+        }
+        response = requests.post(f"{API_URL}/newsletter", json=test_data, headers=headers)
         response_time = time.time() - start_time
         
         post_cors_origin = response.headers.get('Access-Control-Allow-Origin')
+        post_cors_credentials = response.headers.get('Access-Control-Allow-Credentials')
+        
         if post_cors_origin:
             log_test("CORS Headers - POST Request", True,
-                    f"CORS Origin header present: {post_cors_origin}", response_time)
+                    f"CORS Origin: {post_cors_origin}, Credentials: {post_cors_credentials}", response_time)
         else:
             log_test("CORS Headers - POST Request", False,
                     "Missing CORS Origin header in POST response", response_time)
