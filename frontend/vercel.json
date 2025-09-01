@@ -10,6 +10,38 @@
       }
     }
   ],
+  "redirects": [
+    {
+      "source": "/about-us-1",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/contactus",
+      "destination": "/contact", 
+      "permanent": true
+    },
+    {
+      "source": "/shop/:path*",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/helpdesk/:path*",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/profile/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/forum/:path*",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/((?!api/.*).*)",
