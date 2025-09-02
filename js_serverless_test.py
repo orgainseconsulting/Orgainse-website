@@ -491,7 +491,7 @@ class JavaScriptServerlessFunctionTester:
         """Test MongoDB Atlas connection and data persistence"""
         print("\n🗄️ TESTING MONGODB INTEGRATION")
         
-        if not self.db:
+        if self.db is None:
             self.log_test("MongoDB - Connection", "FAIL", "MongoDB connection not available", 0)
             return
         
