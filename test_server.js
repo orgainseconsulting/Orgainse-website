@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Set environment variables for testing
 process.env.MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost:27017';
-process.env.DB_NAME = process.env.DB_NAME || 'orgainse_consulting';
+process.env.DB_NAME = process.env.DB_NAME || 'orgainse-consulting';
 
 // Import and setup API routes
 async function setupRoutes() {
