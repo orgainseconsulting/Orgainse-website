@@ -24,8 +24,8 @@ import threading
 # Add the clean-orgainse directory to Python path
 sys.path.insert(0, '/app/clean-orgainse')
 
-# Set environment variables for testing
-os.environ['MONGO_URL'] = 'mongodb+srv://admin:orgainse2024@cluster0.mongodb.net/orgainse_consulting?retryWrites=true&w=majority'
+# Set environment variables for testing (using local MongoDB for testing)
+os.environ['MONGO_URL'] = 'mongodb://localhost:27017'
 os.environ['DB_NAME'] = 'orgainse_consulting'
 
 # Import the serverless functions
