@@ -2022,9 +2022,9 @@ const Services = () => {
         source: 'services_page_popup'
       };
 
-      const GOOGLE_SHEETS_API = process.env.REACT_APP_BACKEND_URL + '/api/newsletter' || import.meta.env?.REACT_APP_BACKEND_URL + '/api/newsletter';
+      const CONTACT_API = process.env.REACT_APP_BACKEND_URL + '/api/contact' || import.meta.env?.REACT_APP_BACKEND_URL + '/api/contact';
       
-      if (GOOGLE_SHEETS_API) {
+      if (CONTACT_API) {
         const leadData = {
           leadType: 'Service Inquiry',
           service_name: serviceName,
@@ -2039,7 +2039,7 @@ const Services = () => {
           timestamp: new Date().toISOString()
         };
 
-        await fetch(GOOGLE_SHEETS_API, {
+        await fetch(CONTACT_API, {
           method: 'POST',
           mode: 'cors',
           headers: {
