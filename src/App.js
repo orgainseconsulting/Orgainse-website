@@ -3509,7 +3509,7 @@ const ROICalculator = () => {
         timestamp: new Date().toISOString()
       };
 
-      await fetch(GOOGLE_SHEETS_API, {
+      await fetch(CONTACT_API, {
         method: 'POST',
         mode: 'cors',
         headers: {
