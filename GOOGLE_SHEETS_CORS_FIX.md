@@ -63,7 +63,7 @@ REACT_APP_GOOGLE_SHEETS_API=https://script.google.com/macros/s/[NEW_DEPLOYMENT_I
 Run this command to verify CORS is working:
 ```bash
 curl -X OPTIONS \
-  -H "Origin: https://cache-refresh-web.preview.emergentagent.com" \
+  -H "Origin: https://orgainse-api-deploy.preview.emergentagent.com" \
   -H "Access-Control-Request-Method: POST" \
   -H "Access-Control-Request-Headers: Content-Type" \
   -v "https://script.google.com/macros/s/AKfycby7OIa3NLEW_tZQu9wjXZNBt4NLXKnwJeKWe2Upt4OUARyeDcWzwXzccdxZbZSK8n_PhA/exec"
@@ -108,7 +108,7 @@ curl -X OPTIONS \
 ❌ **Previous Error:**
 ```
 Access to fetch at 'https://script.google.com/macros/s/.../exec' 
-from origin 'https://cache-refresh-web.preview.emergentagent.com' 
+from origin 'https://orgainse-api-deploy.preview.emergentagent.com' 
 has been blocked by CORS policy: Response to preflight request doesn't pass 
 access control check: No 'Access-Control-Allow-Origin' header is present 
 on the requested resource.

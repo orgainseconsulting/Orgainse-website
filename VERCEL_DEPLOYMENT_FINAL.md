@@ -18,7 +18,7 @@
 ### **STEP 2: Update Local Environment File**
 Update `/app/frontend/.env` with:
 ```bash
-REACT_APP_BACKEND_URL=https://cache-refresh-web.preview.emergentagent.com
+REACT_APP_BACKEND_URL=https://orgainse-api-deploy.preview.emergentagent.com
 REACT_APP_GOOGLE_SHEETS_API=[YOUR_NEW_GOOGLE_APPS_SCRIPT_URL]
 ```
 
@@ -33,7 +33,7 @@ In Vercel Dashboard → Project Settings → Environment Variables:
 
 ```bash
 Name: REACT_APP_BACKEND_URL
-Value: https://cache-refresh-web.preview.emergentagent.com
+Value: https://orgainse-api-deploy.preview.emergentagent.com
 Environment: Production, Preview
 
 Name: REACT_APP_GOOGLE_SHEETS_API  

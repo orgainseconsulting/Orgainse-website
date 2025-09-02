@@ -37,7 +37,7 @@ In Vercel Dashboard → Settings → Environment Variables, add:
 
 ```bash
 Name: REACT_APP_BACKEND_URL
-Value: https://cache-refresh-web.preview.emergentagent.com
+Value: https://orgainse-api-deploy.preview.emergentagent.com
 Environment: Production, Preview, Development
 
 Name: REACT_APP_GOOGLE_SHEETS_API
