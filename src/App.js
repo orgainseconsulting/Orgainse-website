@@ -44,6 +44,7 @@ const AnalyticsDebug = () => {
 import { Separator } from "./components/ui/separator";
 import ServicePopup from "./components/ServicePopup";
 import SEOHead from "./components/SEOHead";
+import AdminDashboard from "./components/AdminDashboard";
 import { 
   Menu, 
   X, 
