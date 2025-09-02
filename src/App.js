@@ -4016,15 +4016,15 @@ const SmartCalendar = () => {
     setIsLoading(true);
     
     try {
-      // Use working backend temporarily while Google Apps Script is being fixed
-      const GOOGLE_SHEETS_API = process.env.REACT_APP_BACKEND_URL + '/api/newsletter' || import.meta.env?.REACT_APP_BACKEND_URL + '/api/newsletter';
+      // Use contact API endpoint for AI assessment
+      const CONTACT_API = process.env.REACT_APP_BACKEND_URL + '/api/contact' || import.meta.env?.REACT_APP_BACKEND_URL + '/api/contact';
       
       console.log('🔧 Consultation Debug Info:');
-      console.log('📋 Environment Variable:', GOOGLE_SHEETS_API);
+      console.log('📋 Environment Variable:', CONTACT_API);
       
-      if (!GOOGLE_SHEETS_API) {
-        console.error('❌ Google Sheets API URL not configured');
-        alert('Configuration error: Google Sheets API not set up.');
+      if (!CONTACT_API) {
+        console.error('❌ Contact API URL not configured');
+        alert('Configuration error: Contact API not set up.');
         setIsLoading(false);
         return;
       }
