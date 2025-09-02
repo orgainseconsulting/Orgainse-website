@@ -4431,6 +4431,7 @@ function App() {
                 <Route path="/roi-calculator" element={<ROICalculator />} />
                 <Route path="/smart-calendar" element={<SmartCalendar />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/terms" element={<TermsOfService />} />
                 <Route path="*" element={<NotFound />} />
