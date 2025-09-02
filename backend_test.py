@@ -19,7 +19,7 @@ import sys
 from datetime import datetime
 
 # Test configuration
-BASE_URL = "http://localhost:3000"  # Local development server
+BASE_URL = "http://localhost:3001"  # Local test server for serverless functions
 TEST_EMAIL = "test@orgainse.com"
 TEST_NAME = "Test User"
 TEST_COMPANY = "Test Company"
