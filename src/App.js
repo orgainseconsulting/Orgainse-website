@@ -3063,7 +3063,7 @@ const AIAssessmentTool = () => {
 
       console.log('📤 Sending AI assessment:', leadData);
 
-      const response = await fetch(GOOGLE_SHEETS_API, {
+      const response = await fetch(CONTACT_API, {
         method: 'POST',
         mode: 'cors',
         headers: {
