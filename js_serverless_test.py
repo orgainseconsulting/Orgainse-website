@@ -304,7 +304,7 @@ class JavaScriptServerlessFunctionTester:
                             f"Contact ID: {data.get('id')}, Status: {data.get('status')}", response_time)
                 
                 # Verify MongoDB persistence
-                if self.db:
+                if self.db is not None:
                     contact = self.db.contact_messages.find_one({"email": REALISTIC_TEST_DATA["healthcare_contact"]["email"]})
                     if contact:
                         self.log_test("Contact - MongoDB Persistence", "PASS", f"Record found in database", response_time)
