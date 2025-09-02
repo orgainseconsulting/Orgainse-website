@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     // MongoDB connection
     const client = new MongoClient(process.env.MONGO_URL);
     await client.connect();
-    const db = client.db(process.env.DB_NAME || 'orgainse_consulting');
+    const db = client.db(process.env.DB_NAME || 'orgainse-consulting');
 
     // Get all newsletter subscriptions
     const newsletters = await db.collection('newsletter_subscriptions')
