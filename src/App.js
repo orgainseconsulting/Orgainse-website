@@ -1995,7 +1995,7 @@ const Services = () => {
       console.log('📤 Sending service inquiry:', leadData);
 
       // Submit service inquiry to Google Sheets
-      await fetch(GOOGLE_SHEETS_API, {
+      await fetch(CONTACT_API, {
         method: 'POST',
         mode: 'cors',
         headers: {
