@@ -692,12 +692,12 @@ const Home = () => {
       const NEWSLETTER_API = process.env.REACT_APP_BACKEND_URL + '/api/newsletter' || import.meta.env?.REACT_APP_BACKEND_URL + '/api/newsletter';
       
       console.log('🔧 Newsletter Debug Info:');
-      console.log('📋 Environment Variable:', GOOGLE_SHEETS_API);
+      console.log('📋 Environment Variable:', NEWSLETTER_API);
       console.log('✉️ Email:', newsletterEmail);
       
-      if (!GOOGLE_SHEETS_API || GOOGLE_SHEETS_API.includes('YOUR_GOOGLE_APPS_SCRIPT_URL')) {
-        console.error('❌ Google Sheets API URL not configured');
-        alert('Configuration error: Google Sheets API not set up. Please check environment variables.');
+      if (!NEWSLETTER_API || NEWSLETTER_API.includes('YOUR_GOOGLE_APPS_SCRIPT_URL')) {
+        console.error('❌ Newsletter API URL not configured');
+        alert('Configuration error: Newsletter API not set up. Please check environment variables.');
         setNewsletterStatus("error");
         setIsNewsletterLoading(false);
         return;
