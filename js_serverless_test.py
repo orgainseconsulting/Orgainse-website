@@ -167,7 +167,7 @@ class JavaScriptServerlessFunctionTester:
                             f"Subscription ID: {data.get('id')}, Email: {data.get('email')}", response_time)
                 
                 # Verify MongoDB persistence
-                if self.db:
+                if self.db is not None:
                     subscription = self.db.newsletter_subscriptions.find_one({"email": REALISTIC_TEST_DATA["manufacturing_newsletter"]["email"]})
                     if subscription:
                         self.log_test("Newsletter - MongoDB Persistence", "PASS", f"Record found in database", response_time)
