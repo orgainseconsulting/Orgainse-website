@@ -2470,9 +2470,9 @@ const Contact = () => {
       };
 
       console.log('📤 Sending contact lead:', leadData);
-      console.log('🌐 API Endpoint:', GOOGLE_SHEETS_API);
+      console.log('🌐 API Endpoint:', CONTACT_API);
 
-      const response = await fetch(GOOGLE_SHEETS_API, {
+      const response = await fetch(CONTACT_API, {
         method: 'POST',
         mode: 'cors',
         headers: {
