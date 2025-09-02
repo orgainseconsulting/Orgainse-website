@@ -715,9 +715,9 @@ const Home = () => {
       };
 
       console.log('📤 Sending lead data:', leadData);
-      console.log('🌐 Sending to:', GOOGLE_SHEETS_API);
+      console.log('🌐 Sending to:', NEWSLETTER_API);
 
-      const response = await fetch(GOOGLE_SHEETS_API, {
+      const response = await fetch(NEWSLETTER_API, {
         method: 'POST',
         mode: 'cors',
         headers: {
