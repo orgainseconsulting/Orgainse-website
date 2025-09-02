@@ -688,8 +688,8 @@ const Home = () => {
     setNewsletterStatus("");
 
     try {
-      // Use contact API endpoint for contact form
-      const CONTACT_API = process.env.REACT_APP_BACKEND_URL + '/api/contact' || import.meta.env?.REACT_APP_BACKEND_URL + '/api/contact';
+      // Use newsletter API endpoint for newsletter form
+      const NEWSLETTER_API = process.env.REACT_APP_BACKEND_URL + '/api/newsletter' || import.meta.env?.REACT_APP_BACKEND_URL + '/api/newsletter';
       
       console.log('🔧 Newsletter Debug Info:');
       console.log('📋 Environment Variable:', GOOGLE_SHEETS_API);
