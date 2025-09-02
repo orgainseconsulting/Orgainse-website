@@ -2445,16 +2445,16 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Use working backend temporarily while Google Apps Script is being fixed
-      const GOOGLE_SHEETS_API = process.env.REACT_APP_BACKEND_URL + '/api/newsletter' || import.meta.env?.REACT_APP_BACKEND_URL + '/api/newsletter';
+      // Use contact API endpoint for contact form
+      const CONTACT_API = process.env.REACT_APP_BACKEND_URL + '/api/contact' || import.meta.env?.REACT_APP_BACKEND_URL + '/api/contact';
       
       console.log('🔧 Contact Form Debug Info:');
-      console.log('📋 Environment Variable:', GOOGLE_SHEETS_API);
+      console.log('📋 Environment Variable:', CONTACT_API);
       console.log('📝 Form Data:', formData);
       
-      if (!GOOGLE_SHEETS_API || GOOGLE_SHEETS_API.includes('YOUR_GOOGLE_APPS_SCRIPT_URL')) {
-        console.error('❌ Google Sheets API URL not configured');
-        alert('Configuration error: Google Sheets API not set up. Please check environment variables.');
+      if (!CONTACT_API || CONTACT_API.includes('YOUR_GOOGLE_APPS_SCRIPT_URL')) {
+        console.error('❌ Contact API URL not configured');
+        alert('Configuration error: Contact API not set up. Please check environment variables.');
         return;
       }
       
