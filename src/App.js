@@ -689,7 +689,7 @@ const Home = () => {
 
     try {
       // Use newsletter API endpoint for newsletter form
-      const NEWSLETTER_API = process.env.REACT_APP_BACKEND_URL + '/api/newsletter' || import.meta.env?.REACT_APP_BACKEND_URL + '/api/newsletter';
+      const NEWSLETTER_API = '/api/newsletter';
       
       console.log('🔧 Newsletter Debug Info:');
       console.log('📋 Environment Variable:', NEWSLETTER_API);
