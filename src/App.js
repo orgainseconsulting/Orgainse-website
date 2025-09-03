@@ -3052,9 +3052,9 @@ const AIAssessmentTool = () => {
         role: userInfo.role || '',
         industry: userInfo.industry || '',
         company_size: userInfo.companySize || '',
-        current_ai_usage: formattedResponses.find(r => r.question.includes('AI usage'))?.answer || '',
-        main_challenges: formattedResponses.find(r => r.question.includes('challenges'))?.answer || '',
-        goals: formattedResponses.find(r => r.question.includes('goals'))?.answer || '',
+        current_ai_usage: formattedResponses.find(r => r.question && r.question.includes && r.question.includes('AI usage'))?.answer || 'Not specified',
+        main_challenges: formattedResponses.find(r => r.question && r.question.includes && r.question.includes('challenges'))?.answer || 'Not specified',
+        goals: formattedResponses.find(r => r.question && r.question.includes && r.question.includes('goals'))?.answer || 'Not specified',
         assessmentScore: Math.floor(Math.random() * 40) + 60, // Simplified scoring
         recommendations: 'AI Assessment completed - detailed report generated',
         source: window.location.origin + '/ai-assessment',
