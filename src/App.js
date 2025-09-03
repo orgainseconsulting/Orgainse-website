@@ -2446,7 +2446,7 @@ const Contact = () => {
     e.preventDefault();
     try {
       // Use contact API endpoint for contact form
-      const CONTACT_API = process.env.REACT_APP_BACKEND_URL + '/api/contact' || import.meta.env?.REACT_APP_BACKEND_URL + '/api/contact';
+      const CONTACT_API = '/api/contact';
       
       console.log('🔧 Contact Form Debug Info:');
       console.log('📋 Environment Variable:', CONTACT_API);
