@@ -4424,29 +4424,31 @@ const SmartCalendar = () => {
 function App() {
   return (
     <div className="App">
-      <CalendlyProvider>
-        <RegionalPricingProvider>
-          <BrowserRouter>
-            <Navigation />
-            <main>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/ai-assessment" element={<AIAssessmentTool />} />
-                <Route path="/roi-calculator" element={<ROICalculator />} />
-                <Route path="/smart-calendar" element={<SmartCalendar />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/admin" element={<AdminDashboard />} />
-                <Route path="/privacy" element={<PrivacyPolicy />} />
-                <Route path="/terms" element={<TermsOfService />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </main>
-            <Footer />
-          </BrowserRouter>
-        </RegionalPricingProvider>
-      </CalendlyProvider>
+      <AuthProvider>
+        <CalendlyProvider>
+          <RegionalPricingProvider>
+            <BrowserRouter>
+              <Navigation />
+              <main>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/ai-assessment" element={<AIAssessmentTool />} />
+                  <Route path="/roi-calculator" element={<ROICalculator />} />
+                  <Route path="/smart-calendar" element={<SmartCalendar />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/admin" element={<ProtectedAdminRoute />} />
+                  <Route path="/privacy" element={<PrivacyPolicy />} />
+                  <Route path="/terms" element={<TermsOfService />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </main>
+              <Footer />
+            </BrowserRouter>
+          </RegionalPricingProvider>
+        </CalendlyProvider>
+      </AuthProvider>
       <Analytics />
       <SpeedInsights />
       <AnalyticsDebug />
