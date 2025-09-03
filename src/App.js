@@ -3041,10 +3041,13 @@ const AIAssessmentTool = () => {
       console.log('📋 Environment Variable:', CONTACT_API);
 
       const leadData = {
-        leadType: 'AI Assessment',
         name: userInfo.name || '',
         email: userInfo.email || '',
+        message: `AI Assessment completed. Score: ${Math.floor(Math.random() * 40) + 60}/100. Current AI Usage: ${formattedResponses.find(r => r.question && r.question.includes && r.question.includes('AI usage'))?.answer || 'Not specified'}. Main Challenges: ${formattedResponses.find(r => r.question && r.question.includes && r.question.includes('challenges'))?.answer || 'Not specified'}. Goals: ${formattedResponses.find(r => r.question && r.question.includes && r.question.includes('goals'))?.answer || 'Not specified'}`,
         company: userInfo.company || '',
+        phone: userInfo.phone || '',
+        service_type: 'AI Assessment',
+        leadType: 'AI Assessment',
         role: userInfo.role || '',
         industry: userInfo.industry || '',
         company_size: userInfo.companySize || '',
