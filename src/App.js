@@ -2022,7 +2022,7 @@ const Services = () => {
         source: 'services_page_popup'
       };
 
-      const CONTACT_API = process.env.REACT_APP_BACKEND_URL + '/api/contact' || import.meta.env?.REACT_APP_BACKEND_URL + '/api/contact';
+      const CONTACT_API = '/api/contact';
       
       if (CONTACT_API) {
         const leadData = {
