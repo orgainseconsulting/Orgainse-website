@@ -3636,7 +3636,7 @@ const ROICalculator = () => {
               Recommended Services for Your Business
             </h2>
             <div className="grid gap-6 md:grid-cols-2">
-              {results.recommended_services.map((service, index) => (
+              {(results.recommended_services || []).map((service, index) => (
                 <div 
                   key={index}
                   className="group relative"
