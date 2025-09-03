@@ -46,7 +46,37 @@ export default async function handler(req, res) {
       timestamp: new Date().toISOString()
     };
 
-    await db.collection('contact_messages').insertOne(contactMessage);
+    // Determine collection based on lead type for separate tracking
+    let collectionName = 'contact_messages'; // Default
+    
+    if (leadType === 'AI Strategy & Automation') {
+      collectionName = 'ai_strategy_leads';
+    } else if (leadType === 'Digital Transformation') {
+      collectionName = 'digital_transformation_leads';
+    } else if (leadType === 'Data Analytics & Business Intelligence') {
+      collectionName = 'data_analytics_leads';
+    } else if (leadType === 'Process Optimization') {
+      collectionName = 'process_optimization_leads';
+    } else if (leadType === 'Tech Integration & Support') {
+      collectionName = 'tech_integration_leads';
+    } else if (leadType === 'Training & Change Management') {
+      collectionName = 'training_change_leads';
+    } else if (leadType === 'Service Inquiry') {
+      // Check service_type for more specific collection
+      if (service_type) {
+        if (service_type.includes('AI Strategy')) collectionName = 'ai_strategy_leads';
+        else if (service_type.includes('Digital Transformation')) collectionName = 'digital_transformation_leads';
+        else if (service_type.includes('Data Analytics')) collectionName = 'data_analytics_leads';
+        else if (service_type.includes('Process Optimization')) collectionName = 'process_optimization_leads';
+        else if (service_type.includes('Tech Integration')) collectionName = 'tech_integration_leads';
+        else if (service_type.includes('Training')) collectionName = 'training_change_leads';
+        else collectionName = 'general_service_inquiries';
+      } else {
+        collectionName = 'general_service_inquiries';
+      }
+    }
+
+    await db.collection(collectionName).insertOne(contactMessage);
     await client.close();
 
     res.status(200).json({
