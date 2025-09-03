@@ -45,6 +45,8 @@ import { Separator } from "./components/ui/separator";
 import ServicePopup from "./components/ServicePopup";
 import SEOHead from "./components/SEOHead";
 import AdminDashboard from "./components/AdminDashboard";
+import { AuthProvider } from "./components/AuthContext";
+import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
 import { 
   Menu, 
   X, 
