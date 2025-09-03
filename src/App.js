@@ -3492,11 +3492,18 @@ const ROICalculator = () => {
         setIsLoading(false);
         return;
       }
+
+      // Calculate ROI BEFORE using it in leadData (simplified calculation)
+      const calculatedROI = {
+        potential_savings: formData.current_project_cost * 0.3,
+        efficiency_improvement: (10 - formData.current_efficiency_rating) * 15,
+        roi_percentage: 250 + (formData.current_efficiency_rating * 10)
+      };
       
       const leadData = {
         name: formData.name,
         email: formData.email,
-        message: `ROI Calculator completed. Estimated ROI: ${calculatedROI}%. Current Project Cost: $${formData.current_project_cost}, Duration: ${formData.project_duration_months} months, Efficiency Rating: ${formData.current_efficiency_rating}/10. Interested in: ${formData.desired_services.join(', ')}`,
+        message: `ROI Calculator completed. Estimated ROI: ${calculatedROI.roi_percentage}%. Current Project Cost: $${formData.current_project_cost}, Duration: ${formData.project_duration_months} months, Efficiency Rating: ${formData.current_efficiency_rating}/10. Interested in: ${formData.desired_services.join(', ')}`,
         company: formData.company,
         phone: formData.phone || '',
         service_type: 'ROI Calculator',
@@ -3508,7 +3515,7 @@ const ROICalculator = () => {
         project_duration_months: parseInt(formData.project_duration_months),
         current_efficiency_rating: parseInt(formData.current_efficiency_rating),
         desired_services: formData.desired_services,
-        calculatedROI: calculatedROI,
+        calculatedROI: calculatedROI.roi_percentage,
         source: 'orgainse.com/roi-calculator',
         timestamp: new Date().toISOString()
       };
@@ -3521,13 +3528,6 @@ const ROICalculator = () => {
         },
         body: JSON.stringify(leadData)
       });
-      
-      // Calculate ROI for display (simplified calculation)
-      const calculatedROI = {
-        potential_savings: formData.current_project_cost * 0.3,
-        efficiency_improvement: (10 - formData.current_efficiency_rating) * 15,
-        roi_percentage: 250 + (formData.current_efficiency_rating * 10)
-      };
       
       setResults(calculatedROI);
       setIsSubmitted(true);
