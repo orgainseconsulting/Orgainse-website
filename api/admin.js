@@ -26,92 +26,64 @@ export default async function handler(req, res) {
       .sort({ subscribed_at: -1 })
       .toArray();
 
-    // Get all contact messages from different collections
+    // Get contact messages (general contact form)
     const contactMessages = await db.collection('contact_messages')
       .find({})
       .sort({ submitted_at: -1 })
       .toArray();
 
-    // Get service-specific leads
-    const aiStrategyLeads = await db.collection('ai_strategy_leads')
+    // Get AI Assessment leads
+    const aiAssessmentLeads = await db.collection('ai_assessment_leads')
       .find({})
       .sort({ submitted_at: -1 })
       .toArray();
 
-    const digitalTransformationLeads = await db.collection('digital_transformation_leads')
+    // Get ROI Calculator leads
+    const roiCalculatorLeads = await db.collection('roi_calculator_leads')
       .find({})
       .sort({ submitted_at: -1 })
       .toArray();
 
-    const dataAnalyticsLeads = await db.collection('data_analytics_leads')
+    // Get Service Inquiries (all 6 services combined)
+    const serviceInquiries = await db.collection('service_inquiries')
       .find({})
       .sort({ submitted_at: -1 })
       .toArray();
 
-    const processOptimizationLeads = await db.collection('process_optimization_leads')
+    // Get Consultation leads
+    const consultationLeads = await db.collection('consultation_leads')
       .find({})
       .sort({ submitted_at: -1 })
       .toArray();
-
-    const techIntegrationLeads = await db.collection('tech_integration_leads')
-      .find({})
-      .sort({ submitted_at: -1 })
-      .toArray();
-
-    const trainingChangeLeads = await db.collection('training_change_leads')
-      .find({})
-      .sort({ submitted_at: -1 })
-      .toArray();
-
-    const generalServiceInquiries = await db.collection('general_service_inquiries')
-      .find({})
-      .sort({ submitted_at: -1 })
-      .toArray();
-
-    // Combine all contacts
-    const allContacts = [
-      ...contactMessages,
-      ...aiStrategyLeads,
-      ...digitalTransformationLeads,
-      ...dataAnalyticsLeads,
-      ...processOptimizationLeads,
-      ...techIntegrationLeads,
-      ...trainingChangeLeads,
-      ...generalServiceInquiries
-    ].sort((a, b) => new Date(b.submitted_at) - new Date(a.submitted_at));
 
     await client.close();
 
+    const totalContacts = contactMessages.length + aiAssessmentLeads.length + roiCalculatorLeads.length + serviceInquiries.length + consultationLeads.length;
+
     const summary = {
       total_newsletters: newsletters.length,
-      total_contacts: allContacts.length,
-      total_leads: newsletters.length + allContacts.length,
-      service_breakdown: {
-        ai_strategy: aiStrategyLeads.length,
-        digital_transformation: digitalTransformationLeads.length,
-        data_analytics: dataAnalyticsLeads.length,
-        process_optimization: processOptimizationLeads.length,
-        tech_integration: techIntegrationLeads.length,
-        training_change: trainingChangeLeads.length,
-        general_inquiries: generalServiceInquiries.length,
-        general_contacts: contactMessages.length
+      total_contacts: totalContacts,
+      total_leads: newsletters.length + totalContacts,
+      breakdown: {
+        newsletters: newsletters.length,
+        contact_messages: contactMessages.length,
+        ai_assessments: aiAssessmentLeads.length,
+        roi_calculators: roiCalculatorLeads.length,
+        service_inquiries: serviceInquiries.length,
+        consultations: consultationLeads.length
       },
       last_updated: new Date().toISOString()
     };
 
     res.status(200).json({
       summary,
-      newsletters,
-      contacts: allContacts,
-      service_specific: {
-        ai_strategy_leads: aiStrategyLeads,
-        digital_transformation_leads: digitalTransformationLeads,
-        data_analytics_leads: dataAnalyticsLeads,
-        process_optimization_leads: processOptimizationLeads,
-        tech_integration_leads: techIntegrationLeads,
-        training_change_leads: trainingChangeLeads,
-        general_service_inquiries: generalServiceInquiries,
-        general_contacts: contactMessages
+      data: {
+        newsletters,
+        contact_messages: contactMessages,
+        ai_assessment_leads: aiAssessmentLeads,
+        roi_calculator_leads: roiCalculatorLeads,
+        service_inquiries: serviceInquiries,
+        consultation_leads: consultationLeads
       },
       success: true
     });
