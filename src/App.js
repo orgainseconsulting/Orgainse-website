@@ -3084,11 +3084,12 @@ const AIAssessmentTool = () => {
         setResults(mockResults);
         setIsSubmitted(true);
       } else {
-        throw new Error('Assessment submission failed');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(`Assessment submission failed: ${response.status} - ${errorData.error || response.statusText}`);
       }
     } catch (error) {
       console.error('Assessment submission failed:', error);
-      alert('Failed to submit assessment. Please try again.');
+      alert(`Failed to submit assessment: ${error.message}. Please try again.`);
     } finally {
       setIsLoading(false);
     }
