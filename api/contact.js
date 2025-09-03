@@ -47,32 +47,29 @@ export default async function handler(req, res) {
     };
 
     // Determine collection based on lead type for separate tracking
-    let collectionName = 'contact_messages'; // Default
+    let collectionName = 'contact_messages'; // Default for general contact inquiries
     
-    if (leadType === 'AI Strategy & Automation') {
-      collectionName = 'ai_strategy_leads';
-    } else if (leadType === 'Digital Transformation') {
-      collectionName = 'digital_transformation_leads';
-    } else if (leadType === 'Data Analytics & Business Intelligence') {
-      collectionName = 'data_analytics_leads';
-    } else if (leadType === 'Process Optimization') {
-      collectionName = 'process_optimization_leads';
-    } else if (leadType === 'Tech Integration & Support') {
-      collectionName = 'tech_integration_leads';
-    } else if (leadType === 'Training & Change Management') {
-      collectionName = 'training_change_leads';
+    if (leadType === 'AI Assessment') {
+      collectionName = 'ai_assessment_leads';
+    } else if (leadType === 'ROI Calculator') {
+      collectionName = 'roi_calculator_leads';
+    } else if (leadType === 'Consultation') {
+      collectionName = 'consultation_leads';
     } else if (leadType === 'Service Inquiry') {
-      // Check service_type for more specific collection
-      if (service_type) {
-        if (service_type.includes('AI Strategy')) collectionName = 'ai_strategy_leads';
-        else if (service_type.includes('Digital Transformation')) collectionName = 'digital_transformation_leads';
-        else if (service_type.includes('Data Analytics')) collectionName = 'data_analytics_leads';
-        else if (service_type.includes('Process Optimization')) collectionName = 'process_optimization_leads';
-        else if (service_type.includes('Tech Integration')) collectionName = 'tech_integration_leads';
-        else if (service_type.includes('Training')) collectionName = 'training_change_leads';
-        else collectionName = 'general_service_inquiries';
-      } else {
-        collectionName = 'general_service_inquiries';
+      collectionName = 'service_inquiries'; // All 6 services go here
+    } else if (leadType === 'Contact Form') {
+      collectionName = 'contact_messages'; // General contact form
+    } else {
+      // Handle any other specific service types as service inquiries
+      if (service_type && (
+        service_type.includes('AI Strategy') ||
+        service_type.includes('Digital Transformation') ||
+        service_type.includes('Data Analytics') ||
+        service_type.includes('Process Optimization') ||
+        service_type.includes('Tech Integration') ||
+        service_type.includes('Training')
+      )) {
+        collectionName = 'service_inquiries';
       }
     }
 
