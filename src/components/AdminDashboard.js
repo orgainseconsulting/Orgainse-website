@@ -57,6 +57,153 @@ const AdminDashboard = () => {
     window.URL.revokeObjectURL(url);
   };
 
+  const exportAllLeadsToCSV = () => {
+    if (!data || !data.data) return;
+    
+    // Combine all lead data from different collections
+    const allLeads = [];
+    
+    // Add newsletters with lead type identification
+    if (data.data.newsletters) {
+      data.data.newsletters.forEach(lead => {
+        allLeads.push({
+          ...lead,
+          lead_category: 'Newsletter Subscription',
+          collection_source: 'newsletter_subscriptions'
+        });
+      });
+    }
+    
+    // Add contact messages
+    if (data.data.contact_messages) {
+      data.data.contact_messages.forEach(lead => {
+        allLeads.push({
+          ...lead,
+          lead_category: 'Contact Message',
+          collection_source: 'contact_messages'
+        });
+      });
+    }
+    
+    // Add AI assessment leads
+    if (data.data.ai_assessment_leads) {
+      data.data.ai_assessment_leads.forEach(lead => {
+        allLeads.push({
+          ...lead,
+          lead_category: 'AI Assessment',
+          collection_source: 'ai_assessment_leads'
+        });
+      });
+    }
+    
+    // Add ROI calculator leads
+    if (data.data.roi_calculator_leads) {
+      data.data.roi_calculator_leads.forEach(lead => {
+        allLeads.push({
+          ...lead,
+          lead_category: 'ROI Calculator',
+          collection_source: 'roi_calculator_leads'
+        });
+      });
+    }
+    
+    // Add service inquiries
+    if (data.data.service_inquiries) {
+      data.data.service_inquiries.forEach(lead => {
+        allLeads.push({
+          ...lead,
+          lead_category: 'Service Inquiry',
+          collection_source: 'service_inquiries'
+        });
+      });
+    }
+    
+    // Add consultation leads
+    if (data.data.consultation_leads) {
+      data.data.consultation_leads.forEach(lead => {
+        allLeads.push({
+          ...lead,
+          lead_category: 'Consultation Request',
+          collection_source: 'consultation_leads'
+        });
+      });
+    }
+    
+    // Sort by date (newest first)
+    allLeads.sort((a, b) => {
+      const dateA = new Date(a.submitted_at || a.subscribed_at);
+      const dateB = new Date(b.submitted_at || b.subscribed_at);
+      return dateB - dateA;
+    });
+    
+    if (allLeads.length === 0) {
+      alert('No leads found to export.');
+      return;
+    }
+    
+    // Create comprehensive headers for all lead types
+    const allHeaders = [
+      'lead_category',
+      'collection_source',
+      'id',
+      'name',
+      'first_name',
+      'email',
+      'company',
+      'phone',
+      'role',
+      'industry',
+      'company_size',
+      'service_type',
+      'message',
+      'subject',
+      'leadType',
+      'source',
+      'current_ai_usage',
+      'main_challenges',
+      'goals',
+      'assessmentScore',
+      'recommendations',
+      'current_project_cost',
+      'project_duration_months',
+      'current_efficiency_rating',
+      'desired_services',
+      'calculatedROI',
+      'potential_savings',
+      'efficiency_improvement',
+      'roi_percentage',
+      'submitted_at',
+      'subscribed_at',
+      'timestamp',
+      'status'
+    ];
+    
+    // Create rows with all headers
+    const rows = allLeads.map(item => 
+      allHeaders.map(header => {
+        const value = item[header];
+        if (value === null || value === undefined) return '';
+        if (Array.isArray(value)) return `"${value.join(', ')}"`;
+        if (typeof value === 'object') return JSON.stringify(value);
+        return `"${String(value).replace(/"/g, '""')}"`;
+      })
+    );
+
+    const csvContent = [allHeaders, ...rows]
+      .map(row => row.join(','))
+      .join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `all_leads_export_${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  };
+
   const tabs = [
     { id: 'overview', name: 'Overview', count: data?.summary?.total_leads || 0 },
     { id: 'newsletters', name: 'Newsletter Subscriptions', count: data?.summary?.breakdown?.newsletters || 0 },
