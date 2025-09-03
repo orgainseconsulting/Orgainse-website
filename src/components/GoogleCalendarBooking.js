@@ -41,7 +41,8 @@ const GoogleCalendarBooking = ({ isOpen, onClose }) => {
   // Confirmation state
   const [bookingResult, setBookingResult] = useState(null);
 
-  const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+  const API_BASE_URL = '';
+  const api_url = '/api';
 
   // Fetch available time slots when modal opens
   useEffect(() => {
