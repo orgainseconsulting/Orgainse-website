@@ -3035,14 +3035,10 @@ const AIAssessmentTool = () => {
       };
 
       // Use contact API endpoint for AI assessment
-      const CONTACT_API = process.env.REACT_APP_BACKEND_URL + '/api/contact' || import.meta.env?.REACT_APP_BACKEND_URL + '/api/contact';
+      const CONTACT_API = '/api/contact';
       
-      if (!CONTACT_API) {
-        console.error('❌ Contact API URL not configured');
-        alert('Configuration error: Contact API not set up.');
-        setIsLoading(false);
-        return;
-      }
+      console.log('🔧 AI Assessment Debug Info:');
+      console.log('📋 Environment Variable:', CONTACT_API);
 
       const leadData = {
         leadType: 'AI Assessment',
