@@ -4,6 +4,7 @@ const AdminDashboard = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [activeTab, setActiveTab] = useState('overview');
 
   const fetchData = async () => {
     try {
@@ -28,53 +29,43 @@ const AdminDashboard = () => {
     fetchData();
   }, []);
 
-  const exportToCSV = (data, type) => {
+  const exportToCSV = (data, filename) => {
     if (!data || data.length === 0) return;
     
-    const headers = type === 'newsletters' 
-      ? ['Email', 'First Name', 'Date Subscribed', 'Status', 'Lead Type', 'Source']
-      : ['Name', 'Email', 'Company', 'Phone', 'Service Type', 'Message', 'Date Submitted', 'Status', 'Lead Type', 'Source'];
-    
-    const rows = data.map(item => {
-      if (type === 'newsletters') {
-        return [
-          item.email,
-          item.first_name || '',
-          new Date(item.subscribed_at).toLocaleDateString(),
-          item.status,
-          item.leadType || 'Newsletter Subscription',
-          item.source || 'Website'
-        ];
-      } else {
-        return [
-          item.name,
-          item.email,
-          item.company || '',
-          item.phone || '',
-          item.service_type || '',
-          item.message,
-          new Date(item.submitted_at).toLocaleDateString(),
-          item.status,
-          item.leadType || 'Contact Inquiry',
-          item.source || 'Website'
-        ];
-      }
-    });
+    const headers = Object.keys(data[0]).filter(key => !key.startsWith('_'));
+    const rows = data.map(item => 
+      headers.map(header => {
+        const value = item[header];
+        if (value === null || value === undefined) return '';
+        if (typeof value === 'object') return JSON.stringify(value);
+        return `"${String(value).replace(/"/g, '""')}"`;
+      })
+    );
 
     const csvContent = [headers, ...rows]
-      .map(row => row.map(field => `"${field}"`).join(','))
+      .map(row => row.join(','))
       .join('\n');
 
     const blob = new Blob([csvContent], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${type}_${new Date().toISOString().split('T')[0]}.csv`;
+    a.download = `${filename}_${new Date().toISOString().split('T')[0]}.csv`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
   };
+
+  const tabs = [
+    { id: 'overview', name: 'Overview', count: data?.summary?.total_leads || 0 },
+    { id: 'newsletters', name: 'Newsletter Subscriptions', count: data?.summary?.breakdown?.newsletters || 0 },
+    { id: 'contacts', name: 'Contact Messages', count: data?.summary?.breakdown?.contact_messages || 0 },
+    { id: 'ai_assessments', name: 'AI Assessments', count: data?.summary?.breakdown?.ai_assessments || 0 },
+    { id: 'roi_calculators', name: 'ROI Calculators', count: data?.summary?.breakdown?.roi_calculators || 0 },
+    { id: 'service_inquiries', name: 'Service Inquiries', count: data?.summary?.breakdown?.service_inquiries || 0 },
+    { id: 'consultations', name: 'Consultations', count: data?.summary?.breakdown?.consultations || 0 }
+  ];
 
   if (loading) {
     return (
@@ -113,13 +104,127 @@ const AdminDashboard = () => {
     );
   }
 
+  const renderTabContent = () => {
+    if (activeTab === 'overview') {
+      return (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {tabs.slice(1).map(tab => (
+            <div key={tab.id} className="bg-white rounded-lg shadow p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">{tab.name}</h3>
+              <p className="text-3xl font-bold text-blue-600">{tab.count}</p>
+              <button
+                onClick={() => setActiveTab(tab.id)}
+                className="mt-3 text-blue-600 hover:text-blue-800 text-sm font-medium"
+              >
+                View Details →
+              </button>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    const getDataForTab = () => {
+      switch (activeTab) {
+        case 'newsletters': return data?.data?.newsletters || [];
+        case 'contacts': return data?.data?.contact_messages || [];
+        case 'ai_assessments': return data?.data?.ai_assessment_leads || [];
+        case 'roi_calculators': return data?.data?.roi_calculator_leads || [];
+        case 'service_inquiries': return data?.data?.service_inquiries || [];
+        case 'consultations': return data?.data?.consultation_leads || [];
+        default: return [];
+      }
+    };
+
+    const tabData = getDataForTab();
+    const currentTab = tabs.find(t => t.id === activeTab);
+
+    return (
+      <div className="bg-white rounded-lg shadow">
+        <div className="p-6 border-b">
+          <div className="flex justify-between items-center">
+            <h2 className="text-xl font-bold text-gray-900">{currentTab?.name}</h2>
+            <button
+              onClick={() => exportToCSV(tabData, activeTab)}
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center"
+            >
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Export CSV
+            </button>
+          </div>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name/Email</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Details</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {tabData.map((item, index) => (
+                <tr key={item.id || index} className="hover:bg-gray-50">
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div>
+                      <div className="text-sm font-medium text-gray-900">
+                        {item.name || item.first_name || 'N/A'}
+                      </div>
+                      <div className="text-sm text-gray-500">{item.email}</div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {item.company || 'N/A'}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-900 max-w-xs">
+                    {activeTab === 'service_inquiries' && (
+                      <div className="mb-1">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                          {item.service_type || 'General Service'}
+                        </span>
+                      </div>
+                    )}
+                    <div className="truncate" title={item.message}>
+                      {item.message || item.subject || item.leadType || 'No details'}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {new Date(item.submitted_at || item.subscribed_at).toLocaleDateString()}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
+                      item.status === 'active' || item.status === 'new' 
+                        ? 'bg-green-100 text-green-800' 
+                        : 'bg-gray-100 text-gray-800'
+                    }`}>
+                      {item.status || 'active'}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {tabData.length === 0 && (
+            <div className="text-center py-8 text-gray-500">
+              No {currentTab?.name.toLowerCase()} yet.
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Lead Management Dashboard</h1>
-          <p className="text-gray-600">Manage and export your captured leads</p>
+          <p className="text-gray-600">Manage your captured leads by category</p>
         </div>
 
         {/* Summary Cards */}
@@ -147,7 +252,7 @@ const AdminDashboard = () => {
               </div>
               <div className="ml-4">
                 <p className="text-sm text-gray-600">Newsletter Subscribers</p>
-                <p className="text-2xl font-bold text-gray-900">{data?.summary?.total_newsletters || 0}</p>
+                <p className="text-2xl font-bold text-gray-900">{data?.summary?.breakdown?.newsletters || 0}</p>
               </div>
             </div>
           </div>
@@ -156,12 +261,12 @@ const AdminDashboard = () => {
             <div className="flex items-center">
               <div className="p-2 bg-purple-100 rounded-lg">
                 <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
               <div className="ml-4">
-                <p className="text-sm text-gray-600">Contact Messages</p>
-                <p className="text-2xl font-bold text-gray-900">{data?.summary?.total_contacts || 0}</p>
+                <p className="text-sm text-gray-600">AI Assessments</p>
+                <p className="text-2xl font-bold text-gray-900">{data?.summary?.breakdown?.ai_assessments || 0}</p>
               </div>
             </div>
           </div>
@@ -170,143 +275,46 @@ const AdminDashboard = () => {
             <div className="flex items-center">
               <div className="p-2 bg-yellow-100 rounded-lg">
                 <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                 </svg>
               </div>
               <div className="ml-4">
-                <p className="text-sm text-gray-600">Last Updated</p>
-                <p className="text-sm font-semibold text-gray-900">
-                  {data?.summary?.last_updated ? new Date(data.summary.last_updated).toLocaleString() : 'N/A'}
-                </p>
+                <p className="text-sm text-gray-600">Service Inquiries</p>
+                <p className="text-2xl font-bold text-gray-900">{data?.summary?.breakdown?.service_inquiries || 0}</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Newsletter Subscriptions */}
+        {/* Tabs */}
         <div className="bg-white rounded-lg shadow mb-8">
-          <div className="p-6 border-b">
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-bold text-gray-900">Newsletter Subscriptions</h2>
-              <button
-                onClick={() => exportToCSV(data?.newsletters, 'newsletters')}
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center"
-              >
-                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                Export CSV
-              </button>
-            </div>
+          <div className="border-b">
+            <nav className="-mb-px flex space-x-8 px-6" aria-label="Tabs">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                    activeTab === tab.id
+                      ? 'border-blue-500 text-blue-600'
+                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  }`}
+                >
+                  {tab.name}
+                  <span className="ml-2 px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-900">
+                    {tab.count}
+                  </span>
+                </button>
+              ))}
+            </nav>
           </div>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lead Type</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Source</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {data?.newsletters?.map((newsletter, index) => (
-                  <tr key={newsletter.id || index} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{newsletter.email}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{newsletter.first_name || 'N/A'}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {new Date(newsletter.subscribed_at).toLocaleDateString()}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                        newsletter.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                      }`}>
-                        {newsletter.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {newsletter.leadType || 'Newsletter Subscription'}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {newsletter.source || 'Website'}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            {(!data?.newsletters || data.newsletters.length === 0) && (
-              <div className="text-center py-8 text-gray-500">
-                No newsletter subscriptions yet.
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Contact Messages */}
-        <div className="bg-white rounded-lg shadow">
-          <div className="p-6 border-b">
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-bold text-gray-900">Contact Messages</h2>
-              <button
-                onClick={() => exportToCSV(data?.contacts, 'contacts')}
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center"
-              >
-                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                Export CSV
-              </button>
-            </div>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Message</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {data?.contacts?.map((contact, index) => (
-                  <tr key={contact.id || index} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{contact.name}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{contact.email}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{contact.company || 'N/A'}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{contact.service_type || 'N/A'}</td>
-                    <td className="px-6 py-4 text-sm text-gray-900 max-w-xs truncate" title={contact.message}>
-                      {contact.message}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {new Date(contact.submitted_at).toLocaleDateString()}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                        contact.status === 'new' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'
-                      }`}>
-                        {contact.status}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            {(!data?.contacts || data.contacts.length === 0) && (
-              <div className="text-center py-8 text-gray-500">
-                No contact messages yet.
-              </div>
-            )}
+          <div className="p-6">
+            {renderTabContent()}
           </div>
         </div>
 
         {/* Refresh Button */}
-        <div className="mt-8 text-center">
+        <div className="text-center">
           <button
             onClick={fetchData}
             className="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition-colors flex items-center mx-auto"
