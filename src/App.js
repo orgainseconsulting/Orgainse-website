@@ -3494,10 +3494,13 @@ const ROICalculator = () => {
       }
       
       const leadData = {
-        leadType: 'ROI Calculator',
         name: formData.name,
         email: formData.email,
+        message: `ROI Calculator completed. Estimated ROI: ${calculatedROI}%. Current Project Cost: $${formData.current_project_cost}, Duration: ${formData.project_duration_months} months, Efficiency Rating: ${formData.current_efficiency_rating}/10. Interested in: ${formData.desired_services.join(', ')}`,
         company: formData.company,
+        phone: formData.phone || '',
+        service_type: 'ROI Calculator',
+        leadType: 'ROI Calculator',
         role: formData.role,
         company_size: formData.company_size,
         industry: formData.industry,
@@ -3505,6 +3508,7 @@ const ROICalculator = () => {
         project_duration_months: parseInt(formData.project_duration_months),
         current_efficiency_rating: parseInt(formData.current_efficiency_rating),
         desired_services: formData.desired_services,
+        calculatedROI: calculatedROI,
         source: 'orgainse.com/roi-calculator',
         timestamp: new Date().toISOString()
       };
