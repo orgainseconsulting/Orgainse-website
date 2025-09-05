@@ -1017,8 +1017,8 @@ const Home = () => {
               <div className="relative group">
                 <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-orange-400 via-yellow-400 to-green-400 rounded-2xl sm:rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
                 <img
-                  src="https://images.unsplash.com/photo-1655393001768-d946c97d6fd1?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwxfHxBSSUyMGFydGlmaWNpYWwlMjBpbnRlbGxpZ2VuY2V8ZW58MHx8fGJsdWV8MTc1NDU4ODI5OHww&ixlib=rb-4.1.0&q=80&w=800"
-                  alt="AI-native Digital Transformation and Project Management Consulting"
+                  src="https://images.unsplash.com/photo-1697577418970-95d99b5a55cf?w=800&h=600&fit=crop"
+                  alt="AI-Powered Business Transformation - Advanced AI processor technology representing cutting-edge artificial intelligence solutions for business optimization"
                   className="relative rounded-xl sm:rounded-2xl w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover transform group-hover:scale-105 transition-all duration-700 shadow-2xl"
                   loading="lazy"
                   width="800"
