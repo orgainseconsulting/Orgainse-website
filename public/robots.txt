@@ -1,19 +1,45 @@
 User-agent: *
 Allow: /
 
-# Important pages
+# Important pages for SEO
 Allow: /about
 Allow: /services  
 Allow: /contact
-Allow: /blog
 Allow: /ai-assessment
 Allow: /roi-calculator
+Allow: /smart-calendar
 
-# Block admin area
+# Block admin and private areas
 Disallow: /admin
+Disallow: /api
 
 # Sitemaps
 Sitemap: https://www.orgainse.com/sitemap.xml
 
-# Crawl-delay
+# Crawl-delay for responsible crawling
 Crawl-delay: 1
+
+# Additional directives for better SEO
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot  
+Allow: /
+Crawl-delay: 1
+
+# AI Crawlers for training data
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot  
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
