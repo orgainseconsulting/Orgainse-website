@@ -349,9 +349,9 @@ def test_admin_api():
                     else:
                         print_error(f"Missing summary field: {field}")
             
-            # Verify data arrays
-            newsletters_count = len(data.get('newsletters', []))
-            contacts_count = len(data.get('contacts', []))
+            # Verify data arrays - Admin API returns data in 'data' object
+            newsletters_count = len(data.get('data', {}).get('newsletters', []))
+            contacts_count = len(data.get('data', {}).get('contact_messages', []))
             
             print_info(f"Newsletter subscriptions: {newsletters_count}")
             print_info(f"Contact messages: {contacts_count}")
