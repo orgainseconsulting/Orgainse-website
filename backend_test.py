@@ -357,14 +357,14 @@ def test_admin_api():
             print_info(f"Contact messages: {contacts_count}")
             
             # Verify data is sorted by date (newest first)
-            if newsletters_count > 1:
-                newsletters = data['newsletters']
-                if 'subscribed_at' in newsletters[0]:
+            if newsletters_count > 0:
+                newsletters = data['data']['newsletters']
+                if newsletters and 'subscribed_at' in newsletters[0]:
                     print_success("Newsletter data includes timestamp")
                     
-            if contacts_count > 1:
-                contacts = data['contacts']
-                if 'submitted_at' in contacts[0]:
+            if contacts_count > 0:
+                contacts = data['data']['contact_messages']
+                if contacts and 'submitted_at' in contacts[0]:
                     print_success("Contact data includes timestamp")
             
             print_success(f"Admin API successful - {newsletters_count} newsletters, {contacts_count} contacts")
