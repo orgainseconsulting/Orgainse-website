@@ -80,63 +80,218 @@
   <meta property="twitter:site" content="@orgainseconsult" />
   <meta property="twitter:creator" content="@orgainseconsult" />
   
-  <!-- Structured Data Schema -->
+  <!-- Enhanced Structured Data Schema -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Orgainse Consulting",
-    "alternateName": "OrgAInse Consulting",
-    "url": "https://www.orgainse.com",
-    "logo": "https://customer-assets.emergentagent.com/job_digital-presence-29/artifacts/xx6a5zd7_Copy%20of%20OrgAInse%20Consulting%20%28Website%29.png",
-    "description": "AI-native consulting firm offering GPT-powered project management, digital transformation, and operational optimization for startups and SMEs globally.",
-    "address": [
-      {
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Orgainse Consulting",
+      "alternateName": ["OrgAInse Consulting", "Orgainse", "OrgAInse"],
+      "url": "https://www.orgainse.com",
+      "logo": "https://www.orgainse.com/logo-orgainse-consulting.png",
+      "description": "Leading AI project management service provider offering GPT-powered PMaaS for startups and SMEs. Expert digital transformation consulting across IT Services, EdTech, FinTech, Healthcare, Hospitality, and Software Development industries.",
+      "foundingDate": "2023",
+      "slogan": "AI-Native Business & Digital Transformation",
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "Koramangala",
+          "addressLocality": "Bangalore",
+          "addressRegion": "Karnataka",
+          "postalCode": "560034",
+          "addressCountry": "IN"
+        },
+        {
+          "@type": "PostalAddress", 
+          "addressLocality": "Austin",
+          "addressRegion": "TX",
+          "addressCountry": "US"
+        }
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+91-9740384683",
+          "contactType": "customer service",
+          "availableLanguage": ["en", "hi"],
+          "areaServed": ["IN", "US", "GB", "AE", "AU", "NZ", "ZA"]
+        },
+        {
+          "@type": "ContactPoint",
+          "telephone": "+91-9740394863", 
+          "contactType": "technical support",
+          "availableLanguage": "en",
+          "areaServed": ["IN", "US", "GB", "AE", "AU", "NZ", "ZA"]
+        }
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/company/orgainse-consulting",
+        "https://twitter.com/orgainseconsult",
+        "https://www.facebook.com/orgainseconsulting"
+      ],
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "India"
+        },
+        {
+          "@type": "Country", 
+          "name": "United States"
+        },
+        {
+          "@type": "Country",
+          "name": "United Kingdom"
+        },
+        {
+          "@type": "Country",
+          "name": "United Arab Emirates"
+        },
+        {
+          "@type": "Country",
+          "name": "Australia"
+        },
+        {
+          "@type": "Country",
+          "name": "New Zealand"
+        },
+        {
+          "@type": "Country",
+          "name": "South Africa"
+        }
+      ],
+      "knowsAbout": [
+        "Artificial Intelligence",
+        "Project Management",
+        "Digital Transformation", 
+        "Business Process Automation",
+        "GPT Integration",
+        "Machine Learning",
+        "Data Analytics",
+        "Cloud Computing",
+        "Agile Methodology"
+      ],
+      "serviceType": [
+        "AI Project Management",
+        "Digital Transformation Consulting",
+        "Business Process Optimization",
+        "GPT-Powered Solutions",
+        "Technology Consulting"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "AI Project Management Service (PMaaS)",
+      "description": "GPT-powered Project Management as a Service for startups and SMEs. Achieve 25% faster delivery and 340% ROI with our AI-native approach.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Orgainse Consulting"
+      },
+      "serviceType": "Business Consulting",
+      "category": "Project Management",
+      "areaServed": ["India", "USA", "UK", "UAE", "Australia", "New Zealand", "South Africa"],
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Startups and SMEs"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "AI Project Management Starter",
+          "description": "Basic AI project management for small teams",
+          "category": "PMaaS"
+        },
+        {
+          "@type": "Offer", 
+          "name": "Enterprise AI Transformation",
+          "description": "Complete digital transformation with AI integration",
+          "category": "Digital Transformation"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "AI Consulting Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AI Strategy Consulting"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service", 
+              "name": "Process Optimization"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Data Analytics & AI"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is AI project management service?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI project management service (PMaaS) uses GPT and machine learning algorithms to automate project planning, resource allocation, risk assessment, and progress tracking. It provides 25% faster delivery and 340% ROI compared to traditional project management."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does PMaaS work for startups?",
+          "acceptedAnswer": {
+            "@type": "Answer", 
+            "text": "PMaaS for startups provides AI-powered project management without the need for expensive software or dedicated project managers. It includes automated task scheduling, intelligent resource optimization, predictive analytics, and real-time collaboration tools."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What industries does Orgainse Consulting serve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Orgainse Consulting specializes in AI transformation for IT Services, EdTech, FinTech, Healthcare, Hospitality, and Software Development industries across India, USA, UK, UAE, Australia, New Zealand, and South Africa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the ROI of AI project management?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our clients typically see 340% ROI within 18 months, with 25% faster project delivery, 45% cost reduction in operations, and 90% average implementation time of 90 days."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Orgainse Consulting",
+      "description": "Professional AI consulting and digital transformation services",
+      "priceRange": "$$$$",
+      "telephone": "+91-9740384683",
+      "address": {
         "@type": "PostalAddress",
         "addressLocality": "Bangalore",
         "addressCountry": "IN"
       },
-      {
-        "@type": "PostalAddress", 
-        "addressLocality": "Austin",
-        "addressRegion": "TX",
-        "addressCountry": "US"
-      }
-    ],
-    "contactPoint": [
-      {
-        "@type": "ContactPoint",
-        "telephone": "+91-9740384683",
-        "contactType": "customer service",
-        "availableLanguage": "en"
-      },
-      {
-        "@type": "ContactPoint",
-        "telephone": "+91-9740394863", 
-        "contactType": "technical support",
-        "availableLanguage": "en"
-      }
-    ],
-    "email": "info@orgainse.com",
-    "sameAs": [
-      "https://linkedin.com/company/orgainse-consulting",
-      "https://twitter.com/orgainseconsult",
-      "https://instagram.com/orgainseconsulting",
-      "https://facebook.com/orgainseconsulting",
-      "https://youtube.com/@orgainseconsulting"
-    ],
-    "foundingDate": "2019",
-    "numberOfEmployees": "50-100",
-    "industry": "Management Consulting",
-    "services": [
-      "AI Project Management Service",
-      "Digital Transformation Consulting",
-      "Operational Optimization",
-      "Business Strategy Development",
-      "Agile & Scrum Coaching",
-      "Risk Management & Compliance"
-    ]
-  }
+      "openingHours": "Mo-Fr 09:00-18:00",
+      "paymentAccepted": ["Credit Card", "Bank Transfer", "Invoice"],
+      "currenciesAccepted": ["INR", "USD", "GBP", "AED", "AUD"]
+    }
+  ]
   </script>
   
   <!-- Additional Meta Tags for Regional SEO -->
