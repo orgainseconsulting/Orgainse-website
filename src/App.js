@@ -1018,8 +1018,8 @@ const Home = () => {
               <div className="relative group">
                 <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-orange-400 via-yellow-400 to-green-400 rounded-2xl sm:rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
                 <img
-                  src="https://images.unsplash.com/photo-1697577418970-95d99b5a55cf?w=800&h=600&fit=crop"
-                  alt="AI-Powered Business Transformation - Advanced AI processor technology representing cutting-edge artificial intelligence solutions for business optimization"
+                  src="https://images.unsplash.com/photo-1644088379091-d574269d422f?w=800&h=600&fit=crop"
+                  alt="AI Neural Network Visualization - Advanced neural network connections representing intelligent automation and cross-industry AI implementation for IT Services, EdTech, FinTech, Healthcare, Hospitality, and Software Development"
                   className="relative rounded-xl sm:rounded-2xl w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover transform group-hover:scale-105 transition-all duration-700 shadow-2xl"
                   loading="lazy"
                   width="800"
