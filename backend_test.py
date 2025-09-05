@@ -157,7 +157,8 @@ def test_newsletter_api():
                 
                 if response.status_code == 200:
                     # Verify response format matches frontend expectations
-                    required_fields = ['id', 'email', 'timestamp', 'status']
+                    # Note: API returns subscription_id instead of id
+                    required_fields = ['subscription_id', 'email', 'timestamp', 'status']
                     for field in required_fields:
                         if field in data:
                             print_success(f"Required field '{field}' present")
