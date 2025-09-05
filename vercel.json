@@ -1,6 +1,11 @@
 {
   "version": 2,
   "name": "orgainse-consulting",
+  "framework": "create-react-app",
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
+  "devCommand": "npm start",
+  "installCommand": "npm install",
   "rewrites": [
     {
       "source": "/api/(.*)",
@@ -18,32 +23,57 @@
       "permanent": true
     },
     {
-      "source": "/contactus",
-      "destination": "/contact", 
-      "permanent": true
-    },
-    {
-      "source": "/shop/:path*",
-      "destination": "/services",
-      "permanent": true
-    },
-    {
-      "source": "/helpdesk/:path*",
+      "source": "/contactus", 
       "destination": "/contact",
-      "permanent": true
-    },
-    {
-      "source": "/profile/:path*",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/forum/:path*",
-      "destination": "/",
       "permanent": true
     }
   ],
   "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://assets.calendly.com https://js.calendly.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com; font-src 'self' https://fonts.gstatic.com https://assets.calendly.com; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://api.calendly.com https://analytics.google.com; frame-src https://calendly.com https://assets.calendly.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options", 
+          "value": "nosniff"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=(), ambient-light-sensor=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains; preload"
+        },
+        {
+          "key": "Cross-Origin-Embedder-Policy",
+          "value": "require-corp"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy", 
+          "value": "same-origin"
+        },
+        {
+          "key": "Cross-Origin-Resource-Policy",
+          "value": "same-origin"
+        }
+      ]
+    },
     {
       "source": "/api/(.*)",
       "headers": [
@@ -58,13 +88,38 @@
         {
           "key": "Access-Control-Allow-Headers",
           "value": "Content-Type, Authorization"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2))",
+      "headers": [
+        {
+          "key": "Cache-Control", 
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     }
   ],
   "functions": {
-    "api/*.js": {
+    "app/api/*.js": {
       "maxDuration": 10
     }
-  }
+  },
+  "regions": ["iad1"],
+  "cleanUrls": true,
+  "trailingSlash": false
 }
