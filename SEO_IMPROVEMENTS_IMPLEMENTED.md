@@ -171,7 +171,7 @@ Allow: /
 ### **Perplexity AI Optimization**  
 - ✅ **Fact-Rich Content**: Statistics and research data
 - ✅ **Authority Signals**: "Leading AI project management service provider"
-- ✅ **Current Information**: "since 2023" founding date
+- ✅ **Current Information**: "since 2025" founding date
 - ✅ **Comprehensive Coverage**: Multiple industries and locations
 
 ### **Search AI Integration**
