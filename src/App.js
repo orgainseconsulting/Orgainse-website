@@ -853,7 +853,7 @@ const Home = () => {
         canonical="https://orgainse.com/"
       />
       
-      {/* Mobile-Optimized Hero Section */}
+      {/* Hero Section with Professional AI-Themed Background */}
       <section className="relative bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-8 sm:py-12 lg:py-16 overflow-hidden">
         {/* Mobile-Optimized Background Elements */}
         <div className="absolute inset-0">
