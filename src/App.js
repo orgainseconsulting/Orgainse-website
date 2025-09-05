@@ -4435,20 +4435,30 @@ function App() {
             <BrowserRouter>
               <Navigation />
               <main>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/services" element={<Services />} />
-                  <Route path="/ai-assessment" element={<AIAssessmentTool />} />
-                  <Route path="/roi-calculator" element={<ROICalculator />} />
-                  <Route path="/smart-calendar" element={<SmartCalendar />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/blog" element={<BlogSystem />} />
-                  <Route path="/admin" element={<ProtectedAdminRoute />} />
-                  <Route path="/privacy" element={<PrivacyPolicy />} />
-                  <Route path="/terms" element={<TermsOfService />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
+                <Suspense fallback={
+                  <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-orange-500 mx-auto mb-4"></div>
+                      <p className="text-gray-600">Loading...</p>
+                    </div>
+                  </div>
+                }>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/services" element={<Services />} />
+                    <Route path="/ai-assessment" element={<AIAssessmentTool />} />
+                    <Route path="/roi-calculator" element={<ROICalculator />} />
+                    <Route path="/smart-calendar" element={<SmartCalendar />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/blog" element={<BlogSystem />} />
+                    <Route path="/blog/*" element={<BlogSystem />} />
+                    <Route path="/admin" element={<ProtectedAdminRoute />} />
+                    <Route path="/privacy" element={<PrivacyPolicy />} />
+                    <Route path="/terms" element={<TermsOfService />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </Suspense>
               </main>
               <Footer />
             </BrowserRouter>
