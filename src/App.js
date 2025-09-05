@@ -1488,8 +1488,8 @@ const About = () => {
               <div className="relative group">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-3xl blur opacity-60 group-hover:opacity-80 transition duration-1000 animate-pulse"></div>
                 <img
-                  src="https://images.unsplash.com/photo-1660165458059-57cfb6cc87e5?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwyfHxBSSUyMGFydGlmaWNpYWwlMjBpbnRlbGxpZ2VuY2V8ZW58MHx8fGJsdWV8MTc1NDU4ODI5OHww&ixlib=rb-4.1.0&q=80&w=600"
-                  alt="AI-driven Business Strategy Consulting Team implementing GPT-powered solutions"
+                  src="https://images.unsplash.com/photo-1674027444485-cec3da58eef4?w=600&h=400&fit=crop"
+                  alt="AI-Powered Business Strategy - Digital network visualization representing intelligent connectivity and data-driven transformation solutions for modern enterprises"
                   className="relative rounded-2xl w-full h-[400px] object-cover transform group-hover:scale-105 transition-all duration-700 shadow-2xl"
                   loading="lazy"
                   width="600"
