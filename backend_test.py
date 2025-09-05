@@ -466,9 +466,10 @@ def test_concurrent_requests():
 
 def main():
     """Main test execution"""
-    print_header("JAVASCRIPT SERVERLESS FUNCTIONS TESTING - POST CORS FIX")
+    print_header("BACKEND API TESTING AFTER FOUNDING DATE CORRECTIONS")
     print_info(f"Testing against: {BASE_URL}")
     print_info(f"Test started at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print_info("Verifying that founding date corrections haven't broken backend functionality")
     
     # Test results tracking
     test_results = {}
