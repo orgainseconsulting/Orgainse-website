@@ -398,7 +398,8 @@ def test_cors_headers():
             options_response = requests.options(f"{BASE_URL}{endpoint}", timeout=5)
             print_info(f"OPTIONS {endpoint}: {options_response.status_code}")
             
-            if options_response.status_code == 200:
+            # Accept both 200 and 204 as valid CORS responses
+            if options_response.status_code in [200, 204]:
                 print_success(f"OPTIONS request successful for {endpoint}")
                 cors_success += 1
             else:
