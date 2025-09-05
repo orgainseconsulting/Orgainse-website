@@ -47,6 +47,7 @@ import SEOHead from "./components/SEOHead";
 import AdminDashboard from "./components/AdminDashboard";
 import { AuthProvider } from "./components/AuthContext";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
+import BlogSystem from "./components/BlogSystem";
 import { 
   Menu, 
   X, 
