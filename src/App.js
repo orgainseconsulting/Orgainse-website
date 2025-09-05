@@ -45,7 +45,6 @@ import { Separator } from "./components/ui/separator";
 import ServicePopup from "./components/ServicePopup";
 import SEOHead from "./components/SEOHead";
 // Lazy loaded components for better performance
-const BlogSystem = React.lazy(() => import("./components/BlogSystem"));
 const AdminDashboard = React.lazy(() => import("./components/AdminDashboard"));
 const ProtectedAdminRoute = React.lazy(() => import("./components/ProtectedAdminRoute"));
 
