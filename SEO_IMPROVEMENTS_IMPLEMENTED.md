@@ -20,7 +20,7 @@
 ### **2. ENHANCED META DESCRIPTION (High Impact)**
 ```html
 <!-- NEW OPTIMIZED DESCRIPTION -->
-"Leading AI project management service provider offering GPT-powered PMaaS for startups & SMEs. 25% faster delivery, 340% ROI across India, USA, UK, UAE, Australia. Expert AI digital transformation consulting since 2023."
+"Leading AI project management service provider offering GPT-powered PMaaS for startups & SMEs. 25% faster delivery, 340% ROI across India, USA, UK, UAE, Australia. Expert AI digital transformation consulting since 2025."
 ```
 
 **Improvements:**
