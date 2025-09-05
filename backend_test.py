@@ -328,8 +328,8 @@ def test_admin_api():
             data = response.json()
             print_info(f"Response keys: {list(data.keys())}")
             
-            # Verify response structure
-            required_fields = ['summary', 'newsletters', 'contacts', 'success']
+            # Verify response structure - Admin API returns 'data' object containing collections
+            required_fields = ['summary', 'data', 'success', 'timestamp']
             for field in required_fields:
                 if field in data:
                     print_success(f"Required field '{field}' present")
