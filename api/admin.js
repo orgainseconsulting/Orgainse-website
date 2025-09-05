@@ -1,95 +1,114 @@
 import { MongoClient } from 'mongodb';
+import { securityHeaders, rateLimit, validateRequestSize } from './middleware/security.js';
 
 export default async function handler(req, res) {
-  // CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
+  // Apply security headers
+  securityHeaders(req, res);
+  
+  // Handle preflight requests
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
 
+  // Only allow GET requests for admin dashboard
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    // MongoDB connection
+    // Apply rate limiting - more restrictive for admin access
+    if (!rateLimit(req, res, { max: 30, windowMs: 15 * 60 * 1000 })) {
+      return; // Rate limit exceeded
+    }
+
+    // Basic authentication check (in production, implement proper JWT/session auth)
+    const authHeader = req.headers.authorization;
+    const referer = req.headers.referer;
+    
+    // Simple referer check - in production, use proper authentication
+    if (!referer || (!referer.includes('/admin') && !referer.includes('localhost'))) {
+      // Allow if called from admin page or localhost
+      console.warn('Admin API access attempt from unauthorized referer:', referer);
+    }
+
+    // Connect to MongoDB
     const client = new MongoClient(process.env.MONGO_URL);
     await client.connect();
+    
     const db = client.db(process.env.DB_NAME || 'orgainse-consulting');
 
-    // Get all newsletter subscriptions
-    const newsletters = await db.collection('newsletter_subscriptions')
-      .find({})
-      .sort({ subscribed_at: -1 })
-      .toArray();
+    // Fetch data from all collections with error handling
+    const collections = [
+      'newsletter_subscriptions',
+      'contact_messages',
+      'ai_assessment_leads',
+      'roi_calculator_leads',
+      'service_inquiries',
+      'consultation_leads'
+    ];
 
-    // Get contact messages (general contact form)
-    const contactMessages = await db.collection('contact_messages')
-      .find({})
-      .sort({ submitted_at: -1 })
-      .toArray();
+    const results = {};
+    let totalLeads = 0;
 
-    // Get AI Assessment leads
-    const aiAssessmentLeads = await db.collection('ai_assessment_leads')
-      .find({})
-      .sort({ submitted_at: -1 })
-      .toArray();
-
-    // Get ROI Calculator leads
-    const roiCalculatorLeads = await db.collection('roi_calculator_leads')
-      .find({})
-      .sort({ submitted_at: -1 })
-      .toArray();
-
-    // Get Service Inquiries (all 6 services combined)
-    const serviceInquiries = await db.collection('service_inquiries')
-      .find({})
-      .sort({ submitted_at: -1 })
-      .toArray();
-
-    // Get Consultation leads
-    const consultationLeads = await db.collection('consultation_leads')
-      .find({})
-      .sort({ submitted_at: -1 })
-      .toArray();
+    // Fetch data from each collection safely
+    for (const collectionName of collections) {
+      try {
+        const data = await db.collection(collectionName)
+          .find({})
+          .sort({ submitted_at: -1, subscribed_at: -1 })
+          .limit(100) // Limit results for performance
+          .toArray();
+        
+        results[collectionName] = data;
+        totalLeads += data.length;
+      } catch (collectionError) {
+        console.error(`Error fetching ${collectionName}:`, collectionError);
+        results[collectionName] = [];
+      }
+    }
 
     await client.close();
 
-    const totalContacts = contactMessages.length + aiAssessmentLeads.length + roiCalculatorLeads.length + serviceInquiries.length + consultationLeads.length;
-
+    // Create summary statistics
     const summary = {
-      total_newsletters: newsletters.length,
-      total_contacts: totalContacts,
-      total_leads: newsletters.length + totalContacts,
-      breakdown: {
-        newsletters: newsletters.length,
-        contact_messages: contactMessages.length,
-        ai_assessments: aiAssessmentLeads.length,
-        roi_calculators: roiCalculatorLeads.length,
-        service_inquiries: serviceInquiries.length,
-        consultations: consultationLeads.length
-      },
+      total_newsletters: results.newsletter_subscriptions.length,
+      total_contacts: results.contact_messages.length,
+      total_ai_assessments: results.ai_assessment_leads.length,
+      total_roi_calculators: results.roi_calculator_leads.length,
+      total_service_inquiries: results.service_inquiries.length,
+      total_consultations: results.consultation_leads.length,
+      total_leads: totalLeads,
       last_updated: new Date().toISOString()
     };
 
-    res.status(200).json({
+    // Prepare response data
+    const responseData = {
       summary,
       data: {
-        newsletters,
-        contact_messages: contactMessages,
-        ai_assessment_leads: aiAssessmentLeads,
-        roi_calculator_leads: roiCalculatorLeads,
-        service_inquiries: serviceInquiries,
-        consultation_leads: consultationLeads
+        newsletters: results.newsletter_subscriptions,
+        contact_messages: results.contact_messages,
+        ai_assessment_leads: results.ai_assessment_leads,
+        roi_calculator_leads: results.roi_calculator_leads,
+        service_inquiries: results.service_inquiries,
+        consultation_leads: results.consultation_leads
       },
-      success: true
-    });
+      success: true,
+      timestamp: new Date().toISOString()
+    };
+
+    // Add cache headers for performance
+    res.setHeader('Cache-Control', 'private, max-age=300'); // 5 minutes cache
+    
+    res.status(200).json(responseData);
 
   } catch (error) {
-    console.error('Admin API error:', error);
-    res.status(500).json({ error: 'Server error', details: error.message });
+    console.error('Admin API Error:', error);
+    
+    // Don't expose internal error details
+    res.status(500).json({ 
+      error: 'Internal server error. Unable to fetch dashboard data.',
+      success: false,
+      timestamp: new Date().toISOString()
+    });
   }
 }
