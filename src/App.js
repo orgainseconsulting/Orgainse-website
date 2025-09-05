@@ -4439,6 +4439,7 @@ function App() {
                   <Route path="/roi-calculator" element={<ROICalculator />} />
                   <Route path="/smart-calendar" element={<SmartCalendar />} />
                   <Route path="/contact" element={<Contact />} />
+                  <Route path="/blog" element={<BlogSystem />} />
                   <Route path="/admin" element={<ProtectedAdminRoute />} />
                   <Route path="/privacy" element={<PrivacyPolicy />} />
                   <Route path="/terms" element={<TermsOfService />} />
