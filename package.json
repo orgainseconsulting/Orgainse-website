@@ -23,8 +23,10 @@
   "proxy": "http://localhost:3001",
   "scripts": {
     "start": "craco start",
-    "build": "craco build",
-    "test": "craco test"
+    "build": "craco build && npm run generate-sitemap",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "generate-sitemap": "node scripts/generate-sitemap.js"
   },
   "browserslist": {
     "production": [
