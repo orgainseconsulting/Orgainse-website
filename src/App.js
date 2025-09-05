@@ -44,10 +44,13 @@ const AnalyticsDebug = () => {
 import { Separator } from "./components/ui/separator";
 import ServicePopup from "./components/ServicePopup";
 import SEOHead from "./components/SEOHead";
-import AdminDashboard from "./components/AdminDashboard";
+// Lazy loaded components for better performance
+const BlogSystem = React.lazy(() => import("./components/BlogSystem"));
+const AdminDashboard = React.lazy(() => import("./components/AdminDashboard"));
+const ProtectedAdminRoute = React.lazy(() => import("./components/ProtectedAdminRoute"));
+
+// Regular imports for core components
 import { AuthProvider } from "./components/AuthContext";
-import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
-import BlogSystem from "./components/BlogSystem";
 import { 
   Menu, 
   X, 
