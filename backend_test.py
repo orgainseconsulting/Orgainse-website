@@ -463,6 +463,139 @@ def test_concurrent_requests():
     print_info(f"Concurrent Tests: {success_count}/{len(test_requests)} successful")
     return success_count >= len(test_requests) * 0.8  # 80% success rate
 
+def test_ai_assessment_api():
+    """Test AI Assessment API endpoint"""
+    print_test("AI Assessment API - /api/ai-assessment")
+    
+    test_data = {
+        "company": "TechCorp Solutions",
+        "industry": "Technology",
+        "company_size": "Medium (50-200 employees)",
+        "current_ai_usage": "Basic automation tools",
+        "business_goals": "Improve efficiency and reduce costs",
+        "budget_range": "$50,000 - $100,000",
+        "timeline": "6-12 months",
+        "email": "cto@techcorp.com",
+        "name": "John Smith"
+    }
+    
+    try:
+        response = requests.post(f"{BASE_URL}/api/ai-assessment", json=test_data, timeout=10)
+        print_info(f"Response Status: {response.status_code}")
+        print_info(f"Response Time: {response.elapsed.total_seconds():.3f}s")
+        
+        if response.status_code == 200:
+            data = response.json()
+            print_info(f"Response: {json.dumps(data, indent=2)}")
+            
+            # Check required fields
+            required_fields = ['assessment_id', 'maturity_score', 'recommendations', 'timestamp']
+            for field in required_fields:
+                if field in data:
+                    print_success(f"Required field '{field}' present")
+                else:
+                    print_error(f"Missing required field: {field}")
+            
+            print_success("AI Assessment API working correctly")
+            return True
+        else:
+            print_error(f"AI Assessment API failed with status {response.status_code}")
+            print_error(f"Response: {response.text}")
+            return False
+            
+    except Exception as e:
+        print_error(f"AI Assessment API test failed: {str(e)}")
+        return False
+
+def test_roi_calculator_api():
+    """Test ROI Calculator API endpoint"""
+    print_test("ROI Calculator API - /api/roi-calculator")
+    
+    test_data = {
+        "company": "Manufacturing Inc",
+        "email": "cfo@manufacturing.com",
+        "annual_revenue": 5000000,
+        "current_costs": 2000000,
+        "employees": 150,
+        "industry": "Manufacturing",
+        "automation_level": "Low",
+        "pain_points": ["Manual processes", "High labor costs"],
+        "goals": ["Reduce costs", "Improve efficiency"]
+    }
+    
+    try:
+        response = requests.post(f"{BASE_URL}/api/roi-calculator", json=test_data, timeout=10)
+        print_info(f"Response Status: {response.status_code}")
+        print_info(f"Response Time: {response.elapsed.total_seconds():.3f}s")
+        
+        if response.status_code == 200:
+            data = response.json()
+            print_info(f"Response: {json.dumps(data, indent=2)}")
+            
+            # Check required fields
+            required_fields = ['calculation_id', 'potential_savings', 'roi_percentage', 'payback_period', 'timestamp']
+            for field in required_fields:
+                if field in data:
+                    print_success(f"Required field '{field}' present")
+                else:
+                    print_error(f"Missing required field: {field}")
+            
+            print_success("ROI Calculator API working correctly")
+            return True
+        else:
+            print_error(f"ROI Calculator API failed with status {response.status_code}")
+            print_error(f"Response: {response.text}")
+            return False
+            
+    except Exception as e:
+        print_error(f"ROI Calculator API test failed: {str(e)}")
+        return False
+
+def test_consultation_api():
+    """Test Consultation Booking API endpoint"""
+    print_test("Consultation API - /api/consultation")
+    
+    test_data = {
+        "name": "Sarah Johnson",
+        "email": "sarah.johnson@enterprise.com",
+        "company": "Enterprise Solutions Ltd",
+        "phone": "+1-555-0123",
+        "consultation_type": "AI Strategy Session",
+        "preferred_date": "2025-09-15",
+        "preferred_time": "14:00",
+        "message": "Looking to implement AI solutions for our customer service department",
+        "industry": "Financial Services",
+        "company_size": "Large (500+ employees)"
+    }
+    
+    try:
+        response = requests.post(f"{BASE_URL}/api/consultation", json=test_data, timeout=10)
+        print_info(f"Response Status: {response.status_code}")
+        print_info(f"Response Time: {response.elapsed.total_seconds():.3f}s")
+        
+        if response.status_code == 200:
+            data = response.json()
+            print_info(f"Response: {json.dumps(data, indent=2)}")
+            
+            # Check required fields
+            required_fields = ['consultation_id', 'message', 'timestamp']
+            for field in required_fields:
+                if field in data:
+                    print_success(f"Required field '{field}' present")
+                else:
+                    print_error(f"Missing required field: {field}")
+            
+            print_success("Consultation API working correctly")
+            return True
+        else:
+            print_error(f"Consultation API failed with status {response.status_code}")
+            print_error(f"Response: {response.text}")
+            return False
+            
+    except Exception as e:
+        print_error(f"Consultation API test failed: {str(e)}")
+        return False
+
 def main():
     """Main test execution"""
     print_header("BACKEND API TESTING AFTER FOUNDING DATE CORRECTIONS")
