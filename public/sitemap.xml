@@ -56,48 +56,7 @@
     <priority>0.7</priority>
   </url>
   
-  <!-- Service-Specific Landing Pages -->
-  <url>
-    <loc>https://www.orgainse.com/services/ai-strategy-consulting</loc>
-    <lastmod>2025-09-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.orgainse.com/services/digital-transformation</loc>
-    <lastmod>2025-09-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.orgainse.com/services/process-optimization</loc>
-    <lastmod>2025-09-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.orgainse.com/services/data-analytics-ai</loc>
-    <lastmod>2025-09-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.orgainse.com/services/technology-integration</loc>
-    <lastmod>2025-09-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.orgainse.com/services/ai-training-education</loc>
-    <lastmod>2025-09-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <!-- Note: Service-specific pages are handled through the main /services page with popups -->
   
   <!-- Legal Pages -->
   <url>
