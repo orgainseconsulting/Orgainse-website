@@ -18,6 +18,21 @@
   ],
   "redirects": [
     {
+      "source": "http://orgainse.com/:path*",
+      "destination": "https://www.orgainse.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "http://www.orgainse.com/:path*",
+      "destination": "https://www.orgainse.com/:path*", 
+      "permanent": true
+    },
+    {
+      "source": "https://orgainse.com/:path*",
+      "destination": "https://www.orgainse.com/:path*",
+      "permanent": true
+    },
+    {
       "source": "/about-us-1",
       "destination": "/about",
       "permanent": true
@@ -25,6 +40,31 @@
     {
       "source": "/contactus", 
       "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/shop",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/shop/:path*",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/profile/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/helpdesk/:path*",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/forum/:path*",
+      "destination": "/",
       "permanent": true
     }
   ],
