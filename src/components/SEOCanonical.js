@@ -11,8 +11,11 @@ const SEOCanonical = () => {
     // Base canonical URL - always use www version
     const baseUrl = 'https://www.orgainse.com';
     
-    // Construct canonical URL
+    // Construct canonical URL (without query parameters)
     const canonicalUrl = `${baseUrl}${canonicalPath === '/' ? '' : canonicalPath}`;
+    
+    // Check if current URL has query parameters
+    const hasQueryParams = location.search && location.search.length > 0;
     
     // Remove existing canonical tag if present
     const existingCanonical = document.querySelector('link[rel="canonical"]');
@@ -27,6 +30,30 @@ const SEOCanonical = () => {
     
     // Add to head
     document.head.appendChild(canonicalTag);
+    
+    // Handle meta robots for query parameters
+    let existingRobots = document.querySelector('meta[name="robots"]');
+    if (hasQueryParams) {
+      // If URL has query parameters, tell robots to not index this specific URL
+      if (existingRobots) {
+        existingRobots.setAttribute('content', 'noindex, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
+      } else {
+        const robotsTag = document.createElement('meta');
+        robotsTag.setAttribute('name', 'robots');
+        robotsTag.setAttribute('content', 'noindex, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
+        document.head.appendChild(robotsTag);
+      }
+    } else {
+      // Clean URL without parameters - allow indexing
+      if (existingRobots) {
+        existingRobots.setAttribute('content', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
+      } else {
+        const robotsTag = document.createElement('meta');
+        robotsTag.setAttribute('name', 'robots');
+        robotsTag.setAttribute('content', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
+        document.head.appendChild(robotsTag);
+      }
+    }
     
     // Update Open Graph URL to match canonical
     const existingOgUrl = document.querySelector('meta[property="og:url"]');
@@ -50,9 +77,17 @@ const SEOCanonical = () => {
       document.head.appendChild(twitterUrlTag);
     }
     
+    // Update page title for better SEO if it's a parameterized page
+    if (hasQueryParams && canonicalPath === '/services') {
+      const existingTitle = document.querySelector('title');
+      if (existingTitle && !existingTitle.textContent.includes('(Filtered)')) {
+        existingTitle.textContent = existingTitle.textContent + ' (Filtered)';
+      }
+    }
+    
     // Cleanup function
     return () => {
-      // Keep canonical tag for SEO (don't remove on unmount)
+      // Keep canonical tag and meta robots for SEO (don't remove on unmount)
     };
   }, [location]);
 
