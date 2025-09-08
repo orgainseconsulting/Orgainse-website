@@ -468,15 +468,21 @@ def test_ai_assessment_api():
     print_test("AI Assessment API - /api/ai-assessment")
     
     test_data = {
-        "company": "TechCorp Solutions",
-        "industry": "Technology",
-        "company_size": "Medium (50-200 employees)",
-        "current_ai_usage": "Basic automation tools",
-        "business_goals": "Improve efficiency and reduce costs",
-        "budget_range": "$50,000 - $100,000",
-        "timeline": "6-12 months",
-        "email": "cto@techcorp.com",
-        "name": "John Smith"
+        "user_info": {
+            "name": "John Smith",
+            "email": "cto@techcorp.com",
+            "company": "TechCorp Solutions",
+            "industry": "Technology",
+            "company_size": "Medium (50-200 employees)"
+        },
+        "responses": {
+            "tech_infrastructure": 3,
+            "ai_tools_usage": "Basic tools",
+            "data_management": "Basic databases",
+            "team_readiness": 2,
+            "process_automation": 3,
+            "ai_strategy": "no"
+        }
     }
     
     try:
