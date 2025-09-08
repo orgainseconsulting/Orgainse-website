@@ -22,14 +22,28 @@ async function setupRoutes() {
     const { default: newsletterHandler } = await import('./api/newsletter.js');
     const { default: contactHandler } = await import('./api/contact.js');
     const { default: adminHandler } = await import('./api/admin.js');
+    const { default: aiAssessmentHandler } = await import('./api/ai-assessment.js');
+    const { default: roiCalculatorHandler } = await import('./api/roi-calculator.js');
+    const { default: consultationHandler } = await import('./api/consultation.js');
 
-    // Setup routes
+    // Setup routes for all 7 endpoints
     app.get('/api/health', healthHandler);
     app.post('/api/newsletter', newsletterHandler);
     app.post('/api/contact', contactHandler);
     app.get('/api/admin', adminHandler);
+    app.post('/api/ai-assessment', aiAssessmentHandler);
+    app.post('/api/roi-calculator', roiCalculatorHandler);
+    app.post('/api/consultation', consultationHandler);
     
-    console.log('✅ API routes configured successfully');
+    console.log('✅ All 7 API routes configured successfully');
+    console.log('📋 Available endpoints:');
+    console.log('   GET  /api/health');
+    console.log('   POST /api/newsletter');
+    console.log('   POST /api/contact');
+    console.log('   GET  /api/admin');
+    console.log('   POST /api/ai-assessment');
+    console.log('   POST /api/roi-calculator');
+    console.log('   POST /api/consultation');
   } catch (error) {
     console.error('❌ Error setting up routes:', error);
   }
