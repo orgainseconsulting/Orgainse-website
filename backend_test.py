@@ -611,6 +611,9 @@ def main():
     test_results['newsletter'] = test_newsletter_api()
     test_results['contact'] = test_contact_api()
     test_results['admin'] = test_admin_api()
+    test_results['ai_assessment'] = test_ai_assessment_api()
+    test_results['roi_calculator'] = test_roi_calculator_api()
+    test_results['consultation'] = test_consultation_api()
     test_results['cors'] = test_cors_headers()
     test_results['concurrent'] = test_concurrent_requests()
     
