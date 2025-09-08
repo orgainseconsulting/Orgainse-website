@@ -518,15 +518,14 @@ def test_roi_calculator_api():
     print_test("ROI Calculator API - /api/roi-calculator")
     
     test_data = {
-        "company": "Manufacturing Inc",
+        "company_name": "Manufacturing Inc",
         "email": "cfo@manufacturing.com",
         "annual_revenue": 5000000,
-        "current_costs": 2000000,
-        "employees": 150,
-        "industry": "Manufacturing",
-        "automation_level": "Low",
-        "pain_points": ["Manual processes", "High labor costs"],
-        "goals": ["Reduce costs", "Improve efficiency"]
+        "employee_count": "51-200",
+        "current_pm_costs": 15000,
+        "tech_budget": 100000,
+        "implementation_timeline": "6-12 months",
+        "user_region": "US"
     }
     
     try:
