@@ -598,10 +598,10 @@ def test_consultation_api():
 
 def main():
     """Main test execution"""
-    print_header("BACKEND API TESTING AFTER FOUNDING DATE CORRECTIONS")
+    print_header("COMPREHENSIVE BACKEND API TESTING AFTER SEO FIXES")
     print_info(f"Testing against: {BASE_URL}")
     print_info(f"Test started at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print_info("Verifying that founding date corrections haven't broken backend functionality")
+    print_info("Verifying all 7 API endpoints after SEO canonical and redirect fixes")
     
     # Test results tracking
     test_results = {}
