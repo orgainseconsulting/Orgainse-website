@@ -44,6 +44,7 @@ const AnalyticsDebug = () => {
 import { Separator } from "./components/ui/separator";
 import ServicePopup from "./components/ServicePopup";
 import SEOHead from "./components/SEOHead";
+import SEOCanonical from "./components/SEOCanonical";
 // Lazy loaded components for better performance
 const AdminDashboard = React.lazy(() => import("./components/AdminDashboard"));
 const ProtectedAdminRoute = React.lazy(() => import("./components/ProtectedAdminRoute"));
