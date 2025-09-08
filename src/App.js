@@ -4432,6 +4432,7 @@ function App() {
         <CalendlyProvider>
           <RegionalPricingProvider>
             <BrowserRouter>
+              <SEOCanonical />
               <Navigation />
               <main>
                 <Suspense fallback={
