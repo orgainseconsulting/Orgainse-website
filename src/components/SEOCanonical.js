@@ -12,7 +12,7 @@ const SEOCanonical = () => {
     const baseUrl = 'https://www.orgainse.com';
     
     // Construct canonical URL (without query parameters)
-    const canonicalUrl = `${baseUrl}${canonicalPath === '/' ? '' : canonicalPath}`;
+    const canonicalUrl = canonicalPath === '/' ? baseUrl : `${baseUrl}${canonicalPath}`;
     
     // Check if current URL has query parameters
     const hasQueryParams = location.search && location.search.length > 0;
