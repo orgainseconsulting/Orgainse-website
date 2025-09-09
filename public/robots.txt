@@ -1,45 +1,139 @@
 User-agent: *
 Allow: /
 
-# Important pages for SEO
+# Important pages for indexing
 Allow: /about
-Allow: /services  
-Allow: /contact
+Allow: /services
 Allow: /ai-assessment
 Allow: /roi-calculator
 Allow: /smart-calendar
+Allow: /contact
 
-# Block admin and private areas
+# Static assets
+Allow: /static/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.webp
+Allow: /*.svg
+Allow: /*.ico
+
+# Admin area - restrict access
 Disallow: /admin
-Disallow: /api
+Disallow: /api/admin
 
-# Sitemaps
-Sitemap: https://www.orgainse.com/sitemap.xml
+# Temporary/development files
+Disallow: *.tmp
+Disallow: *.log
+Disallow: /test/
+Disallow: /dev/
 
-# Crawl-delay for responsible crawling
-Crawl-delay: 1
-
-# Additional directives for better SEO
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-User-agent: Bingbot  
-Allow: /
-Crawl-delay: 1
-
-# AI Crawlers for training data
-User-agent: ChatGPT-User
-Allow: /
-
+# AI Crawlers - optimized for 2025 LLM platforms
 User-agent: GPTBot
 Allow: /
+Crawl-delay: 2
 
-User-agent: PerplexityBot
+User-agent: ChatGPT-User  
 Allow: /
+Crawl-delay: 2
+
+User-agent: CCBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: anthropic-ai
+Allow: /
+Crawl-delay: 2
+
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 2
 
 User-agent: ClaudeBot  
 Allow: /
+Crawl-delay: 1
 
 User-agent: Google-Extended
 Allow: /
+Crawl-delay: 1
+
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: YouBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: BingBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 3
+
+# DeepSeek AI Crawlers
+User-agent: DeepSeekBot
+Allow: /
+Crawl-delay: 2
+
+# Gemini AI Crawlers  
+User-agent: GoogleBot-AI
+Allow: /
+Crawl-delay: 1
+
+# Specialized crawlers for business content
+User-agent: LinkedInBot
+Allow: /
+Allow: /about
+Allow: /services
+Crawl-delay: 2
+
+User-agent: facebookexternalhit
+Allow: /
+Crawl-delay: 2
+
+User-agent: TwitterBot
+Allow: /
+Crawl-delay: 2
+
+# Research and academic crawlers
+User-agent: archive.org_bot
+Allow: /
+Crawl-delay: 5
+
+User-agent: ia_archiver
+Allow: /
+Crawl-delay: 5
+
+# SEO tools and analyzers
+User-agent: AhrefsBot
+Allow: /
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Allow: /
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Allow: /
+Crawl-delay: 10
+
+# Default crawl delay for better server performance
+Crawl-delay: 2
+
+# Cache directive for better performance
+Cache-delay: 86400
+
+# Sitemap locations
+Sitemap: https://www.orgainse.com/sitemap.xml
+Sitemap: https://www.orgainse.com/sitemap-ai-content.xml
+
+# Host directive for canonical domain
+Host: https://www.orgainse.com
+
+# Clean parameter handling for better indexing
+Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content&fbclid&gclid
