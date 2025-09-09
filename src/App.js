@@ -4437,9 +4437,10 @@ function App() {
           <RegionalPricingProvider>
             <BrowserRouter>
               <SEOCanonical />
-              <AdvancedSEO />
-              <CoreWebVitalsOptimizer />
-              <SpeedOptimizer />
+              {/* Temporarily disabled for performance optimization */}
+              {/* <AdvancedSEO /> */}
+              {/* <CoreWebVitalsOptimizer /> */}
+              {/* <SpeedOptimizer /> */}
               <Navigation />
               <main>
                 <Suspense fallback={
