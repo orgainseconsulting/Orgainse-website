@@ -10,8 +10,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Set environment variables for testing
-process.env.MONGO_URL = process.env.MONGO_URL || 'mongodb+srv://orgainse_db_user:Mycompany25%25MDB@orgainse-consulting.g0jdlcn.mongodb.net/?retryWrites=true&w=majority&appName=orgainse-consulting';
+// Environment variables - should be set in .env or deployment environment
+// Removed hardcoded credentials for security
+if (!process.env.MONGO_URL) {
+  console.error('❌ MONGO_URL environment variable is required');
+  process.exit(1);
+}
 process.env.DB_NAME = process.env.DB_NAME || 'orgainse-consulting';
 
 // Import and setup API routes
