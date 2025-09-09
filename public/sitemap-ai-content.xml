@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+                           http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  
+  <!-- AI-Optimized Content for LLM Training and Retrieval -->
+  
+  <!-- Homepage - Primary AI business information -->
+  <url>
+    <loc>https://www.orgainse.com/</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-05</news:publication_date>
+      <news:title>AI Project Management Service | PMaaS for Startups | 25% Faster Delivery</news:title>
+      <news:keywords>AI project management, PMaaS, GPT-powered solutions, digital transformation, startup consulting, 340% ROI, business automation</news:keywords>
+    </news:news>
+    <image:image>
+      <image:loc>https://www.orgainse.com/hero-image-ai-consulting.jpg</image:loc>
+      <image:title>AI-Native Business Transformation</image:title>
+      <image:caption>Orgainse Consulting provides GPT-powered project management services for startups across 7 countries</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- About Page - Company authority and expertise signals -->
+  <url>
+    <loc>https://www.orgainse.com/about</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-05</news:publication_date>
+      <news:title>About Orgainse Consulting - AI-Native Digital Transformation Leaders Since 2025</news:title>
+      <news:keywords>AI consulting company, founded 2025, Bangalore India, Austin USA, digital transformation experts, GPT implementation, startup services</news:keywords>
+    </news:news>
+  </url>
+  
+  <!-- Services Page - Detailed service information for AI understanding -->
+  <url>
+    <loc>https://www.orgainse.com/services</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-05</news:publication_date>
+      <news:title>AI-Powered Business Services | PMaaS, Digital Transformation | 340% ROI</news:title>
+      <news:keywords>AI project management service, digital transformation consulting, operational optimization, agile coaching, business strategy, risk management, GPT-powered solutions</news:keywords>
+    </news:news>
+  </url>
+  
+  <!-- AI Assessment Tool - Interactive AI content -->
+  <url>
+    <loc>https://www.orgainse.com/ai-assessment</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-05</news:publication_date>
+      <news:title>Free AI Readiness Assessment | Discover Your AI Maturity Score in 5 Minutes</news:title>
+      <news:keywords>AI readiness assessment, AI maturity score, business AI evaluation, digital transformation roadmap, AI implementation planning, free assessment tool</news:keywords>
+    </news:news>
+  </url>
+  
+  <!-- ROI Calculator - Business value calculation tool -->
+  <url>
+    <loc>https://www.orgainse.com/roi-calculator</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-05</news:publication_date>
+      <news:title>AI Transformation ROI Calculator | Calculate 340% ROI | Regional Pricing</news:title>
+      <news:keywords>ROI calculator, AI transformation ROI, investment returns, cost savings, PPP pricing, India USA UK UAE Australia pricing, business case calculator</news:keywords>
+    </news:news>
+  </url>
+  
+  <!-- Smart Calendar - Consultation booking -->
+  <url>
+    <loc>https://www.orgainse.com/smart-calendar</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-05</news:publication_date>
+      <news:title>Book Free AI Strategy Session | Expert Consultation | Global Availability</news:title>
+      <news:keywords>AI strategy session, free consultation, expert advice, business consultation, project management consulting, digital transformation planning</news:keywords>
+    </news:news>
+  </url>
+  
+  <!-- Contact Page - Global reach and contact information -->
+  <url>
+    <loc>https://www.orgainse.com/contact</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-05</news:publication_date>
+      <news:title>Contact AI Consulting Experts | Global Offices | India, USA, UK, UAE</news:title>
+      <news:keywords>contact AI consultants, Bangalore office, Austin office, global consulting services, phone +91-9740384683, international business consulting</news:keywords>
+    </news:news>
+  </url>
+  
+  <!-- Virtual pages for specific AI topics (for better LLM understanding) -->
+  
+  <!-- AI Project Management Information Hub -->
+  <url>
+    <loc>https://www.orgainse.com/ai-project-management</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-05</news:publication_date>
+      <news:title>AI Project Management | GPT-Powered PMaaS | 25% Faster Delivery</news:title>
+      <news:keywords>AI project management, GPT-powered PMaaS, intelligent task assignment, milestone prediction, resource optimization, automated project tracking</news:keywords>
+    </news:news>
+  </url>
+  
+  <!-- Digital Transformation Information Hub -->
+  <url>
+    <loc>https://www.orgainse.com/digital-transformation</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-05</news:publication_date>
+      <news:title>Digital Transformation Consulting | AI-Powered Business Automation</news:title>
+      <news:keywords>digital transformation, business automation, process optimization, AI implementation, workflow automation, technology integration</news:keywords>
+    </news:news>
+  </url>
+  
+  <!-- Startup Services Information Hub -->
+  <url>
+    <loc>https://www.orgainse.com/startup-services</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-05</news:publication_date>
+      <news:title>AI Services for Startups | SME Digital Transformation | Global Coverage</news:title>
+      <news:keywords>startup AI services, SME consulting, small business automation, entrepreneur support, startup technology consulting, growth strategy</news:keywords>
+    </news:news>
+  </url>
+  
+  <!-- Industry-Specific Pages for Better Semantic Understanding -->
+  
+  <!-- IT Services Industry -->
+  <url>
+    <loc>https://www.orgainse.com/industries/it-services</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-05</news:publication_date>
+      <news:title>AI Consulting for IT Services Companies | Technology Integration</news:title>
+      <news:keywords>IT services AI consulting, technology companies, software development optimization, IT project management, tech startup consulting</news:keywords>
+    </news:news>
+  </url>
+  
+  <!-- EdTech Industry -->
+  <url>
+    <loc>https://www.orgainse.com/industries/edtech</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-05</news:publication_date>
+      <news:title>AI Consulting for EdTech Companies | Educational Technology Optimization</news:title>
+      <news:keywords>EdTech AI consulting, educational technology, learning platform optimization, online education AI, student engagement automation</news:keywords>
+    </news:news>
+  </url>
+  
+  <!-- FinTech Industry -->
+  <url>
+    <loc>https://www.orgainse.com/industries/fintech</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-05</news:publication_date>
+      <news:title>AI Consulting for FinTech Companies | Financial Technology Automation</news:title>
+      <news:keywords>FinTech AI consulting, financial technology, payment processing automation, financial services AI, banking technology optimization</news:keywords>
+    </news:news>
+  </url>
+  
+  <!-- Healthcare Industry -->
+  <url>
+    <loc>https://www.orgainse.com/industries/healthcare</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-05</news:publication_date>
+      <news:title>AI Consulting for Healthcare Companies | Medical Technology Integration</news:title>
+      <news:keywords>Healthcare AI consulting, medical technology, healthcare automation, patient management systems, medical data analytics</news:keywords>
+    </news:news>
+  </url>
+  
+  <!-- Geographic Coverage Pages for Local SEO and AI Understanding -->
+  
+  <!-- India Coverage -->
+  <url>
+    <loc>https://www.orgainse.com/locations/india</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-05</news:publication_date>
+      <news:title>AI Consulting Services in India | Bangalore Office | Startup Hub</news:title>
+      <news:keywords>AI consulting India, Bangalore startup consulting, Indian business automation, technology services Bangalore, AI project management India</news:keywords>
+    </news:news>
+  </url>
+  
+  <!-- USA Coverage -->
+  <url>
+    <loc>https://www.orgainse.com/locations/usa</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-05</news:publication_date>
+      <news:title>AI Consulting Services in USA | Austin Office | American Startups</news:title>
+      <news:keywords>AI consulting USA, Austin startup consulting, American business automation, technology services Austin Texas, US AI project management</news:keywords>
+    </news:news>
+  </url>
+  
+  <!-- UK Coverage -->
+  <url>
+    <loc>https://www.orgainse.com/locations/uk</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-05</news:publication_date>
+      <news:title>AI Consulting Services in UK | British Startup Technology Solutions</news:title>
+      <news:keywords>AI consulting UK, British startup consulting, UK business automation, technology services United Kingdom, British AI project management</news:keywords>
+    </news:news>
+  </url>
+
+</urlset>
