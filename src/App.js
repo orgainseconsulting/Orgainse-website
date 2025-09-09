@@ -45,9 +45,10 @@ import { Separator } from "./components/ui/separator";
 import ServicePopup from "./components/ServicePopup";
 import SEOHead from "./components/SEOHead";
 import SEOCanonical from "./components/SEOCanonical";
-import AdvancedSEO from "./components/AdvancedSEO";
-import CoreWebVitalsOptimizer from "./components/CoreWebVitalsOptimizer";
-import SpeedOptimizer from "./components/SpeedOptimizer";
+// Temporarily disabled for performance optimization
+// import AdvancedSEO from "./components/AdvancedSEO";
+// import CoreWebVitalsOptimizer from "./components/CoreWebVitalsOptimizer";
+// import SpeedOptimizer from "./components/SpeedOptimizer";
 // Lazy loaded components for better performance
 const AdminDashboard = React.lazy(() => import("./components/AdminDashboard"));
 const ProtectedAdminRoute = React.lazy(() => import("./components/ProtectedAdminRoute"));
