@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Main Website Sitemap -->
+  <sitemap>
+    <loc>https://www.orgainse.com/sitemap.xml</loc>
+    <lastmod>2025-09-05T12:00:00+00:00</lastmod>
+  </sitemap>
+  
+  <!-- AI-Optimized Content Sitemap -->
+  <sitemap>
+    <loc>https://www.orgainse.com/sitemap-ai-content.xml</loc>
+    <lastmod>2025-09-05T12:00:00+00:00</lastmod>
+  </sitemap>
+  
+</sitemapindex>
