@@ -1,20 +1,13 @@
 {
   "version": 2,
-  "name": "orgainse-consulting",
   "framework": "create-react-app",
-  "buildCommand": "npm run build",
-  "outputDirectory": "build",
-  "devCommand": "npm start",
-  "installCommand": "npm install",
-  "cleanUrls": true,
-  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/api/(.*)",
       "destination": "/api/$1"
     },
     {
-      "source": "/((?!api|_next|static|favicon.ico|robots.txt|sitemap|.*\\.).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ],
