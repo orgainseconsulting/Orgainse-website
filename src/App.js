@@ -4431,11 +4431,6 @@ function App() {
         <CalendlyProvider>
           <RegionalPricingProvider>
             <BrowserRouter>
-              <SEOCanonical />
-              {/* Temporarily disabled for performance optimization */}
-              {/* <AdvancedSEO /> */}
-              {/* <CoreWebVitalsOptimizer /> */}
-              {/* <SpeedOptimizer /> */}
               <Navigation />
               <main>
                 <Suspense fallback={
