@@ -23,7 +23,7 @@ import sys
 from datetime import datetime
 
 # Test configuration - Use production-like URL from frontend environment
-BASE_URL = "http://localhost:3002"  # Local test server for serverless functions
+BASE_URL = "http://localhost:8001"  # Local test server for serverless functions
 TEST_EMAIL = "seo.test@orgainse.com"
 TEST_NAME = "SEO Test User"
 TEST_COMPANY = "SEO Test Company"
