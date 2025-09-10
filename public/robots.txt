@@ -131,6 +131,7 @@ Cache-delay: 86400
 # Sitemap locations
 Sitemap: https://www.orgainse.com/sitemap.xml
 Sitemap: https://www.orgainse.com/sitemap-ai-content.xml
+Sitemap: https://www.orgainse.com/sitemap-news.xml
 
 # Host directive for canonical domain
 Host: https://www.orgainse.com
