@@ -8,28 +8,38 @@
   <!-- Main Pages -->
   <url>
     <loc>https://www.orgainse.com/</loc>
-    <lastmod>2025-09-05</lastmod>
+    <lastmod>2025-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1644088379091-d574269d422f?w=800&amp;h=600&amp;fit=crop</image:loc>
+      <image:title>AI Neural Network Visualization - Orgainse Consulting</image:title>
+      <image:caption>Advanced neural network connections representing intelligent automation for AI transformation</image:caption>
+    </image:image>
   </url>
   
   <url>
     <loc>https://www.orgainse.com/about</loc>
-    <lastmod>2025-09-05</lastmod>
+    <lastmod>2025-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://www.orgainse.com/services</loc>
-    <lastmod>2025-09-05</lastmod>
+    <lastmod>2025-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://images.pexels.com/photos/16053029/pexels-photo-16053029.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400&amp;h=300&amp;dpr=1</image:loc>
+      <image:title>AI Project Management Service</image:title>
+      <image:caption>PMaaS for startups and SMEs</image:caption>
+    </image:image>
   </url>
   
   <url>
     <loc>https://www.orgainse.com/contact</loc>
-    <lastmod>2025-09-05</lastmod>
+    <lastmod>2025-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
