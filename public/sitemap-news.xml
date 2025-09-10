@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+  
+  <!-- Recent Updates and News -->
+  <url>
+    <loc>https://www.orgainse.com/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-10</news:publication_date>
+      <news:title>AI Project Management Services Now Available Across 7 Countries</news:title>
+      <news:keywords>AI project management, PMaaS, digital transformation, startups, SMEs</news:keywords>
+    </news:news>
+  </url>
+  
+  <url>
+    <loc>https://www.orgainse.com/services</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Orgainse Consulting</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-09-10</news:publication_date>
+      <news:title>New AI-Native Consulting Services Launch for Enterprise Digital Transformation</news:title>
+      <news:keywords>AI consulting, enterprise transformation, GPT solutions, business optimization</news:keywords>
+    </news:news>
+  </url>
+  
+</urlset>
