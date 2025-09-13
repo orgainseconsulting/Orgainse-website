@@ -965,8 +965,8 @@ const Home = () => {
               
               <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-4 sm:mb-6 max-w-2xl mx-auto lg:mx-0">
                 GPT-powered project management, AI-driven strategy consulting, 
-                and intelligent operational optimization for <span className="text-orange-600 font-bold">startups</span> and <span className="text-green-600 font-bold">SMEs</span>  
-                across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
+                and intelligent operational optimization for <span className="text-orange-600 font-bold">startups</span> and <span className="text-green-600 font-bold">SMEs</span>   
+                 across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
               </p>
               
               <p className="text-sm sm:text-base text-slate-600 mb-4 sm:mb-6 max-w-xl mx-auto lg:mx-0">
@@ -1465,8 +1465,8 @@ const About = () => {
               
               <p className="text-lg text-slate-700 leading-relaxed mb-6">
                 We are an AI-native consulting firm specializing in <span className="text-orange-600 font-bold">GPT-powered project management</span>, 
-                intelligent business strategy, and <span className="text-green-600 font-bold">automated operational optimization</span>  
-                for startups and SMEs across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
+                intelligent business strategy, and <span className="text-green-600 font-bold">automated operational optimization</span>   
+                 for startups and SMEs across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
               </p>
               
               <div className="space-y-3">
@@ -1530,9 +1530,9 @@ const About = () => {
               <span className="text-slate-800">Ecosystem</span>
             </h2>
             <p className="text-xl text-slate-600 max-w-4xl mx-auto mb-8 leading-relaxed">
-              Four interconnected forces delivering <span className="font-bold text-orange-600">AI-driven business strategy consulting</span> and  
-              <span className="font-bold text-green-600">GPT-powered agile coaching</span>. Not hierarchy, but  
-               <span className="font-bold text-slate-700">predictive risk analytics</span>.
+              Four interconnected forces delivering <span className="font-bold text-orange-600">AI-driven business strategy consulting</span> and   
+               <span className="font-bold text-green-600">GPT-powered agile coaching</span>. Not hierarchy, but   
+                <span className="font-bold text-slate-700">predictive risk analytics</span>.
             </p>
             
             {/* Visual Connection Lines */}
@@ -1626,7 +1626,7 @@ const About = () => {
                     
                     <p className="text-sm leading-relaxed text-amber-900">
                       Pure momentum through <span className="font-bold">GPT-powered project planning</span>. Harnesses cutting-edge  
-                      <span className="font-bold">AI operational optimization</span>, breakthrough technologies, and 
+                       <span className="font-bold">AI operational optimization</span>, breakthrough technologies, and 
                       revolutionary thinking to propel clients beyond their competition.
                     </p>
                     
@@ -1739,10 +1739,10 @@ const About = () => {
                 <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Our Mission</span>
               </h2>
               <p className="text-xl text-slate-200 leading-relaxed">
-                To democratize access to world-class <span className="text-yellow-400 font-bold">AI-native digital transformation consulting</span> through  
-                <span className="text-green-400 font-bold">GPT-powered solutions</span>, enabling organizations of all sizes to achieve 
-                breakthrough performance and sustainable growth with <span className="text-blue-400 font-bold">intelligent automation</span> and  
-                <span className="text-purple-400 font-bold">real-time compliance monitoring</span>.
+                To democratize access to world-class <span className="text-yellow-400 font-bold">AI-native digital transformation consulting</span> through   
+                 <span className="text-green-400 font-bold">GPT-powered solutions</span>, enabling organizations of all sizes to achieve 
+                breakthrough performance and sustainable growth with <span className="text-blue-400 font-bold">intelligent automation</span> and   
+                 <span className="text-purple-400 font-bold">real-time compliance monitoring</span>.
               </p>
             </div>
 
@@ -1752,8 +1752,8 @@ const About = () => {
               </h2>
               <p className="text-xl text-slate-200 leading-relaxed">
                 To be the global leader in <span className="text-orange-400 font-bold">AI-native consulting</span>, setting the standard 
-                for innovation, excellence, and measurable business outcomes through <span className="text-green-400 font-bold">cutting-edge GPT</span> and  
-                <span className="text-blue-400 font-bold">AI technologies</span> across all industries we serve with <span className="text-pink-400 font-bold">outcome-based AI strategy consulting</span>.
+                for innovation, excellence, and measurable business outcomes through <span className="text-green-400 font-bold">cutting-edge GPT</span> and   
+                 <span className="text-blue-400 font-bold">AI technologies</span> across all industries we serve with <span className="text-pink-400 font-bold">outcome-based AI strategy consulting</span>.
               </p>
             </div>
           </div>
@@ -2154,8 +2154,8 @@ const Services = () => {
           
           <p className="text-xl text-slate-700 max-w-4xl mx-auto mb-8 leading-relaxed">
             Comprehensive <span className="text-orange-600 font-bold">AI-native consulting services</span> designed to transform your business 
-            with <span className="text-green-600 font-bold">GPT-powered project management</span>, intelligent automation, and  
-            <span className="text-purple-600 font-bold">AI-driven strategy</span> across six key industries and seven global regions.
+            with <span className="text-green-600 font-bold">GPT-powered project management</span>, intelligent automation, and   
+             <span className="text-purple-600 font-bold">AI-driven strategy</span> across six key industries and seven global regions.
           </p>
           
           <div className="flex justify-center flex-wrap gap-4 mb-12">
