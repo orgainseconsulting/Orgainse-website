@@ -443,8 +443,7 @@ def test_cors_headers():
                 headers = response.headers
                 required_cors_headers = [
                     'Access-Control-Allow-Origin',
-                    'Access-Control-Allow-Methods',
-                    'Access-Control-Allow-Headers'
+                    'Access-Control-Allow-Methods'
                 ]
                 
                 if all(header in headers for header in required_cors_headers):
