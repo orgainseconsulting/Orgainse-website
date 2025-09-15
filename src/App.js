@@ -47,6 +47,7 @@ import SEOHead from "./components/SEOHead";
 import SocialShare from "./components/SocialShare";
 import SEOLinks from "./components/SEOLinks";
 import SEOContent from "./components/SEOContent";
+import MobilePerformanceOptimizer from "./components/MobilePerformanceOptimizer";
 // Lazy loaded components for better performance
 const AdminDashboard = React.lazy(() => import("./components/AdminDashboard"));
 const ProtectedAdminRoute = React.lazy(() => import("./components/ProtectedAdminRoute"));
