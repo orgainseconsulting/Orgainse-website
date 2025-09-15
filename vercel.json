@@ -1,9 +1,15 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
   "framework": "create-react-app",
   "buildCommand": "yarn build",
   "outputDirectory": "build",
   "installCommand": "yarn install",
+  "functions": {
+    "api/**/*.js": {
+      "maxDuration": 10
+    }
+  },
   "rewrites": [
     {
       "source": "/api/(.*)",
@@ -56,10 +62,6 @@
       "source": "/(.*)",
       "headers": [
         {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://assets.calendly.com https://js.calendly.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com; font-src 'self' https://fonts.gstatic.com https://assets.calendly.com; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://api.calendly.com https://analytics.google.com; frame-src https://calendly.com https://assets.calendly.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';"
-        },
-        {
           "key": "X-Frame-Options",
           "value": "DENY"
         },
@@ -74,10 +76,6 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=(), payment=()"
         },
         {
           "key": "Strict-Transport-Security",
@@ -103,39 +101,13 @@
       ]
     },
     {
-      "source": "/static/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
       "source": "/(.*\\.(js|css|png|jpg|jpeg|webp|svg|ico|woff|woff2))",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
-        },
-        {
-          "key": "Vary",
-          "value": "Accept-Encoding"
         }
       ]
     }
-  ],
-  "functions": {
-    "api/**/*.js": {
-      "maxDuration": 10,
-      "runtime": "nodejs18.x"
-    }
-  },
-  "env": {
-    "REACT_APP_BACKEND_URL": "@react_app_backend_url",
-    "MONGO_URL": "@mongo_url",
-    "DB_NAME": "@db_name",
-    "REACT_APP_ADMIN_USERNAME": "@react_app_admin_username",
-    "REACT_APP_ADMIN_PASSWORD": "@react_app_admin_password"
-  }
+  ]
 }
