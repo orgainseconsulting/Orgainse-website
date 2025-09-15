@@ -25,9 +25,35 @@
   "proxy": "http://localhost:8001",
   "scripts": {
     "start": "craco start",
-    "build": "craco build",
+    "build": "craco build && react-snap",
+    "build-no-snap": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
+  },
+  "reactSnap": {
+    "source": "build",
+    "minifyHtml": {
+      "collapseWhitespace": false,
+      "removeComments": false
+    },
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ],
+    "crawl": true,
+    "include": [
+      "/",
+      "/about",
+      "/services", 
+      "/contact",
+      "/ai-assessment",
+      "/roi-calculator",
+      "/smart-calendar"
+    ],
+    "skipThirdPartyRequests": true,
+    "cacheAjaxRequests": false,
+    "preconnectThirdParty": true,
+    "inlineCss": true
   },
   "browserslist": {
     "production": [
