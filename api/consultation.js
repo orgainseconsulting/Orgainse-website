@@ -51,14 +51,12 @@ function generateConfirmationMessage(consultationType, preferredDate) {
 }
 
 export default async function handler(req, res) {
-  // Set CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  // Apply security headers
+  securityHeaders(req, res);
   
-  // Handle preflight request
+  // Handle preflight requests
   if (req.method === 'OPTIONS') {
-    return res.status(204).end();
+    return res.status(200).end();
   }
   
   // Only allow POST requests
@@ -70,9 +68,20 @@ export default async function handler(req, res) {
   }
   
   try {
+    // Apply rate limiting
+    if (!rateLimit(req, res, { max: 30, windowMs: 15 * 60 * 1000 })) {
+      return; // Rate limit exceeded
+    }
+
+    // Validate request size
+    if (!validateRequestSize(req, res, 10 * 1024)) { // 10KB limit
+      return;
+    }
+
     const { db } = await connectToDatabase();
     
-    // Extract and validate required fields
+    // Sanitize input data
+    const sanitizedBody = sanitizeInput(req.body);
     const { 
       full_name,
       email,
@@ -83,7 +92,7 @@ export default async function handler(req, res) {
       preferred_time,
       requirements,
       industry
-    } = req.body;
+    } = sanitizedBody;
     
     // Validation
     if (!full_name || full_name.trim().length < 2) {
@@ -93,7 +102,7 @@ export default async function handler(req, res) {
       });
     }
     
-    if (!email || !isValidEmail(email)) {
+    if (!email || !validateEmail(email)) {
       return res.status(400).json({
         error: 'Validation failed',
         message: 'Valid email address is required'
