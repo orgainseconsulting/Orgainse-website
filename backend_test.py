@@ -683,6 +683,54 @@ def test_seo_performance_impact():
         print_error("SEO optimizations may have impacted API performance")
         return False
 
+def test_mobile_performance_impact():
+    """Test if mobile optimizations have impacted API performance"""
+    print_test("Mobile Performance Impact Assessment")
+    
+    performance_results = {}
+    endpoints = ['/api/health', '/api/newsletter', '/api/contact']
+    
+    for endpoint in endpoints:
+        try:
+            # Measure response times for multiple requests
+            times = []
+            for i in range(5):
+                start_time = time.time()
+                if endpoint == '/api/newsletter':
+                    response = requests.post(f"{BASE_URL}{endpoint}", 
+                                           json={"email": f"mobile.test.{i}@orgainse.com", "first_name": "Mobile Test"},
+                                           timeout=10)
+                elif endpoint == '/api/contact':
+                    response = requests.post(f"{BASE_URL}{endpoint}",
+                                           json={"name": "Mobile Test", "email": f"mobile.test.{i}@orgainse.com", "message": "Mobile performance test"},
+                                           timeout=10)
+                else:
+                    response = requests.get(f"{BASE_URL}{endpoint}", timeout=10)
+                
+                response_time = time.time() - start_time
+                times.append(response_time)
+                time.sleep(0.2)  # Small delay between requests
+            
+            avg_time = sum(times) / len(times)
+            max_time = max(times)
+            performance_results[endpoint] = {'avg': avg_time, 'max': max_time}
+            
+            print_info(f"{endpoint}: Avg {avg_time:.3f}s, Max {max_time:.3f}s")
+            
+        except Exception as e:
+            print_error(f"Performance test failed for {endpoint}: {str(e)}")
+            performance_results[endpoint] = {'avg': 999, 'max': 999}
+    
+    # Check if performance is acceptable (under 5 seconds average)
+    acceptable_performance = all(result['avg'] < 5.0 for result in performance_results.values())
+    
+    if acceptable_performance:
+        print_success("Mobile optimizations have not negatively impacted API performance")
+        return True
+    else:
+        print_error("Mobile optimizations may have impacted API performance")
+        return False
+
 def main():
     """Main test execution"""
     print_header("FINAL COMPREHENSIVE SEO OPTIMIZATION VERIFICATION")
