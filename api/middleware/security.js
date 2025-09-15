@@ -13,7 +13,7 @@ export const securityHeaders = (req, res) => {
     "base-uri 'self';"
   );
 
-  // Enhanced Security Headers
+  // Enhanced Security Headers - RELAXED CSP for API endpoints
   res.setHeader('Content-Security-Policy', "default-src 'none'; frame-ancestors 'none';");
   res.setHeader('Permissions-Policy', 'accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=(), geolocation=(), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=()');
   res.setHeader('X-Frame-Options', 'DENY');
