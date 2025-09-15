@@ -3520,15 +3520,17 @@ const ROICalculator = () => {
     setIsLoading(true);
     
     try {
-      // Use contact API endpoint for AI assessment
-      const CONTACT_API = '/api/contact';
+      // Use contact API endpoint for service inquiries
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
+      const CONTACT_API = BACKEND_URL + '/api/contact';
       
       console.log('🔧 ROI Calculator Debug Info:');
-      console.log('📋 Environment Variable:', CONTACT_API);
+      console.log('📋 Backend URL:', BACKEND_URL);
+      console.log('📋 Contact API:', CONTACT_API);
       
-      if (!CONTACT_API) {
-        console.error('❌ Contact API URL not configured');
-        alert('Configuration error: Contact API not set up.');
+      if (!BACKEND_URL) {
+        console.error('❌ Backend URL not configured');
+        alert('Configuration error. Please contact support.');
         setIsLoading(false);
         return;
       }
