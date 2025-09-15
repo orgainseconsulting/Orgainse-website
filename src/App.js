@@ -2436,6 +2436,31 @@ const Services = () => {
             </div>
           </div>
         </section>
+
+        {/* SEO Content Section - Rich Content for Search Engines */}
+        <SEOContent />
+
+        {/* SEO Links Section - Internal and External Links */}
+        <SEOLinks />
+
+        {/* Social Share Component */}
+        <div className="py-8 bg-gradient-to-r from-slate-50 to-orange-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-slate-900 mb-4">
+                Share Our AI Transformation Story
+              </h3>
+              <p className="text-slate-600 mb-6">
+                Help others discover the power of AI-driven digital transformation
+              </p>
+              <SocialShare 
+                title="AI Project Management Service | Orgainse Consulting - Transform Your Business with PMaaS"
+                description="Discover how AI-powered project management delivers 340% ROI and 25% faster delivery for startups and SMEs across 7 countries."
+                hashtags="AI,ProjectManagement,DigitalTransformation,PMaaS,AIConsulting"
+              />
+            </div>
+          </div>
+        </div>
     </div>
   );
 };
