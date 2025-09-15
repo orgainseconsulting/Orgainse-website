@@ -699,10 +699,12 @@ const Home = () => {
 
     try {
       // Use newsletter API endpoint for newsletter form
-      const NEWSLETTER_API = process.env.REACT_APP_BACKEND_URL || '/api/newsletter';
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
+      const NEWSLETTER_API = BACKEND_URL + '/api/newsletter';
       
       console.log('🔧 Newsletter Debug Info:');
-      console.log('📋 Environment Variable:', NEWSLETTER_API);
+      console.log('📋 Backend URL:', BACKEND_URL);
+      console.log('📋 Newsletter API:', NEWSLETTER_API);
       console.log('✉️ Email:', newsletterEmail);
       
       if (!NEWSLETTER_API || NEWSLETTER_API.includes('YOUR_GOOGLE_APPS_SCRIPT_URL')) {
