@@ -1,6 +1,9 @@
 {
   "version": 2,
   "framework": "create-react-app",
+  "buildCommand": "yarn build",
+  "outputDirectory": "build",
+  "installCommand": "yarn install",
   "rewrites": [
     {
       "source": "/api/(.*)",
