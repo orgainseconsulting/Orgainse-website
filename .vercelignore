@@ -7,14 +7,6 @@ node_modules
 coverage
 *.tsbuildinfo
 
-# Production build
-build
-
-# Environment files (handled by Vercel)
-.env.local
-.env.development.local
-.env.test.local
-
 # Logs
 npm-debug.log*
 yarn-debug.log*
@@ -62,7 +54,6 @@ dist
 
 # Gatsby files
 .cache/
-public
 
 # Storybook build outputs
 .out
@@ -88,11 +79,12 @@ temp/
 ehthumbs.db
 Thumbs.db
 
-# Local development
+# Development files only
 test_server.js
 vercel_deployment_health_check.py
 vercel_dev.log
 backend_test.py
+vercel-deploy-check.js
 
-# Test results
+# Test results and local development files
 test_result.md
