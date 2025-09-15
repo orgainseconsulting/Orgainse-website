@@ -1,5 +1,6 @@
 import { MongoClient } from 'mongodb';
 import { v4 as uuidv4 } from 'uuid';
+import { securityHeaders, rateLimit, sanitizeInput, validateEmail, validateRequestSize } from './middleware/security.js';
 
 // MongoDB connection
 let cachedClient = null;
