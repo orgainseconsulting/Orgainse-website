@@ -2484,10 +2484,12 @@ const Contact = () => {
     e.preventDefault();
     try {
       // Use contact API endpoint for contact form
-      const CONTACT_API = '/api/contact';
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
+      const CONTACT_API = BACKEND_URL + '/api/contact';
       
       console.log('🔧 Contact Form Debug Info:');
-      console.log('📋 Environment Variable:', CONTACT_API);
+      console.log('📋 Backend URL:', BACKEND_URL);
+      console.log('📋 Contact API:', CONTACT_API);
       console.log('📝 Form Data:', formData);
       
       if (!CONTACT_API || CONTACT_API.includes('YOUR_GOOGLE_APPS_SCRIPT_URL')) {
