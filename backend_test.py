@@ -23,8 +23,8 @@ import time
 import sys
 from datetime import datetime
 
-# Test configuration - Use production URL from environment
-BASE_URL = "https://orgainse-consulting.vercel.app"  # Production URL for mobile optimization testing
+# Test configuration - Use correct production URL from environment
+BASE_URL = "https://www.orgainse.com"  # Correct production URL for mobile optimization testing
 TEST_EMAIL = "mobile.test@orgainse.com"
 TEST_NAME = "Mobile Test User"
 TEST_COMPANY = "Mobile Test Company"
