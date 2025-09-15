@@ -380,3 +380,11 @@ orgainse-frontend-fixed.tar.gz
 *.env
 *.env.*
 node_modules/puppeteer/.local-chromium/linux-686378/chrome-linux/chrome
+-e 
+# Environment files
+*.env
+*.env.*
+-e 
+# Environment files
+*.env
+*.env.*
