@@ -4474,6 +4474,9 @@ function App() {
         <CalendlyProvider>
           <RegionalPricingProvider>
             <BrowserRouter>
+              {/* Mobile Performance Optimizer */}
+              <MobilePerformanceOptimizer />
+              
               <Navigation />
               <main>
                 <Suspense fallback={
