@@ -23,11 +23,11 @@ import time
 import sys
 from datetime import datetime
 
-# Test configuration - Use production-like URL from frontend environment
-BASE_URL = "http://localhost:8001"  # Local test server for serverless functions
-TEST_EMAIL = "seo.test@orgainse.com"
-TEST_NAME = "SEO Test User"
-TEST_COMPANY = "SEO Test Company"
+# Test configuration - Use production URL from environment
+BASE_URL = "https://orgainse-consulting.vercel.app"  # Production URL for mobile optimization testing
+TEST_EMAIL = "mobile.test@orgainse.com"
+TEST_NAME = "Mobile Test User"
+TEST_COMPANY = "Mobile Test Company"
 
 class Colors:
     GREEN = '\033[92m'
