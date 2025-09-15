@@ -30,6 +30,7 @@ export const securityHeaders = (req, res) => {
   const allowedOrigins = [
     'http://localhost:3000',
     'https://orgainse-consulting.vercel.app',
+    'https://orgainse-website.vercel.app',
     'https://www.orgainse.com',
     'https://orgainse.com',
     'https://orgainse-consulting.emergent.host',
