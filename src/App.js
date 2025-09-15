@@ -1030,8 +1030,9 @@ const Home = () => {
                   alt="AI Neural Network Visualization - Advanced neural network connections representing intelligent automation and cross-industry AI implementation for IT Services, EdTech, FinTech, Healthcare, Hospitality, and Software Development"
                   className="relative rounded-xl sm:rounded-2xl w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover transform group-hover:scale-105 transition-all duration-700 shadow-2xl"
                   loading="lazy"
+                  decoding="async"
                   width="800"
-                  height="500"
+                  height="600"
                 />
                 
                 {/* AI-Enhanced Floating UI Elements */}
