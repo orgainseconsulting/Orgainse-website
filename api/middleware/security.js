@@ -28,7 +28,9 @@ export const securityHeaders = (req, res) => {
     'http://localhost:3000',
     'https://orgainse-consulting.vercel.app',
     'https://www.orgainse.com',
-    'https://orgainse.com'
+    'https://orgainse.com',
+    'https://orgainse-consulting.emergent.host',
+    'https://www.orgainse-consulting.emergent.host'
   ];
   
   const origin = req.headers.origin;
