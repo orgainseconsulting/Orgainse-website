@@ -115,14 +115,12 @@ function calculateROI(inputs, userRegion = 'US') {
 }
 
 export default async function handler(req, res) {
-  // Set CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  // Apply security headers
+  securityHeaders(req, res);
   
-  // Handle preflight request
+  // Handle preflight requests
   if (req.method === 'OPTIONS') {
-    return res.status(204).end();
+    return res.status(200).end();
   }
   
   // Only allow POST requests
@@ -134,9 +132,20 @@ export default async function handler(req, res) {
   }
   
   try {
+    // Apply rate limiting
+    if (!rateLimit(req, res, { max: 50, windowMs: 15 * 60 * 1000 })) {
+      return; // Rate limit exceeded
+    }
+
+    // Validate request size
+    if (!validateRequestSize(req, res, 10 * 1024)) { // 10KB limit
+      return;
+    }
+
     const { db } = await connectToDatabase();
     
-    // Validate required fields
+    // Sanitize input data
+    const sanitizedBody = sanitizeInput(req.body);
     const { 
       company_name, 
       email, 
@@ -146,12 +155,19 @@ export default async function handler(req, res) {
       tech_budget,
       implementation_timeline,
       user_region = 'US'
-    } = req.body;
+    } = sanitizedBody;
     
     if (!company_name || !email) {
       return res.status(400).json({
         error: 'Validation failed',
         message: 'Company name and email are required'
+      });
+    }
+
+    // Validate email format
+    if (!validateEmail(email)) {
+      return res.status(400).json({ 
+        error: 'Invalid email format' 
       });
     }
     
