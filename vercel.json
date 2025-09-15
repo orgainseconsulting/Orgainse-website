@@ -130,5 +130,12 @@
       "maxDuration": 10,
       "runtime": "nodejs18.x"
     }
+  },
+  "env": {
+    "REACT_APP_BACKEND_URL": "@react_app_backend_url",
+    "MONGO_URL": "@mongo_url",
+    "DB_NAME": "@db_name",
+    "REACT_APP_ADMIN_USERNAME": "@react_app_admin_username",
+    "REACT_APP_ADMIN_PASSWORD": "@react_app_admin_password"
   }
 }
