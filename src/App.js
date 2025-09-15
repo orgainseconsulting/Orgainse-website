@@ -2035,9 +2035,10 @@ const Services = () => {
         source: 'services_page_popup'
       };
 
-      const CONTACT_API = '/api/contact';
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
+      const CONTACT_API = BACKEND_URL + '/api/contact';
       
-      if (CONTACT_API) {
+      if (BACKEND_URL) {
         const leadData = {
           leadType: 'Service Inquiry',
           service_name: serviceName,
