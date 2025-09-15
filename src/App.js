@@ -1981,12 +1981,13 @@ const Services = () => {
         timestamp: new Date().toISOString()
       };
 
-      // Use contact API endpoint for AI assessment
-      const CONTACT_API = '/api/contact';
+      // Use contact API endpoint for service inquiries
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
+      const CONTACT_API = BACKEND_URL + '/api/contact';
       
-      if (!CONTACT_API) {
-        console.error('❌ Contact API URL not configured');
-        alert('Configuration error: Contact API not set up.');
+      if (!BACKEND_URL) {
+        console.error('❌ Backend URL not configured');
+        alert('Configuration error. Please contact support.');
         return;
       }
 
