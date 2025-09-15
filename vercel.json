@@ -16,10 +16,6 @@
       "destination": "/api/$1"
     },
     {
-      "source": "/static/(.*)",
-      "destination": "/static/$1"
-    },
-    {
       "source": "/((?!api|static).*)",
       "destination": "/index.html"
     }
