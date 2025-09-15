@@ -150,14 +150,12 @@ function generateRecommendations(score, userInfo) {
 }
 
 export default async function handler(req, res) {
-  // Set CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  // Apply security headers
+  securityHeaders(req, res);
   
-  // Handle preflight request
+  // Handle preflight requests
   if (req.method === 'OPTIONS') {
-    return res.status(204).end();
+    return res.status(200).end();
   }
   
   // Only allow POST requests
@@ -169,15 +167,33 @@ export default async function handler(req, res) {
   }
   
   try {
+    // Apply rate limiting
+    if (!rateLimit(req, res, { max: 50, windowMs: 15 * 60 * 1000 })) {
+      return; // Rate limit exceeded
+    }
+
+    // Validate request size
+    if (!validateRequestSize(req, res, 10 * 1024)) { // 10KB limit
+      return;
+    }
+
     const { db } = await connectToDatabase();
     
-    // Validate required fields
-    const { user_info, responses } = req.body;
+    // Sanitize input data
+    const sanitizedBody = sanitizeInput(req.body);
+    const { user_info, responses } = sanitizedBody;
     
     if (!user_info || !user_info.name || !user_info.email) {
       return res.status(400).json({
         error: 'Validation failed',
         message: 'User information (name, email) is required'
+      });
+    }
+
+    // Validate email format
+    if (!validateEmail(user_info.email)) {
+      return res.status(400).json({ 
+        error: 'Invalid email format' 
       });
     }
     
