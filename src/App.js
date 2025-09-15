@@ -50,6 +50,8 @@ const ProtectedAdminRoute = React.lazy(() => import("./components/ProtectedAdmin
 
 // Regular imports for core components
 import { AuthProvider } from "./components/AuthContext";
+import BlogPost from "./components/BlogPost";
+import { blogPosts, getBlogPost } from "./data/blogPosts";
 import { 
   Menu, 
   X, 
