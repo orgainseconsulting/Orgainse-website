@@ -966,14 +966,14 @@ const Home = () => {
               </div>
               
               <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-4 sm:mb-6 max-w-2xl mx-auto lg:mx-0">
-                GPT-powered project management, AI-driven strategy consulting, 
+                <strong>AI-powered project management service (PMaaS)</strong> with GPT-driven strategy consulting, 
                 and intelligent operational optimization for <span className="text-orange-600 font-bold">startups</span> and <span className="text-green-600 font-bold">SMEs</span> 
                 across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
               </p>
               
               <p className="text-sm sm:text-base text-slate-600 mb-4 sm:mb-6 max-w-xl mx-auto lg:mx-0">
-                Transforming businesses with GPT-powered solutions across IT Services, EdTech, FinTech, 
-                Healthcare, Hospitality, and Software Development industries.
+                <strong>Digital transformation consulting</strong> with GPT-powered solutions across IT Services, EdTech, FinTech, 
+                Healthcare, Hospitality, and Software Development industries. <strong>340% ROI</strong> with <strong>25% faster delivery</strong>.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4 sm:mb-6 items-center">
