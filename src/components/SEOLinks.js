@@ -33,6 +33,36 @@ const SEOLinks = () => {
       to: "/smart-calendar",
       text: "Book Strategy Session",
       description: "Schedule your AI transformation planning"
+    },
+    {
+      to: "/services",
+      text: "Digital Transformation Consulting",
+      description: "Enterprise AI transformation services"
+    },
+    {
+      to: "/services",
+      text: "GPT-Powered PMaaS Solutions",
+      description: "Automated project management systems"
+    },
+    {
+      to: "/ai-assessment",
+      text: "AI Maturity Assessment",
+      description: "Comprehensive business readiness evaluation"
+    },
+    {
+      to: "/roi-calculator",
+      text: "PMaaS Investment Calculator",
+      description: "Business case development tools"
+    },
+    {
+      to: "/contact",
+      text: "Schedule Free Consultation",
+      description: "Expert AI strategy discussion"
+    },
+    {
+      to: "/about",
+      text: "AI Innovation Methodology",
+      description: "Our proven transformation approach"
     }
   ];
 
