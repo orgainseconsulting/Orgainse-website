@@ -191,7 +191,7 @@ export default async function handler(req, res) {
     
     // Prepare ROI calculation data
     const roiData = {
-      calculation_id: uuidv4(),
+      calculation_id: generateId(),
       business_inputs: {
         company_name,
         email,
