@@ -106,36 +106,36 @@ def test_newsletter_api():
     """Test 2: Newsletter API (/api/newsletter.js)"""
     print_test("Newsletter API - /api/newsletter")
     
-    # Test data for realistic business scenarios
+    # Test data for realistic enterprise business scenarios
     test_cases = [
         {
-            "name": "Healthcare Industry Lead",
+            "name": "Healthcare AI Implementation Lead",
             "data": {
-                "email": "dr.sarah.johnson@healthtech.com",
-                "first_name": "Dr. Sarah",
-                "name": "Dr. Sarah Johnson",
+                "email": "cto@healthcareinnovations.com",
+                "first_name": "Dr. Michael",
+                "name": "Dr. Michael Chen",
                 "leadType": "Newsletter Subscription",
-                "source": "Healthcare Landing Page"
+                "source": "Healthcare AI Solutions Page"
             }
         },
         {
-            "name": "Financial Services Lead", 
+            "name": "Financial Services AI Lead", 
             "data": {
-                "email": "michael.chen@globalfinance.com",
-                "first_name": "Michael",
-                "name": "Michael Chen",
-                "leadType": "Marketing Campaign",
-                "source": "Financial Services Blog"
+                "email": "ai.director@globalfinance.com",
+                "first_name": "Jennifer",
+                "name": "Jennifer Martinez",
+                "leadType": "AI Newsletter",
+                "source": "Financial AI Blog"
             }
         },
         {
-            "name": "Manufacturing Lead",
+            "name": "Manufacturing AI Optimization Lead",
             "data": {
-                "email": "lisa.thompson@manufacturing.com", 
-                "first_name": "Lisa",
-                "name": "Lisa Thompson",
-                "leadType": "Website Visitor",
-                "source": "Manufacturing Solutions Page"
+                "email": "operations@manufacturingtech.com", 
+                "first_name": "Robert",
+                "name": "Robert Thompson",
+                "leadType": "Manufacturing Newsletter",
+                "source": "Manufacturing AI Solutions"
             }
         }
     ]
