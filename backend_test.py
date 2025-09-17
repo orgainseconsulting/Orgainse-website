@@ -29,8 +29,8 @@ import time
 import sys
 from datetime import datetime
 
-# Test configuration - Use production URL for Vercel deployment verification
-BASE_URL = "https://www.orgainse.com"  # Production URL for Vercel deployment verification
+# Test configuration - Use local test server for Vercel deployment verification
+BASE_URL = "http://localhost:8001"  # Local test server for API verification
 TEST_EMAIL_PREFIX = "vercel.deployment.test"
 TEST_COMPANY_PREFIX = "Vercel Test Enterprise"
 
