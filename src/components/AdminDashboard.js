@@ -265,13 +265,16 @@ const AdminDashboard = () => {
 
       if (response.ok && result.success) {
         alert(`✅ Successfully deleted ${result.deletedCount} leads from ${collectionName}.`);
-        fetchData(); // Refresh data
+        // Wait a moment for database operations to complete, then refresh
+        setTimeout(() => {
+          fetchData();
+        }, 1000);
       } else {
         alert(`❌ Delete failed: ${result.message || result.error}`);
+        setLoading(false);
       }
     } catch (error) {
       alert(`❌ Delete operation failed: ${error.message}`);
-    } finally {
       setLoading(false);
     }
   };
@@ -293,7 +296,8 @@ const AdminDashboard = () => {
 
       if (response.ok && result.success) {
         alert(`✅ Successfully deleted lead "${leadName || leadId}".`);
-        fetchData(); // Refresh data
+        // Refresh data immediately for single deletions
+        fetchData();
       } else {
         alert(`❌ Delete failed: ${result.message || result.error}`);
       }
