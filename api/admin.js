@@ -78,7 +78,16 @@ export default async function handler(req, res) {
       total_service_inquiries: results.service_inquiries.length,
       total_consultations: results.consultation_leads.length,
       total_leads: totalLeads,
-      last_updated: new Date().toISOString()
+      last_updated: new Date().toISOString(),
+      // Add breakdown structure that frontend expects
+      breakdown: {
+        newsletters: results.newsletter_subscriptions.length,
+        contact_messages: results.contact_messages.length,
+        ai_assessments: results.ai_assessment_leads.length,
+        roi_calculators: results.roi_calculator_leads.length,
+        service_inquiries: results.service_inquiries.length,
+        consultations: results.consultation_leads.length
+      }
     };
 
     // Prepare response data
