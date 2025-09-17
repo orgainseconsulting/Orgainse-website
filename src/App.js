@@ -417,7 +417,7 @@ const Navigation = () => {
           isScrolled ? 'h-16 sm:h-20' : 'h-20 sm:h-24 lg:h-32'
         }`}>
             {/* Logo with Home Link - Better Mobile Sizing */}
-          <Link to="/" className="flex items-center group">
+          <Link to="/" className="flex items-center group mr-8 lg:mr-12">
             <img 
               src="https://customer-assets.emergentagent.com/job_digital-presence-29/artifacts/xx6a5zd7_Copy%20of%20OrgAInse%20Consulting%20%28Website%29.png" 
               alt="Orgainse Consulting - AI Project Management Service & Digital Transformation" 
