@@ -569,14 +569,14 @@ def test_consultation_api():
     print_test("Consultation API - /api/consultation")
     
     test_data = {
-        "full_name": "Sarah Johnson",
-        "email": "sarah.johnson@enterprise.com",
-        "company": "Enterprise Solutions Ltd",
+        "full_name": "Robert Chen",
+        "email": "robert.chen@financialservices.com",
+        "company": "Financial Services Corporation",
         "phone": "+1-555-0123",
-        "consultation_type": "AI Readiness Assessment",
-        "preferred_date": "2025-09-15",
-        "preferred_time": "14:00",
-        "requirements": "Looking to implement AI solutions for our customer service department",
+        "consultation_type": "Digital Transformation Planning",
+        "preferred_date": "2025-09-20",
+        "preferred_time": "10:00",
+        "requirements": "Looking to implement comprehensive AI solutions for our financial services operations including risk assessment, fraud detection, and customer analytics",
         "industry": "Financial Services"
     }
     
