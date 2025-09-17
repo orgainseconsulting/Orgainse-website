@@ -477,19 +477,19 @@ def test_ai_assessment_api():
     
     test_data = {
         "user_info": {
-            "name": "John Smith",
-            "email": "cto@techcorp.com",
-            "company": "TechCorp Solutions",
-            "industry": "Technology",
-            "company_size": "Medium (50-200 employees)"
+            "name": "Dr. Jennifer Martinez",
+            "email": "cto@healthcareinnovations.com",
+            "company": "Healthcare Innovations Inc.",
+            "industry": "Healthcare Technology",
+            "company_size": "Large (500+ employees)"
         },
         "responses": {
-            "tech_infrastructure": 3,
-            "ai_tools_usage": "Basic tools",
-            "data_management": "Basic databases",
-            "team_readiness": 2,
-            "process_automation": 3,
-            "ai_strategy": "no"
+            "tech_infrastructure": 4,
+            "ai_tools_usage": "Advanced AI",
+            "data_management": "Advanced analytics",
+            "team_readiness": 3,
+            "process_automation": 4,
+            "ai_strategy": "yes"
         }
     }
     
