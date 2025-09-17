@@ -21,7 +21,9 @@ const SocialShare = ({
     twitter: `https://twitter.com/intent/tweet?url=${shareData.url}&text=${shareData.title}&hashtags=${shareData.hashtags}`,
     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${shareData.url}`,
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${shareData.url}&quote=${shareData.title}`,
-    email: `mailto:?subject=${shareData.title}&body=${shareData.description}%0A%0A${shareData.url}`
+    email: `mailto:?subject=${shareData.title}&body=${shareData.description}%0A%0A${shareData.url}`,
+    whatsapp: `https://wa.me/?text=${shareData.title}%20${shareData.url}`,
+    telegram: `https://t.me/share/url?url=${shareData.url}&text=${shareData.title}`
   };
 
   const handleCopyLink = async () => {
