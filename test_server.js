@@ -30,25 +30,29 @@ async function setupRoutes() {
     const { default: aiAssessmentHandler } = await import('./api/ai-assessment.js');
     const { default: roiCalculatorHandler } = await import('./api/roi-calculator.js');
     const { default: consultationHandler } = await import('./api/consultation.js');
+    const { default: adminDeleteHandler } = await import('./api/admin-delete.js');
 
-    // Setup routes for all 7 endpoints
+    // Setup routes for all 8 endpoints (including admin-delete)
     app.get('/api/health', healthHandler);
     app.post('/api/newsletter', newsletterHandler);
     app.post('/api/contact', contactHandler);
     app.get('/api/admin', adminHandler);
+    app.delete('/api/admin-delete', adminDeleteHandler);
+    app.options('/api/admin-delete', adminDeleteHandler);
     app.post('/api/ai-assessment', aiAssessmentHandler);
     app.post('/api/roi-calculator', roiCalculatorHandler);
     app.post('/api/consultation', consultationHandler);
     
-    console.log('✅ All 7 API routes configured successfully');
+    console.log('✅ All 8 API routes configured successfully (including admin-delete)');
     console.log('📋 Available endpoints:');
-    console.log('   GET  /api/health');
-    console.log('   POST /api/newsletter');
-    console.log('   POST /api/contact');
-    console.log('   GET  /api/admin');
-    console.log('   POST /api/ai-assessment');
-    console.log('   POST /api/roi-calculator');
-    console.log('   POST /api/consultation');
+    console.log('   GET    /api/health');
+    console.log('   POST   /api/newsletter');
+    console.log('   POST   /api/contact');
+    console.log('   GET    /api/admin');
+    console.log('   DELETE /api/admin-delete');
+    console.log('   POST   /api/ai-assessment');
+    console.log('   POST   /api/roi-calculator');
+    console.log('   POST   /api/consultation');
   } catch (error) {
     console.error('❌ Error setting up routes:', error);
   }
