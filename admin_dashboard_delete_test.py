@@ -20,7 +20,7 @@ from datetime import datetime
 import uuid
 
 # Test configuration - Use environment variable for backend URL
-BASE_URL = "http://localhost:3001"  # Test server with admin-delete endpoint
+BASE_URL = "http://localhost:3002"  # Test server with admin-delete endpoint
 TEST_EMAIL_PREFIX = "admin.dashboard.test"
 TEST_COMPANY_PREFIX = "Admin Test Enterprise"
 
