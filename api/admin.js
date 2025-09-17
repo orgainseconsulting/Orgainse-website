@@ -105,8 +105,10 @@ export default async function handler(req, res) {
       timestamp: new Date().toISOString()
     };
 
-    // Add cache headers for performance
-    res.setHeader('Cache-Control', 'private, max-age=300'); // 5 minutes cache
+    // Add cache headers for performance but ensure data freshness after deletes
+    res.setHeader('Cache-Control', 'private, max-age=0, no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
     
     res.status(200).json(responseData);
 
