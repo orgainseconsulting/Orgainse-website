@@ -1504,6 +1504,8 @@ const About = () => {
                   alt="AI Business Implementation - Professional human-AI interaction representing intelligent cross-industry automation and digital transformation solutions connecting IT Services, EdTech, FinTech, Healthcare, Hospitality, and Software Development sectors"
                   className="relative rounded-2xl w-full h-[400px] object-cover transform group-hover:scale-105 transition-all duration-700 shadow-2xl"
                   loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
                   width="600"
                   height="400"
                 />
