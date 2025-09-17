@@ -343,9 +343,21 @@
   <link rel="dns-prefetch" href="//images.unsplash.com">
   <link rel="dns-prefetch" href="//images.pexels.com">
   
-  <!-- Preload key resources for mobile performance -->
+  <!-- Preload critical resources for mobile performance -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  
+  <!-- Optimize JavaScript loading -->
+  <script>
+    // Preload critical JavaScript modules
+    const criticalScripts = ['/static/js/main.js'];
+    criticalScripts.forEach(src => {
+      const link = document.createElement('link');
+      link.rel = 'modulepreload';
+      link.href = src;
+      document.head.appendChild(link);
+    });
+  </script>
   
   <!-- Preload Critical CSS -->
   <link rel="preload" href="/static/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
