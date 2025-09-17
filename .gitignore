@@ -128,3 +128,7 @@ node_modules/puppeteer/.local-chromium/linux-686378/chrome-linux/chrome
 # Environment files
 *.env
 *.env.*
+-e 
+# Environment files
+*.env
+*.env.*
