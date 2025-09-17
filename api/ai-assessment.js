@@ -220,7 +220,7 @@ export default async function handler(req, res) {
     
     // Prepare assessment data
     const assessmentData = {
-      assessment_id: uuidv4(),
+      assessment_id: generateId(),
       user_info: {
         name: user_info.name,
         email: user_info.email,
