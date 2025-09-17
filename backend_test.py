@@ -526,12 +526,12 @@ def test_roi_calculator_api():
     print_test("ROI Calculator API - /api/roi-calculator")
     
     test_data = {
-        "company_name": "Manufacturing Inc",
-        "email": "cfo@manufacturing.com",
-        "annual_revenue": 5000000,
-        "employee_count": "51-200",
-        "current_pm_costs": 15000,
-        "tech_budget": 100000,
+        "company_name": "Global Manufacturing Technologies",
+        "email": "cfo@globalmanufacturing.com",
+        "annual_revenue": 25000000,
+        "employee_count": "201-500",
+        "current_pm_costs": 45000,
+        "tech_budget": 500000,
         "implementation_timeline": "6-12 months",
         "user_region": "US"
     }
