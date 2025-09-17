@@ -19,8 +19,12 @@ const SEOContent = () => {
               <strong>Orgainse Consulting</strong> is the leading provider of <strong>AI project management services (PMaaS)</strong> for startups and SMEs worldwide. Our <strong>GPT-powered digital transformation solutions</strong> deliver an average <strong>340% ROI</strong> and <strong>25% faster project delivery</strong> across industries including IT Services, EdTech, FinTech, Healthcare, Hospitality, and Software Development.
             </p>
 
-            <p className="text-lg text-slate-700 leading-relaxed mb-8">
+            <p className="text-lg text-slate-700 leading-relaxed mb-6">
               Since our founding in <strong>2025</strong>, we have revolutionized how businesses approach <strong>project management as a service</strong> by integrating cutting-edge artificial intelligence with proven project management methodologies. Our <strong>AI-native approach</strong> enables organizations to achieve unprecedented efficiency, cost reduction, and strategic growth through intelligent automation and data-driven decision making.
+            </p>
+
+            <p className="text-lg text-slate-700 leading-relaxed mb-8">
+              <strong>AI project management service</strong> represents the future of business operations. Traditional project management often struggles with resource allocation, timeline predictions, and risk assessment. Our innovative <strong>PMaaS platform</strong> leverages machine learning algorithms to analyze project patterns, predict potential bottlenecks, and automatically optimize workflows for maximum efficiency. This results in significantly improved project outcomes and client satisfaction rates exceeding 95%.
             </p>
           </div>
 
