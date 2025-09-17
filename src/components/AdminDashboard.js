@@ -9,17 +9,32 @@ const AdminDashboard = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/admin');
+      setError('');
+      
+      // Add cache-busting parameter to ensure fresh data
+      const timestamp = new Date().getTime();
+      const response = await fetch(`/api/admin?_t=${timestamp}`, {
+        method: 'GET',
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        }
+      });
+      
       const result = await response.json();
       
       if (response.ok) {
         setData(result);
         setError('');
+        console.log('✅ Admin dashboard data refreshed:', result.summary);
       } else {
         setError(result.error || 'Failed to fetch data');
+        console.error('❌ Admin API error:', result);
       }
     } catch (err) {
-      setError('Network error. Please try again.');
+      const errorMsg = 'Network error. Please try again.';
+      setError(errorMsg);
+      console.error('❌ Admin dashboard fetch error:', err);
     } finally {
       setLoading(false);
     }
