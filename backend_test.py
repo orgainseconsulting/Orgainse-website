@@ -213,45 +213,45 @@ def test_contact_api():
     """Test 3: Contact API (/api/contact.js)"""
     print_test("Contact API - /api/contact")
     
-    # Test data for realistic business scenarios
+    # Test data for realistic enterprise business scenarios
     test_cases = [
         {
-            "name": "Healthcare Enterprise Inquiry",
+            "name": "Healthcare Enterprise AI Inquiry",
             "data": {
-                "name": "Dr. Jennifer Martinez",
-                "email": "j.martinez@medicalinnovations.com",
-                "company": "Medical Innovations Inc.",
+                "name": "Dr. Sarah Johnson",
+                "email": "s.johnson@healthcareinnovations.com",
+                "company": "Healthcare Innovations Inc.",
                 "phone": "+1-555-0123",
                 "service_type": "AI Healthcare Solutions",
-                "message": "We're interested in implementing AI solutions for patient data analysis and predictive healthcare. Our hospital network serves 500,000+ patients annually.",
-                "leadType": "Enterprise Inquiry",
-                "source": "Healthcare Solutions Page"
+                "message": "We're a 500-bed hospital network looking to implement AI solutions for patient data analysis, predictive healthcare, and operational efficiency. We serve 750,000+ patients annually and need enterprise-grade AI integration.",
+                "leadType": "Enterprise Healthcare Inquiry",
+                "source": "Healthcare AI Solutions Page"
             }
         },
         {
-            "name": "Financial Services Consultation",
+            "name": "Financial Services AI Consultation",
             "data": {
-                "name": "Robert Kim",
-                "email": "robert.kim@globalinvestment.com", 
+                "name": "Michael Chen",
+                "email": "m.chen@globalinvestmentgroup.com", 
                 "company": "Global Investment Group",
                 "phone": "+1-555-0456",
                 "service_type": "AI Financial Analytics",
-                "message": "Looking for AI-driven risk assessment and portfolio optimization solutions for our $2B investment portfolio.",
-                "leadType": "Consultation Request",
-                "source": "Financial Services Landing Page"
+                "message": "Looking for AI-driven risk assessment, portfolio optimization, and algorithmic trading solutions for our $5B investment portfolio. Need compliance-ready AI systems for financial services.",
+                "leadType": "Financial Services Consultation",
+                "source": "Financial AI Landing Page"
             }
         },
         {
-            "name": "Manufacturing Optimization",
+            "name": "Manufacturing AI Optimization",
             "data": {
                 "name": "Lisa Thompson",
-                "email": "l.thompson@globalmfg.com",
-                "company": "Global Manufacturing Solutions", 
+                "email": "l.thompson@manufacturingtech.com",
+                "company": "Manufacturing Technologies Corp", 
                 "phone": "+1-555-0789",
                 "service_type": "AI Operations Optimization",
-                "message": "Need AI solutions for supply chain optimization and predictive maintenance across 15 manufacturing facilities.",
-                "leadType": "Operations Inquiry",
-                "source": "Manufacturing Solutions Page"
+                "message": "Need comprehensive AI solutions for supply chain optimization, predictive maintenance, and quality control across 25 manufacturing facilities. Looking for Industry 4.0 transformation.",
+                "leadType": "Manufacturing AI Inquiry",
+                "source": "Manufacturing AI Solutions"
             }
         }
     ]
