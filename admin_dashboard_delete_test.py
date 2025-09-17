@@ -20,7 +20,7 @@ from datetime import datetime
 import uuid
 
 # Test configuration - Use environment variable for backend URL
-BASE_URL = "http://localhost:3000"  # From .env REACT_APP_BACKEND_URL
+BASE_URL = "http://localhost:3001"  # Test server with admin-delete endpoint
 TEST_EMAIL_PREFIX = "admin.dashboard.test"
 TEST_COMPANY_PREFIX = "Admin Test Enterprise"
 
