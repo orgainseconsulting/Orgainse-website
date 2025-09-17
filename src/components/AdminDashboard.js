@@ -350,18 +350,41 @@ const AdminDashboard = () => {
     if (activeTab === 'overview') {
       return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {tabs.slice(1).map(tab => (
-            <div key={tab.id} className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">{tab.name}</h3>
-              <p className="text-3xl font-bold text-blue-600">{tab.count}</p>
-              <button
-                onClick={() => setActiveTab(tab.id)}
-                className="mt-3 text-blue-600 hover:text-blue-800 text-sm font-medium"
-              >
-                View Details →
-              </button>
-            </div>
-          ))}
+          {tabs.slice(1).map(tab => {
+            // Map tab IDs to collection names
+            const collectionMap = {
+              'newsletters': 'newsletter_subscriptions',
+              'contacts': 'contact_messages',
+              'ai_assessments': 'ai_assessment_leads',
+              'roi_calculators': 'roi_calculator_leads',
+              'service_inquiries': 'service_inquiries',
+              'consultations': 'consultation_leads'
+            };
+            const collection = collectionMap[tab.id];
+            
+            return (
+              <div key={tab.id} className="bg-white rounded-lg shadow p-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{tab.name}</h3>
+                <p className="text-3xl font-bold text-blue-600">{tab.count}</p>
+                <div className="mt-3 flex gap-2">
+                  <button
+                    onClick={() => setActiveTab(tab.id)}
+                    className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                  >
+                    View Details →
+                  </button>
+                  {tab.count > 0 && (
+                    <button
+                      onClick={() => deleteCollectionLeads(collection, tab.name)}
+                      className="text-red-600 hover:text-red-800 text-sm font-medium ml-2"
+                    >
+                      Delete All
+                    </button>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       );
     }
