@@ -1,5 +1,5 @@
 import React from 'react';
-import { Share2, Twitter, Linkedin, Facebook, Mail, Link } from 'lucide-react';
+import { Share2, Twitter, Linkedin, Facebook, Mail, Link, MessageCircle, Send } from 'lucide-react';
 
 const SocialShare = ({ 
   url = window.location.href, 
