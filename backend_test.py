@@ -29,11 +29,10 @@ import time
 import sys
 from datetime import datetime
 
-# Test configuration - Use correct production URL
-BASE_URL = "https://www.orgainse.com"  # Production URL for SEO fixes verification
-TEST_EMAIL = "seo.verification@orgainse.com"
-TEST_NAME = "SEO Verification User"
-TEST_COMPANY = "SEO Test Company"
+# Test configuration - Use production URL for Vercel deployment verification
+BASE_URL = "https://www.orgainse.com"  # Production URL for Vercel deployment verification
+TEST_EMAIL_PREFIX = "vercel.deployment.test"
+TEST_COMPANY_PREFIX = "Vercel Test Enterprise"
 
 class Colors:
     GREEN = '\033[92m'
