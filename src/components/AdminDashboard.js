@@ -204,6 +204,101 @@ const AdminDashboard = () => {
     window.URL.revokeObjectURL(url);
   };
 
+  // Delete functionality
+  const deleteAllLeads = async () => {
+    if (!window.confirm('⚠️ WARNING: This will permanently delete ALL leads from ALL collections. This action cannot be undone. Are you absolutely sure?')) {
+      return;
+    }
+
+    if (!window.confirm('🚨 FINAL CONFIRMATION: You are about to delete ALL lead data. Type confirmation in the next dialog if you want to proceed.')) {
+      return;
+    }
+
+    const confirmation = window.prompt('Type "DELETE ALL LEADS" to confirm this destructive action:');
+    if (confirmation !== 'DELETE ALL LEADS') {
+      alert('Operation cancelled. Incorrect confirmation text.');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await fetch('/api/admin-delete?deleteType=all', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        alert(`✅ Successfully deleted ${result.deletedCount} leads from all collections.`);
+        fetchData(); // Refresh data
+      } else {
+        alert(`❌ Delete failed: ${result.message || result.error}`);
+      }
+    } catch (error) {
+      alert(`❌ Delete operation failed: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deleteCollectionLeads = async (collection, collectionName) => {
+    if (!window.confirm(`⚠️ This will permanently delete ALL leads from ${collectionName}. Are you sure?`)) {
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await fetch(`/api/admin-delete?deleteType=collection&collection=${collection}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        alert(`✅ Successfully deleted ${result.deletedCount} leads from ${collectionName}.`);
+        fetchData(); // Refresh data
+      } else {
+        alert(`❌ Delete failed: ${result.message || result.error}`);
+      }
+    } catch (error) {
+      alert(`❌ Delete operation failed: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deleteSingleLead = async (leadId, collection, leadName) => {
+    if (!window.confirm(`⚠️ This will permanently delete the lead "${leadName || leadId}". Are you sure?`)) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/admin-delete?deleteType=single&collection=${collection}&leadId=${leadId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        alert(`✅ Successfully deleted lead "${leadName || leadId}".`);
+        fetchData(); // Refresh data
+      } else {
+        alert(`❌ Delete failed: ${result.message || result.error}`);
+      }
+    } catch (error) {
+      alert(`❌ Delete operation failed: ${error.message}`);
+    }
+  };
+
   const tabs = [
     { id: 'overview', name: 'Overview', count: data?.summary?.total_leads || 0 },
     { id: 'newsletters', name: 'Newsletter Subscriptions', count: data?.summary?.breakdown?.newsletters || 0 },
