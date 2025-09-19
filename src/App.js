@@ -2670,7 +2670,7 @@ const Contact = () => {
             Get Your Free AI Consultation & GPT-Powered Strategy Session
           </h2>
           
-          <p className="text-xl text-slate-700 max-w-4xl mx-auto mb-8 leading-relaxed">
+          <p className="text-xl text-slate-700 max-w-4xl mx-auto mb-8 leading-relaxed text-justify">
             Ready to transform your business with <span className="text-orange-600 font-bold">AI-native consulting</span>? Let's discuss how our 
             <span className="text-green-600 font-bold"> GPT-powered solutions</span> can drive your success across 
             <span className="text-purple-600 font-bold"> project management</span>, digital transformation, 
