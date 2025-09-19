@@ -2507,9 +2507,9 @@ const Services = () => {
                 Help others discover the power of AI-driven digital transformation
               </p>
               <SocialShare 
-                title="AI Project Management Service | Orgainse Consulting - Transform Your Business with PMaaS"
-                description="Discover how AI-powered project management delivers 340% ROI and 25% faster delivery for startups and SMEs across 7 countries."
-                hashtags="AI,ProjectManagement,DigitalTransformation,PMaaS,AIConsulting"
+                title="Comprehensive Business Consulting Services | Digital Transformation | Orgainse Consulting"
+                description="Transform your business with comprehensive consulting services. 340% ROI, 25% faster delivery. Expert business consulting across India, USA, UK, UAE, Australia."
+                hashtags="BusinessConsulting,DigitalTransformation,BusinessStrategy,Consulting,AIConsulting"
               />
             </div>
           </div>
