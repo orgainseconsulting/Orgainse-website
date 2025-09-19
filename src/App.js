@@ -1202,7 +1202,7 @@ const Home = () => {
                 AI Transformation
               </span>
             </h2>
-            <p className="text-lg text-slate-700 max-w-3xl mx-auto mb-6 leading-relaxed">
+            <p className="text-lg text-slate-700 max-w-3xl mx-auto mb-6 leading-relaxed text-justify">
               Get exclusive insights, free resources, and expert guidance to transform your business with 
               <span className="text-orange-600 font-bold"> AI-native solutions</span>. Join us to accelerate and write your own success story.
             </p>
