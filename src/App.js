@@ -996,6 +996,22 @@ const Home = () => {
                 accelerate your business transformation journey and maximize return on investment.
               </p>
 
+              {/* External Links for SEO Authority */}
+              <div className="text-xs sm:text-sm text-slate-500 mb-4 sm:mb-6 max-w-2xl mx-auto lg:mx-0">
+                Learn more about industry standards: 
+                <a href="https://www.pmi.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 font-medium ml-1 mr-2">
+                  PMI.org
+                </a>
+                |
+                <a href="https://www.mckinsey.com/capabilities/operations/our-insights" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 font-medium ml-2 mr-2">
+                  McKinsey Insights
+                </a>
+                |
+                <a href="https://www.gartner.com/en/information-technology" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 font-medium ml-2">
+                  Gartner Research
+                </a>
+              </div>
+
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4 sm:mb-6 items-center">
                 <button 
                   onClick={openCalendly}
