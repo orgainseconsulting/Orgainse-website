@@ -972,28 +972,15 @@ const Home = () => {
               </div>
               
               <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-4 sm:mb-6 max-w-2xl mx-auto lg:mx-0">
-                <strong>AI-powered project management service (PMaaS)</strong> with GPT-driven strategy consulting, 
-                and intelligent operational optimization for <span className="text-orange-600 font-bold">startups</span> and <span className="text-green-600 font-bold">SMEs</span> 
+                <strong>AI-native business consulting</strong> with comprehensive digital transformation solutions for 
+                <span className="text-orange-600 font-bold"> startups</span> and <span className="text-green-600 font-bold">SMEs</span> 
                 across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
               </p>
               
               <p className="text-sm sm:text-base text-slate-600 mb-4 sm:mb-6 max-w-xl mx-auto lg:mx-0">
-                <strong>Digital transformation consulting</strong> with GPT-powered solutions across IT Services, EdTech, FinTech, 
-                Healthcare, Hospitality, and Software Development industries. <strong>340% ROI</strong> with <strong>25% faster delivery</strong>.
-              </p>
-
-              <p className="text-sm sm:text-base text-slate-600 mb-4 sm:mb-6 max-w-2xl mx-auto lg:mx-0">
-                Our AI consulting experts specialize in <strong>project management as a service</strong>, offering comprehensive 
-                digital transformation strategies tailored for modern businesses. We leverage advanced artificial intelligence 
-                and machine learning technologies to optimize business processes, enhance operational efficiency, and drive 
-                sustainable growth across multiple industry verticals.
-              </p>
-
-              <p className="text-sm sm:text-base text-slate-600 mb-4 sm:mb-6 max-w-2xl mx-auto lg:mx-0">
-                From <strong>AI implementation</strong> and <strong>process automation</strong> to <strong>strategic planning</strong> 
-                and <strong>risk management</strong>, Orgainse Consulting delivers proven results. Our team of certified 
-                project management professionals combines decades of industry experience with cutting-edge AI tools to 
-                accelerate your business transformation journey and maximize return on investment.
+                <strong>Comprehensive consulting services</strong> including project management, digital transformation, 
+                AI strategy, risk management, and operational optimization across IT Services, EdTech, FinTech, 
+                Healthcare, Hospitality, and Software Development. <strong>340% ROI</strong> with <strong>25% faster delivery</strong>.
               </p>
 
               {/* External Links for SEO Authority */}
