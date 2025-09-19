@@ -982,6 +982,20 @@ const Home = () => {
                 Healthcare, Hospitality, and Software Development industries. <strong>340% ROI</strong> with <strong>25% faster delivery</strong>.
               </p>
 
+              <p className="text-sm sm:text-base text-slate-600 mb-4 sm:mb-6 max-w-2xl mx-auto lg:mx-0">
+                Our AI consulting experts specialize in <strong>project management as a service</strong>, offering comprehensive 
+                digital transformation strategies tailored for modern businesses. We leverage advanced artificial intelligence 
+                and machine learning technologies to optimize business processes, enhance operational efficiency, and drive 
+                sustainable growth across multiple industry verticals.
+              </p>
+
+              <p className="text-sm sm:text-base text-slate-600 mb-4 sm:mb-6 max-w-2xl mx-auto lg:mx-0">
+                From <strong>AI implementation</strong> and <strong>process automation</strong> to <strong>strategic planning</strong> 
+                and <strong>risk management</strong>, Orgainse Consulting delivers proven results. Our team of certified 
+                project management professionals combines decades of industry experience with cutting-edge AI tools to 
+                accelerate your business transformation journey and maximize return on investment.
+              </p>
+
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4 sm:mb-6 items-center">
                 <button 
                   onClick={openCalendly}
