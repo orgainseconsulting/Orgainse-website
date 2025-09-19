@@ -957,9 +957,9 @@ const Home = () => {
             <div className="animate-fade-in text-center lg:text-left">
               <div className="mb-4 sm:mb-6">
                 <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight">
-                  <span className="block text-slate-800">AI Project Management Service</span>
+                  <span className="block text-slate-800">Let Us Plan</span>
                   <span className="block bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient-text text-4xl sm:text-5xl lg:text-7xl">
-                    PMaaS by Orgainse Consulting
+                    Your SUCCESS!!
                   </span>
                 </h1>
               </div>
