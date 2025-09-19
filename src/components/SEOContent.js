@@ -15,15 +15,15 @@ const SEOContent = () => {
               Comprehensive Business Consulting Services: Transform Your Business with AI-Native Solutions
             </h1>
             
-            <p className="text-xl text-slate-700 leading-relaxed mb-6">
+            <p className="text-xl text-slate-700 leading-relaxed mb-6 text-justify">
               <strong>Orgainse Consulting</strong> is a leading <strong>business consulting firm</strong> offering comprehensive <strong>digital transformation</strong>, <strong>project management</strong>, <strong>AI strategy</strong>, and <strong>operational optimization services</strong> for startups and SMEs worldwide. Our integrated consulting approach delivers an average <strong>340% ROI</strong> and <strong>25% faster delivery</strong> across industries including IT Services, EdTech, FinTech, Healthcare, Hospitality, and Software Development.
             </p>
 
-            <p className="text-lg text-slate-700 leading-relaxed mb-6">
+            <p className="text-lg text-slate-700 leading-relaxed mb-6 text-justify">
               Since our founding in <strong>2025</strong>, we have revolutionized how businesses approach <strong>comprehensive transformation</strong> by integrating cutting-edge technology with proven business methodologies. Our <strong>holistic consulting approach</strong> enables organizations to achieve unprecedented efficiency, cost reduction, and strategic growth through intelligent solutions and data-driven decision making across all business functions.
             </p>
 
-            <p className="text-lg text-slate-700 leading-relaxed mb-8">
+            <p className="text-lg text-slate-700 leading-relaxed mb-8 text-justify">
               <strong>Modern business consulting</strong> requires expertise across multiple domains. Our comprehensive service portfolio includes <strong>digital transformation</strong>, <strong>project management optimization</strong>, <strong>AI strategy development</strong>, <strong>risk management</strong>, and <strong>operational excellence</strong>. This integrated approach results in significantly improved business outcomes and client satisfaction rates exceeding 95%.
             </p>
           </div>
