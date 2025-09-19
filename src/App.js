@@ -1044,15 +1044,6 @@ const Home = () => {
                 </Link>
               </div>
 
-              {/* Social Sharing for SEO */}
-              <div className="flex justify-center lg:justify-start mb-4 sm:mb-6">
-                <SocialShare 
-                  url="https://orgainse.com/"
-                  title="AI Project Management Service | PMaaS | Orgainse Consulting"
-                  description="Transform your business with AI-powered project management. 340% ROI, 25% faster delivery. Digital transformation consulting across India, USA, UK, UAE, Australia."
-                />
-              </div>
-
               {/* Mobile-Optimized Stats Display */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 {stats.map((stat, index) => (
