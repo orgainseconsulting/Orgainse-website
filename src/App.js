@@ -971,13 +971,13 @@ const Home = () => {
                 <div className="hidden lg:block absolute -left-4 top-0 w-2 h-full bg-gradient-to-b from-orange-500 to-green-500 rounded-full animate-pulse"></div>
               </div>
               
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-4 sm:mb-6 max-w-2xl mx-auto lg:mx-0">
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-4 sm:mb-6 max-w-2xl mx-auto lg:mx-0 text-justify">
                 <strong>AI-native business consulting</strong> with comprehensive digital transformation solutions for 
                 <span className="text-orange-600 font-bold"> startups</span> and <span className="text-green-600 font-bold">SMEs</span> 
                 across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
               </p>
               
-              <p className="text-sm sm:text-base text-slate-600 mb-4 sm:mb-6 max-w-xl mx-auto lg:mx-0">
+              <p className="text-sm sm:text-base text-slate-600 mb-4 sm:mb-6 max-w-xl mx-auto lg:mx-0 text-justify">
                 <strong>Comprehensive consulting services</strong> including project management, digital transformation, 
                 AI strategy, risk management, and operational optimization across IT Services, EdTech, FinTech, 
                 Healthcare, Hospitality, and Software Development. <strong>340% ROI</strong> with <strong>25% faster delivery</strong>.
