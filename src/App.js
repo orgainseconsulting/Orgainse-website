@@ -1015,6 +1015,29 @@ const Home = () => {
                 </button>
               </div>
 
+              {/* Internal Links for SEO */}
+              <div className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <Link to="/services" className="text-xs sm:text-sm text-orange-600 hover:text-orange-700 font-medium border-b border-orange-200 hover:border-orange-400 transition-colors">
+                  Our Services
+                </Link>
+                <span className="text-xs sm:text-sm text-slate-400">•</span>
+                <Link to="/ai-assessment" className="text-xs sm:text-sm text-green-600 hover:text-green-700 font-medium border-b border-green-200 hover:border-green-400 transition-colors">
+                  AI Assessment
+                </Link>
+                <span className="text-xs sm:text-sm text-slate-400">•</span>
+                <Link to="/roi-calculator" className="text-xs sm:text-sm text-blue-600 hover:text-blue-700 font-medium border-b border-blue-200 hover:border-blue-400 transition-colors">
+                  ROI Calculator
+                </Link>
+                <span className="text-xs sm:text-sm text-slate-400">•</span>
+                <Link to="/about" className="text-xs sm:text-sm text-purple-600 hover:text-purple-700 font-medium border-b border-purple-200 hover:border-purple-400 transition-colors">
+                  About Us
+                </Link>
+                <span className="text-xs sm:text-sm text-slate-400">•</span>
+                <Link to="/contact" className="text-xs sm:text-sm text-slate-600 hover:text-slate-700 font-medium border-b border-slate-200 hover:border-slate-400 transition-colors">
+                  Contact
+                </Link>
+              </div>
+
               {/* Mobile-Optimized Stats Display */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 {stats.map((stat, index) => (
