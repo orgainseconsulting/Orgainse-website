@@ -102,10 +102,6 @@ const SEOContent = () => {
                 </div>
               </div>
             </div>
-                  <p className="text-slate-700">Process optimization, performance improvement, and operational efficiency enhancement.</p>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Industry Expertise */}
