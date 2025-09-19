@@ -1585,7 +1585,7 @@ const About = () => {
               <br />
               <span className="text-slate-800">Ecosystem</span>
             </h2>
-            <p className="text-xl text-slate-600 max-w-4xl mx-auto mb-8 leading-relaxed">
+            <p className="text-xl text-slate-600 max-w-4xl mx-auto mb-8 leading-relaxed text-justify">
               Four interconnected forces delivering <span className="font-bold text-orange-600">AI-driven business strategy consulting</span> and 
               <span className="font-bold text-green-600">GPT-powered agile coaching</span>. Not hierarchy, but 
               <span className="font-bold text-slate-700">predictive risk analytics</span>.
