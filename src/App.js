@@ -2701,7 +2701,7 @@ const Contact = () => {
                 Let's Start Your AI Transformation
               </span>
             </h2>
-            <p className="text-xl text-slate-600 max-w-5xl mx-auto leading-relaxed">
+            <p className="text-xl text-slate-600 max-w-5xl mx-auto leading-relaxed text-justify">
               Whether you're looking to implement <span className="font-bold text-blue-600">AI project management</span>, 
               optimize operations with <span className="font-bold text-purple-600">GPT-powered solutions</span>, 
               or accelerate <span className="font-bold text-orange-600">digital transformation</span>, we're here to help you succeed 
