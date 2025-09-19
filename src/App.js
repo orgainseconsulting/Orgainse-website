@@ -1129,7 +1129,7 @@ const Home = () => {
               </span>
               <span className="text-slate-800"> Consulting Arsenal</span>
             </h2>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto text-justify">
               Transforming businesses with GPT-powered solutions across key industries.
             </p>
           </div>
