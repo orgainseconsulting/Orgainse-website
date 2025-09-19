@@ -75,7 +75,7 @@ const SEOContent = () => {
               Comprehensive Business Consulting Solutions
             </h2>
             
-            <p className="text-lg text-slate-700 leading-relaxed mb-8">
+            <p className="text-lg text-slate-700 leading-relaxed mb-8 text-justify">
               Our <strong>comprehensive consulting services</strong> encompass the full spectrum of business transformation needs. From initial <strong>strategic assessment</strong> to complete <strong>operational optimization</strong>, we provide end-to-end solutions tailored to your industry requirements and organizational goals.
             </p>
 
@@ -83,14 +83,14 @@ const SEOContent = () => {
               <div className="text-center">
                 <Target className="h-8 w-8 text-orange-500 mx-auto mb-3" />
                 <h3 className="text-lg font-semibold text-slate-900 mb-2">Strategic Consulting</h3>
-                <p className="text-slate-700">Business strategy development, market analysis, and growth planning for sustainable competitive advantage.</p>
+                <p className="text-slate-700 text-justify">Business strategy development, market analysis, and growth planning for sustainable competitive advantage.</p>
               </div>
               
               <div className="text-center">
                 <Zap className="h-8 w-8 text-yellow-500 mx-auto mb-3" />
                 <div>
                   <h3 className="text-lg font-semibold text-slate-900 mb-2">Digital Transformation</h3>
-                  <p className="text-slate-700">Complete technology modernization, process digitization, and digital strategy implementation.</p>
+                  <p className="text-slate-700 text-justify">Complete technology modernization, process digitization, and digital strategy implementation.</p>
                 </div>
               </div>
               
@@ -98,6 +98,10 @@ const SEOContent = () => {
                 <Users className="h-8 w-8 text-blue-500 mx-auto mb-3" />
                 <div>
                   <h3 className="text-lg font-semibold text-slate-900 mb-2">Operational Excellence</h3>
+                  <p className="text-slate-700 text-justify">Process optimization, performance improvement, and operational efficiency enhancement.</p>
+                </div>
+              </div>
+            </div>
                   <p className="text-slate-700">Process optimization, performance improvement, and operational efficiency enhancement.</p>
                 </div>
               </div>
