@@ -1010,12 +1010,15 @@ const Home = () => {
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </button>
-                <button className="group relative px-4 sm:px-6 py-3 bg-transparent border-2 border-green-500 text-green-600 font-bold rounded-xl hover:bg-green-50 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto">
-                  <span className="flex items-center justify-center text-sm sm:text-base">
-                    View Success Stories
-                    <Star className="ml-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
-                  </span>
-                </button>
+                
+                {/* Share Button replacing View Success Stories */}
+                <div className="w-full sm:w-auto">
+                  <SocialShare 
+                    url="https://orgainse.com/"
+                    title="AI Business Consulting | Digital Transformation | Orgainse Consulting"
+                    description="Transform your business with comprehensive consulting services. 340% ROI, 25% faster delivery. Digital transformation consulting across India, USA, UK, UAE, Australia."
+                  />
+                </div>
               </div>
 
               {/* Internal Links for SEO */}
