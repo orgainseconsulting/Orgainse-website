@@ -174,20 +174,6 @@ const SEOContent = () => {
 };
 
 export default SEOContent;
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <Users className="h-6 w-6 text-blue-500 mt-1" />
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">Expert Team</h3>
-                  <p className="text-slate-700">Certified project managers and AI specialists with deep industry expertise across multiple verticals and technology stacks.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <Globe className="h-6 w-6 text-green-500 mt-1" />
-                <div>
                   <h3 className="text-lg font-semibold text-slate-900 mb-2">Global Reach</h3>
                   <p className="text-slate-700">Serving businesses across 7 countries: India, USA, UK, UAE, Australia, New Zealand, and South Africa with 24/7 support.</p>
                 </div>
