@@ -174,15 +174,6 @@ const SEOContent = () => {
 };
 
 export default SEOContent;
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">Global Reach</h3>
-                  <p className="text-slate-700">Serving businesses across 7 countries: India, USA, UK, UAE, Australia, New Zealand, and South Africa with 24/7 support.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Services Overview */}
-          <div className="mb-12">
             <h2 className="text-3xl font-bold text-slate-900 mb-8">
               Comprehensive AI Project Management Solutions
             </h2>
