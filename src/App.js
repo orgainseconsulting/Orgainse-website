@@ -1517,7 +1517,7 @@ const About = () => {
                 AI-Native Digital Transformation Leaders & GPT-Powered Project Management Experts
               </h2>
               
-              <p className="text-lg text-slate-700 leading-relaxed mb-6">
+              <p className="text-lg text-slate-700 leading-relaxed mb-6 text-justify">
                 We are an AI-native consulting firm specializing in <span className="text-orange-600 font-bold">GPT-powered project management</span>, 
                 intelligent business strategy, and <span className="text-green-600 font-bold">automated operational optimization</span> 
                 for startups and SMEs across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
