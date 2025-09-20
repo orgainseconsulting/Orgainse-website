@@ -280,7 +280,7 @@ const SEOContent = () => {
                       <h4 className="text-slate-900 font-bold text-left mb-2">
                         IT Services & Software Development:
                       </h4>
-                      <p className="text-slate-700 leading-relaxed text-center">
+                      <p className="text-slate-700 leading-relaxed text-left">
                         Technology strategy, agile transformation, and development process optimization
                       </p>
                     </div>
@@ -296,7 +296,7 @@ const SEOContent = () => {
                       <h4 className="text-slate-900 font-bold text-left mb-2">
                         EdTech & Education:
                       </h4>
-                      <p className="text-slate-700 leading-relaxed text-center">
+                      <p className="text-slate-700 leading-relaxed text-left">
                         Educational technology consulting, learning platform optimization, and institutional transformation
                       </p>
                     </div>
@@ -312,7 +312,7 @@ const SEOContent = () => {
                       <h4 className="text-slate-900 font-bold text-left mb-2">
                         FinTech & Financial Services:
                       </h4>
-                      <p className="text-slate-700 leading-relaxed text-center">
+                      <p className="text-slate-700 leading-relaxed text-left">
                         Financial technology strategy, regulatory compliance, and process automation
                       </p>
                     </div>
@@ -328,7 +328,7 @@ const SEOContent = () => {
                       <h4 className="text-slate-900 font-bold text-left mb-2">
                         Healthcare & MedTech:
                       </h4>
-                      <p className="text-slate-700 leading-relaxed text-center">
+                      <p className="text-slate-700 leading-relaxed text-left">
                         Healthcare technology consulting, clinical process optimization, and digital health solutions
                       </p>
                     </div>
@@ -344,7 +344,7 @@ const SEOContent = () => {
                       <h4 className="text-slate-900 font-bold text-left mb-2">
                         Hospitality & Tourism:
                       </h4>
-                      <p className="text-slate-700 leading-relaxed text-center">
+                      <p className="text-slate-700 leading-relaxed text-left">
                         Customer experience optimization, operations consulting, and digital service transformation
                       </p>
                     </div>
@@ -360,7 +360,7 @@ const SEOContent = () => {
                       <h4 className="text-slate-900 font-bold text-left mb-2">
                         Manufacturing & Supply Chain:
                       </h4>
-                      <p className="text-slate-700 leading-relaxed text-center">
+                      <p className="text-slate-700 leading-relaxed text-left">
                         Industrial automation, quality management, and intelligent supply chain coordination
                       </p>
                     </div>
