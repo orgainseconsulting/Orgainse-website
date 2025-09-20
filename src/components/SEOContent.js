@@ -172,37 +172,68 @@ const SEOContent = () => {
             </div>
           </div>
 
-          {/* Comprehensive Services Section */}
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-8">
-              Comprehensive Business Consulting Solutions
-            </h2>
+          {/* Enhanced Comprehensive Services Section with Beautiful Design */}
+          <div className="mb-12 relative">
+            {/* Background Design Elements */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-16 left-16 w-28 h-28 bg-gradient-to-r from-green-300 to-blue-300 rounded-full blur-2xl animate-pulse"></div>
+              <div className="absolute bottom-16 right-16 w-36 h-36 bg-gradient-to-r from-purple-300 to-pink-300 rounded-full blur-2xl animate-pulse animation-delay-1500"></div>
+            </div>
             
-            <p className="text-lg text-slate-700 leading-relaxed mb-8 text-justify">
-              Our <strong>comprehensive consulting services</strong> encompass the full spectrum of business transformation needs. From initial <strong>strategic assessment</strong> to complete <strong>operational optimization</strong>, we provide end-to-end solutions tailored to your industry requirements and organizational goals.
-            </p>
+            {/* Enhanced Section Title */}
+            <div className="text-center mb-8 relative z-10">
+              <div className="inline-block">
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Comprehensive Business Consulting Solutions
+                </h2>
+                {/* Decorative underline */}
+                <div className="w-32 h-1 bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 rounded-full mx-auto animate-pulse"></div>
+              </div>
+            </div>
+            
+            {/* Enhanced Description Card */}
+            <div className="bg-gradient-to-r from-white via-blue-50 to-purple-50 rounded-2xl p-8 shadow-xl border border-blue-200/30 mb-8 relative z-10 hover:shadow-2xl transition-all duration-500 transform hover:scale-[1.02]">
+              <p className="text-lg text-slate-700 leading-relaxed text-justify">
+                Our <strong>comprehensive consulting services</strong> encompass the full spectrum of business transformation needs. From initial <strong>strategic assessment</strong> to complete <strong>operational optimization</strong>, we provide end-to-end solutions tailored to your industry requirements and organizational goals.
+              </p>
+              {/* Decorative corners */}
+              <div className="absolute top-4 right-4 w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full opacity-20 animate-pulse"></div>
+              <div className="absolute bottom-4 left-4 w-6 h-6 bg-gradient-to-br from-green-400 to-blue-400 rounded-full opacity-20 animate-pulse animation-delay-1000"></div>
+            </div>
 
-            <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="text-center">
-                <Target className="h-8 w-8 text-orange-500 mx-auto mb-3" />
-                <h3 className="text-lg font-semibold text-slate-900 mb-2">Strategic Consulting</h3>
-                <p className="text-slate-700 text-justify">Business strategy development, market analysis, and growth planning for sustainable competitive advantage.</p>
+            {/* Enhanced Service Cards Grid */}
+            <div className="grid md:grid-cols-3 gap-8 mb-8 relative z-10">
+              {/* Strategic Consulting Card */}
+              <div className="group bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-6 shadow-lg border border-orange-200/50 hover:shadow-2xl transition-all duration-500 transform hover:scale-105 text-center animate-fade-in">
+                <div className="bg-gradient-to-r from-orange-400 to-red-500 p-4 rounded-full mx-auto mb-4 w-16 h-16 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+                  <Target className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-orange-700 transition-colors">Strategic Consulting</h3>
+                <p className="text-slate-700 text-justify leading-relaxed">Business strategy development, market analysis, and growth planning for sustainable competitive advantage.</p>
+                {/* Card bottom decoration */}
+                <div className="mt-4 w-full h-1 bg-gradient-to-r from-orange-400 to-red-500 rounded-full opacity-30 group-hover:opacity-60 transition-opacity"></div>
               </div>
               
-              <div className="text-center">
-                <Zap className="h-8 w-8 text-yellow-500 mx-auto mb-3" />
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">Digital Transformation</h3>
-                  <p className="text-slate-700 text-justify">Complete technology modernization, process digitization, and digital strategy implementation.</p>
+              {/* Digital Transformation Card */}
+              <div className="group bg-gradient-to-br from-yellow-50 to-amber-50 rounded-xl p-6 shadow-lg border border-yellow-200/50 hover:shadow-2xl transition-all duration-500 transform hover:scale-105 text-center animate-fade-in animation-delay-200">
+                <div className="bg-gradient-to-r from-yellow-400 to-amber-500 p-4 rounded-full mx-auto mb-4 w-16 h-16 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+                  <Zap className="h-8 w-8 text-white" />
                 </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-yellow-700 transition-colors">Digital Transformation</h3>
+                <p className="text-slate-700 text-justify leading-relaxed">Complete technology modernization, process digitization, and digital strategy implementation.</p>
+                {/* Card bottom decoration */}
+                <div className="mt-4 w-full h-1 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full opacity-30 group-hover:opacity-60 transition-opacity"></div>
               </div>
               
-              <div className="text-center">
-                <Users className="h-8 w-8 text-blue-500 mx-auto mb-3" />
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">Operational Excellence</h3>
-                  <p className="text-slate-700 text-justify">Process optimization, performance improvement, and operational efficiency enhancement.</p>
+              {/* Operational Excellence Card */}
+              <div className="group bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 shadow-lg border border-blue-200/50 hover:shadow-2xl transition-all duration-500 transform hover:scale-105 text-center animate-fade-in animation-delay-400">
+                <div className="bg-gradient-to-r from-blue-400 to-indigo-500 p-4 rounded-full mx-auto mb-4 w-16 h-16 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+                  <Users className="h-8 w-8 text-white" />
                 </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Operational Excellence</h3>
+                <p className="text-slate-700 text-justify leading-relaxed">Process optimization, performance improvement, and operational efficiency enhancement.</p>
+                {/* Card bottom decoration */}
+                <div className="mt-4 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full opacity-30 group-hover:opacity-60 transition-opacity"></div>
               </div>
             </div>
           </div>
