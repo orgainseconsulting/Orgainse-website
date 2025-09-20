@@ -3,17 +3,44 @@ import { CheckCircle, TrendingUp, Users, Globe, Zap, Target } from 'lucide-react
 
 const SEOContent = () => {
   return (
-    <div className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="py-16 bg-gradient-to-br from-slate-50 via-purple-50 to-blue-50 relative overflow-hidden">
+      {/* Beautiful Background Elements */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-blue-200 to-purple-200 rounded-full blur-3xl animate-pulse will-change-transform"></div>
+        <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-purple-200 to-pink-200 rounded-full blur-3xl animate-pulse will-change-transform animation-delay-2000"></div>
+        <div className="absolute top-1/2 left-1/4 w-6 h-16 bg-blue-300 rounded-full animate-pulse opacity-40"></div>
+        <div className="absolute top-1/3 right-1/3 w-4 h-12 bg-purple-300 rounded-full animate-pulse opacity-30 animation-delay-1000"></div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Main Content Section */}
+        {/* Enhanced Main Content Section with Design Elements */}
         <div className="max-w-4xl mx-auto">
           
-          {/* Introduction Paragraph */}
-          <div className="prose prose-lg max-w-none mb-12">
-            <h1 className="text-4xl font-bold text-slate-900 mb-6 leading-tight">
-              Comprehensive Business Consulting Services: Transform Your Business with AI-Native Solutions
-            </h1>
+          {/* Enhanced Introduction Section with Visual Elements */}
+          <div className="prose prose-lg max-w-none mb-12 relative">
+            {/* Decorative Element Above Title */}
+            <div className="flex justify-center mb-6">
+              <div className="w-20 h-1 bg-gradient-to-r from-orange-500 via-green-500 to-blue-500 rounded-full animate-pulse"></div>
+            </div>
+            
+            {/* Enhanced Title with Gradient Background */}
+            <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20 mb-8 animate-fade-in">
+              <h1 className="text-4xl font-bold mb-6 leading-tight text-center">
+                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-orange-600 bg-clip-text text-transparent">
+                  Comprehensive Business Consulting Services:
+                </span>
+                <br />
+                <span className="text-slate-800">Transform Your Business with </span>
+                <span className="bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient-text">
+                  AI-Native Solutions
+                </span>
+              </h1>
+              
+              {/* Decorative Corner Elements */}
+              <div className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-orange-400 to-pink-400 rounded-full opacity-20 animate-pulse"></div>
+              <div className="absolute bottom-4 left-4 w-8 h-8 bg-gradient-to-br from-blue-400 to-green-400 rounded-full opacity-20 animate-pulse animation-delay-1000"></div>
+            </div>
             
             <p className="text-xl text-slate-700 leading-relaxed mb-6 text-justify">
               <strong>Orgainse Consulting</strong> is a leading <strong>business consulting firm</strong> offering comprehensive <strong>digital transformation</strong>, <strong>project management</strong>, <strong>AI strategy</strong>, and <strong>operational optimization services</strong> for startups and SMEs worldwide. Our integrated consulting approach delivers an average <strong>340% ROI</strong> and <strong>25% faster delivery</strong> across industries including IT Services, EdTech, FinTech, Healthcare, Hospitality, and Software Development.
