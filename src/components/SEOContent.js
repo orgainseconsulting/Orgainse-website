@@ -42,17 +42,35 @@ const SEOContent = () => {
               <div className="absolute bottom-4 left-4 w-8 h-8 bg-gradient-to-br from-blue-400 to-green-400 rounded-full opacity-20 animate-pulse animation-delay-1000"></div>
             </div>
             
-            <p className="text-xl text-slate-700 leading-relaxed mb-6 text-justify">
-              <strong>Orgainse Consulting</strong> is a leading <strong>business consulting firm</strong> offering comprehensive <strong>digital transformation</strong>, <strong>project management</strong>, <strong>AI strategy</strong>, and <strong>operational optimization services</strong> for startups and SMEs worldwide. Our integrated consulting approach delivers an average <strong>340% ROI</strong> and <strong>25% faster delivery</strong> across industries including IT Services, EdTech, FinTech, Healthcare, Hospitality, and Software Development.
-            </p>
+            {/* Enhanced Content Cards */}
+            <div className="space-y-6">
+              {/* First Content Card */}
+              <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-white/30 hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] animate-fade-in">
+                <p className="text-xl text-slate-700 leading-relaxed text-justify">
+                  <strong>Orgainse Consulting</strong> is a leading <strong>business consulting firm</strong> offering comprehensive <strong>digital transformation</strong>, <strong>project management</strong>, <strong>AI strategy</strong>, and <strong>operational optimization services</strong> for startups and SMEs worldwide. Our integrated consulting approach delivers an average <strong>340% ROI</strong> and <strong>25% faster delivery</strong> across industries including IT Services, EdTech, FinTech, Healthcare, Hospitality, and Software Development.
+                </p>
+                {/* Small decorative element */}
+                <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-4 animate-pulse"></div>
+              </div>
 
-            <p className="text-lg text-slate-700 leading-relaxed mb-6 text-justify">
-              Since our founding in <strong>2025</strong>, we have revolutionized how businesses approach <strong>comprehensive transformation</strong> by integrating cutting-edge technology with proven business methodologies. Our <strong>holistic consulting approach</strong> enables organizations to achieve unprecedented efficiency, cost reduction, and strategic growth through intelligent solutions and data-driven decision making across all business functions.
-            </p>
+              {/* Second Content Card */}
+              <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 shadow-lg border border-blue-200/50 hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] animate-fade-in animation-delay-300">
+                <p className="text-lg text-slate-700 leading-relaxed text-justify">
+                  Since our founding in <strong>2025</strong>, we have revolutionized how businesses approach <strong>comprehensive transformation</strong> by integrating cutting-edge technology with proven business methodologies. Our <strong>holistic consulting approach</strong> enables organizations to achieve unprecedented efficiency, cost reduction, and strategic growth through intelligent solutions and data-driven decision making across all business functions.
+                </p>
+                {/* Small decorative element */}
+                <div className="w-16 h-1 bg-gradient-to-r from-green-500 to-orange-500 rounded-full mt-4 animate-pulse"></div>
+              </div>
 
-            <p className="text-lg text-slate-700 leading-relaxed mb-8 text-justify">
-              <strong>Modern business consulting</strong> requires expertise across multiple domains. Our comprehensive service portfolio includes <strong>digital transformation</strong>, <strong>project management optimization</strong>, <strong>AI strategy development</strong>, <strong>risk management</strong>, and <strong>operational excellence</strong>. This integrated approach results in significantly improved business outcomes and client satisfaction rates exceeding 95%.
-            </p>
+              {/* Third Content Card */}
+              <div className="bg-gradient-to-r from-green-50 to-orange-50 rounded-xl p-6 shadow-lg border border-green-200/50 hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] animate-fade-in animation-delay-600">
+                <p className="text-lg text-slate-700 leading-relaxed text-justify">
+                  <strong>Modern business consulting</strong> requires expertise across multiple domains. Our comprehensive service portfolio includes <strong>digital transformation</strong>, <strong>project management optimization</strong>, <strong>AI strategy development</strong>, <strong>risk management</strong>, and <strong>operational excellence</strong>. This integrated approach results in significantly improved business outcomes and client satisfaction rates exceeding 95%.
+                </p>
+                {/* Small decorative element */}
+                <div className="w-16 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mt-4 animate-pulse"></div>
+              </div>
+            </div>
           </div>
 
           {/* Key Benefits Section */}
