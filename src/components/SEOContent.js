@@ -73,40 +73,104 @@ const SEOContent = () => {
             </div>
           </div>
 
-          {/* Key Benefits Section */}
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-8">
-              Why Choose Orgainse Consulting Services?
-            </h2>
+          {/* Enhanced Key Benefits Section with Beautiful Design */}
+          <div className="mb-12 relative">
+            {/* Background Design Elements for this section */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-10 right-10 w-32 h-32 bg-gradient-to-r from-orange-300 to-yellow-300 rounded-full blur-2xl animate-pulse"></div>
+              <div className="absolute bottom-10 left-10 w-40 h-40 bg-gradient-to-r from-blue-300 to-green-300 rounded-full blur-2xl animate-pulse animation-delay-1000"></div>
+            </div>
             
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="flex items-start space-x-4">
-                <CheckCircle className="h-6 w-6 text-green-500 mt-1" />
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">340% Average ROI</h3>
-                  <p className="text-slate-700">Proven return on investment within 18 months through comprehensive business optimization and intelligent automation across all consulting services.</p>
+            {/* Enhanced Section Title */}
+            <div className="text-center mb-12 relative z-10">
+              <div className="inline-block">
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-slate-800 via-blue-700 to-purple-700 bg-clip-text text-transparent">
+                  Why Choose Orgainse Consulting Services?
+                </h2>
+                {/* Decorative underline */}
+                <div className="w-24 h-1 bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 rounded-full mx-auto animate-pulse"></div>
+              </div>
+            </div>
+            
+            {/* Enhanced Benefits Grid with Cards */}
+            <div className="grid md:grid-cols-2 gap-6 mb-8 relative z-10">
+              {/* 340% ROI Card */}
+              <div className="group bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6 shadow-lg border border-green-200/50 hover:shadow-2xl transition-all duration-500 transform hover:scale-105 animate-fade-in">
+                <div className="flex items-start space-x-4">
+                  <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-3 rounded-full shadow-lg group-hover:shadow-xl transition-all duration-300">
+                    <CheckCircle className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-green-700 transition-colors">
+                      340% Average ROI
+                    </h3>
+                    <p className="text-slate-700 text-justify leading-relaxed">
+                      Proven return on investment within 18 months through comprehensive business optimization and intelligent automation across all consulting services.
+                    </p>
+                  </div>
                 </div>
+                {/* Card bottom decoration */}
+                <div className="mt-4 w-full h-1 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full opacity-30 group-hover:opacity-60 transition-opacity"></div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <TrendingUp className="h-6 w-6 text-orange-500 mt-1" />
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">25% Faster Delivery</h3>
-                  <p className="text-slate-700">Accelerated business transformation through integrated consulting services, strategic planning, and optimized implementation processes.</p>
+              {/* 25% Faster Delivery Card */}
+              <div className="group bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-6 shadow-lg border border-orange-200/50 hover:shadow-2xl transition-all duration-500 transform hover:scale-105 animate-fade-in animation-delay-200">
+                <div className="flex items-start space-x-4">
+                  <div className="bg-gradient-to-r from-orange-400 to-red-500 p-3 rounded-full shadow-lg group-hover:shadow-xl transition-all duration-300">
+                    <TrendingUp className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-orange-700 transition-colors">
+                      25% Faster Delivery
+                    </h3>
+                    <p className="text-slate-700 text-justify leading-relaxed">
+                      Accelerated business transformation through integrated consulting services, strategic planning, and optimized implementation processes.
+                    </p>
+                  </div>
                 </div>
+                {/* Card bottom decoration */}
+                <div className="mt-4 w-full h-1 bg-gradient-to-r from-orange-400 to-red-500 rounded-full opacity-30 group-hover:opacity-60 transition-opacity"></div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <Users className="h-6 w-6 text-blue-500 mt-1" />
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">Expert Team</h3>
-                  <p className="text-slate-700">Certified business consultants, strategists, and transformation specialists with deep industry expertise across multiple verticals and business functions.</p>
+              {/* Expert Team Card */}
+              <div className="group bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 shadow-lg border border-blue-200/50 hover:shadow-2xl transition-all duration-500 transform hover:scale-105 animate-fade-in animation-delay-400">
+                <div className="flex items-start space-x-4">
+                  <div className="bg-gradient-to-r from-blue-400 to-indigo-500 p-3 rounded-full shadow-lg group-hover:shadow-xl transition-all duration-300">
+                    <Users className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-700 transition-colors">
+                      Expert Team
+                    </h3>
+                    <p className="text-slate-700 text-justify leading-relaxed">
+                      Certified business consultants, strategists, and transformation specialists with deep industry expertise across multiple verticals and business functions.
+                    </p>
+                  </div>
                 </div>
+                {/* Card bottom decoration */}
+                <div className="mt-4 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full opacity-30 group-hover:opacity-60 transition-opacity"></div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <Globe className="h-6 w-6 text-purple-500 mt-1" />
-                <div>
+              {/* Global Reach Card */}
+              <div className="group bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 shadow-lg border border-purple-200/50 hover:shadow-2xl transition-all duration-500 transform hover:scale-105 animate-fade-in animation-delay-600">
+                <div className="flex items-start space-x-4">
+                  <div className="bg-gradient-to-r from-purple-400 to-pink-500 p-3 rounded-full shadow-lg group-hover:shadow-xl transition-all duration-300">
+                    <Globe className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-purple-700 transition-colors">
+                      Global Reach
+                    </h3>
+                    <p className="text-slate-700 text-justify leading-relaxed">
+                      Serving businesses across 7 countries: India, USA, UK, UAE, Australia, New Zealand, and South Africa with comprehensive consulting support.
+                    </p>
+                  </div>
+                </div>
+                {/* Card bottom decoration */}
+                <div className="mt-4 w-full h-1 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full opacity-30 group-hover:opacity-60 transition-opacity"></div>
+              </div>
+            </div>
+          </div>
                   <h3 className="text-lg font-semibold text-slate-900 mb-2">Global Reach</h3>
                   <p className="text-slate-700">Serving businesses across 7 countries: India, USA, UK, UAE, Australia, New Zealand, and South Africa with comprehensive consulting support.</p>
                 </div>
