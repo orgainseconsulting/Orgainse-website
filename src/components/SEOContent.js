@@ -171,12 +171,6 @@ const SEOContent = () => {
               </div>
             </div>
           </div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">Global Reach</h3>
-                  <p className="text-slate-700">Serving businesses across 7 countries: India, USA, UK, UAE, Australia, New Zealand, and South Africa with comprehensive consulting support.</p>
-                </div>
-              </div>
-            </div>
-          </div>
 
           {/* Comprehensive Services Section */}
           <div className="mb-12">
