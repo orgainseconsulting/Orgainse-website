@@ -276,9 +276,12 @@ const SEOContent = () => {
                     <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
                       <CheckCircle className="h-5 w-5 text-white" />
                     </div>
-                    <div>
-                      <p className="text-slate-700 font-medium text-justify leading-relaxed">
-                        <strong>IT Services & Software Development:</strong> Technology strategy, agile transformation, and development process optimization
+                    <div className="flex-1">
+                      <h4 className="text-slate-900 font-bold text-left mb-2 whitespace-nowrap">
+                        IT Services & Software Development:
+                      </h4>
+                      <p className="text-slate-700 text-center leading-relaxed">
+                        Technology strategy, agile transformation, and development process optimization
                       </p>
                     </div>
                   </div>
@@ -289,9 +292,12 @@ const SEOContent = () => {
                     <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
                       <CheckCircle className="h-5 w-5 text-white" />
                     </div>
-                    <div>
-                      <p className="text-slate-700 font-medium text-justify leading-relaxed">
-                        <strong>EdTech & Education:</strong> Educational technology consulting, learning platform optimization, and institutional transformation
+                    <div className="flex-1">
+                      <h4 className="text-slate-900 font-bold text-left mb-2 whitespace-nowrap">
+                        EdTech & Education:
+                      </h4>
+                      <p className="text-slate-700 text-center leading-relaxed">
+                        Educational technology consulting, learning platform optimization, and institutional transformation
                       </p>
                     </div>
                   </div>
@@ -302,9 +308,12 @@ const SEOContent = () => {
                     <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
                       <CheckCircle className="h-5 w-5 text-white" />
                     </div>
-                    <div>
-                      <p className="text-slate-700 font-medium text-justify leading-relaxed">
-                        <strong>FinTech & Financial Services:</strong> Financial technology strategy, regulatory compliance, and process automation
+                    <div className="flex-1">
+                      <h4 className="text-slate-900 font-bold text-left mb-2 whitespace-nowrap">
+                        FinTech & Financial Services:
+                      </h4>
+                      <p className="text-slate-700 text-center leading-relaxed">
+                        Financial technology strategy, regulatory compliance, and process automation
                       </p>
                     </div>
                   </div>
@@ -315,9 +324,12 @@ const SEOContent = () => {
                     <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
                       <CheckCircle className="h-5 w-5 text-white" />
                     </div>
-                    <div>
-                      <p className="text-slate-700 font-medium text-justify leading-relaxed">
-                        <strong>Healthcare & MedTech:</strong> Healthcare technology consulting, clinical process optimization, and digital health solutions
+                    <div className="flex-1">
+                      <h4 className="text-slate-900 font-bold text-left mb-2 whitespace-nowrap">
+                        Healthcare & MedTech:
+                      </h4>
+                      <p className="text-slate-700 text-center leading-relaxed">
+                        Healthcare technology consulting, clinical process optimization, and digital health solutions
                       </p>
                     </div>
                   </div>
@@ -328,9 +340,12 @@ const SEOContent = () => {
                     <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
                       <CheckCircle className="h-5 w-5 text-white" />
                     </div>
-                    <div>
-                      <p className="text-slate-700 font-medium text-justify leading-relaxed">
-                        <strong>Hospitality & Tourism:</strong> Customer experience optimization, operations consulting, and digital service transformation
+                    <div className="flex-1">
+                      <h4 className="text-slate-900 font-bold text-left mb-2 whitespace-nowrap">
+                        Hospitality & Tourism:
+                      </h4>
+                      <p className="text-slate-700 text-center leading-relaxed">
+                        Customer experience optimization, operations consulting, and digital service transformation
                       </p>
                     </div>
                   </div>
@@ -341,9 +356,12 @@ const SEOContent = () => {
                     <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
                       <CheckCircle className="h-5 w-5 text-white" />
                     </div>
-                    <div>
-                      <p className="text-slate-700 font-medium text-justify leading-relaxed">
-                        <strong>Manufacturing & Supply Chain:</strong> Industrial automation, quality management, and intelligent supply chain coordination
+                    <div className="flex-1">
+                      <h4 className="text-slate-900 font-bold text-left mb-2 whitespace-nowrap">
+                        Manufacturing & Supply Chain:
+                      </h4>
+                      <p className="text-slate-700 text-center leading-relaxed">
+                        Industrial automation, quality management, and intelligent supply chain coordination
                       </p>
                     </div>
                   </div>
