@@ -209,7 +209,7 @@ const SEOContent = () => {
                   <Target className="h-8 w-8 text-white" />
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-orange-700 transition-colors">Strategic Consulting</h3>
-                <p className="text-slate-700 text-justify leading-relaxed">Business strategy development, market analysis, and growth planning for sustainable competitive advantage.</p>
+                <p className="text-slate-700 text-center leading-relaxed">Business strategy development, market analysis, and growth planning for sustainable competitive advantage.</p>
                 {/* Card bottom decoration */}
                 <div className="mt-4 w-full h-1 bg-gradient-to-r from-orange-400 to-red-500 rounded-full opacity-30 group-hover:opacity-60 transition-opacity"></div>
               </div>
@@ -220,7 +220,7 @@ const SEOContent = () => {
                   <Zap className="h-8 w-8 text-white" />
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-yellow-700 transition-colors">Digital Transformation</h3>
-                <p className="text-slate-700 text-justify leading-relaxed">Complete technology modernization, process digitization, and digital strategy implementation.</p>
+                <p className="text-slate-700 text-center leading-relaxed">Complete technology modernization, process digitization, and digital strategy implementation.</p>
                 {/* Card bottom decoration */}
                 <div className="mt-4 w-full h-1 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full opacity-30 group-hover:opacity-60 transition-opacity"></div>
               </div>
@@ -231,7 +231,7 @@ const SEOContent = () => {
                   <Users className="h-8 w-8 text-white" />
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Operational Excellence</h3>
-                <p className="text-slate-700 text-justify leading-relaxed">Process optimization, performance improvement, and operational efficiency enhancement.</p>
+                <p className="text-slate-700 text-center leading-relaxed">Process optimization, performance improvement, and operational efficiency enhancement.</p>
                 {/* Card bottom decoration */}
                 <div className="mt-4 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full opacity-30 group-hover:opacity-60 transition-opacity"></div>
               </div>
