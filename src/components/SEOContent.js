@@ -238,37 +238,116 @@ const SEOContent = () => {
             </div>
           </div>
 
-          {/* Industry Expertise */}
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-8">
-              Industry-Specific Business Transformation Expertise
-            </h2>
+          {/* Enhanced Industry Expertise Section with Beautiful Design */}
+          <div className="mb-12 relative">
+            {/* Background Design Elements */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-12 right-12 w-24 h-24 bg-gradient-to-r from-pink-300 to-rose-300 rounded-full blur-2xl animate-pulse"></div>
+              <div className="absolute bottom-12 left-12 w-32 h-32 bg-gradient-to-r from-cyan-300 to-teal-300 rounded-full blur-2xl animate-pulse animation-delay-2000"></div>
+            </div>
             
-            <p className="text-lg text-slate-700 leading-relaxed mb-6">
-              Our team brings deep vertical expertise across multiple industries, ensuring that your <strong>business transformation solution</strong> aligns with industry best practices, regulatory requirements, and market-specific challenges.
-            </p>
+            {/* Enhanced Section Title */}
+            <div className="text-center mb-8 relative z-10">
+              <div className="inline-block">
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-teal-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                  Industry-Specific Business Transformation Expertise
+                </h2>
+                {/* Decorative underline */}
+                <div className="w-40 h-1 bg-gradient-to-r from-teal-500 via-cyan-500 to-blue-500 rounded-full mx-auto animate-pulse"></div>
+              </div>
+            </div>
+            
+            {/* Enhanced Description Card */}
+            <div className="bg-gradient-to-r from-white via-teal-50 to-cyan-50 rounded-2xl p-8 shadow-xl border border-teal-200/30 mb-8 relative z-10 hover:shadow-2xl transition-all duration-500 transform hover:scale-[1.02]">
+              <p className="text-lg text-slate-700 leading-relaxed mb-6 text-justify">
+                Our team brings deep vertical expertise across multiple industries, ensuring that your <strong>business transformation solution</strong> aligns with industry best practices, regulatory requirements, and market-specific challenges.
+              </p>
+              {/* Decorative corners */}
+              <div className="absolute top-4 right-4 w-8 h-8 bg-gradient-to-br from-teal-400 to-cyan-400 rounded-full opacity-20 animate-pulse"></div>
+              <div className="absolute bottom-4 left-4 w-6 h-6 bg-gradient-to-br from-cyan-400 to-blue-400 rounded-full opacity-20 animate-pulse animation-delay-1000"></div>
+            </div>
 
-            <h3 className="text-xl font-semibold text-slate-900 mb-4">Key Industries We Serve:</h3>
-            <div className="space-y-3 mb-8">
-              <div className="flex items-start space-x-3">
-                <CheckCircle className="h-5 w-5 text-green-500 mt-1" />
-                <p className="text-slate-700"><strong>IT Services & Software Development:</strong> Technology strategy, agile transformation, and development process optimization</p>
-              </div>
-              <div className="flex items-start space-x-3">
-                <CheckCircle className="h-5 w-5 text-green-500 mt-1" />
-                <p className="text-slate-700"><strong>EdTech & Education:</strong> Educational technology consulting, learning platform optimization, and institutional transformation</p>
-              </div>
-              <div className="flex items-start space-x-3">
-                <CheckCircle className="h-5 w-5 text-green-500 mt-1" />
-                <p className="text-slate-700"><strong>FinTech & Financial Services:</strong> Financial technology strategy, regulatory compliance, and process automation</p>
-              </div>
-              <div className="flex items-start space-x-3">
-                <CheckCircle className="h-5 w-5 text-green-500 mt-1" />
-                <p className="text-slate-700"><strong>Healthcare & MedTech:</strong> Healthcare technology consulting, clinical process optimization, and digital health solutions</p>
-              </div>
-              <div className="flex items-start space-x-3">
-                <CheckCircle className="h-5 w-5 text-green-500 mt-1" />
-                <p className="text-slate-700"><strong>Hospitality & Tourism:</strong> Customer experience optimization, operations consulting, and digital service transformation</p>
+            {/* Enhanced Industries List */}
+            <div className="relative z-10">
+              <h3 className="text-xl font-bold text-slate-900 mb-6 text-center">Key Industries We Serve:</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                <div className="group bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 shadow-md border border-blue-200/50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in">
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
+                      <CheckCircle className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-slate-700 font-medium text-justify leading-relaxed">
+                        <strong>IT Services & Software Development:</strong> Technology strategy, agile transformation, and development process optimization
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="group bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-4 shadow-md border border-purple-200/50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in animation-delay-100">
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
+                      <CheckCircle className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-slate-700 font-medium text-justify leading-relaxed">
+                        <strong>EdTech & Education:</strong> Educational technology consulting, learning platform optimization, and institutional transformation
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="group bg-gradient-to-r from-green-50 to-teal-50 rounded-lg p-4 shadow-md border border-green-200/50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in animation-delay-200">
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
+                      <CheckCircle className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-slate-700 font-medium text-justify leading-relaxed">
+                        <strong>FinTech & Financial Services:</strong> Financial technology strategy, regulatory compliance, and process automation
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="group bg-gradient-to-r from-orange-50 to-red-50 rounded-lg p-4 shadow-md border border-orange-200/50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in animation-delay-300">
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
+                      <CheckCircle className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-slate-700 font-medium text-justify leading-relaxed">
+                        <strong>Healthcare & MedTech:</strong> Healthcare technology consulting, clinical process optimization, and digital health solutions
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="group bg-gradient-to-r from-yellow-50 to-amber-50 rounded-lg p-4 shadow-md border border-yellow-200/50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in animation-delay-400">
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
+                      <CheckCircle className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-slate-700 font-medium text-justify leading-relaxed">
+                        <strong>Hospitality & Tourism:</strong> Customer experience optimization, operations consulting, and digital service transformation
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="group bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg p-4 shadow-md border border-cyan-200/50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in animation-delay-500">
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
+                      <CheckCircle className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-slate-700 font-medium text-justify leading-relaxed">
+                        <strong>Manufacturing & Supply Chain:</strong> Industrial automation, quality management, and intelligent supply chain coordination
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
