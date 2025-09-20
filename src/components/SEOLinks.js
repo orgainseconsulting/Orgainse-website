@@ -86,6 +86,46 @@ const SEOLinks = () => {
       href: "https://openai.com/enterprise",
       text: "OpenAI Enterprise Solutions", 
       description: "Enterprise AI tools and capabilities"
+    },
+    {
+      href: "https://www.forrester.com/report/the-state-of-artificial-intelligence-2023/",
+      text: "Forrester AI Research Report",
+      description: "AI transformation trends and business impact analysis"
+    },
+    {
+      href: "https://www.deloitte.com/global/en/our-thinking/insights/topics/artificial-intelligence.html",
+      text: "Deloitte AI Insights",
+      description: "Strategic AI implementation and consulting insights"
+    },
+    {
+      href: "https://www.accenture.com/us-en/insights/artificial-intelligence-index",
+      text: "Accenture AI Index",
+      description: "AI adoption benchmarks and industry analysis"
+    },
+    {
+      href: "https://www.pwc.com/us/en/tech-effect/ai-analytics.html",
+      text: "PwC AI Analytics",
+      description: "AI business value and ROI measurement frameworks"
+    },
+    {
+      href: "https://www.bcg.com/capabilities/artificial-intelligence",
+      text: "BCG AI Capabilities",
+      description: "AI strategy development and transformation consulting"
+    },
+    {
+      href: "https://www.ibm.com/watson/ai-consulting",
+      text: "IBM AI Consulting",
+      description: "Enterprise AI implementation and consulting services"
+    },
+    {
+      href: "https://cloud.google.com/ai/",
+      text: "Google Cloud AI",
+      description: "AI platform and machine learning development tools"
+    },
+    {
+      href: "https://azure.microsoft.com/en-us/products/ai-services/",
+      text: "Microsoft Azure AI",
+      description: "Comprehensive AI services and cognitive solutions"
     }
   ];
 
