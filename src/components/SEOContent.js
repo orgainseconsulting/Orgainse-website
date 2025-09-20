@@ -277,10 +277,10 @@ const SEOContent = () => {
                       <CheckCircle className="h-5 w-5 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-slate-900 font-bold text-left mb-2 whitespace-nowrap">
+                      <h4 className="text-slate-900 font-bold text-left mb-2">
                         IT Services & Software Development:
                       </h4>
-                      <p className="text-slate-700 text-center leading-relaxed">
+                      <p className="text-slate-700 leading-relaxed text-center">
                         Technology strategy, agile transformation, and development process optimization
                       </p>
                     </div>
@@ -293,10 +293,10 @@ const SEOContent = () => {
                       <CheckCircle className="h-5 w-5 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-slate-900 font-bold text-left mb-2 whitespace-nowrap">
+                      <h4 className="text-slate-900 font-bold text-left mb-2">
                         EdTech & Education:
                       </h4>
-                      <p className="text-slate-700 text-center leading-relaxed">
+                      <p className="text-slate-700 leading-relaxed text-center">
                         Educational technology consulting, learning platform optimization, and institutional transformation
                       </p>
                     </div>
@@ -309,10 +309,10 @@ const SEOContent = () => {
                       <CheckCircle className="h-5 w-5 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-slate-900 font-bold text-left mb-2 whitespace-nowrap">
+                      <h4 className="text-slate-900 font-bold text-left mb-2">
                         FinTech & Financial Services:
                       </h4>
-                      <p className="text-slate-700 text-center leading-relaxed">
+                      <p className="text-slate-700 leading-relaxed text-center">
                         Financial technology strategy, regulatory compliance, and process automation
                       </p>
                     </div>
@@ -325,10 +325,10 @@ const SEOContent = () => {
                       <CheckCircle className="h-5 w-5 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-slate-900 font-bold text-left mb-2 whitespace-nowrap">
+                      <h4 className="text-slate-900 font-bold text-left mb-2">
                         Healthcare & MedTech:
                       </h4>
-                      <p className="text-slate-700 text-center leading-relaxed">
+                      <p className="text-slate-700 leading-relaxed text-center">
                         Healthcare technology consulting, clinical process optimization, and digital health solutions
                       </p>
                     </div>
@@ -341,10 +341,10 @@ const SEOContent = () => {
                       <CheckCircle className="h-5 w-5 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-slate-900 font-bold text-left mb-2 whitespace-nowrap">
+                      <h4 className="text-slate-900 font-bold text-left mb-2">
                         Hospitality & Tourism:
                       </h4>
-                      <p className="text-slate-700 text-center leading-relaxed">
+                      <p className="text-slate-700 leading-relaxed text-center">
                         Customer experience optimization, operations consulting, and digital service transformation
                       </p>
                     </div>
@@ -357,10 +357,10 @@ const SEOContent = () => {
                       <CheckCircle className="h-5 w-5 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-slate-900 font-bold text-left mb-2 whitespace-nowrap">
+                      <h4 className="text-slate-900 font-bold text-left mb-2">
                         Manufacturing & Supply Chain:
                       </h4>
-                      <p className="text-slate-700 text-center leading-relaxed">
+                      <p className="text-slate-700 leading-relaxed text-center">
                         Industrial automation, quality management, and intelligent supply chain coordination
                       </p>
                     </div>
