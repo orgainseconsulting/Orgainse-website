@@ -627,7 +627,14 @@ const Footer = () => {
               
               <div>
                 <div className="font-semibold text-slate-800 mb-1">Austin, USA (Corporate)</div>
-                <div className="text-slate-600">Corporate Office</div>
+                <div className="flex items-center space-x-2 mb-1">
+                  <Phone className="h-4 w-4" />
+                  <span>+1-(512) 641-8773</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Phone className="h-4 w-4" />
+                  <span>+1-(512) 641-3494</span>
+                </div>
               </div>
               
               <div className="space-y-1">
@@ -973,7 +980,7 @@ const Home = () => {
               
               <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-4 sm:mb-6 max-w-2xl mx-auto lg:mx-0 text-justify">
                 <strong>AI-native business consulting</strong> with comprehensive digital transformation solutions for 
-                <span className="text-orange-600 font-bold"> startups</span> and <span className="text-green-600 font-bold">SMEs</span> 
+                <span className="text-orange-600 font-bold"> startups</span> and <span className="text-green-600 font-bold">SMEs </span>  
                 across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
               </p>
               
@@ -1129,7 +1136,7 @@ const Home = () => {
               </span>
               <span className="text-slate-800"> Consulting Arsenal</span>
             </h2>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto text-justify">
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto text-center">
               Transforming businesses with GPT-powered solutions across key industries.
             </p>
           </div>
@@ -1519,22 +1526,22 @@ const About = () => {
               
               <p className="text-lg text-slate-700 leading-relaxed mb-6 text-justify">
                 We are an AI-native consulting firm specializing in <span className="text-orange-600 font-bold">GPT-powered project management</span>, 
-                intelligent business strategy, and <span className="text-green-600 font-bold">automated operational optimization</span> 
+                intelligent business strategy, and <span className="text-green-600 font-bold">automated operational optimization </span>  
                 for startups and SMEs across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
               </p>
               
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-600" />
-                  <span className="text-slate-700 text-sm">Founded in 2025 with <span className="text-blue-600 font-semibold">AI-first approach</span> and started branches in Bangalore, India and Austin, USA in 4 months</span>
+                  <span className="text-slate-700 text-sm">Founded in 2025 with <span className="text-blue-600 font-semibold">AI-first approach</span> and started branches in Bangalore, India and Austin, USA in 4 months.</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-600" />
-                  <span className="text-slate-700 text-sm">Global operations: <span className="text-orange-600 font-semibold">AI project management service</span> across 5 continents (7 countries)</span>
+                  <span className="text-slate-700 text-sm">Global operations: <span className="text-orange-600 font-semibold">AI project management service</span> across the globe. </span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-600" />
-                  <span className="text-slate-700 text-sm">AI-powered methodologies with <span className="text-purple-600 font-semibold">GPT implementation roadmap</span> integration</span>
+                  <span className="text-slate-700 text-sm">AI-powered methodologies with <span className="text-purple-600 font-semibold">GPT implementation roadmap</span> integration.</span>
                 </div>
               </div>
             </div>
@@ -1587,8 +1594,8 @@ const About = () => {
             </h2>
             <p className="text-xl text-slate-600 max-w-4xl mx-auto mb-8 leading-relaxed text-justify">
               Four interconnected forces delivering <span className="font-bold text-orange-600">AI-driven business strategy consulting</span> and 
-              <span className="font-bold text-green-600">GPT-powered agile coaching</span>. Not hierarchy, but 
-              <span className="font-bold text-slate-700">predictive risk analytics</span>.
+              <span className="font-bold text-green-600"> GPT-powered agile coaching </span>. Not hierarchy, but 
+              <span className="font-bold text-slate-700"> predictive risk analytics. </span>.
             </p>
             
             {/* Visual Connection Lines */}
@@ -1642,7 +1649,7 @@ const About = () => {
                       </div>
                       <div>
                         <h3 className="text-xl sm:text-2xl font-bold">The Foundation</h3>
-                        <p className="text-orange-100 font-medium">AI Strategy & Vision</p>
+                        <p className="text-orange-100 font-medium">Strategy & Vision</p>
                       </div>
                     </div>
                     
@@ -1682,15 +1689,15 @@ const About = () => {
                     
                     <p className="text-sm leading-relaxed text-amber-900">
                       Pure momentum through <span className="font-bold">GPT-powered project planning</span>. Harnesses cutting-edge 
-                      <span className="font-bold">AI operational optimization</span>, breakthrough technologies, and 
+                      <span className="font-bold"> AI operational optimization </span>, breakthrough technologies, and 
                       revolutionary thinking to propel clients beyond their competition.
                     </p>
                     
                     <div className="mt-6 flex items-center space-x-2">
                       <div className="flex-1 h-2 bg-amber-300 rounded-full overflow-hidden">
-                        <div className="h-full bg-amber-600 rounded-full animate-pulse" style={{width: '92%'}}></div>
+                        <div className="h-full bg-amber-600 rounded-full animate-pulse" style={{width: '95%'}}></div>
                       </div>
-                      <span className="text-xs text-amber-800">Power: 92%</span>
+                      <span className="text-xs text-amber-800">Power: 95%</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -1772,6 +1779,7 @@ const About = () => {
                   <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></div>
                   <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse animation-delay-300"></div>
                   <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse animation-delay-500"></div>
+                  <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse animation-delay-700"></div>
                 </div>
                 <span className="text-slate-600 font-medium">Working in Perfect Harmony</span>
               </div>
@@ -1795,10 +1803,10 @@ const About = () => {
                 <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Our Mission</span>
               </h2>
               <p className="text-xl text-slate-200 leading-relaxed">
-                To democratize access to world-class <span className="text-yellow-400 font-bold">AI-native digital transformation consulting</span> through 
-                <span className="text-green-400 font-bold">GPT-powered solutions</span>, enabling organizations of all sizes to achieve 
-                breakthrough performance and sustainable growth with <span className="text-blue-400 font-bold">intelligent automation</span> and 
-                <span className="text-purple-400 font-bold">real-time compliance monitoring</span>.
+                To democratize access to world-class <span className="text-yellow-400 font-bold">AI-native digital transformation consulting</span> through  
+                <span className="text-green-400 font-bold"> GPT-powered solutions</span>, enabling organizations of all sizes to achieve 
+                breakthrough performance and sustainable growth with <span className="text-blue-400 font-bold">intelligent automation</span> and  
+                <span className="text-purple-400 font-bold"> real-time compliance monitoring</span>.
               </p>
             </div>
 
@@ -1808,8 +1816,8 @@ const About = () => {
               </h2>
               <p className="text-xl text-slate-200 leading-relaxed">
                 To be the global leader in <span className="text-orange-400 font-bold">AI-native consulting</span>, setting the standard 
-                for innovation, excellence, and measurable business outcomes through <span className="text-green-400 font-bold">cutting-edge GPT</span> and 
-                <span className="text-blue-400 font-bold">AI technologies</span> across all industries we serve with <span className="text-pink-400 font-bold">outcome-based AI strategy consulting</span>.
+                for innovation, excellence, and measurable business outcomes through <span className="text-green-400 font-bold">cutting-edge GPT</span> and  
+                <span className="text-blue-400 font-bold"> AI technologies</span> across all industries we serve with <span className="text-pink-400 font-bold">outcome-based AI strategy consulting</span>.
               </p>
             </div>
           </div>
@@ -2212,8 +2220,8 @@ const Services = () => {
           
           <p className="text-xl text-slate-700 max-w-4xl mx-auto mb-8 leading-relaxed">
             Comprehensive <span className="text-orange-600 font-bold">AI-native consulting services</span> designed to transform your business 
-            with <span className="text-green-600 font-bold">GPT-powered project management</span>, intelligent automation, and 
-            <span className="text-purple-600 font-bold">AI-driven strategy</span> across six key industries and seven global regions.
+            with <span className="text-green-600 font-bold">GPT-powered project management</span>, intelligent automation, and  
+            <span className="text-purple-600 font-bold"> AI-driven strategy</span> across six key industries and seven global regions.
           </p>
           
           <div className="flex justify-center flex-wrap gap-4 mb-12">
@@ -2615,22 +2623,22 @@ const Contact = () => {
 
   const contactMethods = [
     {
-      title: "Phone - India (HQ)",
-      description: "Direct consultation with our AI specialists",
-      details: ["+91-9740384683", "+91-9740394863"],
+      title: "Phone - India (HQ) & USA (Corporate)",
+      description: "Direct consultation with our specialists",
+      details: ["+91-9740384683" / "+1(512)641-8773", "+91-9740394863" / "+1(512)641-3494"],
       icon: Phone,
       gradient: "from-green-400 to-emerald-500"
     },
     {
       title: "Email Support",
-      description: "24/7 AI-powered support and consultation",
+      description: "24/7 support and consultation",
       details: ["info@orgainse.com", "support@orgainse.com"],
       icon: Mail,
       gradient: "from-blue-400 to-indigo-500"
     },
     {
       title: "Book AI Consultation",
-      description: "Schedule your free GPT-powered strategy session",
+      description: "Schedule your free strategy session",
       details: ["Free 30-min consultation", "Customized AI roadmap"],
       icon: Calendar,
       gradient: "from-orange-400 to-red-500"
@@ -2813,7 +2821,7 @@ const Contact = () => {
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         <span className="relative z-10 flex items-center justify-center text-lg">
-                          Send Message & Get AI Consultation
+                          Send Message & Get Consultation
                           <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform" />
                         </span>
                       </button>
@@ -2839,7 +2847,7 @@ const Contact = () => {
                       </div>
                       <div className="flex-1">
                         <h3 className="text-xl font-bold text-slate-800 mb-2">Phone • India (HQ)</h3>
-                        <p className="text-slate-600 text-sm mb-3">Direct consultation with our AI specialists</p>
+                        <p className="text-slate-600 text-sm mb-3">Direct consultation with our specialists</p>
                         <div className="space-y-1">
                           <p className="text-slate-700 font-medium">+91-9740384683</p>
                           <p className="text-slate-700 font-medium">+91-9740394863</p>
@@ -2864,7 +2872,7 @@ const Contact = () => {
                       </div>
                       <div className="flex-1">
                         <h3 className="text-xl font-bold text-slate-800 mb-2">Email Support</h3>
-                        <p className="text-slate-600 text-sm mb-3">24/7 AI-powered support and consultation</p>
+                        <p className="text-slate-600 text-sm mb-3">24/7 support and consultation</p>
                         <div className="space-y-1">
                           <p className="text-slate-700 font-medium">info@orgainse.com</p>
                           <p className="text-slate-700 font-medium">support@orgainse.com</p>
@@ -2888,8 +2896,8 @@ const Contact = () => {
                         <Calendar className="h-8 w-8 text-slate-600" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-slate-800 mb-2">Book AI Consultation</h3>
-                        <p className="text-slate-600 text-sm mb-3">Schedule your free GPT-powered strategy session</p>
+                        <h3 className="text-xl font-bold text-slate-800 mb-2">Book Consultation</h3>
+                        <p className="text-slate-600 text-sm mb-3">Schedule your free strategy session</p>
                         <div className="space-y-1">
                           <p className="text-slate-700 font-medium">Free 30-min consultation</p>
                           <p className="text-slate-700 font-medium">Customized AI roadmap</p>
@@ -2938,7 +2946,7 @@ const Contact = () => {
                 
                 <CardContent className="p-6 h-full flex flex-col justify-center">
                   <h3 className="text-xl font-bold text-slate-800 mb-4 text-center">
-                    Connect With Our AI Community
+                    Connect With Our Community
                   </h3>
                   <p className="text-slate-600 text-center mb-6">
                     Follow us for the latest insights on AI-native consulting and GPT-powered business transformation
@@ -4618,7 +4626,7 @@ const PrivacyPolicy = () => {
           <h1 className="text-4xl lg:text-5xl font-bold mb-8 bg-gradient-to-r from-orange-600 to-green-600 bg-clip-text text-transparent">
             Privacy Policy
           </h1>
-          <p className="text-slate-600 mb-6">Last updated: January 2025</p>
+          <p className="text-slate-600 mb-6">Last updated: November 2025</p>
           
           <div className="space-y-8 text-slate-700">
             <section>
@@ -4678,7 +4686,8 @@ const PrivacyPolicy = () => {
               </p>
               <div className="mt-4 space-y-2">
                 <p>Email: info@orgainse.com | support@orgainse.com</p>
-                <p>Phone: +91-9740384683 | +91-9740394863</p>
+                <p>Phone (India): +91-9740384683 | +91-9740394863</p>
+                <p>Phone (USA): +1(512)641-8773 | +1(512)641-3494</p>
                 <p>Address: Bangalore, India | Austin, USA</p>
               </div>
             </section>
@@ -4698,7 +4707,7 @@ const TermsOfService = () => {
           <h1 className="text-4xl lg:text-5xl font-bold mb-8 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
             Terms of Service
           </h1>
-          <p className="text-slate-600 mb-6">Last updated: January 2025</p>
+          <p className="text-slate-600 mb-6">Last updated: November 2025</p>
           
           <div className="space-y-8 text-slate-700">
             <section>
@@ -4775,6 +4784,7 @@ const TermsOfService = () => {
               <div className="mt-4 space-y-2">
                 <p>Email: info@orgainse.com | support@orgainse.com</p>
                 <p>Phone: +91-9740384683 | +91-9740394863</p>
+                <p>Phone (USA): +1(512)641-8773 | +1(512)641-3494</p>
                 <p>Headquarters: Bangalore, India | Austin, USA</p>
               </div>
             </section>
