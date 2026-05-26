@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import { securityHeaders, rateLimit, sanitizeInput, validateEmail, validateRequestSize } from './middleware/security.js';
+import { securityHeaders, rateLimit, sanitizeInput, validateEmail, validateRequestSize } from '../_middleware/security.js';
 
 export default async function handler(req, res) {
   // Apply security headers

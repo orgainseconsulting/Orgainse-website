@@ -23,9 +23,9 @@ import {
   getDb, slugify, SLUG_RE, isEmail, genId, genToken, nowIso, readBody,
   buildIssueDoc, issueToAdminShape, subToShape,
   renderEmailHtml, renderEmailText, SENDER_EMAIL, SENDER_NAME, PUBLIC_SITE_URL,
-} from './_newsletter-utils.js';
-import { securityHeaders, rateLimit } from './middleware/security.js';
-import { requireAdmin } from './middleware/verify-admin.js';
+} from '../../_newsletter-utils.js';
+import { securityHeaders, rateLimit } from '../../_middleware/security.js';
+import { requireAdmin } from '../../_middleware/verify-admin.js';
 
 export const config = { maxDuration: 60 };
 

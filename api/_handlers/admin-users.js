@@ -5,15 +5,15 @@
  *
  * Super-admin only. Mirrors FastAPI admin-users CRUD.
  */
-import { securityHeaders, validateRequestSize, sanitizeInput } from './middleware/security.js';
-import { requireAdmin } from './middleware/verify-admin.js';
+import { securityHeaders, validateRequestSize, sanitizeInput } from '../_middleware/security.js';
+import { requireAdmin } from '../_middleware/verify-admin.js';
 import {
   getDb,
   hashPassword,
   requireSuperAdmin,
   adminUserShape,
   cryptoRandomId,
-} from './_auth-utils.js';
+} from '../_auth-utils.js';
 
 export default async function handler(req, res) {
   securityHeaders(req, res);

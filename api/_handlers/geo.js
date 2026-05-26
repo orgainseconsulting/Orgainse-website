@@ -9,7 +9,7 @@
  * preflight error on some networks. Proxying server-side eliminates it and
  * lets us swap providers without a SPA redeploy.
  */
-import { securityHeaders } from './middleware/security.js';
+import { securityHeaders } from '../_middleware/security.js';
 
 // Module-scoped cache survives between warm invocations on Vercel.
 const CACHE = new Map(); // ip -> { ts, data }

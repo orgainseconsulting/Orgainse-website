@@ -5,8 +5,8 @@
  * (admin_users where show_as_host=true with a booking_url). Consumed by
  * the front-end Book-a-Call modal and the Stay-Tuned countdowns.
  */
-import { securityHeaders } from '../middleware/security.js';
-import { getDb } from '../_auth-utils.js';
+import { securityHeaders } from '../../_middleware/security.js';
+import { getDb } from '../../_auth-utils.js';
 
 const SETTINGS_ID = 'global';
 

@@ -2,8 +2,8 @@
  * GET /api/unsubscribe?token=  → returns email + already_unsubscribed
  * POST /api/unsubscribe { token } → marks unsubscribed
  */
-import { getDb, nowIso } from './_newsletter-utils.js';
-import { securityHeaders, rateLimit } from './middleware/security.js';
+import { getDb, nowIso } from '../_newsletter-utils.js';
+import { securityHeaders, rateLimit } from '../_middleware/security.js';
 
 export default async function handler(req, res) {
   securityHeaders(req, res);

@@ -7,8 +7,8 @@
  *  - Returns a short-lived (15 min, purpose=password_change) token when
  *    must_change_password=true; otherwise a full 8-hour token.
  */
-import { securityHeaders, validateRequestSize, sanitizeInput } from './middleware/security.js';
-import { getDb, signToken, verifyPassword, ensureSeedUsers } from './_auth-utils.js';
+import { securityHeaders, validateRequestSize, sanitizeInput } from '../_middleware/security.js';
+import { getDb, signToken, verifyPassword, ensureSeedUsers } from '../_auth-utils.js';
 
 const MAX_ATTEMPTS = 5;
 const LOCKOUT_MIN = 15;

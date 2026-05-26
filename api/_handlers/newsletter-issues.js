@@ -2,8 +2,8 @@
  * GET /api/newsletter-issues          → list published+sent issues (paginated)
  * GET /api/newsletter-issues?slug=    → single full issue
  */
-import { getDb, issueToPublicShape } from './_newsletter-utils.js';
-import { securityHeaders, rateLimit } from './middleware/security.js';
+import { getDb, issueToPublicShape } from '../_newsletter-utils.js';
+import { securityHeaders, rateLimit } from '../_middleware/security.js';
 
 export default async function handler(req, res) {
   securityHeaders(req, res);

@@ -3,9 +3,9 @@
  * Returns the current user's profile based on the bearer token.
  * Allows password_change purpose so the forced-change screen can read user info.
  */
-import { securityHeaders } from '../middleware/security.js';
-import { requireAdmin } from '../middleware/verify-admin.js';
-import { getDb } from '../_auth-utils.js';
+import { securityHeaders } from '../../_middleware/security.js';
+import { requireAdmin } from '../../_middleware/verify-admin.js';
+import { getDb } from '../../_auth-utils.js';
 
 export default async function handler(req, res) {
   securityHeaders(req, res);

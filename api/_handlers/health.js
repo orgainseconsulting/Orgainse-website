@@ -1,4 +1,4 @@
-import { securityHeaders, rateLimit } from './middleware/security.js';
+import { securityHeaders, rateLimit } from '../_middleware/security.js';
 
 export default async function handler(req, res) {
   // Apply security headers

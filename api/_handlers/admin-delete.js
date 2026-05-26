@@ -3,8 +3,8 @@
  * Bulk/single deletion. Requires admin JWT.
  */
 import { MongoClient } from 'mongodb';
-import { securityHeaders, rateLimit } from './middleware/security.js';
-import { requireAdmin } from './middleware/verify-admin.js';
+import { securityHeaders, rateLimit } from '../_middleware/security.js';
+import { requireAdmin } from '../_middleware/verify-admin.js';
 
 const VALID_COLLECTIONS = [
   'newsletter_subscriptions',

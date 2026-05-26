@@ -7,9 +7,9 @@
  *
  * Public endpoint: /api/app-settings/public (no auth, no secrets).
  */
-import { securityHeaders, validateRequestSize, sanitizeInput } from './middleware/security.js';
-import { requireAdmin } from './middleware/verify-admin.js';
-import { getDb, requireSuperAdmin, cryptoRandomId, maskSecret } from './_auth-utils.js';
+import { securityHeaders, validateRequestSize, sanitizeInput } from '../_middleware/security.js';
+import { requireAdmin } from '../_middleware/verify-admin.js';
+import { getDb, requireSuperAdmin, cryptoRandomId, maskSecret } from '../_auth-utils.js';
 
 const SETTINGS_ID = 'global';
 

@@ -9,7 +9,7 @@
  * pages can render it without a second round-trip.
  */
 import { MongoClient } from 'mongodb';
-import { securityHeaders, rateLimit } from './middleware/security.js';
+import { securityHeaders, rateLimit } from '../_middleware/security.js';
 
 let cachedClient = null;
 async function getDb() {

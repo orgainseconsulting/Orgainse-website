@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import { securityHeaders, rateLimit, sanitizeInput, validateEmail, validateRequestSize } from './middleware/security.js';
+import { securityHeaders, rateLimit, sanitizeInput, validateEmail, validateRequestSize } from '../_middleware/security.js';
 
 // Generate UUID-like ID without external dependency
 function generateId() {

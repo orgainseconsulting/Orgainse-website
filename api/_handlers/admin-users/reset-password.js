@@ -2,9 +2,9 @@
  * POST /api/admin-users/reset-password?id=...
  * Super-admin only. Sets a new temporary password & forces change on next login.
  */
-import { securityHeaders, validateRequestSize, sanitizeInput } from '../middleware/security.js';
-import { requireAdmin } from '../middleware/verify-admin.js';
-import { getDb, hashPassword, requireSuperAdmin, adminUserShape } from '../_auth-utils.js';
+import { securityHeaders, validateRequestSize, sanitizeInput } from '../../_middleware/security.js';
+import { requireAdmin } from '../../_middleware/verify-admin.js';
+import { getDb, hashPassword, requireSuperAdmin, adminUserShape } from '../../_auth-utils.js';
 
 export default async function handler(req, res) {
   securityHeaders(req, res);

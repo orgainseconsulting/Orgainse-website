@@ -9,8 +9,8 @@
  */
 import { MongoClient } from 'mongodb';
 import { randomUUID } from 'crypto';
-import { securityHeaders, rateLimit, sanitizeInput } from './middleware/security.js';
-import { requireAdmin } from './middleware/verify-admin.js';
+import { securityHeaders, rateLimit, sanitizeInput } from '../_middleware/security.js';
+import { requireAdmin } from '../_middleware/verify-admin.js';
 
 let cachedClient = null;
 async function getDb() {

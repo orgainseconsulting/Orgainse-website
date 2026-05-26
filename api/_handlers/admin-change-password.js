@@ -6,9 +6,9 @@
  * Accepts the short-lived password_change token (or a full token) and rotates
  * the user's password. Clears must_change_password + temp_password_plain.
  */
-import { securityHeaders, validateRequestSize, sanitizeInput } from './middleware/security.js';
-import { requireAdmin } from './middleware/verify-admin.js';
-import { getDb, hashPassword, verifyPassword, signToken } from './_auth-utils.js';
+import { securityHeaders, validateRequestSize, sanitizeInput } from '../_middleware/security.js';
+import { requireAdmin } from '../_middleware/verify-admin.js';
+import { getDb, hashPassword, verifyPassword, signToken } from '../_auth-utils.js';
 
 export default async function handler(req, res) {
   securityHeaders(req, res);
