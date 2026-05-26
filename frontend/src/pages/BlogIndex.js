@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Clock, User as UserIcon } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
+import StayTunedBanner from '../components/StayTunedBanner';
 import { blogApi } from '../lib/blogApi';
 
 const formatDate = (iso) => {
@@ -157,14 +158,7 @@ const BlogIndexPage = () => {
             <p className="text-xs text-slate-400">{error}</p>
           </div>
         ) : posts.length === 0 ? (
-          <div className="text-center py-20 border-2 border-dashed border-slate-200 rounded-xl" data-testid="blog-empty">
-            <h2 className="text-xl font-bold text-slate-900 mb-2">No posts yet</h2>
-            <p className="text-slate-500 mb-6">Our writers are sharpening their pencils. Check back soon.</p>
-            <Link to="/contact" className="inline-flex items-center gap-2 text-orange-600 hover:text-orange-700 font-medium">
-              Talk to us instead
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+          <StayTunedBanner kind="blog" />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-testid="blog-grid">
             {posts.map((p) => <BlogCard key={p.id} post={p} />)}

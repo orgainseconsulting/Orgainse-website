@@ -4,7 +4,9 @@ import { api } from '../lib/api';
 import { useAuth } from './AuthContext';
 import BlogManager from './blog/BlogManager';
 import NewsletterManager from './newsletter/NewsletterManager';
-import { LayoutDashboard, FileText, Mail } from 'lucide-react';
+import AdminUsersManager from './admin/AdminUsersManager';
+import AdminSettingsManager from './admin/AdminSettingsManager';
+import { LayoutDashboard, FileText, Mail, Users, Settings } from 'lucide-react';
 
 /**
  * Flatten a lead document so the table & CSV exports show human-readable
@@ -132,17 +134,23 @@ const formatForCSV = (value) => {
 const csvEscape = (s) => `"${String(s).replace(/"/g, '""')}"`;
 
 const AdminDashboard = () => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
+  const isSuper = !!user?.is_super_admin;
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [section, setSection] = useState('leads'); // leads | blog | newsletter
+  const [section, setSection] = useState('leads'); // leads | blog | newsletter | users | settings
   const [activeTab, setActiveTab] = useState('overview');
   const [page, setPage] = useState(1);
   const [expandedId, setExpandedId] = useState(null);
   const pageSize = 100;
 
   const fetchData = async () => {
+    // Lead dashboard is only relevant in 'leads' section
+    if (section !== 'leads') {
+      setLoading(false);
+      return;
+    }
     try {
       setLoading(true);
       setError('');
@@ -164,7 +172,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, [page, section]);
 
   const exportToCSV = (rawRows, filename, collectionKey) => {
     if (!rawRows || rawRows.length === 0) {
@@ -311,7 +319,7 @@ const AdminDashboard = () => {
     }
   };
 
-  if (loading) {
+  if (loading && section === 'leads') {
     return (
       <div className="min-h-screen bg-gray-100 p-8">
         <div className="max-w-7xl mx-auto">
@@ -324,7 +332,7 @@ const AdminDashboard = () => {
     );
   }
 
-  if (error) {
+  if (error && section === 'leads') {
     return (
       <div className="min-h-screen bg-gray-100 p-8">
         <div className="max-w-7xl mx-auto">
@@ -614,11 +622,15 @@ const AdminDashboard = () => {
                 {section === 'leads' && 'Lead Management Dashboard'}
                 {section === 'blog' && 'Blog Post Management'}
                 {section === 'newsletter' && 'Newsletter Center'}
+                {section === 'users' && 'Admin Users'}
+                {section === 'settings' && 'Settings'}
               </h1>
               <p className="text-gray-600">
                 {section === 'leads' && 'Manage your captured leads by category'}
                 {section === 'blog' && 'Write, publish and manage blog articles'}
                 {section === 'newsletter' && 'Compose issues, manage subscribers, send branded emails'}
+                {section === 'users' && 'Invite teammates, reset passwords, manage access'}
+                {section === 'settings' && 'API keys, sender identity, and Book-a-Call hosts'}
               </p>
             </div>
             {section === 'leads' && (
@@ -652,10 +664,12 @@ const AdminDashboard = () => {
         <div className="mb-8">
           <div className="inline-flex p-1 bg-white border border-slate-200 rounded-xl shadow-sm" role="tablist">
             {[
-              { id: 'leads', label: 'Lead Management', icon: LayoutDashboard, testid: 'admin-section-leads' },
-              { id: 'blog', label: 'Blog Posts', icon: FileText, testid: 'admin-section-blog' },
-              { id: 'newsletter', label: 'Newsletter', icon: Mail, testid: 'admin-section-newsletter' },
-            ].map(({ id, label, icon: Icon, testid }) => {
+              { id: 'leads', label: 'Lead Management', icon: LayoutDashboard, testid: 'admin-section-leads', show: true },
+              { id: 'blog', label: 'Blog Posts', icon: FileText, testid: 'admin-section-blog', show: true },
+              { id: 'newsletter', label: 'Newsletter', icon: Mail, testid: 'admin-section-newsletter', show: true },
+              { id: 'users', label: 'Users', icon: Users, testid: 'admin-section-users', show: isSuper },
+              { id: 'settings', label: 'Settings', icon: Settings, testid: 'admin-section-settings', show: isSuper },
+            ].filter((s) => s.show).map(({ id, label, icon: Icon, testid }) => {
               const active = section === id;
               return (
                 <button
@@ -779,6 +793,20 @@ const AdminDashboard = () => {
         {section === 'newsletter' && (
           <div className="bg-white rounded-lg shadow mb-8 p-6">
             <NewsletterManager />
+          </div>
+        )}
+
+        {/* Admin Users section (super-admin only) */}
+        {section === 'users' && isSuper && (
+          <div className="bg-white rounded-lg shadow mb-8 p-6">
+            <AdminUsersManager />
+          </div>
+        )}
+
+        {/* Settings section (super-admin only) */}
+        {section === 'settings' && isSuper && (
+          <div className="bg-white rounded-lg shadow mb-8 p-6">
+            <AdminSettingsManager />
           </div>
         )}
 

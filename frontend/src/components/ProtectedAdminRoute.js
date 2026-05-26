@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from './AuthContext';
 import AdminLogin from './AdminLogin';
 import AdminDashboard from './AdminDashboard';
+import AdminChangePassword from './AdminChangePassword';
 import { LogOut, Shield, User } from 'lucide-react';
 
 const ProtectedAdminRoute = () => {
@@ -25,6 +26,11 @@ const ProtectedAdminRoute = () => {
     return <AdminLogin onLogin={login} />;
   }
 
+  // Forced password change before dashboard access
+  if (user?.must_change_password) {
+    return <AdminChangePassword />;
+  }
+
   // Show admin dashboard with logout option if authenticated
   return (
     <div className="min-h-screen bg-gray-100">
@@ -38,13 +44,21 @@ const ProtectedAdminRoute = () => {
             </div>
             
             <div className="flex items-center space-x-4">
-              <div className="flex items-center text-sm text-gray-600">
+              <div className="flex items-center text-sm text-gray-600" data-testid="admin-current-user">
                 <User className="w-4 h-4 mr-1" />
-                <span>Welcome, {user?.username}</span>
+                <span>
+                  Welcome, {user?.name || user?.email}
+                  {user?.is_super_admin && (
+                    <span className="ml-2 inline-block bg-amber-100 text-amber-800 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">
+                      Super Admin
+                    </span>
+                  )}
+                </span>
               </div>
               
               <button
                 onClick={() => setShowLogoutConfirm(true)}
+                data-testid="admin-logout-btn"
                 className="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
               >
                 <LogOut className="w-4 h-4 mr-1" />

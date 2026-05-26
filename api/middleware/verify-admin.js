@@ -9,7 +9,7 @@
  */
 import jwt from 'jsonwebtoken';
 
-export function requireAdmin(req, res) {
+export function requireAdmin(req, res, options = {}) {
   const header = req.headers.authorization || '';
   if (!header.toLowerCase().startsWith('bearer ')) {
     res.status(401).json({ error: 'Missing bearer token' });
@@ -31,6 +31,11 @@ export function requireAdmin(req, res) {
     const payload = jwt.verify(token, secret, { algorithms: ['HS256'] });
     if (payload.role !== 'admin') {
       res.status(403).json({ error: 'Not an admin token' });
+      return null;
+    }
+    const requiredPurpose = options.allowPasswordChange ? null : 'full';
+    if (requiredPurpose && payload.purpose && payload.purpose !== requiredPurpose) {
+      res.status(403).json({ error: 'Token purpose insufficient' });
       return null;
     }
     return payload;

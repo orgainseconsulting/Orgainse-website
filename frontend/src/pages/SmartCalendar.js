@@ -6,7 +6,8 @@ import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Badge } from '../components/ui/badge';
 import { api } from '../lib/api';
-import { BOOKING_URL, openBookingPage } from '../lib/booking';
+import { BOOKING_URL } from '../lib/booking';
+import { useCalendly } from '../context/CalendlyContext';
 
 const SERVICE_TYPES = [
   'AI Project Management Service (PMaaS)',
@@ -32,6 +33,7 @@ const TIMEZONES = [
 ];
 
 export default function SmartCalendar() {
+  const { openCalendly } = useCalendly();
   const [form, setForm] = useState({
     name: '', email: '', phone: '', company: '',
     service_type: '', preferred_datetime: '',
@@ -106,7 +108,7 @@ export default function SmartCalendar() {
             </p>
             <button
               data-testid="consultation-book-google-btn"
-              onClick={openBookingPage}
+              onClick={openCalendly}
               className="px-8 py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 inline-flex items-center"
             >
               <Calendar className="mr-2 h-5 w-5" /> Book Instantly with Google Calendar
@@ -130,15 +132,14 @@ export default function SmartCalendar() {
           </p>
           <div className="inline-flex items-center justify-center gap-3 bg-white/80 rounded-full px-6 py-2 shadow">
             <span className="text-sm text-slate-600">Prefer to pick a slot yourself?</span>
-            <a
+            <button
+              type="button"
               data-testid="consultation-google-link"
-              href={BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={openCalendly}
               className="text-orange-600 hover:text-orange-700 font-semibold text-sm inline-flex items-center"
             >
               Open Google booking <ExternalLink className="ml-1 h-3 w-3" />
-            </a>
+            </button>
           </div>
         </div>
 

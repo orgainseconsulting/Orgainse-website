@@ -246,31 +246,50 @@ async def startup_event():
     await db.blog_posts.create_index([("status", 1), ("published_at", -1)])
 
     # ---- Seed @orgainse.com admin users with a temp password (idempotent) ----
-    seed_temp_password = os.environ.get("ADMIN_SEED_TEMP_PASSWORD", "Org@inse-Welcome-2026!")
+    seed_temp_password = os.environ.get("ADMIN_SEED_TEMP_PASSWORD", "Orgainse25%Web..")
     seed_users = [
-        {"email": "info@orgainse.com",   "name": "Orgainse Admin"},
-        {"email": "support@orgainse.com","name": "Orgainse Support"},
-        {"email": "swarag@orgainse.com", "name": "Swarag"},
-        {"email": "rajesh@orgainse.com", "name": "Rajesh"},
+        {"email": "info@orgainse.com",    "name": "Orgainse Admin",   "is_super_admin": False},
+        {"email": "support@orgainse.com", "name": "Orgainse Support", "is_super_admin": False},
+        {"email": "swarag@orgainse.com",  "name": "Swarag",           "is_super_admin": True},
+        {"email": "rajesh@orgainse.com",  "name": "Rajesh",           "is_super_admin": False},
     ]
     seeded = 0
     for u in seed_users:
         existing = await db.admin_users.find_one({"email": u["email"]})
         if existing:
+            # Backfill is_super_admin flag for swarag if missing (idempotent migration)
+            if u["is_super_admin"] and not existing.get("is_super_admin"):
+                await db.admin_users.update_one(
+                    {"_id": existing["_id"]},
+                    {"$set": {"is_super_admin": True}},
+                )
             continue
         await db.admin_users.insert_one({
             "id": gen_id(),
             "email": u["email"],
             "name": u["name"],
             "password_hash": hash_password(seed_temp_password),
+            # Plaintext temp password is retained ONLY until the user changes it.
+            # Visible only to super-admin via the Admin Users tab. Cleared on password change.
+            "temp_password_plain": seed_temp_password,
             "must_change_password": True,
             "role": "admin",
+            "is_super_admin": u["is_super_admin"],
             "created_at": now_iso(),
             "last_login_at": None,
         })
         seeded += 1
     if seeded:
-        print(f"[startup] Seeded {seeded} admin users with temp password")
+        print(f"[startup] Seeded {seeded} admin users with temp password '{seed_temp_password}'")
+
+    # ---- Load app_settings overrides (Resend API key) at runtime ----
+    try:
+        settings_doc = await db.app_settings.find_one({"_id": SETTINGS_DOC_ID})
+        if settings_doc and settings_doc.get("resend_api_key"):
+            resend.api_key = settings_doc["resend_api_key"]
+            print("[startup] Loaded Resend API key from app_settings override")
+    except Exception as e:
+        print(f"[startup] could not load app_settings: {e}")
 
     if ADMIN_PASSWORD:
         existing = await db.admin_users.find_one({"username": ADMIN_USERNAME})
@@ -386,6 +405,10 @@ async def admin_login(payload: AdminLoginIn, request: Request):
     raw_email = (payload.email or payload.username or "").strip().lower()
     if not raw_email:
         raise HTTPException(status_code=400, detail="Email is required")
+    # Restrict admin access to @orgainse.com emails (legacy username allowed below)
+    is_email_input = "@" in raw_email
+    if is_email_input and not raw_email.endswith("@orgainse.com"):
+        raise HTTPException(status_code=403, detail="Only @orgainse.com accounts may sign in")
     identifier = f"{ip}:{raw_email}"
     now = datetime.now(timezone.utc)
 
@@ -436,6 +459,7 @@ async def admin_login(payload: AdminLoginIn, request: Request):
         "username": user_email,  # legacy clients
         "name": user.get("name") or "",
         "must_change_password": must_change,
+        "is_super_admin": bool(user.get("is_super_admin")),
     }
 
 
@@ -466,7 +490,8 @@ async def admin_change_password(payload: AdminChangePasswordIn, claims: Dict[str
             "must_change_password": False,
             "password_changed_at": now_iso(),
             "last_login_at": now_iso(),
-        }},
+        },
+         "$unset": {"temp_password_plain": ""}},
     )
 
     user_email = user.get("email") or user.get("username") or email
@@ -478,7 +503,277 @@ async def admin_change_password(payload: AdminChangePasswordIn, claims: Dict[str
         "email": user_email,
         "name": user.get("name") or "",
         "must_change_password": False,
+        "is_super_admin": bool(user.get("is_super_admin")),
     }
+
+
+# ---------------------------------------------------------------------------
+# /api/auth/me — return current user info
+# ---------------------------------------------------------------------------
+@app.get("/api/auth/me")
+async def auth_me(claims: Dict[str, Any] = Depends(verify_admin_any_purpose)):
+    email = (claims.get("email") or claims.get("sub") or "").lower()
+    user = await db.admin_users.find_one({"email": email})
+    if not user:
+        user = await db.admin_users.find_one({"username": email})
+    if not user:
+        raise HTTPException(404, "User not found")
+    return {
+        "success": True,
+        "email": user.get("email") or user.get("username") or email,
+        "name": user.get("name") or "",
+        "needs_password_change": bool(user.get("must_change_password")),
+        "is_super_admin": bool(user.get("is_super_admin")),
+        "role": user.get("role") or "admin",
+    }
+
+
+# ---------------------------------------------------------------------------
+# /api/admin-users — super-admin only (CRUD + reset + invite)
+# ---------------------------------------------------------------------------
+async def _require_super_admin(claims: Dict[str, Any]) -> Dict[str, Any]:
+    email = (claims.get("email") or claims.get("sub") or "").lower()
+    user = await db.admin_users.find_one({"email": email})
+    if not user or not user.get("is_super_admin"):
+        raise HTTPException(403, "Super-admin access required")
+    return user
+
+
+def _admin_user_shape(doc: dict, include_temp_password: bool = False) -> dict:
+    return {
+        "id": doc.get("id"),
+        "email": doc.get("email") or doc.get("username") or "",
+        "name": doc.get("name") or "",
+        "role": doc.get("role") or "admin",
+        "is_super_admin": bool(doc.get("is_super_admin")),
+        "must_change_password": bool(doc.get("must_change_password")),
+        "temp_password_plain": doc.get("temp_password_plain") if include_temp_password else None,
+        "created_at": doc.get("created_at"),
+        "last_login_at": doc.get("last_login_at"),
+        "password_changed_at": doc.get("password_changed_at"),
+    }
+
+
+class AdminUserInviteIn(BaseModel):
+    email: EmailStr
+    name: str = Field(..., min_length=1, max_length=120)
+    temp_password: str = Field(..., min_length=8, max_length=200)
+
+
+class AdminUserUpdateIn(BaseModel):
+    name: Optional[str] = None
+
+
+class AdminUserResetIn(BaseModel):
+    new_temp_password: str = Field(..., min_length=8, max_length=200)
+
+
+@app.get("/api/admin-users")
+async def admin_users_list(claims: Dict[str, Any] = Depends(verify_admin)):
+    me = await _require_super_admin(claims)
+    rows = await db.admin_users.find({"email": {"$exists": True}}, {"_id": 0}).sort("created_at", 1).to_list(length=200)
+    return {
+        "success": True,
+        "users": [_admin_user_shape(r, include_temp_password=True) for r in rows],
+        "me": _admin_user_shape(me, include_temp_password=True),
+    }
+
+
+@app.post("/api/admin-users")
+async def admin_user_invite(payload: AdminUserInviteIn, claims: Dict[str, Any] = Depends(verify_admin)):
+    await _require_super_admin(claims)
+    email = payload.email.lower().strip()
+    if not email.endswith("@orgainse.com"):
+        raise HTTPException(400, "Only @orgainse.com emails may be invited")
+    existing = await db.admin_users.find_one({"email": email})
+    if existing:
+        raise HTTPException(400, "User with this email already exists")
+    name = sanitize_input({"n": payload.name})["n"][:120]
+    doc = {
+        "id": gen_id(),
+        "email": email,
+        "name": name,
+        "password_hash": hash_password(payload.temp_password),
+        "temp_password_plain": payload.temp_password,
+        "must_change_password": True,
+        "role": "admin",
+        "is_super_admin": False,
+        "created_at": now_iso(),
+        "last_login_at": None,
+    }
+    await db.admin_users.insert_one(doc)
+    return {"success": True, "user": _admin_user_shape(doc, include_temp_password=True)}
+
+
+@app.put("/api/admin-users")
+async def admin_user_update(payload: AdminUserUpdateIn, id: str = Query(...), claims: Dict[str, Any] = Depends(verify_admin)):
+    await _require_super_admin(claims)
+    user = await db.admin_users.find_one({"id": id})
+    if not user:
+        raise HTTPException(404, "User not found")
+    updates: Dict[str, Any] = {"updated_at": now_iso()}
+    if payload.name is not None:
+        updates["name"] = sanitize_input({"n": payload.name})["n"][:120]
+    await db.admin_users.update_one({"id": id}, {"$set": updates})
+    updated = await db.admin_users.find_one({"id": id}, {"_id": 0})
+    return {"success": True, "user": _admin_user_shape(updated, include_temp_password=True)}
+
+
+@app.post("/api/admin-users/reset-password")
+async def admin_user_reset_password(payload: AdminUserResetIn, id: str = Query(...), claims: Dict[str, Any] = Depends(verify_admin)):
+    await _require_super_admin(claims)
+    user = await db.admin_users.find_one({"id": id})
+    if not user:
+        raise HTTPException(404, "User not found")
+    await db.admin_users.update_one(
+        {"id": id},
+        {"$set": {
+            "password_hash": hash_password(payload.new_temp_password),
+            "temp_password_plain": payload.new_temp_password,
+            "must_change_password": True,
+            "updated_at": now_iso(),
+        }},
+    )
+    updated = await db.admin_users.find_one({"id": id}, {"_id": 0})
+    return {"success": True, "user": _admin_user_shape(updated, include_temp_password=True)}
+
+
+@app.delete("/api/admin-users")
+async def admin_user_delete(id: str = Query(...), claims: Dict[str, Any] = Depends(verify_admin)):
+    me = await _require_super_admin(claims)
+    user = await db.admin_users.find_one({"id": id})
+    if not user:
+        raise HTTPException(404, "User not found")
+    if user.get("id") == me.get("id") or user.get("is_super_admin"):
+        raise HTTPException(400, "Cannot delete a super-admin or yourself")
+    await db.admin_users.delete_one({"id": id})
+    return {"success": True, "deleted": id}
+
+
+# ---------------------------------------------------------------------------
+# /api/app-settings — dynamic configuration (Resend key, booking hosts)
+# ---------------------------------------------------------------------------
+SETTINGS_DOC_ID = "global"
+
+
+def _mask_secret(value: Optional[str]) -> str:
+    if not value:
+        return ""
+    if len(value) <= 6:
+        return "•" * len(value)
+    return value[:3] + "•" * 8 + value[-2:]
+
+
+class HostIn(BaseModel):
+    id: Optional[str] = None
+    name: str = Field(..., min_length=1, max_length=80)
+    role: Optional[str] = ""
+    photo_url: Optional[str] = ""
+    booking_url: str = Field(..., min_length=8, max_length=500)
+    initials: Optional[str] = ""
+
+
+class AppSettingsIn(BaseModel):
+    resend_api_key: Optional[str] = None       # new value or null
+    sender_email: Optional[str] = None
+    sender_name: Optional[str] = None
+    booking_url_default: Optional[str] = None  # legacy single URL fallback
+    hosts: Optional[List[HostIn]] = None
+
+
+def _settings_to_admin_shape(doc: Optional[dict]) -> Dict[str, Any]:
+    doc = doc or {}
+    return {
+        "resend_api_key_masked": _mask_secret(doc.get("resend_api_key") or RESEND_API_KEY),
+        "resend_api_key_set": bool(doc.get("resend_api_key") or RESEND_API_KEY),
+        "sender_email": doc.get("sender_email") or SENDER_EMAIL,
+        "sender_name": doc.get("sender_name") or SENDER_NAME,
+        "booking_url_default": doc.get("booking_url_default") or "",
+        "hosts": doc.get("hosts") or [],
+        "updated_at": doc.get("updated_at"),
+    }
+
+
+def _settings_to_public_shape(doc: Optional[dict]) -> Dict[str, Any]:
+    """Public-safe settings for the front-end (no secrets)."""
+    doc = doc or {}
+    return {
+        "booking_url_default": doc.get("booking_url_default") or "",
+        "hosts": doc.get("hosts") or [],
+    }
+
+
+async def _get_settings_doc() -> Dict[str, Any]:
+    return await db.app_settings.find_one({"_id": SETTINGS_DOC_ID}) or {}
+
+
+async def _save_settings(updates: Dict[str, Any]) -> Dict[str, Any]:
+    updates["updated_at"] = now_iso()
+    await db.app_settings.update_one(
+        {"_id": SETTINGS_DOC_ID},
+        {"$set": updates, "$setOnInsert": {"created_at": now_iso()}},
+        upsert=True,
+    )
+    return await _get_settings_doc()
+
+
+def _apply_resend_key_runtime(new_key: Optional[str]):
+    if new_key:
+        resend.api_key = new_key
+
+
+@app.get("/api/app-settings")
+async def app_settings_get(claims: Dict[str, Any] = Depends(verify_admin)):
+    await _require_super_admin(claims)
+    doc = await _get_settings_doc()
+    return {"success": True, "settings": _settings_to_admin_shape(doc)}
+
+
+@app.put("/api/app-settings")
+async def app_settings_update(payload: AppSettingsIn, claims: Dict[str, Any] = Depends(verify_admin)):
+    await _require_super_admin(claims)
+    updates: Dict[str, Any] = {}
+
+    if payload.resend_api_key is not None:
+        new_key = payload.resend_api_key.strip()
+        if new_key and not new_key.startswith("re_"):
+            raise HTTPException(400, "Resend API keys start with 're_'")
+        updates["resend_api_key"] = new_key
+        _apply_resend_key_runtime(new_key or None)
+
+    if payload.sender_email is not None:
+        updates["sender_email"] = sanitize_input({"e": payload.sender_email})["e"][:120]
+
+    if payload.sender_name is not None:
+        updates["sender_name"] = sanitize_input({"n": payload.sender_name})["n"][:120]
+
+    if payload.booking_url_default is not None:
+        updates["booking_url_default"] = sanitize_input({"u": payload.booking_url_default})["u"][:500]
+
+    if payload.hosts is not None:
+        cleaned_hosts = []
+        for h in payload.hosts:
+            cleaned_hosts.append({
+                "id": h.id or gen_id(),
+                "name": sanitize_input({"n": h.name})["n"][:80],
+                "role": sanitize_input({"r": h.role or ""})["r"][:120],
+                "photo_url": sanitize_input({"p": h.photo_url or ""})["p"][:1000],
+                "initials": sanitize_input({"i": h.initials or ""})["i"][:4].upper(),
+                "booking_url": sanitize_input({"b": h.booking_url})["b"][:500],
+            })
+        updates["hosts"] = cleaned_hosts
+
+    if not updates:
+        raise HTTPException(400, "No changes")
+
+    doc = await _save_settings(updates)
+    return {"success": True, "settings": _settings_to_admin_shape(doc)}
+
+
+@app.get("/api/app-settings/public")
+async def app_settings_public():
+    doc = await _get_settings_doc()
+    return {"success": True, "settings": _settings_to_public_shape(doc)}
 
 
 # ---------------------------------------------------------------------------

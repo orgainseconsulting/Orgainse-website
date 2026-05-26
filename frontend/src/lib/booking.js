@@ -15,7 +15,8 @@ export const BOOKING_URL =
   process.env.REACT_APP_BOOKING_URL ||
   'https://calendar.app.google/i8mBG9yQzmUkeeRy6';
 
-export function openBookingPage() {
+export function openBookingPage(url) {
+  const target = url || BOOKING_URL;
   // Open in a new tab so the user keeps your site in their history.
-  window.open(BOOKING_URL, '_blank', 'noopener,noreferrer');
+  window.open(target, '_blank', 'noopener,noreferrer');
 }

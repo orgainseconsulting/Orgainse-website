@@ -1,0 +1,51 @@
+{
+  "summary": "End-to-end backend + frontend testing of Phase 1/2 Admin features (multi-user auth with forced password change, super-admin Users CRUD, app-settings with Resend key masking + hosts, Host Picker modal on Book CTAs, Stay Tuned empty banners). 19/20 pytest cases pass. 1 backend bug found: 6th failed admin-login attempt returns 500 (timezone-aware vs naive datetime comparison) instead of 429 lockout. All frontend flows verified working.",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "POST /api/admin-login",
+        "issue": "Lockout path raises TypeError: can't compare offset-naive and offset-aware datetimes. After 5 failed attempts the lockout doc is written with a tz-aware datetime, but on subsequent requests Mongo returns it tz-naive, and the comparison `lockout['locked_until'] > now` (where now is tz-aware) crashes — returning 500 to the user instead of the intended 429. Reproduce by calling /api/admin-login with a valid @orgainse.com email and a wrong password 6 times in a row. Fix: when reading `lockout['locked_until']`, attach UTC tzinfo, e.g. `lu = lockout['locked_until']; if lu.tzinfo is None: lu = lu.replace(tzinfo=timezone.utc); if lu > now: ...`. Same pattern likely applies wherever `password_changed_at`, `locked_until`, etc. are compared after a Mongo read.",
+        "priority": "HIGH"
+      }
+    ],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "Hero/Nav",
+        "issues": [
+          "There are TWO elements containing the text 'Book Consultation' on the homepage — a visually-hidden SEO anchor (<a href=/smart-calendar>Book Consultation - Schedule expert consultation</a>) AND the visible orange nav button. Playwright `getByText('Book Consultation').first` resolves to the invisible anchor, which is brittle for any automation/AT user. Recommend adding aria-hidden=true or sr-only on the SEO anchor, or removing the duplicate."
+        ]
+      }
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_admin_auth.py",
+    "/app/test_reports/pytest/admin_auth_results.xml"
+  ],
+  "action_items": [
+    "FIX backend lockout TypeError on /api/admin-login — read locked_until and coerce to tz-aware UTC before comparison (and audit all other datetime fields read from Mongo: password_changed_at, expires_at). Verify by running the test TestAdminLogin::test_lockout_after_5_fails which currently fails with 500 instead of 429.",
+    "Optional polish: hide/remove the duplicate hidden 'Book Consultation' SEO anchor on the homepage so accessibility tooling and tests target the visible CTA."
+  ],
+  "critical_code_review_comments": [
+    "server.py is 2192 lines — should be modularised (routers for admin auth, app-settings, users, blog, newsletter). File size > recommended 700 lines.",
+    "Datetime handling inconsistency: locked_until is stored as datetime.now(timezone.utc) but Motor returns naive datetimes by default (no tz_aware=True on AsyncIOMotorClient). This same class of bug can hit must_change_password expiry checks. Consider initialising the Mongo client with tz_aware=True, or wrap all datetime reads in a helper.",
+    "The 6-attempt 500 is a real production bug — brute-force protection is silently broken (a determined attacker would just see 500s and keep trying; rate limiter never fires)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_admin_auth.py"
+  ],
+  "success_rate": {
+    "backend": "95% (19/20 pytest cases pass; 1 critical lockout bug)",
+    "frontend": "100% of tested flows pass"
+  },
+  "test_credentials": "swarag@orgainse.com (super-admin), info@/support@/rajesh@orgainse.com (all temp password: Orgainse25%Web..). All four reset back to temp at end of run.",
+  "seed_data_creation": "Two hosts (Swarag founder + Rajesh director) were written into app_settings.hosts via PUT /api/app-settings during testing; booking_url_default=https://cal.example.com/default. This is required for the host-picker-modal frontend test and should remain configured (or be re-seeded by the main agent's Settings UI if removed).",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "All 4 seed users were reset to temp password Orgainse25%Web.. and must_change_password=true at end of run. Hosts (Swarag, Rajesh) are configured in app_settings — so HostPickerModal WILL appear on any Book Consultation CTA. To test the no-hosts fallback (window.open direct), clear app_settings.hosts to []. Note: BlogIndex was empty at test time (stay-tuned-blog rendered). NewsletterIndex had 1 published issue, so the stay-tuned-newsletter banner did NOT render — to verify it, delete the published issue first.",
+  "rca_of_the_issue": "BUG: 500 on 6th admin-login attempt. ROOT CAUSE: in /app/backend/server.py admin-login handler, `lockout['locked_until']` is read from Mongo (where Motor returns naive datetime by default) and compared against `now = datetime.now(timezone.utc)` (aware). Python raises TypeError on aware-vs-naive comparison. STEPS: (1) POST /api/admin-login with valid @orgainse.com email + wrong password 5 times → 401s + lockout doc written; (2) 6th POST → server reads lockout and crashes with 500. FIX: coerce locked_until to UTC-aware before compare, OR construct AsyncIOMotorClient(tz_aware=True). RECOMMENDED PATCH (illustrative):\n    lu = lockout.get('locked_until')\n    if lu is not None and lu.tzinfo is None:\n        lu = lu.replace(tzinfo=timezone.utc)\n    if lu and lu > now:\n        raise HTTPException(429, ...)\nAudit other reads: password_changed_at, any expires_at fields."
+}

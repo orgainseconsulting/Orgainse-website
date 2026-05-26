@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Clock, Mail } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
+import StayTunedBanner from '../components/StayTunedBanner';
 import { newsletterApi } from '../lib/newsletterApi';
 import { api } from '../lib/api';
 import { toast } from 'sonner';
@@ -171,13 +172,7 @@ const NewsletterIndex = () => {
         ) : error ? (
           <div className="text-center py-16 text-slate-500">{error}</div>
         ) : issues.length === 0 ? (
-          <div className="text-center py-20 border-2 border-dashed border-slate-300 rounded-2xl bg-white">
-            <h3 className="text-xl font-bold text-slate-900 mb-2">First issue, coming soon</h3>
-            <p className="text-slate-500 mb-6">Subscribe above to get it in your inbox on launch day.</p>
-            <Link to="/contact" className="inline-flex items-center gap-2 text-orange-600 hover:text-orange-700 font-medium">
-              Or talk to us directly <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+          <StayTunedBanner kind="newsletter" />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-testid="newsletter-grid">
             {(featured ? [featured, ...rest] : issues).map((i) => <IssueCard key={i.id} issue={i} />)}

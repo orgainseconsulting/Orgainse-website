@@ -6,6 +6,7 @@ import { Input } from '../components/ui/input';
 import { Badge } from '../components/ui/badge';
 import { api } from '../lib/api';
 import { openBookingPage } from '../lib/booking';
+import { useCalendly } from '../context/CalendlyContext';
 
 const INDUSTRIES = [
   'IT Services & Software',
@@ -37,6 +38,7 @@ function fmtCurrency(amount, symbol) {
 }
 
 export default function ROICalculator() {
+  const { openCalendly } = useCalendly();
   const [form, setForm] = useState({
     company_name: '', email: '', phone: '',
     industry: '', company_size: '',
@@ -134,7 +136,7 @@ export default function ROICalculator() {
             <p className="text-slate-600 mb-6">Book a strategy session to discuss implementation.</p>
             <button
               data-testid="roi-book-btn"
-              onClick={openBookingPage}
+              onClick={openCalendly}
               className="px-8 py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 inline-flex items-center"
             >
               Schedule Strategy Session <ArrowRight className="ml-2 h-5 w-5" />

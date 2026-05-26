@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../co
 import { Input } from '../components/ui/input';
 import { Badge } from '../components/ui/badge';
 import { api } from '../lib/api';
-import { openBookingPage } from '../lib/booking';
+import { useCalendly } from '../context/CalendlyContext';
 
 const QUESTIONS = [
   {
@@ -82,6 +82,7 @@ const scoreColor = (s) =>
   : 'from-red-500 to-red-600';
 
 export default function AIAssessmentTool() {
+  const { openCalendly } = useCalendly();
   const [step, setStep] = useState(0);
   const [user, setUser] = useState({ name: '', email: '', company: '', phone: '' });
   const [responses, setResponses] = useState({});
@@ -160,7 +161,7 @@ export default function AIAssessmentTool() {
             <p className="text-slate-600 mb-6">Book a free consultation to discuss implementation.</p>
             <button
               data-testid="assessment-book-btn"
-              onClick={openBookingPage}
+              onClick={openCalendly}
               className="px-8 py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 inline-flex items-center"
             >
               Book Free Consultation <ArrowRight className="ml-2 h-5 w-5" />

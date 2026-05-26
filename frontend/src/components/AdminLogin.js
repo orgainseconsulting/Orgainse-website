@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { toast } from 'sonner';
-import { Eye, EyeOff, Shield, Lock, User } from 'lucide-react';
+import { Eye, EyeOff, Shield, Lock, Mail } from 'lucide-react';
 import { api } from '../lib/api';
+import { useAuth } from './AuthContext';
 
 const AdminLogin = ({ onLogin }) => {
-  const [credentials, setCredentials] = useState({ username: '', password: '' });
+  const { persistLogin } = useAuth();
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -15,16 +17,24 @@ const AdminLogin = ({ onLogin }) => {
     setError('');
 
     try {
-      const res = await api.adminLogin(credentials.username, credentials.password);
-      // Persist token + username + issued-at timestamp (8h TTL handled server-side)
-      sessionStorage.setItem('orgainse_admin_auth', JSON.stringify({
-        authenticated: true,
-        timestamp: Date.now(),
-        username: res.username,
+      const email = credentials.email.trim().toLowerCase();
+      if (!email.endsWith('@orgainse.com')) {
+        throw new Error('Only @orgainse.com accounts may sign in.');
+      }
+      const res = await api.adminLogin(email, credentials.password);
+      persistLogin({
         token: res.token,
-      }));
-      toast.success('Welcome back!');
-      onLogin(res.username);
+        email: res.email || email,
+        name: res.name || '',
+        must_change_password: !!res.must_change_password,
+        is_super_admin: !!res.is_super_admin,
+      });
+      if (res.must_change_password) {
+        toast.message('Welcome. Please set a new password to continue.');
+      } else {
+        toast.success(`Welcome back, ${res.name || res.email}`);
+      }
+      onLogin(res.email || email);
     } catch (err) {
       setError(err.message || 'Login failed. Please try again.');
       toast.error(err.message || 'Login failed');
@@ -54,28 +64,28 @@ const AdminLogin = ({ onLogin }) => {
             </div>
           </div>
           <h1 className="text-3xl font-bold text-slate-800 mb-2">Admin Portal</h1>
-          <p className="text-slate-600">Orgainse Consulting Dashboard</p>
+          <p className="text-slate-600">Orgainse Consulting · @orgainse.com only</p>
         </div>
 
         <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-slate-700 mb-2">
-                Username
+              <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
+                Work email
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User className="h-5 w-5 text-slate-400" />
+                  <Mail className="h-5 w-5 text-slate-400" />
                 </div>
                 <input
-                  data-testid="admin-username-input"
-                  type="text"
-                  id="username"
-                  name="username"
-                  value={credentials.username}
+                  data-testid="admin-email-input"
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={credentials.email}
                   onChange={handleInputChange}
                   className="block w-full pl-10 pr-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors bg-white/80"
-                  placeholder="Enter your username"
+                  placeholder="you@orgainse.com"
                   required
                   disabled={isLoading}
                   autoComplete="username"
@@ -126,7 +136,7 @@ const AdminLogin = ({ onLogin }) => {
             <button
               data-testid="admin-login-submit-btn"
               type="submit"
-              disabled={isLoading || !credentials.username || !credentials.password}
+              disabled={isLoading || !credentials.email || !credentials.password}
               className="w-full bg-gradient-to-r from-orange-500 to-green-500 text-white font-semibold py-3 px-4 rounded-lg hover:from-orange-600 hover:to-green-600 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center"
             >
               {isLoading ? (
@@ -144,7 +154,7 @@ const AdminLogin = ({ onLogin }) => {
 
           <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
             <p className="text-blue-700 text-xs text-center">
-              Secure admin access. Credentials verified server-side with bcrypt + JWT.
+              First-time sign-in? You'll be asked to set a new password. Need help? Ping the super-admin.
             </p>
           </div>
         </div>

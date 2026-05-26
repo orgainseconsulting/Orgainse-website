@@ -55,11 +55,31 @@ export const api = {
   aiAssessment: (data) => request('/ai-assessment', { method: 'POST', body: data }),
   roiCalculator: (data) => request('/roi-calculator', { method: 'POST', body: data }),
   consultation: (data) => request('/consultation', { method: 'POST', body: data }),
-  adminLogin: (username, password) => request('/admin-login', { method: 'POST', body: { username, password } }),
+
+  // ----- Auth -----
+  adminLogin: (email, password) => request('/admin-login', { method: 'POST', body: { email, password } }),
+  authMe: () => request('/auth/me', { requiresAdmin: true }),
+  adminChangePassword: (current_password, new_password) =>
+    request('/admin-change-password', { method: 'POST', body: { current_password, new_password }, requiresAdmin: true }),
+
+  // ----- Lead dashboard -----
   adminDashboard: (page = 1, pageSize = 100) =>
     request(`/admin?page=${page}&page_size=${pageSize}`, { requiresAdmin: true }),
   adminDelete: (params) => {
     const qs = new URLSearchParams(params).toString();
     return request(`/admin-delete?${qs}`, { method: 'DELETE', requiresAdmin: true });
   },
+
+  // ----- Admin users (super-admin only) -----
+  adminUsersList: () => request('/admin-users', { requiresAdmin: true }),
+  adminUsersInvite: (data) => request('/admin-users', { method: 'POST', body: data, requiresAdmin: true }),
+  adminUsersUpdate: (id, data) => request(`/admin-users?id=${encodeURIComponent(id)}`, { method: 'PUT', body: data, requiresAdmin: true }),
+  adminUsersReset: (id, new_temp_password) =>
+    request(`/admin-users/reset-password?id=${encodeURIComponent(id)}`, { method: 'POST', body: { new_temp_password }, requiresAdmin: true }),
+  adminUsersDelete: (id) => request(`/admin-users?id=${encodeURIComponent(id)}`, { method: 'DELETE', requiresAdmin: true }),
+
+  // ----- App settings -----
+  appSettingsGet: () => request('/app-settings', { requiresAdmin: true }),
+  appSettingsUpdate: (data) => request('/app-settings', { method: 'PUT', body: data, requiresAdmin: true }),
+  appSettingsPublic: () => request('/app-settings/public'),
 };
