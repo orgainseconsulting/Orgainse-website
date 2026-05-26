@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, Suspense } from "react";
+import { Toaster, toast } from 'sonner';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import "./App.css";
@@ -8,6 +9,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./com
 import { Input } from "./components/ui/input";
 import { Textarea } from "./components/ui/textarea";
 import { Badge } from "./components/ui/badge";
+import { api } from "./lib/api";
+import { openBookingPage, BOOKING_URL } from "./lib/booking";
+import CookieBanner from "./components/CookieBanner";
 
 // Debug Analytics Component
 const AnalyticsDebug = () => {
@@ -51,6 +55,9 @@ import MobilePerformanceOptimizer from "./components/MobilePerformanceOptimizer"
 // Lazy loaded components for better performance
 const AdminDashboard = React.lazy(() => import("./components/AdminDashboard"));
 const ProtectedAdminRoute = React.lazy(() => import("./components/ProtectedAdminRoute"));
+const AIAssessmentToolPage = React.lazy(() => import("./pages/AIAssessmentTool"));
+const ROICalculatorPage = React.lazy(() => import("./pages/ROICalculator"));
+const SmartCalendarPage = React.lazy(() => import("./pages/SmartCalendar"));
 
 // Regular imports for core components
 import { AuthProvider } from "./components/AuthContext";
@@ -150,18 +157,14 @@ const REGION_CONFIG = {
 // Default region if detection fails
 const DEFAULT_REGION = 'US';
 
-// Google Calendar Booking Context - REPLACED WITH CALENDLY
+// Google Calendar Booking Context (replaces Calendly)
 const CalendlyContext = React.createContext();
 
-// Calendly Provider
+// Booking Provider - uses Google Calendar Appointment Scheduling URL from
+// src/lib/booking.js. Set REACT_APP_BOOKING_URL in frontend/.env to override.
 const CalendlyProvider = ({ children }) => {
-  const openCalendly = () => {
-    // Open Calendly in new window or embed
-    window.open('https://calendly.com/orgainse-info', '_blank', 'width=800,height=600');
-  };
-  
   return (
-    <CalendlyContext.Provider value={{ openCalendly }}>
+    <CalendlyContext.Provider value={{ openCalendly: openBookingPage, bookingUrl: BOOKING_URL }}>
       {children}
     </CalendlyContext.Provider>
   );
@@ -4547,9 +4550,9 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/services" element={<Services />} />
-                    <Route path="/ai-assessment" element={<AIAssessmentTool />} />
-                    <Route path="/roi-calculator" element={<ROICalculator />} />
-                    <Route path="/smart-calendar" element={<SmartCalendar />} />
+                    <Route path="/ai-assessment" element={<AIAssessmentToolPage />} />
+                    <Route path="/roi-calculator" element={<ROICalculatorPage />} />
+                    <Route path="/smart-calendar" element={<SmartCalendarPage />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/admin" element={<ProtectedAdminRoute />} />
                     <Route path="/privacy" element={<PrivacyPolicy />} />
@@ -4566,6 +4569,8 @@ function App() {
       <Analytics />
       <SpeedInsights />
       <AnalyticsDebug />
+      <Toaster position="top-right" richColors closeButton />
+      <CookieBanner />
     </div>
   );
 }

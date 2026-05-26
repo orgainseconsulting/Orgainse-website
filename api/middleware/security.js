@@ -1,162 +1,130 @@
-// Security middleware for all API endpoints
-export const securityHeaders = (req, res) => {
-  // Content Security Policy
-  res.setHeader('Content-Security-Policy', 
-    "default-src 'self'; " +
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://assets.calendly.com; " +
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com; " +
-    "font-src 'self' https://fonts.gstatic.com; " +
-    "img-src 'self' data: https://images.unsplash.com https://www.google-analytics.com; " +
-    "connect-src 'self' https://www.google-analytics.com https://api.calendly.com; " +
-    "frame-src https://calendly.com; " +
-    "object-src 'none'; " +
-    "base-uri 'self';"
-  );
+/**
+ * Shared security middleware for /api/* handlers.
+ * - Strict CORS allowlist (no wildcard with credentials)
+ * - Tight CSP for API responses (no asset fetches needed)
+ * - In-memory token-bucket rate limiter (best-effort across cold starts)
+ * - Input sanitization + email/phone validation
+ * - Request-size validation
+ */
 
-  // Enhanced Security Headers - RELAXED CSP for API endpoints
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
+
+const DEFAULT_ALLOWED = [
+  'http://localhost:3000',
+  'https://www.orgainse.com',
+  'https://orgainse.com',
+  'https://orgainse-consulting.vercel.app',
+  'https://orgainse-website.vercel.app',
+];
+
+function effectiveAllowedOrigins() {
+  return ALLOWED_ORIGINS.length ? ALLOWED_ORIGINS : DEFAULT_ALLOWED;
+}
+
+export const securityHeaders = (req, res) => {
+  // API CSP: no resource loading allowed.
   res.setHeader('Content-Security-Policy', "default-src 'none'; frame-ancestors 'none';");
-  res.setHeader('Permissions-Policy', 'accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=(), geolocation=(), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=()');
+  res.setHeader(
+    'Permissions-Policy',
+    'accelerometer=(), camera=(), display-capture=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()'
+  );
   res.setHeader('X-Frame-Options', 'DENY');
   res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-XSS-Protection', '1; mode=block');
   res.setHeader('Referrer-Policy', 'no-referrer');
   res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   res.setHeader('X-Permitted-Cross-Domain-Policies', 'none');
-  res.setHeader('Cross-Origin-Embedder-Policy', 'unsafe-none');
   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
-  res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
-  
-  // CORS - more restrictive for production
-  const allowedOrigins = [
-    'http://localhost:3000',
-    'https://orgainse-consulting.vercel.app',
-    'https://orgainse-website.vercel.app',
-    'https://www.orgainse.com',
-    'https://orgainse.com',
-    'https://orgainse-consulting.emergent.host',
-    'https://www.orgainse-consulting.emergent.host'
-  ];
-  
+  res.setHeader('Cross-Origin-Resource-Policy', 'same-site');
+
+  // CORS — explicit allowlist; no wildcard when credentials may be in play.
+  const allowed = effectiveAllowedOrigins();
   const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin) || !origin) {
-    res.setHeader('Access-Control-Allow-Origin', origin || '*');
+  if (origin && allowed.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
   }
-  
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Max-Age', '86400'); // 24 hours
+  res.setHeader('Access-Control-Max-Age', '86400');
 };
 
-// Rate limiting storage (in production, use Redis or external service)
+// ---------------------------------------------------------------------------
+// Rate limiting (in-memory; best-effort under serverless cold starts)
+// ---------------------------------------------------------------------------
 const rateLimitStore = new Map();
 
 export const rateLimit = (req, res, options = {}) => {
-  const {
-    windowMs = 15 * 60 * 1000, // 15 minutes
-    max = 100, // limit each IP to 100 requests per windowMs
-    message = 'Too many requests, please try again later.'
-  } = options;
-
-  const ip = req.headers['x-forwarded-for'] || 
-             req.headers['x-real-ip'] || 
-             req.connection.remoteAddress ||
-             'unknown';
+  const { windowMs = 15 * 60 * 1000, max = 100, message = 'Too many requests, please try again later.' } = options;
+  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim()
+    || req.headers['x-real-ip']
+    || req.connection?.remoteAddress
+    || 'unknown';
 
   const now = Date.now();
   const windowStart = now - windowMs;
+  const recent = (rateLimitStore.get(ip) || []).filter((t) => t > windowStart);
 
-  // Get or create rate limit data for this IP
-  if (!rateLimitStore.has(ip)) {
-    rateLimitStore.set(ip, []);
-  }
-
-  const requests = rateLimitStore.get(ip);
-  
-  // Remove old requests outside the window
-  const recentRequests = requests.filter(time => time > windowStart);
-  rateLimitStore.set(ip, recentRequests);
-
-  // Check if limit exceeded
-  if (recentRequests.length >= max) {
-    res.status(429).json({
-      error: message,
-      retryAfter: Math.ceil(windowMs / 1000)
-    });
+  if (recent.length >= max) {
+    res.status(429).json({ error: message, retryAfter: Math.ceil(windowMs / 1000) });
     return false;
   }
-
-  // Add current request
-  recentRequests.push(now);
-  rateLimitStore.set(ip, recentRequests);
-
-  // Add rate limit headers
-  res.setHeader('X-RateLimit-Limit', max);
-  res.setHeader('X-RateLimit-Remaining', Math.max(0, max - recentRequests.length));
+  recent.push(now);
+  rateLimitStore.set(ip, recent);
+  res.setHeader('X-RateLimit-Limit', String(max));
+  res.setHeader('X-RateLimit-Remaining', String(Math.max(0, max - recent.length)));
   res.setHeader('X-RateLimit-Reset', new Date(now + windowMs).toISOString());
-
   return true;
 };
 
+// ---------------------------------------------------------------------------
 // Input sanitization
+// ---------------------------------------------------------------------------
+const SCRIPT_RE = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+const JS_PROTOCOL_RE = /javascript:/gi;
+const EVENT_HANDLER_RE = /on\w+\s*=/gi;
+
 export const sanitizeInput = (data) => {
   if (typeof data === 'string') {
     return data
       .trim()
-      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Remove script tags
-      .replace(/javascript:/gi, '') // Remove javascript: protocols
-      .replace(/on\w+\s*=/gi, '') // Remove event handlers
-      .substring(0, 10000); // Limit length
+      .replace(SCRIPT_RE, '')
+      .replace(JS_PROTOCOL_RE, '')
+      .replace(EVENT_HANDLER_RE, '')
+      .substring(0, 10000);
   }
-  
-  if (typeof data === 'object' && data !== null) {
-    const sanitized = {};
-    for (const [key, value] of Object.entries(data)) {
-      if (typeof value === 'string') {
-        sanitized[key] = sanitizeInput(value);
-      } else if (Array.isArray(value)) {
-        sanitized[key] = value.map(item => sanitizeInput(item));
-      } else {
-        sanitized[key] = value;
-      }
-    }
-    return sanitized;
+  if (Array.isArray(data)) return data.map(sanitizeInput);
+  if (data && typeof data === 'object') {
+    const out = {};
+    for (const [k, v] of Object.entries(data)) out[k] = sanitizeInput(v);
+    return out;
   }
-  
   return data;
 };
 
-// Email validation
-export const validateEmail = (email) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email) && email.length <= 254;
-};
+export const validateEmail = (email) =>
+  typeof email === 'string' &&
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) &&
+  email.length <= 254;
 
-// Request size validation
-export const validateRequestSize = (req, res, maxSize = 1024 * 1024) => { // 1MB default
-  const contentLength = parseInt(req.headers['content-length'] || '0');
-  
-  if (contentLength > maxSize) {
-    res.status(413).json({
-      error: 'Request payload too large',
-      maxSize: `${maxSize / 1024 / 1024}MB`
-    });
+export const validateRequestSize = (req, res, maxSize = 1024 * 1024) => {
+  const len = parseInt(req.headers['content-length'] || '0', 10);
+  if (len > maxSize) {
+    res.status(413).json({ error: 'Request payload too large', maxSize: `${maxSize / 1024 / 1024}MB` });
     return false;
   }
-  
   return true;
 };
 
-// Clean up rate limit store periodically (prevents memory leaks)
+// Periodic GC of the rate-limit store (best-effort)
 setInterval(() => {
   const now = Date.now();
   const windowMs = 15 * 60 * 1000;
-  
-  for (const [ip, requests] of rateLimitStore.entries()) {
-    const recentRequests = requests.filter(time => time > (now - windowMs));
-    if (recentRequests.length === 0) {
-      rateLimitStore.delete(ip);
-    } else {
-      rateLimitStore.set(ip, recentRequests);
-    }
+  for (const [ip, ts] of rateLimitStore.entries()) {
+    const recent = ts.filter((t) => t > now - windowMs);
+    if (recent.length === 0) rateLimitStore.delete(ip);
+    else rateLimitStore.set(ip, recent);
   }
-}, 5 * 60 * 1000); // Clean every 5 minutes
+}, 5 * 60 * 1000).unref?.();

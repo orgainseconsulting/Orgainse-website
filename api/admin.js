@@ -1,125 +1,104 @@
+/**
+ * GET /api/admin
+ * Admin dashboard data. Requires a valid admin JWT (Authorization: Bearer ...).
+ * Paginated via ?page=&page_size=.
+ */
 import { MongoClient } from 'mongodb';
-import { securityHeaders, rateLimit, validateRequestSize } from './middleware/security.js';
+import { securityHeaders, rateLimit } from './middleware/security.js';
+import { requireAdmin } from './middleware/verify-admin.js';
+
+const VALID_COLLECTIONS = [
+  'newsletter_subscriptions',
+  'contact_messages',
+  'ai_assessment_leads',
+  'roi_calculator_leads',
+  'service_inquiries',
+  'consultation_leads',
+];
+
+let cachedClient = null;
+async function getDb() {
+  if (!cachedClient) {
+    cachedClient = new MongoClient(process.env.MONGO_URL);
+    await cachedClient.connect();
+  }
+  return cachedClient.db(process.env.DB_NAME || 'orgainse-consulting');
+}
 
 export default async function handler(req, res) {
-  // Apply security headers
   securityHeaders(req, res);
-  
-  // Handle preflight requests
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
 
-  // Only allow GET requests for admin dashboard
-  if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+  if (!rateLimit(req, res, { max: 60, windowMs: 15 * 60 * 1000 })) return;
+
+  const auth = requireAdmin(req, res);
+  if (!auth) return;
 
   try {
-    // Apply rate limiting - more restrictive for admin access
-    if (!rateLimit(req, res, { max: 30, windowMs: 15 * 60 * 1000 })) {
-      return; // Rate limit exceeded
-    }
+    const page = Math.max(1, parseInt(req.query.page || '1', 10));
+    const pageSize = Math.min(500, Math.max(1, parseInt(req.query.page_size || '100', 10)));
 
-    // Basic authentication check (in production, implement proper JWT/session auth)
-    const authHeader = req.headers.authorization;
-    const referer = req.headers.referer;
-    
-    // Simple referer check - in production, use proper authentication
-    if (!referer || (!referer.includes('/admin') && !referer.includes('localhost'))) {
-      // Allow if called from admin page or localhost
-      console.warn('Admin API access attempt from unauthorized referer:', referer);
-    }
-
-    // Connect to MongoDB
-    const client = new MongoClient(process.env.MONGO_URL);
-    await client.connect();
-    
-    const db = client.db(process.env.DB_NAME || 'orgainse-consulting');
-
-    // Fetch data from all collections with error handling
-    const collections = [
-      'newsletter_subscriptions',
-      'contact_messages',
-      'ai_assessment_leads',
-      'roi_calculator_leads',
-      'service_inquiries',
-      'consultation_leads'
-    ];
-
-    const results = {};
+    const db = await getDb();
+    const data = {};
+    const counts = {};
     let totalLeads = 0;
 
-    // Fetch data from each collection safely
-    for (const collectionName of collections) {
+    for (const name of VALID_COLLECTIONS) {
       try {
-        const data = await db.collection(collectionName)
-          .find({})
+        const docs = await db.collection(name)
+          .find({}, { projection: { _id: 0 } })
           .sort({ submitted_at: -1, subscribed_at: -1 })
-          .limit(100) // Limit results for performance
+          .skip((page - 1) * pageSize)
+          .limit(pageSize)
           .toArray();
-        
-        results[collectionName] = data;
-        totalLeads += data.length;
-      } catch (collectionError) {
-        console.error(`Error fetching ${collectionName}:`, collectionError);
-        results[collectionName] = [];
+        const total = await db.collection(name).countDocuments({});
+        data[name] = docs;
+        counts[name] = total;
+        totalLeads += total;
+      } catch (e) {
+        console.error(`fetch ${name} failed:`, e);
+        data[name] = [];
+        counts[name] = 0;
       }
     }
 
-    await client.close();
-
-    // Create summary statistics
     const summary = {
-      total_newsletters: results.newsletter_subscriptions.length,
-      total_contacts: results.contact_messages.length,
-      total_ai_assessments: results.ai_assessment_leads.length,
-      total_roi_calculators: results.roi_calculator_leads.length,
-      total_service_inquiries: results.service_inquiries.length,
-      total_consultations: results.consultation_leads.length,
       total_leads: totalLeads,
+      total_newsletters: counts.newsletter_subscriptions,
+      total_contacts: counts.contact_messages,
+      total_ai_assessments: counts.ai_assessment_leads,
+      total_roi_calculators: counts.roi_calculator_leads,
+      total_service_inquiries: counts.service_inquiries,
+      total_consultations: counts.consultation_leads,
       last_updated: new Date().toISOString(),
-      // Add breakdown structure that frontend expects
       breakdown: {
-        newsletters: results.newsletter_subscriptions.length,
-        contact_messages: results.contact_messages.length,
-        ai_assessments: results.ai_assessment_leads.length,
-        roi_calculators: results.roi_calculator_leads.length,
-        service_inquiries: results.service_inquiries.length,
-        consultations: results.consultation_leads.length
-      }
+        newsletters: counts.newsletter_subscriptions,
+        contact_messages: counts.contact_messages,
+        ai_assessments: counts.ai_assessment_leads,
+        roi_calculators: counts.roi_calculator_leads,
+        service_inquiries: counts.service_inquiries,
+        consultations: counts.consultation_leads,
+      },
     };
 
-    // Prepare response data
-    const responseData = {
+    res.setHeader('Cache-Control', 'private, no-store, max-age=0');
+    return res.status(200).json({
+      success: true,
+      pagination: { page, page_size: pageSize },
       summary,
       data: {
-        newsletters: results.newsletter_subscriptions,
-        contact_messages: results.contact_messages,
-        ai_assessment_leads: results.ai_assessment_leads,
-        roi_calculator_leads: results.roi_calculator_leads,
-        service_inquiries: results.service_inquiries,
-        consultation_leads: results.consultation_leads
+        newsletters: data.newsletter_subscriptions,
+        contact_messages: data.contact_messages,
+        ai_assessment_leads: data.ai_assessment_leads,
+        roi_calculator_leads: data.roi_calculator_leads,
+        service_inquiries: data.service_inquiries,
+        consultation_leads: data.consultation_leads,
       },
-      success: true,
-      timestamp: new Date().toISOString()
-    };
-
-    // Add cache headers for performance but ensure data freshness after deletes
-    res.setHeader('Cache-Control', 'private, max-age=0, no-cache, no-store, must-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
-    
-    res.status(200).json(responseData);
-
-  } catch (error) {
-    console.error('Admin API Error:', error);
-    
-    // Don't expose internal error details
-    res.status(500).json({ 
-      error: 'Internal server error. Unable to fetch dashboard data.',
-      success: false,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
+  } catch (err) {
+    console.error('admin error:', err);
+    return res.status(500).json({ error: 'Internal server error', success: false });
   }
 }

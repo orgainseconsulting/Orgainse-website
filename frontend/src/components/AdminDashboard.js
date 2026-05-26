@@ -1,48 +1,37 @@
 import React, { useState, useEffect } from 'react';
+import { toast } from 'sonner';
+import { api } from '../lib/api';
+import { useAuth } from './AuthContext';
 
 const AdminDashboard = () => {
+  const { logout } = useAuth();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('overview');
+  const [page, setPage] = useState(1);
+  const pageSize = 100;
 
   const fetchData = async () => {
     try {
       setLoading(true);
       setError('');
-      
-      // Add cache-busting parameter to ensure fresh data
-      const timestamp = new Date().getTime();
-      const response = await fetch(`/api/admin?_t=${timestamp}`, {
-        method: 'GET',
-        headers: {
-          'Cache-Control': 'no-cache',
-          'Pragma': 'no-cache'
-        }
-      });
-      
-      const result = await response.json();
-      
-      if (response.ok) {
-        setData(result);
-        setError('');
-        console.log('✅ Admin dashboard data refreshed:', result.summary);
-      } else {
-        setError(result.error || 'Failed to fetch data');
-        console.error('❌ Admin API error:', result);
-      }
+      const result = await api.adminDashboard(page, pageSize);
+      setData(result);
     } catch (err) {
-      const errorMsg = 'Network error. Please try again.';
-      setError(errorMsg);
-      console.error('❌ Admin dashboard fetch error:', err);
+      if (err.status === 401 || err.status === 403) {
+        toast.error('Session expired. Please log in again.');
+        logout();
+        return;
+      }
+      setError(err.message || 'Failed to fetch data');
+      toast.error(err.message || 'Failed to fetch data');
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  useEffect(() => { fetchData(); /* eslint-disable-next-line */ }, [page]);
 
   const exportToCSV = (data, filename) => {
     if (!data || data.length === 0) return;
@@ -237,87 +226,50 @@ const AdminDashboard = () => {
 
     try {
       setLoading(true);
-      const response = await fetch('/api/admin-delete?deleteType=all', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
-
-      const result = await response.json();
-
-      if (response.ok && result.success) {
-        alert(`✅ Successfully deleted ${result.deletedCount} leads from all collections.`);
-        // Wait a moment for database operations to complete, then refresh
-        setTimeout(() => {
-          fetchData();
-        }, 1000);
+      const result = await api.adminDelete({ deleteType: 'all' });
+      if (result.success) {
+        toast.success(`Deleted ${result.deletedCount} leads`);
+        setTimeout(fetchData, 800);
       } else {
-        alert(`❌ Delete failed: ${result.message || result.error}`);
+        toast.error(result.message || result.error);
         setLoading(false);
       }
     } catch (error) {
-      alert(`❌ Delete operation failed: ${error.message}`);
+      toast.error(error.message || 'Delete failed');
       setLoading(false);
     }
   };
 
   const deleteCollectionLeads = async (collection, collectionName) => {
-    if (!window.confirm(`⚠️ This will permanently delete ALL leads from ${collectionName}. Are you sure?`)) {
-      return;
-    }
-
+    if (!window.confirm(`This will permanently delete ALL leads from ${collectionName}. Are you sure?`)) return;
     try {
       setLoading(true);
-      const response = await fetch(`/api/admin-delete?deleteType=collection&collection=${collection}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
-
-      const result = await response.json();
-
-      if (response.ok && result.success) {
-        alert(`✅ Successfully deleted ${result.deletedCount} leads from ${collectionName}.`);
-        // Wait a moment for database operations to complete, then refresh
-        setTimeout(() => {
-          fetchData();
-        }, 1000);
+      const result = await api.adminDelete({ deleteType: 'collection', collection });
+      if (result.success) {
+        toast.success(`Deleted ${result.deletedCount} leads from ${collectionName}`);
+        setTimeout(fetchData, 800);
       } else {
-        alert(`❌ Delete failed: ${result.message || result.error}`);
+        toast.error(result.message || result.error);
         setLoading(false);
       }
     } catch (error) {
-      alert(`❌ Delete operation failed: ${error.message}`);
+      toast.error(error.message || 'Delete failed');
       setLoading(false);
     }
   };
 
   const deleteSingleLead = async (leadId, collection, leadName) => {
-    if (!window.confirm(`⚠️ This will permanently delete the lead "${leadName || leadId}". Are you sure?`)) {
-      return;
-    }
-
+    if (!window.confirm(`This will permanently delete the lead "${leadName || leadId}". Are you sure?`)) return;
     try {
-      const response = await fetch(`/api/admin-delete?deleteType=single&collection=${collection}&leadId=${leadId}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
-
-      const result = await response.json();
-
-      if (response.ok && result.success) {
-        alert(`✅ Successfully deleted lead "${leadName || leadId}".`);
-        // Refresh data immediately for single deletions
+      const result = await api.adminDelete({ deleteType: 'single', collection, leadId });
+      if (result.success) {
+        toast.success(`Deleted "${leadName || leadId}"`);
         fetchData();
       } else {
-        alert(`❌ Delete failed: ${result.message || result.error}`);
+        toast.error(result.message || result.error);
       }
     } catch (error) {
-      alert(`❌ Delete operation failed: ${error.message}`);
+      toast.error(error.message || 'Delete failed');
     }
   };
 
