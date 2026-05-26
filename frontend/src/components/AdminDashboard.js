@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { api } from '../lib/api';
 import { useAuth } from './AuthContext';
+import BlogManager from './blog/BlogManager';
 
 /**
  * Flatten a lead document so the table & CSV exports show human-readable
@@ -295,7 +296,8 @@ const AdminDashboard = () => {
     { id: 'ai_assessments', name: 'AI Assessments', count: data?.summary?.breakdown?.ai_assessments || 0 },
     { id: 'roi_calculators', name: 'ROI Calculators', count: data?.summary?.breakdown?.roi_calculators || 0 },
     { id: 'service_inquiries', name: 'Service Inquiries', count: data?.summary?.breakdown?.service_inquiries || 0 },
-    { id: 'consultations', name: 'Consultations', count: data?.summary?.breakdown?.consultations || 0 }
+    { id: 'consultations', name: 'Consultations', count: data?.summary?.breakdown?.consultations || 0 },
+    { id: 'blog', name: 'Blog' }
   ];
 
   // Reset to page 1 whenever the active tab changes
@@ -345,10 +347,13 @@ const AdminDashboard = () => {
   }
 
   const renderTabContent = () => {
+    if (activeTab === 'blog') {
+      return <BlogManager />;
+    }
     if (activeTab === 'overview') {
       return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {tabs.slice(1).map(tab => {
+          {tabs.slice(1).filter((t) => t.id !== 'blog').map(tab => {
             // Map tab IDs to collection names
             const collectionMap = {
               'newsletters': 'newsletter_subscriptions',
@@ -707,9 +712,11 @@ const AdminDashboard = () => {
                   }`}
                 >
                   {tab.name}
-                  <span className="ml-2 px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-900">
-                    {tab.count}
-                  </span>
+                  {tab.count !== undefined && (
+                    <span className="ml-2 px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-900">
+                      {tab.count}
+                    </span>
+                  )}
                 </button>
               ))}
             </nav>

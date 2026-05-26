@@ -30,6 +30,8 @@ const NotFoundPage = React.lazy(() => import("./pages/NotFound"));
 const PrivacyPolicyPage = React.lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfServicePage = React.lazy(() => import("./pages/TermsOfService"));
 const ProductsPage = React.lazy(() => import("./pages/Products"));
+const BlogIndexPage = React.lazy(() => import("./pages/BlogIndex"));
+const BlogPostPage = React.lazy(() => import("./pages/BlogPost"));
 
 const RouteFallback = () => (
   <div
@@ -63,6 +65,8 @@ function App() {
                     <Route path="/smart-calendar" element={<SmartCalendarPage />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/products" element={<ProductsPage />} />
+                    <Route path="/blog" element={<BlogIndexPage />} />
+                    <Route path="/blog/:slug" element={<BlogPostPage />} />
                     <Route path="/admin" element={<ProtectedAdminRoute />} />
                     <Route path="/privacy" element={<PrivacyPolicyPage />} />
                     <Route path="/terms" element={<TermsOfServicePage />} />

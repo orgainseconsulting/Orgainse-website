@@ -126,5 +126,13 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-  
+
+  <!-- Blog -->
+  <url>
+    <loc>https://www.orgainse.com/blog</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const SEOHead = ({ title, description, canonical, noindex = false, structuredData = null, keywords = null }) => {
+const SEOHead = ({ title, description, canonical, noindex = false, structuredData = null, keywords = null, ogImage = null, ogType = null }) => {
   const location = useLocation();
   
   // Generate breadcrumb data based on current path
@@ -121,10 +121,14 @@ const SEOHead = ({ title, description, canonical, noindex = false, structuredDat
       kw.setAttribute('content', keywords);
     }
 
-    // Page-scoped structured data — replaces any previous page-scoped block
+    // Page-scoped structured data — replaces any previous page-scoped block.
+    // Accepts either an array of schema objects or a single object (for posts).
     document.querySelectorAll('script[data-page-schema]').forEach((n) => n.remove());
-    if (Array.isArray(structuredData) && structuredData.length > 0) {
-      structuredData.forEach((schema, i) => {
+    const schemas = Array.isArray(structuredData)
+      ? structuredData
+      : (structuredData && typeof structuredData === 'object' ? [structuredData] : []);
+    if (schemas.length > 0) {
+      schemas.forEach((schema, i) => {
         const s = document.createElement('script');
         s.type = 'application/ld+json';
         s.setAttribute('data-page-schema', `${location.pathname}-${i}`);
@@ -133,7 +137,31 @@ const SEOHead = ({ title, description, canonical, noindex = false, structuredDat
       });
     }
 
-  }, [title, description, canonical, location.pathname, noindex, structuredData, keywords]);
+    // Optional og:image and og:type overrides (e.g., blog posts)
+    if (ogImage) {
+      const ogImg = document.querySelector('meta[property="og:image"]');
+      if (ogImg) ogImg.setAttribute('content', ogImage);
+      const twImg = document.querySelector('meta[property="twitter:image"]');
+      if (twImg) twImg.setAttribute('content', ogImage);
+    }
+    if (ogType) {
+      const ogT = document.querySelector('meta[property="og:type"]');
+      if (ogT) ogT.setAttribute('content', ogType);
+    }
+    if (title) {
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) ogTitle.setAttribute('content', title);
+      const twTitle = document.querySelector('meta[property="twitter:title"]');
+      if (twTitle) twTitle.setAttribute('content', title);
+    }
+    if (description) {
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) ogDesc.setAttribute('content', description);
+      const twDesc = document.querySelector('meta[property="twitter:description"]');
+      if (twDesc) twDesc.setAttribute('content', description);
+    }
+
+  }, [title, description, canonical, location.pathname, noindex, structuredData, keywords, ogImage, ogType]);
   
   return null; // This component doesn't render anything
 };
