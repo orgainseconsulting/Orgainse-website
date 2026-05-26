@@ -72,7 +72,11 @@ export const RegionalPricingProvider = ({ children }) => {
     const detectRegion = async () => {
       let detected = null;
       try {
-        const response = await fetch("https://ipapi.co/json/", { mode: "cors" });
+        // Proxy through our own API so the browser never sees the cross-origin
+        // request to ipapi.co (kills the CORS console noise and lets us swap
+        // providers without touching the SPA).
+        const backend = process.env.REACT_APP_BACKEND_URL || "";
+        const response = await fetch(`${backend}/api/geo`);
         if (response.ok) {
           const data = await response.json();
           if (data?.country_code) {
