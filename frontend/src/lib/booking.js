@@ -13,7 +13,7 @@
  */
 export const BOOKING_URL =
   process.env.REACT_APP_BOOKING_URL ||
-  'https://calendar.app.google/REPLACE_ME_WITH_YOUR_APPOINTMENT_URL';
+  'https://calendar.app.google/i8mBG9yQzmUkeeRy6';
 
 export function openBookingPage() {
   // Open in a new tab so the user keeps your site in their history.
