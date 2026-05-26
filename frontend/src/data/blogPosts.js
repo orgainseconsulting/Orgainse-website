@@ -59,7 +59,7 @@ export const blogPosts = [
       <h3>IT Services &amp; Software</h3>
       <p>AI PMaaS accelerates development cycles, improves code quality, and optimizes resource utilization across development teams.</p>
       
-      <h3>Revenue Cycle Management (US Healthcare)</h3>
+      <h3>Healthcare Revenue Intelligence Advisory</h3>
       <p>AI-powered revenue intelligence — denial trend analytics, payer behavior insight, and governance advisory — surfaced through executive-ready dashboards, working alongside existing RCM operations.</p>
       
       <h3>Industry-Agnostic for SMEs &amp; Startups</h3>
@@ -119,7 +119,7 @@ export const blogPosts = [
       
       <h2>Industry-Specific Transformation Strategies</h2>
       
-      <h3>Revenue Cycle Management (US Healthcare)</h3>
+      <h3>Healthcare Revenue Intelligence Advisory</h3>
       <ul>
         <li>AI-driven denial intelligence and trend analysis</li>
         <li>Payer behavior &amp; contract performance analytics</li>
@@ -228,7 +228,7 @@ export const blogPosts = [
         <li><strong>Payback Period:</strong> 6–9 months</li>
       </ul>
       
-      <h3>Revenue Cycle Management (US Healthcare)</h3>
+      <h3>Healthcare Revenue Intelligence Advisory</h3>
       <ul>
         <li><strong>Typical revenue uplift potential:</strong> 3% or more, identified through AI-powered denial trend analytics, payer behavior insight, and governance advisory (advisory only — no operational billing/coding)</li>
         <li><strong>Key Benefits:</strong> Independent visibility into revenue leakage, denial intelligence, payer &amp; contract analytics</li>

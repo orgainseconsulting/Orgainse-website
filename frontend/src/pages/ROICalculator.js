@@ -9,7 +9,7 @@ import { openBookingPage } from '../lib/booking';
 
 const INDUSTRIES = [
   'IT Services & Software',
-  'Revenue Cycle Management (US Healthcare)',
+  'Healthcare Revenue Intelligence Advisory',
   'Other / Industry-Agnostic',
 ];
 
@@ -17,7 +17,7 @@ const SIZES = ['1-10', '11-50', '51-200', '201-500', '500+'];
 
 const SERVICES = [
   'AI Project Management', 'Digital Transformation', 'Operational Optimization',
-  'Business Strategy Development', 'Revenue Cycle Management (US Healthcare)', 'Risk Management & Compliance',
+  'Business Strategy Development', 'Healthcare Revenue Intelligence Advisory', 'Risk Management & Compliance',
 ];
 
 const REGIONS = [

@@ -47,7 +47,7 @@ const SEOContent = () => {
               {/* First Content Card */}
               <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-white/30 hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] animate-fade-in">
                 <p className="text-xl text-slate-700 leading-relaxed text-justify">
-                  <strong>Orgainse Consulting</strong> is a leading <strong>business consulting firm</strong> offering comprehensive <strong>digital transformation</strong>, <strong>project management</strong>, <strong>AI strategy</strong>, and <strong>operational optimization services</strong> for startups and SMEs worldwide. Our integrated consulting approach delivers <strong>measurable, data-driven outcomes</strong> and <strong>faster delivery</strong> — industry-agnostic for SMEs and startups, with deep specialization in <strong>IT Services &amp; Software</strong> and <strong>Revenue Cycle Management (US Healthcare)</strong>.
+                  <strong>Orgainse Consulting</strong> is a leading <strong>business consulting firm</strong> offering comprehensive <strong>digital transformation</strong>, <strong>project management</strong>, <strong>AI strategy</strong>, and <strong>operational optimization services</strong> for startups and SMEs worldwide. Our integrated consulting approach delivers <strong>measurable, data-driven outcomes</strong> and <strong>faster delivery</strong> — industry-agnostic for SMEs and startups, with deep specialization in <strong>IT Services &amp; Software</strong> and <strong>Healthcare Revenue Intelligence Advisory</strong>.
                 </p>
                 {/* Small decorative element */}
                 <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-4 animate-pulse"></div>
@@ -294,7 +294,7 @@ const SEOContent = () => {
                     </div>
                     <div className="flex-1">
                       <h4 className="text-slate-900 font-bold text-left mb-2">
-                        Revenue Cycle Management (US Healthcare)
+                        Healthcare Revenue Intelligence Advisory
                       </h4>
                       <p className="text-slate-700 leading-relaxed text-left">
                         AI-powered revenue intelligence advisory: denial analytics, payer behavior insight, governance and AI readiness — alongside your existing RCM operations

@@ -13,7 +13,7 @@ const SERVICE_TYPES = [
   'Digital Transformation Consulting',
   'AI Operational Optimization',
   'Business Strategy Development',
-  'Revenue Cycle Management (US Healthcare)',
+  'Healthcare Revenue Intelligence Advisory',
   'Risk Management & Compliance',
   'General Consultation',
 ];
