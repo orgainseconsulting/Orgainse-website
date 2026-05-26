@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { Clock, Save, X } from 'lucide-react';
 import { api } from '../../lib/api';
@@ -67,7 +67,7 @@ const NextLaunchCountdownCard = ({ kind }) => {
   const [currentIso, setCurrentIso] = useState('');
   const [draft, setDraft] = useState('');
 
-  const load = async () => {
+  const load = useCallback(async () => {
     setLoading(true);
     try {
       // Try super-admin endpoint first; fall back to public if 403.
@@ -90,9 +90,9 @@ const NextLaunchCountdownCard = ({ kind }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [field]);
 
-  useEffect(() => { load(); /* eslint-disable-next-line */ }, [kind]);
+  useEffect(() => { load(); }, [load]);
 
   const save = async () => {
     setSaving(true);
