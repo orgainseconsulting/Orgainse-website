@@ -238,3 +238,24 @@ See `/app/memory/test_credentials.md`.
 | DELETE | `/api/newsletter-admin/segments?id=`         | Bearer | delete (also strips slug from subscribers) |
 | GET    | `/api/unsubscribe?token=`                    | — | check sub state |
 | POST   | `/api/unsubscribe`                           | — | confirm unsubscribe |
+| POST   | `/api/admin-change-password`                 | Bearer (password_change or full) | rotates password, returns full token |
+| GET    | `/api/auth/me`                               | Bearer (password_change or full) | `{email,name,needs_password_change,is_super_admin,role}` |
+| GET    | `/api/admin-users`                           | Bearer (super-admin) | list users + me, includes `temp_password_plain` for unchanged users |
+| POST   | `/api/admin-users`                           | Bearer (super-admin) | invite (`{email,name,temp_password}`) |
+| PUT    | `/api/admin-users?id=`                       | Bearer (super-admin) | update `name` |
+| DELETE | `/api/admin-users?id=`                       | Bearer (super-admin) | cannot delete self or super-admin |
+| POST   | `/api/admin-users/reset-password?id=`        | Bearer (super-admin) | sets new temp + forces change |
+| GET    | `/api/app-settings`                          | Bearer (super-admin) | masked resend key, sender, hosts |
+| PUT    | `/api/app-settings`                          | Bearer (super-admin) | update key/sender/hosts/booking_url_default |
+| GET    | `/api/app-settings/public`                   | — | non-secret subset (hosts + fallback URL) |
+
+## Implemented (May 2026 — multi-user admin + dynamic settings)
+
+- **Multi-user admin auth** — `admin_users` collection seeded with 4 `@orgainse.com` accounts (`info`, `support`, `swarag` super-admin, `rajesh`) with shared temp password `Orgainse25%Web..` and forced-change on first login (short-lived 15-min `password_change` JWT until reset).
+- **Domain restriction** — login rejects non-`@orgainse.com` emails with 403; brute-force lockout (5 attempts → 15 min). Timezone-aware datetime comparison fix applied for lockout reads.
+- **Admin Users tab** (`super-admin only`) — invite, edit name, reset password, delete. `temp_password_plain` is stored alongside the bcrypt hash and shown only to super-admin via a `PasswordReveal` control (with Copy); auto-cleared on user's first password change.
+- **Admin Settings tab** (`super-admin only`) — masked Resend API key (`re_•••••pH`) with Replace button; sender email/name; configurable Book-a-Call hosts list (name, role, initials/photo, individual booking URL); fallback `booking_url_default`. Persisted in `app_settings` collection with `_id: "global"`. New keys are applied to the in-process Resend client immediately and re-loaded on startup.
+- **Book-a-Call host picker modal** — `CalendlyContext` pre-loads `/api/app-settings/public` at mount; `openCalendly()` opens `HostPickerModal` with avatar cards. When no hosts configured, falls back to `window.open(REACT_APP_BOOKING_URL)` directly. Wired into Navigation, Contact, AIAssessmentTool, ROICalculator, SmartCalendar.
+- **Animated "Stay tuned" empty-state banners** (`StayTunedBanner`) — wired into `/blog` and `/newsletter`. Live countdown (days/hrs/mins/secs), animated dots, CTAs to newsletter & contact.
+- **Test data cleanup** — all seeded test `blog_posts` and `newsletter_issues` were removed so empty banners render.
+- **Vercel serverless mirror** — every new endpoint mirrored to `/app/api/*` (auth/me, admin-change-password, admin-users CRUD, admin-users/reset-password, app-settings, app-settings/public) using a shared `/app/api/_auth-utils.js` helper.

@@ -414,8 +414,11 @@ async def admin_login(payload: AdminLoginIn, request: Request):
 
     # Check lockout
     lockout = await db.login_attempts.find_one({"_id": identifier})
-    if lockout and lockout.get("locked_until") and lockout["locked_until"] > now:
-        remaining = int((lockout["locked_until"] - now).total_seconds())
+    locked_until = lockout.get("locked_until") if lockout else None
+    if locked_until is not None and locked_until.tzinfo is None:
+        locked_until = locked_until.replace(tzinfo=timezone.utc)
+    if locked_until and locked_until > now:
+        remaining = int((locked_until - now).total_seconds())
         raise HTTPException(
             status_code=429,
             detail=f"Too many failed attempts. Try again in {remaining}s.",

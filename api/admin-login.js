@@ -44,8 +44,10 @@ export default async function handler(req, res) {
     const now = new Date();
 
     const attempt = await db.collection('login_attempts').findOne({ _id: identifier });
-    if (attempt?.locked_until && new Date(attempt.locked_until) > now) {
-      const remaining = Math.ceil((new Date(attempt.locked_until) - now) / 1000);
+    const lockedUntilRaw = attempt?.locked_until;
+    const lockedUntil = lockedUntilRaw ? new Date(lockedUntilRaw) : null;
+    if (lockedUntil && lockedUntil > now) {
+      const remaining = Math.ceil((lockedUntil - now) / 1000);
       return res.status(429).json({ error: `Too many failed attempts. Try again in ${remaining}s.` });
     }
 
