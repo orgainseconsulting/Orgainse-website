@@ -2483,26 +2483,30 @@ const Services = () => {
 const Contact = () => {
   const { openCalendly } = useCalendly();
   const location = useLocation();
+  const queryParams = React.useMemo(
+    () => new URLSearchParams(location.search),
+    [location.search]
+  );
+  const isOrqyneInquiry = queryParams.get("product") === "orqyne";
+
   const initialSubject = React.useMemo(() => {
-    const params = new URLSearchParams(location.search);
-    if (params.get("product") === "orqyne") {
-      const tier = params.get("tier");
-      const cockpit = params.get("cockpit");
+    if (isOrqyneInquiry) {
+      const tier = queryParams.get("tier");
+      const cockpit = queryParams.get("cockpit");
       const cockpitMap = { it: "IT Services & Software", canvas: "Canvas", rcm: "US Healthcare Analytics" };
       const tierStr = tier ? ` · ${tier.charAt(0).toUpperCase() + tier.slice(1)} tier` : "";
       const cockpitStr = cockpit && cockpitMap[cockpit] ? ` · ${cockpitMap[cockpit]} cockpit` : "";
       return `ORQYNE Product Inquiry${tierStr}${cockpitStr}`;
     }
     return "";
-  }, [location.search]);
+  }, [isOrqyneInquiry, queryParams]);
 
   const initialMessage = React.useMemo(() => {
-    const params = new URLSearchParams(location.search);
-    if (params.get("product") === "orqyne") {
+    if (isOrqyneInquiry) {
       return "I'm interested in ORQYNE — your AI Project Management as a Service product. Please share a personalised demo, ROI estimate, and the right tier for my team.";
     }
     return "";
-  }, [location.search]);
+  }, [isOrqyneInquiry]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -2521,7 +2525,7 @@ const Contact = () => {
     setSubmitStatus("");
     try {
       await api.contact({
-        leadType: formData.subject?.startsWith("ORQYNE") ? "Product Inquiry (ORQYNE)" : "Contact Inquiry",
+        leadType: isOrqyneInquiry ? "Product Inquiry (ORQYNE)" : "Contact Inquiry",
         name: formData.name,
         email: formData.email,
         phone: formData.phone,

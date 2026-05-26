@@ -33,10 +33,10 @@ const SIGNUP_URL = "https://orgainse.live/signup";
 // ---------- DATA ---------------------------------------------------------
 
 const HERO_STATS = [
-  { value: "20+", label: "RAG-grounded AI agents" },
-  { value: "3", label: "Industry cockpits live" },
-  { value: "90s", label: "From spreadsheet to running project" },
-  { value: "BYOK", label: "Your API keys, your choice" },
+  { key: "agents", value: "20+", label: "RAG-grounded AI agents" },
+  { key: "cockpits", value: "3", label: "Industry cockpits live" },
+  { key: "time", value: "90s", label: "From spreadsheet to running project" },
+  { key: "byok", value: "BYOK", label: "Your API keys, your choice" },
 ];
 
 const COCKPITS = [
@@ -298,8 +298,8 @@ const ProductsPage = () => {
           <div className="mt-14 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
             {HERO_STATS.map((s) => (
               <div
-                key={s.label}
-                data-testid={`stat-${s.label.split(" ")[0].toLowerCase()}`}
+                key={s.key}
+                data-testid={`stat-${s.key}`}
                 className="bg-white/70 backdrop-blur-sm border border-slate-200/80 rounded-2xl p-5 text-center shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5"
               >
                 <div className="text-3xl lg:text-4xl font-extrabold bg-gradient-to-br from-blue-600 to-orange-500 bg-clip-text text-transparent">
