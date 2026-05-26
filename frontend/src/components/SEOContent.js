@@ -47,7 +47,7 @@ const SEOContent = () => {
               {/* First Content Card */}
               <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-white/30 hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] animate-fade-in">
                 <p className="text-xl text-slate-700 leading-relaxed text-justify">
-                  <strong>Orgainse Consulting</strong> is a leading <strong>business consulting firm</strong> offering comprehensive <strong>digital transformation</strong>, <strong>project management</strong>, <strong>AI strategy</strong>, and <strong>operational optimization services</strong> for startups and SMEs worldwide. Our integrated consulting approach delivers an average <strong>340% ROI</strong> and <strong>25% faster delivery</strong> across industries including IT Services, EdTech, FinTech, Healthcare, Hospitality, and Software Development.
+                  <strong>Orgainse Consulting</strong> is a leading <strong>business consulting firm</strong> offering comprehensive <strong>digital transformation</strong>, <strong>project management</strong>, <strong>AI strategy</strong>, and <strong>operational optimization services</strong> for startups and SMEs worldwide. Our integrated consulting approach delivers <strong>measurable, data-driven outcomes</strong> and <strong>faster delivery</strong> — industry-agnostic for SMEs and startups, with deep specialization in <strong>IT Services &amp; Software</strong> and <strong>Revenue Cycle Management (US Healthcare)</strong>.
                 </p>
                 {/* Small decorative element */}
                 <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-4 animate-pulse"></div>
@@ -94,7 +94,7 @@ const SEOContent = () => {
             
             {/* Enhanced Benefits Grid with Cards */}
             <div className="grid md:grid-cols-2 gap-6 mb-8 relative z-10">
-              {/* 340% ROI Card */}
+              {/* Measurable Outcomes Card */}
               <div className="group bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6 shadow-lg border border-green-200/50 hover:shadow-2xl transition-all duration-500 transform hover:scale-105 animate-fade-in">
                 <div className="flex items-start space-x-4">
                   <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-3 rounded-full shadow-lg group-hover:shadow-xl transition-all duration-300">
@@ -102,10 +102,10 @@ const SEOContent = () => {
                   </div>
                   <div className="flex-1">
                     <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-green-700 transition-colors">
-                      340% Average ROI
+                      Measurable, Data-Driven Outcomes
                     </h3>
                     <p className="text-slate-700 text-justify leading-relaxed">
-                      Proven return on investment within 18 months through comprehensive business optimization and intelligent automation across all consulting services.
+                      Every engagement is structured around quantifiable KPIs, executive dashboards, and conservative, defensible benchmarks — never vanity metrics.
                     </p>
                   </div>
                 </div>
@@ -269,7 +269,7 @@ const SEOContent = () => {
 
             {/* Enhanced Industries List */}
             <div className="relative z-10">
-              <h3 className="text-xl font-bold text-slate-900 mb-6 text-center">Key Industries We Serve:</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-6 text-center">Where We Specialize:</h3>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                 <div className="group bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 shadow-md border border-blue-200/50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in">
                   <div className="flex items-start space-x-3">
@@ -278,15 +278,15 @@ const SEOContent = () => {
                     </div>
                     <div className="flex-1">
                       <h4 className="text-slate-900 font-bold text-left mb-2">
-                        IT Services & Software Development:
+                        IT Services &amp; Software
                       </h4>
                       <p className="text-slate-700 leading-relaxed text-left">
-                        Technology strategy, agile transformation, and development process optimization
+                        Technology strategy, agile transformation, AI-native delivery, and development process optimization
                       </p>
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="group bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-4 shadow-md border border-purple-200/50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in animation-delay-100">
                   <div className="flex items-start space-x-3">
                     <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
@@ -294,74 +294,26 @@ const SEOContent = () => {
                     </div>
                     <div className="flex-1">
                       <h4 className="text-slate-900 font-bold text-left mb-2">
-                        EdTech & Education:
+                        Revenue Cycle Management (US Healthcare)
                       </h4>
                       <p className="text-slate-700 leading-relaxed text-left">
-                        Educational technology consulting, learning platform optimization, and institutional transformation
+                        AI-powered revenue intelligence advisory: denial analytics, payer behavior insight, governance and AI readiness — alongside your existing RCM operations
                       </p>
                     </div>
                   </div>
                 </div>
-                
-                <div className="group bg-gradient-to-r from-green-50 to-teal-50 rounded-lg p-4 shadow-md border border-green-200/50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in animation-delay-200">
+
+                <div className="group bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg p-4 shadow-md border border-cyan-200/50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in animation-delay-200">
                   <div className="flex items-start space-x-3">
                     <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
                       <CheckCircle className="h-5 w-5 text-white" />
                     </div>
                     <div className="flex-1">
                       <h4 className="text-slate-900 font-bold text-left mb-2">
-                        FinTech & Financial Services:
+                        Industry-Agnostic for SMEs &amp; Startups
                       </h4>
                       <p className="text-slate-700 leading-relaxed text-left">
-                        Financial technology strategy, regulatory compliance, and process automation
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="group bg-gradient-to-r from-orange-50 to-red-50 rounded-lg p-4 shadow-md border border-orange-200/50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in animation-delay-300">
-                  <div className="flex items-start space-x-3">
-                    <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
-                      <CheckCircle className="h-5 w-5 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="text-slate-900 font-bold text-left mb-2">
-                        Healthcare & MedTech:
-                      </h4>
-                      <p className="text-slate-700 leading-relaxed text-left">
-                        Healthcare technology consulting, clinical process optimization, and digital health solutions
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="group bg-gradient-to-r from-yellow-50 to-amber-50 rounded-lg p-4 shadow-md border border-yellow-200/50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in animation-delay-400">
-                  <div className="flex items-start space-x-3">
-                    <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
-                      <CheckCircle className="h-5 w-5 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="text-slate-900 font-bold text-left mb-2">
-                        Hospitality & Tourism:
-                      </h4>
-                      <p className="text-slate-700 leading-relaxed text-left">
-                        Customer experience optimization, operations consulting, and digital service transformation
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="group bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg p-4 shadow-md border border-cyan-200/50 hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-fade-in animation-delay-500">
-                  <div className="flex items-start space-x-3">
-                    <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
-                      <CheckCircle className="h-5 w-5 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="text-slate-900 font-bold text-left mb-2">
-                        Manufacturing & Supply Chain:
-                      </h4>
-                      <p className="text-slate-700 leading-relaxed text-left">
-                        Industrial automation, quality management, and intelligent supply chain coordination
+                        Project management, digital transformation, business strategy, and risk &amp; compliance for SMEs and startups across any sector
                       </p>
                     </div>
                   </div>

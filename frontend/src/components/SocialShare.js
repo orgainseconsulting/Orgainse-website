@@ -4,7 +4,7 @@ import { Share2, Twitter, Linkedin, Facebook, Mail, Link, MessageCircle, Send } 
 const SocialShare = ({ 
   url = window.location.href, 
   title = "AI Project Management Service | Orgainse Consulting",
-  description = "Transform your business with AI-powered project management. 340% ROI, 25% faster delivery.",
+  description = "Transform your business with AI-powered project management — measurable, data-driven outcomes and faster delivery.",
   hashtags = "AI,ProjectManagement,DigitalTransformation,PMaaS"
 }) => {
   const [showDropdown, setShowDropdown] = React.useState(false);

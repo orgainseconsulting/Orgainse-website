@@ -8,16 +8,16 @@ import { api } from '../lib/api';
 import { openBookingPage } from '../lib/booking';
 
 const INDUSTRIES = [
-  'IT Services & Software Development', 'EdTech & Education', 'FinTech & Financial Services',
-  'Healthcare & MedTech', 'Hospitality & Tourism', 'Manufacturing',
-  'E-commerce & Retail', 'Consulting Services', 'Other',
+  'IT Services & Software',
+  'Revenue Cycle Management (US Healthcare)',
+  'Other / Industry-Agnostic',
 ];
 
 const SIZES = ['1-10', '11-50', '51-200', '201-500', '500+'];
 
 const SERVICES = [
   'AI Project Management', 'Digital Transformation', 'Operational Optimization',
-  'Business Strategy Development', 'Agile & Scrum Coaching', 'Risk Management & Compliance',
+  'Business Strategy Development', 'Revenue Cycle Management (US Healthcare)', 'Risk Management & Compliance',
 ];
 
 const REGIONS = [

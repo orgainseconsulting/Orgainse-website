@@ -133,6 +133,10 @@ Sitemap: https://www.orgainse.com/sitemap.xml
 Sitemap: https://www.orgainse.com/sitemap-ai-content.xml
 Sitemap: https://www.orgainse.com/sitemap-news.xml
 
+# LLM-readable site overview (GEO / AI Answer Engine optimization)
+# https://llmstxt.org/
+LLM-Content: https://www.orgainse.com/llms.txt
+
 # Host directive for canonical domain
 Host: https://www.orgainse.com
 

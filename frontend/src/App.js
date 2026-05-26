@@ -604,7 +604,7 @@ const Footer = () => {
               <li>Digital Transformation</li>
               <li>Operational Optimization</li>
               <li>PMaaS (AI Project Management)</li>
-              <li>Agile & Scrum Coaching</li>
+              <li>Revenue Cycle Management (US Healthcare)</li>
               <li>Risk Management & Compliance</li>
             </ul>
           </div>
@@ -613,12 +613,9 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4 text-slate-800">Industries</h3>
             <ul className="space-y-2 text-sm text-slate-600">
-              <li>IT Services & Software Development</li>
-              <li>EdTech & Education</li>
-              <li>FinTech & Financial Services</li>
-              <li>Healthcare & MedTech</li>
-              <li>Hospitality & Tourism</li>
-              <li>Startups & SMEs</li>
+              <li>IT Services & Software</li>
+              <li>Revenue Cycle Management (US Healthcare)</li>
+              <li>Industry-Agnostic for SMEs &amp; Startups</li>
             </ul>
           </div>
 
@@ -799,10 +796,10 @@ const Home = () => {
       iconColor: "text-green-600"
     },
     {
-      title: "AI Agile & Scrum Coaching",
-      description: "GPT-powered Scrum coach and automated sprint retrospectives",
-      icon: Users,
-      keywords: "AI agile coaching service, GPT-powered Scrum coach, data-driven agile transformation",
+      title: "Revenue Cycle Management (US Healthcare)",
+      description: "AI-powered advisory for US healthcare revenue performance — denial intelligence, payer behavior analytics, and governance frameworks",
+      icon: Shield,
+      keywords: "healthcare revenue cycle management consulting, RCM advisory, AI revenue intelligence US healthcare",
       gradient: "from-blue-400 to-indigo-500",
       iconBg: "bg-blue-100",
       iconColor: "text-blue-600"
@@ -951,9 +948,10 @@ const Home = () => {
               </p>
               
               <p className="text-sm sm:text-base text-slate-600 mb-4 sm:mb-6 max-w-xl mx-auto lg:mx-0 text-justify">
-                <strong>Comprehensive consulting services</strong> including project management, digital transformation, 
-                AI strategy, risk management, and operational optimization across IT Services, EdTech, FinTech, 
-                Healthcare, Hospitality, and Software Development. <strong>340% ROI</strong> with <strong>25% faster delivery</strong>.
+                <strong>Comprehensive consulting services</strong> including project management, digital transformation,
+                AI strategy, risk management, revenue cycle intelligence, and operational optimization for IT Services,
+                Healthcare RCM, and SMEs across industries. Built for <strong>measurable, data-driven outcomes</strong>
+                and <strong>faster delivery</strong>.
               </p>
 
               {/* External Links for SEO Authority */}
@@ -989,7 +987,7 @@ const Home = () => {
                   <SocialShare 
                     url="https://orgainse.com/"
                     title="AI Business Consulting | Digital Transformation | Orgainse Consulting"
-                    description="Transform your business with comprehensive consulting services. 340% ROI, 25% faster delivery. Digital transformation consulting across India, USA, UK, UAE, Australia."
+                  description="Transform your business with comprehensive consulting services delivering measurable, data-driven outcomes. AI-powered digital transformation consulting across India, USA, UK, UAE, Australia."
                   />
                 </div>
               </div>
@@ -1043,7 +1041,7 @@ const Home = () => {
                 <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-orange-400 via-yellow-400 to-green-400 rounded-2xl sm:rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
                 <img
                   src="https://images.unsplash.com/photo-1644088379091-d574269d422f?w=800&h=600&fit=crop"
-                  alt="AI Neural Network Visualization - Advanced neural network connections representing intelligent automation and cross-industry AI implementation for IT Services, EdTech, FinTech, Healthcare, Hospitality, and Software Development"
+                  alt="AI Neural Network Visualization - Advanced neural network connections representing intelligent automation and cross-industry AI implementation for IT Services & Software, Healthcare Revenue Cycle Management, and SMEs of all sizes"
                   className="relative rounded-xl sm:rounded-2xl w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover transform group-hover:scale-105 transition-all duration-700 shadow-2xl"
                   loading="lazy"
                   decoding="async"
@@ -1518,7 +1516,7 @@ const About = () => {
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-3xl blur opacity-60 group-hover:opacity-80 transition duration-1000 animate-pulse"></div>
                 <img
                   src="https://images.unsplash.com/photo-1694903089438-bf28d4697d9a?w=600&h=400&fit=crop"
-                  alt="AI Business Implementation - Professional human-AI interaction representing intelligent cross-industry automation and digital transformation solutions connecting IT Services, EdTech, FinTech, Healthcare, Hospitality, and Software Development sectors"
+                  alt="AI Business Implementation - Professional human-AI interaction representing intelligent cross-industry automation and digital transformation across IT Services & Software, Healthcare Revenue Cycle Management, and industry-agnostic SME and startup engagements"
                   className="relative rounded-2xl w-full h-[400px] object-cover transform group-hover:scale-105 transition-all duration-700 shadow-2xl"
                   loading="lazy"
                   decoding="async"
@@ -1882,13 +1880,13 @@ const Services = () => {
         whyChooseUs: "Unlike traditional project management, our AI-native approach reduces planning time by 60%, eliminates scope creep through intelligent boundary detection, and provides predictive insights that prevent 80% of common project failures before they occur.",
         whatYouGet: "Complete AI-powered project ecosystem including automated project planning, intelligent resource allocation, real-time risk monitoring, GPT-generated documentation, predictive analytics dashboard, and 24/7 AI project assistant.",
         benefits: ["60% reduction in project planning time", "45% increase in project success rates", "80% reduction in scope creep", "Real-time predictive insights", "Automated documentation generation", "24/7 AI project support"],
-        industries: ["Software Development", "EdTech", "FinTech", "Healthcare", "Startups", "SMEs"]
+        industries: ["IT Services & Software", "Healthcare RCM", "Industry-Agnostic SMEs & Startups"]
       }
     },
     {
       id: 'digital-transformation',
       title: "AI-Native Digital Transformation",
-      description: "Complete digital transformation consulting with AI maturity assessment, multi-agent orchestration platforms, and GPT implementation roadmap tailored for EdTech, FinTech, Healthcare, and Software Development industries.",
+      description: "Complete digital transformation consulting with AI maturity assessment, multi-agent orchestration platforms, and a GPT implementation roadmap — industry-agnostic for SMEs &amp; startups, with deep specialization in IT Services and US Healthcare Revenue Cycle Management.",
       features: ["AI Maturity Assessment & Digital Readiness Audit", "Multi-agent Orchestration Platform Setup", "GPT Implementation Roadmap & Integration", "Cloud-First Architecture with AI-Powered Analytics"],
       icon: Zap,
       image: "https://images.unsplash.com/photo-1530825894095-9c184b068fcb?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHw0fHxkaWdpdGFsJTIwdHJhbnNmb3JtYXRpb258ZW58MHx8fGJsdWV8MTc1NDU4ODMwN3ww&ixlib=rb-4.1.0&q=75&w=400&h=300",
@@ -1899,13 +1897,13 @@ const Services = () => {
         whyChooseUs: "Our transformations are 70% faster than traditional approaches because we use AI to design, implement, and optimize simultaneously. We don't just digitize - we intelligentize your operations with AI agents that continuously improve your processes.",
         whatYouGet: "Complete digital ecosystem transformation including AI maturity assessment, custom multi-agent platform, GPT integration roadmap, cloud-first architecture, AI-powered analytics suite, and ongoing optimization support.",
         benefits: ["70% faster transformation timeline", "50% reduction in operational costs", "300% improvement in process efficiency", "AI-powered continuous optimization", "Future-ready scalable architecture", "Real-time business intelligence"],
-        industries: ["EdTech", "FinTech", "Healthcare", "Manufacturing", "Retail", "Professional Services"]
+        industries: ["IT Services & Software", "Healthcare RCM", "Industry-Agnostic SMEs & Startups"]
       }
     },
     {
       id: 'operational-optimization',
       title: "AI Operational Optimization", 
-      description: "Intelligent operational optimization using AI-driven workflow automation, predictive maintenance agents, and GPT process mining to reduce OPEX by 20% for hospitality, healthcare, and manufacturing SMEs.",
+      description: "Intelligent operational optimization using AI-driven workflow automation, predictive maintenance agents, and GPT process mining to reduce OPEX — for SMEs across IT Services, US Healthcare RCM, and industry-agnostic engagements.",
       features: ["AI Workflow Automation & Process Intelligence", "Predictive Maintenance AI Agent & Monitoring", "GPT Process Mining & Bottleneck Detection", "Real-time Performance Analytics & Cost Optimization"],
       icon: TrendingUp,
       image: "https://images.pexels.com/photos/8728559/pexels-photo-8728559.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1",
@@ -1916,30 +1914,56 @@ const Services = () => {
         whyChooseUs: "Our AI optimization is proactive, not reactive. While others optimize after problems occur, our AI agents predict and prevent operational issues, resulting in 90% fewer disruptions and continuous cost savings that compound over time.",
         whatYouGet: "Comprehensive operational intelligence platform with AI workflow automation, predictive maintenance system, GPT process mining tools, real-time analytics dashboard, automated cost optimization, and performance monitoring suite.",
         benefits: ["35% reduction in operational costs", "90% fewer operational disruptions", "Automated process optimization", "Predictive maintenance alerts", "Real-time performance insights", "Continuous improvement automation"],
-        industries: ["Hospitality", "Healthcare", "Manufacturing", "Logistics", "Retail", "Professional Services"]
+        industries: ["IT Services & Software", "Healthcare RCM", "Industry-Agnostic SMEs & Startups"]
       }
     },
     {
-      id: 'agile-coaching',
-      title: "AI Agile & Scrum Coaching",
-      description: "Revolutionary agile coaching with GPT-powered Scrum assistance, automated sprint retrospectives, and AI backlog prioritization for enhanced team velocity across UK startups, Australia agile teams, and India software companies.",
-      features: ["GPT-Powered Scrum Coaching & Team Mentoring", "Automated Sprint Retrospectives & Analysis", "AI Backlog Prioritization & Story Estimation", "Data-driven Team Performance Analytics"],
-      icon: Users,
-      image: "https://images.unsplash.com/photo-1585846328761-acbf5a12beea?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwyfHxjb25zdWx0aW5nfGVufDB8fHxibHVlfDE3NTQ1ODg0NDR8MA&ixlib=rb-4.1.0&q=75&w=400&h=300",
-      keywords: "AI agile coaching service, GPT-powered Scrum coach, data-driven agile transformation",
+      id: 'revenue-cycle-management',
+      title: "Revenue Cycle Management (US Healthcare)",
+      description: "AI-powered strategy, analytics, and governance advisory for US healthcare organizations that need a clearer view of revenue performance — working alongside your existing operational teams and vendor relationships, not in place of them.",
+      features: ["Revenue Performance Assessment", "Denial Intelligence & Trend Analysis", "Payer Behavior & Contract Advisory", "Revenue Cycle Governance & Process Advisory", "AI Readiness & Transformation Advisory"],
+      icon: Shield,
+      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=400&h=300",
+      keywords: "healthcare revenue cycle management consulting, RCM advisory, AI revenue intelligence US healthcare, denial intelligence, payer behavior analytics",
       gradient: "from-blue-400 to-indigo-500",
       detailedInfo: {
-        whatItDoes: "Supercharge your agile teams with AI-powered Scrum coaching that provides real-time guidance, automated retrospectives, intelligent backlog prioritization, and predictive sprint planning. Our GPT coach works alongside your teams to optimize velocity and delivery quality.",
-        whyChooseUs: "Traditional agile coaching is limited by human availability and subjective insights. Our AI coach provides 24/7 support, data-driven recommendations, and objective performance analysis that improves team velocity by 65% while reducing burnout.",
-        whatYouGet: "Complete agile acceleration platform including GPT-powered Scrum coach, automated retrospective analysis, AI backlog prioritization engine, sprint planning optimization, team performance analytics, and continuous improvement recommendations.",
-        benefits: ["65% improvement in team velocity", "50% reduction in sprint planning time", "24/7 AI coaching availability", "Data-driven performance insights", "Automated administrative tasks", "Predictive delivery forecasting"],
-        industries: ["Software Development", "Technology Startups", "Digital Agencies", "Product Teams", "IT Services", "Innovation Labs"]
+        whatItDoes: "Healthcare revenue performance depends on more than billing accuracy — it depends on visibility. Our Healthcare Revenue Intelligence Advisory delivers that visibility through strategic consulting, AI-powered analytics, and governance frameworks. We provide independent, unbiased insight into where revenue is being lost, how denial patterns are shifting, and how payer behavior is affecting financial outcomes — working alongside your existing RCM operations.",
+        whyChooseUs: "Independence is the trust signal. We are not a billing or coding vendor — we are an advisory layer that helps CFOs, COOs, and VPs of Revenue Cycle interpret performance with disciplined, AI-driven analytics typically reserved for large health systems. First leadership deliverable within 30 days, with no system access or patient data required.",
+        whatYouGet: "Executive-ready deliverables across six advisory areas: revenue performance assessment, denial intelligence, payer & contract advisory, governance & process advisory, AI readiness assessment, and vendor oversight & accountability advisory. Each engagement is available standalone or as part of a broader programme. Conservative financial guidance (e.g., '3% or more' uplift potential, never guaranteed).",
+        benefits: [
+          "Independent, unbiased visibility into revenue leakage",
+          "AI-powered denial trend analytics and reduction strategy",
+          "Strategic payer behavior and contract performance insight",
+          "Executive dashboard design and KPI framework",
+          "AI readiness assessment and transformation roadmap",
+          "Vendor oversight, accountability, and transition advisory"
+        ],
+        notIncluded: [
+          "Medical billing or claims submission",
+          "Medical coding or clinical documentation",
+          "AR follow-up or collections",
+          "Denial follow-up or appeal submission",
+          "Payment posting or remittance processing",
+          "Patient billing or collections",
+          "Offshore or onshore RCM staffing",
+          "Outsourced revenue cycle operations of any kind"
+        ],
+        whoWeServe: [
+          "Physician groups and multi-specialty practices",
+          "Regional hospital systems and health networks",
+          "Healthcare startups and MedTech companies",
+          "Value-based care and risk-bearing organizations",
+          "Ambulatory Surgical Centers (ASCs) and Clinical Laboratories",
+          "Independent Practice Associations (IPAs) and ACOs",
+          "Health plans with provider analytics requirements"
+        ],
+        industries: ["Healthcare RCM", "US Hospital Systems", "Physician Groups", "ASCs & Laboratories", "Value-Based Care Organizations", "Health Plans"]
       }
     },
     {
       id: 'business-strategy',
       title: "AI-Driven Business Strategy Development",
-      description: "Advanced business strategy development using automated market intelligence GPT, competitive analysis AI, and scenario planning tools for faster go-to-market strategies across IT Services, EdTech startups, and FinTech SMEs.",
+      description: "Advanced business strategy development using automated market intelligence GPT, competitive analysis AI, and scenario planning tools — industry-agnostic for SMEs and startups, with deep specialization in IT Services and US Healthcare RCM.",
       features: ["Automated Market Intelligence & Competitor Analysis", "AI-Powered Competitive Strategy & Positioning", "Scenario Planning Tools & Market Forecasting", "Growth Strategy Optimization & ROI Modeling"],
       icon: Globe,
       image: "https://images.unsplash.com/photo-1573164574230-db1d5e960238?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwxfHxjb25zdWx0aW5nfGVufDB8fHxibHVlfDE3NTQ1ODg0NDR8MA&ixlib=rb-4.1.0&q=75&w=400&h=300",
@@ -1950,13 +1974,13 @@ const Services = () => {
         whyChooseUs: "While traditional strategy consulting takes months and relies on historical data, our AI-driven approach delivers real-time insights and predictive strategies in weeks. We analyze 1000x more data points to identify opportunities others miss.",
         whatYouGet: "Comprehensive strategy development suite including automated market intelligence system, AI competitive analysis platform, scenario planning tools, growth optimization roadmap, ROI modeling dashboard, and strategic implementation support.",
         benefits: ["85% higher strategy success rate", "75% faster strategy development", "Real-time market intelligence", "Predictive opportunity identification", "Data-driven decision making", "Continuous strategy optimization"],
-        industries: ["IT Services", "EdTech", "FinTech", "SaaS", "E-commerce", "Professional Services"]
+        industries: ["IT Services & Software", "Healthcare RCM", "Industry-Agnostic SMEs & Startups"]
       }
     },
     {
       id: 'risk-management',
       title: "AI Risk Management & Compliance",
-      description: "Comprehensive AI risk management with GPT-based risk co-pilots, automated scenario modeling, and real-time compliance monitoring for fintech SMEs, healthcare organizations, and UAE regulatory compliance requirements.",
+      description: "Comprehensive AI risk management with GPT-based risk co-pilots, automated scenario modeling, and real-time compliance monitoring — industry-agnostic for SMEs and startups, with deep specialization in IT Services and US Healthcare RCM.",
       features: ["GPT-Based Risk Assessment & Co-pilot Support", "Automated Scenario Modeling & Stress Testing", "Real-time Compliance Monitoring & Reporting", "Predictive Risk Analytics & Mitigation Planning"],
       icon: Shield,
       image: "https://images.unsplash.com/photo-1497409988347-cbfaac2f0b12?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxhZ2lsZSUyMHNjcnVtfGVufDB8fHxibHVlfDE3NTQ1ODg0Mzl8MA&ixlib=rb-4.1.0&q=75&w=400&h=300",
@@ -1967,7 +1991,7 @@ const Services = () => {
         whyChooseUs: "Traditional risk management is reactive and manual. Our AI approach is predictive and automated, identifying 95% of potential risks before they materialize and ensuring continuous compliance with changing regulations across multiple jurisdictions.",
         whatYouGet: "Complete risk intelligence platform including GPT-based risk co-pilot, automated scenario modeling system, real-time compliance monitoring dashboard, predictive risk analytics, automated reporting suite, and mitigation planning tools.",
         benefits: ["95% early risk detection rate", "80% reduction in compliance violations", "Real-time regulatory updates", "Automated risk reporting", "Predictive risk modeling", "24/7 compliance monitoring"],
-        industries: ["FinTech", "Healthcare", "Insurance", "Banking", "Regulated Industries", "Government"]
+        industries: ["IT Services & Software", "Healthcare RCM", "Industry-Agnostic SMEs & Startups"]
       }
     },
   ];
@@ -2123,19 +2147,16 @@ const Services = () => {
           </h2>
           
           <p className="text-xl text-slate-700 max-w-4xl mx-auto mb-8 leading-relaxed">
-            Comprehensive <span className="text-orange-600 font-bold">AI-native consulting services</span> designed to transform your business 
-            with <span className="text-green-600 font-bold">GPT-powered project management</span>, intelligent automation, and  
-            <span className="text-purple-600 font-bold"> AI-driven strategy</span> across six key industries and seven global regions.
+            Comprehensive <span className="text-orange-600 font-bold">AI-native consulting services</span> designed to transform your business
+            with <span className="text-green-600 font-bold">GPT-powered project management</span>, intelligent automation, and
+            <span className="text-purple-600 font-bold"> AI-driven strategy</span> — industry-agnostic for SMEs &amp; startups, with deep specialization in IT Services and US Healthcare Revenue Cycle Management.
           </p>
           
           <div className="flex justify-center flex-wrap gap-4 mb-12">
             {[
               { name: "IT Services & Software", color: "from-orange-400 to-red-500" },
-              { name: "EdTech & Education", color: "from-blue-400 to-indigo-500" },
-              { name: "FinTech & Finance", color: "from-green-400 to-emerald-500" },
-              { name: "Healthcare & MedTech", color: "from-purple-400 to-pink-500" },
-              { name: "Hospitality & Tourism", color: "from-pink-400 to-rose-500" },
-              { name: "Startups & SMEs", color: "from-indigo-400 to-purple-500" },
+              { name: "Revenue Cycle Management (US Healthcare)", color: "from-purple-400 to-pink-500" },
+              { name: "Industry-Agnostic for SMEs & Startups", color: "from-indigo-400 to-purple-500" },
             ].map((industry, index) => (
               <div 
                 key={index}
@@ -2292,7 +2313,7 @@ const Services = () => {
                     },
                     {
                       question: "Which industries benefit most from AI consulting services?",
-                      answer: "Our AI consulting services are particularly transformative for FinTech, Healthcare, E-commerce, Manufacturing, Professional Services, and SaaS companies. These industries see the highest ROI due to their data-rich environments and process-intensive operations that can be significantly optimized through AI implementation."
+                      answer: "Our AI consulting is industry-agnostic — designed to scale with SMEs and startups across any sector. We have particularly deep specialization in IT Services & Software and Revenue Cycle Management (US Healthcare), where data-rich, process-intensive operations consistently see the strongest results from AI-driven optimization."
                     },
                     {
                       question: "How do I know if my business is ready for AI transformation?",
@@ -2314,6 +2335,27 @@ const Services = () => {
                     {
                       question: "How do you ensure smooth integration with our existing systems?",
                       answer: "We conduct comprehensive system audits, use API-based integrations, implement gradual rollouts, and provide extensive testing before full deployment. Our team has experience with 200+ software platforms and ensures zero disruption to your current operations during the transition."
+                    }
+                  ]
+                },
+                {
+                  category: "Healthcare Revenue Cycle Management (US)",
+                  questions: [
+                    {
+                      question: "What is Healthcare Revenue Intelligence Advisory?",
+                      answer: "Healthcare Revenue Intelligence Advisory is our AI-powered advisory service for US healthcare organizations. We deliver strategic consulting, AI-driven analytics, and governance frameworks that provide independent visibility into revenue performance — working alongside your existing RCM operations rather than replacing them. It is advisory and analytics only; we do not provide billing, coding, AR follow-up, claims processing, or operational delivery of any kind."
+                    },
+                    {
+                      question: "Who is the right fit for Orgainse's RCM Advisory?",
+                      answer: "The right fit is US healthcare organizations that already have revenue cycle operations in place — internally managed or via a third-party vendor — and need an independent, AI-powered view of what those operations are delivering. This includes physician groups, multi-specialty practices, regional hospital systems, ASCs, clinical laboratories, IPAs, ACOs, value-based-care organizations, healthcare startups, MedTech companies, and health plans with provider analytics needs."
+                    },
+                    {
+                      question: "What is explicitly not included in this service?",
+                      answer: "We are not an outsourced operations vendor. We do not provide: medical billing or claims submission, medical coding or clinical documentation, AR follow-up or collections, denial follow-up or appeal submission operations, payment posting or remittance processing, patient billing or collections, or any onshore/offshore RCM staffing. Our scope is strictly advisory, analytics, and governance."
+                    },
+                    {
+                      question: "How quickly do you deliver insights?",
+                      answer: "Engagements are structured for speed and minimal internal burden. The first leadership deliverable lands within 30 days. No system access or patient data is required for the initial assessment."
                     }
                   ]
                 },
@@ -2420,7 +2462,7 @@ const Services = () => {
               </p>
               <SocialShare 
                 title="Comprehensive Business Consulting Services | Digital Transformation | Orgainse Consulting"
-                description="Transform your business with comprehensive consulting services. 340% ROI, 25% faster delivery. Expert business consulting across India, USA, UK, UAE, Australia."
+                description="Transform your business with comprehensive consulting services delivering measurable, data-driven outcomes. Expert business consulting across India, USA, UK, UAE, Australia."
                 hashtags="BusinessConsulting,DigitalTransformation,BusinessStrategy,Consulting,AIConsulting"
               />
             </div>

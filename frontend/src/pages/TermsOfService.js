@@ -32,7 +32,7 @@ const TermsOfService = () => {
                 <li>AI Project Management Service (PMaaS) with GPT-powered solutions</li>
                 <li>Digital transformation consulting and strategy development</li>
                 <li>Operational optimization using AI-driven methodologies</li>
-                <li>Agile & Scrum coaching with AI-powered insights</li>
+                <li>Revenue Cycle Management (US Healthcare) — AI-powered advisory</li>
                 <li>Risk management and compliance consulting</li>
                 <li>Business strategy development across multiple industries</li>
               </ul>
