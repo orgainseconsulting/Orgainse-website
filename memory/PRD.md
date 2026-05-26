@@ -123,23 +123,45 @@ Key directives:
 - Iteration 1: 8/10 flows green; identified newsletter & contact bypassing `api.js` and missing testids.
 - Iteration 2 (after fix): 4/4 retest objectives **PASS** (100%).
 - Iteration 3 (refactor + pagination + cleanup): 7/7 review objectives **PASS** (100%).
+- Iteration 6 (App.js decoupling + ORQYNE JSON-LD): 7/8 review items **PASS** (87.5%). All 7 routes load with no React errors; SoftwareApplication + FAQPage + TechArticle JSON-LD correctly injected on `/products`; region switcher works; static-asset 404s eliminated.
+
+## Implemented (Feb 26, 2026 — late session)
+
+### ORQYNE `/products` JSON-LD (P0 — done)
+- `pages/Products.js` builds a memoized `structuredData` array containing **SoftwareApplication** (`name: "ORQYNE"`, full `featureList`, `AggregateOffer` for 4 tiers, `BusinessAudience`), **FAQPage** (auto-derived from the on-page FAQS so wording stays in sync), and **TechArticle** ("How ORQYNE Provisions a RAG-Grounded AI Workspace From a Spreadsheet").
+- `components/SEOHead.js` already supports array `structuredData`; each entry is injected as `<script type="application/ld+json" data-page-schema="<path>-<i>">` and removed on route change.
+
+### App.js decoupling — Phase 2 (P1 — done)
+`App.js` reduced from **3036 → 88 lines**. Now a slim shell containing only providers, routes, and global widgets. Extracted modules:
+
+| New file | Lines | Source range in old App.js |
+| --- | --- | --- |
+| `context/CalendlyContext.js` | 23 | 164–183 |
+| `context/RegionalPricingContext.js` | 148 | 101–332 |
+| `components/AnalyticsDebug.js` | 35 | 68–98 |
+| `components/Navigation.js` | 180 | 372–565 |
+| `components/Footer.js` | 130 | 568–695 |
+| `components/RegionSelector.js` | 41 | 335–366 |
+| `pages/Home.js` | 781 | 698–1448 |
+| `pages/About.js` | 426 | 1451–1860 |
+| `pages/Services.js` | 658 | 1863–2490 |
+| `pages/Contact.js` | 515 | 2493–2982 |
+
+All routes already lazy-load via `React.lazy` + `<Suspense fallback=…>`.
+
+### Index.html cleanup
+- Removed stale literal `<link href="/static/css/main.css">` and `<script src="/static/js/main.js">` preload references that were 404'ing on every route (CRA emits hashed bundle filenames and injects them automatically).
 
 ## Open / Backlog
 
-### P1 — Finish App.js decoupling
-`App.js` is still ~2950 lines. Remaining sections to extract:
-- `Navigation` (~185 lines), `Footer` (~130 lines)
-- `Home` (~750 lines), `About` (~410 lines), `Services` (~640 lines), `Contact` (~465 lines)
-- `CalendlyProvider` + `useCalendly` context → `/app/frontend/src/contexts/CalendlyContext.js`
-- `RegionalPricingProvider` + `useRegionalPricing` + `RegionSelector` → `/app/frontend/src/contexts/RegionalPricingContext.js`
-
 ### P2
-- Wire `REACT_APP_BOOKING_URL` to a real Google Calendar Appointment Scheduling URL.
-- Audit the ~14 generic 404 resource-load console errors (likely tracking pixels or icon variants) and silence them.
+- Wire `REACT_APP_BOOKING_URL` to a real Google Calendar Appointment Scheduling URL (currently `https://calendar.app.google/REPLACE_ME_WITH_YOUR_APPOINTMENT_URL`). Nav "Book Consultation" button opens a new tab to this placeholder.
+- (Optional) Move `SIGNUP_URL = "https://orgainse.live/signup"` in `pages/Products.js` to an env var for parity.
 
 ### P3
 - Playwright smoke-test workflow in CI.
-- Consider deleting `react-snap` (prerendering) if not actively used; it's only useful for SEO and SPA initial paint, and currently nothing in build script consumes it apart from `build-with-snap`.
+- Consider deleting `react-snap` (prerendering) if not actively used.
+- Move any remaining direct `axios`/`fetch` calls into `lib/api.js`. After Phase 2 decoupling, all extracted pages already use `api.*`.
 
 ## Credentials & env
 
