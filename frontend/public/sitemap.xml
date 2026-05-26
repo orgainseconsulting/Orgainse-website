@@ -135,4 +135,12 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Newsletter -->
+  <url>
+    <loc>https://www.orgainse.com/newsletter</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>

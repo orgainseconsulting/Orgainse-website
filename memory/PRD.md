@@ -124,54 +124,81 @@ Key directives:
 - Iteration 2 (after fix): 4/4 retest objectives **PASS** (100%).
 - Iteration 3 (refactor + pagination + cleanup): 7/7 review objectives **PASS** (100%).
 - Iteration 6 (App.js decoupling + ORQYNE JSON-LD): 7/8 review items **PASS** (87.5%).
-- **Iteration 7 (Blog CMS): backend 14/14 PASS, frontend ~95% PASS.** Public list excludes drafts, slug uniqueness enforced, image MIME validated, /blog 3-col grid renders, /blog/:slug renders with `BlogPosting` JSON-LD + canonical, admin Blog tab → TipTap editor flow works end-to-end. Only cosmetic warning (TipTap duplicate `link` extension) fixed post-test.
+- Iteration 7 (Blog CMS): backend 14/14 PASS, frontend ~95% PASS.
+- **Iteration 8 (Newsletter system + 3-section admin restructure): backend 18/18 PASS, frontend 100% PASS.** Live Resend send to info@orgainse.com confirmed (sent:1/1). Legacy `/api/newsletter` regression check passed — new subscribers now persist with `unsubscribe_token`.
 
-## Implemented (Feb 26, 2026 — late session)
+## Implemented (Feb 26, 2026 — late session, full newsletter)
 
-### Blog CMS (P0 — done)
+### Newsletter system (P0 — done)
 
-Admin-authored blog system end-to-end:
+**Email provider**: Resend (verified domain `info@orgainse.com` as sender).
 
-**Backend (Vercel serverless mirrored 1:1 in FastAPI):**
-- `/api/blog` — public GET (paginated list of published posts; single-post by `?slug=`). Excludes drafts. Cover image returned inline as `data:` URL.
-- `/api/blog-admin` — JWT-protected CRUD (`GET` list-with-drafts, `GET ?id=`, `POST`, `PUT ?id=`, `DELETE ?id=`).
-- New `blog_posts` collection. Unique index on `slug`. Image base64 stored alongside MIME. Slug regex enforced, body HTML sanitized (`<script>` / `on*=` / `javascript:` stripped), reading-minutes auto-estimated.
+**Backend** — appended to `/app/backend/server.py` (FastAPI mirror) **and** mirrored to Vercel serverless:
+- `/app/api/newsletter-issues.js` — public GET list + by-slug
+- `/app/api/newsletter-admin/[...path].js` — catch-all admin (issues + subscribers + segments + send)
+- `/app/api/unsubscribe.js` — GET (check) + POST (confirm)
+- `/app/api/_newsletter-utils.js` — shared utilities (slug, image validation, email template, etc.)
 
-**Admin UI:** new **Blog** tab inside `AdminDashboard` → `BlogManager` (list + status badges) → `BlogEditor` (TipTap WYSIWYG + slug auto-derive + cover image upload + status toggle + manual SEO fields).
+**New collections**: `newsletter_issues` (unique slug index), `newsletter_segments` (unique slug), plus extensions to `newsletter_subscriptions` (`unsubscribe_token`, `tags[]`, `unsubscribed`, `bounced`, `complained`).
 
-**Public UI:**
-- `/blog` — magazine-style hero + 3-col card grid + pagination + placeholder gradient when post has no cover.
-- `/blog/:slug` — full article with `BlogPosting` JSON-LD, canonical URL, og:type=article, dynamic og:image, typography-styled body (`@tailwindcss/typography`), tags + CTA.
-- Blog link in Nav + Footer, `/blog` added to `sitemap.xml`.
+**Public endpoints**: `GET /api/newsletter-issues`, `GET /api/newsletter-issues?slug=`, `GET/POST /api/unsubscribe`. **Admin endpoints** (JWT): full CRUD on issues/subscribers/segments, CSV export, `POST /api/newsletter-admin/issues/send` for test + broadcast.
 
-**Editor capabilities (TipTap):**
-- H2/H3, paragraph, bold/italic/strike/inline-code, bullet/ordered lists, blockquote, code block, HR, link (with prompt), inline image upload (base64), undo/redo.
-- Cover image + OG image uploads, manual SEO title/description.
-- Status: Draft / Published. "Update post" replaces the row in-place.
+**Branded email template**: slate-900 header with logo + amber issue chip, hero with orange "From the Orgainse desk" kicker, optional cover image, body, "Read on the web" CTA, footer with view-in-browser + 1-click unsubscribe link. RFC 8058 `List-Unsubscribe` headers included.
+
+**Admin UI** — major restructure:
+- `AdminDashboard.js` now has **3 top-level sections** (data-testids `admin-section-leads`, `admin-section-blog`, `admin-section-newsletter`).
+- **Newsletter Center** → 3 sub-tabs:
+  1. **Issues**: list with status (draft/published/sent) + send-stats + IssueEditor (TipTap body + cover image + issue number/edition date/preview text + manual SEO + send modal with test/live toggle and segment filter).
+  2. **Subscribers**: table with search, state filter, segment filter, inline edit (name/tags/unsubscribed flag), add modal, delete, CSV export.
+  3. **Segments**: card grid CRUD.
+
+**Public site**:
+- `/newsletter` — magazine-style hero (slate-900 with amber "The Orgainse Pulse" kicker, hero + tilted featured-issue card on desktop) + 3-col archive grid + inline subscribe form (hooks the existing `/api/newsletter`).
+- `/newsletter/:slug` — slate-900 masthead with issue number chip + edition date + category, hero title + subtitle, body in white card with `prose` typography, tags chips + dark "Don't miss the next issue" subscribe CTA. Full `Article` JSON-LD with `isPartOf: PublicationIssue`.
+- `/unsubscribe?token=` — 4 states (loading / confirm / already / done / error) with toggle to keep subscription.
+
+**Subscriber capture sources** preserved:
+- Existing site-wide newsletter forms (Home, Contact) → `/api/newsletter` (now auto-tokens new subs).
+- Hero subscribe form on `/newsletter` and `/newsletter/:slug` → same endpoint.
+- Admin-added: source = `admin_added`.
+
+### Admin panel restructure (P0 — done)
+
+- Three top-level pills: **Lead Management** / **Blog Posts** / **Newsletter** with dark active state.
+- Existing lead overview/sub-tabs preserved under "Lead Management".
+- Existing BlogManager moved under "Blog Posts".
+- Page header title + description switch dynamically per section.
+- Export-All-Leads / Delete-All-Leads buttons only shown in the Leads section.
+
+### Blog CMS (P0 — done, prior session)
+Unchanged. Still works end-to-end.
 
 ### ORQYNE `/products` JSON-LD (P0 — done)
-- `pages/Products.js` builds a memoized `structuredData` array containing **SoftwareApplication**, **FAQPage** (auto-derived from on-page FAQs), and **TechArticle**.
-- `components/SEOHead.js` extended to support array OR single-object `structuredData`, plus optional `ogImage`/`ogType` props (used by blog posts).
+Unchanged.
 
 ### App.js decoupling — Phase 2 (P1 — done)
-`App.js` reduced from **3036 → 91 lines**. Extracted: `context/{CalendlyContext,RegionalPricingContext}.js`, `components/{Navigation,Footer,RegionSelector,AnalyticsDebug}.js`, `pages/{Home,About,Services,Contact}.js`. All routes lazy-loaded via `React.lazy` + Suspense.
+Unchanged.
 
 ### Misc
-- Removed stale `/static/css/main.css` + `/static/js/main.js` literal preload tags from `public/index.html` that were 404'ing.
-- Wired real Google Calendar Appointment Scheduling URL → `https://calendar.app.google/i8mBG9yQzmUkeeRy6` (both in `frontend/.env` and as fallback in `lib/booking.js`).
-- Tiny ORQYNE mark icon removed from the desktop "Products" nav link per user feedback.
+- `tailwind.config.js` already had `@tailwindcss/typography` from blog work — reused for newsletter body.
+- Sitemap updated to include `/newsletter`.
+- `sender / Resend integration` documented in `/app/memory/test_credentials.md`.
 
 ## Open / Backlog
 
+### P1
+- For very large subscriber bases (>500), the send loop is one Resend call per recipient. **Resend supports `resend.batch.send()` for up to 100 messages per call** — switch to batch mode if list grows. (Free tier is 100/day so not urgent yet.)
+- Consider modularizing `/app/backend/server.py` (now 1769 lines) into separate routers (auth, leads, blog, newsletter) per testing-agent code-review note.
+
 ### P2
-- Set `REACT_APP_BOOKING_URL` on Vercel (Production + Preview + Dev) so the live build picks it up. (Code already deployed; just an env-var entry away.)
-- `ipapi.co` CORS error on every page (pre-existing, from `RegionalPricingContext`'s client-side geolocation). Either proxy through backend or drop the fetch and rely solely on `Intl.DateTimeFormat().resolvedOptions().timeZone`.
-- (Optional) Move `SIGNUP_URL` in `pages/Products.js` to env-var.
+- Set `RESEND_API_KEY`, `SENDER_EMAIL`, `SENDER_NAME`, `PUBLIC_SITE_URL` env vars on Vercel (Production + Preview + Development) so production deploy can send.
+- Set `REACT_APP_BOOKING_URL` on Vercel (still placeholder in prod).
+- Optional: subscribe email **bounce/complaint webhooks** from Resend → auto-mark `bounced: true` in DB so future sends skip them. Right now we track `bounced` manually.
 
 ### P3
 - Playwright smoke-test workflow in CI (GitHub Actions).
-- Consider deleting `react-snap` (prerendering) if not actively used.
-- Move any remaining direct `axios`/`fetch` calls into `lib/api.js`. After Phase 2 decoupling, all extracted pages already use `api.*`.
+- `ipapi.co` CORS error from `RegionalPricingContext` (pre-existing, falls back gracefully).
+- Consider deleting `react-snap` if unused.
 
 ## Credentials & env
 
@@ -181,17 +208,33 @@ See `/app/memory/test_credentials.md`.
 
 | Method | Path | Auth | Notes |
 | --- | --- | --- | --- |
-| GET    | `/api/health`          | — | liveness |
-| POST   | `/api/admin-login`     | — | returns JWT |
-| POST   | `/api/contact`         | — | XSS-sanitized; routes to specific collection by `leadType` |
-| POST   | `/api/newsletter`      | — | dedupes by email |
-| POST   | `/api/ai-assessment`   | — | server-side maturity scoring |
-| POST   | `/api/roi-calculator`  | — | regional currency math |
-| POST   | `/api/consultation`    | — | 24h-dedupe per email |
-| GET    | `/api/admin`           | Bearer | paginated (`?page=&page_size=`) |
-| DELETE | `/api/admin-delete`    | Bearer | all / collection / single |
-| GET    | `/api/blog`            | — | published only (`?slug=`, `?page=`, `?category=`, `?tag=`) |
-| GET    | `/api/blog-admin`      | Bearer | all (drafts + published); `?id=` for single |
-| POST   | `/api/blog-admin`      | Bearer | create post (base64 images) |
-| PUT    | `/api/blog-admin?id=`  | Bearer | update post |
-| DELETE | `/api/blog-admin?id=`  | Bearer | delete post |
+| GET    | `/api/health`                                | — | liveness |
+| POST   | `/api/admin-login`                           | — | JWT |
+| POST   | `/api/contact`                               | — | XSS-sanitized |
+| POST   | `/api/newsletter`                            | — | dedupes; auto-generates `unsubscribe_token` |
+| POST   | `/api/ai-assessment`                         | — | server-side scoring |
+| POST   | `/api/roi-calculator`                        | — | regional currency math |
+| POST   | `/api/consultation`                          | — | 24h-dedupe per email |
+| GET    | `/api/admin`                                 | Bearer | paginated |
+| DELETE | `/api/admin-delete`                          | Bearer | all/collection/single |
+| GET    | `/api/blog`                                  | — | published only (`?slug=`) |
+| GET    | `/api/blog-admin`                            | Bearer | all (drafts+published) |
+| POST   | `/api/blog-admin`                            | Bearer | create |
+| PUT    | `/api/blog-admin?id=`                        | Bearer | update |
+| DELETE | `/api/blog-admin?id=`                        | Bearer | delete |
+| GET    | `/api/newsletter-issues`                     | — | published+sent only (`?slug=`) |
+| GET    | `/api/newsletter-admin/issues`               | Bearer | list (incl drafts) / `?id=` for single |
+| POST   | `/api/newsletter-admin/issues`               | Bearer | create |
+| PUT    | `/api/newsletter-admin/issues?id=`           | Bearer | update |
+| DELETE | `/api/newsletter-admin/issues?id=`           | Bearer | delete |
+| POST   | `/api/newsletter-admin/issues/send?id=`      | Bearer | Resend send (`test_email` or `segment_slug`) |
+| GET    | `/api/newsletter-admin/subscribers`          | Bearer | list (q/segment/state filters + counts) |
+| POST   | `/api/newsletter-admin/subscribers`          | Bearer | manual add |
+| PUT    | `/api/newsletter-admin/subscribers?id=`      | Bearer | update name/tags/unsubscribed |
+| DELETE | `/api/newsletter-admin/subscribers?id=`      | Bearer | delete |
+| GET    | `/api/newsletter-admin/subscribers/export`   | Bearer | CSV |
+| GET    | `/api/newsletter-admin/segments`             | Bearer | list |
+| POST   | `/api/newsletter-admin/segments`             | Bearer | create |
+| DELETE | `/api/newsletter-admin/segments?id=`         | Bearer | delete (also strips slug from subscribers) |
+| GET    | `/api/unsubscribe?token=`                    | — | check sub state |
+| POST   | `/api/unsubscribe`                           | — | confirm unsubscribe |
