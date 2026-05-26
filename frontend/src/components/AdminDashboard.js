@@ -283,6 +283,14 @@ const AdminDashboard = () => {
     { id: 'consultations', name: 'Consultations', count: data?.summary?.breakdown?.consultations || 0 }
   ];
 
+  // Reset to page 1 whenever the active tab changes
+  const handleTabChange = (tabId) => {
+    if (tabId !== activeTab) {
+      setPage(1);
+      setActiveTab(tabId);
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-100 p-8">
@@ -342,7 +350,7 @@ const AdminDashboard = () => {
                 <p className="text-3xl font-bold text-blue-600">{tab.count}</p>
                 <div className="mt-3 flex gap-2">
                   <button
-                    onClick={() => setActiveTab(tab.id)}
+                    onClick={() => handleTabChange(tab.id)}
                     className="text-blue-600 hover:text-blue-800 text-sm font-medium"
                   >
                     View Details →
@@ -500,6 +508,45 @@ const AdminDashboard = () => {
             </div>
           )}
         </div>
+
+        {/* Pagination footer */}
+        {(() => {
+          const totalForTab = currentTab?.count || 0;
+          const totalPages = Math.max(1, Math.ceil(totalForTab / pageSize));
+          if (totalPages <= 1) return null;
+          return (
+            <div
+              data-testid="admin-pagination"
+              className="flex items-center justify-between px-6 py-3 border-t border-gray-200 bg-gray-50"
+            >
+              <div className="text-sm text-gray-600">
+                Showing page <span className="font-semibold">{page}</span> of{" "}
+                <span className="font-semibold">{totalPages}</span>
+                <span className="ml-2 text-gray-400">
+                  ({tabData.length} of {totalForTab} records on this page)
+                </span>
+              </div>
+              <div className="flex gap-2">
+                <button
+                  data-testid="admin-pagination-prev"
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page <= 1}
+                  className="px-3 py-1.5 text-sm rounded-md bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  ← Previous
+                </button>
+                <button
+                  data-testid="admin-pagination-next"
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={page >= totalPages}
+                  className="px-3 py-1.5 text-sm rounded-md bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  Next →
+                </button>
+              </div>
+            </div>
+          );
+        })()}
       </div>
     );
   };
@@ -603,7 +650,8 @@ const AdminDashboard = () => {
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  data-testid={`admin-tab-${tab.id}`}
+                  onClick={() => handleTabChange(tab.id)}
                   className={`py-4 px-1 border-b-2 font-medium text-sm ${
                     activeTab === tab.id
                       ? 'border-blue-500 text-blue-600'

@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  frontend-build:
+    name: Frontend build & lint
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: yarn
+          cache-dependency-path: frontend/yarn.lock
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build (runs CRA ESLint)
+        env:
+          # CRA upgrades ESLint warnings to errors when CI=true. Build will fail
+          # on any new lint regression.
+          CI: "true"
+          REACT_APP_BACKEND_URL: "https://example.com"
+          REACT_APP_BOOKING_URL: "https://calendar.app.google/example"
+        run: yarn build
+
+  backend-imports:
+    name: Backend smoke (imports + syntax)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install backend deps
+        run: pip install -r requirements.txt
+
+      - name: Syntax check
+        run: python -m compileall -q server.py
+
+      - name: Import smoke test
+        env:
+          MONGO_URL: "mongodb://localhost:27017"
+          DB_NAME: "ci_smoke"
+          JWT_SECRET: "ci-only-secret-do-not-use"
+          ADMIN_USERNAME: "ci_admin"
+          ADMIN_PASSWORD: "ci-password-only-for-smoke"
+          ALLOWED_ORIGINS: "http://localhost:3000"
+        run: python -c "import server; print('OK', server.app.title)"
