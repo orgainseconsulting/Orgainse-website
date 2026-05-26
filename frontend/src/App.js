@@ -32,6 +32,9 @@ const TermsOfServicePage = React.lazy(() => import("./pages/TermsOfService"));
 const ProductsPage = React.lazy(() => import("./pages/Products"));
 const BlogIndexPage = React.lazy(() => import("./pages/BlogIndex"));
 const BlogPostPage = React.lazy(() => import("./pages/BlogPost"));
+const NewsletterIndexPage = React.lazy(() => import("./pages/NewsletterIndex"));
+const NewsletterIssuePage = React.lazy(() => import("./pages/NewsletterIssue"));
+const UnsubscribePage = React.lazy(() => import("./pages/Unsubscribe"));
 
 const RouteFallback = () => (
   <div
@@ -67,6 +70,9 @@ function App() {
                     <Route path="/products" element={<ProductsPage />} />
                     <Route path="/blog" element={<BlogIndexPage />} />
                     <Route path="/blog/:slug" element={<BlogPostPage />} />
+                    <Route path="/newsletter" element={<NewsletterIndexPage />} />
+                    <Route path="/newsletter/:slug" element={<NewsletterIssuePage />} />
+                    <Route path="/unsubscribe" element={<UnsubscribePage />} />
                     <Route path="/admin" element={<ProtectedAdminRoute />} />
                     <Route path="/privacy" element={<PrivacyPolicyPage />} />
                     <Route path="/terms" element={<TermsOfServicePage />} />

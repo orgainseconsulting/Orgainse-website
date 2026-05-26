@@ -1,0 +1,33 @@
+{
+  "summary": "Comprehensive testing of newly added Newsletter system (backend + frontend). 18/18 backend pytest cases pass on first clean run. Frontend public pages (/newsletter, /newsletter/:slug, /unsubscribe) and admin Newsletter Center (3 top-level pills + 3 sub-tabs + IssueEditor + Send modal) all render and work correctly. Live Resend test-send to info@orgainse.com returns success:true sent:1 total_recipients:1. Regression on legacy /api/newsletter signup confirmed — new subscribers persist with unsubscribe_token, unsubscribed=false, bounced=false, tags=[].",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_newsletter.py",
+    "/app/test_reports/pytest/newsletter_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Subscriber `unsubscribe_token` is intentionally stripped from API responses by `_sub_to_shape` (good — security). Tests assert against the DB directly to verify persistence. Confirm this is desired behaviour, particularly for the create-subscriber API response (admin UI cannot retrieve the token via API at all once created — only the email link contains it, so any failed send/lost link means the token is unrecoverable via admin UI).",
+    "Backend file /app/backend/server.py is now 1769 lines — should be split into modular routers (newsletter_admin, newsletter_public, unsubscribe) for maintainability per the >700-lines guideline.",
+    "Public `GET /api/newsletter-issues` (list) and `/api/newsletter-issues?slug=` (detail) share the same path with branching on query — works, but two distinct routes would be clearer and easier to cache.",
+    "Send-test endpoint validates only `test_email` truthiness; consider RFC email validation to avoid wasted Resend API calls."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_newsletter.py"
+  ],
+  "success_rate": {"backend": "100% (18/18 pytest)", "frontend": "100% (all data-testids verified, all flows pass)"},
+  "test_credentials": "Admin: orgainse_admin / Org@iNs3-Adm!n-2026-x7P9qK (from /app/memory/test_credentials.md). Resend test recipient: info@orgainse.com (only verified domain).",
+  "seed_data_creation": "Tests create issues with slug prefix 'test-*', subscribers with 'test_*'/'playwright_*'/'unsubpw_*' emails, segments with 'test-seg-*' — all torn down per test. Final manual sweep run to delete leftover test docs. Production seed issue 'welcome-to-the-orgainse-pulse-issue-01' untouched.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend response shape for newsletter endpoints is wrapper-style: POST/PUT/GET issue returns {success, issue:{...}}, list returns {success, pagination, issues:[...]}; subscriber/segment APIs use the same wrapper pattern. unsubscribe_token is NOT exposed via any admin API response (stripped by _sub_to_shape) — to test unsubscribe end-to-end, fetch the token from MongoDB directly (newsletter_subscriptions collection). The seed published issue slug for public tests is 'welcome-to-the-orgainse-pulse-issue-01'. Resend live send only delivers to info@orgainse.com. Use only test_email mode in send tests to avoid spamming live subscribers.",
+  "rca of the issue": "N/A — no failing flows. Initial test run had 8 failures because pytest expected unwrapped response shapes; rewrote tests to match server.py wrapper shape and to read unsubscribe_token from Mongo (since API strips it). All 18 tests then passed."
+}

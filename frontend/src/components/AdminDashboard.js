@@ -3,6 +3,8 @@ import { toast } from 'sonner';
 import { api } from '../lib/api';
 import { useAuth } from './AuthContext';
 import BlogManager from './blog/BlogManager';
+import NewsletterManager from './newsletter/NewsletterManager';
+import { LayoutDashboard, FileText, Mail } from 'lucide-react';
 
 /**
  * Flatten a lead document so the table & CSV exports show human-readable
@@ -134,6 +136,7 @@ const AdminDashboard = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [section, setSection] = useState('leads'); // leads | blog | newsletter
   const [activeTab, setActiveTab] = useState('overview');
   const [page, setPage] = useState(1);
   const [expandedId, setExpandedId] = useState(null);
@@ -296,8 +299,7 @@ const AdminDashboard = () => {
     { id: 'ai_assessments', name: 'AI Assessments', count: data?.summary?.breakdown?.ai_assessments || 0 },
     { id: 'roi_calculators', name: 'ROI Calculators', count: data?.summary?.breakdown?.roi_calculators || 0 },
     { id: 'service_inquiries', name: 'Service Inquiries', count: data?.summary?.breakdown?.service_inquiries || 0 },
-    { id: 'consultations', name: 'Consultations', count: data?.summary?.breakdown?.consultations || 0 },
-    { id: 'blog', name: 'Blog' }
+    { id: 'consultations', name: 'Consultations', count: data?.summary?.breakdown?.consultations || 0 }
   ];
 
   // Reset to page 1 whenever the active tab changes
@@ -347,13 +349,10 @@ const AdminDashboard = () => {
   }
 
   const renderTabContent = () => {
-    if (activeTab === 'blog') {
-      return <BlogManager />;
-    }
     if (activeTab === 'overview') {
       return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {tabs.slice(1).filter((t) => t.id !== 'blog').map(tab => {
+          {tabs.slice(1).map(tab => {
             // Map tab IDs to collection names
             const collectionMap = {
               'newsletters': 'newsletter_subscriptions',
@@ -608,36 +607,76 @@ const AdminDashboard = () => {
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-6">
           <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">Lead Management Dashboard</h1>
-              <p className="text-gray-600">Manage your captured leads by category</p>
+              <h1 className="text-3xl font-bold text-gray-900 mb-1" data-testid="admin-section-title">
+                {section === 'leads' && 'Lead Management Dashboard'}
+                {section === 'blog' && 'Blog Post Management'}
+                {section === 'newsletter' && 'Newsletter Center'}
+              </h1>
+              <p className="text-gray-600">
+                {section === 'leads' && 'Manage your captured leads by category'}
+                {section === 'blog' && 'Write, publish and manage blog articles'}
+                {section === 'newsletter' && 'Compose issues, manage subscribers, send branded emails'}
+              </p>
             </div>
-            <div className="flex gap-3">
-              <button
-                onClick={exportAllLeadsToCSV}
-                className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition-colors flex items-center shadow-lg hover:shadow-xl transform hover:scale-105"
-              >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3M7 7h10a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V9a2 2 0 012-2z" />
-                </svg>
-                Export All Leads
-              </button>
-              <button
-                onClick={deleteAllLeads}
-                className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-colors flex items-center shadow-lg hover:shadow-xl transform hover:scale-105"
-              >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-                Delete All Leads
-              </button>
-            </div>
+            {section === 'leads' && (
+              <div className="flex gap-3">
+                <button
+                  onClick={exportAllLeadsToCSV}
+                  data-testid="admin-export-all-csv"
+                  className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition-colors flex items-center shadow-lg hover:shadow-xl transform hover:scale-105"
+                >
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3M7 7h10a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V9a2 2 0 012-2z" />
+                  </svg>
+                  Export All Leads
+                </button>
+                <button
+                  onClick={deleteAllLeads}
+                  data-testid="admin-delete-all-leads"
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-colors flex items-center shadow-lg hover:shadow-xl transform hover:scale-105"
+                >
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                  Delete All Leads
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Summary Cards */}
+        {/* Top-level section pills */}
+        <div className="mb-8">
+          <div className="inline-flex p-1 bg-white border border-slate-200 rounded-xl shadow-sm" role="tablist">
+            {[
+              { id: 'leads', label: 'Lead Management', icon: LayoutDashboard, testid: 'admin-section-leads' },
+              { id: 'blog', label: 'Blog Posts', icon: FileText, testid: 'admin-section-blog' },
+              { id: 'newsletter', label: 'Newsletter', icon: Mail, testid: 'admin-section-newsletter' },
+            ].map(({ id, label, icon: Icon, testid }) => {
+              const active = section === id;
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => setSection(id)}
+                  role="tab"
+                  data-testid={testid}
+                  className={`inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-lg transition-all
+                    ${active ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}
+                >
+                  <Icon className="h-4 w-4" />
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Summary Cards (Lead section only) */}
+        {section === 'leads' && (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center">
@@ -695,8 +734,10 @@ const AdminDashboard = () => {
             </div>
           </div>
         </div>
+        )}
 
-        {/* Tabs */}
+        {/* Tabs (Lead section only) */}
+        {section === 'leads' && (
         <div className="bg-white rounded-lg shadow mb-8">
           <div className="border-b">
             <nav className="-mb-px flex space-x-8 px-6" aria-label="Tabs">
@@ -725,8 +766,24 @@ const AdminDashboard = () => {
             {renderTabContent()}
           </div>
         </div>
+        )}
 
-        {/* Refresh Button */}
+        {/* Blog section */}
+        {section === 'blog' && (
+          <div className="bg-white rounded-lg shadow mb-8 p-6">
+            <BlogManager />
+          </div>
+        )}
+
+        {/* Newsletter section */}
+        {section === 'newsletter' && (
+          <div className="bg-white rounded-lg shadow mb-8 p-6">
+            <NewsletterManager />
+          </div>
+        )}
+
+        {/* Refresh Button (Lead section only) */}
+        {section === 'leads' && (
         <div className="text-center">
           <button
             onClick={fetchData}
@@ -738,6 +795,7 @@ const AdminDashboard = () => {
             Refresh Data
           </button>
         </div>
+        )}
       </div>
     </div>
   );
