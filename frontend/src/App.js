@@ -199,38 +199,45 @@ const RegionalPricingProvider = ({ children }) => {
 
   // Auto-detect user region on component mount
   useEffect(() => {
-    const detectRegion = async () => {
-      try {
-        // Try multiple methods for region detection
-        
-        // Method 1: Try simple IP geolocation service (free tier)
-        try {
-          const response = await fetch('https://ipapi.co/json/');
-          const data = await response.json();
-          if (data.country_code) {
-            const detectedRegion = mapCountryToRegion(data.country_code);
-            if (detectedRegion && !userOverride) {
-              setCurrentRegion(detectedRegion);
-            }
-          }
-        } catch (error) {
-          console.log('Primary geolocation failed, trying fallback...');
-        }
-
-        // Method 2: Fallback to timezone-based detection
-        if (currentRegion === DEFAULT_REGION && !userOverride) {
-          const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-          const regionFromTimezone = mapTimezoneToRegion(timezone);
-          if (regionFromTimezone) {
-            setCurrentRegion(regionFromTimezone);
-          }
-        }
-
-      } catch (error) {
-        console.log('Region detection failed, using default:', DEFAULT_REGION);
-      } finally {
+    // Persisted region check — skip network call on repeat visits
+    try {
+      const cached = localStorage.getItem('orgainse_region');
+      if (cached && REGION_CONFIG[cached]) {
+        setCurrentRegion(cached);
         setIsLoading(false);
+        return;
       }
+    } catch { /* ignore localStorage errors */ }
+
+    const detectRegion = async () => {
+      let detected = null;
+
+      // Method 1: IP geolocation (best-effort, silent on failure)
+      try {
+        const response = await fetch('https://ipapi.co/json/', { mode: 'cors' });
+        if (response.ok) {
+          const data = await response.json();
+          if (data?.country_code) {
+            detected = mapCountryToRegion(data.country_code);
+          }
+        }
+      } catch {
+        // Silent fail — CORS, network, or rate-limited. Fall through.
+      }
+
+      // Method 2: Timezone-based fallback
+      if (!detected) {
+        try {
+          const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          detected = mapTimezoneToRegion(timezone);
+        } catch { /* keep default */ }
+      }
+
+      if (detected && !userOverride) {
+        setCurrentRegion(detected);
+        try { localStorage.setItem('orgainse_region', detected); } catch { /* ignore */ }
+      }
+      setIsLoading(false);
     };
 
     detectRegion();
@@ -299,6 +306,7 @@ const RegionalPricingProvider = ({ children }) => {
   const changeRegion = (newRegion) => {
     setCurrentRegion(newRegion);
     setUserOverride(true);
+    try { localStorage.setItem('orgainse_region', newRegion); } catch { /* ignore */ }
   };
 
   const value = {
@@ -709,67 +717,20 @@ const Home = () => {
     setNewsletterStatus("");
 
     try {
-      // Use newsletter API endpoint for newsletter form
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
-      const NEWSLETTER_API = BACKEND_URL + '/api/newsletter';
-      
-      console.log('🔧 Newsletter Debug Info:');
-      console.log('📋 Backend URL:', BACKEND_URL);
-      console.log('📋 Newsletter API:', NEWSLETTER_API);
-      console.log('✉️ Email:', newsletterEmail);
-      
-      if (!NEWSLETTER_API || NEWSLETTER_API.includes('YOUR_GOOGLE_APPS_SCRIPT_URL')) {
-        console.error('❌ Newsletter API URL not configured');
-        alert('Configuration error: Newsletter API not set up. Please check environment variables.');
-        setNewsletterStatus("error");
-        setIsNewsletterLoading(false);
-        return;
-      }
-      
-      const leadData = {
-        leadType: 'Newsletter Subscription',
-        name: 'Newsletter Subscriber',
-        email: newsletterEmail,
-        company: '',
-        phone: '',
-        message: 'Newsletter subscription request',
-        source: window.location.origin + '/newsletter',
-        timestamp: new Date().toISOString()
-      };
-
-      console.log('📤 Sending lead data:', leadData);
-      console.log('🌐 Sending to:', NEWSLETTER_API);
-
-      const response = await fetch(NEWSLETTER_API, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(leadData)
-      });
-
-      console.log('📥 Response status:', response.status);
-      console.log('📄 Response ok:', response.ok);
-
-      if (response.ok) {
-        const responseData = await response.text();
-        console.log('✅ Success response:', responseData);
-        
-        setNewsletterStatus("success");
-        setNewsletterEmail("");
-        trackLeadAction('newsletter_signup');
-        setTimeout(() => setNewsletterStatus(""), 3000);
+      const res = await api.newsletter({ email: newsletterEmail });
+      if (res?.status === "already_subscribed") {
+        setNewsletterStatus("duplicate");
       } else {
-        const errorText = await response.text();
-        console.error('❌ Response error:', errorText);
-        throw new Error(`Server error: ${response.status} - ${errorText}`);
+        setNewsletterStatus("success");
+        trackLeadAction("newsletter_signup");
       }
+      setNewsletterEmail("");
+      setTimeout(() => setNewsletterStatus(""), 4000);
     } catch (error) {
-      console.error('❌ Newsletter submission error:', error);
-      alert(`Newsletter submission failed: ${error.message}`);
+      console.error("Newsletter submission error:", error);
+      toast.error(error.message || "Subscription failed. Please try again.");
       setNewsletterStatus("error");
-      setTimeout(() => setNewsletterStatus(""), 3000);
+      setTimeout(() => setNewsletterStatus(""), 4000);
     } finally {
       setIsNewsletterLoading(false);
     }
@@ -1084,10 +1045,9 @@ const Home = () => {
                   className="relative rounded-xl sm:rounded-2xl w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover transform group-hover:scale-105 transition-all duration-700 shadow-2xl"
                   loading="lazy"
                   decoding="async"
-                  fetchpriority="low"
+                  fetchPriority="low"
                   width="800"
                   height="500"
-                  height="600"
                 />
                 
                 {/* AI-Enhanced Floating UI Elements */}
@@ -1244,6 +1204,7 @@ const Home = () => {
                   {/* Newsletter Form */}
                   <form onSubmit={handleNewsletterSubmit} className="space-y-3">
                     <Input 
+                      data-testid="newsletter-email-input"
                       type="email" 
                       value={newsletterEmail}
                       onChange={(e) => setNewsletterEmail(e.target.value)}
@@ -1253,6 +1214,7 @@ const Home = () => {
                       disabled={isNewsletterLoading}
                     />
                     <button 
+                      data-testid="newsletter-submit-btn"
                       type="submit"
                       disabled={isNewsletterLoading || !newsletterEmail.trim()}
                       className="w-full group relative px-4 py-2.5 bg-gradient-to-r from-orange-500 to-yellow-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-sm"
@@ -1266,17 +1228,17 @@ const Home = () => {
                     
                     {/* Status Messages */}
                     {newsletterStatus === "success" && (
-                      <p className="text-green-600 text-xs text-center font-medium">
+                      <p data-testid="newsletter-status-success" className="text-green-600 text-xs text-center font-medium">
                         🎉 Welcome! Check your email for resources.
                       </p>
                     )}
                     {newsletterStatus === "duplicate" && (
-                      <p className="text-yellow-600 text-xs text-center font-medium">
+                      <p data-testid="newsletter-status-duplicate" className="text-yellow-600 text-xs text-center font-medium">
                         📧 Already subscribed! Check your email.
                       </p>
                     )}
                     {newsletterStatus === "error" && (
-                      <p className="text-red-500 text-xs text-center font-medium">
+                      <p data-testid="newsletter-status-error" className="text-red-500 text-xs text-center font-medium">
                         ❌ Something went wrong. Try again.
                       </p>
                     )}
@@ -1558,7 +1520,7 @@ const About = () => {
                   className="relative rounded-2xl w-full h-[400px] object-cover transform group-hover:scale-105 transition-all duration-700 shadow-2xl"
                   loading="lazy"
                   decoding="async"
-                  fetchpriority="low"
+                  fetchPriority="low"
                   width="600"
                   height="400"
                 />
@@ -2540,72 +2502,32 @@ const Contact = () => {
     subject: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(""); // "", "success", "error"
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus("");
     try {
-      // Use contact API endpoint for contact form
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
-      const CONTACT_API = BACKEND_URL + '/api/contact';
-      
-      console.log('🔧 Contact Form Debug Info:');
-      console.log('📋 Backend URL:', BACKEND_URL);
-      console.log('📋 Contact API:', CONTACT_API);
-      console.log('📝 Form Data:', formData);
-      
-      if (!CONTACT_API || CONTACT_API.includes('YOUR_GOOGLE_APPS_SCRIPT_URL')) {
-        console.error('❌ Contact API URL not configured');
-        alert('Configuration error: Contact API not set up. Please check environment variables.');
-        return;
-      }
-      
-      const leadData = {
-        leadType: 'Contact Form',
+      await api.contact({
+        leadType: "Contact Inquiry",
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
         company: formData.company,
-        message: `Subject: ${formData.subject}\n\nMessage: ${formData.message}`,
-        source: window.location.origin + '/contact',
-        timestamp: new Date().toISOString()
-      };
-
-      console.log('📤 Sending contact lead:', leadData);
-      console.log('🌐 API Endpoint:', CONTACT_API);
-
-      const response = await fetch(CONTACT_API, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(leadData)
+        subject: formData.subject,
+        message: formData.message,
       });
-      
-      console.log('📥 Contact Response Status:', response.status);
-      console.log('📄 Contact Response OK:', response.ok);
-      
-      if (response.ok) {
-        const responseData = await response.text();
-        console.log('✅ Contact Success:', responseData);
-        
-        alert("Message sent successfully! We'll get back to you within 24 hours with a customized AI consultation plan.");
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          company: "",
-          subject: "",
-          message: "",
-        });
-      } else {
-        const errorText = await response.text();
-        console.error('❌ Contact Response Error:', errorText);
-        throw new Error(`Server error: ${response.status} - ${errorText}`);
-      }
-    } catch (error) {
-      console.error('❌ Contact Form Error:', error);
-      alert(`Error sending message: ${error.message}. Please try again or contact us directly at info@orgainse.com`);
+      toast.success("Message sent! We'll respond within 24 hours.");
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", phone: "", company: "", subject: "", message: "" });
+    } catch (err) {
+      console.error("Contact submit failed:", err);
+      toast.error(err.message || "Failed to send message. Please try again.");
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -2743,11 +2665,29 @@ const Contact = () => {
                   </CardHeader>
                   
                   <CardContent>
+                    {submitStatus === "success" ? (
+                      <div data-testid="contact-success-message" className="text-center py-12">
+                        <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
+                        <h3 className="text-2xl font-bold text-slate-800 mb-2">Message Sent!</h3>
+                        <p className="text-slate-600 mb-6">
+                          Thanks for reaching out. We'll respond within 24 hours with a customized
+                          AI consultation plan.
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => setSubmitStatus("")}
+                          className="text-blue-600 underline text-sm"
+                        >
+                          Send another message
+                        </button>
+                      </div>
+                    ) : (
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                           <label className="text-sm font-semibold text-slate-700">Name *</label>
                           <Input
+                            data-testid="contact-name-input"
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
@@ -2759,6 +2699,7 @@ const Contact = () => {
                         <div>
                           <label className="text-sm font-semibold text-slate-700">Email *</label>
                           <Input
+                            data-testid="contact-email-input"
                             name="email"
                             type="email"
                             value={formData.email}
@@ -2774,6 +2715,7 @@ const Contact = () => {
                         <div>
                           <label className="text-sm font-semibold text-slate-700">Phone</label>
                           <Input
+                            data-testid="contact-phone-input"
                             name="phone"
                             value={formData.phone}
                             onChange={handleChange}
@@ -2784,6 +2726,7 @@ const Contact = () => {
                         <div>
                           <label className="text-sm font-semibold text-slate-700">Company</label>
                           <Input
+                            data-testid="contact-company-input"
                             name="company"
                             value={formData.company}
                             onChange={handleChange}
@@ -2796,6 +2739,7 @@ const Contact = () => {
                       <div>
                         <label className="text-sm font-semibold text-slate-700">Subject *</label>
                         <Input
+                          data-testid="contact-subject-input"
                           name="subject"
                           value={formData.subject}
                           onChange={handleChange}
@@ -2808,6 +2752,7 @@ const Contact = () => {
                       <div>
                         <label className="text-sm font-semibold text-slate-700">Message *</label>
                         <Textarea
+                          data-testid="contact-message-input"
                           name="message"
                           value={formData.message}
                           onChange={handleChange}
@@ -2818,17 +2763,20 @@ const Contact = () => {
                         />
                       </div>
 
-                      <button 
-                        type="submit" 
-                        className="group w-full relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden"
+                      <button
+                        data-testid="contact-submit-btn"
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="group w-full relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed"
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         <span className="relative z-10 flex items-center justify-center text-lg">
-                          Send Message & Get Consultation
-                          <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform" />
+                          {isSubmitting ? "Sending..." : "Send Message & Get Consultation"}
+                          {!isSubmitting && <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform" />}
                         </span>
                       </button>
                     </form>
+                    )}
                   </CardContent>
                 </Card>
               </div>
