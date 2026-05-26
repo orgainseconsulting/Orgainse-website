@@ -123,43 +123,53 @@ Key directives:
 - Iteration 1: 8/10 flows green; identified newsletter & contact bypassing `api.js` and missing testids.
 - Iteration 2 (after fix): 4/4 retest objectives **PASS** (100%).
 - Iteration 3 (refactor + pagination + cleanup): 7/7 review objectives **PASS** (100%).
-- Iteration 6 (App.js decoupling + ORQYNE JSON-LD): 7/8 review items **PASS** (87.5%). All 7 routes load with no React errors; SoftwareApplication + FAQPage + TechArticle JSON-LD correctly injected on `/products`; region switcher works; static-asset 404s eliminated.
+- Iteration 6 (App.js decoupling + ORQYNE JSON-LD): 7/8 review items **PASS** (87.5%).
+- **Iteration 7 (Blog CMS): backend 14/14 PASS, frontend ~95% PASS.** Public list excludes drafts, slug uniqueness enforced, image MIME validated, /blog 3-col grid renders, /blog/:slug renders with `BlogPosting` JSON-LD + canonical, admin Blog tab → TipTap editor flow works end-to-end. Only cosmetic warning (TipTap duplicate `link` extension) fixed post-test.
 
 ## Implemented (Feb 26, 2026 — late session)
 
+### Blog CMS (P0 — done)
+
+Admin-authored blog system end-to-end:
+
+**Backend (Vercel serverless mirrored 1:1 in FastAPI):**
+- `/api/blog` — public GET (paginated list of published posts; single-post by `?slug=`). Excludes drafts. Cover image returned inline as `data:` URL.
+- `/api/blog-admin` — JWT-protected CRUD (`GET` list-with-drafts, `GET ?id=`, `POST`, `PUT ?id=`, `DELETE ?id=`).
+- New `blog_posts` collection. Unique index on `slug`. Image base64 stored alongside MIME. Slug regex enforced, body HTML sanitized (`<script>` / `on*=` / `javascript:` stripped), reading-minutes auto-estimated.
+
+**Admin UI:** new **Blog** tab inside `AdminDashboard` → `BlogManager` (list + status badges) → `BlogEditor` (TipTap WYSIWYG + slug auto-derive + cover image upload + status toggle + manual SEO fields).
+
+**Public UI:**
+- `/blog` — magazine-style hero + 3-col card grid + pagination + placeholder gradient when post has no cover.
+- `/blog/:slug` — full article with `BlogPosting` JSON-LD, canonical URL, og:type=article, dynamic og:image, typography-styled body (`@tailwindcss/typography`), tags + CTA.
+- Blog link in Nav + Footer, `/blog` added to `sitemap.xml`.
+
+**Editor capabilities (TipTap):**
+- H2/H3, paragraph, bold/italic/strike/inline-code, bullet/ordered lists, blockquote, code block, HR, link (with prompt), inline image upload (base64), undo/redo.
+- Cover image + OG image uploads, manual SEO title/description.
+- Status: Draft / Published. "Update post" replaces the row in-place.
+
 ### ORQYNE `/products` JSON-LD (P0 — done)
-- `pages/Products.js` builds a memoized `structuredData` array containing **SoftwareApplication** (`name: "ORQYNE"`, full `featureList`, `AggregateOffer` for 4 tiers, `BusinessAudience`), **FAQPage** (auto-derived from the on-page FAQS so wording stays in sync), and **TechArticle** ("How ORQYNE Provisions a RAG-Grounded AI Workspace From a Spreadsheet").
-- `components/SEOHead.js` already supports array `structuredData`; each entry is injected as `<script type="application/ld+json" data-page-schema="<path>-<i>">` and removed on route change.
+- `pages/Products.js` builds a memoized `structuredData` array containing **SoftwareApplication**, **FAQPage** (auto-derived from on-page FAQs), and **TechArticle**.
+- `components/SEOHead.js` extended to support array OR single-object `structuredData`, plus optional `ogImage`/`ogType` props (used by blog posts).
 
 ### App.js decoupling — Phase 2 (P1 — done)
-`App.js` reduced from **3036 → 88 lines**. Now a slim shell containing only providers, routes, and global widgets. Extracted modules:
+`App.js` reduced from **3036 → 91 lines**. Extracted: `context/{CalendlyContext,RegionalPricingContext}.js`, `components/{Navigation,Footer,RegionSelector,AnalyticsDebug}.js`, `pages/{Home,About,Services,Contact}.js`. All routes lazy-loaded via `React.lazy` + Suspense.
 
-| New file | Lines | Source range in old App.js |
-| --- | --- | --- |
-| `context/CalendlyContext.js` | 23 | 164–183 |
-| `context/RegionalPricingContext.js` | 148 | 101–332 |
-| `components/AnalyticsDebug.js` | 35 | 68–98 |
-| `components/Navigation.js` | 180 | 372–565 |
-| `components/Footer.js` | 130 | 568–695 |
-| `components/RegionSelector.js` | 41 | 335–366 |
-| `pages/Home.js` | 781 | 698–1448 |
-| `pages/About.js` | 426 | 1451–1860 |
-| `pages/Services.js` | 658 | 1863–2490 |
-| `pages/Contact.js` | 515 | 2493–2982 |
-
-All routes already lazy-load via `React.lazy` + `<Suspense fallback=…>`.
-
-### Index.html cleanup
-- Removed stale literal `<link href="/static/css/main.css">` and `<script src="/static/js/main.js">` preload references that were 404'ing on every route (CRA emits hashed bundle filenames and injects them automatically).
+### Misc
+- Removed stale `/static/css/main.css` + `/static/js/main.js` literal preload tags from `public/index.html` that were 404'ing.
+- Wired real Google Calendar Appointment Scheduling URL → `https://calendar.app.google/i8mBG9yQzmUkeeRy6` (both in `frontend/.env` and as fallback in `lib/booking.js`).
+- Tiny ORQYNE mark icon removed from the desktop "Products" nav link per user feedback.
 
 ## Open / Backlog
 
 ### P2
-- Wire `REACT_APP_BOOKING_URL` to a real Google Calendar Appointment Scheduling URL (currently `https://calendar.app.google/REPLACE_ME_WITH_YOUR_APPOINTMENT_URL`). Nav "Book Consultation" button opens a new tab to this placeholder.
-- (Optional) Move `SIGNUP_URL = "https://orgainse.live/signup"` in `pages/Products.js` to an env var for parity.
+- Set `REACT_APP_BOOKING_URL` on Vercel (Production + Preview + Dev) so the live build picks it up. (Code already deployed; just an env-var entry away.)
+- `ipapi.co` CORS error on every page (pre-existing, from `RegionalPricingContext`'s client-side geolocation). Either proxy through backend or drop the fetch and rely solely on `Intl.DateTimeFormat().resolvedOptions().timeZone`.
+- (Optional) Move `SIGNUP_URL` in `pages/Products.js` to env-var.
 
 ### P3
-- Playwright smoke-test workflow in CI.
+- Playwright smoke-test workflow in CI (GitHub Actions).
 - Consider deleting `react-snap` (prerendering) if not actively used.
 - Move any remaining direct `axios`/`fetch` calls into `lib/api.js`. After Phase 2 decoupling, all extracted pages already use `api.*`.
 
@@ -180,3 +190,8 @@ See `/app/memory/test_credentials.md`.
 | POST   | `/api/consultation`    | — | 24h-dedupe per email |
 | GET    | `/api/admin`           | Bearer | paginated (`?page=&page_size=`) |
 | DELETE | `/api/admin-delete`    | Bearer | all / collection / single |
+| GET    | `/api/blog`            | — | published only (`?slug=`, `?page=`, `?category=`, `?tag=`) |
+| GET    | `/api/blog-admin`      | Bearer | all (drafts + published); `?id=` for single |
+| POST   | `/api/blog-admin`      | Bearer | create post (base64 images) |
+| PUT    | `/api/blog-admin?id=`  | Bearer | update post |
+| DELETE | `/api/blog-admin?id=`  | Bearer | delete post |

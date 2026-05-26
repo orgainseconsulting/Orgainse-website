@@ -149,7 +149,13 @@ const TipTapEditor = ({ value, onChange, placeholder = 'Start writing your postâ
 
   const editor = useEditor({
     extensions: [
-      StarterKit.configure({ codeBlock: { HTMLAttributes: { class: 'language-plain' } } }),
+      StarterKit.configure({
+        codeBlock: { HTMLAttributes: { class: 'language-plain' } },
+        // StarterKit ships a Link mark; we register the standalone Link extension
+        // below for openOnClick=false + custom HTMLAttributes, so disable the
+        // bundled one to avoid the "Duplicate extension names found: [link]" warning.
+        link: false,
+      }),
       Image.configure({ inline: false, allowBase64: true, HTMLAttributes: { class: 'mx-auto rounded-lg my-4 max-w-full h-auto' } }),
       Link.configure({ openOnClick: false, HTMLAttributes: { class: 'text-orange-600 underline underline-offset-2 hover:text-orange-700' } }),
       Placeholder.configure({ placeholder }),
