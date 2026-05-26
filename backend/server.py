@@ -571,8 +571,8 @@ class AdminUserInviteIn(BaseModel):
 
 
 class CustomFieldIn(BaseModel):
-    label: str = Field(..., min_length=1, max_length=60)
-    value: str = Field(..., min_length=0, max_length=300)
+    label: str = Field("", max_length=60)
+    value: str = Field("", max_length=300)
 
 
 class AdminUserUpdateIn(BaseModel):

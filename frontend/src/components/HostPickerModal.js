@@ -49,8 +49,15 @@ const HostPickerModal = ({ open, onClose, hosts = [], fallbackUrl = '' }) => {
 
   if (!open) return null;
 
-  const pick = (url) => {
-    if (!url) return;
+  const handlePick = (e, url) => {
+    // Allow native middle-click / cmd-click to open in new tab via the <a>;
+    // only intercept the plain left-click so we can close the modal.
+    if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1)) {
+      onClose();
+      return;
+    }
+    if (!url) { e?.preventDefault?.(); return; }
+    e?.preventDefault?.();
     window.open(url, '_blank', 'noopener,noreferrer');
     onClose();
   };
@@ -106,10 +113,12 @@ const HostPickerModal = ({ open, onClose, hosts = [], fallbackUrl = '' }) => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {list.map((h, idx) => (
-                <button
-                  type="button"
+                <a
+                  href={h.booking_url || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   key={h.id || idx}
-                  onClick={() => pick(h.booking_url)}
+                  onClick={(e) => handlePick(e, h.booking_url)}
                   data-testid={`host-picker-card-${(h.name || 'host').toLowerCase().replace(/\s+/g, '-')}`}
                   className="group text-left flex flex-col gap-3 p-4 border-2 border-slate-200 hover:border-orange-400 hover:bg-orange-50/50 rounded-xl transition-all"
                 >
@@ -133,7 +142,7 @@ const HostPickerModal = ({ open, onClose, hosts = [], fallbackUrl = '' }) => {
                       ))}
                     </div>
                   )}
-                </button>
+                </a>
               ))}
             </div>
           )}
