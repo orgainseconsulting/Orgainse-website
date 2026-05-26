@@ -1,8 +1,14 @@
 import React from "react";
+import SEOHead from "../components/SEOHead";
 
 const TermsOfService = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-green-50 py-20">
+      <SEOHead
+        title="Terms of Service - Orgainse Consulting"
+        description="Review the terms governing the use of Orgainse Consulting's AI-native consulting services and website."
+        canonical="https://orgainse.com/terms"
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-3xl shadow-2xl p-8 lg:p-12">
           <h1 className="text-4xl lg:text-5xl font-bold mb-8 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">

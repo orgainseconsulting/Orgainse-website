@@ -19,7 +19,7 @@ Key directives:
 | Frontend | React 19 + craco + Tailwind + shadcn/ui (lazy-loaded routes) |
 | Backend (prod) | Vercel Node.js Serverless Functions in `/app/api/*.js` |
 | Backend (dev mirror) | FastAPI in `/app/backend/server.py` (mirrors `/api/*` for in-pod E2E testing) |
-| DB | MongoDB (local in this sandbox; Atlas hostname currently NXDOMAIN) |
+| DB | MongoDB (local in sandbox; Atlas hostname currently NXDOMAIN) |
 | Auth | bcrypt + JWT (HS256, 8h TTL), brute-force lockout |
 | Booking | Google Calendar Appointment Scheduling (`REACT_APP_BOOKING_URL`) |
 
@@ -33,51 +33,69 @@ Key directives:
 - XSS-prone strings sanitized server-side before persistence
 
 ### Frontend refactor
-- Extracted from `App.js` into `/app/frontend/src/pages/`:
+- Extracted from `App.js` into `/app/frontend/src/pages/` (all lazy-loaded):
   - `AIAssessmentTool.js` (5-question wizard, server-scored maturity)
   - `ROICalculator.js` (regional currency, recommended-services pricing)
   - `SmartCalendar.js` (consultation booking)
-- All 5 lead-capture forms now flow through `/app/frontend/src/lib/api.js` (Newsletter & Contact refactored this fork)
+  - `NotFound.js` (404 page, with `notfound-home-link` testid)
+  - `PrivacyPolicy.js` (now with SEOHead)
+  - `TermsOfService.js` (now with SEOHead)
+- **Deleted 1566 lines of dead code** from `App.js` (legacy AIAssessmentTool / ROICalculator / SmartCalendar that were no longer routed). `App.js`: 4752 → **~2950 lines** (≈38% reduction).
+- All form submissions now flow through `/app/frontend/src/lib/api.js`:
+  - Newsletter, Contact, AI Assessment, ROI Calculator, Consultation, Admin login.
+  - 5 legacy inline `fetch(BACKEND_URL + '/api/contact')` blocks migrated to `api.contact()` (including Services-page `handleContactFormSubmit` and `handleServiceInquiry`).
 - GDPR cookie banner with localStorage persistence (`CookieBanner.js`)
 - `fetchpriority` JSX attribute corrected to `fetchPriority`
-- `ipapi.co` region detection now silent-fail + cached in `localStorage` (`orgainse_region`)
-- React lazy-loading for `/admin`, `/ai-assessment`, `/roi-calculator`, `/smart-calendar`
+- `ipapi.co` region detection now silent-fail + cached in `localStorage` (`orgainse_region`); manual region override also persisted
+- React lazy-loading for `/admin`, `/ai-assessment`, `/roi-calculator`, `/smart-calendar`, `/privacy`, `/terms`, `*` (404)
 
-### Data-testids added (testing/automation)
+### Admin dashboard
+- Pagination controls added (data-testid `admin-pagination`, `admin-pagination-prev/next`).
+- Tab buttons now expose `admin-tab-{id}` testids; switching tabs resets page to 1.
+- Pagination footer renders only when `totalForTab > pageSize` (100).
+
+### Data-testids (testing/automation)
 - `newsletter-email-input`, `newsletter-submit-btn`, `newsletter-status-success|duplicate|error`
 - `contact-name-input`, `contact-email-input`, `contact-phone-input`, `contact-company-input`, `contact-subject-input`, `contact-message-input`, `contact-submit-btn`, `contact-success-message`
 - `admin-username-input`, `admin-password-input`, `admin-login-submit-btn`, `admin-login-error`
-- `assessment-*`, `roi-*` test IDs on the extracted pages
+- `admin-tab-overview|newsletters|contacts|ai_assessments|roi_calculators|service_inquiries|consultations`
+- `admin-pagination`, `admin-pagination-prev`, `admin-pagination-next`
+- `notfound-home-link`
+- `assessment-*`, `roi-*` testids on the extracted lead-gen pages
 
 ### Booking
 - Calendly removed; replaced with Google Calendar URL placeholder in `src/lib/booking.js` (`REACT_APP_BOOKING_URL`).
 
-### Dev environment
+### Dev / Repo
 - `craco.config.js` now sets `devServer.allowedHosts: 'all'` so the React dev server accepts the K8s ingress host header.
 - FastAPI mirror at `localhost:8001` reachable via `/api/*` through ingress.
+- `.gitignore`: removed 165 lines of duplicated `*.env` blocks; now 94 lines, deduped.
+- `README.md`: rewritten to reflect the actual Vercel Serverless + FastAPI-mirror stack (replaced the inaccurate "FastAPI in prod" / "Odoo CRM" copy).
+- `.eslintrc.json`: added with `react-app` extends + warnings for unused vars / console.
+- GitHub Actions `.github/workflows/ci.yml`: frontend build with `CI=true` (lint-as-error) and backend import smoke.
 
 ## Verified by testing agent
 
 - Iteration 1: 8/10 flows green; identified newsletter & contact bypassing `api.js` and missing testids.
-- Iteration 2 (after fix): 4/4 retest objectives **PASS** (100%). Admin counts: Newsletter=3, Contact=2, AI Assessment=2, ROI=2, Consultations=2.
+- Iteration 2 (after fix): 4/4 retest objectives **PASS** (100%).
+- Iteration 3 (refactor + pagination + cleanup): 7/7 review objectives **PASS** (100%).
 
 ## Open / Backlog
 
-### P1 — Decouple App.js
-`App.js` is still ~4752 lines. Sections to extract into `/app/frontend/src/pages/` and `/app/frontend/src/components/`:
-- `Home`, `About`, `Services`, `Contact`, `PrivacyPolicy`, `TermsOfService`, `NotFound`
-- `Navigation`, `Footer`, `RegionalPricingProvider`, `CalendlyProvider`
-- Remove the ~5 leftover raw `fetch(BACKEND_URL + '/api/contact')` blocks (lines ~1989, 2042, 3083, 3531, 4073) — these belong to inline contact forms inside Home/About/Services and should also use `api.contact()`.
+### P1 — Finish App.js decoupling
+`App.js` is still ~2950 lines. Remaining sections to extract:
+- `Navigation` (~185 lines), `Footer` (~130 lines)
+- `Home` (~750 lines), `About` (~410 lines), `Services` (~640 lines), `Contact` (~465 lines)
+- `CalendlyProvider` + `useCalendly` context → `/app/frontend/src/contexts/CalendlyContext.js`
+- `RegionalPricingProvider` + `useRegionalPricing` + `RegionSelector` → `/app/frontend/src/contexts/RegionalPricingContext.js`
 
-### P2 — Cleanup
-- Delete dead files: `GoogleCalendarBooking.js`, `CalendlyBooking.js`, `/api/ai-assessment-simple.js`, `/api/test-uuid.js` (if still present in repo)
-- Clean duplicated env-file block in `.gitignore` (~30 dupes)
-- Review `<link rel="preload">` tags causing "preloaded but not used" warnings
+### P2
+- Wire `REACT_APP_BOOKING_URL` to a real Google Calendar Appointment Scheduling URL.
+- Audit the ~14 generic 404 resource-load console errors (likely tracking pixels or icon variants) and silence them.
 
-### P3 — Quality / DX
-- ESLint + GitHub Actions CI + Playwright smoke test
-- Rewrite `README.md` to reflect the actual Vercel/Node stack (not FastAPI)
-- Pagination UI in admin dashboard (backend already supports `?page=&page_size=`)
+### P3
+- Playwright smoke-test workflow in CI.
+- Consider deleting `react-snap` (prerendering) if not actively used; it's only useful for SEO and SPA initial paint, and currently nothing in build script consumes it apart from `build-with-snap`.
 
 ## Credentials & env
 
@@ -94,5 +112,5 @@ See `/app/memory/test_credentials.md`.
 | POST   | `/api/ai-assessment`   | — | server-side maturity scoring |
 | POST   | `/api/roi-calculator`  | — | regional currency math |
 | POST   | `/api/consultation`    | — | 24h-dedupe per email |
-| GET    | `/api/admin`           | Bearer | paginated |
+| GET    | `/api/admin`           | Bearer | paginated (`?page=&page_size=`) |
 | DELETE | `/api/admin-delete`    | Bearer | all / collection / single |
