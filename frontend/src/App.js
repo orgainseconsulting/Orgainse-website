@@ -2,79 +2,17 @@ import React, { useState, useEffect, useContext, Suspense } from "react";
 import { Toaster, toast } from 'sonner';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
-import "./App.css";
 import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
-import { Button } from "./components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./components/ui/card";
-import { Input } from "./components/ui/input";
-import { Textarea } from "./components/ui/textarea";
-import { Badge } from "./components/ui/badge";
-import { api } from "./lib/api";
-import { openBookingPage, BOOKING_URL } from "./lib/booking";
-import CookieBanner from "./components/CookieBanner";
-
-// Debug Analytics Component
-const AnalyticsDebug = () => {
-  useEffect(() => {
-    console.log('✅ Vercel Analytics component mounted');
-    
-    // Test if gtag is available
-    if (typeof window !== 'undefined' && window.gtag) {
-      console.log('✅ Google Analytics gtag function available');
-      
-      // Send a test event
-      window.gtag('event', 'page_view', {
-        page_title: document.title,
-        page_location: window.location.href
-      });
-      console.log('📊 Sent page_view event to GA');
-    } else {
-      console.log('❌ Google Analytics gtag not found');
-    }
-    
-    // Check for Vercel Analytics
-    setTimeout(() => {
-      const vaScript = document.querySelector('script[src*="vitals.vercel-analytics.com"]');
-      if (vaScript) {
-        console.log('✅ Vercel Analytics script loaded');
-      } else {
-        console.log('❌ Vercel Analytics script not found');
-      }
-    }, 2000);
-  }, []);
-  
-  return null;
-};
-import { Separator } from "./components/ui/separator";
-import ServicePopup from "./components/ServicePopup";
-import SEOHead from "./components/SEOHead";
-import SocialShare from "./components/SocialShare";
-import SEOLinks from "./components/SEOLinks";
-import SEOContent from "./components/SEOContent";
-import MobilePerformanceOptimizer from "./components/MobilePerformanceOptimizer";
-// Lazy loaded components for better performance
-const AdminDashboard = React.lazy(() => import("./components/AdminDashboard"));
-const ProtectedAdminRoute = React.lazy(() => import("./components/ProtectedAdminRoute"));
-const AIAssessmentToolPage = React.lazy(() => import("./pages/AIAssessmentTool"));
-const ROICalculatorPage = React.lazy(() => import("./pages/ROICalculator"));
-const SmartCalendarPage = React.lazy(() => import("./pages/SmartCalendar"));
-const NotFoundPage = React.lazy(() => import("./pages/NotFound"));
-const PrivacyPolicyPage = React.lazy(() => import("./pages/PrivacyPolicy"));
-const TermsOfServicePage = React.lazy(() => import("./pages/TermsOfService"));
-
-// Regular imports for core components
-import { AuthProvider } from "./components/AuthContext";
-import BlogPost from "./components/BlogPost";
-import { blogPosts, getBlogPost } from "./data/blogPosts";
-import { 
-  Menu, 
-  X, 
-  ArrowRight, 
-  CheckCircle, 
-  Users, 
-  TrendingUp, 
-  Shield, 
-  Zap, 
+import axios from "axios";
+import {
+  Menu,
+  X,
+  ArrowRight,
+  CheckCircle,
+  Users,
+  TrendingUp,
+  Shield,
+  Zap,
   Globe,
   Brain,
   Target,
@@ -95,7 +33,68 @@ import {
   Plus,
   Minus
 } from "lucide-react";
-import axios from "axios";
+import { Button } from "./components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./components/ui/card";
+import { Input } from "./components/ui/input";
+import { Textarea } from "./components/ui/textarea";
+import { Badge } from "./components/ui/badge";
+import { Separator } from "./components/ui/separator";
+import { api } from "./lib/api";
+import { openBookingPage, BOOKING_URL } from "./lib/booking";
+import { AuthProvider } from "./components/AuthContext";
+import { blogPosts, getBlogPost } from "./data/blogPosts";
+import CookieBanner from "./components/CookieBanner";
+import ServicePopup from "./components/ServicePopup";
+import SEOHead from "./components/SEOHead";
+import SocialShare from "./components/SocialShare";
+import SEOLinks from "./components/SEOLinks";
+import SEOContent from "./components/SEOContent";
+import MobilePerformanceOptimizer from "./components/MobilePerformanceOptimizer";
+import BlogPost from "./components/BlogPost";
+import "./App.css";
+
+// Lazy-loaded route components for code-splitting
+const AdminDashboard = React.lazy(() => import("./components/AdminDashboard"));
+const ProtectedAdminRoute = React.lazy(() => import("./components/ProtectedAdminRoute"));
+const AIAssessmentToolPage = React.lazy(() => import("./pages/AIAssessmentTool"));
+const ROICalculatorPage = React.lazy(() => import("./pages/ROICalculator"));
+const SmartCalendarPage = React.lazy(() => import("./pages/SmartCalendar"));
+const NotFoundPage = React.lazy(() => import("./pages/NotFound"));
+const PrivacyPolicyPage = React.lazy(() => import("./pages/PrivacyPolicy"));
+const TermsOfServicePage = React.lazy(() => import("./pages/TermsOfService"));
+
+// Debug Analytics Component
+const AnalyticsDebug = () => {
+  useEffect(() => {
+    console.log('✅ Vercel Analytics component mounted');
+
+    // Test if gtag is available
+    if (typeof window !== 'undefined' && window.gtag) {
+      console.log('✅ Google Analytics gtag function available');
+
+      // Send a test event
+      window.gtag('event', 'page_view', {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+      console.log('📊 Sent page_view event to GA');
+    } else {
+      console.log('❌ Google Analytics gtag not found');
+    }
+
+    // Check for Vercel Analytics
+    setTimeout(() => {
+      const vaScript = document.querySelector('script[src*="vitals.vercel-analytics.com"]');
+      if (vaScript) {
+        console.log('✅ Vercel Analytics script loaded');
+      } else {
+        console.log('❌ Vercel Analytics script not found');
+      }
+    }, 2000);
+  }, []);
+
+  return null;
+};
 
 // Regional Pricing and Currency System
 const REGION_CONFIG = {

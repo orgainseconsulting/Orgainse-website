@@ -3,7 +3,7 @@
   "version": 2,
   "framework": "create-react-app",
   "buildCommand": "yarn build",
-  "outputDirectory": "build",
+  "outputDirectory": "frontend/build",
   "installCommand": "yarn install",
   "functions": {
     "api/**/*.js": {

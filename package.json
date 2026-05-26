@@ -1,0 +1,24 @@
+{
+  "name": "orgainse-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Orgainse Consulting marketing site — React SPA + Vercel Node.js serverless functions.",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "install:frontend": "cd frontend && yarn install --frozen-lockfile",
+    "build:frontend": "cd frontend && yarn build",
+    "build": "yarn install:frontend && yarn build:frontend",
+    "postinstall": "yarn install:frontend"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb": "^6.19.0",
+    "uuid": "^12.0.0"
+  }
+}

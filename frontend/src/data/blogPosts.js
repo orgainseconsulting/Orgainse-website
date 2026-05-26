@@ -184,7 +184,6 @@ export const blogPosts = [
   {
     id: 3,
     slug: "ai-roi-calculator-business-case",
-    title: "Building the Business Case: AI ROI Calculator for Decision Makers",
     title: "How to Calculate AI ROI: Complete Guide for Business Leaders and CFOs",
     excerpt: "Learn how to build compelling business cases for AI investments. Includes ROI calculation frameworks, implementation costs, and proven metrics from 500+ successful AI projects.",
     content: `
