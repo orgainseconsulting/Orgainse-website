@@ -43,6 +43,23 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- Product -->
+  <url>
+    <loc>https://www.orgainse.com/products</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://www.orgainse.com/orqyne/long-1200.png</image:loc>
+      <image:title>ORQYNE — AI Project Management as a Service by Orgainse Consulting</image:title>
+      <image:caption>ORQYNE wordmark with the abstract Q mark, a product of Orgainse Consulting</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.orgainse.com/orqyne/mark-800.png</image:loc>
+      <image:title>ORQYNE icon mark</image:title>
+    </image:image>
+  </url>
   
   <!-- Interactive Tools -->
   <url>

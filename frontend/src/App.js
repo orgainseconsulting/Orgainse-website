@@ -448,13 +448,23 @@ const Navigation = () => {
               <Link
                 key={link.href}
                 to={link.href}
-                className={`text-sm font-medium transition-colors hover:text-orange-500 ${
+                className={`text-sm font-medium transition-colors hover:text-orange-500 inline-flex items-center gap-1.5 ${
                   location.pathname === link.href
                     ? "text-orange-500"
                     : "text-slate-600"
                 }`}
               >
                 {link.label}
+                {link.href === "/products" && (
+                  <img
+                    src="/orqyne/mark-200.png"
+                    alt=""
+                    aria-hidden="true"
+                    width="16"
+                    height="16"
+                    className="h-4 w-4 object-contain"
+                  />
+                )}
               </Link>
             ))}
             

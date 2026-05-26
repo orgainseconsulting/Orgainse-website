@@ -117,24 +117,30 @@ const ServicePopup = ({
                       <a
                         href={service.productLink.href}
                         data-testid={`product-crosslink-${service.id}`}
-                        className="block group relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-50 via-white to-orange-50 border-2 border-blue-200 p-5 hover:border-blue-400 hover:shadow-lg transition-all"
+                        className="block group relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 border-2 border-blue-400/40 p-5 hover:border-blue-300 hover:shadow-2xl hover:shadow-blue-500/20 transition-all"
                       >
                         <div className="flex items-center gap-4">
-                          <div className="flex-shrink-0 h-12 w-12 rounded-xl bg-gradient-to-br from-blue-600 to-orange-500 flex items-center justify-center shadow-md">
-                            <Sparkles className="h-6 w-6 text-white" />
+                          <div className="flex-shrink-0 h-14 w-14 rounded-xl bg-black/40 ring-1 ring-blue-400/30 flex items-center justify-center p-1.5">
+                            <img
+                              src="/orqyne/mark-400.png"
+                              alt="ORQYNE"
+                              className="h-full w-full object-contain"
+                              width="56"
+                              height="56"
+                            />
                           </div>
                           <div className="flex-1">
-                            <div className="text-[10px] font-bold tracking-[0.15em] uppercase text-blue-600 mb-0.5">
+                            <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-blue-300 mb-0.5">
                               Powered by our product
                             </div>
-                            <div className="text-base font-extrabold text-slate-900 leading-tight">
+                            <div className="text-lg font-extrabold text-white leading-tight">
                               {service.productLink.label}
                             </div>
-                            <div className="text-xs text-slate-600 mt-0.5">
+                            <div className="text-xs text-slate-300 mt-1">
                               {service.productLink.tagline}
                             </div>
                           </div>
-                          <div className="flex-shrink-0 text-blue-600 group-hover:translate-x-1 transition-transform">
+                          <div className="flex-shrink-0 text-blue-300 group-hover:translate-x-1 transition-transform">
                             <ArrowRight className="h-5 w-5" />
                           </div>
                         </div>

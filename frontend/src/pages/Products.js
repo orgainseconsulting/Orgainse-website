@@ -26,7 +26,7 @@ import {
   Code2,
 } from "lucide-react";
 import SEOHead from "../components/SEOHead";
-import OrqyneLogo from "../components/OrqyneLogo";
+import { OrqyneLogo, OrqyneMark } from "../components/OrqyneLogo";
 
 const SIGNUP_URL = "https://orgainse.live/signup";
 
@@ -228,6 +228,115 @@ const ProductsPage = () => {
   const [openFaq, setOpenFaq] = useState(null);
   const current = COCKPITS.find((c) => c.id === activeCockpit);
 
+  // -------- Page-scoped JSON-LD (SoftwareApplication + FAQPage + SoftwareSourceCode) --------
+  const structuredData = React.useMemo(
+    () => [
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "ORQYNE",
+        "alternateName": ["Orqyne AI", "Orqyne PMaaS", "ORQYNE by Orgainse"],
+        "applicationCategory": "BusinessApplication",
+        "applicationSubCategory": "Project Management",
+        "operatingSystem": "Web",
+        "url": "https://orgainse.live",
+        "sameAs": [
+          "https://orgainse.live",
+          "https://www.orgainse.com/products"
+        ],
+        "image": "https://www.orgainse.com/orqyne/long-1200.png",
+        "logo": "https://www.orgainse.com/orqyne/mark-400.png",
+        "description":
+          "ORQYNE is AI Project Management as a Service. Upload a spreadsheet and ORQYNE provisions a workspace with 20+ RAG-grounded AI agents that run on your data in 90 seconds. Industry-native cockpits for IT Services, Canvas (any-industry), and US Healthcare Analytics. BYOK or managed AI key.",
+        "softwareVersion": "2026.1",
+        "brand": { "@type": "Brand", "name": "ORQYNE" },
+        "creator": {
+          "@type": "Organization",
+          "name": "Orgainse Consulting",
+          "url": "https://www.orgainse.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Orgainse Consulting",
+          "url": "https://www.orgainse.com"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "USD",
+          "offerCount": "4",
+          "lowPrice": "0",
+          "highPrice": "0",
+          "availability": "https://schema.org/InStock",
+          "url": "https://www.orgainse.com/contact?product=orqyne",
+          "description": "Four tiers: Starter (1-10 users), Professional (11-50 users), Enterprise (51+ users), Custom. Contact sales for region- and team-specific pricing."
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "bestRating": "5",
+          "ratingCount": "42"
+        },
+        "featureList": [
+          "20+ RAG-grounded AI agents per workspace",
+          "3 industry cockpits: IT Services, Canvas, US Healthcare Analytics",
+          "Spreadsheet-to-workspace provisioning in 90 seconds",
+          "7 platform agents: Strategic, Planner, Delivery, Risk, Comms, Quality, Knowledge",
+          "Team Chat with @orqyne AI grounded in Project / Sprint / Epic",
+          "Agent Marketplace with publishing rights for Enterprise tier",
+          "40+ engineering connectors (GitHub, GitLab, Jira, Azure DevOps, Slack, Microsoft Teams, Confluence, PagerDuty, Notion, Linear)",
+          "BYOK (bring your own keys) or managed AI key options",
+          "TLS 1.3 in transit, AES-256 at rest, multi-tenant isolation",
+          "Region choice (US / EU / India) locked at provision time",
+          "SSO (Google, Microsoft, SAML, SCIM)",
+          "HIPAA-modelled BAA, GDPR DPA, SOC2-aligned audit report templates"
+        ],
+        "audience": {
+          "@type": "BusinessAudience",
+          "audienceType": [
+            "Software engineering teams",
+            "IT services and consulting firms",
+            "US healthcare revenue cycle leaders",
+            "PMO and delivery management",
+            "Startups and SMEs"
+          ]
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": "https://www.orgainse.com/products#faq",
+        "mainEntity": FAQS.map((f) => ({
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": { "@type": "Answer", "text": f.a }
+        }))
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "How ORQYNE Provisions a RAG-Grounded AI Workspace From a Spreadsheet",
+        "description":
+          "Technical overview: ORQYNE parses an engineering backlog spreadsheet, builds per-tenant RAG indexes over your repos, runbooks, ADRs, retrospectives, and Jira history, provisions Scrum/Kanban boards, and hires seven platform agents — all in 90 seconds.",
+        "keywords":
+          "RAG, retrieval-augmented generation, AI project management, PMaaS, multi-tenant SaaS, BYOK AI, healthcare revenue cycle analytics",
+        "proficiencyLevel": "Expert",
+        "dependencies":
+          "OpenAI / Anthropic / Google AI compatible LLM providers; PostgreSQL or MongoDB-compatible datastore; OIDC/SAML SSO for identity",
+        "about": [
+          { "@type": "Thing", "name": "Retrieval-Augmented Generation (RAG)" },
+          { "@type": "Thing", "name": "AI Agents" },
+          { "@type": "Thing", "name": "Multi-tenant SaaS architecture" }
+        ],
+        "author": {
+          "@type": "Organization",
+          "name": "Orgainse Consulting",
+          "url": "https://www.orgainse.com"
+        }
+      }
+    ],
+    []
+  );
+
   return (
     <div className="min-h-screen bg-white">
       <SEOHead
@@ -235,6 +344,7 @@ const ProductsPage = () => {
         description="ORQYNE by Orgainse Consulting: upload a spreadsheet, get a fully provisioned workspace with 20+ RAG-grounded AI agents running on your data in 90 seconds. Industry cockpits for IT Services, Canvas, and US Healthcare Analytics. BYOK or managed AI."
         canonical="https://orgainse.com/products"
         keywords="ORQYNE, AI project management as a service, PMaaS, RAG-grounded AI agents, AI sprint planner, US healthcare analytics, BYOK AI, agent marketplace"
+        structuredData={structuredData}
       />
 
       {/* ─────────────────────────────────── HERO ─────────────────────────────────── */}
@@ -251,8 +361,8 @@ const ProductsPage = () => {
               </span>
             </div>
 
-            <div className="flex justify-center mb-8" data-testid="orqyne-logo-hero">
-              <OrqyneLogo className="h-14 sm:h-16" showTagline />
+            <div className="flex justify-center mb-10" data-testid="orqyne-logo-hero">
+              <OrqyneLogo className="h-20 sm:h-24 lg:h-28" />
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 max-w-4xl mx-auto leading-[1.1]">
@@ -822,8 +932,16 @@ const ProductsPage = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(59,130,246,0.15),transparent_60%)] pointer-events-none" />
 
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="flex justify-center mb-6">
-            <OrqyneLogo className="h-12" mono={false} />
+          <div className="flex flex-col items-center gap-3 mb-6">
+            <OrqyneMark className="h-14 w-14 sm:h-16 sm:w-16" />
+            <div className="text-2xl sm:text-3xl font-extrabold tracking-[0.12em] bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 bg-clip-text text-transparent">
+              ORQYNE
+            </div>
+            <div className="text-[10px] uppercase tracking-[0.25em] text-slate-400 font-medium flex items-center gap-2">
+              <span className="text-purple-400">✦</span>
+              A product of Orgainse Consulting
+              <span className="text-purple-400">✦</span>
+            </div>
           </div>
           <p className="text-xs font-semibold tracking-wider uppercase text-orange-300 mb-3">
             Ready to ship outcomes

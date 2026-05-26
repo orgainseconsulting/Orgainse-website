@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const SEOHead = ({ title, description, canonical, noindex = false }) => {
+const SEOHead = ({ title, description, canonical, noindex = false, structuredData = null, keywords = null }) => {
   const location = useLocation();
   
   // Generate breadcrumb data based on current path
@@ -19,6 +19,7 @@ const SEOHead = ({ title, description, canonical, noindex = false }) => {
     const pathMap = {
       'about': 'About Us',
       'services': 'Our Services',
+      'products': 'ORQYNE Product',
       'contact': 'Contact Us',
       'ai-assessment': 'AI Readiness Assessment',
       'roi-calculator': 'ROI Calculator',
@@ -108,8 +109,31 @@ const SEOHead = ({ title, description, canonical, noindex = false }) => {
       breadcrumbScript.textContent = JSON.stringify(breadcrumbData);
       document.head.appendChild(breadcrumbScript);
     }
-    
-  }, [title, description, canonical, location.pathname, noindex]);
+
+    // Update keywords meta
+    if (keywords) {
+      let kw = document.querySelector('meta[name="keywords"]');
+      if (!kw) {
+        kw = document.createElement('meta');
+        kw.name = 'keywords';
+        document.head.appendChild(kw);
+      }
+      kw.setAttribute('content', keywords);
+    }
+
+    // Page-scoped structured data — replaces any previous page-scoped block
+    document.querySelectorAll('script[data-page-schema]').forEach((n) => n.remove());
+    if (Array.isArray(structuredData) && structuredData.length > 0) {
+      structuredData.forEach((schema, i) => {
+        const s = document.createElement('script');
+        s.type = 'application/ld+json';
+        s.setAttribute('data-page-schema', `${location.pathname}-${i}`);
+        s.textContent = JSON.stringify(schema);
+        document.head.appendChild(s);
+      });
+    }
+
+  }, [title, description, canonical, location.pathname, noindex, structuredData, keywords]);
   
   return null; // This component doesn't render anything
 };
