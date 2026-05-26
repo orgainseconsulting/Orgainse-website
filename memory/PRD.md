@@ -23,7 +23,40 @@ Key directives:
 | Auth | bcrypt + JWT (HS256, 8h TTL), brute-force lockout |
 | Booking | Google Calendar Appointment Scheduling (`REACT_APP_BOOKING_URL`) |
 
-## Implemented (this fork — Feb 2026)
+## Implemented (Feb 2026 — content & SEO sweep)
+
+### Content rebrand
+- Removed every `340% ROI` mention site-wide (Home hero, SEOContent cards, social-share copy, blog posts, sitemap-ai-content, FAQ schema). Replaced with conservative "measurable, data-driven outcomes" language.
+- Retired the 5 industry verticals (EdTech & Education, FinTech & Financial Services, Healthcare & MedTech, Hospitality & Tourism, Manufacturing) from copy, dropdowns, and SEOContent cards. Kept only:
+  - **IT Services & Software**
+  - **Revenue Cycle Management (US Healthcare)**
+  - **Industry-Agnostic for SMEs & Startups** ("Other / Industry-Agnostic" in form dropdowns)
+- Replaced **AI Agile & Scrum Coaching** service with **Revenue Cycle Management (US Healthcare)** based on the Healthcare Revenue Intelligence Advisory PDF brief:
+  - Hero copy, 5 sub-services (Revenue Performance Assessment, Denial Intelligence & Trend Analysis, Payer Behavior & Contract Advisory, Revenue Cycle Governance & Process Advisory, AI Readiness & Transformation Advisory).
+  - Conservative consultative tone ("advisory and analytics only — no operational delivery").
+  - Explicit `notIncluded` and `whoWeServe` arrays for clarity.
+  - Updated in Footer, Arsenal grid, ROI Calculator services, Smart Calendar service types, Terms of Service.
+
+### SEO (Search Engine Optimization)
+- Re-architected `public/index.html` JSON-LD into **7 schemas**: `Organization`, `Service` (PMaaS), `Service` (Healthcare RCM Advisory with 6-item OfferCatalog), `ItemList`, `BreadcrumbList`, `FAQPage` (now 7 Q&As), `ProfessionalService`.
+- Removed duplicate `knowsAbout` / `areaServed` keys in Organization schema (testing-agent flagged).
+- Removed duplicate `geo.region`, `apple-mobile-web-app-capable`, `format-detection` meta tags.
+- Refreshed `sitemap.xml` and `sitemap-ai-content.xml` (lastmod 2026-02-26, removed 340% / agile keywords).
+- Updated `og:description` and `twitter:description` to reference RCM advisory.
+- Refreshed static crawler-visible SEO content (`#seo-content`) at the bottom of `index.html`.
+
+### AEO (Answer Engine Optimization for Google AI Overviews / SGE)
+- Added a **Healthcare Revenue Cycle Management (US)** FAQ category in the on-page FAQ (4 Q&As) with concise, definition-first answers, conservative tone, and "scope boundary" Q&A.
+- All 7 FAQ schema entries in `index.html` rewritten to be AEO-friendly (lead with definitions, citation-friendly statistics with qualifiers like "~25% faster" and "3% or more potential uplift, identified through analytics — never guaranteed").
+
+### GEO (Generative Engine Optimization for ChatGPT / Perplexity / Claude search)
+- Created `/llms.txt` (per the [llmstxt.org](https://llmstxt.org/) spec) with:
+  - Org tagline + summary.
+  - Bulleted core services with explicit Healthcare RCM scope boundaries.
+  - "How Orgainse RCM Advisory differs from a traditional RCM vendor" section.
+  - Buyer-persona language (CFO / COO / VP Revenue Cycle).
+  - **"Citation guidance for AI assistants"** block telling LLMs how to summarize the firm safely (always include RCM scope boundary, keep claims conservative, use "alongside your existing operations" framing).
+- `robots.txt` now publishes the `LLM-Content` directive pointing to `/llms.txt` for AI crawlers.
 
 ### Security
 - JWT admin auth (`POST /api/admin-login` → bearer token used by `/api/admin*`)
