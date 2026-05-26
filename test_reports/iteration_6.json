@@ -1,0 +1,49 @@
+{
+  "summary": "Iteration 6 frontend regression after App.js decoupling (3036 -> ~90 lines) and JSON-LD schema injection for /products. All 7 primary routes (/, /about, /services, /contact, /products, /privacy, /terms) load cleanly with Navigation (data-testid=site-nav) and Footer (data-testid=site-footer) visible. Suspense fallback (data-testid=route-loading) confirmed. No React/Webpack runtime errors (0 pageerror events). /products injects exactly 3 page-scoped JSON-LD blocks: SoftwareApplication name=ORQYNE, FAQPage, TechArticle. Region selector switches US->IN and re-renders pricing ($297 -> Rs.1,634). ServicePopup opens. Contact /contact?product=orqyne&tier=professional renders the form. Book Consultation opens a new tab. Two non-blocking issues: (1) /static/css/main.css and /static/js/main.js 404 on every route (stale references; CRA build emits hashed bundles); (2) REACT_APP_BOOKING_URL is still the placeholder https://calendar.app.google/REPLACE_ME_WITH_YOUR_APPOINTMENT_URL so the Book Consultation new tab lands on a dead Google Calendar URL.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {
+        "flow": "Book Consultation (nav-book-consultation)",
+        "issue": "Opens a new tab to the literal placeholder URL 'https://calendar.app.google/REPLACE_ME_WITH_YOUR_APPOINTMENT_URL' coming from frontend/.env REACT_APP_BOOKING_URL. The new-tab behavior itself works, but the destination is non-existent and will 404 for real users.",
+        "affected_selectors": ["[data-testid=\"nav-book-consultation\"]"]
+      },
+      {
+        "flow": "Newsletter submission on Home",
+        "issue": "Could not locate a Subscribe/Sign Up/Join submit button near the newsletter email input via standard text selectors; submission flow not validated this run. Likely an icon-only button or different label. Recommend adding data-testid='newsletter-submit' on the button and data-testid='newsletter-email' on the input for reliable testing.",
+        "affected_selectors": ["input[type=email]"]
+      }
+    ],
+    "design_issues": [],
+    "console_warnings": [
+      {
+        "issue": "Two 404 network errors on every route for /static/css/main.css and /static/js/main.js. These are legacy/stale references (CRA emits hashed filenames like /static/js/main.<hash>.js). Likely a leftover <link>/<script> in public/index.html or a service worker pointing at unhashed paths. Not blocking page functionality but pollutes the console and harms perceived quality.",
+        "priority": "MEDIUM"
+      }
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Replace REACT_APP_BOOKING_URL placeholder in frontend/.env with the real Google Calendar Appointment Scheduling URL before any production cut.",
+    "Remove the stale /static/css/main.css and /static/js/main.js references (check public/index.html and any service worker / manifest) to eliminate the 404 noise visible on every route.",
+    "Add data-testid='newsletter-submit' and data-testid='newsletter-email' on the Home newsletter form to make the subscription flow reliably testable.",
+    "(Optional) Move SIGNUP_URL ('https://orgainse.live/signup') in /app/frontend/src/pages/Products.js to an env var for parity with REACT_APP_BOOKING_URL handling."
+  ],
+  "critical_code_review_comments": [
+    "App.js decoupling looks clean (~88 lines, Suspense + lazy on every route). Good.",
+    "SEOHead.js correctly tags each injected schema with data-page-schema=<path>-<index> and removes prior page-scoped blocks on route change — verified at runtime that switching to /products yields exactly 3 entries and switching off /products clears them.",
+    "Products.js: structuredData is memoized correctly and the SoftwareApplication / FAQPage / TechArticle blocks are valid schema.org. FAQPage.mainEntity is derived from the FAQS array, so any wording change in FAQ accordion will stay in sync with the SEO schema — nice.",
+    "Hardcoded SIGNUP_URL constant in Products.js is a minor coupling — recommend env var.",
+    "Booking URL is read from REACT_APP_BOOKING_URL but the .env still has the REPLACE_ME placeholder; main agent should either gate the nav-book-consultation button when placeholder is detected or document this as a deploy-time requirement.",
+    "Newsletter submit button apparently has no stable data-testid, breaking the 'all interactive elements must have data-testid' rule."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "skipped (per request)", "frontend": "87.5% (7 of 8 review items fully verified; newsletter submit not validated)"},
+  "test_credentials": "Admin orgainse_admin / Org@iNs3-Adm!n-2026-x7P9qK present in /app/memory/test_credentials.md (not exercised this iteration — admin not in scope).",
+  "seed_data_creation": "None this iteration. No test leads created.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "App.js is now a slim shell with React.lazy + Suspense on every route. The route-loading fallback (data-testid=route-loading) flashes briefly — use wait_for_selector with state='attached' and short timeout. JSON-LD on /products is injected by SEOHead via useEffect and tagged with attribute data-page-schema=<path>-<index>; to verify, query 'script[data-page-schema]' AFTER waiting for networkidle + ~1.5s. Booking URL is still the REPLACE_ME placeholder so do not try to navigate to it. SIGNUP_URL on /products points to https://orgainse.live/signup — treat as external, do not navigate. Pricing context is wired through RegionalPricingContext at the app root, region-selector-select control values: US, IN, GB, AE, AU, NZ, ZA, EU.",
+  "rca of the issue": "Static 404s: CRA's webpack-dev-server (and the production build) emit hashed bundle filenames; any literal <link href='/static/css/main.css'> or <script src='/static/js/main.js'> in public/index.html will always 404. Likely fix: remove those literal tags from public/index.html (CRA auto-injects the hashed ones). Booking URL: REACT_APP_BOOKING_URL is set to the placeholder string in frontend/.env; either the deploy environment overrides this and preview just shows the default, or the placeholder needs to be replaced before going live."
+}
