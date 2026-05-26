@@ -43,4 +43,15 @@ module.exports = {
       return webpackConfig;
     },
   },
+  devServer: {
+    allowedHosts: 'all',
+    host: '0.0.0.0',
+    client: {
+      webSocketURL: {
+        protocol: 'wss',
+        hostname: '0.0.0.0',
+        port: 443,
+      },
+    },
+  },
 };
