@@ -3,6 +3,131 @@ import { toast } from 'sonner';
 import { api } from '../lib/api';
 import { useAuth } from './AuthContext';
 
+/**
+ * Flatten a lead document so the table & CSV exports show human-readable
+ * values regardless of which collection it came from. Different lead types
+ * nest the contact info in different sub-objects (`user_info`,
+ * `business_inputs`, `consultation_details`) and store payloads as arrays
+ * of objects — without this normalization the dashboard surfaces blanks or
+ * "[object Object]".
+ */
+const normalizeLead = (item, collectionKey) => {
+  if (!item || typeof item !== 'object') return {};
+
+  const userInfo = item.user_info || {};
+  const bizInputs = item.business_inputs || {};
+  const calcMetrics = item.calculated_metrics || {};
+  const consultDetails = item.consultation_details || {};
+
+  // Choose the best identifier source
+  const id = item.id || item.assessment_id || item.calculation_id || item.consultation_id || '';
+
+  // Resolve name / email / company / phone across all known shapes
+  const name =
+    item.name ||
+    item.first_name ||
+    userInfo.name ||
+    bizInputs.company_name ||
+    consultDetails.full_name ||
+    '';
+  const email = item.email || userInfo.email || bizInputs.email || consultDetails.email || '';
+  const company = item.company || userInfo.company || bizInputs.company_name || consultDetails.company || '';
+  const phone = item.phone || userInfo.phone || bizInputs.phone || consultDetails.phone || '';
+
+  // Build a "details" string that's actually informative per lead type
+  let details = '';
+  switch (collectionKey) {
+    case 'ai_assessments': {
+      const recs = Array.isArray(item.recommendations)
+        ? item.recommendations.map((r) => r.title).filter(Boolean).join(', ')
+        : '';
+      details = [
+        item.maturity_score != null ? `Score: ${item.maturity_score}/100 (${item.score_label || ''})` : '',
+        recs ? `Top recs: ${recs}` : '',
+      ]
+        .filter(Boolean)
+        .join(' • ');
+      break;
+    }
+    case 'roi_calculators': {
+      const symbol = calcMetrics.currency_symbol || '';
+      const savings = calcMetrics.potential_savings;
+      const roi = calcMetrics.roi_percentage;
+      const payback = calcMetrics.payback_period_months;
+      details = [
+        bizInputs.industry ? `Industry: ${bizInputs.industry}` : '',
+        savings != null ? `Savings: ${symbol}${Number(savings).toLocaleString()}` : '',
+        roi != null ? `ROI: ${roi}%` : '',
+        payback != null ? `Payback: ${payback} mo` : '',
+      ]
+        .filter(Boolean)
+        .join(' • ');
+      break;
+    }
+    case 'consultations': {
+      const dt = item.preferred_datetime ? new Date(item.preferred_datetime).toLocaleString() : 'Not set';
+      details = [
+        consultDetails.consultation_type ? `Type: ${consultDetails.consultation_type}` : '',
+        item.timezone ? `TZ: ${item.timezone}` : '',
+        `Preferred: ${dt}`,
+        consultDetails.requirements ? `Notes: ${consultDetails.requirements}` : '',
+      ]
+        .filter(Boolean)
+        .join(' • ');
+      break;
+    }
+    case 'service_inquiries':
+      details = [item.service_type, item.message].filter(Boolean).join(' — ');
+      break;
+    case 'contacts':
+      details = [item.subject, item.message].filter(Boolean).join(' — ');
+      break;
+    case 'newsletters':
+    default:
+      details = item.message || item.leadType || '';
+      break;
+  }
+
+  return {
+    id,
+    name,
+    email,
+    company,
+    phone,
+    details,
+    leadType: item.leadType || '',
+    submitted_at: item.submitted_at || item.subscribed_at || item.timestamp || '',
+    status: item.status || 'active',
+    raw: item,
+  };
+};
+
+/** Format any value safely for a CSV cell. Arrays become "; "-joined,
+ *  objects render their primitive scalar keys as "k=v" pairs. */
+const formatForCSV = (value) => {
+  if (value === null || value === undefined) return '';
+  if (Array.isArray(value)) {
+    return value
+      .map((v) => {
+        if (v && typeof v === 'object') {
+          // Prefer common title-ish keys, fall back to compact key=value list
+          return v.title || v.name || v.label || Object.entries(v).map(([k, x]) => `${k}=${x}`).join(' | ');
+        }
+        return String(v);
+      })
+      .join('; ');
+  }
+  if (typeof value === 'object') {
+    return Object.entries(value)
+      .filter(([, v]) => v !== null && v !== undefined && v !== '')
+      .map(([k, v]) => `${k}=${typeof v === 'object' ? JSON.stringify(v) : v}`)
+      .join(' | ');
+  }
+  return String(value);
+};
+
+const csvEscape = (s) => `"${String(s).replace(/"/g, '""')}"`;
+
 const AdminDashboard = () => {
   const { logout } = useAuth();
   const [data, setData] = useState(null);
@@ -10,6 +135,7 @@ const AdminDashboard = () => {
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('overview');
   const [page, setPage] = useState(1);
+  const [expandedId, setExpandedId] = useState(null);
   const pageSize = 100;
 
   const fetchData = async () => {
@@ -31,26 +157,23 @@ const AdminDashboard = () => {
     }
   };
 
-  useEffect(() => { fetchData(); /* eslint-disable-next-line */ }, [page]);
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
-  const exportToCSV = (data, filename) => {
-    if (!data || data.length === 0) return;
-    
-    const headers = Object.keys(data[0]).filter(key => !key.startsWith('_'));
-    const rows = data.map(item => 
-      headers.map(header => {
-        const value = item[header];
-        if (value === null || value === undefined) return '';
-        if (typeof value === 'object') return JSON.stringify(value);
-        return `"${String(value).replace(/"/g, '""')}"`;
-      })
-    );
+  const exportToCSV = (rawRows, filename, collectionKey) => {
+    if (!rawRows || rawRows.length === 0) {
+      toast.info('Nothing to export on this tab.');
+      return;
+    }
 
-    const csvContent = [headers, ...rows]
-      .map(row => row.join(','))
-      .join('\n');
+    const normalized = rawRows.map((r) => normalizeLead(r, collectionKey));
+    const headers = ['id', 'name', 'email', 'company', 'phone', 'details', 'leadType', 'submitted_at', 'status'];
+    const csvRows = normalized.map((n) => headers.map((h) => csvEscape(formatForCSV(n[h]))).join(','));
+    const csvContent = [headers.join(','), ...csvRows].join('\n');
 
-    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -63,141 +186,33 @@ const AdminDashboard = () => {
 
   const exportAllLeadsToCSV = () => {
     if (!data || !data.data) return;
-    
-    // Combine all lead data from different collections
-    const allLeads = [];
-    
-    // Add newsletters with lead type identification
-    if (data.data.newsletters) {
-      data.data.newsletters.forEach(lead => {
-        allLeads.push({
-          ...lead,
-          lead_category: 'Newsletter Subscription',
-          collection_source: 'newsletter_subscriptions'
-        });
-      });
-    }
-    
-    // Add contact messages
-    if (data.data.contact_messages) {
-      data.data.contact_messages.forEach(lead => {
-        allLeads.push({
-          ...lead,
-          lead_category: 'Contact Message',
-          collection_source: 'contact_messages'
-        });
-      });
-    }
-    
-    // Add AI assessment leads
-    if (data.data.ai_assessment_leads) {
-      data.data.ai_assessment_leads.forEach(lead => {
-        allLeads.push({
-          ...lead,
-          lead_category: 'AI Assessment',
-          collection_source: 'ai_assessment_leads'
-        });
-      });
-    }
-    
-    // Add ROI calculator leads
-    if (data.data.roi_calculator_leads) {
-      data.data.roi_calculator_leads.forEach(lead => {
-        allLeads.push({
-          ...lead,
-          lead_category: 'ROI Calculator',
-          collection_source: 'roi_calculator_leads'
-        });
-      });
-    }
-    
-    // Add service inquiries
-    if (data.data.service_inquiries) {
-      data.data.service_inquiries.forEach(lead => {
-        allLeads.push({
-          ...lead,
-          lead_category: 'Service Inquiry',
-          collection_source: 'service_inquiries'
-        });
-      });
-    }
-    
-    // Add consultation leads
-    if (data.data.consultation_leads) {
-      data.data.consultation_leads.forEach(lead => {
-        allLeads.push({
-          ...lead,
-          lead_category: 'Consultation Request',
-          collection_source: 'consultation_leads'
-        });
-      });
-    }
-    
-    // Sort by date (newest first)
-    allLeads.sort((a, b) => {
-      const dateA = new Date(a.submitted_at || a.subscribed_at);
-      const dateB = new Date(b.submitted_at || b.subscribed_at);
-      return dateB - dateA;
-    });
-    
-    if (allLeads.length === 0) {
-      alert('No leads found to export.');
-      return;
-    }
-    
-    // Create comprehensive headers for all lead types
-    const allHeaders = [
-      'lead_category',
-      'collection_source',
-      'id',
-      'name',
-      'first_name',
-      'email',
-      'company',
-      'phone',
-      'role',
-      'industry',
-      'company_size',
-      'service_type',
-      'message',
-      'subject',
-      'leadType',
-      'source',
-      'current_ai_usage',
-      'main_challenges',
-      'goals',
-      'assessmentScore',
-      'recommendations',
-      'current_project_cost',
-      'project_duration_months',
-      'current_efficiency_rating',
-      'desired_services',
-      'calculatedROI',
-      'potential_savings',
-      'efficiency_improvement',
-      'roi_percentage',
-      'submitted_at',
-      'subscribed_at',
-      'timestamp',
-      'status'
+
+    const buckets = [
+      { rows: data.data.newsletters || [], collectionKey: 'newsletters', category: 'Newsletter Subscription' },
+      { rows: data.data.contact_messages || [], collectionKey: 'contacts', category: 'Contact Message' },
+      { rows: data.data.ai_assessment_leads || [], collectionKey: 'ai_assessments', category: 'AI Assessment' },
+      { rows: data.data.roi_calculator_leads || [], collectionKey: 'roi_calculators', category: 'ROI Calculator' },
+      { rows: data.data.service_inquiries || [], collectionKey: 'service_inquiries', category: 'Service Inquiry' },
+      { rows: data.data.consultation_leads || [], collectionKey: 'consultations', category: 'Consultation Request' },
     ];
-    
-    // Create rows with all headers
-    const rows = allLeads.map(item => 
-      allHeaders.map(header => {
-        const value = item[header];
-        if (value === null || value === undefined) return '';
-        if (Array.isArray(value)) return `"${value.join(', ')}"`;
-        if (typeof value === 'object') return JSON.stringify(value);
-        return `"${String(value).replace(/"/g, '""')}"`;
-      })
+
+    const allLeads = buckets.flatMap(({ rows, collectionKey, category }) =>
+      rows.map((row) => ({ ...normalizeLead(row, collectionKey), lead_category: category }))
     );
 
-    const csvContent = [allHeaders, ...rows]
-      .map(row => row.join(','))
-      .join('\n');
+    if (allLeads.length === 0) {
+      toast.info('No leads found to export.');
+      return;
+    }
 
-    const blob = new Blob([csvContent], { type: 'text/csv' });
+    // Sort newest first
+    allLeads.sort((a, b) => new Date(b.submitted_at) - new Date(a.submitted_at));
+
+    const headers = ['lead_category', 'id', 'name', 'email', 'company', 'phone', 'details', 'leadType', 'submitted_at', 'status'];
+    const csvRows = allLeads.map((n) => headers.map((h) => csvEscape(formatForCSV(n[h]))).join(','));
+    const csvContent = [headers.join(','), ...csvRows].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -287,6 +302,7 @@ const AdminDashboard = () => {
   const handleTabChange = (tabId) => {
     if (tabId !== activeTab) {
       setPage(1);
+      setExpandedId(null);
       setActiveTab(tabId);
     }
   };
@@ -393,7 +409,7 @@ const AdminDashboard = () => {
             <h2 className="text-xl font-bold text-gray-900">{currentTab?.name}</h2>
             <div className="flex gap-2">
               <button
-                onClick={() => exportToCSV(tabData, activeTab)}
+                onClick={() => exportToCSV(tabData, activeTab, activeTab)}
                 className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center"
               >
                 <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -449,55 +465,87 @@ const AdminDashboard = () => {
                   'consultations': 'consultation_leads'
                 };
                 const collection = collectionMap[activeTab];
-                
+                const n = normalizeLead(item, activeTab);
+                const rowKey = n.id || index;
+                const isExpanded = expandedId === rowKey;
+
                 return (
-                  <tr key={item.id || index} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div>
-                        <div className="text-sm font-medium text-gray-900">
-                          {item.name || item.first_name || 'N/A'}
+                  <React.Fragment key={rowKey}>
+                    <tr className="hover:bg-gray-50" data-testid={`admin-row-${activeTab}-${rowKey}`}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div>
+                          <div className="text-sm font-medium text-gray-900">
+                            {n.name || <span className="italic text-gray-400">(no name)</span>}
+                          </div>
+                          <div className="text-sm text-gray-500">
+                            {n.email || <span className="italic text-gray-400">(no email)</span>}
+                          </div>
                         </div>
-                        <div className="text-sm text-gray-500">{item.email}</div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {item.company || 'N/A'}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-900 max-w-xs">
-                      {activeTab === 'service_inquiries' && (
-                        <div className="mb-1">
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                            {item.service_type || 'General Service'}
-                          </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        {n.company || <span className="italic text-gray-400">—</span>}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-900 max-w-md">
+                        {activeTab === 'service_inquiries' && item.service_type && (
+                          <div className="mb-1">
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                              {item.service_type}
+                            </span>
+                          </div>
+                        )}
+                        <div className="whitespace-pre-wrap break-words" title={n.details}>
+                          {n.details || <span className="italic text-gray-400">No details</span>}
                         </div>
-                      )}
-                      <div className="truncate" title={item.message}>
-                        {item.message || item.subject || item.leadType || 'No details'}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {new Date(item.submitted_at || item.subscribed_at).toLocaleDateString()}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                        item.status === 'active' || item.status === 'new' 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-gray-100 text-gray-800'
-                      }`}>
-                        {item.status || 'active'}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <button
-                        onClick={() => deleteSingleLead(item.id, collection, item.name || item.email)}
-                        className="text-red-600 hover:text-red-900 bg-red-50 hover:bg-red-100 px-3 py-1 rounded-md transition-colors"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg>
-                      </button>
-                    </td>
-                  </tr>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        {n.submitted_at ? new Date(n.submitted_at).toLocaleDateString() : '—'}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
+                          n.status === 'active' || n.status === 'new'
+                            ? 'bg-green-100 text-green-800'
+                            : 'bg-gray-100 text-gray-800'
+                        }`}>
+                          {n.status}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <div className="flex items-center gap-2">
+                          <button
+                            data-testid={`admin-row-expand-${rowKey}`}
+                            onClick={() => setExpandedId(isExpanded ? null : rowKey)}
+                            className="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors text-xs font-medium"
+                            title={isExpanded ? 'Hide raw data' : 'View raw data'}
+                          >
+                            {isExpanded ? 'Hide' : 'View'}
+                          </button>
+                          <button
+                            onClick={() => deleteSingleLead(n.id, collection, n.name || n.email)}
+                            className="text-red-600 hover:text-red-900 bg-red-50 hover:bg-red-100 px-3 py-1 rounded-md transition-colors"
+                            title="Delete lead"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    {isExpanded && (
+                      <tr data-testid={`admin-row-raw-${rowKey}`} className="bg-slate-50">
+                        <td colSpan={6} className="px-6 py-4">
+                          <div className="rounded-md border border-slate-200 bg-white p-4">
+                            <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+                              Full lead payload
+                            </div>
+                            <pre className="text-xs text-slate-800 whitespace-pre-wrap break-words font-mono leading-relaxed">
+{JSON.stringify(item, null, 2)}
+                            </pre>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
+                  </React.Fragment>
                 );
               })}
             </tbody>
