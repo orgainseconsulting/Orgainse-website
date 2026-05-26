@@ -62,6 +62,7 @@ const SmartCalendarPage = React.lazy(() => import("./pages/SmartCalendar"));
 const NotFoundPage = React.lazy(() => import("./pages/NotFound"));
 const PrivacyPolicyPage = React.lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfServicePage = React.lazy(() => import("./pages/TermsOfService"));
+const ProductsPage = React.lazy(() => import("./pages/Products"));
 
 // Debug Analytics Component
 const AnalyticsDebug = () => {
@@ -410,6 +411,7 @@ const Navigation = () => {
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/services", label: "Services" },
+    { href: "/products", label: "Products" },
     { href: "/contact", label: "Contact" },
   ];
 
@@ -1881,6 +1883,11 @@ const Services = () => {
         whatYouGet: "Complete AI-powered project ecosystem including automated project planning, intelligent resource allocation, real-time risk monitoring, GPT-generated documentation, predictive analytics dashboard, and 24/7 AI project assistant.",
         benefits: ["60% reduction in project planning time", "45% increase in project success rates", "80% reduction in scope creep", "Real-time predictive insights", "Automated documentation generation", "24/7 AI project support"],
         industries: ["IT Services & Software", "Healthcare Revenue Intelligence Advisory", "Industry-Agnostic SMEs & Startups"]
+      },
+      productLink: {
+        href: "/products",
+        label: "Powered by ORQYNE",
+        tagline: "Upload a spreadsheet → 20+ RAG-grounded AI agents running on your data in 90 seconds. See the product →"
       }
     },
     {
@@ -2475,13 +2482,35 @@ const Services = () => {
 // Revolutionary Contact Page with Creative Design and SEO
 const Contact = () => {
   const { openCalendly } = useCalendly();
+  const location = useLocation();
+  const initialSubject = React.useMemo(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("product") === "orqyne") {
+      const tier = params.get("tier");
+      const cockpit = params.get("cockpit");
+      const cockpitMap = { it: "IT Services & Software", canvas: "Canvas", rcm: "US Healthcare Analytics" };
+      const tierStr = tier ? ` · ${tier.charAt(0).toUpperCase() + tier.slice(1)} tier` : "";
+      const cockpitStr = cockpit && cockpitMap[cockpit] ? ` · ${cockpitMap[cockpit]} cockpit` : "";
+      return `ORQYNE Product Inquiry${tierStr}${cockpitStr}`;
+    }
+    return "";
+  }, [location.search]);
+
+  const initialMessage = React.useMemo(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("product") === "orqyne") {
+      return "I'm interested in ORQYNE — your AI Project Management as a Service product. Please share a personalised demo, ROI estimate, and the right tier for my team.";
+    }
+    return "";
+  }, [location.search]);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     company: "",
-    subject: "",
-    message: "",
+    subject: initialSubject,
+    message: initialMessage,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(""); // "", "success", "error"
@@ -2492,7 +2521,7 @@ const Contact = () => {
     setSubmitStatus("");
     try {
       await api.contact({
-        leadType: "Contact Inquiry",
+        leadType: formData.subject?.startsWith("ORQYNE") ? "Product Inquiry (ORQYNE)" : "Contact Inquiry",
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
@@ -2967,6 +2996,7 @@ function App() {
                     <Route path="/roi-calculator" element={<ROICalculatorPage />} />
                     <Route path="/smart-calendar" element={<SmartCalendarPage />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/products" element={<ProductsPage />} />
                     <Route path="/admin" element={<ProtectedAdminRoute />} />
                     <Route path="/privacy" element={<PrivacyPolicyPage />} />
                     <Route path="/terms" element={<TermsOfServicePage />} />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { X, Target, CheckCircle, Award } from 'lucide-react';
+import { X, Target, CheckCircle, Award, Sparkles, ArrowRight } from 'lucide-react';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Button } from './ui/button';
@@ -111,6 +111,35 @@ const ServicePopup = ({
                         ))}
                       </div>
                     </div>
+
+                    {/* Cross-link to product page when this service is powered by a product */}
+                    {service.productLink && (
+                      <a
+                        href={service.productLink.href}
+                        data-testid={`product-crosslink-${service.id}`}
+                        className="block group relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-50 via-white to-orange-50 border-2 border-blue-200 p-5 hover:border-blue-400 hover:shadow-lg transition-all"
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className="flex-shrink-0 h-12 w-12 rounded-xl bg-gradient-to-br from-blue-600 to-orange-500 flex items-center justify-center shadow-md">
+                            <Sparkles className="h-6 w-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <div className="text-[10px] font-bold tracking-[0.15em] uppercase text-blue-600 mb-0.5">
+                              Powered by our product
+                            </div>
+                            <div className="text-base font-extrabold text-slate-900 leading-tight">
+                              {service.productLink.label}
+                            </div>
+                            <div className="text-xs text-slate-600 mt-0.5">
+                              {service.productLink.tagline}
+                            </div>
+                          </div>
+                          <div className="flex-shrink-0 text-blue-600 group-hover:translate-x-1 transition-transform">
+                            <ArrowRight className="h-5 w-5" />
+                          </div>
+                        </div>
+                      </a>
+                    )}
 
                     {/* Compact CTA Section */}
                     <div className="text-center bg-gradient-to-r from-slate-50 to-slate-100 rounded-xl p-6">

@@ -1,0 +1,60 @@
+{
+  "summary": "Iteration 5 frontend testing of new /products (ORQYNE) page, nav update, /services PMaaS cross-link, and /contact prefill+submit. 15/15 review-request items verified working. End-to-end lead persistence verified via admin API (leadType='Product Inquiry (ORQYNE)' confirmed for submitted TEST_ORQ_* record).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/products hero stat tiles", "issues": ["Stat data-testid slugs are derived from the first word of the LABEL (stat-rag-grounded, stat-industry, stat-from, stat-your) rather than the value or a stable semantic key. The review request had specified stat-20+, stat-3, stat-90s, stat-byok. The request allowed 'or similar slug' so this is non-blocking, but consider stable semantic ids like stat-agents, stat-cockpits, stat-time, stat-byok for better discoverability."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "(Optional) Rename stat tile data-testids to stable semantic keys (stat-agents/stat-cockpits/stat-time/stat-byok) instead of label-derived slugs for clearer test selectors."
+  ],
+  "critical_code_review_comments": [
+    "Contact.js inline (App.js ~L2486-2505): leadType inference via formData.subject?.startsWith('ORQYNE') is a string-coupling that will silently regress if the prefix changes; safer to read the URL ?product=orqyne param into a stable state and use that as the discriminator.",
+    "Stat tile testids use s.label.split(' ')[0].toLowerCase() — fragile if labels are ever rephrased. Prefer explicit per-stat slug.",
+    "App.js exceeds 3000 lines and embeds the entire Contact page + multiple page components — should be split into /src/pages/Contact.js etc. (already flagged in earlier iterations, restated)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (1/1 admin API spot-check)", "frontend": "100% (15/15 review items)"},
+  "test_credentials": "Admin orgainse_admin / Org@iNs3-Adm!n-2026-x7P9qK (working). Generated TEST_ORQ_1779812318 contact lead during e2e submit verification.",
+  "seed_data_creation": "Created one TEST_ORQ_* contact lead with leadType='Product Inquiry (ORQYNE)' and subject 'ORQYNE Product Inquiry · Professional tier'. Cleanup is recommended (filter by name prefix TEST_ORQ_ via admin delete endpoint).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Products page is lazy-loaded — always wait_for_load_state('networkidle') + ~1.5s buffer. The ORQYNE logo is inline SVG (not an image asset). Pilot CTAs use target='_blank' rel='noopener noreferrer' — verify by attribute, never navigate to orgainse.live in tests (treated as mock). For ServicePopup the trigger is the per-card 'Learn More' button, not the title. Contact prefill happens via useMemo over location.search (params: product=orqyne&tier=<name>&cockpit=<id>).",
+  "rca of the issue": "N/A — no defects found in iteration 5 scope.",
+  "verification_evidence": {
+    "navigation_order": ["Home", "About", "Services", "Products", "Contact"],
+    "products_active_class": "text-orange-500",
+    "hero_cta_sales_href": "/contact?product=orqyne",
+    "hero_cta_pilot_href": "https://orgainse.live/signup",
+    "hero_cta_pilot_target": "_blank",
+    "hero_cta_pilot_rel": "noopener noreferrer",
+    "h1_text": "AI Project Management starts the moment you upload a spreadsheet.",
+    "stat_testids_found": ["stat-rag-grounded", "stat-industry", "stat-from", "stat-your"],
+    "stat_values_present": ["20+ RAG-grounded AI agents", "3 Industry cockpits live", "90s From spreadsheet to running project", "BYOK Your API keys, your choice"],
+    "cockpit_tabs": ["cockpit-tab-it", "cockpit-tab-canvas", "cockpit-tab-rcm"],
+    "cockpit_rcm_panel_contains": ["AR leakage", "HIPAA", "Healthcare Revenue Intelligence Advisory"],
+    "how_steps_present": ["how-step-1", "how-step-2", "how-step-3", "how-step-4"],
+    "how_step1_contains": "engineering template",
+    "how_step4_contains": "Live industry cockpit",
+    "agents_present": ["agent-strategic", "agent-planner", "agent-delivery", "agent-risk", "agent-comms", "agent-quality", "agent-knowledge"],
+    "integrations_strip": ["GitHub", "Jira", "Slack", "Microsoft Teams", "+ 28 more"],
+    "team_chat_contains": ["@orqyne what tasks are blocked in Sprint 12?", "RCM-LEAK-1", "WEB-204"],
+    "pricing_tiers": [
+      {"tier-starter": "/contact?product=orqyne&tier=starter"},
+      {"tier-professional": "/contact?product=orqyne&tier=professional", "badge": "Most chosen"},
+      {"tier-enterprise": "/contact?product=orqyne&tier=enterprise"},
+      {"tier-custom": "/contact?product=orqyne&tier=custom"}
+    ],
+    "security_strings_present": ["AES-256", "Multi-tenant", "BYOK", "audit", "region", "compliance template", "Managed AI key", "Bring your own keys"],
+    "faq_items": ["faq-0", "faq-1", "faq-2", "faq-3", "faq-4", "faq-5"],
+    "faq0_expanded_contains": ["AI delivery workforce", "Seven RAG-grounded agents"],
+    "final_cta": {"sales_testid": "final-cta-sales", "pilot_testid": "final-cta-pilot", "pilot_href": "https://orgainse.live/signup", "pilot_target": "_blank", "headline": "Stop tracking work. Start shipping outcomes.", "footer_mentions_orgainse_live": true},
+    "services_pmaas_crosslink": {"testid": "product-crosslink-ai-project-management", "href": "/products", "contains": ["Powered by ORQYNE", "90 seconds"]},
+    "contact_prefill": {"subject": "ORQYNE Product Inquiry · Professional tier", "message_prefix": "I'm interested in ORQYNE — your AI Project Management as a Service product."},
+    "submission_persisted_record": {"name": "TEST_ORQ_1779812318", "email": "test_orq_1779812318@example.com", "subject": "ORQYNE Product Inquiry · Professional tier", "leadType": "Product Inquiry (ORQYNE)"}
+  }
+}
