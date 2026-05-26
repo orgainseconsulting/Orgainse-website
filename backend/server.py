@@ -163,12 +163,19 @@ def verify_password(plain: str, hashed: str) -> bool:
         return False
 
 
-def create_access_token(username: str) -> str:
+def create_access_token(email: str, purpose: str = "full", ttl_hours: Optional[float] = None) -> str:
+    """Build a JWT.
+    purpose="full" → normal 8h admin token.
+    purpose="password_change" → short-lived (15 min) token that may only call /api/admin-change-password.
+    """
+    hours = ttl_hours if ttl_hours is not None else (0.25 if purpose == "password_change" else JWT_TTL_HOURS)
     payload = {
-        "sub": username,
+        "sub": email,
+        "email": email,
         "role": "admin",
+        "purpose": purpose,
         "iat": datetime.now(timezone.utc),
-        "exp": datetime.now(timezone.utc) + timedelta(hours=JWT_TTL_HOURS),
+        "exp": datetime.now(timezone.utc) + timedelta(hours=hours),
     }
     return pyjwt.encode(payload, JWT_SECRET, algorithm=JWT_ALG)
 
@@ -176,6 +183,25 @@ def create_access_token(username: str) -> str:
 async def verify_admin(
     credentials: Optional[HTTPAuthorizationCredentials] = Depends(bearer_scheme),
 ) -> Dict[str, Any]:
+    if not credentials or credentials.scheme.lower() != "bearer":
+        raise HTTPException(status_code=401, detail="Missing bearer token")
+    try:
+        payload = pyjwt.decode(credentials.credentials, JWT_SECRET, algorithms=[JWT_ALG])
+    except pyjwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token expired")
+    except pyjwt.InvalidTokenError:
+        raise HTTPException(status_code=401, detail="Invalid token")
+    if payload.get("role") != "admin":
+        raise HTTPException(status_code=403, detail="Not an admin token")
+    if payload.get("purpose") not in (None, "full"):
+        raise HTTPException(status_code=403, detail="Token purpose insufficient")
+    return payload
+
+
+async def verify_admin_any_purpose(
+    credentials: Optional[HTTPAuthorizationCredentials] = Depends(bearer_scheme),
+) -> Dict[str, Any]:
+    """Like verify_admin but also accepts purpose=password_change. Used by /api/admin-change-password."""
     if not credentials or credentials.scheme.lower() != "bearer":
         raise HTTPException(status_code=401, detail="Missing bearer token")
     try:
@@ -201,7 +227,15 @@ def client_ip(request: Request) -> str:
 # ---------------------------------------------------------------------------
 @app.on_event("startup")
 async def startup_event():
-    await db.admin_users.create_index("username", unique=True)
+    # Drop legacy username_1 index if it lacks sparse=true (causes IndexKeySpecsConflict on restart)
+    try:
+        existing_indexes = await db.admin_users.index_information()
+        if "username_1" in existing_indexes and not existing_indexes["username_1"].get("sparse"):
+            await db.admin_users.drop_index("username_1")
+    except Exception as e:
+        print(f"[startup] could not inspect/drop legacy username_1 index: {e}")
+    await db.admin_users.create_index("email", unique=True, sparse=True)
+    await db.admin_users.create_index("username", unique=True, sparse=True)
     await db.login_attempts.create_index("expires_at", expireAfterSeconds=0)
     await db.newsletter_subscriptions.create_index("email", unique=False)
     await db.newsletter_subscriptions.create_index("unsubscribe_token", unique=False, sparse=True)
@@ -211,33 +245,64 @@ async def startup_event():
     await db.blog_posts.create_index("slug", unique=True)
     await db.blog_posts.create_index([("status", 1), ("published_at", -1)])
 
-    if not ADMIN_PASSWORD:
-        print("[startup] WARNING: ADMIN_PASSWORD not set; admin login disabled")
-        return
-
-    existing = await db.admin_users.find_one({"username": ADMIN_USERNAME})
-    if existing is None:
+    # ---- Seed @orgainse.com admin users with a temp password (idempotent) ----
+    seed_temp_password = os.environ.get("ADMIN_SEED_TEMP_PASSWORD", "Org@inse-Welcome-2026!")
+    seed_users = [
+        {"email": "info@orgainse.com",   "name": "Orgainse Admin"},
+        {"email": "support@orgainse.com","name": "Orgainse Support"},
+        {"email": "swarag@orgainse.com", "name": "Swarag"},
+        {"email": "rajesh@orgainse.com", "name": "Rajesh"},
+    ]
+    seeded = 0
+    for u in seed_users:
+        existing = await db.admin_users.find_one({"email": u["email"]})
+        if existing:
+            continue
         await db.admin_users.insert_one({
-            "username": ADMIN_USERNAME,
-            "password_hash": hash_password(ADMIN_PASSWORD),
+            "id": gen_id(),
+            "email": u["email"],
+            "name": u["name"],
+            "password_hash": hash_password(seed_temp_password),
+            "must_change_password": True,
             "role": "admin",
             "created_at": now_iso(),
+            "last_login_at": None,
         })
-        print(f"[startup] Seeded admin user '{ADMIN_USERNAME}'")
-    elif not verify_password(ADMIN_PASSWORD, existing["password_hash"]):
-        await db.admin_users.update_one(
-            {"username": ADMIN_USERNAME},
-            {"$set": {"password_hash": hash_password(ADMIN_PASSWORD), "updated_at": now_iso()}},
-        )
-        print(f"[startup] Rotated password for '{ADMIN_USERNAME}'")
+        seeded += 1
+    if seeded:
+        print(f"[startup] Seeded {seeded} admin users with temp password")
+
+    if ADMIN_PASSWORD:
+        existing = await db.admin_users.find_one({"username": ADMIN_USERNAME})
+        if existing is None:
+            await db.admin_users.insert_one({
+                "username": ADMIN_USERNAME,
+                "password_hash": hash_password(ADMIN_PASSWORD),
+                "role": "admin",
+                "must_change_password": False,
+                "created_at": now_iso(),
+            })
+            print(f"[startup] Seeded legacy admin user '{ADMIN_USERNAME}'")
+        elif not verify_password(ADMIN_PASSWORD, existing["password_hash"]):
+            await db.admin_users.update_one(
+                {"username": ADMIN_USERNAME},
+                {"$set": {"password_hash": hash_password(ADMIN_PASSWORD), "updated_at": now_iso()}},
+            )
+            print(f"[startup] Rotated password for '{ADMIN_USERNAME}'")
 
 
 # ---------------------------------------------------------------------------
 # Models
 # ---------------------------------------------------------------------------
 class AdminLoginIn(BaseModel):
-    username: str = Field(..., min_length=1, max_length=100)
+    username: Optional[str] = None
+    email: Optional[str] = None
     password: str = Field(..., min_length=1, max_length=200)
+
+
+class AdminChangePasswordIn(BaseModel):
+    current_password: str = Field(..., min_length=1, max_length=200)
+    new_password: str = Field(..., min_length=8, max_length=200)
 
 
 class ContactIn(BaseModel):
@@ -317,7 +382,11 @@ async def health():
 @app.post("/api/admin-login")
 async def admin_login(payload: AdminLoginIn, request: Request):
     ip = client_ip(request)
-    identifier = f"{ip}:{payload.username.lower()}"
+    # Accept either email (new) or username (legacy)
+    raw_email = (payload.email or payload.username or "").strip().lower()
+    if not raw_email:
+        raise HTTPException(status_code=400, detail="Email is required")
+    identifier = f"{ip}:{raw_email}"
     now = datetime.now(timezone.utc)
 
     # Check lockout
@@ -329,9 +398,12 @@ async def admin_login(payload: AdminLoginIn, request: Request):
             detail=f"Too many failed attempts. Try again in {remaining}s.",
         )
 
-    user = await db.admin_users.find_one({"username": payload.username})
+    # Look up by email (new users) OR username (legacy fallback)
+    user = await db.admin_users.find_one({"email": raw_email})
+    if not user:
+        user = await db.admin_users.find_one({"username": raw_email})
+
     if not user or not verify_password(payload.password, user["password_hash"]):
-        # Increment attempts
         attempts = (lockout or {}).get("attempts", 0) + 1
         update = {"attempts": attempts, "last_attempt": now}
         if attempts >= 5:
@@ -340,16 +412,72 @@ async def admin_login(payload: AdminLoginIn, request: Request):
         else:
             update["expires_at"] = now + timedelta(minutes=15)
         await db.login_attempts.update_one({"_id": identifier}, {"$set": update}, upsert=True)
-        raise HTTPException(status_code=401, detail="Invalid username or password")
+        raise HTTPException(status_code=401, detail="Invalid email or password")
 
-    # Success: clear attempts
     await db.login_attempts.delete_one({"_id": identifier})
-    token = create_access_token(payload.username)
+
+    user_email = user.get("email") or user.get("username") or raw_email
+    must_change = bool(user.get("must_change_password"))
+    purpose = "password_change" if must_change else "full"
+    token = create_access_token(user_email, purpose=purpose)
+    ttl_seconds = int(0.25 * 3600) if must_change else JWT_TTL_HOURS * 3600
+
+    if not must_change:
+        await db.admin_users.update_one(
+            {"_id": user["_id"]},
+            {"$set": {"last_login_at": now_iso()}},
+        )
+
     return {
         "success": True,
         "token": token,
+        "expires_in": ttl_seconds,
+        "email": user_email,
+        "username": user_email,  # legacy clients
+        "name": user.get("name") or "",
+        "must_change_password": must_change,
+    }
+
+
+@app.post("/api/admin-change-password")
+async def admin_change_password(payload: AdminChangePasswordIn, claims: Dict[str, Any] = Depends(verify_admin_any_purpose)):
+    email = (claims.get("email") or claims.get("sub") or "").lower()
+    if not email:
+        raise HTTPException(400, "Token missing email")
+
+    user = await db.admin_users.find_one({"email": email})
+    if not user:
+        user = await db.admin_users.find_one({"username": email})
+    if not user:
+        raise HTTPException(404, "User not found")
+
+    if not verify_password(payload.current_password, user["password_hash"]):
+        raise HTTPException(401, "Current password is incorrect")
+
+    if payload.new_password == payload.current_password:
+        raise HTTPException(400, "New password must be different from current password")
+    if len(payload.new_password) < 8:
+        raise HTTPException(400, "Password must be at least 8 characters")
+
+    await db.admin_users.update_one(
+        {"_id": user["_id"]},
+        {"$set": {
+            "password_hash": hash_password(payload.new_password),
+            "must_change_password": False,
+            "password_changed_at": now_iso(),
+            "last_login_at": now_iso(),
+        }},
+    )
+
+    user_email = user.get("email") or user.get("username") or email
+    new_token = create_access_token(user_email, purpose="full")
+    return {
+        "success": True,
+        "token": new_token,
         "expires_in": JWT_TTL_HOURS * 3600,
-        "username": payload.username,
+        "email": user_email,
+        "name": user.get("name") or "",
+        "must_change_password": False,
     }
 
 
