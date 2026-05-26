@@ -98,6 +98,13 @@ export function adminUserShape(doc, { includeTempPassword = false } = {}) {
     created_at: doc.created_at,
     last_login_at: doc.last_login_at,
     password_changed_at: doc.password_changed_at,
+    // host profile
+    designation: doc.designation || '',
+    photo_url: doc.photo_url || '',
+    initials: (doc.initials || '').toUpperCase(),
+    booking_url: doc.booking_url || '',
+    show_as_host: !!doc.show_as_host,
+    custom_fields: doc.custom_fields || [],
   };
 }
 

@@ -3,6 +3,7 @@ import { toast } from 'sonner';
 import { Plus, Edit3, ExternalLink } from 'lucide-react';
 import { blogApi } from '../../lib/blogApi';
 import BlogEditor from './BlogEditor';
+import NextLaunchCountdownCard from '../admin/NextLaunchCountdownCard';
 
 const StatusBadge = ({ status }) => {
   const styles =
@@ -70,6 +71,8 @@ const BlogManager = () => {
 
   return (
     <div className="space-y-5" data-testid="blog-manager">
+      <NextLaunchCountdownCard kind="blog" />
+
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-bold text-slate-900">Blog posts</h2>

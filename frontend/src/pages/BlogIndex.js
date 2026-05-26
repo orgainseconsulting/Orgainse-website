@@ -4,6 +4,7 @@ import { ArrowRight, Calendar, Clock, User as UserIcon } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import StayTunedBanner from '../components/StayTunedBanner';
 import { blogApi } from '../lib/blogApi';
+import { api } from '../lib/api';
 
 const formatDate = (iso) => {
   if (!iso) return '';
@@ -92,7 +93,19 @@ const BlogIndexPage = () => {
   const [error, setError] = useState('');
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
+  const [launchIso, setLaunchIso] = useState('');
   const pageSize = 12;
+
+  // Pre-fetch the admin-configured "next blog launch" target for the
+  // Stay-Tuned countdown. Failure is silent; the banner falls back to its
+  // own rolling 30-day default.
+  useEffect(() => {
+    let alive = true;
+    api.appSettingsPublic()
+      .then((res) => { if (alive) setLaunchIso(res?.settings?.next_blog_launch_at || ''); })
+      .catch(() => { /* silent */ });
+    return () => { alive = false; };
+  }, []);
 
   useEffect(() => {
     let alive = true;
@@ -158,7 +171,7 @@ const BlogIndexPage = () => {
             <p className="text-xs text-slate-400">{error}</p>
           </div>
         ) : posts.length === 0 ? (
-          <StayTunedBanner kind="blog" />
+          <StayTunedBanner kind="blog" targetIso={launchIso} />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-testid="blog-grid">
             {posts.map((p) => <BlogCard key={p.id} post={p} />)}

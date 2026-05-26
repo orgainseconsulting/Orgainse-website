@@ -74,12 +74,25 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, user: adminUserShape(doc, { includeTempPassword: true }) });
     }
 
-    // ---- PUT: update user (name) ----
+    // ---- PUT: update user (name + host profile) ----
     if (req.method === 'PUT') {
       if (!id) return res.status(400).json({ error: 'id required' });
       const body = sanitizeInput(req.body || {});
       const updates = { updated_at: new Date().toISOString() };
       if (typeof body.name === 'string') updates.name = body.name.slice(0, 120);
+      if (typeof body.designation === 'string') updates.designation = body.designation.slice(0, 160);
+      if (typeof body.photo_url === 'string') updates.photo_url = body.photo_url.slice(0, 1000);
+      if (typeof body.initials === 'string') updates.initials = body.initials.slice(0, 4).toUpperCase();
+      if (typeof body.booking_url === 'string') updates.booking_url = body.booking_url.slice(0, 500);
+      if (typeof body.show_as_host === 'boolean') updates.show_as_host = body.show_as_host;
+      if (Array.isArray(body.custom_fields)) {
+        updates.custom_fields = body.custom_fields
+          .filter((cf) => cf && typeof cf.label === 'string' && cf.label.trim())
+          .map((cf) => ({
+            label: String(cf.label).slice(0, 60),
+            value: String(cf.value || '').slice(0, 300),
+          }));
+      }
       const user = await db.collection('admin_users').findOne({ id });
       if (!user) return res.status(404).json({ error: 'User not found' });
       await db.collection('admin_users').updateOne({ id }, { $set: updates });

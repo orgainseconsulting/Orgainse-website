@@ -3,6 +3,7 @@ import { Mail, Users, Tags } from 'lucide-react';
 import IssuesManager from './IssuesManager';
 import SubscribersTable from './SubscribersTable';
 import SegmentsManager from './SegmentsManager';
+import NextLaunchCountdownCard from '../admin/NextLaunchCountdownCard';
 
 const TABS = [
   { id: 'issues', label: 'Issues', icon: Mail },
@@ -14,7 +15,9 @@ const NewsletterManager = () => {
   const [tab, setTab] = useState('issues');
 
   return (
-    <div data-testid="newsletter-manager">
+    <div data-testid="newsletter-manager" className="space-y-6">
+      <NextLaunchCountdownCard kind="newsletter" />
+
       <div className="border-b border-slate-200 mb-6">
         <nav className="-mb-px flex gap-6" aria-label="Newsletter tabs">
           {TABS.map((t) => {

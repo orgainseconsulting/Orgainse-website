@@ -71,6 +71,15 @@ const NewsletterIndex = () => {
   const [total, setTotal] = useState(0);
   const [subEmail, setSubEmail] = useState('');
   const [subbing, setSubbing] = useState(false);
+  const [launchIso, setLaunchIso] = useState('');
+
+  useEffect(() => {
+    let alive = true;
+    api.appSettingsPublic()
+      .then((res) => { if (alive) setLaunchIso(res?.settings?.next_newsletter_launch_at || ''); })
+      .catch(() => { /* silent */ });
+    return () => { alive = false; };
+  }, []);
   const pageSize = 12;
 
   useEffect(() => {
@@ -172,7 +181,7 @@ const NewsletterIndex = () => {
         ) : error ? (
           <div className="text-center py-16 text-slate-500">{error}</div>
         ) : issues.length === 0 ? (
-          <StayTunedBanner kind="newsletter" />
+          <StayTunedBanner kind="newsletter" targetIso={launchIso} />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-testid="newsletter-grid">
             {(featured ? [featured, ...rest] : issues).map((i) => <IssueCard key={i.id} issue={i} />)}

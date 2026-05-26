@@ -44,7 +44,7 @@ const useCountdownTo = (targetDate) => {
 };
 
 // Default soft target: 30 days from first render (rolling). Looks "alive" without
-// implying a hard launch promise.
+// implying a hard launch promise. Used only when the admin hasn't set one.
 const buildTarget = () => {
   const t = new Date();
   t.setDate(t.getDate() + 30);
@@ -80,10 +80,30 @@ const StayTunedBanner = ({
   subtitle,
   ctaTo = '/contact',
   ctaLabel,
+  targetIso = '',
 }) => {
   const copy = COPY[kind] || COPY.blog;
-  const [target] = useState(buildTarget);
-  const { d, h, m, s } = useCountdownTo(target);
+  // Memoise the target so the countdown doesn't reset on every render. If an
+  // admin-configured ISO is passed, use it; otherwise fall back to the rolling
+  // soft target.
+  const [target] = useState(() => {
+    if (targetIso) {
+      const d = new Date(targetIso);
+      if (!Number.isNaN(d.getTime())) return d;
+    }
+    return buildTarget();
+  });
+  // If the prop changes while mounted (admin updates the date), re-anchor.
+  const [activeTarget, setActiveTarget] = useState(target);
+  useEffect(() => {
+    if (targetIso) {
+      const d = new Date(targetIso);
+      if (!Number.isNaN(d.getTime())) setActiveTarget(d);
+    } else {
+      setActiveTarget(buildTarget());
+    }
+  }, [targetIso]);
+  const { d, h, m, s } = useCountdownTo(activeTarget);
 
   return (
     <section

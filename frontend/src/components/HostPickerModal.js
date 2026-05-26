@@ -111,16 +111,28 @@ const HostPickerModal = ({ open, onClose, hosts = [], fallbackUrl = '' }) => {
                   key={h.id || idx}
                   onClick={() => pick(h.booking_url)}
                   data-testid={`host-picker-card-${(h.name || 'host').toLowerCase().replace(/\s+/g, '-')}`}
-                  className="group text-left flex items-center gap-4 p-4 border-2 border-slate-200 hover:border-orange-400 hover:bg-orange-50/50 rounded-xl transition-all"
+                  className="group text-left flex flex-col gap-3 p-4 border-2 border-slate-200 hover:border-orange-400 hover:bg-orange-50/50 rounded-xl transition-all"
                 >
-                  <HostAvatar host={h} idx={idx} />
-                  <div className="flex-1 min-w-0">
-                    <p className="font-bold text-slate-900 truncate">{h.name}</p>
-                    {h.role && <p className="text-xs text-slate-500 truncate">{h.role}</p>}
-                    <p className="text-[11px] font-semibold uppercase tracking-wider text-orange-600 mt-1 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                      Book a call <ArrowRight className="h-3 w-3" />
-                    </p>
+                  <div className="flex items-center gap-4">
+                    <HostAvatar host={h} idx={idx} />
+                    <div className="flex-1 min-w-0">
+                      <p className="font-bold text-slate-900 truncate">{h.name}</p>
+                      {h.role && <p className="text-xs text-slate-500 truncate">{h.role}</p>}
+                      <p className="text-[11px] font-semibold uppercase tracking-wider text-orange-600 mt-1 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                        Open calendar <ArrowRight className="h-3 w-3" />
+                      </p>
+                    </div>
                   </div>
+                  {Array.isArray(h.custom_fields) && h.custom_fields.filter((cf) => cf.label && cf.label.trim()).length > 0 && (
+                    <div className="border-t border-slate-100 pt-3 space-y-1">
+                      {h.custom_fields.filter((cf) => cf.label && cf.label.trim()).slice(0, 3).map((cf, i) => (
+                        <div key={i} className="flex gap-2 text-[11px] leading-tight">
+                          <span className="font-bold text-slate-600 shrink-0">{cf.label}:</span>
+                          <span className="text-slate-700 truncate">{cf.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </button>
               ))}
             </div>

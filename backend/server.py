@@ -554,6 +554,13 @@ def _admin_user_shape(doc: dict, include_temp_password: bool = False) -> dict:
         "created_at": doc.get("created_at"),
         "last_login_at": doc.get("last_login_at"),
         "password_changed_at": doc.get("password_changed_at"),
+        # ---- Host profile (visible only to super-admin via Users tab) ----
+        "designation": doc.get("designation") or "",
+        "photo_url": doc.get("photo_url") or "",
+        "initials": (doc.get("initials") or "").upper(),
+        "booking_url": doc.get("booking_url") or "",
+        "show_as_host": bool(doc.get("show_as_host")),
+        "custom_fields": doc.get("custom_fields") or [],
     }
 
 
@@ -563,8 +570,19 @@ class AdminUserInviteIn(BaseModel):
     temp_password: str = Field(..., min_length=8, max_length=200)
 
 
+class CustomFieldIn(BaseModel):
+    label: str = Field(..., min_length=1, max_length=60)
+    value: str = Field(..., min_length=0, max_length=300)
+
+
 class AdminUserUpdateIn(BaseModel):
     name: Optional[str] = None
+    designation: Optional[str] = None
+    photo_url: Optional[str] = None
+    initials: Optional[str] = None
+    booking_url: Optional[str] = None
+    show_as_host: Optional[bool] = None
+    custom_fields: Optional[List[CustomFieldIn]] = None
 
 
 class AdminUserResetIn(BaseModel):
@@ -617,6 +635,24 @@ async def admin_user_update(payload: AdminUserUpdateIn, id: str = Query(...), cl
     updates: Dict[str, Any] = {"updated_at": now_iso()}
     if payload.name is not None:
         updates["name"] = sanitize_input({"n": payload.name})["n"][:120]
+    if payload.designation is not None:
+        updates["designation"] = sanitize_input({"d": payload.designation})["d"][:160]
+    if payload.photo_url is not None:
+        updates["photo_url"] = sanitize_input({"p": payload.photo_url})["p"][:1000]
+    if payload.initials is not None:
+        updates["initials"] = sanitize_input({"i": payload.initials})["i"][:4].upper()
+    if payload.booking_url is not None:
+        updates["booking_url"] = sanitize_input({"b": payload.booking_url})["b"][:500]
+    if payload.show_as_host is not None:
+        updates["show_as_host"] = bool(payload.show_as_host)
+    if payload.custom_fields is not None:
+        cleaned: List[Dict[str, str]] = []
+        for cf in payload.custom_fields:
+            label = sanitize_input({"l": cf.label})["l"][:60]
+            value = sanitize_input({"v": cf.value})["v"][:300]
+            if label:
+                cleaned.append({"label": label, "value": value})
+        updates["custom_fields"] = cleaned
     await db.admin_users.update_one({"id": id}, {"$set": updates})
     updated = await db.admin_users.find_one({"id": id}, {"_id": 0})
     return {"success": True, "user": _admin_user_shape(updated, include_temp_password=True)}
@@ -682,6 +718,8 @@ class AppSettingsIn(BaseModel):
     sender_name: Optional[str] = None
     booking_url_default: Optional[str] = None  # legacy single URL fallback
     hosts: Optional[List[HostIn]] = None
+    next_blog_launch_at: Optional[str] = None       # ISO datetime or empty string to clear
+    next_newsletter_launch_at: Optional[str] = None
 
 
 def _settings_to_admin_shape(doc: Optional[dict]) -> Dict[str, Any]:
@@ -693,16 +731,46 @@ def _settings_to_admin_shape(doc: Optional[dict]) -> Dict[str, Any]:
         "sender_name": doc.get("sender_name") or SENDER_NAME,
         "booking_url_default": doc.get("booking_url_default") or "",
         "hosts": doc.get("hosts") or [],
+        "next_blog_launch_at": doc.get("next_blog_launch_at") or "",
+        "next_newsletter_launch_at": doc.get("next_newsletter_launch_at") or "",
         "updated_at": doc.get("updated_at"),
     }
 
 
-def _settings_to_public_shape(doc: Optional[dict]) -> Dict[str, Any]:
+async def _hosts_from_admin_users() -> List[Dict[str, Any]]:
+    """Return host cards derived from admin_users where show_as_host=True and a booking_url is set."""
+    cursor = db.admin_users.find(
+        {"show_as_host": True, "booking_url": {"$exists": True, "$ne": ""}},
+        {"_id": 0},
+    ).sort("created_at", 1)
+    hosts: List[Dict[str, Any]] = []
+    async for u in cursor:
+        if not u.get("booking_url"):
+            continue
+        hosts.append({
+            "id": u.get("id"),
+            "name": u.get("name") or u.get("email") or "Host",
+            "role": u.get("designation") or "",
+            "photo_url": u.get("photo_url") or "",
+            "initials": (u.get("initials") or "").upper(),
+            "booking_url": u.get("booking_url") or "",
+            "custom_fields": u.get("custom_fields") or [],
+            "email": u.get("email") or "",
+        })
+    return hosts
+
+
+def _settings_to_public_shape(doc: Optional[dict], hosts: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
     """Public-safe settings for the front-end (no secrets)."""
     doc = doc or {}
+    # If hosts derived from admin_users are available, prefer them. Otherwise
+    # fall back to the legacy `hosts` list stored on the settings document.
+    final_hosts = hosts if hosts else (doc.get("hosts") or [])
     return {
         "booking_url_default": doc.get("booking_url_default") or "",
-        "hosts": doc.get("hosts") or [],
+        "hosts": final_hosts,
+        "next_blog_launch_at": doc.get("next_blog_launch_at") or "",
+        "next_newsletter_launch_at": doc.get("next_newsletter_launch_at") or "",
     }
 
 
@@ -753,6 +821,12 @@ async def app_settings_update(payload: AppSettingsIn, claims: Dict[str, Any] = D
     if payload.booking_url_default is not None:
         updates["booking_url_default"] = sanitize_input({"u": payload.booking_url_default})["u"][:500]
 
+    if payload.next_blog_launch_at is not None:
+        updates["next_blog_launch_at"] = sanitize_input({"d": payload.next_blog_launch_at})["d"][:60]
+
+    if payload.next_newsletter_launch_at is not None:
+        updates["next_newsletter_launch_at"] = sanitize_input({"d": payload.next_newsletter_launch_at})["d"][:60]
+
     if payload.hosts is not None:
         cleaned_hosts = []
         for h in payload.hosts:
@@ -776,7 +850,8 @@ async def app_settings_update(payload: AppSettingsIn, claims: Dict[str, Any] = D
 @app.get("/api/app-settings/public")
 async def app_settings_public():
     doc = await _get_settings_doc()
-    return {"success": True, "settings": _settings_to_public_shape(doc)}
+    derived_hosts = await _hosts_from_admin_users()
+    return {"success": True, "settings": _settings_to_public_shape(doc, hosts=derived_hosts)}
 
 
 # ---------------------------------------------------------------------------

@@ -1,0 +1,43 @@
+{
+  "summary": "Iteration-10 — Tested next_blog/newsletter launch-at countdown timers and host-profile-per-admin-user features. 31/31 backend tests pass (11 new + 20 regression). UI flows for Blog/Newsletter launch cards, Users tab host-profile expander, public StayTunedBanner countdown, Book-a-Call host picker modal, and Settings tab (legacy host editor removed) all verified end-to-end.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "PUT /api/admin-users (custom_fields)", "issue": "Contract mismatch with spec — spec claims 'empty labels are stripped server-side', but server returns 422 (Pydantic CustomField.label min_length=1). Either update spec or change validator to filter empty rows."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "HostPickerModal 'Open calendar'", "issue": "Anchors lack target=_blank attribute in DOM (likely uses window.open programmatically). Works, but right-click → 'open in new tab' won't honor the booking URL.", "selector": "[data-testid=host-picker-card-...]", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_launch_and_host_profile.py",
+    "/app/backend/tests/test_admin_auth.py",
+    "/app/test_reports/pytest/launch_host_results.xml",
+    "/app/test_reports/pytest/admin_auth_results.xml"
+  ],
+  "action_items": [
+    "(MINOR) Decide between (a) loosening CustomField.label validator to filter empty rows server-side as the doc/agent-note claims OR (b) update the doc — current behavior returns 422 for empty labels.",
+    "(LOW) Consider adding target='_blank' + rel='noopener' to host 'Open calendar' anchors so middle-click / cmd-click works naturally."
+  ],
+  "critical_code_review_comments": [
+    "_hosts_from_admin_users() correctly switches host source: when ≥1 admin has show_as_host=True AND booking_url set → derived; else fallback to app_settings.hosts (verified by toggling all 4 admins off and seeing legacy host appear in public response).",
+    "AdminUserUpdateIn now correctly supports partial updates — verified PUT with only {designation} did NOT clear booking_url or show_as_host on Rajesh.",
+    "Public /api/app-settings/public exposes next_blog_launch_at / next_newsletter_launch_at correctly; '' is accepted to clear (becomes null/empty).",
+    "Non-super-admin (info@) correctly receives 403 on PUT /api/app-settings and PUT /api/admin-users.",
+    "Login lockout 500 bug from iteration_9 is fixed — TestAdminLogin::test_lockout_after_5_fails passes."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_launch_and_host_profile.py (new)"
+  ],
+  "success_rate": {"backend": "100% (31/31)", "frontend": "100% (all observed flows pass)"},
+  "test_credentials": "Reset at end-of-run: swarag@/rajesh@/info@/support@orgainse.com + Orgainse25%Web.. (all must_change_password=true again, login_attempts cleared).",
+  "seed_data_creation": "Restored Rajesh designation to 'Director, Delivery & Operations' (a partial-update test had set it to 'Director-<uuid>'). Cleared next_blog_launch_at / next_newsletter_launch_at on app_settings so a fresh iteration starts clean.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "All 4 admins are again on temp password Orgainse25%Web.. with must_change=true. Swarag + Rajesh remain show_as_host=true with their seeded Google Calendar booking_urls (visible in Book-a-Call modal). Next-launch timers are empty so /blog and /newsletter banners use the rolling ~30-day fallback. Host-picker modal data-testids are 'host-picker-card-<first-name-lower>' not 'host-card-<email>' — update test selectors accordingly. 'Open calendar' button likely uses window.open() rather than a normal <a target=_blank>.",
+  "rca of the issue": "n/a — feature work verified, no critical bugs found."
+}

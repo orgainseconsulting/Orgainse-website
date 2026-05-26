@@ -22,6 +22,8 @@ function toAdminShape(doc) {
     sender_name: doc.sender_name || process.env.SENDER_NAME || '',
     booking_url_default: doc.booking_url_default || '',
     hosts: Array.isArray(doc.hosts) ? doc.hosts : [],
+    next_blog_launch_at: doc.next_blog_launch_at || '',
+    next_newsletter_launch_at: doc.next_newsletter_launch_at || '',
     updated_at: doc.updated_at || null,
   };
 }
@@ -59,6 +61,12 @@ export default async function handler(req, res) {
       if (typeof body.sender_name === 'string') updates.sender_name = body.sender_name.slice(0, 120);
       if (typeof body.booking_url_default === 'string') {
         updates.booking_url_default = body.booking_url_default.slice(0, 500);
+      }
+      if (typeof body.next_blog_launch_at === 'string') {
+        updates.next_blog_launch_at = body.next_blog_launch_at.slice(0, 60);
+      }
+      if (typeof body.next_newsletter_launch_at === 'string') {
+        updates.next_newsletter_launch_at = body.next_newsletter_launch_at.slice(0, 60);
       }
       if (Array.isArray(body.hosts)) {
         updates.hosts = body.hosts

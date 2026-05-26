@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-import { Eye, EyeOff, KeyRound, UserPlus, Trash2, Pencil, ShieldCheck, X } from 'lucide-react';
+import { Eye, EyeOff, KeyRound, UserPlus, Trash2, Pencil, ShieldCheck, X, ChevronDown, ChevronUp, Calendar, Plus } from 'lucide-react';
 import { api } from '../../lib/api';
+import HostProfileEditor from './HostProfileEditor';
 
 const formatDate = (iso) => {
   if (!iso) return '—';
@@ -196,6 +197,9 @@ const AdminUsersManager = () => {
   const [showInvite, setShowInvite] = useState(false);
   const [resetTarget, setResetTarget] = useState(null);
   const [editingName, setEditingName] = useState({}); // { [id]: string }
+  const [expanded, setExpanded] = useState({}); // { [id]: boolean }
+
+  const toggleExpand = (id) => setExpanded((p) => ({ ...p, [id]: !p[id] }));
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -253,7 +257,7 @@ const AdminUsersManager = () => {
         <div>
           <h2 className="text-xl font-bold text-slate-900">Admin users</h2>
           <p className="text-sm text-slate-500">
-            Manage who can sign in. Only super-admin (you) can view temporary passwords.
+            Manage who can sign in. Expand a row to set that user's <strong>host profile</strong> (designation, photo, booking URL, custom fields) for the public Book-a-Call modal. Only the super-admin can view temporary passwords.
           </p>
         </div>
         <button
@@ -270,9 +274,11 @@ const AdminUsersManager = () => {
         <table className="w-full text-sm">
           <thead className="bg-slate-50 text-[11px] font-bold uppercase tracking-wider text-slate-500">
             <tr>
+              <th className="text-left px-4 py-3 w-8"></th>
               <th className="text-left px-4 py-3">Name</th>
               <th className="text-left px-4 py-3">Email</th>
               <th className="text-left px-4 py-3">Role</th>
+              <th className="text-left px-4 py-3">Host</th>
               <th className="text-left px-4 py-3">Temp password</th>
               <th className="text-left px-4 py-3">Last login</th>
               <th className="text-right px-4 py-3">Actions</th>
@@ -282,8 +288,21 @@ const AdminUsersManager = () => {
             {users.map((u) => {
               const isEditing = editingName[u.id] !== undefined;
               const isSelf = me && u.id === me.id;
+              const isOpen = !!expanded[u.id];
               return (
-                <tr key={u.id} data-testid={`users-row-${u.email}`} className="hover:bg-slate-50/60">
+                <React.Fragment key={u.id}>
+                <tr data-testid={`users-row-${u.email}`} className="hover:bg-slate-50/60">
+                  <td className="px-4 py-3">
+                    <button
+                      type="button"
+                      onClick={() => toggleExpand(u.id)}
+                      aria-label={isOpen ? 'Collapse host profile' : 'Expand host profile'}
+                      data-testid={`users-row-expand-${u.email}`}
+                      className="text-slate-400 hover:text-slate-700"
+                    >
+                      {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                    </button>
+                  </td>
                   <td className="px-4 py-3">
                     {isEditing ? (
                       <div className="flex items-center gap-2">
@@ -309,6 +328,9 @@ const AdminUsersManager = () => {
                         </button>
                       </div>
                     )}
+                    {u.designation && (
+                      <p className="text-[11px] text-slate-500 mt-0.5">{u.designation}</p>
+                    )}
                   </td>
                   <td className="px-4 py-3 text-slate-700">{u.email}</td>
                   <td className="px-4 py-3">
@@ -320,6 +342,17 @@ const AdminUsersManager = () => {
                       <span className="text-slate-500 text-xs">Admin</span>
                     )}
                     {isSelf && <span className="ml-2 text-[10px] uppercase tracking-wider text-slate-400">(you)</span>}
+                  </td>
+                  <td className="px-4 py-3" data-testid={`users-host-status-${u.email}`}>
+                    {u.show_as_host && u.booking_url ? (
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider">
+                        <Calendar className="h-3 w-3" /> Live
+                      </span>
+                    ) : u.booking_url ? (
+                      <span className="text-[11px] text-slate-500">Hidden</span>
+                    ) : (
+                      <span className="text-[11px] text-slate-400 italic">No URL</span>
+                    )}
                   </td>
                   <td className="px-4 py-3">
                     {u.must_change_password ? (
@@ -350,6 +383,14 @@ const AdminUsersManager = () => {
                     </div>
                   </td>
                 </tr>
+                {isOpen && (
+                  <tr>
+                    <td colSpan={8} className="p-0">
+                      <HostProfileEditor user={u} onSaved={() => fetchUsers()} />
+                    </td>
+                  </tr>
+                )}
+                </React.Fragment>
               );
             })}
           </tbody>

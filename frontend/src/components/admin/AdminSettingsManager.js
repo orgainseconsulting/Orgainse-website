@@ -1,103 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-import { Eye, EyeOff, RefreshCw, Save, Trash2, Plus, Link2, Mail, KeyRound } from 'lucide-react';
+import { Eye, EyeOff, RefreshCw, Save, Link2, Mail, KeyRound } from 'lucide-react';
 import { api } from '../../lib/api';
-
-const blankHost = () => ({
-  id: '',
-  name: '',
-  role: '',
-  initials: '',
-  photo_url: '',
-  booking_url: '',
-});
-
-const HostCard = ({ host, onChange, onRemove }) => (
-  <div className="bg-white border border-slate-200 rounded-xl p-4 grid grid-cols-1 md:grid-cols-2 gap-3"
-    data-testid={`settings-host-${host.id || 'new'}`}>
-    <div className="md:col-span-2 flex items-center gap-3">
-      <div className="h-12 w-12 rounded-full bg-gradient-to-br from-orange-400 to-rose-500 flex items-center justify-center text-white font-black text-base overflow-hidden">
-        {host.photo_url ? (
-          // eslint-disable-next-line jsx-a11y/img-redundant-alt
-          <img src={host.photo_url} alt={host.name || 'host photo'} className="w-full h-full object-cover" />
-        ) : (
-          host.initials || (host.name || '?').slice(0, 2).toUpperCase()
-        )}
-      </div>
-      <div className="flex-1">
-        <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Host</p>
-        <p className="text-sm font-semibold text-slate-900">{host.name || 'Unnamed host'}</p>
-      </div>
-      <button
-        type="button"
-        onClick={onRemove}
-        className="text-red-600 hover:text-red-800 text-xs font-semibold inline-flex items-center gap-1"
-      >
-        <Trash2 className="h-3.5 w-3.5" /> Remove
-      </button>
-    </div>
-
-    <div>
-      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">Name</label>
-      <input
-        type="text"
-        value={host.name}
-        onChange={(e) => onChange({ ...host, name: e.target.value })}
-        className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-      />
-    </div>
-    <div>
-      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">Role / Title</label>
-      <input
-        type="text"
-        value={host.role}
-        onChange={(e) => onChange({ ...host, role: e.target.value })}
-        className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-        placeholder="Co-founder"
-      />
-    </div>
-    <div>
-      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">Initials (fallback avatar)</label>
-      <input
-        type="text"
-        value={host.initials}
-        maxLength={4}
-        onChange={(e) => onChange({ ...host, initials: e.target.value.toUpperCase() })}
-        className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 font-mono"
-        placeholder="SW"
-      />
-    </div>
-    <div>
-      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">Photo URL (optional)</label>
-      <input
-        type="url"
-        value={host.photo_url}
-        onChange={(e) => onChange({ ...host, photo_url: e.target.value })}
-        className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-        placeholder="https://…"
-      />
-    </div>
-    <div className="md:col-span-2">
-      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
-        Google Calendar booking URL
-      </label>
-      <input
-        type="url"
-        required
-        value={host.booking_url}
-        onChange={(e) => onChange({ ...host, booking_url: e.target.value })}
-        className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-        placeholder="https://calendar.app.google/XXXXXXXX"
-      />
-    </div>
-  </div>
-);
 
 const AdminSettingsManager = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [settings, setSettings] = useState(null);
-  const [hosts, setHosts] = useState([]);
   const [bookingDefault, setBookingDefault] = useState('');
   const [senderEmail, setSenderEmail] = useState('');
   const [senderName, setSenderName] = useState('');
@@ -113,7 +22,6 @@ const AdminSettingsManager = () => {
       const res = await api.appSettingsGet();
       const s = res.settings || {};
       setSettings(s);
-      setHosts(s.hosts || []);
       setBookingDefault(s.booking_url_default || '');
       setSenderEmail(s.sender_email || '');
       setSenderName(s.sender_name || '');
@@ -126,29 +34,15 @@ const AdminSettingsManager = () => {
 
   useEffect(() => { fetchSettings(); }, []);
 
-  const addHost = () => setHosts((p) => [...p, blankHost()]);
-  const updateHost = (idx, next) => setHosts((p) => p.map((h, i) => i === idx ? next : h));
-  const removeHost = (idx) => setHosts((p) => p.filter((_, i) => i !== idx));
-
   const saveAll = async () => {
     setSaving(true);
     try {
-      const payload = {
-        hosts: hosts.map((h) => ({
-          id: h.id || undefined,
-          name: h.name || '',
-          role: h.role || '',
-          initials: (h.initials || '').toUpperCase(),
-          photo_url: h.photo_url || '',
-          booking_url: h.booking_url || '',
-        })).filter((h) => h.name && h.booking_url),
+      const res = await api.appSettingsUpdate({
         booking_url_default: bookingDefault,
         sender_email: senderEmail,
         sender_name: senderName,
-      };
-      const res = await api.appSettingsUpdate(payload);
+      });
       setSettings(res.settings);
-      setHosts(res.settings.hosts || []);
       toast.success('Settings saved');
     } catch (err) {
       toast.error(err.message || 'Could not save settings');
@@ -268,20 +162,21 @@ const AdminSettingsManager = () => {
         </div>
       </section>
 
-      {/* Booking URL + hosts */}
+      {/* Booking URL fallback */}
       <section className="bg-white border border-slate-200 rounded-xl p-6">
         <div className="mb-4">
           <h3 className="text-lg font-bold text-slate-900 inline-flex items-center gap-2">
-            <Link2 className="h-5 w-5 text-orange-600" /> Book-a-Call hosts
+            <Link2 className="h-5 w-5 text-orange-600" /> Book-a-Call fallback URL
           </h3>
           <p className="text-sm text-slate-500">
-            These hosts appear in the Book-a-Call modal across the site. Each gets their own Google Calendar URL.
+            <strong>Hosts</strong> are now configured per-admin under <em>Users</em>: open a row and set their designation, photo, booking URL, and custom fields.
+            This fallback URL is used only when no admin has been published as a host yet.
           </p>
         </div>
 
-        <div className="mb-5">
+        <div>
           <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
-            Fallback booking URL (used when no host picked)
+            Fallback Google Calendar URL
           </label>
           <input
             type="url"
@@ -291,25 +186,6 @@ const AdminSettingsManager = () => {
             placeholder="https://calendar.app.google/XXXXXXXX"
             data-testid="settings-booking-default"
           />
-        </div>
-
-        <div className="space-y-4">
-          {hosts.map((h, idx) => (
-            <HostCard
-              key={h.id || `new-${idx}`}
-              host={h}
-              onChange={(next) => updateHost(idx, next)}
-              onRemove={() => removeHost(idx)}
-            />
-          ))}
-          <button
-            type="button"
-            onClick={addHost}
-            data-testid="settings-host-add"
-            className="w-full inline-flex items-center justify-center gap-2 border-2 border-dashed border-slate-300 hover:border-orange-300 hover:text-orange-600 text-slate-500 rounded-xl py-4 text-sm font-semibold transition-colors"
-          >
-            <Plus className="h-4 w-4" /> Add another host
-          </button>
         </div>
       </section>
 
