@@ -32,6 +32,9 @@ async function request(path, { method = 'GET', body, headers = {}, requiresAdmin
     method,
     headers: finalHeaders,
     body: body ? JSON.stringify(body) : undefined,
+    // Admin & dynamic public endpoints must always reflect the latest data
+    // the moment a super-admin saves. Don't let the browser HTTP-cache GETs.
+    cache: 'no-store',
   });
 
   const text = await res.text();

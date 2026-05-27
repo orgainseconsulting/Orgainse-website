@@ -55,10 +55,28 @@ function notFound(res, path) {
 }
 
 export default async function handler(req, res) {
-  // Strip query string and `/api/` prefix; split into segments.
-  const rawPath = (req.url || '').split('?')[0] || '';
-  const cleanPath = rawPath.replace(/^\/+/, '').replace(/^api\/?/, '');
-  const segments = cleanPath.split('/').filter(Boolean);
+  // Resolve route segments.
+  //
+  // We try TWO sources in priority order, because Vercel's runtime behaviour
+  // for `[[...slug]].js` is inconsistent across regions / build versions:
+  //   1. req.query.slug — populated by Vercel's catch-all matcher. This is the
+  //      authoritative path the matcher saw. Always an array when present.
+  //   2. req.url — the original request URL. Used as a fallback (and for
+  //      local Node tests where req.query is mocked).
+  //
+  // Using req.query.slug first avoids edge cases where Vercel rewrites
+  // req.url to `/api/[[...slug]]` (without the real segments) under certain
+  // optimization passes.
+  let segments;
+  if (Array.isArray(req.query?.slug) && req.query.slug.length) {
+    segments = req.query.slug.filter(Boolean);
+  } else if (typeof req.query?.slug === 'string' && req.query.slug) {
+    segments = [req.query.slug];
+  } else {
+    const rawPath = (req.url || '').split('?')[0] || '';
+    const cleanPath = rawPath.replace(/^\/+/, '').replace(/^api\/?/, '');
+    segments = cleanPath.split('/').filter(Boolean);
+  }
   const first = segments[0] || '';
   const second = segments[1] || '';
 
@@ -73,9 +91,12 @@ export default async function handler(req, res) {
     return appSettingsPublicHandler(req, res);
   }
   if (first === 'newsletter-admin') {
-    // The newsletter-admin handler does its own internal path routing
-    // (issues / subscribers / segments / send / export). It reads
-    // req.url, so just pass the request through unchanged.
+    // The newsletter-admin handler does its own internal sub-routing (issues
+    // / subscribers / segments / send / export) and reads `req.query.path`
+    // (from the original `[...path].js` shape). Inject that here so the
+    // handler picks up the right resource/action even when Vercel routes
+    // via the top-level slug catch-all.
+    req.query.path = segments.slice(1);
     return newsletterAdminHandler(req, res);
   }
 
