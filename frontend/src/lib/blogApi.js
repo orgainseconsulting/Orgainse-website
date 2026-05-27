@@ -1,8 +1,12 @@
 /**
  * Blog API helpers (admin & public).
  */
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
-const API = `${BACKEND_URL}/api`;
+// Same-origin in the browser; fall back to build-time env at SSR/build time.
+// Avoids stale Vercel aliases causing silent 404 / CORS failures.
+const BUILD_BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
+const API = (typeof window !== 'undefined' && window.location?.origin)
+  ? `${window.location.origin}/api`
+  : `${BUILD_BACKEND_URL}/api`;
 
 function getAdminToken() {
   try {

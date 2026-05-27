@@ -3,10 +3,23 @@
  * - Builds absolute URLs from REACT_APP_BACKEND_URL (falls back to same-origin)
  * - Attaches the admin Bearer token from sessionStorage when calling /api/admin*
  * - Returns parsed JSON; throws an Error with message from the server
+ *
+ * Origin resolution: at runtime in the browser we always prefer the current
+ * window origin so the frontend hits its OWN deployment's /api/* handlers —
+ * even when REACT_APP_BACKEND_URL was baked into the build with a stale
+ * Vercel alias (which produces silent 404s + CORS failures and is hard to
+ * diagnose). Build-time env is only used during SSR/build (no window).
  */
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
+const BUILD_BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
 
-export const API_BASE = `${BACKEND_URL}/api`;
+function resolveApiBase() {
+  if (typeof window !== 'undefined' && window.location?.origin) {
+    return `${window.location.origin}/api`;
+  }
+  return `${BUILD_BACKEND_URL}/api`;
+}
+
+export const API_BASE = resolveApiBase();
 
 function getAdminToken() {
   try {

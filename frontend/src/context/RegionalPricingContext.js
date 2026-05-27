@@ -75,7 +75,11 @@ export const RegionalPricingProvider = ({ children }) => {
         // Proxy through our own API so the browser never sees the cross-origin
         // request to ipapi.co (kills the CORS console noise and lets us swap
         // providers without touching the SPA).
-        const backend = process.env.REACT_APP_BACKEND_URL || "";
+        // Same-origin in the browser to avoid stale Vercel aliases causing
+        // CORS failures / silent 404s. Falls back to build-time env only at SSR.
+        const backend = (typeof window !== 'undefined' && window.location?.origin)
+          ? window.location.origin
+          : (process.env.REACT_APP_BACKEND_URL || "");
         const response = await fetch(`${backend}/api/geo`);
         if (response.ok) {
           const data = await response.json();

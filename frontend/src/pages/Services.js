@@ -23,7 +23,9 @@ import SEOContent from "../components/SEOContent";
 import SEOHead from "../components/SEOHead";
 import { useCalendly } from "../context/CalendlyContext";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "";
+const BACKEND_URL = (typeof window !== 'undefined' && window.location?.origin)
+  ? window.location.origin
+  : (process.env.REACT_APP_BACKEND_URL || "");
 
 const Services = () => {
   const [selectedService, setSelectedService] = useState(null);
@@ -39,8 +41,10 @@ const Services = () => {
   });
   const { openCalendly } = useCalendly();
 
-  // Backend URL for API calls
-  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
+  // Backend URL for API calls (same-origin to avoid stale Vercel aliases)
+  const BACKEND_URL = (typeof window !== 'undefined' && window.location?.origin)
+    ? window.location.origin
+    : (process.env.REACT_APP_BACKEND_URL || '');
 
   const services = [
     {
