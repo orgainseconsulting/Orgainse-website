@@ -41,7 +41,14 @@ const HostProfileEditor = ({ user, onSaved }) => {
     });
   }, [user.id, user.designation, user.photo_url, user.initials, user.booking_url, user.show_as_host, user.custom_fields]);
 
-  const updateField = (cb) => setForm((p) => ({ ...p, ...cb(p) }));
+  const updateField = (cb) => setForm((p) => {
+    const next = { ...p, ...cb(p) };
+    // Auto-publish to Book-a-Call the moment a booking URL is entered.
+    // Admin can still explicitly uncheck if they want hidden-but-saved state.
+    if (next.booking_url && !p.booking_url) next.show_as_host = true;
+    if (!next.booking_url) next.show_as_host = false;
+    return next;
+  });
 
   const updateCustom = (idx, key, value) => {
     setForm((p) => ({

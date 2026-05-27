@@ -12,6 +12,8 @@ const SETTINGS_ID = 'global';
 
 export default async function handler(req, res) {
   securityHeaders(req, res);
+  // Admin can update launch timers / hosts at any time — never cache.
+  res.setHeader('Cache-Control', 'no-store, max-age=0, must-revalidate');
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
 

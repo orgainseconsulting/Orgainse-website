@@ -93,6 +93,15 @@ export default async function handler(req, res) {
             value: String(cf.value || '').slice(0, 300),
           }));
       }
+      // Auto-publish to Book-a-Call when a booking URL is added (and the
+      // request didn't explicitly opt-out via show_as_host=false). Likewise,
+      // clearing the booking URL auto-unpublishes.
+      if ('booking_url' in updates) {
+        if (updates.booking_url && updates.show_as_host === undefined) {
+          updates.show_as_host = true;
+        }
+        if (!updates.booking_url) updates.show_as_host = false;
+      }
       const user = await db.collection('admin_users').findOne({ id });
       if (!user) return res.status(404).json({ error: 'User not found' });
       await db.collection('admin_users').updateOne({ id }, { $set: updates });

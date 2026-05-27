@@ -13,6 +13,7 @@ from typing import Optional, List, Dict, Any
 
 import httpx
 from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 from deps import (
@@ -104,10 +105,12 @@ async def app_settings_update(payload: AppSettingsIn, claims: Dict[str, Any] = D
 
 
 @router.get("/api/app-settings/public")
-async def app_settings_public():
+async def app_settings_public(request: Request):
     doc = await get_settings_doc()
     derived = await hosts_from_admin_users()
-    return {"success": True, "settings": settings_to_public_shape(doc, hosts=derived)}
+    response = JSONResponse({"success": True, "settings": settings_to_public_shape(doc, hosts=derived)})
+    response.headers["Cache-Control"] = "no-store, max-age=0, must-revalidate"
+    return response
 
 
 # ---- Geo proxy ------------------------------------------------------------

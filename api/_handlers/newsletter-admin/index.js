@@ -242,7 +242,15 @@ export default async function handler(req, res) {
 }
 
 async function sendIssue(req, res, db) {
-  if (!process.env.RESEND_API_KEY) return res.status(500).json({ error: 'RESEND_API_KEY not configured' });
+  // Prefer the admin-saved key from app_settings over the env-var fallback.
+  // This is what the "Resend API key" field in Admin → Settings is for: it
+  // lets a super-admin rotate the key without redeploying.
+  const settingsDoc = await db.collection('app_settings').findOne({ _id: 'global' });
+  const effectiveKey = (settingsDoc?.resend_api_key && settingsDoc.resend_api_key.trim())
+    || process.env.RESEND_API_KEY;
+  if (!effectiveKey) return res.status(500).json({ error: 'Resend API key not configured (set it in Admin → Settings)' });
+  const effectiveSenderEmail = settingsDoc?.sender_email || SENDER_EMAIL;
+  const effectiveSenderName = settingsDoc?.sender_name || SENDER_NAME;
   const { id } = req.query;
   if (!id) return res.status(400).json({ error: 'id required' });
   const issue = await db.collection('newsletter_issues').findOne({ id });
@@ -275,8 +283,8 @@ async function sendIssue(req, res, db) {
 
   if (!recipients.length) return res.status(400).json({ error: 'No recipients matched the selected criteria' });
 
-  const resend = new Resend(process.env.RESEND_API_KEY);
-  const fromAddr = `${SENDER_NAME} <${SENDER_EMAIL}>`;
+  const resend = new Resend(effectiveKey);
+  const fromAddr = `${effectiveSenderName} <${effectiveSenderEmail}>`;
   let sent = 0, failed = 0;
   const failures = [];
 
@@ -290,10 +298,10 @@ async function sendIssue(req, res, db) {
         html: renderEmailHtml(issue, r.unsubscribe_token),
         text: renderEmailText(issue, r.unsubscribe_token),
         headers: {
-          'List-Unsubscribe': `<${unsubUrl}>, <mailto:${SENDER_EMAIL}?subject=Unsubscribe>`,
+          'List-Unsubscribe': `<${unsubUrl}>, <mailto:${effectiveSenderEmail}?subject=Unsubscribe>`,
           'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
         },
-        replyTo: SENDER_EMAIL,
+        replyTo: effectiveSenderEmail,
         tags: [{ name: 'campaign', value: issue.slug || 'newsletter' }],
       });
       sent++;
