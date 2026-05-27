@@ -6,17 +6,13 @@
   "outputDirectory": "frontend/build",
   "installCommand": "yarn install",
   "functions": {
-    "api/**/*.js": {
+    "api/[...slug].js": {
       "maxDuration": 60
     }
   },
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    },
-    {
-      "source": "/((?!api|static).*)",
+      "source": "/((?!api/|static/|favicon|robots\\.txt|sitemap).*)",
       "destination": "/index.html"
     }
   ],

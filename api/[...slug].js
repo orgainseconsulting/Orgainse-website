@@ -68,12 +68,12 @@ export default async function handler(req, res) {
   // req.url to `/api/[[...slug]]` (without the real segments) under certain
   // optimization passes.
   let segments;
+  const rawPath = (req.url || '').split('?')[0] || '';
   if (Array.isArray(req.query?.slug) && req.query.slug.length) {
     segments = req.query.slug.filter(Boolean);
   } else if (typeof req.query?.slug === 'string' && req.query.slug) {
     segments = [req.query.slug];
   } else {
-    const rawPath = (req.url || '').split('?')[0] || '';
     const cleanPath = rawPath.replace(/^\/+/, '').replace(/^api\/?/, '');
     segments = cleanPath.split('/').filter(Boolean);
   }
