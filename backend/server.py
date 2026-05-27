@@ -1,18 +1,33 @@
 """
 Orgainse Consulting — FastAPI backend (entrypoint).
 
-This file is intentionally thin: it builds the FastAPI app, applies CORS, runs
-the startup tasks (Mongo indexes + admin user seed) and includes the routers
-that hold all of the actual endpoints.
+DESIGN: this Python process exists only to keep the supervisor-managed
+backend port (8001) up. The actual API logic lives in the SAME Node
+serverless handlers that ship to Vercel production (`/app/api/_handlers/**`
+dispatched through `/app/api/index.js`).
 
-All shared primitives (DB client, JWT, sanitisation, settings/host helpers,
-super-admin gate, etc.) live in `/app/backend/deps.py`. Each router module
-under `/app/backend/routers/` owns its own pydantic models and route handlers.
+At startup we:
+  1. Spawn a Node sidecar (`sidecar.mjs`) that wraps the Vercel dispatcher
+     on `127.0.0.1:8765`.
+  2. Create Mongo indexes + seed admin users (one-shot bootstrap, idempotent).
+  3. Mount a single catch-all FastAPI route that reverse-proxies every
+     `/api/*` request to the Node sidecar.
 
-The Vercel deployment continues to use the per-route Node handlers under
-`/app/api/*.js`; this Python tree powers the preview / Emergent workspace.
+This gives us ONE source of truth for API behaviour — Vercel handlers — and
+zero schema drift between local dev and production.
 """
-from fastapi import FastAPI
+from __future__ import annotations
+
+import asyncio
+import os
+import signal
+import subprocess
+import sys
+from contextlib import asynccontextmanager
+
+import httpx
+import resend
+from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 
 from deps import (
@@ -26,28 +41,55 @@ from deps import (
     now_iso,
     verify_password,
 )
-from routers import admin_users, auth, blog, forms, newsletter, settings as settings_router
 
-import os
-import resend
+SIDECAR_PORT = int(os.environ.get("SIDECAR_PORT", "8765"))
+SIDECAR_HOST = "127.0.0.1"
+SIDECAR_BASE = f"http://{SIDECAR_HOST}:{SIDECAR_PORT}"
+SIDECAR_SCRIPT = os.path.join(os.path.dirname(__file__), "sidecar.mjs")
 
-app = FastAPI(title="Orgainse Consulting API", version="3.0.0")
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS or ["*"],
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allow_headers=["*"],
-)
+# Headers that hop-by-hop / proxy infrastructure must never forward.
+_HOP_BY_HOP = {
+    "connection", "keep-alive", "proxy-authenticate", "proxy-authorization",
+    "te", "trailers", "transfer-encoding", "upgrade", "host", "content-length",
+}
 
 
-# ---------------------------------------------------------------------------
-# Startup — index creation + admin user seed + Resend key hydration
-# ---------------------------------------------------------------------------
-@app.on_event("startup")
-async def startup_event():
-    # Drop legacy username_1 index if it lacks sparse=true (prevents IndexKeySpecsConflict)
+async def _wait_for_sidecar(timeout: float = 10.0) -> None:
+    """Block until the Node sidecar answers /api/health (or timeout)."""
+    deadline = asyncio.get_event_loop().time() + timeout
+    async with httpx.AsyncClient(timeout=2.0) as client:
+        last_err: Exception | None = None
+        while asyncio.get_event_loop().time() < deadline:
+            try:
+                r = await client.get(f"{SIDECAR_BASE}/api/health")
+                if r.status_code == 200:
+                    return
+            except Exception as e:  # noqa: BLE001
+                last_err = e
+            await asyncio.sleep(0.25)
+        raise RuntimeError(f"Sidecar did not become ready in {timeout}s (last err: {last_err})")
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # ---- 1. Spawn the Node sidecar -----------------------------------------
+    env = {**os.environ, "SIDECAR_PORT": str(SIDECAR_PORT)}
+    sidecar_proc = subprocess.Popen(
+        ["node", SIDECAR_SCRIPT],
+        env=env,
+        stdout=sys.stdout,
+        stderr=sys.stderr,
+        cwd=os.path.dirname(__file__),
+        start_new_session=False,  # keep in same process group so supervisor stop kills us together
+    )
+    app.state.sidecar_proc = sidecar_proc
+    try:
+        await _wait_for_sidecar()
+        print(f"[startup] Node sidecar ready on {SIDECAR_BASE}")
+    except Exception as e:  # noqa: BLE001
+        print(f"[startup] Sidecar startup failed: {e}")
+
+    # ---- 2. DB bootstrap (one-shot, idempotent) ----------------------------
     try:
         existing_indexes = await db.admin_users.index_information()
         if "username_1" in existing_indexes and not existing_indexes["username_1"].get("sparse"):
@@ -66,7 +108,7 @@ async def startup_event():
     await db.blog_posts.create_index("slug", unique=True)
     await db.blog_posts.create_index([("status", 1), ("published_at", -1)])
 
-    # ---- Seed @orgainse.com admin users with a temp password (idempotent) ----
+    # Seed @orgainse.com admin users
     seed_temp_password = os.environ.get("ADMIN_SEED_TEMP_PASSWORD", "Orgainse25%Web..")
     seed_users = [
         {"email": "info@orgainse.com",    "name": "Orgainse Admin",   "is_super_admin": False},
@@ -99,7 +141,7 @@ async def startup_event():
     if seeded:
         print(f"[startup] Seeded {seeded} admin users with temp password '{seed_temp_password}'")
 
-    # ---- Load Resend API key override from app_settings ----
+    # Load Resend API key override from app_settings
     try:
         settings_doc = await db.app_settings.find_one({"_id": SETTINGS_DOC_ID})
         if settings_doc and settings_doc.get("resend_api_key"):
@@ -108,7 +150,7 @@ async def startup_event():
     except Exception as e:  # noqa: BLE001
         print(f"[startup] could not load app_settings: {e}")
 
-    # ---- Legacy ADMIN_USERNAME/ADMIN_PASSWORD seed (backwards-compat) ----
+    # Legacy ADMIN_USERNAME/ADMIN_PASSWORD seed (backwards-compat)
     if ADMIN_PASSWORD:
         existing = await db.admin_users.find_one({"username": ADMIN_USERNAME})
         if existing is None:
@@ -127,13 +169,82 @@ async def startup_event():
             )
             print(f"[startup] Rotated password for '{ADMIN_USERNAME}'")
 
+    # ---- 3. Long-lived HTTP client used by the proxy route -----------------
+    app.state.proxy_client = httpx.AsyncClient(
+        base_url=SIDECAR_BASE,
+        timeout=httpx.Timeout(60.0, connect=5.0),
+    )
 
-# ---------------------------------------------------------------------------
-# Routers
-# ---------------------------------------------------------------------------
-app.include_router(forms.router)
-app.include_router(auth.router)
-app.include_router(admin_users.router)
-app.include_router(settings_router.router)
-app.include_router(blog.router)
-app.include_router(newsletter.router)
+    yield
+
+    # ---- Shutdown ----------------------------------------------------------
+    try:
+        await app.state.proxy_client.aclose()
+    except Exception:  # noqa: BLE001
+        pass
+    try:
+        sidecar_proc.send_signal(signal.SIGTERM)
+        sidecar_proc.wait(timeout=5)
+    except Exception:  # noqa: BLE001
+        try:
+            sidecar_proc.kill()
+        except Exception:  # noqa: BLE001
+            pass
+
+
+app = FastAPI(title="Orgainse Consulting API", version="4.0.0", lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS or ["*"],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_headers=["*"],
+)
+
+
+@app.api_route(
+    "/api/{path:path}",
+    methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"],
+)
+async def vercel_proxy(path: str, request: Request) -> Response:
+    """Forward every /api/* request to the Node sidecar (Vercel dispatcher)."""
+    target_path = f"/api/{path}"
+    qs = request.url.query
+    if qs:
+        target_path = f"{target_path}?{qs}"
+
+    fwd_headers = {
+        k: v for k, v in request.headers.items()
+        if k.lower() not in _HOP_BY_HOP
+    }
+    fwd_headers["x-forwarded-for"] = request.client.host if request.client else "unknown"
+    fwd_headers["x-forwarded-proto"] = request.url.scheme
+
+    body = await request.body()
+    client: httpx.AsyncClient = request.app.state.proxy_client
+
+    try:
+        upstream = await client.request(
+            request.method,
+            target_path,
+            headers=fwd_headers,
+            content=body if body else None,
+        )
+    except httpx.RequestError as e:
+        return Response(
+            content=f'{{"error":"sidecar unreachable","message":"{type(e).__name__}: {e}"}}',
+            status_code=502,
+            media_type="application/json",
+        )
+
+    resp_headers = {
+        k: v for k, v in upstream.headers.items()
+        if k.lower() not in _HOP_BY_HOP
+    }
+    return Response(
+        content=upstream.content,
+        status_code=upstream.status_code,
+        headers=resp_headers,
+        media_type=upstream.headers.get("content-type"),
+    )

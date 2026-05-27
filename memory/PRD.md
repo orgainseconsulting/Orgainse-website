@@ -274,3 +274,40 @@ See `/app/memory/test_credentials.md`.
 - Do **not** rename `api/index.js` to `[[...slug]].js` or `[...slug].js` — only `api/index.js` + explicit rewrite reliably routes multi-segment paths on CRA framework preset.
 - Frontend (`src/lib/api.js`) must call `${window.location.origin}/api/...` at runtime — baked-in `REACT_APP_BACKEND_URL` aliases go stale per-deploy.
 
+
+
+## Implemented (May 27, 2026 — single source of truth for API)
+
+To kill the drift that just caused the ROI/AI Assessment outage, the **Python
+FastAPI tree is no longer the source of truth**. The Vercel JS handlers under
+`/app/api/_handlers/**` (dispatched by `/app/api/index.js`) are now the ONE
+implementation of every API endpoint, used by both production (Vercel) and
+local dev (preview pod).
+
+### New local-dev architecture
+- `/app/backend/sidecar.mjs` — tiny Node HTTP server (port `127.0.0.1:8765`).
+  Imports `/app/api/index.js` and wraps every request in a Vercel-style
+  `req`/`res` pair, then forwards to the dispatcher.
+- `/app/backend/server.py` — FastAPI is now a thin reverse-proxy:
+  1. On startup it `subprocess.Popen("node sidecar.mjs")`.
+  2. Runs the one-shot Mongo bootstrap (indexes + `@orgainse.com` admin seed
+     + Resend key hydration) — kept in Python because uvicorn already had
+     async Motor wired up.
+  3. Mounts a single catch-all route `@app.api_route("/api/{path:path}", ...)`
+     that proxies the full request/response to the Node sidecar via `httpx`.
+- `/app/backend/routers/` — **DELETED**. Six Python router modules (forms,
+  auth, admin_users, settings, blog, newsletter) totalling ~2k lines of
+  duplicated logic removed.
+
+### Why this matters
+- One business-logic codebase. The next "frontend works locally but fails on
+  prod" surprise simply cannot happen — the same Node code runs in both
+  places.
+- Smaller cognitive load: a handler bug is fixed in exactly one file.
+- Production (Vercel) is **unchanged** — same JS handlers, same dispatcher.
+
+### Known follow-up (non-blocking)
+- `/app/backend/tests/test_*.py` were written against FastAPI's default
+  `{"detail": "..."}` error envelope. The JS handlers use `{"error": "..."}`.
+  Tests assertions need a one-line update (`.get("detail")` → `.get("error")`)
+  to match the new source of truth. Endpoint behaviour itself is unchanged.
