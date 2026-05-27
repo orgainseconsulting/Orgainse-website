@@ -8,9 +8,18 @@
  *        excludes the folder from Vercel's function discovery).
  *     2. Importing each handler statically here and dispatching by request path.
  *
+ * Why this file is /api/index.js (not [...slug].js):
+ *   In non-Next.js Vercel projects (we use `framework: create-react-app`), the
+ *   `[...slug].js` catch-all syntax does NOT reliably match multi-segment paths
+ *   like `/api/auth/me` or `/api/app-settings/public`. Single segments work,
+ *   deeper segments return `x-vercel-error: NOT_FOUND`. The reliable fix is to
+ *   put the dispatcher at `api/index.js` and add an explicit rewrite in
+ *   `vercel.json`: `{ "source": "/api/(.*)", "destination": "/api" }`. This
+ *   forwards every `/api/*` request to this file while preserving the original
+ *   request URL on `req.url`, so we can dispatch by path.
+ *
  * The public URLs (`/api/contact`, `/api/admin-login`, `/api/auth/me`, ...) are
- * unchanged — Vercel's optional catch-all routing maps every `/api/*` request
- * through this file.
+ * unchanged.
  */
 
 // Public (no-auth) handlers
@@ -55,27 +64,24 @@ function notFound(res, path) {
 }
 
 export default async function handler(req, res) {
-  // Resolve route segments.
+  // Resolve route segments from req.url.
   //
-  // We try TWO sources in priority order, because Vercel's runtime behaviour
-  // for `[[...slug]].js` is inconsistent across regions / build versions:
-  //   1. req.query.slug — populated by Vercel's catch-all matcher. This is the
-  //      authoritative path the matcher saw. Always an array when present.
-  //   2. req.url — the original request URL. Used as a fallback (and for
-  //      local Node tests where req.query is mocked).
+  // This file lives at /api/index.js and receives ALL /api/* traffic via
+  // an explicit `vercel.json` rewrite `/api/(.*) -> /api`. Vercel preserves
+  // the original request URL on req.url, so we parse the segments from there.
   //
-  // Using req.query.slug first avoids edge cases where Vercel rewrites
-  // req.url to `/api/[[...slug]]` (without the real segments) under certain
-  // optimization passes.
+  // We also still check req.query.slug as a fallback for legacy/local tests
+  // that mock the catch-all shape.
   let segments;
   const rawPath = (req.url || '').split('?')[0] || '';
-  if (Array.isArray(req.query?.slug) && req.query.slug.length) {
-    segments = req.query.slug.filter(Boolean);
-  } else if (typeof req.query?.slug === 'string' && req.query.slug) {
-    segments = [req.query.slug];
-  } else {
-    const cleanPath = rawPath.replace(/^\/+/, '').replace(/^api\/?/, '');
-    segments = cleanPath.split('/').filter(Boolean);
+  const cleanPath = rawPath.replace(/^\/+/, '').replace(/^api\/?/, '');
+  segments = cleanPath.split('/').filter(Boolean);
+  if (segments.length === 0) {
+    if (Array.isArray(req.query?.slug) && req.query.slug.length) {
+      segments = req.query.slug.filter(Boolean);
+    } else if (typeof req.query?.slug === 'string' && req.query.slug) {
+      segments = [req.query.slug];
+    }
   }
   const first = segments[0] || '';
   const second = segments[1] || '';

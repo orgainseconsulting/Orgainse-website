@@ -18,7 +18,7 @@ import pytest
 import requests
 from motor.motor_asyncio import AsyncIOMotorClient
 
-BASE = os.environ.get("REACT_APP_BACKEND_URL", "https://review-and-learn.preview.emergentagent.com").rstrip("/")
+BASE = os.environ.get("REACT_APP_BACKEND_URL", "https://orgainse-dashboard.preview.emergentagent.com").rstrip("/")
 TEMP_PASSWORD = "Orgainse25%Web.."
 MONGO_URL = "mongodb://localhost:27017"
 DB_NAME = "orgainse-consulting"

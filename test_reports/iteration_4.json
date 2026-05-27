@@ -71,5 +71,5 @@
   "seed_data_creation": "None",
   "retest_needed": false,
   "main_agent_can_self_test": true,
-  "context_for_next_testing_agent": "Iteration 4 content/SEO sweep verified at 100%. JSON-LD has minor duplicate keys (knowsAbout, areaServed) in Organization schema — non-blocking. Public URL: https://1954cad7-a00b-483c-9a78-3b700df1269e.preview.emergentagent.com. Smart Calendar Service Type dropdown enumerated. Footer Industries list confirmed exactly 3 items. All static SEO files (llms.txt, sitemap.xml, robots.txt) return 200."
+  "context_for_next_testing_agent": "Iteration 4 content/SEO sweep verified at 100%. JSON-LD has minor duplicate keys (knowsAbout, areaServed) in Organization schema — non-blocking. Public URL: https://orgainse-dashboard.preview.emergentagent.com. Smart Calendar Service Type dropdown enumerated. Footer Industries list confirmed exactly 3 items. All static SEO files (llms.txt, sitemap.xml, robots.txt) return 200."
 }

@@ -26,7 +26,7 @@ def _db_sub(email=None, sid=None):
     q = {"email": email} if email else {"id": sid}
     return _db.newsletter_subscriptions.find_one(q)
 
-BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "https://review-and-learn.preview.emergentagent.com").rstrip("/")
+BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "https://orgainse-dashboard.preview.emergentagent.com").rstrip("/")
 ADMIN_USER = "orgainse_admin"
 ADMIN_PASS = "Org@iNs3-Adm!n-2026-x7P9qK"
 
