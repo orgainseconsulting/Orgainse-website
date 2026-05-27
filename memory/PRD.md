@@ -261,3 +261,16 @@ See `/app/memory/test_credentials.md`.
 - **Animated "Stay tuned" empty-state banners** (`StayTunedBanner`) — wired into `/blog` and `/newsletter`. Live countdown (days/hrs/mins/secs), animated dots, CTAs to newsletter & contact.
 - **Test data cleanup** — all seeded test `blog_posts` and `newsletter_issues` were removed so empty banners render.
 - **Vercel serverless mirror** — every new endpoint mirrored to `/app/api/*` (auth/me, admin-change-password, admin-users CRUD w/ profile fields, admin-users/reset-password, app-settings w/ launch timers, app-settings/public w/ derived hosts) using a shared `/app/api/_auth-utils.js` helper.
+
+## Implemented (May 27, 2026 — Vercel routing + lead-tool schema parity)
+
+- **Vercel multi-segment routing fix** — `[...slug].js` catch-all syntax is Next.js-specific; in this CRA Vercel project it only matched single-segment paths, returning `x-vercel-error: NOT_FOUND` for `/api/auth/me`, `/api/app-settings/public`, `/api/admin-users/reset-password`, and all `/api/newsletter-admin/*`. Fix: renamed dispatcher to `api/index.js` and added explicit rewrite in `vercel.json`: `{ "source": "/api/(.*)", "destination": "/api" }`. Dispatcher now parses `req.url` directly (Vercel preserves original URL on rewrite).
+- **ROI Calculator handler rewrite** (`api/_handlers/roi-calculator.js`) — old schema used `annual_revenue`/`current_pm_costs`/`employee_count`/`implementation_timeline`. Frontend (`ROICalculator.js`) actually sends `current_project_cost`/`project_duration_months`/`current_efficiency_rating`/`desired_services`/`user_region`. Ported the FastAPI logic (`backend/routers/forms.py::roi_calculator`) to JS so the Vercel function accepts the live frontend payload and returns the response shape the result view expects (`payback_period_months`, `estimated_project_cost`, `efficiency_gain_percent`, `recommended_services`, etc.).
+- **AI Assessment handler rewrite** (`api/_handlers/ai-assessment.js`) — old schema expected `{user_info, responses: { tech_infrastructure, ai_tools_usage, ... }}`. Frontend (`AIAssessmentTool.js`) sends flat `{name, email, company, phone, responses: [{question_id, answer, score}]}`. Rewrote handler to match FastAPI scoring (`avg(score) * 10`, score labels: AI Beginner / Developing / Ready / Advanced) and response shape (`score_label` returned).
+
+## ⚠ Vercel deployment rules (must follow)
+
+- The Hobby plan caps a deployment at **12 functions**. Keep ONE function file: `api/index.js`. New routes must be added inside `api/_handlers/**` and wired through the switch in `api/index.js`. Adding a new `.js` directly under `/api/` will instantly break the deploy.
+- Do **not** rename `api/index.js` to `[[...slug]].js` or `[...slug].js` — only `api/index.js` + explicit rewrite reliably routes multi-segment paths on CRA framework preset.
+- Frontend (`src/lib/api.js`) must call `${window.location.origin}/api/...` at runtime — baked-in `REACT_APP_BACKEND_URL` aliases go stale per-deploy.
+

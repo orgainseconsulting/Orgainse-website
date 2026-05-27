@@ -1,259 +1,143 @@
+/**
+ * POST /api/ai-assessment
+ *
+ * Mirrors backend/routers/forms.py::ai_assessment.
+ *
+ * Frontend (frontend/src/pages/AIAssessmentTool.js) submits:
+ *   { name, email, company?, phone?, industry?, company_size?,
+ *     responses: [{ question_id, answer, score }, ...] }
+ *
+ * Scoring: average response.score (1-10) × 10  =>  0-100 maturity score.
+ */
 import { MongoClient } from 'mongodb';
-import { securityHeaders, rateLimit, sanitizeInput, validateEmail, validateRequestSize } from '../_middleware/security.js';
+import {
+  securityHeaders,
+  rateLimit,
+  sanitizeInput,
+  validateEmail,
+  validateRequestSize,
+} from '../_middleware/security.js';
 
-// Generate UUID-like ID without external dependency
 function generateId() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    const r = Math.random() * 16 | 0;
-    const v = c == 'x' ? r : (r & 0x3 | 0x8);
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
 }
 
-// MongoDB connection
 let cachedClient = null;
 let cachedDb = null;
-
 async function connectToDatabase() {
-  if (cachedClient && cachedDb) {
-    return { client: cachedClient, db: cachedDb };
-  }
-
+  if (cachedClient && cachedDb) return { client: cachedClient, db: cachedDb };
   const client = new MongoClient(process.env.MONGO_URL);
   await client.connect();
-  
   const db = client.db(process.env.DB_NAME || 'orgainse-consulting');
-  
   cachedClient = client;
   cachedDb = db;
-  
   return { client, db };
 }
 
-// Calculate AI maturity score based on responses
 function calculateMaturityScore(responses) {
-  let totalScore = 0;
-  let questionCount = 0;
-  
-  // Technology infrastructure (0-100)
-  if (responses.tech_infrastructure) {
-    totalScore += responses.tech_infrastructure * 20; // Scale 1-5 to 0-100
-    questionCount++;
-  }
-  
-  // AI tools usage (0-100)  
-  if (responses.ai_tools_usage) {
-    const aiToolsScore = {
-      'None': 0,
-      'Basic tools': 25,
-      'Advanced AI': 75,
-      'Custom AI solutions': 100
-    };
-    totalScore += aiToolsScore[responses.ai_tools_usage] || 0;
-    questionCount++;
-  }
-  
-  // Data management (0-100)
-  if (responses.data_management) {
-    const dataScore = {
-      'Spreadsheets': 10,
-      'Basic databases': 30,
-      'Advanced analytics': 70,
-      'AI-driven insights': 100
-    };
-    totalScore += dataScore[responses.data_management] || 0;
-    questionCount++;
-  }
-  
-  // Team AI readiness (0-100)
-  if (responses.team_readiness) {
-    totalScore += responses.team_readiness * 20; // Scale 1-5 to 0-100
-    questionCount++;
-  }
-  
-  // Process automation (0-100)
-  if (responses.process_automation) {
-    totalScore += responses.process_automation * 20; // Scale 1-5 to 0-100
-    questionCount++;
-  }
-  
-  // AI strategy (0-100)
-  if (responses.ai_strategy === 'yes') {
-    totalScore += 100;
-  } else if (responses.ai_strategy === 'no') {
-    totalScore += 0;
-  }
-  questionCount++;
-  
-  return questionCount > 0 ? Math.round(totalScore / questionCount) : 0;
+  if (!Array.isArray(responses) || responses.length === 0) return 0;
+  const total = responses.reduce((acc, r) => acc + (Number(r?.score) || 0), 0);
+  const avg = total / responses.length;
+  return Math.round(avg * 10);
 }
 
-// Generate recommendations based on maturity score
-function generateRecommendations(score, userInfo) {
-  const recommendations = [];
-  
+function scoreLabel(score) {
+  if (score >= 80) return 'AI Advanced';
+  if (score >= 60) return 'AI Ready';
+  if (score >= 40) return 'AI Developing';
+  return 'AI Beginner';
+}
+
+function generateRecommendations(score) {
   if (score < 25) {
-    recommendations.push({
-      title: "AI Foundation Building",
-      description: "Start with basic AI tools and team training to build fundamental AI capabilities",
-      priority: "High",
-      timeline: "3-6 months",
-      category: "Foundation"
-    });
-    recommendations.push({
-      title: "Data Infrastructure Setup",
-      description: "Implement proper data collection and management systems as the foundation for AI",
-      priority: "High", 
-      timeline: "2-4 months",
-      category: "Infrastructure"
-    });
-  } else if (score >= 25 && score < 50) {
-    recommendations.push({
-      title: "Process Automation Implementation",
-      description: "Implement AI-powered workflow automation to improve efficiency",
-      priority: "High",
-      timeline: "6-12 months", 
-      category: "Automation"
-    });
-    recommendations.push({
-      title: "Team AI Training Program",
-      description: "Comprehensive AI training for your team to maximize adoption",
-      priority: "Medium",
-      timeline: "3-6 months",
-      category: "Training"
-    });
-  } else if (score >= 50 && score < 75) {
-    recommendations.push({
-      title: "Advanced AI Integration",
-      description: "Implement sophisticated AI solutions for predictive analytics and decision support",
-      priority: "High",
-      timeline: "6-18 months",
-      category: "Advanced AI"
-    });
-    recommendations.push({
-      title: "AI Governance Framework",
-      description: "Establish proper AI governance and ethics guidelines for responsible AI use",
-      priority: "Medium",
-      timeline: "3-6 months",
-      category: "Governance"
-    });
-  } else {
-    recommendations.push({
-      title: "AI Innovation Leadership",
-      description: "Lead industry innovation with cutting-edge AI research and development",
-      priority: "Strategic",
-      timeline: "12+ months",
-      category: "Innovation"
-    });
-    recommendations.push({
-      title: "AI Center of Excellence",
-      description: "Establish an AI Center of Excellence to drive organization-wide AI initiatives",
-      priority: "Medium",
-      timeline: "6-12 months", 
-      category: "Strategic"
-    });
+    return [
+      { title: 'AI Foundation Building', description: 'Start with basic AI tools and team training to build fundamental AI capabilities', priority: 'High', timeline: '3-6 months', category: 'Foundation' },
+      { title: 'Data Infrastructure Setup', description: 'Implement proper data collection and management systems as the foundation for AI', priority: 'High', timeline: '2-4 months', category: 'Infrastructure' },
+    ];
   }
-  
-  return recommendations;
+  if (score < 50) {
+    return [
+      { title: 'Process Automation Implementation', description: 'Implement AI-powered workflow automation to improve efficiency', priority: 'High', timeline: '6-12 months', category: 'Automation' },
+      { title: 'Team AI Training Program', description: 'Comprehensive AI training for your team to maximize adoption', priority: 'Medium', timeline: '3-6 months', category: 'Training' },
+    ];
+  }
+  if (score < 75) {
+    return [
+      { title: 'Advanced AI Integration', description: 'Implement sophisticated AI solutions for predictive analytics and decision support', priority: 'High', timeline: '6-18 months', category: 'Advanced AI' },
+      { title: 'AI Governance Framework', description: 'Establish proper AI governance and ethics guidelines for responsible AI use', priority: 'Medium', timeline: '3-6 months', category: 'Governance' },
+    ];
+  }
+  return [
+    { title: 'AI Innovation Leadership', description: 'Lead industry innovation with cutting-edge AI research and development', priority: 'Strategic', timeline: '12+ months', category: 'Innovation' },
+    { title: 'AI Center of Excellence', description: 'Establish an AI Center of Excellence to drive organization-wide AI initiatives', priority: 'Medium', timeline: '6-12 months', category: 'Strategic' },
+  ];
 }
 
 export default async function handler(req, res) {
-  // Apply security headers
   securityHeaders(req, res);
-  
-  // Handle preflight requests
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-  
-  // Only allow POST requests
+  if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') {
-    return res.status(405).json({ 
-      error: 'Method not allowed',
-      message: 'Only POST requests are supported for AI assessments'
-    });
+    return res.status(405).json({ error: 'Method not allowed' });
   }
-  
-  try {
-    // Apply rate limiting
-    if (!rateLimit(req, res, { max: 50, windowMs: 15 * 60 * 1000 })) {
-      return; // Rate limit exceeded
-    }
 
-    // Validate request size
-    if (!validateRequestSize(req, res, 10 * 1024)) { // 10KB limit
-      return;
-    }
+  try {
+    if (!rateLimit(req, res, { max: 50, windowMs: 15 * 60 * 1000 })) return;
+    if (!validateRequestSize(req, res, 10 * 1024)) return;
 
     const { db } = await connectToDatabase();
-    
-    // Sanitize input data
-    const sanitizedBody = sanitizeInput(req.body);
-    const { user_info, responses } = sanitizedBody;
-    
-    if (!user_info || !user_info.name || !user_info.email) {
-      return res.status(400).json({
-        error: 'Validation failed',
-        message: 'User information (name, email) is required'
-      });
+    const data = sanitizeInput(req.body || {});
+    const { name, email, company = '', phone = '', industry = '', company_size = '', responses } = data;
+
+    if (!name || !email) {
+      return res.status(400).json({ error: 'Validation failed', message: 'Name and email are required' });
+    }
+    if (!validateEmail(email)) {
+      return res.status(400).json({ error: 'Invalid email format' });
+    }
+    if (!Array.isArray(responses) || responses.length === 0) {
+      return res.status(400).json({ error: 'Validation failed', message: 'Assessment responses are required' });
     }
 
-    // Validate email format
-    if (!validateEmail(user_info.email)) {
-      return res.status(400).json({ 
-        error: 'Invalid email format' 
-      });
-    }
-    
-    if (!responses) {
-      return res.status(400).json({
-        error: 'Validation failed', 
-        message: 'Assessment responses are required'
-      });
-    }
-    
-    // Calculate maturity score
-    const maturityScore = calculateMaturityScore(responses);
-    
-    // Generate recommendations
-    const recommendations = generateRecommendations(maturityScore, user_info);
-    
-    // Prepare assessment data
-    const assessmentData = {
+    const score = calculateMaturityScore(responses);
+    const recs = generateRecommendations(score);
+
+    const doc = {
       assessment_id: generateId(),
       user_info: {
-        name: user_info.name,
-        email: user_info.email,
-        company: user_info.company || null,
-        industry: user_info.industry || null,
-        company_size: user_info.company_size || null
+        name,
+        email: String(email).toLowerCase(),
+        company,
+        phone,
+        industry,
+        company_size,
       },
-      responses: responses,
-      maturity_score: maturityScore,
-      recommendations: recommendations,
+      responses,
+      maturity_score: score,
+      score_label: scoreLabel(score),
+      recommendations: recs,
+      leadType: 'AI Assessment',
+      source: req.headers?.referer || 'Direct',
       submitted_at: new Date().toISOString(),
-      leadType: "AI Assessment",
-      source: "ai_assessment_tool"
+      ip_address: req.headers?.['x-forwarded-for']?.split(',')[0]?.trim() || req.socket?.remoteAddress || 'unknown',
     };
-    
-    // Insert into MongoDB
-    const result = await db.collection('ai_assessment_leads').insertOne(assessmentData);
-    
-    // Return response
+
+    await db.collection('ai_assessment_leads').insertOne(doc);
+
     return res.status(200).json({
       success: true,
-      assessment_id: assessmentData.assessment_id,
-      maturity_score: maturityScore,
-      recommendations: recommendations,
-      message: "AI assessment completed successfully",
-      timestamp: assessmentData.submitted_at
+      assessment_id: doc.assessment_id,
+      maturity_score: score,
+      score_label: doc.score_label,
+      recommendations: recs,
+      message: 'AI assessment completed successfully',
+      timestamp: doc.submitted_at,
     });
-    
   } catch (error) {
     console.error('AI Assessment API Error:', error);
-    return res.status(500).json({
-      error: 'Internal server error',
-      message: 'Failed to process AI assessment. Please try again.'
-    });
+    return res.status(500).json({ error: 'Internal server error', message: 'Failed to process AI assessment. Please try again.' });
   }
 }
