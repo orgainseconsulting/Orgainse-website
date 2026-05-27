@@ -38,8 +38,17 @@ import appSettingsHandler from './_handlers/app-settings.js';
 import blogAdminHandler from './_handlers/blog-admin.js';
 import newsletterAdminHandler from './_handlers/newsletter-admin/index.js';
 
-// Newsletter sending can take longer than the default 10s.
-export const config = { maxDuration: 60 };
+// Vercel function config:
+// - maxDuration: newsletter sends can take >10s when fanning out to Resend.
+// - bodyParser.sizeLimit: blog/newsletter editors POST base64 cover images
+//   (~1.5 MB raw → ~2 MB encoded) on top of HTML, so the default 1 MB cap
+//   would silently drop large saves.
+export const config = {
+  maxDuration: 60,
+  api: {
+    bodyParser: { sizeLimit: '4mb' },
+  },
+};
 
 function notFound(res, path) {
   return res.status(404).json({ error: 'Not found', path });

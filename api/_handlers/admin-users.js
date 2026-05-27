@@ -18,7 +18,7 @@ import {
 export default async function handler(req, res) {
   securityHeaders(req, res);
   if (req.method === 'OPTIONS') return res.status(200).end();
-  if (!validateRequestSize(req, res, 8 * 1024)) return;
+  if (!validateRequestSize(req, res, 64 * 1024)) return;
 
   const claims = requireAdmin(req, res);
   if (!claims) return;

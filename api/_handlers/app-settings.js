@@ -31,7 +31,7 @@ function toAdminShape(doc) {
 export default async function handler(req, res) {
   securityHeaders(req, res);
   if (req.method === 'OPTIONS') return res.status(200).end();
-  if (!validateRequestSize(req, res, 32 * 1024)) return;
+  if (!validateRequestSize(req, res, 128 * 1024)) return;
 
   const claims = requireAdmin(req, res);
   if (!claims) return;
