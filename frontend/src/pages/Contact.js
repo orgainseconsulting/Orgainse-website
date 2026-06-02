@@ -103,7 +103,7 @@ const Contact = () => {
 
   const contactMethods = [
     {
-      title: "Phone — India (HQ)",
+      title: "Phone — Bengaluru (Corporate Office)",
       description: "Direct consultation with our specialists",
       details: ["+91 97403 84683", "+91 97403 94863"],
       icon: Phone,
@@ -352,7 +352,7 @@ const Contact = () => {
                         <Phone className="h-8 w-8 text-slate-600" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-slate-800 mb-2">Phone — India (HQ)</h3>
+                        <h3 className="text-xl font-bold text-slate-800 mb-2">Phone — Bengaluru (Corporate Office)</h3>
                         <p className="text-slate-600 text-sm mb-3">Direct consultation with our specialists</p>
                         <div className="space-y-1">
                           <p className="text-slate-700 font-medium">

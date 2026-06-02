@@ -30,9 +30,13 @@ const Footer = () => {
               <img
                 src="/orgainse-logo.png"
                 alt="Orgainse Consulting — Let us plan your SUCCESS"
-                className="h-20 sm:h-24 w-auto object-contain transition-all duration-300 transform hover:scale-105"
+                className="h-20 sm:h-24 w-auto object-contain bg-white rounded-2xl px-4 py-2 shadow-lg ring-1 ring-slate-200/70 hover:shadow-xl hover:ring-orange-300/60 transition-all duration-300 transform hover:scale-105"
                 width="1689"
                 height="476"
+                style={{
+                  boxShadow:
+                    "0 1px 0 rgba(255,255,255,0.9) inset, 0 -1px 0 rgba(0,0,0,0.04) inset, 0 8px 18px -8px rgba(15,23,42,0.18), 0 2px 4px rgba(15,23,42,0.06)",
+                }}
               />
             </Link>
             <p className="text-slate-600 text-sm">

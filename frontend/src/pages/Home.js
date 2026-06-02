@@ -7,10 +7,14 @@ import {
   Calendar,
   CheckCircle,
   ExternalLink,
+  Gauge,
   Globe,
   Mail,
   Shield,
+  Sparkles,
+  Star,
   Target,
+  TrendingDown,
   TrendingUp,
   X,
   Zap,
@@ -104,10 +108,38 @@ const Home = () => {
   };
 
   const stats = [
-    { value: "Faster", label: "AI-Native Project Delivery", color: "from-orange-400 to-orange-600" },
-    { value: "Lower", label: "OPEX vs. Baseline (Measured)", color: "from-green-400 to-green-600" },
-    { value: "4.6★", label: "Client Satisfaction Rating", color: "from-yellow-400 to-yellow-600" },
-    { value: "90", label: "Days Average Implementation", color: "from-purple-400 to-purple-600" },
+    {
+      icon: Gauge,
+      eyebrow: "Velocity",
+      headline: "AI-Native",
+      tagline: "Delivery Cadence",
+      color: "from-orange-500 to-amber-500",
+      iconBg: "bg-orange-100 text-orange-600",
+    },
+    {
+      icon: TrendingDown,
+      eyebrow: "OPEX ↓",
+      headline: "vs. Baseline",
+      tagline: "Measured, Not Promised",
+      color: "from-emerald-500 to-green-500",
+      iconBg: "bg-emerald-100 text-emerald-600",
+    },
+    {
+      icon: Star,
+      eyebrow: "4.6 / 5",
+      headline: "Client CSAT",
+      tagline: "Verified Across Engagements",
+      color: "from-yellow-500 to-amber-500",
+      iconBg: "bg-yellow-100 text-yellow-600",
+    },
+    {
+      icon: Sparkles,
+      eyebrow: "~90 Days",
+      headline: "Kickoff → Live",
+      tagline: "Average Time to Outcome",
+      color: "from-purple-500 to-fuchsia-500",
+      iconBg: "bg-purple-100 text-purple-600",
+    },
   ];
 
   const services = [
@@ -141,7 +173,6 @@ const Home = () => {
     {
       title: "Healthcare Revenue Intelligence Advisory",
       description: "AI-powered advisory for US healthcare revenue performance — denial intelligence, payer behavior analytics, and governance frameworks",
-      scopeNote: "Right fit: organizations with RCM operations already in place that need an independent, AI-powered view of revenue performance. Not the right fit: outsourced billing, coding, AR follow-up, claims processing, or operational RCM delivery — Orgainse does not provide these services.",
       icon: Shield,
       keywords: "healthcare revenue cycle management consulting, RCM advisory, AI revenue intelligence US healthcare",
       gradient: "from-blue-400 to-indigo-500",
@@ -362,17 +393,30 @@ const Home = () => {
               {/* Mobile-Optimized Stats Display */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 {stats.map((stat, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
+                    data-testid={`hero-stat-card-${index}`}
                     className="group relative transform hover:scale-105 transition-all duration-500 animate-fade-in"
                     style={{ animationDelay: `${index * 200 + 1000}ms` }}
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} rounded-xl opacity-20 group-hover:opacity-30 transition-opacity blur-sm`}></div>
-                    <div className="relative bg-white/90 backdrop-blur-lg rounded-xl p-3 sm:p-4 border border-white/40 hover:border-orange-300 transition-all duration-300 shadow-lg h-20 sm:h-24 flex flex-col items-center justify-center text-center">
-                      <div className={`text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent animate-counter mb-1`}>
-                        {stat.value}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} rounded-2xl opacity-15 group-hover:opacity-25 transition-opacity blur-sm`}></div>
+                    <div className="relative bg-white/95 backdrop-blur-lg rounded-2xl p-4 sm:p-5 border border-white/60 hover:border-orange-300 transition-all duration-300 shadow-lg min-h-[110px] sm:min-h-[124px] flex flex-col items-start text-left overflow-hidden">
+                      <div className="flex items-center justify-between w-full mb-2">
+                        <div className={`p-1.5 sm:p-2 rounded-lg ${stat.iconBg} shadow-sm`}>
+                          <stat.icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                        </div>
+                        <span className={`text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.14em] bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                          {stat.eyebrow}
+                        </span>
                       </div>
-                      <div className="text-xs sm:text-xs text-slate-700 font-medium leading-tight max-w-full">{stat.label}</div>
+                      <div className="text-sm sm:text-base font-bold text-slate-900 leading-tight">
+                        {stat.headline}
+                      </div>
+                      <div className="text-[10px] sm:text-xs text-slate-500 font-medium leading-snug mt-0.5">
+                        {stat.tagline}
+                      </div>
+                      {/* Decorative bottom accent */}
+                      <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${stat.color} opacity-60 group-hover:opacity-100 transition-opacity`}></div>
                     </div>
                   </div>
                 ))}
