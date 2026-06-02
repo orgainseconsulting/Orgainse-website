@@ -53,6 +53,70 @@ export default async function handler(req, res) {
   const action = segments[1];
 
   try {
+    if (resource === 'analytics' && req.method === 'GET') {
+      const issuesCol = db.collection('newsletter_issues');
+      const subsCol = db.collection('newsletter_subscriptions');
+      const sinceDays = (n) => new Date(Date.now() - n * 24 * 60 * 60 * 1000).toISOString();
+      const [
+        totalIssues, publishedIssues, draftIssues, sentIssues,
+        viewsAgg, topIssues, recentIssues,
+        totalSubs, activeSubs, unsubSubs, bouncedSubs,
+        subs7d, subs30d,
+        publishedLast30,
+      ] = await Promise.all([
+        issuesCol.countDocuments({}),
+        issuesCol.countDocuments({ status: 'published' }),
+        issuesCol.countDocuments({ status: 'draft' }),
+        issuesCol.countDocuments({ status: 'sent' }),
+        issuesCol.aggregate([{ $group: { _id: null, total: { $sum: { $ifNull: ['$view_count', 0] } } } }]).toArray(),
+        issuesCol.find(
+          { status: { $in: ['published', 'sent'] } },
+          { projection: { _id: 0, slug: 1, title: 1, view_count: 1, published_at: 1, sent_at: 1, status: 1, sent_count: 1 } }
+        ).sort({ view_count: -1, published_at: -1 }).limit(5).toArray(),
+        issuesCol.find(
+          {},
+          { projection: { _id: 0, slug: 1, title: 1, status: 1, view_count: 1, updated_at: 1, published_at: 1, sent_at: 1, sent_count: 1 } }
+        ).sort({ updated_at: -1 }).limit(5).toArray(),
+        subsCol.countDocuments({}),
+        subsCol.countDocuments({ unsubscribed: { $ne: true }, bounced: { $ne: true } }),
+        subsCol.countDocuments({ unsubscribed: true }),
+        subsCol.countDocuments({ bounced: true }),
+        subsCol.countDocuments({ subscribed_at: { $gte: sinceDays(7) } }),
+        subsCol.countDocuments({ subscribed_at: { $gte: sinceDays(30) } }),
+        issuesCol.countDocuments({ status: { $in: ['published', 'sent'] }, published_at: { $gte: sinceDays(30) } }),
+      ]);
+      const totalViews = viewsAgg[0]?.total || 0;
+      return res.status(200).json({
+        success: true,
+        analytics: {
+          total_issues: totalIssues,
+          published_issues: publishedIssues,
+          draft_issues: draftIssues,
+          sent_issues: sentIssues,
+          published_last_30d: publishedLast30,
+          total_views: totalViews,
+          avg_views_per_published: publishedIssues ? Math.round(totalViews / publishedIssues) : 0,
+          total_subscribers: totalSubs,
+          active_subscribers: activeSubs,
+          unsubscribed: unsubSubs,
+          bounced: bouncedSubs,
+          new_subscribers_7d: subs7d,
+          new_subscribers_30d: subs30d,
+          top_issues: topIssues.map((i) => ({
+            slug: i.slug, title: i.title, view_count: i.view_count || 0,
+            sent_count: i.sent_count || 0, status: i.status,
+            published_at: i.published_at, sent_at: i.sent_at,
+          })),
+          recent_issues: recentIssues.map((i) => ({
+            slug: i.slug, title: i.title, status: i.status,
+            view_count: i.view_count || 0, sent_count: i.sent_count || 0,
+            updated_at: i.updated_at, published_at: i.published_at, sent_at: i.sent_at,
+          })),
+          generated_at: new Date().toISOString(),
+        },
+      });
+    }
+
     if (resource === 'issues') {
       const col = db.collection('newsletter_issues');
 
@@ -75,7 +139,10 @@ export default async function handler(req, res) {
         return res.status(200).json({
           success: true,
           pagination: { page, page_size: pageSize, total },
-          issues: rows.map((r) => issueToAdminShape({ ...r, content_html: '', cover_image_b64: null, og_image_b64: null })),
+          issues: rows.map((r) => ({
+            ...issueToAdminShape({ ...r, content_html: '', cover_image_b64: null, og_image_b64: null }),
+            view_count: r.view_count || 0,
+          })),
         });
       }
 

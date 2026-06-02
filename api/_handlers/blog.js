@@ -77,10 +77,16 @@ export default async function handler(req, res) {
     const { slug } = req.query;
 
     if (slug) {
-      const doc = await db.collection('blog_posts').findOne(
+      // Atomically increment view_count when a single post is fetched.
+      // This is the cheapest "page view" we can capture without a separate
+      // beacon endpoint; CDN cache (s-maxage=300) means we slightly undercount
+      // in 5-minute windows, which is acceptable for admin analytics.
+      const result = await db.collection('blog_posts').findOneAndUpdate(
         { slug, status: 'published' },
-        { projection: publicProjection(true) }
+        { $inc: { view_count: 1 } },
+        { projection: publicProjection(true), returnDocument: 'after' }
       );
+      const doc = result?.value ?? result; // driver-version safety
       if (!doc) return res.status(404).json({ error: 'Post not found' });
       res.setHeader('Cache-Control', 'public, max-age=60, s-maxage=300');
       return res.status(200).json({ success: true, post: reshape(doc, true) });

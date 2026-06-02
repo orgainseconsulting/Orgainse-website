@@ -222,7 +222,55 @@ export default async function handler(req, res) {
 
   try {
     if (req.method === 'GET') {
-      const { id } = req.query;
+      const { id, action } = req.query;
+
+      // -- Analytics summary --------------------------------------------------
+      if (action === 'analytics') {
+        const sinceDays = (n) => new Date(Date.now() - n * 24 * 60 * 60 * 1000).toISOString();
+        const [
+          totalPosts,
+          publishedPosts,
+          draftPosts,
+          viewsAgg,
+          topPosts,
+          recentPosts,
+          publishedLast30,
+        ] = await Promise.all([
+          col.countDocuments({}),
+          col.countDocuments({ status: 'published' }),
+          col.countDocuments({ status: 'draft' }),
+          col.aggregate([{ $group: { _id: null, total: { $sum: { $ifNull: ['$view_count', 0] } } } }]).toArray(),
+          col.find({ status: 'published' }, {
+            projection: { _id: 0, id: 1, slug: 1, title: 1, view_count: 1, published_at: 1, category: 1 },
+          }).sort({ view_count: -1, published_at: -1 }).limit(5).toArray(),
+          col.find({}, {
+            projection: { _id: 0, id: 1, slug: 1, title: 1, status: 1, view_count: 1, updated_at: 1, published_at: 1 },
+          }).sort({ updated_at: -1 }).limit(5).toArray(),
+          col.countDocuments({ status: 'published', published_at: { $gte: sinceDays(30) } }),
+        ]);
+        const totalViews = viewsAgg[0]?.total || 0;
+        return res.status(200).json({
+          success: true,
+          analytics: {
+            total_posts: totalPosts,
+            published_posts: publishedPosts,
+            draft_posts: draftPosts,
+            published_last_30d: publishedLast30,
+            total_views: totalViews,
+            avg_views_per_published: publishedPosts ? Math.round(totalViews / publishedPosts) : 0,
+            top_posts: topPosts.map((p) => ({
+              slug: p.slug, title: p.title, view_count: p.view_count || 0,
+              published_at: p.published_at, category: p.category || '',
+            })),
+            recent_posts: recentPosts.map((p) => ({
+              slug: p.slug, title: p.title, status: p.status,
+              view_count: p.view_count || 0, updated_at: p.updated_at, published_at: p.published_at,
+            })),
+            generated_at: new Date().toISOString(),
+          },
+        });
+      }
+
       if (id) {
         const doc = await col.findOne({ id }, { projection: adminProjection });
         if (!doc) return res.status(404).json({ error: 'Post not found' });
@@ -242,6 +290,7 @@ export default async function handler(req, res) {
         pagination: { page, page_size: pageSize, total },
         posts: rows.map((r) => ({
           ...toAdminShape({ ...r, content_html: '', cover_image_b64: null, og_image_b64: null }),
+          view_count: r.view_count || 0,
         })),
       });
     }

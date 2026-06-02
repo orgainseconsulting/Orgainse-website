@@ -17,7 +17,13 @@ export default async function handler(req, res) {
     const { slug } = req.query;
 
     if (slug) {
-      const doc = await col.findOne({ slug, status: { $in: ['published', 'sent'] } }, { projection: { _id: 0 } });
+      // Atomically increment view_count on each public single-issue fetch.
+      const result = await col.findOneAndUpdate(
+        { slug, status: { $in: ['published', 'sent'] } },
+        { $inc: { view_count: 1 } },
+        { projection: { _id: 0 }, returnDocument: 'after' }
+      );
+      const doc = result?.value ?? result;
       if (!doc) return res.status(404).json({ error: 'Issue not found' });
       res.setHeader('Cache-Control', 'public, max-age=60, s-maxage=300');
       return res.status(200).json({ success: true, issue: issueToPublicShape(doc, true) });

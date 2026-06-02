@@ -85,4 +85,7 @@ export const newsletterApi = {
   adminSegmentsList: () => request('/newsletter-admin/segments', { admin: true }),
   adminSegmentCreate: (seg) => request('/newsletter-admin/segments', { method: 'POST', body: seg, admin: true }),
   adminSegmentDelete: (id) => request(`/newsletter-admin/segments?id=${encodeURIComponent(id)}`, { method: 'DELETE', admin: true }),
+
+  // Admin — analytics
+  adminAnalytics: () => request('/newsletter-admin/analytics', { admin: true }),
 };

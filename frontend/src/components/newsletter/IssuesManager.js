@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
-import { Plus, Edit3, ExternalLink } from 'lucide-react';
+import { Plus, Edit3, ExternalLink, Eye } from 'lucide-react';
 import { newsletterApi } from '../../lib/newsletterApi';
 import IssueEditor from './IssueEditor';
 
@@ -87,6 +87,7 @@ const IssuesManager = () => {
                 <th className="px-4 py-3 text-left">Issue</th>
                 <th className="px-4 py-3 text-left">Status</th>
                 <th className="px-4 py-3 text-left">Edition</th>
+                <th className="px-4 py-3 text-right">Views</th>
                 <th className="px-4 py-3 text-left">Send stats</th>
                 <th className="px-4 py-3 text-left">Updated</th>
                 <th className="px-4 py-3 text-right">Actions</th>
@@ -104,6 +105,15 @@ const IssuesManager = () => {
                   </td>
                   <td className="px-4 py-3"><StatusBadge status={i.status} /></td>
                   <td className="px-4 py-3 text-sm text-slate-600">{i.edition_date ? fmt(i.edition_date) : '—'}</td>
+                  <td className="px-4 py-3 text-right">
+                    <span
+                      className="inline-flex items-center gap-1 text-xs font-bold text-slate-700 tabular-nums"
+                      data-testid={`issue-row-${i.slug}-views`}
+                    >
+                      <Eye className="h-3 w-3 text-slate-400" />
+                      {(i.view_count || 0).toLocaleString()}
+                    </span>
+                  </td>
                   <td className="px-4 py-3 text-xs text-slate-600">
                     {i.status === 'sent' && i.send_stats ? (
                       <>

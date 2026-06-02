@@ -66,4 +66,5 @@ export const blogApi = {
   adminCreate: (post) => adminRequest('/blog-admin', { method: 'POST', body: post }),
   adminUpdate: (id, post) => adminRequest(`/blog-admin?id=${encodeURIComponent(id)}`, { method: 'PUT', body: post }),
   adminDelete: (id) => adminRequest(`/blog-admin?id=${encodeURIComponent(id)}`, { method: 'DELETE' }),
+  adminAnalytics: () => adminRequest('/blog-admin?action=analytics'),
 };

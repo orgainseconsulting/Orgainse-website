@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
-import { Plus, Edit3, ExternalLink } from 'lucide-react';
+import { Plus, Edit3, ExternalLink, Eye } from 'lucide-react';
 import { blogApi } from '../../lib/blogApi';
 import BlogEditor from './BlogEditor';
 import NextLaunchCountdownCard from '../admin/NextLaunchCountdownCard';
+import AnalyticsPanel, { ANALYTICS_ICONS } from '../admin/AnalyticsPanel';
 
 const StatusBadge = ({ status }) => {
   const styles =
@@ -35,6 +36,9 @@ const BlogManager = () => {
   const [editorPostId, setEditorPostId] = useState(undefined); // undefined = list view, null = new, string = edit
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
+  const [analytics, setAnalytics] = useState(null);
+  const [analyticsLoading, setAnalyticsLoading] = useState(true);
+  const [analyticsError, setAnalyticsError] = useState(null);
 
   const fetchPosts = useCallback(async () => {
     setLoading(true);
@@ -49,11 +53,25 @@ const BlogManager = () => {
     }
   }, [page]);
 
+  const fetchAnalytics = useCallback(async () => {
+    setAnalyticsLoading(true);
+    setAnalyticsError(null);
+    try {
+      const res = await blogApi.adminAnalytics();
+      setAnalytics(res.analytics || null);
+    } catch (err) {
+      setAnalyticsError(err.message || 'Failed to load analytics');
+    } finally {
+      setAnalyticsLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
     if (editorPostId === undefined) {
       fetchPosts();
+      fetchAnalytics();
     }
-  }, [editorPostId, fetchPosts]);
+  }, [editorPostId, fetchPosts, fetchAnalytics]);
 
   if (editorPostId !== undefined) {
     return (
@@ -72,6 +90,54 @@ const BlogManager = () => {
   return (
     <div className="space-y-5" data-testid="blog-manager">
       <NextLaunchCountdownCard kind="blog" />
+
+      <AnalyticsPanel
+        title="Blog Analytics"
+        loading={analyticsLoading}
+        error={analyticsError}
+        stats={analytics ? [
+          {
+            testid: 'analytics-blog-total-views',
+            label: 'Total Views',
+            value: (analytics.total_views || 0).toLocaleString(),
+            hint: `${analytics.avg_views_per_published || 0} avg/published`,
+            icon: ANALYTICS_ICONS.Eye,
+            gradient: 'from-orange-500 to-amber-500',
+          },
+          {
+            testid: 'analytics-blog-published',
+            label: 'Published',
+            value: analytics.published_posts || 0,
+            hint: `${analytics.draft_posts || 0} draft${analytics.draft_posts === 1 ? '' : 's'}`,
+            icon: ANALYTICS_ICONS.FileText,
+            gradient: 'from-emerald-500 to-green-500',
+          },
+          {
+            testid: 'analytics-blog-last-30d',
+            label: 'New in 30 days',
+            value: analytics.published_last_30d || 0,
+            hint: 'Newly published posts',
+            icon: ANALYTICS_ICONS.TrendingUp,
+            gradient: 'from-sky-500 to-cyan-500',
+          },
+          {
+            testid: 'analytics-blog-top-post',
+            label: 'Top post views',
+            value: (analytics.top_posts?.[0]?.view_count || 0).toLocaleString(),
+            hint: analytics.top_posts?.[0]?.title?.slice(0, 32) || '—',
+            icon: ANALYTICS_ICONS.TrendingUp,
+            gradient: 'from-purple-500 to-fuchsia-500',
+          },
+        ] : []}
+        topTitle="Top 5 posts by views"
+        topRows={(analytics?.top_posts || []).map((p) => ({
+          slug: p.slug,
+          title: p.title,
+          view_count: p.view_count,
+          meta: [p.category, p.published_at ? new Date(p.published_at).toLocaleDateString() : null].filter(Boolean).join(' · '),
+        }))}
+        rowLinkBase="/blog"
+      />
 
       <div className="flex items-center justify-between">
         <div>
@@ -115,6 +181,7 @@ const BlogManager = () => {
                 <th className="px-4 py-3 text-left">Title</th>
                 <th className="px-4 py-3 text-left">Status</th>
                 <th className="px-4 py-3 text-left">Category</th>
+                <th className="px-4 py-3 text-right">Views</th>
                 <th className="px-4 py-3 text-left">Updated</th>
                 <th className="px-4 py-3 text-left">Author</th>
                 <th className="px-4 py-3 text-right">Actions</th>
@@ -129,6 +196,15 @@ const BlogManager = () => {
                   </td>
                   <td className="px-4 py-3"><StatusBadge status={p.status} /></td>
                   <td className="px-4 py-3 text-sm text-slate-600">{p.category || '—'}</td>
+                  <td className="px-4 py-3 text-right">
+                    <span
+                      className="inline-flex items-center gap-1 text-xs font-bold text-slate-700 tabular-nums"
+                      data-testid={`blog-row-${p.slug}-views`}
+                    >
+                      <Eye className="h-3 w-3 text-slate-400" />
+                      {(p.view_count || 0).toLocaleString()}
+                    </span>
+                  </td>
                   <td className="px-4 py-3 text-sm text-slate-600">{formatDate(p.updated_at)}</td>
                   <td className="px-4 py-3 text-sm text-slate-600">{p.author || '—'}</td>
                   <td className="px-4 py-3">
