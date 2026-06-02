@@ -14,7 +14,6 @@ import {
   Sparkles,
   Star,
   Target,
-  TrendingDown,
   TrendingUp,
   X,
   Zap,
@@ -111,34 +110,42 @@ const Home = () => {
     {
       icon: Gauge,
       eyebrow: "Velocity",
-      headline: "AI-Native",
-      tagline: "Delivery Cadence",
-      color: "from-orange-500 to-amber-500",
+      bigValue: "AI-First",
+      tagline: "GPT-Native Delivery Cadence",
+      gradient: "from-orange-500 to-amber-500",
       iconBg: "bg-orange-100 text-orange-600",
+      ringTint: "ring-orange-200/50",
+      live: true,
     },
     {
-      icon: TrendingDown,
-      eyebrow: "OPEX ↓",
-      headline: "vs. Baseline",
-      tagline: "Measured, Not Promised",
-      color: "from-emerald-500 to-green-500",
-      iconBg: "bg-emerald-100 text-emerald-600",
+      icon: Globe,
+      eyebrow: "Global Reach",
+      bigValue: "7",
+      bigValueSuffix: "Countries",
+      tagline: "IN · US · UK · UAE · AU · NZ · ZA",
+      gradient: "from-sky-500 to-cyan-500",
+      iconBg: "bg-sky-100 text-sky-600",
+      ringTint: "ring-sky-200/50",
     },
     {
       icon: Star,
-      eyebrow: "4.6 / 5",
-      headline: "Client CSAT",
+      eyebrow: "Client CSAT",
+      bigValue: "4.6",
+      bigValueSuffix: "/ 5",
       tagline: "Verified Across Engagements",
-      color: "from-yellow-500 to-amber-500",
+      gradient: "from-yellow-500 to-amber-500",
       iconBg: "bg-yellow-100 text-yellow-600",
+      ringTint: "ring-yellow-200/50",
     },
     {
       icon: Sparkles,
-      eyebrow: "~90 Days",
-      headline: "Kickoff → Live",
-      tagline: "Average Time to Outcome",
-      color: "from-purple-500 to-fuchsia-500",
+      eyebrow: "Time to Outcome",
+      bigValue: "~90",
+      bigValueSuffix: "Days",
+      tagline: "Kickoff → Live, on Average",
+      gradient: "from-purple-500 to-fuchsia-500",
       iconBg: "bg-purple-100 text-purple-600",
+      ringTint: "ring-purple-200/50",
     },
   ];
 
@@ -396,27 +403,56 @@ const Home = () => {
                   <div
                     key={index}
                     data-testid={`hero-stat-card-${index}`}
-                    className="group relative transform hover:scale-105 transition-all duration-500 animate-fade-in"
+                    className="group relative transform hover:scale-105 hover:-translate-y-1 transition-all duration-500 animate-fade-in"
                     style={{ animationDelay: `${index * 200 + 1000}ms` }}
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} rounded-2xl opacity-15 group-hover:opacity-25 transition-opacity blur-sm`}></div>
-                    <div className="relative bg-white/95 backdrop-blur-lg rounded-2xl p-4 sm:p-5 border border-white/60 hover:border-orange-300 transition-all duration-300 shadow-lg min-h-[110px] sm:min-h-[124px] flex flex-col items-start text-left overflow-hidden">
-                      <div className="flex items-center justify-between w-full mb-2">
-                        <div className={`p-1.5 sm:p-2 rounded-lg ${stat.iconBg} shadow-sm`}>
+                    {/* Soft glow halo */}
+                    <div className={`absolute -inset-0.5 bg-gradient-to-br ${stat.gradient} rounded-2xl opacity-20 group-hover:opacity-40 transition-opacity blur-md`}></div>
+
+                    <div className={`relative bg-white/95 backdrop-blur-lg rounded-2xl p-4 sm:p-5 ring-1 ${stat.ringTint} shadow-lg group-hover:shadow-2xl transition-all duration-300 min-h-[128px] sm:min-h-[148px] overflow-hidden`}>
+                      {/* Watermark icon backdrop */}
+                      <stat.icon
+                        className="absolute -right-4 -bottom-4 w-24 h-24 sm:w-28 sm:h-28 text-slate-900 opacity-[0.04] pointer-events-none"
+                        strokeWidth={1.2}
+                      />
+
+                      {/* Top row: icon chip + eyebrow + live dot */}
+                      <div className="flex items-center justify-between mb-2 sm:mb-3">
+                        <div className={`p-1.5 sm:p-2 rounded-lg ${stat.iconBg} shadow-sm flex items-center justify-center`}>
                           <stat.icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                         </div>
-                        <span className={`text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.14em] bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
-                          {stat.eyebrow}
+                        <div className="flex items-center gap-1.5">
+                          {stat.live && (
+                            <span className="relative inline-flex h-2 w-2">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                              <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
+                            </span>
+                          )}
+                          <span className={`text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.16em] bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}>
+                            {stat.eyebrow}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Big hero value */}
+                      <div className="flex items-baseline gap-1.5 mt-1">
+                        <span className={`text-2xl sm:text-3xl lg:text-[2.1rem] font-black tracking-tight leading-none bg-gradient-to-br ${stat.gradient} bg-clip-text text-transparent`}>
+                          {stat.bigValue}
                         </span>
+                        {stat.bigValueSuffix && (
+                          <span className="text-xs sm:text-sm font-bold text-slate-500 leading-none">
+                            {stat.bigValueSuffix}
+                          </span>
+                        )}
                       </div>
-                      <div className="text-sm sm:text-base font-bold text-slate-900 leading-tight">
-                        {stat.headline}
-                      </div>
-                      <div className="text-[10px] sm:text-xs text-slate-500 font-medium leading-snug mt-0.5">
+
+                      {/* Tagline */}
+                      <div className="text-[10px] sm:text-xs text-slate-600 font-medium leading-snug mt-2">
                         {stat.tagline}
                       </div>
-                      {/* Decorative bottom accent */}
-                      <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${stat.color} opacity-60 group-hover:opacity-100 transition-opacity`}></div>
+
+                      {/* Bottom accent bar */}
+                      <div className={`absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r ${stat.gradient} opacity-70 group-hover:opacity-100 transition-opacity`}></div>
                     </div>
                   </div>
                 ))}
