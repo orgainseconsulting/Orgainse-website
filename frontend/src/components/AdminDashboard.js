@@ -6,6 +6,7 @@ import BlogManager from './blog/BlogManager';
 import NewsletterManager from './newsletter/NewsletterManager';
 import AdminUsersManager from './admin/AdminUsersManager';
 import AdminSettingsManager from './admin/AdminSettingsManager';
+import LeadDetailsPanel from './admin/LeadDetailsPanel';
 import { LayoutDashboard, FileText, Mail, Users, Settings } from 'lucide-react';
 
 /**
@@ -527,9 +528,9 @@ const AdminDashboard = () => {
                             data-testid={`admin-row-expand-${rowKey}`}
                             onClick={() => setExpandedId(isExpanded ? null : rowKey)}
                             className="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors text-xs font-medium"
-                            title={isExpanded ? 'Hide raw data' : 'View raw data'}
+                            title={isExpanded ? 'Hide details' : 'View full details'}
                           >
-                            {isExpanded ? 'Hide' : 'View'}
+                            {isExpanded ? 'Hide' : 'Details'}
                           </button>
                           <button
                             onClick={() => deleteSingleLead(n.id, collection, n.name || n.email)}
@@ -546,14 +547,7 @@ const AdminDashboard = () => {
                     {isExpanded && (
                       <tr data-testid={`admin-row-raw-${rowKey}`} className="bg-slate-50">
                         <td colSpan={6} className="px-6 py-4">
-                          <div className="rounded-md border border-slate-200 bg-white p-4">
-                            <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
-                              Full lead payload
-                            </div>
-                            <pre className="text-xs text-slate-800 whitespace-pre-wrap break-words font-mono leading-relaxed">
-{JSON.stringify(item, null, 2)}
-                            </pre>
-                          </div>
+                          <LeadDetailsPanel lead={item} tabKey={activeTab} />
                         </td>
                       </tr>
                     )}
