@@ -103,9 +103,9 @@ const Contact = () => {
 
   const contactMethods = [
     {
-      title: "Phone - India (HQ) & USA (Corporate)",
+      title: "Phone — India (HQ)",
       description: "Direct consultation with our specialists",
-      details: ["+91-9740384683" / "+1(512)641-8773", "+91-9740394863" / "+1(512)641-3494"],
+      details: ["+91 97403 84683", "+91 97403 94863"],
       icon: Phone,
       gradient: "from-green-400 to-emerald-500"
     },
@@ -352,11 +352,15 @@ const Contact = () => {
                         <Phone className="h-8 w-8 text-slate-600" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-slate-800 mb-2">Phone • India (HQ) & USA (Corporate)</h3>
+                        <h3 className="text-xl font-bold text-slate-800 mb-2">Phone — India (HQ)</h3>
                         <p className="text-slate-600 text-sm mb-3">Direct consultation with our specialists</p>
                         <div className="space-y-1">
-                          <p className="text-slate-700 font-medium">+91-9740384683 / +1(512)641-8773</p>
-                          <p className="text-slate-700 font-medium">+91-9740394863 / +1(512)641-3494</p>
+                          <p className="text-slate-700 font-medium">
+                            <a href="tel:+919740384683" className="hover:text-orange-600 transition-colors" data-testid="contact-phone-india-1">+91 97403 84683</a>
+                          </p>
+                          <p className="text-slate-700 font-medium">
+                            <a href="tel:+919740394863" className="hover:text-orange-600 transition-colors" data-testid="contact-phone-india-2">+91 97403 94863</a>
+                          </p>
                         </div>
                       </div>
                     </div>

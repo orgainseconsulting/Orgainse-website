@@ -80,22 +80,11 @@ const Footer = () => {
                 <div className="font-semibold text-slate-800 mb-1">Bangalore, India (HQ)</div>
                 <div className="flex items-center space-x-2 mb-1">
                   <Phone className="h-4 w-4" />
-                  <span>+91-9740384683</span>
+                  <a href="tel:+919740384683" className="hover:text-orange-600 transition-colors" data-testid="footer-phone-india-1">+91 97403 84683</a>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Phone className="h-4 w-4" />
-                  <span>+91-9740394863</span>
-                </div>
-              </div>
-              <div>
-                <div className="font-semibold text-slate-800 mb-1">Austin, USA (Corporate)</div>
-                <div className="flex items-center space-x-2 mb-1">
-                  <Phone className="h-4 w-4" />
-                  <span>+1-(512) 641-8773</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Phone className="h-4 w-4" />
-                  <span>+1-(512) 641-3494</span>
+                  <a href="tel:+919740394863" className="hover:text-orange-600 transition-colors" data-testid="footer-phone-india-2">+91 97403 94863</a>
                 </div>
               </div>
               <div className="space-y-1">

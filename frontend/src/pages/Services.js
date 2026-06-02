@@ -57,10 +57,10 @@ const Services = () => {
       keywords: "AI project management service, PMaaS for startups, GPT-powered project planning",
       gradient: "from-orange-400 to-red-500",
       detailedInfo: {
-        whatItDoes: "Our AI Project Management Service (PMaaS) revolutionizes how you manage projects by leveraging GPT-powered automation. We create intelligent SOWs, automate risk assessments, optimize resource allocation, and provide real-time analytics that increase project success rates by 45%.",
-        whyChooseUs: "Unlike traditional project management, our AI-native approach reduces planning time by 60%, eliminates scope creep through intelligent boundary detection, and provides predictive insights that prevent 80% of common project failures before they occur.",
+        whatItDoes: "Our AI Project Management Service (PMaaS) revolutionizes how you manage projects by leveraging GPT-powered automation. We create intelligent SOWs, automate risk assessments, optimize resource allocation, and provide real-time analytics — built for measurable, data-driven outcomes and faster delivery.",
+        whyChooseUs: "Unlike traditional project management, our AI-native approach compresses planning time, eliminates scope creep through intelligent boundary detection, and provides predictive insights that surface common project failures before they materialise.",
         whatYouGet: "Complete AI-powered project ecosystem including automated project planning, intelligent resource allocation, real-time risk monitoring, GPT-generated documentation, predictive analytics dashboard, and 24/7 AI project assistant.",
-        benefits: ["60% reduction in project planning time", "45% increase in project success rates", "80% reduction in scope creep", "Real-time predictive insights", "Automated documentation generation", "24/7 AI project support"],
+        benefits: ["Compressed project planning cycles", "Higher project success rates", "Reduced scope creep through intelligent boundary detection", "Real-time predictive insights", "Automated documentation generation", "24/7 AI project support"],
         industries: ["IT Services & Software", "Healthcare Revenue Intelligence Advisory", "Industry-Agnostic SMEs & Startups"]
       },
       productLink: {
@@ -80,9 +80,9 @@ const Services = () => {
       gradient: "from-yellow-400 to-orange-500",
       detailedInfo: {
         whatItDoes: "Transform your entire business operations with our AI-native digital transformation service. We conduct comprehensive AI maturity assessments, design multi-agent orchestration platforms, and create custom GPT implementation roadmaps that digitize and optimize every aspect of your business.",
-        whyChooseUs: "Our transformations are 70% faster than traditional approaches because we use AI to design, implement, and optimize simultaneously. We don't just digitize - we intelligentize your operations with AI agents that continuously improve your processes.",
+        whyChooseUs: "Our transformations are built for measurable, data-driven outcomes and faster delivery — we use AI to design, implement, and optimise simultaneously. We don't just digitise — we intelligentise your operations with AI agents that continuously improve your processes.",
         whatYouGet: "Complete digital ecosystem transformation including AI maturity assessment, custom multi-agent platform, GPT integration roadmap, cloud-first architecture, AI-powered analytics suite, and ongoing optimization support.",
-        benefits: ["70% faster transformation timeline", "50% reduction in operational costs", "300% improvement in process efficiency", "AI-powered continuous optimization", "Future-ready scalable architecture", "Real-time business intelligence"],
+        benefits: ["Faster transformation timeline", "Reduced operational costs", "Improved process efficiency", "AI-powered continuous optimization", "Future-ready scalable architecture", "Real-time business intelligence"],
         industries: ["IT Services & Software", "Healthcare Revenue Intelligence Advisory", "Industry-Agnostic SMEs & Startups"]
       }
     },
@@ -96,10 +96,10 @@ const Services = () => {
       keywords: "AI operational optimization consulting, reduce OPEX with AI, GPT process mining",
       gradient: "from-green-400 to-emerald-500",
       detailedInfo: {
-        whatItDoes: "Optimize your operations with AI agents that continuously monitor, analyze, and improve your business processes. Our system uses GPT-powered process mining to identify bottlenecks, implements predictive maintenance, and automates workflows to reduce operational expenses by up to 35%.",
-        whyChooseUs: "Our AI optimization is proactive, not reactive. While others optimize after problems occur, our AI agents predict and prevent operational issues, resulting in 90% fewer disruptions and continuous cost savings that compound over time.",
+        whatItDoes: "Optimize your operations with AI agents that continuously monitor, analyse, and improve your business processes. Our system uses GPT-powered process mining to identify bottlenecks, implements predictive maintenance, and automates workflows — built for measurable, data-driven outcomes and faster delivery.",
+        whyChooseUs: "Our AI optimisation is proactive, not reactive. While others optimise after problems occur, our AI agents predict and prevent operational issues, delivering continuous, compounding cost savings backed by transparent KPIs.",
         whatYouGet: "Comprehensive operational intelligence platform with AI workflow automation, predictive maintenance system, GPT process mining tools, real-time analytics dashboard, automated cost optimization, and performance monitoring suite.",
-        benefits: ["35% reduction in operational costs", "90% fewer operational disruptions", "Automated process optimization", "Predictive maintenance alerts", "Real-time performance insights", "Continuous improvement automation"],
+        benefits: ["Reduced operational costs", "Fewer operational disruptions", "Automated process optimization", "Predictive maintenance alerts", "Real-time performance insights", "Continuous improvement automation"],
         industries: ["IT Services & Software", "Healthcare Revenue Intelligence Advisory", "Industry-Agnostic SMEs & Startups"]
       }
     },
@@ -116,6 +116,8 @@ const Services = () => {
         whatItDoes: "Healthcare revenue performance depends on more than billing accuracy — it depends on visibility. Our Healthcare Revenue Intelligence Advisory delivers that visibility through strategic consulting, AI-powered analytics, and governance frameworks. We provide independent, unbiased insight into where revenue is being lost, how denial patterns are shifting, and how payer behavior is affecting financial outcomes — working alongside your existing RCM operations.",
         whyChooseUs: "Independence is the trust signal. We are not a billing or coding vendor — we are an advisory layer that helps CFOs, COOs, and VPs of Revenue Cycle interpret performance with disciplined, AI-driven analytics typically reserved for large health systems. First leadership deliverable within 30 days, with no system access or patient data required.",
         whatYouGet: "Executive-ready deliverables across six advisory areas: revenue performance assessment, denial intelligence, payer & contract advisory, governance & process advisory, AI readiness assessment, and vendor oversight & accountability advisory. Each engagement is available standalone or as part of a broader programme. Conservative financial guidance (e.g., '3% or more' uplift potential, never guaranteed).",
+        rightFit: "Organizations with RCM operations in place that need an independent, AI-powered view of what those operations are delivering — and where revenue performance can be strengthened through better governance, analytics, or technology readiness.",
+        notRightFit: "Organizations seeking outsourced billing, coding, AR (Accounts Receivable) follow-up, claims processing, or operational RCM delivery. Orgainse does not provide these services.",
         benefits: [
           "Independent, unbiased visibility into revenue leakage",
           "AI-powered denial trend analytics and reduction strategy",
@@ -156,10 +158,10 @@ const Services = () => {
       keywords: "AI-driven business strategy consulting, GPT competitive analysis, strategy development India SMEs",
       gradient: "from-purple-400 to-pink-500",
       detailedInfo: {
-        whatItDoes: "Develop winning business strategies using AI-powered market intelligence, competitive analysis, and scenario planning. Our GPT-driven approach analyzes thousands of data points to create strategies that are 85% more likely to succeed than traditional consulting approaches.",
-        whyChooseUs: "While traditional strategy consulting takes months and relies on historical data, our AI-driven approach delivers real-time insights and predictive strategies in weeks. We analyze 1000x more data points to identify opportunities others miss.",
+        whatItDoes: "Develop winning business strategies using AI-powered market intelligence, competitive analysis, and scenario planning. Our GPT-driven approach analyses thousands of data points to create strategies built for measurable, data-driven outcomes and faster delivery.",
+        whyChooseUs: "While traditional strategy consulting takes months and relies on historical data, our AI-driven approach delivers real-time insights and predictive strategies in weeks — analysing orders of magnitude more data points to surface opportunities others miss.",
         whatYouGet: "Comprehensive strategy development suite including automated market intelligence system, AI competitive analysis platform, scenario planning tools, growth optimization roadmap, ROI modeling dashboard, and strategic implementation support.",
-        benefits: ["85% higher strategy success rate", "75% faster strategy development", "Real-time market intelligence", "Predictive opportunity identification", "Data-driven decision making", "Continuous strategy optimization"],
+        benefits: ["Higher strategy success rate", "Faster strategy development", "Real-time market intelligence", "Predictive opportunity identification", "Data-driven decision making", "Continuous strategy optimization"],
         industries: ["IT Services & Software", "Healthcare Revenue Intelligence Advisory", "Industry-Agnostic SMEs & Startups"]
       }
     },
@@ -174,9 +176,9 @@ const Services = () => {
       gradient: "from-slate-400 to-slate-600",
       detailedInfo: {
         whatItDoes: "Protect your business with AI-powered risk management that predicts, prevents, and mitigates risks before they impact your operations. Our GPT-based risk co-pilot continuously monitors your business environment and provides real-time risk assessment and compliance monitoring.",
-        whyChooseUs: "Traditional risk management is reactive and manual. Our AI approach is predictive and automated, identifying 95% of potential risks before they materialize and ensuring continuous compliance with changing regulations across multiple jurisdictions.",
+        whyChooseUs: "Traditional risk management is reactive and manual. Our AI approach is predictive and automated — built for measurable, data-driven outcomes and faster delivery, with continuous compliance across changing regulations and multiple jurisdictions.",
         whatYouGet: "Complete risk intelligence platform including GPT-based risk co-pilot, automated scenario modeling system, real-time compliance monitoring dashboard, predictive risk analytics, automated reporting suite, and mitigation planning tools.",
-        benefits: ["95% early risk detection rate", "80% reduction in compliance violations", "Real-time regulatory updates", "Automated risk reporting", "Predictive risk modeling", "24/7 compliance monitoring"],
+        benefits: ["Early risk detection", "Reduced compliance violations", "Real-time regulatory updates", "Automated risk reporting", "Predictive risk modeling", "24/7 compliance monitoring"],
         industries: ["IT Services & Software", "Healthcare Revenue Intelligence Advisory", "Industry-Agnostic SMEs & Startups"]
       }
     },
@@ -550,7 +552,7 @@ const Services = () => {
                   questions: [
                     {
                       question: "How do you calculate ROI for AI consulting projects?",
-                      answer: "Our ROI calculation considers multiple factors: cost savings from automation, revenue increases from improved processes, time savings for employees, reduced error rates, and enhanced customer satisfaction. Most clients see 200-500% ROI within 12 months, with payback periods typically ranging from 3-9 months."
+                      answer: "Our engagements are built for measurable, data-driven outcomes and faster delivery, not headline ROI percentages. We model value across cost savings from automation, revenue improvements from better processes, time savings for employees, reduced error rates, and customer-experience gains — and we report against KPIs agreed at SOW. We deliberately do not publish guaranteed ROI multiples; your numbers will depend on baseline maturity and scope."
                     },
                     {
                       question: "What factors influence the pricing of AI consulting services?",

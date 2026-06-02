@@ -90,9 +90,8 @@ const TermsOfService = () => {
               </p>
               <div className="mt-4 space-y-2">
                 <p>Email: info@orgainse.com | support@orgainse.com</p>
-                <p>Phone: +91-9740384683 | +91-9740394863</p>
-                <p>Phone (USA): +1(512)641-8773 | +1(512)641-3494</p>
-                <p>Headquarters: Bangalore, India | Austin, USA</p>
+                <p>Phone: +91 97403 84683 | +91 97403 94863</p>
+                <p>Headquarters: Bangalore, India</p>
               </div>
             </section>
           </div>

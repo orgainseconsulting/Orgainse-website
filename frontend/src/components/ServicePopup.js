@@ -99,6 +99,36 @@ const ServicePopup = ({
                       </div>
                     </div>
 
+                    {/* Right fit / Not the right fit — scope clarification block */}
+                    {(service.detailedInfo.rightFit || service.detailedInfo.notRightFit) && (
+                      <div
+                        data-testid={`service-fit-block-${service.id}`}
+                        className="rounded-xl border-2 border-amber-200 bg-amber-50/70 p-5 grid md:grid-cols-2 gap-4"
+                      >
+                        {service.detailedInfo.rightFit && (
+                          <div data-testid={`service-right-fit-${service.id}`}>
+                            <h4 className="text-sm font-extrabold uppercase tracking-wider text-emerald-700 mb-2 flex items-center gap-2">
+                              <CheckCircle className="h-4 w-4" /> Right fit
+                            </h4>
+                            <p className="text-slate-800 text-sm leading-relaxed">
+                              {service.detailedInfo.rightFit}
+                            </p>
+                          </div>
+                        )}
+                        {service.detailedInfo.notRightFit && (
+                          <div data-testid={`service-not-right-fit-${service.id}`}>
+                            <h4 className="text-sm font-extrabold uppercase tracking-wider text-rose-700 mb-2 flex items-center gap-2">
+                              <span className="inline-block h-4 w-4 rounded-full border-2 border-rose-600 flex items-center justify-center text-rose-600 text-[10px] font-bold leading-none">×</span>
+                              Not the right fit
+                            </h4>
+                            <p className="text-slate-800 text-sm leading-relaxed">
+                              {service.detailedInfo.notRightFit}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
                     {/* Compact Benefits List */}
                     <div className="bg-slate-50 rounded-xl p-4">
                       <h4 className="font-bold text-slate-800 mb-3">Key Benefits:</h4>

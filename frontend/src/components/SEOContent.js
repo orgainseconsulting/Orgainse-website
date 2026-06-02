@@ -113,18 +113,18 @@ const SEOContent = () => {
                 <div className="mt-4 w-full h-1 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full opacity-30 group-hover:opacity-60 transition-opacity"></div>
               </div>
 
-              {/* 25% Faster Delivery Card */}
+              {/* Measurable Delivery Card */}
               <div className="group bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-6 shadow-lg border border-orange-200/50 hover:shadow-2xl transition-all duration-500 transform hover:scale-105 animate-fade-in animation-delay-200">
                 <div className="flex items-start space-x-4">
                   <div className="bg-gradient-to-r from-orange-400 to-red-500 p-3 rounded-full shadow-lg group-hover:shadow-xl transition-all duration-300">
                     <TrendingUp className="h-6 w-6 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-orange-700 transition-colors">
-                      25% Faster Delivery
+                    <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-orange-700 transition-colors" data-testid="seo-measurable-delivery-title">
+                      Built for Measurable, Data-Driven Outcomes and Faster Delivery
                     </h3>
                     <p className="text-slate-700 text-justify leading-relaxed">
-                      Accelerated business transformation through integrated consulting services, strategic planning, and optimized implementation processes.
+                      Every engagement is scoped around quantifiable KPIs and executive-ready milestones — no guaranteed ROI percentages, just disciplined delivery and conservative, defensible benchmarks.
                     </p>
                   </div>
                 </div>
@@ -299,6 +299,14 @@ const SEOContent = () => {
                       <p className="text-slate-700 leading-relaxed text-left">
                         AI-powered revenue intelligence advisory: denial analytics, payer behavior insight, governance and AI readiness — alongside your existing RCM operations
                       </p>
+                      <div
+                        data-testid="seo-hria-scope-note"
+                        className="mt-3 text-[11px] leading-snug text-amber-900 bg-amber-50 border border-amber-200 rounded-md px-2.5 py-2"
+                      >
+                        <strong className="text-emerald-700">Right fit:</strong> organizations with RCM operations in place that need an independent, AI-powered view of revenue performance.
+                        <br />
+                        <strong className="text-rose-700">Not the right fit:</strong> outsourced billing, coding, AR follow-up, claims processing, or operational RCM delivery — Orgainse does not provide these services.
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -104,9 +104,9 @@ const Home = () => {
   };
 
   const stats = [
-    { value: "25%", label: "Faster Project Delivery", color: "from-orange-400 to-orange-600" },
-    { value: "45%", label: "Cost Reduction in Operations", color: "from-green-400 to-green-600" },
-    { value: "4.6★", label: "Client Satisfaction Rating", color: "from-yellow-400 to-yellow-600" }, // Updated 2025-01-09
+    { value: "Faster", label: "AI-Native Project Delivery", color: "from-orange-400 to-orange-600" },
+    { value: "Lower", label: "OPEX vs. Baseline (Measured)", color: "from-green-400 to-green-600" },
+    { value: "4.6★", label: "Client Satisfaction Rating", color: "from-yellow-400 to-yellow-600" },
     { value: "90", label: "Days Average Implementation", color: "from-purple-400 to-purple-600" },
   ];
 
@@ -141,6 +141,7 @@ const Home = () => {
     {
       title: "Healthcare Revenue Intelligence Advisory",
       description: "AI-powered advisory for US healthcare revenue performance — denial intelligence, payer behavior analytics, and governance frameworks",
+      scopeNote: "Right fit: organizations with RCM operations already in place that need an independent, AI-powered view of revenue performance. Not the right fit: outsourced billing, coding, AR follow-up, claims processing, or operational RCM delivery — Orgainse does not provide these services.",
       icon: Shield,
       keywords: "healthcare revenue cycle management consulting, RCM advisory, AI revenue intelligence US healthcare",
       gradient: "from-blue-400 to-indigo-500",
@@ -473,6 +474,15 @@ const Home = () => {
                       <CardDescription className="text-slate-600 group-hover:text-slate-700 transition-colors leading-relaxed text-sm">
                         {service.description}
                       </CardDescription>
+                      {service.scopeNote && (
+                        <div
+                          data-testid={`home-service-scope-note-${index}`}
+                          className="mt-3 text-[11px] leading-snug text-amber-800 bg-amber-50 border border-amber-200 rounded-md px-2.5 py-2"
+                        >
+                          <span className="font-bold uppercase tracking-wider text-amber-700 mr-1">Scope</span>
+                          {service.scopeNote}
+                        </div>
+                      )}
                     </CardHeader>
                   </Card>
                 </div>
