@@ -75,7 +75,8 @@ const PrivacyPolicy = () => {
               <div className="mt-4 space-y-2">
                 <p>Email: info@orgainse.com | support@orgainse.com</p>
                 <p>Phone: +91 97403 84683 | +91 97403 94863</p>
-                <p>Headquarters: Bangalore, India</p>
+                <p>Headquarters: Austin, Texas, USA</p>
+                <p>Corporate Office: Bengaluru, India</p>
               </div>
             </section>
           </div>

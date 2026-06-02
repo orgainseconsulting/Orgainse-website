@@ -126,7 +126,7 @@ const Contact = () => {
     {
       title: "Global Offices",
       description: "AI-native consulting across regions",
-      details: ["Bangalore, India (HQ)", "Austin, USA (Corporate)"],
+      details: ["Austin, Texas, USA (HQ)", "Bengaluru, India (Corporate Office)"],
       icon: MapPin,
       gradient: "from-purple-400 to-pink-500"
     }
@@ -434,8 +434,8 @@ const Contact = () => {
                         <h3 className="text-xl font-bold text-slate-800 mb-2">Global Offices</h3>
                         <p className="text-slate-600 text-sm mb-3">AI-native consulting across regions</p>
                         <div className="space-y-1">
-                          <p className="text-slate-700 font-medium">Bangalore, India (HQ)</p>
-                          <p className="text-slate-700 font-medium">Austin, USA (Corporate)</p>
+                          <p className="text-slate-700 font-medium">Austin, Texas, USA (HQ)</p>
+                          <p className="text-slate-700 font-medium">Bengaluru, India (Corporate Office)</p>
                         </div>
                       </div>
                     </div>

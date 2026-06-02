@@ -28,9 +28,11 @@ const Footer = () => {
           <div className="space-y-4">
             <Link to="/" className="flex items-center">
               <img
-                src="https://customer-assets.emergentagent.com/job_digital-presence-29/artifacts/xx6a5zd7_Copy%20of%20OrgAInse%20Consulting%20%28Website%29.png"
-                alt="Orgainse Consulting - AI-native Digital Transformation Consulting"
-                className="h-16 w-auto object-contain bg-white rounded-xl px-3 py-2 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 border border-gray-100"
+                src="/orgainse-logo.png"
+                alt="Orgainse Consulting — Let us plan your SUCCESS"
+                className="h-20 sm:h-24 w-auto object-contain transition-all duration-300 transform hover:scale-105"
+                width="1689"
+                height="476"
               />
             </Link>
             <p className="text-slate-600 text-sm">
@@ -77,7 +79,14 @@ const Footer = () => {
             <h3 className="font-semibold mb-4 text-slate-800">Contact</h3>
             <div className="space-y-3 text-sm text-slate-600">
               <div>
-                <div className="font-semibold text-slate-800 mb-1">Bangalore, India (HQ)</div>
+                <div className="font-semibold text-slate-800 mb-1">Austin, Texas, USA (HQ)</div>
+                <div className="flex items-center space-x-2">
+                  <Globe className="h-4 w-4" />
+                  <span>Headquarters</span>
+                </div>
+              </div>
+              <div>
+                <div className="font-semibold text-slate-800 mb-1">Bengaluru, India (Corporate Office)</div>
                 <div className="flex items-center space-x-2 mb-1">
                   <Phone className="h-4 w-4" />
                   <a href="tel:+919740384683" className="hover:text-orange-600 transition-colors" data-testid="footer-phone-india-1">+91 97403 84683</a>

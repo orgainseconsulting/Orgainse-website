@@ -67,11 +67,13 @@ const Navigation = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center group mr-8 lg:mr-12" data-testid="nav-logo-home">
             <img
-              src="https://customer-assets.emergentagent.com/job_digital-presence-29/artifacts/xx6a5zd7_Copy%20of%20OrgAInse%20Consulting%20%28Website%29.png"
-              alt="Orgainse Consulting - AI Project Management Service & Digital Transformation"
-              className={`w-auto object-contain bg-white rounded-xl px-2 py-1 sm:px-3 sm:py-2 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 border border-gray-100 ${
-                isScrolled ? "h-8 sm:h-10 lg:h-12" : "h-10 sm:h-14 lg:h-20"
+              src="/orgainse-logo.png"
+              alt="Orgainse Consulting — Let us plan your SUCCESS"
+              className={`w-auto object-contain transition-all duration-300 transform hover:scale-105 ${
+                isScrolled ? "h-10 sm:h-12 lg:h-14" : "h-12 sm:h-16 lg:h-20"
               }`}
+              width="1689"
+              height="476"
             />
           </Link>
 

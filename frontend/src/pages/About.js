@@ -74,7 +74,7 @@ const About = () => {
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-600" />
-                  <span className="text-slate-700 text-sm">Founded in 2025 with <span className="text-blue-600 font-semibold">AI-first approach</span> and started branches in Bangalore, India and Austin, USA in 4 months.</span>
+                  <span className="text-slate-700 text-sm">Founded in 2025 with <span className="text-blue-600 font-semibold">AI-first approach</span> — headquartered in Austin, Texas, USA with our corporate office in Bengaluru, India, operational within 4 months.</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-600" />

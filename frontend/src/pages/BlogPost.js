@@ -55,7 +55,7 @@ const BlogPostPage = () => {
         name: 'Orgainse Consulting',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://customer-assets.emergentagent.com/job_digital-presence-29/artifacts/xx6a5zd7_Copy%20of%20OrgAInse%20Consulting%20%28Website%29.png',
+          url: 'https://www.orgainse.com/orgainse-logo.png',
         },
       },
       image: post.og_image_url || post.cover_image_url || undefined,
