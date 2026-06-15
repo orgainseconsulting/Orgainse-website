@@ -33,10 +33,10 @@ const SIGNUP_URL = "https://orgainse.live/signup";
 // ---------- DATA ---------------------------------------------------------
 
 const HERO_STATS = [
-  { key: "agents", value: "20+", label: "RAG-grounded AI agents" },
-  { key: "cockpits", value: "3", label: "Industry cockpits live" },
-  { key: "time", value: "90s", label: "From spreadsheet to running project" },
-  { key: "byok", value: "BYOK", label: "Your API keys, your choice" },
+  { key: "agents", value: "25", label: "RAG-grounded AI agents" },
+  { key: "cockpits", value: "8", label: "PMI cockpit tabs per project" },
+  { key: "integrations", value: "40+", label: "Live MCP integrations" },
+  { key: "byok", value: "BYOK", label: "OpenAI · Anthropic · Gemini" },
 ];
 
 const COCKPITS = [
@@ -62,7 +62,7 @@ const COCKPITS = [
     headline: "A blank cockpit that learns your industry from your data.",
     bullets: [
       "Define your own object model — projects, milestones, KPIs",
-      "Same 7 platform agents, retuned with your own RAG corpus",
+      "Same 7 canonical agents, retuned with your own RAG corpus",
       "Mix and match templates from IT, Healthcare, or build from scratch",
       "Ideal for consulting practices and multi-vertical SMEs",
       "Marketplace-ready: package your playbook as a sellable agent",
@@ -85,13 +85,13 @@ const COCKPITS = [
 ];
 
 const PLATFORM_AGENTS = [
-  { name: "Strategic", desc: "Portfolio-level outcomes, OKR alignment, exec narratives.", icon: Brain },
-  { name: "Planner", desc: "Sprint planning, capacity, and dependency resolution.", icon: Workflow },
-  { name: "Delivery", desc: "Standup synthesis, blocker triage, daily progress.", icon: Zap },
-  { name: "Risk", desc: "Predictive risk + What-If forecasting on your data.", icon: Shield },
-  { name: "Comms", desc: "Stakeholder updates, release notes, exec briefings.", icon: MessageSquare },
-  { name: "Quality", desc: "Quality trends, code-health, retro analysis.", icon: Award },
-  { name: "Knowledge", desc: "Runbook-aware AI tutor for onboarding & search.", icon: Database },
+  { name: "Strategic Advisor", desc: "Portfolio-level outcomes, OKR alignment, exec narratives.", icon: Brain },
+  { name: "Sprint Planner", desc: "Sprint planning, capacity, and dependency resolution.", icon: Workflow },
+  { name: "Delivery Ops", desc: "Standup synthesis, blocker triage, daily progress.", icon: Zap },
+  { name: "Risk & RAID", desc: "Predictive risk + What-If forecasting on your data.", icon: Shield },
+  { name: "Communications", desc: "Stakeholder updates, release notes, exec briefings.", icon: MessageSquare },
+  { name: "Quality Guardian", desc: "Quality trends, code-health, retro analysis.", icon: Award },
+  { name: "Knowledge / Runbook", desc: "Runbook-aware AI tutor for onboarding & search.", icon: Database },
 ];
 
 const RAG_STEPS = [
@@ -104,13 +104,15 @@ const RAG_STEPS = [
 const HOW_IT_WORKS = [
   { step: "1", title: "Download the engineering template", desc: "Epics + stories + owners + capacity. Three sheets, five minutes." },
   { step: "2", title: "Upload & validate", desc: "We extract every row, parse story points, and surface dependency loops before commit." },
-  { step: "3", title: "Board + delivery agents", desc: "Scrum board, owners, on-call rota, and 7 platform agents — auto-provisioned." },
+  { step: "3", title: "Board + delivery agents", desc: "Scrum / Kanban board, owners, on-call rota, and 7 canonical agents — auto-provisioned." },
   { step: "4", title: "Live industry cockpit", desc: "Smart Briefing, sprint velocity, productivity score — running on real data." },
 ];
 
 const INTEGRATIONS = [
-  "GitHub", "GitLab", "Jira", "Azure DevOps", "Slack", "Microsoft Teams",
-  "Confluence", "PagerDuty", "Notion", "Linear", "Bitbucket", "Sentry",
+  "GitHub", "GitLab", "Bitbucket", "Jira", "Azure DevOps", "Linear",
+  "Asana", "Monday", "ClickUp", "Jenkins", "CircleCI", "Confluence",
+  "Notion", "Slack", "Microsoft Teams", "Discord", "PagerDuty", "Sentry",
+  "DataDog", "Splunk", "Snowflake",
 ];
 
 const SECURITY = [
@@ -148,7 +150,7 @@ const TIERS = [
     items: [
       "Everything in Starter +",
       "Portfolio + cross-team views",
-      "All 7 platform AI agents incl. Risk + Knowledge",
+      "All 7 canonical AI agents incl. Risk & RAID + Knowledge",
       "Full Industry Cockpit (IT · Canvas · RCM Analytics)",
       "Team Chat — unlimited channels, threads, reactions",
       "@orqyne AI in chat (5/day) — grounded in Project / Sprint / Epic",
@@ -197,27 +199,27 @@ const TIERS = [
 const FAQS = [
   {
     q: "How is ORQYNE different from Jira, Linear, or Azure DevOps?",
-    a: "Those are tracking tools. ORQYNE is an AI delivery workforce. Seven RAG-grounded agents actively plan sprints from your backlog, surface delivery risks before standup, draft stakeholder updates, and score quality trends. Tracking tools log what already happened — ORQYNE drives what happens next.",
+    a: "Those are tracking tools. ORQYNE is a Service-as-a-Platform with an AI delivery workforce. 25 RAG-grounded agents actively plan sprints from your backlog, surface delivery risks before standup, draft stakeholder updates, and score quality trends. Tracking tools log what already happened — ORQYNE drives what happens next.",
   },
   {
     q: 'What does "RAG-grounded" actually mean?',
-    a: "Retrieval-Augmented Generation. Every ORQYNE agent runs over a per-tenant index of your repos, runbooks, ADRs, retrospectives, and Jira history. The model is only allowed to generate from retrieved context, and every answer cites the line of code or document it came from. Hallucinations are blocked by design.",
+    a: "Retrieval-Augmented Generation. Every ORQYNE agent runs over a per-tenant index of your repos, runbooks, ADRs, retrospectives, and project history. The model is only allowed to generate from retrieved context, and every answer cites the line of code or document it came from. Hallucinations are blocked by design.",
   },
   {
     q: "How do I start? Can I just upload a spreadsheet?",
-    a: "Yes. Use our prebuilt engineering template (or your own). ORQYNE parses epics, stories, owners, story points, and dependencies in seconds, provisions Scrum/Kanban boards, hires the platform agents, and starts running them on your backlog — before standup ends.",
+    a: "Yes. Use our universal template (or your own). ORQYNE parses tasks, owners, dependencies and milestones, lets you rewrite terminology to fit your domain (Sprint → Cycle, Project → Campaign), and provisions a tailored workspace + the 25 RAG-grounded agents — typically in 180 seconds.",
   },
   {
     q: "Who owns the AI? Can I bring my own keys?",
-    a: "Both modes are first-class. Use our managed AI key for zero key management and predictable cost, or plug in your own AI-provider keys at the workspace or project level (BYOK). We never see your BYOK traffic.",
+    a: "Both modes are first-class. Use our managed AI key for zero key management and predictable cost, or plug in your own AI-provider keys (OpenAI, Anthropic, Gemini) at the workspace or project level (BYOK). We never see your BYOK traffic.",
   },
   {
     q: "How do you handle compliance?",
-    a: "TLS 1.3 in transit, AES-256 at rest, multi-tenant isolation (physical + logical), and a SOC2-aligned audit trail you can export to your SIEM. HIPAA-modelled BAA, GDPR DPA, and SOC2 report templates are generated from your workspace settings. Region residency (US/EU/India) is locked at provision time.",
+    a: "TLS 1.3 in transit, AES-256 at rest, multi-tenant isolation (physical + logical), and a closed-loop audit trail you can export to your SIEM. HIPAA-modelled BAA, GDPR DPA, and SOC2 report templates are generated from your workspace settings and adaptable to your regulator. Region residency (US/EU/India) is locked at provision time.",
   },
   {
     q: "What is the AI Agent Marketplace?",
-    a: "Every PM has a hard-won playbook. The Marketplace lets you turn yours into a packaged AI agent — system prompt, input fields, runner — and ship it to thousands of teams. Build for your team first; sell to the world second. Curated for prompt-injection safety + grounding hygiene before listing.",
+    a: "Every PM has a hard-won playbook. The ORQYNE Agent Marketplace lets you turn yours into a packaged AI agent — system prompt, input fields, runner — and ship it to thousands of teams via a tier-gated Custom Agent Builder. Build for your team first; sell to the world second. Curated for prompt-injection safety + grounding hygiene before listing.",
   },
 ];
 
@@ -247,7 +249,7 @@ const ProductsPage = () => {
         "image": "https://www.orgainse.com/orqyne/long-1200.png",
         "logo": "https://www.orgainse.com/orqyne/mark-400.png",
         "description":
-          "ORQYNE is AI Project Management as a Service. Upload a spreadsheet and ORQYNE provisions a workspace with 20+ RAG-grounded AI agents that run on your data in 90 seconds. Industry-native cockpits for IT Services, Canvas (any-industry), and US Healthcare Analytics. BYOK or managed AI key.",
+          "ORQYNE is Orgainse's first Service-as-a-Platform (SaaP). Productised consulting outcomes, 25 RAG-grounded AI agents, an 8-tab PMI project cockpit, and 40+ live MCP integrations. Pre-built playbooks for IT Services & Software, Canvas (any industry), and US Healthcare Revenue Cycle. BYOK or managed AI key.",
         "softwareVersion": "2026.1",
         "brand": { "@type": "Brand", "name": "ORQYNE" },
         "creator": {
@@ -277,14 +279,15 @@ const ProductsPage = () => {
           "ratingCount": "42"
         },
         "featureList": [
-          "20+ RAG-grounded AI agents per workspace",
-          "3 industry cockpits: IT Services, Canvas, US Healthcare Analytics",
-          "Spreadsheet-to-workspace provisioning in 90 seconds",
-          "7 platform agents: Strategic, Planner, Delivery, Risk, Comms, Quality, Knowledge",
+          "25 RAG-grounded AI agents per workspace (7 canonical + 12 RCM specialist + 6 universal library)",
+          "8-tab PMI project cockpit (Dashboard, Planning, Sprints, Backlog, RAID, Resources, Time, Cost, Communications, Closure)",
+          "3 industry-native cockpits: IT Services & Software, Canvas (any industry), US Healthcare Revenue Cycle",
+          "Spreadsheet-to-workspace customisation in 180 seconds",
+          "7 canonical platform agents: Strategic Advisor, Sprint Planner, Delivery Ops, Risk & RAID, Communications, Quality Guardian, Knowledge / Runbook",
           "Team Chat with @orqyne AI grounded in Project / Sprint / Epic",
-          "Agent Marketplace with publishing rights for Enterprise tier",
-          "40+ engineering connectors (GitHub, GitLab, Jira, Azure DevOps, Slack, Microsoft Teams, Confluence, PagerDuty, Notion, Linear)",
-          "BYOK (bring your own keys) or managed AI key options",
+          "Tier-gated Custom Agent Builder + ORQYNE Agent Marketplace publishing rights",
+          "40+ live MCP integrations (GitHub, GitLab, Bitbucket, Jira, Azure DevOps, Linear, Asana, Monday, ClickUp, Jenkins, CircleCI, Confluence, Notion, Slack, Microsoft Teams, Discord, PagerDuty, Sentry, DataDog, Splunk, Snowflake)",
+          "BYOK (OpenAI, Anthropic, Gemini) or managed AI key",
           "TLS 1.3 in transit, AES-256 at rest, multi-tenant isolation",
           "Region choice (US / EU / India) locked at provision time",
           "SSO (Google, Microsoft, SAML, SCIM)",
@@ -316,7 +319,7 @@ const ProductsPage = () => {
         "@type": "TechArticle",
         "headline": "How ORQYNE Provisions a RAG-Grounded AI Workspace From a Spreadsheet",
         "description":
-          "Technical overview: ORQYNE parses an engineering backlog spreadsheet, builds per-tenant RAG indexes over your repos, runbooks, ADRs, retrospectives, and Jira history, provisions Scrum/Kanban boards, and hires seven platform agents — all in 90 seconds.",
+          "Technical overview: ORQYNE — Orgainse's first Service-as-a-Platform — parses an industry-agnostic project spreadsheet, builds per-tenant RAG indexes over your repos, runbooks, ADRs, retrospectives, and project history, provisions an 8-tab PMI cockpit (Dashboard, Planning, Sprints, Backlog, RAID, Resources, Time, Cost, Communications, Closure), and hires 25 RAG-grounded AI agents — workspace customisable in 180 seconds.",
         "keywords":
           "RAG, retrieval-augmented generation, AI project management, PMaaS, multi-tenant SaaS, BYOK AI, healthcare revenue cycle analytics",
         "proficiencyLevel": "Expert",
@@ -340,10 +343,10 @@ const ProductsPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <SEOHead
-        title="ORQYNE — AI Project Management as a Service | Orgainse Products"
-        description="ORQYNE by Orgainse Consulting: upload a spreadsheet, get a fully provisioned workspace with 20+ RAG-grounded AI agents running on your data in 90 seconds. Industry cockpits for IT Services, Canvas, and US Healthcare Analytics. BYOK or managed AI."
+        title="ORQYNE — Service-as-a-Platform by Orgainse Consulting"
+        description="ORQYNE is Orgainse's first Service-as-a-Platform: productised consulting outcomes, 25 RAG-grounded AI agents, an 8-tab PMI project cockpit, 40+ live MCP integrations, BYOK keys, and pre-built playbooks for IT Services & Software, Canvas (any industry), and US Healthcare Revenue Cycle. No setup calls. No 90-day onboarding."
         canonical="https://orgainse.com/products"
-        keywords="ORQYNE, AI project management as a service, PMaaS, RAG-grounded AI agents, AI sprint planner, US healthcare analytics, BYOK AI, agent marketplace"
+        keywords="ORQYNE, Service-as-a-Platform, SaaP, AI project management, PMaaS, RAG-grounded AI agents, AI sprint planner, US healthcare analytics, BYOK AI, agent marketplace, MCP integrations"
         structuredData={structuredData}
       />
 
@@ -357,7 +360,7 @@ const ProductsPage = () => {
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-blue-100 shadow-sm mb-6">
               <Sparkles className="h-4 w-4 text-orange-500" />
               <span className="text-xs font-semibold tracking-wider uppercase text-slate-600">
-                The Orgainse Product · AI Project Management · PMaaS
+                Orgainse&apos;s first Service-as-a-Platform · Built by Orgainse Consulting
               </span>
             </div>
 
@@ -366,16 +369,17 @@ const ProductsPage = () => {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 max-w-4xl mx-auto leading-[1.1]">
-              AI Project Management starts the moment{" "}
+              Stop renting software.{" "}
               <span className="bg-gradient-to-r from-orange-500 via-blue-600 to-purple-600 bg-clip-text text-transparent">
-                you upload a spreadsheet.
+                Start owning outcomes.
               </span>
             </h1>
 
             <p className="mt-6 text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              Drop your backlog. ORQYNE reads your repos, runbooks, and Jira history,
-              provisions sprints, hires the RAG-grounded delivery agents, and runs them
-              on your codebase. <strong>No setup calls. No 90-day onboarding.</strong>
+              ORQYNE is Orgainse&apos;s first <strong>Service-as-a-Platform</strong> — productised consulting outcomes, RAG-grounded AI agents, and a complete project lifecycle cockpit. One platform that becomes your engineering team, your revenue ops team, or your branded delivery workspace.
+              <span className="block mt-3 text-base text-slate-500">
+                <strong>No setup calls. No 90-day onboarding. No false promises.</strong>
+              </span>
             </p>
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
@@ -503,9 +507,9 @@ const ProductsPage = () => {
                     <div className="text-slate-400">→ Parsing rows… <span className="text-emerald-300">every row</span></div>
                     <div className="text-slate-400">→ Mapping owners… <span className="text-emerald-300">auto</span></div>
                     <div className="text-slate-400">→ Building dependency graph… <span className="text-emerald-300">conflicts flagged</span></div>
-                    <div className="text-slate-400">→ Hiring AI agents… <span className="text-orange-300">7+ platform agents</span></div>
+                    <div className="text-slate-400">→ Hiring AI agents… <span className="text-orange-300">25 RAG-grounded</span></div>
                     <div className="text-slate-400">→ Indexing knowledge base… <span className="text-blue-300">per-tenant</span></div>
-                    <div className="mt-3 text-emerald-300">✓ Cockpit ready · 90s</div>
+                    <div className="mt-3 text-emerald-300">✓ Workspace ready · 180s</div>
                   </div>
                 </div>
               </div>
@@ -613,15 +617,18 @@ const ProductsPage = () => {
             </div>
           </div>
 
-          {/* 7 platform agents */}
+          {/* 7 canonical platform agents */}
           <div className="mt-20">
             <div className="text-center mb-10">
               <h3 className="text-2xl sm:text-3xl font-bold text-slate-900">
-                7 platform agents.{" "}
+                7 canonical agents.{" "}
                 <span className="bg-gradient-to-r from-orange-500 to-blue-600 bg-clip-text text-transparent">
                   Hired on day one.
                 </span>
               </h3>
+              <p className="mt-3 text-sm text-slate-500 max-w-2xl mx-auto">
+                Plus 12 RCM specialist agents in the Healthcare cockpit and an opt-in Universal Library — 25 RAG-grounded agents across the platform.
+              </p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {PLATFORM_AGENTS.map((a) => (
@@ -770,7 +777,7 @@ const ProductsPage = () => {
             </h2>
             <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
               We size every deployment to your team and industry. Tell us about your
-              workspace and we'll match you with the right tier — usually within the same
+              workspace and we&apos;ll match you with the right tier — usually within the same
               business day.
             </p>
           </div>
@@ -953,7 +960,7 @@ const ProductsPage = () => {
             </span>
           </h2>
           <p className="mt-5 text-slate-300 leading-relaxed max-w-2xl mx-auto">
-            Tell us about your team. We'll show you the workspace you'd have if AI was
+            Tell us about your team. We&apos;ll show you the workspace you&apos;d have if AI was
             actually doing the project management.
           </p>
 
