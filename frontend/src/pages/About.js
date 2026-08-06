@@ -68,7 +68,7 @@ const About = () => {
         }}
       />
 
-      {/* Revolutionary Hero Section with SEO */}
+      {/* Hero Section with SEO */}
       <section className="relative bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12 lg:py-16 overflow-hidden">
         {/* Optimized Background Elements */}
         <div className="absolute inset-0 opacity-20">
@@ -378,7 +378,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Revolutionary C.O.R.E. Values Section */}
+      {/* C.O.R.E. Values Section */}
       <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">

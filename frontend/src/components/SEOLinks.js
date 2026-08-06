@@ -6,153 +6,154 @@ const SEOLinks = () => {
   const internalLinks = [
     {
       to: "/about",
-      text: "About Our AI Consulting Team",
-      description: "Learn about our AI transformation experts"
-    },
-    {
-      to: "/services", 
-      text: "AI Project Management Services",
-      description: "Explore our PMaaS offerings across industries"
-    },
-    {
-      to: "/ai-assessment",
-      text: "Free AI Readiness Assessment",
-      description: "Evaluate your business AI potential"
-    },
-    {
-      to: "/roi-calculator",
-      text: "AI ROI Calculator Tool",
-      description: "Calculate your AI transformation ROI"
-    },
-    {
-      to: "/contact",
-      text: "Contact AI Experts",
-      description: "Get free consultation from our team"
-    },
-    {
-      to: "/smart-calendar",
-      text: "Book Strategy Session",
-      description: "Schedule your AI transformation planning"
-    },
-    {
-      to: "/services",
-      text: "Delivery and Workflow Transformation",
-      description: "Process mapping, governance design and adoption support"
+      text: "About Orgainse Consulting",
+      description: "How we work, who we work with, and what we deliberately do not claim"
     },
     {
       to: "/services",
       text: "Project Management as a Service",
-      description: "Structured project leadership, governance and reporting"
+      description: "Structured project leadership, governance, reporting cadence and executive visibility"
+    },
+    {
+      to: "/services",
+      text: "Delivery and workflow transformation",
+      description: "Process mapping, ownership definition, governance design and adoption support"
+    },
+    {
+      to: "/services",
+      text: "Delivery and operational governance",
+      description: "Operating rhythms, risk and action registers, reporting your leadership can rely on"
+    },
+    {
+      to: "/products",
+      text: "ORQYNE delivery-governance workspace",
+      description: "Portfolios, registers, reporting and operating rhythm in one shared workspace"
+    },
+    {
+      to: "/services",
+      text: "Healthcare Revenue Intelligence Advisory",
+      description: "Advisory and analytics only — no billing, coding or operational revenue cycle delivery"
     },
     {
       to: "/ai-assessment",
-      text: "AI Maturity Assessment",
-      description: "Comprehensive business readiness evaluation"
+      text: "Execution readiness assessment",
+      description: "A directional view of governance, data and adoption readiness — not a certification"
     },
     {
       to: "/roi-calculator",
-      text: "PMaaS Investment Calculator",
-      description: "Business case development tools"
+      text: "Delivery scenario calculator",
+      description: "Model potential time, capacity and cost effects using your own assumptions"
+    },
+    {
+      to: "/smart-calendar",
+      text: "Book a discovery call",
+      description: "Bring one execution problem to a focused 30-minute conversation"
     },
     {
       to: "/contact",
-      text: "Schedule Free Consultation",
-      description: "Expert AI strategy discussion"
+      text: "Contact Orgainse",
+      description: "Austin, Texas (headquarters) and Bengaluru, India (corporate office)"
     },
     {
-      to: "/about",
-      text: "AI Innovation Methodology",
-      description: "Our proven transformation approach"
+      to: "/blog",
+      text: "Delivery governance insights",
+      description: "Vendor-neutral notes on execution visibility and governance practice"
+    },
+    {
+      to: "/newsletter",
+      text: "The Orgainse Pulse",
+      description: "Fortnightly briefings on delivery execution and governance"
     }
   ];
 
   const externalLinks = [
     {
-      href: "https://www.gartner.com/en/newsroom/press-releases/2023-03-23-gartner-survey-finds-organizations-are-slow-to-advance-in-ai-maturity",
-      text: "Gartner AI Maturity Research",
-      description: "Latest insights on AI adoption in enterprise"
-    },
-    {
-      href: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year",
-      text: "McKinsey State of AI 2024",
-      description: "Comprehensive AI transformation report"
-    },
-    {
-      href: "https://www.projectmanagement.org/",
+      href: "https://www.pmi.org/",
       text: "Project Management Institute",
-      description: "Global project management standards and best practices"
+      description: "Global project management standards and practice guidance"
     },
     {
-      href: "https://openai.com/enterprise",
-      text: "OpenAI Enterprise Solutions", 
-      description: "Enterprise AI tools and capabilities"
+      href: "https://www.axelos.com/certifications/propath/prince2-project-management",
+      text: "PRINCE2 project governance",
+      description: "Stage-gated project governance and controlled delivery method"
     },
     {
-      href: "https://www.forrester.com/report/the-state-of-artificial-intelligence-2023/",
-      text: "Forrester AI Research Report",
-      description: "AI transformation trends and business impact analysis"
+      href: "https://www.iso.org/standard/50003.html",
+      text: "ISO 21500 project management guidance",
+      description: "International guidance on project management concepts and processes"
     },
     {
-      href: "https://www.deloitte.com/global/en/our-thinking/insights/topics/artificial-intelligence.html",
-      text: "Deloitte AI Insights",
-      description: "Strategic AI implementation and consulting insights"
+      href: "https://www.scaledagileframework.com/",
+      text: "Scaled Agile Framework",
+      description: "Coordination patterns for multi-team delivery at scale"
     },
     {
-      href: "https://www.accenture.com/us-en/insights/artificial-intelligence-index",
-      text: "Accenture AI Index",
-      description: "AI adoption benchmarks and industry analysis"
+      href: "https://www.gartner.com/en/information-technology",
+      text: "Gartner IT research",
+      description: "Independent research on delivery, portfolio and technology operations"
     },
     {
-      href: "https://www.pwc.com/us/en/tech-effect/ai-analytics.html",
-      text: "PwC AI Analytics",
-      description: "AI business value and ROI measurement frameworks"
+      href: "https://www.mckinsey.com/capabilities/operations/how-we-help-clients",
+      text: "McKinsey operations insights",
+      description: "Published research on operating models and execution performance"
     },
     {
-      href: "https://www.bcg.com/capabilities/artificial-intelligence",
-      text: "BCG AI Capabilities",
-      description: "AI strategy development and transformation consulting"
+      href: "https://www.forrester.com/research/",
+      text: "Forrester research library",
+      description: "Analyst perspectives on technology and delivery operations"
     },
     {
-      href: "https://www.ibm.com/watson/ai-consulting",
-      text: "IBM AI Consulting",
-      description: "Enterprise AI implementation and consulting services"
+      href: "https://www.nist.gov/itl/ai-risk-management-framework",
+      text: "NIST AI Risk Management Framework",
+      description: "Reference framework for governing Artificial Intelligence use responsibly"
     },
     {
-      href: "https://cloud.google.com/ai/",
-      text: "Google Cloud AI",
-      description: "AI platform and machine learning development tools"
+      href: "https://gdpr.eu/",
+      text: "General Data Protection Regulation",
+      description: "Reference material on European data protection obligations"
     },
     {
-      href: "https://azure.microsoft.com/en-us/products/ai-services/",
-      text: "Microsoft Azure AI",
-      description: "Comprehensive AI services and cognitive solutions"
+      href: "https://www.hhs.gov/hipaa/index.html",
+      text: "HIPAA (US Department of Health & Human Services)",
+      description: "Official reference for United States healthcare data obligations"
+    },
+    {
+      href: "https://www.hfma.org/",
+      text: "Healthcare Financial Management Association",
+      description: "Revenue cycle and healthcare finance practice resources"
+    },
+    {
+      href: "https://www.pmi.org/disciplined-agile",
+      text: "Disciplined Agile toolkit",
+      description: "Context-driven guidance for choosing a way of working"
     }
   ];
 
   return (
-    <div className="py-12 bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <div className="py-12 bg-gradient-to-br from-slate-50 via-white to-blue-50" data-testid="seo-links-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-slate-900 mb-4">
-            Explore AI Transformation Resources
+        <div className="mb-12">
+          <h2 className="font-outfit text-2xl sm:text-3xl font-bold text-slate-900 mb-4 tracking-[-0.02em]">
+            Explore delivery governance resources
           </h2>
-          <p className="text-lg text-slate-700 max-w-3xl mx-auto">
-            Discover comprehensive AI project management solutions, expert insights, and industry-leading resources to accelerate your digital transformation journey.
+          <p className="text-base text-slate-700 max-w-3xl">
+            Our services, tools and reference material for teams working on execution visibility,
+            delivery governance and practical Artificial Intelligence adoption.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Internal Links Section */}
           <div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
-              <ArrowRight className="h-6 w-6 mr-3 text-blue-500" />
-              Our AI Services & Tools
+            <h3 className="font-outfit text-xl font-bold text-slate-900 mb-6 flex items-center">
+              <ArrowRight className="h-5 w-5 mr-3 text-blue-500" />
+              Services &amp; tools
             </h3>
             <div className="space-y-4">
               {internalLinks.map((link, index) => (
                 <Link
                   key={index}
                   to={link.to}
+                  data-testid={`seo-internal-link-${index}`}
                   className="block p-4 bg-white rounded-lg border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 group"
                 >
                   <h4 className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">
@@ -166,11 +167,10 @@ const SEOLinks = () => {
             </div>
           </div>
 
-          {/* External Links Section */}
           <div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
-              <ExternalLink className="h-6 w-6 mr-3 text-blue-500" />
-              Industry Resources & Research
+            <h3 className="font-outfit text-xl font-bold text-slate-900 mb-6 flex items-center">
+              <ExternalLink className="h-5 w-5 mr-3 text-blue-500" />
+              Standards &amp; independent research
             </h3>
             <div className="space-y-4">
               {externalLinks.map((link, index) => (
@@ -179,6 +179,7 @@ const SEOLinks = () => {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-testid={`seo-external-link-${index}`}
                   className="block p-4 bg-white rounded-lg border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 group"
                 >
                   <h4 className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors flex items-center">
@@ -194,21 +195,22 @@ const SEOLinks = () => {
           </div>
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-12">
+        <div className="mt-12">
           <div className="inline-flex flex-col sm:flex-row gap-4">
             <Link
               to="/contact"
-              className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-600 to-violet-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02]"
+              data-testid="seo-links-contact-cta"
+              className="inline-flex items-center px-7 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-full shadow-[0_12px_34px_-14px_rgba(15,23,42,0.6)] transition-colors duration-200"
             >
-              Start Your AI Transformation
+              Book a discovery call
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
             <Link
               to="/ai-assessment"
-              className="inline-flex items-center px-8 py-3 bg-white border-2 border-blue-500 text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all"
+              data-testid="seo-links-assessment-cta"
+              className="inline-flex items-center px-7 py-3.5 bg-white border border-slate-300 text-slate-900 font-semibold rounded-full hover:border-slate-400 transition-colors duration-200"
             >
-              Take Free Assessment
+              Take the readiness assessment
             </Link>
           </div>
         </div>

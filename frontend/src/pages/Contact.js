@@ -44,7 +44,7 @@ const Contact = () => {
 
   const initialMessage = React.useMemo(() => {
     if (isOrqyneInquiry) {
-      return "I'm interested in ORQYNE — your AI Project Management as a Service product. Please share a personalised demo, ROI estimate, and the right tier for my team.";
+      return "I'm interested in ORQYNE, your delivery-governance workspace. Please share a walkthrough, an indicative scenario for my team size, and the plan that fits our delivery setup.";
     }
     return "";
   }, [isOrqyneInquiry]);
@@ -104,28 +104,28 @@ const Contact = () => {
   const contactMethods = [
     {
       title: "Phone — Bengaluru (Corporate Office)",
-      description: "Direct consultation with our specialists",
+      description: "Speak directly with a delivery practitioner",
       details: ["+91 97403 84683", "+91 97403 94863"],
       icon: Phone,
       gradient: "from-blue-400 to-blue-500"
     },
     {
-      title: "Email Support",
-      description: "24/7 support and consultation",
+      title: "Email",
+      description: "Replies within one business day",
       details: ["info@orgainse.com", "support@orgainse.com"],
       icon: Mail,
       gradient: "from-blue-400 to-blue-500"
     },
     {
-      title: "Book AI Consultation",
-      description: "Schedule your free strategy session",
-      details: ["Free 30-min consultation", "Customized AI roadmap"],
+      title: "Book a Discovery Call",
+      description: "One execution problem, one focused conversation",
+      details: ["Free 30-minute discovery call", "A scoped, practical next step"],
       icon: Calendar,
       gradient: "from-blue-400 to-blue-500"
     },
     {
-      title: "Global Offices",
-      description: "AI-native consulting across regions",
+      title: "Offices",
+      description: "Remote-first delivery across regions",
       details: ["Austin, Texas, USA (HQ)", "Bengaluru, India (Corporate Office)"],
       icon: MapPin,
       gradient: "from-violet-400 to-violet-500"
@@ -157,7 +157,7 @@ const Contact = () => {
         }}
       />
 
-      {/* Revolutionary Hero Section with SEO */}
+      {/* Hero Section with SEO */}
       <section className="relative bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12 lg:py-16 overflow-hidden">
         {/* Dynamic Background Elements */}
         <div className="absolute inset-0 opacity-20">
@@ -188,7 +188,7 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Revolutionary Contact Form & Info with Enhanced Design */}
+      {/* Contact Form & Info */}
       <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
@@ -226,9 +226,9 @@ const Contact = () => {
                       Send us a message
                     </CardTitle>
                     <CardDescription className="text-lg text-slate-600">
-                      Fill out the form below and we'll get back to you within 24 hours with a customized 
-                      <span className="font-bold text-blue-600"> AI consultation plan</span> and 
-                      <span className="font-bold text-violet-600"> GPT-powered strategy recommendations</span>.
+                      Tell us about the execution problem you are dealing with. We reply within one
+                      business day with <span className="font-bold text-blue-600">an honest read on fit</span> and
+                      <span className="font-bold text-violet-600"> a suggested next step</span>.
                     </CardDescription>
                   </CardHeader>
                   
@@ -238,8 +238,8 @@ const Contact = () => {
                         <CheckCircle className="h-16 w-16 text-blue-500 mx-auto mb-4" />
                         <h3 className="text-2xl font-bold text-slate-800 mb-2">Message Sent!</h3>
                         <p className="text-slate-600 mb-6">
-                          Thanks for reaching out. We'll respond within 24 hours with a customized
-                          AI consultation plan.
+                          Thanks for reaching out. We'll respond within one business day with an honest
+                          read on fit and a suggested next step.
                         </p>
                         <button
                           type="button"
@@ -313,7 +313,7 @@ const Contact = () => {
                           onChange={handleChange}
                           required
                           className="mt-2 border-2 border-slate-200 focus:border-blue-500 transition-colors duration-300"
-                          placeholder="AI Consulting Inquiry - Project Management/Digital Transformation"
+                          placeholder="Delivery visibility, project governance, or ORQYNE enquiry"
                         />
                       </div>
 
@@ -327,7 +327,7 @@ const Contact = () => {
                           required
                           rows={6}
                           className="mt-2 border-2 border-slate-200 focus:border-blue-500 transition-colors duration-300"
-                          placeholder="Tell us about your AI transformation needs, GPT-powered project management requirements, operational optimization goals, or how we can help accelerate your business growth with our AI-native consulting services..."
+                          placeholder="Describe the execution problem: where status becomes unclear, which hand-offs slip, who owns the decisions, and what you need visibility on..."
                         />
                       </div>
 
@@ -394,8 +394,8 @@ const Contact = () => {
                         <Mail className="h-8 w-8 text-slate-600" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-slate-800 mb-2">Email Support</h3>
-                        <p className="text-slate-600 text-sm mb-3">24/7 support and consultation</p>
+                        <h3 className="text-xl font-bold text-slate-800 mb-2">Email</h3>
+                        <p className="text-slate-600 text-sm mb-3">Replies within one business day</p>
                         <div className="space-y-1">
                           <p className="text-slate-700 font-medium">info@orgainse.com</p>
                           <p className="text-slate-700 font-medium">support@orgainse.com</p>
@@ -419,11 +419,11 @@ const Contact = () => {
                         <Calendar className="h-8 w-8 text-slate-600" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-slate-800 mb-2">Book Consultation</h3>
-                        <p className="text-slate-600 text-sm mb-3">Schedule your free strategy session</p>
+                        <h3 className="text-xl font-bold text-slate-800 mb-2">Book a Discovery Call</h3>
+                        <p className="text-slate-600 text-sm mb-3">One execution problem, one focused conversation</p>
                         <div className="space-y-1">
-                          <p className="text-slate-700 font-medium">Free 30-min consultation</p>
-                          <p className="text-slate-700 font-medium">Customized AI roadmap</p>
+                          <p className="text-slate-700 font-medium">Free 30-minute discovery call</p>
+                          <p className="text-slate-700 font-medium">A scoped, practical next step</p>
                         </div>
                       </div>
                     </div>
@@ -431,7 +431,7 @@ const Contact = () => {
                 </Card>
               </div>
 
-              {/* Global Offices Card */}
+              {/* Offices Card */}
               <div className="group relative">
                 <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-violet-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
                 
@@ -444,8 +444,8 @@ const Contact = () => {
                         <MapPin className="h-8 w-8 text-slate-600" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-slate-800 mb-2">Global Offices</h3>
-                        <p className="text-slate-600 text-sm mb-3">AI-native consulting across regions</p>
+                        <h3 className="text-xl font-bold text-slate-800 mb-2">Offices</h3>
+                        <p className="text-slate-600 text-sm mb-3">Remote-first delivery across regions</p>
                         <div className="space-y-1">
                           <p className="text-slate-700 font-medium">Austin, Texas, USA (HQ)</p>
                           <p className="text-slate-700 font-medium">Bengaluru, India (Corporate Office)</p>
@@ -472,7 +472,7 @@ const Contact = () => {
                     Connect With Our Community
                   </h3>
                   <p className="text-slate-600 text-center mb-6">
-                    Follow us for the latest insights on AI-native consulting and GPT-powered business transformation
+                    Follow us for practical notes on delivery execution, governance and visible progress
                   </p>
                   
                   <div className="flex justify-center space-x-4">
@@ -498,7 +498,7 @@ const Contact = () => {
               </Card>
             </div>
 
-            {/* Revolutionary CTA Card */}
+            {/* CTA Card */}
             <div className="group relative animate-fade-in" style={{ animationDelay: '1000ms' }}>
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-1000 animate-pulse"></div>
               
@@ -509,15 +509,15 @@ const Contact = () => {
                 <CardContent className="p-8 text-center relative z-10 h-full flex flex-col justify-center">
                   <h3 className="text-2xl font-bold mb-4">Ready to Get Started?</h3>
                   <p className="mb-6 text-blue-100">
-                    Book a free AI consultation call and let's discuss your digital transformation goals 
-                    with our <span className="font-bold">GPT-powered strategy development</span>.
+                    Book a free 30-minute discovery call and bring
+                    <span className="font-bold"> one execution problem</span> you want a clearer view of.
                   </p>
                   <button 
                     onClick={openCalendly}
                     className="group/btn bg-white text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-full font-bold transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl"
                   >
                     <Calendar className="inline-block mr-2 h-5 w-5" />
-                    Schedule Free AI Consultation
+                    Schedule a Free Discovery Call
                   </button>
                 </CardContent>
               </Card>

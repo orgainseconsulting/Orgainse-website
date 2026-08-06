@@ -93,33 +93,38 @@ export default function ROICalculator() {
         />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-              Your ROI Analysis Report
+            <h1 className="font-outfit text-3xl sm:text-4xl font-bold mb-4 tracking-[-0.02em] text-slate-900">
+              Your Modelled Scenario
             </h1>
-            <p className="text-lg text-slate-600">
-              Personalized projections for {result.company_name}
+            <p className="text-base text-slate-600">
+              Based on the assumptions you entered for {result.company_name}
+            </p>
+            <p data-testid="roi-scenario-disclaimer" className="mt-4 text-sm text-slate-600 max-w-2xl mx-auto bg-blue-50 border border-blue-200 rounded-xl px-4 py-3">
+              These figures are a planning scenario generated from your own inputs. They are not a
+              forecast, a promise, or a guarantee of results. Actual outcomes depend on scope, data
+              quality, leadership decisions, adoption and operating conditions.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-            <MetricCard icon={TrendingUp} title="ROI Percentage" value={`${result.roi_percentage}%`} color="from-blue-500 to-blue-600" testId="roi-pct" />
-            <MetricCard icon={Award} title="Annual Savings" value={fmtCurrency(result.potential_savings, sym)} color="from-blue-500 to-blue-500" testId="roi-savings" />
-            <MetricCard icon={Calendar} title="Payback Period" value={`${result.payback_period_months} mo`} color="from-violet-500 to-blue-500" testId="roi-payback" />
-            <MetricCard icon={Target} title="Investment" value={fmtCurrency(result.estimated_project_cost, sym)} color="from-blue-500 to-blue-500" testId="roi-investment" />
+            <MetricCard icon={TrendingUp} title="Modelled Return" value={`${result.roi_percentage}%`} color="from-blue-500 to-blue-600" testId="roi-pct" />
+            <MetricCard icon={Award} title="Modelled Annual Effect" value={fmtCurrency(result.potential_savings, sym)} color="from-blue-500 to-blue-500" testId="roi-savings" />
+            <MetricCard icon={Calendar} title="Indicative Payback" value={`${result.payback_period_months} mo`} color="from-violet-500 to-blue-500" testId="roi-payback" />
+            <MetricCard icon={Target} title="Indicative Investment" value={fmtCurrency(result.estimated_project_cost, sym)} color="from-blue-500 to-blue-500" testId="roi-investment" />
           </div>
 
           <div className="bg-white/90 backdrop-blur-lg rounded-2xl p-6 shadow-xl mb-10">
-            <h3 className="text-xl font-bold text-slate-800 mb-4">Projected Impact</h3>
+            <h3 className="font-outfit text-xl font-bold text-slate-900 mb-4">Modelled Effects</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <ImpactRow label="Efficiency gain" value={`${result.efficiency_gain_percent}%`} />
-              <ImpactRow label="Cost reduction" value={`${result.cost_reduction_percent}%`} />
-              <ImpactRow label="Revenue boost" value={`${result.revenue_boost_percent}%`} />
+              <ImpactRow label="Modelled efficiency effect" value={`${result.efficiency_gain_percent}%`} />
+              <ImpactRow label="Modelled cost effect" value={`${result.cost_reduction_percent}%`} />
+              <ImpactRow label="Modelled capacity effect" value={`${result.revenue_boost_percent}%`} />
             </div>
           </div>
 
           {result.recommended_services?.length > 0 && (
             <div className="mb-10">
-              <h2 className="text-2xl font-bold mb-6 text-slate-800">Recommended Services</h2>
+              <h2 className="font-outfit text-2xl font-bold mb-6 text-slate-900">Services That Fit This Scenario</h2>
               <div className="grid gap-6 md:grid-cols-2">
                 {result.recommended_services.map((svc, i) => (
                   <Card key={i} className="bg-white/90 backdrop-blur-lg border-0 shadow-lg rounded-xl">
@@ -132,7 +137,7 @@ export default function ROICalculator() {
                       <div className="flex items-center justify-between">
                         <span className="text-2xl font-bold text-blue-600">{fmtCurrency(Math.round(svc.price), sym)}</span>
                         <div className="flex items-center text-sm text-slate-600">
-                          <CheckCircle className="h-4 w-4 mr-1 text-blue-500" /> ROI focused
+                          <CheckCircle className="h-4 w-4 mr-1 text-blue-500" /> Indicative
                         </div>
                       </div>
                     </CardHeader>
@@ -143,14 +148,14 @@ export default function ROICalculator() {
           )}
 
           <div className="text-center bg-white/90 backdrop-blur-lg rounded-2xl p-8 shadow-xl">
-            <h3 className="text-2xl font-bold mb-4 text-slate-800">Ready to Achieve These Results?</h3>
-            <p className="text-slate-600 mb-6">Book a strategy session to discuss implementation.</p>
+            <h3 className="font-outfit text-2xl font-bold mb-4 text-slate-900">Want to pressure-test these assumptions?</h3>
+            <p className="text-slate-600 mb-6">Book a free 30-minute discovery call and we will review them with you honestly.</p>
             <button
               data-testid="roi-book-btn"
               onClick={openCalendly}
               className="px-7 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-full shadow-[0_12px_34px_-14px_rgba(15,23,42,0.6)] transition-colors duration-200 inline-flex items-center"
             >
-              Schedule Strategy Session <ArrowRight className="ml-2 h-5 w-5" />
+              Book a Discovery Call <ArrowRight className="ml-2 h-5 w-5" />
             </button>
           </div>
         </div>

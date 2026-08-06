@@ -111,9 +111,9 @@ const NewsletterIndex = () => {
   return (
     <div className="min-h-screen bg-slate-50">
       <SEOHead
-        title="Orgainse Pulse — Newsletter | AI-native consulting briefings"
-        description="The Orgainse Pulse newsletter: fortnightly briefings on AI-native project management, digital transformation and revenue intelligence — straight from the desk that ships the work."
-        keywords="Orgainse newsletter, AI strategy newsletter, PMaaS newsletter, AI-native consulting"
+        title="Orgainse Pulse — Newsletter | Delivery governance briefings"
+        description="The Orgainse Pulse newsletter: fortnightly briefings on delivery execution, governance practice and revenue intelligence — straight from the desk that ships the work."
+        keywords="Orgainse newsletter, delivery governance newsletter, project execution newsletter, PMaaS newsletter"
         canonical="https://www.orgainse.com/newsletter"
       />
 
@@ -126,10 +126,10 @@ const NewsletterIndex = () => {
                 The Orgainse Pulse
               </span>
               <h1 className="text-4xl sm:text-5xl font-black leading-[1.05] mb-5">
-                Briefings from the<br /><span className="text-blue-400">AI-native</span> desk.
+                Briefings from the<br /><span className="text-blue-400">delivery</span> desk.
               </h1>
               <p className="text-lg text-slate-300 max-w-xl leading-relaxed mb-8">
-                Fortnightly, sharp, vendor-neutral. Field-tested perspectives on AI-native project management, digital transformation and revenue intelligence.
+                Fortnightly, sharp, vendor-neutral. Field notes on delivery execution, governance practice and revenue intelligence.
               </p>
               <form onSubmit={subscribe} className="flex flex-col sm:flex-row gap-3 max-w-md" data-testid="newsletter-hero-subscribe">
                 <input type="email" value={subEmail} onChange={(e) => setSubEmail(e.target.value)} required

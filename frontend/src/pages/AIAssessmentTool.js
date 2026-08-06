@@ -11,67 +11,67 @@ import SEOHead from '../components/SEOHead';
 const QUESTIONS = [
   {
     id: 'ai_readiness',
-    title: 'AI Readiness & Current State',
-    question: "How would you describe your organization's current AI adoption level?",
+    title: 'Current State of Delivery Visibility',
+    question: "How is the status of your work known today?",
     options: [
-      { text: 'No AI implementation - completely traditional processes', score: 1 },
-      { text: 'Aware of AI potential but no concrete plans', score: 3 },
-      { text: 'Basic automation tools in use (Excel macros, simple workflows)', score: 5 },
-      { text: 'Some AI tools implemented (chatbots, basic analytics)', score: 7 },
-      { text: 'Advanced AI integration across multiple departments', score: 9 },
-      { text: 'AI-native organization with comprehensive AI strategy', score: 10 },
+      { text: 'Status is reconstructed manually before each review', score: 1 },
+      { text: 'Owners keep their own trackers; reports are stitched together', score: 3 },
+      { text: 'A shared tool exists but is updated inconsistently', score: 5 },
+      { text: 'One shared view, updated on an agreed cadence', score: 7 },
+      { text: 'Shared view plus tracked risks, actions and dependencies', score: 9 },
+      { text: 'Status is a by-product of the work, with assistive automation in place', score: 10 },
     ],
   },
   {
     id: 'data_management',
-    title: 'Data Infrastructure & Management',
-    question: 'How effectively does your organization collect, store, and analyze data?',
+    title: 'Delivery Data and Reporting',
+    question: 'How reliable is the delivery data your leadership decides on?',
     options: [
-      { text: 'Manual data collection with limited storage systems', score: 1 },
-      { text: 'Basic spreadsheet-based data management', score: 3 },
-      { text: 'Database systems with some automated collection', score: 5 },
-      { text: 'Integrated data platforms with analytics capabilities', score: 7 },
-      { text: 'Advanced data lakes/warehouses with real-time analytics', score: 9 },
-      { text: 'AI-powered data management with predictive analytics', score: 10 },
+      { text: 'Mostly spreadsheets, reconciled by hand', score: 1 },
+      { text: 'Data exists but is inconsistent between teams', score: 3 },
+      { text: 'Consistent fields in one tool, reporting still manual', score: 5 },
+      { text: 'Reporting is generated from the working data', score: 7 },
+      { text: 'Reporting is generated and reviewed on a defined cadence', score: 9 },
+      { text: 'Trusted single source, with automated summaries reviewed by a human', score: 10 },
     ],
   },
   {
     id: 'team_skills',
-    title: 'Team Capabilities & Skills',
-    question: "What is your team's current AI and technology skill level?",
+    title: 'Ownership and Delivery Capability',
+    question: 'How clearly is delivery ownership defined across your teams?',
     options: [
-      { text: 'Limited technical skills - primarily traditional business roles', score: 1 },
-      { text: 'Basic computer literacy with willingness to learn', score: 3 },
-      { text: 'Some team members with technical backgrounds', score: 5 },
-      { text: 'Dedicated IT/tech team with AI awareness', score: 7 },
-      { text: 'AI specialists and data scientists on staff', score: 9 },
-      { text: 'AI-first organization with comprehensive AI expertise', score: 10 },
+      { text: 'Ownership is unclear once work crosses teams', score: 1 },
+      { text: 'Owners exist informally but change often', score: 3 },
+      { text: 'Named owners for projects, not for risks and decisions', score: 5 },
+      { text: 'Named owners for projects, risks, actions and decisions', score: 7 },
+      { text: 'Dedicated delivery leads running a defined governance rhythm', score: 9 },
+      { text: 'Governance practice is documented, repeatable and coached internally', score: 10 },
     ],
   },
   {
     id: 'budget_allocation',
-    title: 'Budget & Investment Readiness',
-    question: 'How prepared is your organization to invest in AI transformation?',
+    title: 'Investment Readiness',
+    question: 'How prepared is your organisation to invest in fixing execution?',
     options: [
-      { text: 'Very limited budget - looking for low-cost solutions', score: 1 },
-      { text: 'Small budget allocated for technology improvements', score: 3 },
-      { text: 'Moderate budget with approval for proven ROI solutions', score: 5 },
-      { text: 'Significant budget allocated for digital transformation', score: 7 },
-      { text: 'Substantial investment ready for comprehensive AI implementation', score: 9 },
-      { text: 'Enterprise-level budget with dedicated AI transformation fund', score: 10 },
+      { text: 'No budget identified for this yet', score: 1 },
+      { text: 'Small budget for tooling improvements only', score: 3 },
+      { text: 'Moderate budget available with an agreed business case', score: 5 },
+      { text: 'Budget approved for a scoped delivery-governance engagement', score: 7 },
+      { text: 'Budget approved for governance plus platform rollout and adoption', score: 9 },
+      { text: 'Ongoing budget line for delivery governance as an operating capability', score: 10 },
     ],
   },
   {
     id: 'strategic_vision',
-    title: 'Strategic Vision & Leadership Support',
-    question: 'How committed is your leadership to AI transformation?',
+    title: 'Leadership Commitment',
+    question: 'How committed is leadership to changing how execution is governed?',
     options: [
-      { text: 'Leadership is skeptical about AI benefits', score: 1 },
-      { text: 'Leadership is curious but cautious about AI', score: 3 },
-      { text: 'Leadership supports AI initiatives with proper business case', score: 5 },
-      { text: 'Leadership actively champions AI transformation', score: 7 },
-      { text: 'Leadership has comprehensive AI strategy for next 3 years', score: 9 },
-      { text: 'Leadership views AI as core competitive advantage', score: 10 },
+      { text: 'Leadership sees no problem to solve here', score: 1 },
+      { text: 'Leadership is aware but has not prioritised it', score: 3 },
+      { text: 'Leadership supports change with a clear business case', score: 5 },
+      { text: 'Leadership actively sponsors the change', score: 7 },
+      { text: 'Leadership reviews delivery health on a defined cadence', score: 9 },
+      { text: 'Leadership treats execution visibility as an operating standard', score: 10 },
     ],
   },
 ];
@@ -116,17 +116,17 @@ export default function AIAssessmentTool() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
         <SEOHead
-          title="Free AI Readiness Assessment | Orgainse Consulting"
-          description="Evaluate your organisation across strategy, processes, data, governance, technology and adoption readiness. A directional view of strengths, gaps and priorities — not a certification."
+          title="Execution Readiness Assessment | Orgainse Consulting"
+          description="A five-question directional view of how visible and governed your delivery is today — covering status, reporting reliability, ownership, investment readiness and leadership commitment. Not a certification."
           canonical="https://orgainse.com/ai-assessment"
-          keywords="AI readiness assessment, AI maturity evaluation, AI adoption readiness, free AI assessment"
+          keywords="execution readiness assessment, delivery governance assessment, project visibility assessment, delivery health check"
         />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-              Your AI Readiness Report
+            <h1 className="font-outfit text-3xl sm:text-4xl font-bold mb-4 tracking-[-0.02em] text-slate-900">
+              Your Execution Readiness Report
             </h1>
-            <p className="text-lg text-slate-600">Personalized AI transformation roadmap</p>
+            <p className="text-base text-slate-600">A directional view of strengths, gaps and priorities — not a certification</p>
           </div>
 
           <Card className="bg-white/90 backdrop-blur-lg border-0 shadow-xl rounded-2xl mb-10">
@@ -134,12 +134,12 @@ export default function AIAssessmentTool() {
               <div data-testid="assessment-score-badge" className={`inline-flex items-center justify-center w-32 h-32 rounded-full bg-gradient-to-r ${scoreColor(result.maturity_score)} mb-4 mx-auto`}>
                 <span className="text-4xl font-bold text-white">{result.maturity_score}</span>
               </div>
-              <CardTitle className="text-2xl mb-2">AI Maturity Score: {result.score_label}</CardTitle>
+              <CardTitle className="text-2xl mb-2">Readiness Level: {result.score_label}</CardTitle>
               <CardDescription className="text-lg">You scored {result.maturity_score} out of 100</CardDescription>
             </CardHeader>
           </Card>
 
-          <h2 className="text-2xl font-bold mb-6 text-slate-800">Personalized Recommendations</h2>
+          <h2 className="font-outfit text-2xl font-bold mb-6 text-slate-900">Suggested Priorities</h2>
           <div className="grid gap-4 mb-10">
             {result.recommendations.map((rec, i) => (
               <Card key={i} className="bg-white/90 backdrop-blur-lg border-0 shadow-lg rounded-xl">
@@ -164,14 +164,14 @@ export default function AIAssessmentTool() {
           </div>
 
           <div className="text-center bg-white/90 backdrop-blur-lg rounded-2xl p-8 shadow-xl">
-            <h3 className="text-2xl font-bold mb-4 text-slate-800">Ready to Transform Your Business?</h3>
-            <p className="text-slate-600 mb-6">Book a free consultation to discuss implementation.</p>
+            <h3 className="font-outfit text-2xl font-bold mb-4 text-slate-900">Want to talk through these priorities?</h3>
+            <p className="text-slate-600 mb-6">Book a free 30-minute discovery call to discuss the practical next step.</p>
             <button
               data-testid="assessment-book-btn"
               onClick={openCalendly}
               className="px-7 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-full shadow-[0_12px_34px_-14px_rgba(15,23,42,0.6)] transition-colors duration-200 inline-flex items-center"
             >
-              Book Free Consultation <ArrowRight className="ml-2 h-5 w-5" />
+              Book Free Discovery Call <ArrowRight className="ml-2 h-5 w-5" />
             </button>
           </div>
         </div>
@@ -182,18 +182,19 @@ export default function AIAssessmentTool() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
       <SEOHead
-        title="Free AI Readiness Assessment | Orgainse Consulting"
-        description="Evaluate your organisation across strategy, processes, data, governance, technology and adoption readiness. A directional view of strengths, gaps and priorities — not a certification."
+        title="Execution Readiness Assessment | Orgainse Consulting"
+        description="A five-question directional view of how visible and governed your delivery is today — covering status, reporting reliability, ownership, investment readiness and leadership commitment. Not a certification."
         canonical="https://orgainse.com/ai-assessment"
-        keywords="AI readiness assessment, AI maturity evaluation, AI adoption readiness, free AI assessment"
+        keywords="execution readiness assessment, delivery governance assessment, project visibility assessment, delivery health check"
       />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-            AI Readiness Assessment
+          <h1 className="font-outfit text-3xl sm:text-4xl font-bold mb-4 tracking-[-0.02em] text-slate-900">
+            Execution Readiness Assessment
           </h1>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Discover your AI maturity level and get a personalized roadmap in 5 minutes.
+          <p className="text-base text-slate-600 max-w-2xl mx-auto">
+            Five questions, about three minutes. You get a directional view of where execution visibility
+            and governance are strong today and where the gaps are. It is not a certification or an audit.
           </p>
         </div>
 
@@ -217,7 +218,7 @@ export default function AIAssessmentTool() {
             <CardHeader className="p-8">
               <CardTitle className="text-2xl mb-4 text-center">Let's Get Started</CardTitle>
               <CardDescription className="text-center mb-6">
-                Please provide your information to receive personalized recommendations
+                Please provide your details so we can send your readiness summary
               </CardDescription>
               <div className="space-y-4">
                 <div>

@@ -81,7 +81,7 @@ const BlogPost = ({ post }) => {
             to="/ai-assessment"
             className="inline-flex items-center px-6 py-3 bg-white border-2 border-blue-500 text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all"
           >
-            Take AI Assessment
+            Take the Readiness Assessment
           </Link>
         </div>
       </div>

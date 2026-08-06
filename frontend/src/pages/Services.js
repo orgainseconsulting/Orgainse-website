@@ -516,7 +516,7 @@ const Services = () => {
         </div>
       </section>
 
-        {/* Comprehensive FAQ Section for SEO */}
+        {/* FAQ Section for SEO */}
         <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">

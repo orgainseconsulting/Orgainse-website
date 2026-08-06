@@ -42,6 +42,7 @@ const ServicePopup = ({
         {/* Close Button */}
         <button 
           onClick={onClose}
+          data-testid="service-popup-close-btn"
           className="absolute top-4 right-4 z-10 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all hover:scale-[1.03]"
         >
           <X className="h-5 w-5 text-slate-700" />
@@ -225,20 +226,22 @@ const ServicePopup = ({
                     {/* Compact CTA Section */}
                     <div className="text-center bg-gradient-to-r from-slate-50 via-white to-blue-50 rounded-xl p-6">
                       <h3 className="text-xl font-bold text-slate-800 mb-3">
-                        Ready to Get Started?
+                        Discuss this with us
                       </h3>
                       <div className="flex flex-col sm:flex-row gap-3 justify-center">
                         <button
                           onClick={() => setShowContactForm(true)}
+                          data-testid={`service-popup-proposal-btn-${service.id}`}
                           className={`px-6 py-3 bg-gradient-to-r ${service.gradient} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02]`}
                         >
-                          Get Custom Proposal
+                          Request a Scoped Proposal
                         </button>
                         <button
                           onClick={openCalendly}
+                          data-testid={`service-popup-book-btn-${service.id}`}
                           className="px-6 py-3 bg-white border-2 border-slate-300 text-slate-700 font-bold rounded-xl hover:border-slate-400 hover:shadow-lg transition-all transform hover:scale-[1.02]"
                         >
-                          Book Free Consultation
+                          Book a Discovery Call
                         </button>
                       </div>
                     </div>
@@ -248,7 +251,7 @@ const ServicePopup = ({
                   <div className="max-w-2xl mx-auto">
                     <div className="text-center mb-6">
                       <h3 className="text-2xl font-bold text-slate-800 mb-3">
-                        Get Your Custom Proposal
+                        Request a Scoped Proposal
                       </h3>
                       <p className="text-slate-600">
                         Tell us about your needs for <strong>{service.title}</strong>
@@ -338,6 +341,7 @@ const ServicePopup = ({
                         
                         <button
                           type="submit"
+                          data-testid="service-popup-submit-btn"
                           className={`px-8 py-3 bg-gradient-to-r ${service.gradient} text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02]`}
                         >
                           Send My Request

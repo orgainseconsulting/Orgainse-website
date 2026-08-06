@@ -55,7 +55,7 @@ const Footer = () => {
               />
             </Link>
             <p className="text-sm text-slate-600 leading-relaxed max-w-xs">
-              AI-native consulting, Project Management as a Service, and ORQYNE — turning fragmented work into visible, governed execution.
+              Delivery consulting, Project Management as a Service, and ORQYNE — turning fragmented work into visible, governed execution.
             </p>
             <div className="flex items-center gap-4 pt-1">
               {socialLinks.map((social) => (
@@ -91,7 +91,7 @@ const Footer = () => {
             <ul className="space-y-2.5 text-sm text-slate-600">
               <li><Link to="/products" className="hover:text-blue-700 transition-colors">ORQYNE Platform</Link></li>
               <li><Link to="/about" className="hover:text-blue-700 transition-colors">About Orgainse</Link></li>
-              <li><Link to="/ai-assessment" className="hover:text-blue-700 transition-colors">AI Readiness Assessment</Link></li>
+              <li><Link to="/ai-assessment" className="hover:text-blue-700 transition-colors">Execution Readiness Assessment</Link></li>
               <li><Link to="/roi-calculator" className="hover:text-blue-700 transition-colors">ROI Calculator</Link></li>
               <li><Link to="/blog" className="hover:text-blue-700 transition-colors">Blog</Link></li>
               <li><Link to="/newsletter" className="hover:text-blue-700 transition-colors">Newsletter</Link></li>

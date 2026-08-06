@@ -21,7 +21,7 @@ const SEOHead = ({ title, description, canonical, noindex = false, structuredDat
       'services': 'Our Services',
       'products': 'ORQYNE Product',
       'contact': 'Contact Us',
-      'ai-assessment': 'AI Readiness Assessment',
+      'ai-assessment': 'Execution Readiness Assessment',
       'roi-calculator': 'ROI Calculator',
       'smart-calendar': 'Book Consultation'
     };

@@ -117,12 +117,12 @@ export default async function handler(req, res) {
 
     const servicesList = Array.isArray(desired_services) && desired_services.length > 0
       ? desired_services
-      : ['AI Project Management', 'Digital Transformation'];
+      : ['Project Management as a Service (PMaaS)', 'Delivery and Operational Governance'];
 
     const recommendedServices = servicesList.map((s) => ({
       name: s,
       duration: '3-6 months',
-      description: `Tailored ${String(s).toLowerCase()} solution`,
+      description: `Scoped ${String(s).toLowerCase()} engagement`,
       price: implementationCost / Math.max(servicesList.length, 1),
     }));
 

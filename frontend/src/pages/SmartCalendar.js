@@ -66,7 +66,7 @@ export default function SmartCalendar() {
           title="Book a Discovery Call | Orgainse Consulting"
           description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
           canonical="https://orgainse.com/smart-calendar"
-          keywords="book a consultation, discovery call, delivery consulting appointment, PMaaS consultation"
+          keywords="book a discovery call, delivery consulting appointment, project governance consultation"
         />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
@@ -109,7 +109,7 @@ export default function SmartCalendar() {
           </Card>
 
           <div className="bg-white/90 backdrop-blur-lg rounded-2xl p-8 shadow-xl text-center">
-            <h3 className="text-2xl font-bold mb-4 text-slate-800">Want a guaranteed slot now?</h3>
+            <h3 className="text-2xl font-bold mb-4 text-slate-800">Prefer to pick a time yourself?</h3>
             <p className="text-slate-600 mb-6">
               Pick a time directly from our Google Calendar:
             </p>
@@ -133,7 +133,7 @@ export default function SmartCalendar() {
         title="Book a Discovery Call | Orgainse Consulting"
         description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
         canonical="https://orgainse.com/smart-calendar"
-        keywords="book a consultation, discovery call, delivery consulting appointment, PMaaS consultation"
+        keywords="book a discovery call, delivery consulting appointment, project governance consultation"
       />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
@@ -229,12 +229,12 @@ export default function SmartCalendar() {
 
             <div className="mt-8 pt-6 border-t border-slate-200">
               <h3 className="text-lg font-semibold text-slate-800 mb-4 text-center">
-                What You'll Get From This Consultation
+                What This Discovery Call Covers
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <PerkRow icon={Brain} color="orange" label="AI Readiness Assessment" />
-                <PerkRow icon={Target} color="green" label="Custom Strategy Roadmap" />
-                <PerkRow icon={Award} color="blue" label="ROI Projections" />
+                <PerkRow icon={Brain} color="blue" label="A read on execution readiness" />
+                <PerkRow icon={Target} color="blue" label="A scoped, practical next step" />
+                <PerkRow icon={Award} color="blue" label="An honest read on fit" />
               </div>
             </div>
           </CardHeader>
@@ -251,7 +251,7 @@ function Field({ label, children }) {
         title="Book a Discovery Call | Orgainse Consulting"
         description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
         canonical="https://orgainse.com/smart-calendar"
-        keywords="book a consultation, discovery call, delivery consulting appointment, PMaaS consultation"
+        keywords="book a discovery call, delivery consulting appointment, project governance consultation"
       />
       <label className="block text-sm font-medium text-slate-700 mb-2">{label}</label>
       {children}
@@ -266,7 +266,7 @@ function DetailRow({ label, value }) {
         title="Book a Discovery Call | Orgainse Consulting"
         description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
         canonical="https://orgainse.com/smart-calendar"
-        keywords="book a consultation, discovery call, delivery consulting appointment, PMaaS consultation"
+        keywords="book a discovery call, delivery consulting appointment, project governance consultation"
       />
       <label className="text-sm font-medium text-slate-600">{label}</label>
       <p className="text-lg font-semibold text-slate-800">{value || '—'}</p>
@@ -282,7 +282,7 @@ function PerkRow({ icon: Icon, color, label }) {
         title="Book a Discovery Call | Orgainse Consulting"
         description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
         canonical="https://orgainse.com/smart-calendar"
-        keywords="book a consultation, discovery call, delivery consulting appointment, PMaaS consultation"
+        keywords="book a discovery call, delivery consulting appointment, project governance consultation"
       />
       <div className={`inline-flex items-center justify-center w-10 h-10 rounded-full ${bg} mb-2`}>
         <Icon className="h-5 w-5" />

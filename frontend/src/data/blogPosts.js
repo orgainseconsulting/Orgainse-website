@@ -5,8 +5,8 @@ export const blogPosts = [
   {
     id: 1,
     slug: "ai-project-management-guide-2025",
-    title: "Complete Guide to AI Project Management in 2025: Transform Your Startup with PMaaS",
-    excerpt: "Discover how AI Project Management as a Service (PMaaS) is revolutionizing startup operations with measurable, data-driven outcomes and faster delivery. Learn implementation strategies, tools, and best practices.",
+    title: "A Practical Guide to Project Management as a Service in 2025",
+    excerpt: "How Project Management as a Service works in practice: where it fits, what it covers, and how teams use it to make delivery visible and governed. Includes implementation approach, tooling and operating cadence.",
     content: `
       <h2>What is AI Project Management (PMaaS)?</h2>
       <p>Project Management as a Service (PMaaS) powered by AI represents the next evolution in business operations. Unlike traditional project management, AI-driven PMaaS leverages GPT-powered automation, predictive analytics, and intelligent resource allocation to deliver unprecedented results.</p>
@@ -82,15 +82,15 @@ export const blogPosts = [
     publishDate: "2025-09-10",
     publishDateFormatted: "September 10, 2025",
     readTime: 8,
-    tags: ["AI Project Management", "PMaaS", "Startup Growth", "Digital Transformation"],
-    category: "AI Strategy",
+    tags: ["Project Management", "PMaaS", "Delivery Governance", "Execution Visibility"],
+    category: "Delivery Governance",
     featured: true
   },
   {
     id: 2,
     slug: "digital-transformation-roadmap-sme",
-    title: "Digital Transformation Roadmap 2025: A Complete Guide for SMEs and Startups",
-    excerpt: "Step-by-step digital transformation strategy for small and medium enterprises. Learn how AI-native solutions can deliver 70% faster implementation and sustainable growth.",
+    title: "A Workflow Modernisation Roadmap for SMEs and Growing Teams",
+    excerpt: "A staged approach to modernising how work moves through a growing business: mapping the current workflow, defining ownership, and sequencing change without a big-bang programme.",
     content: `
       <h2>Why Digital Transformation is Critical in 2025</h2>
       <p>Small and Medium Enterprises (SMEs) that embrace digital transformation achieve 70% faster growth rates and 50% higher profitability compared to their traditional counterparts.</p>
@@ -177,15 +177,15 @@ export const blogPosts = [
     publishDate: "2025-09-08",
     publishDateFormatted: "September 8, 2025",
     readTime: 10,
-    tags: ["Digital Transformation", "SME Growth", "AI Implementation", "Business Strategy"],
-    category: "Digital Strategy",
+    tags: ["Workflow Modernisation", "SME Growth", "Operating Model", "Business Strategy"],
+    category: "Operating Model",
     featured: true
   },
   {
     id: 3,
     slug: "ai-roi-calculator-business-case",
-    title: "How to Calculate AI ROI: Complete Guide for Business Leaders and CFOs",
-    excerpt: "Learn how to build compelling business cases for AI investments. Includes ROI calculation frameworks, implementation costs, and proven metrics from 500+ successful AI projects.",
+    title: "Building the Business Case for Delivery Investment: A Guide for Leaders and CFOs",
+    excerpt: "How to build a defensible business case for delivery and governance investment: what to measure, how to frame assumptions, and why outcomes should be modelled as scenarios rather than promised returns.",
     content: `
       <h2>Understanding AI ROI: Beyond Traditional Metrics</h2>
       <p>Calculating return on investment for AI initiatives requires a comprehensive approach that considers both direct financial benefits and strategic advantages.</p>
@@ -289,8 +289,8 @@ export const blogPosts = [
     publishDate: "2025-09-05",
     publishDateFormatted: "September 5, 2025",
     readTime: 12,
-    tags: ["AI ROI", "Business Case", "Investment Planning", "CFO Guide"],
-    category: "Business Intelligence",
+    tags: ["Business Case", "Delivery Investment", "Governance", "CFO Guide"],
+    category: "Business Case",
     featured: false
   }
 ];

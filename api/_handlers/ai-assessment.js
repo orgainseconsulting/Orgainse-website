@@ -46,34 +46,34 @@ function calculateMaturityScore(responses) {
 }
 
 function scoreLabel(score) {
-  if (score >= 80) return 'AI Advanced';
-  if (score >= 60) return 'AI Ready';
-  if (score >= 40) return 'AI Developing';
-  return 'AI Beginner';
+  if (score >= 80) return 'Governed Execution';
+  if (score >= 60) return 'Structured Execution';
+  if (score >= 40) return 'Developing Visibility';
+  return 'Reactive Execution';
 }
 
 function generateRecommendations(score) {
   if (score < 25) {
     return [
-      { title: 'AI Foundation Building', description: 'Start with basic AI tools and team training to build fundamental AI capabilities', priority: 'High', timeline: '3-6 months', category: 'Foundation' },
-      { title: 'Data Infrastructure Setup', description: 'Implement proper data collection and management systems as the foundation for AI', priority: 'High', timeline: '2-4 months', category: 'Infrastructure' },
+      { title: 'Establish a single delivery view', description: 'Consolidate work into one shared view so status stops being reconstructed manually before each review', priority: 'High', timeline: '1-3 months', category: 'Visibility' },
+      { title: 'Define ownership and cadence', description: 'Name owners for projects, risks and decisions, and agree a reporting cadence leadership will actually use', priority: 'High', timeline: '1-2 months', category: 'Governance' },
     ];
   }
   if (score < 50) {
     return [
-      { title: 'Process Automation Implementation', description: 'Implement AI-powered workflow automation to improve efficiency', priority: 'High', timeline: '6-12 months', category: 'Automation' },
-      { title: 'Team AI Training Program', description: 'Comprehensive AI training for your team to maximize adoption', priority: 'Medium', timeline: '3-6 months', category: 'Training' },
+      { title: 'Stand up risk and action registers', description: 'Track risks, actions and dependencies against named owners so issues surface before they affect commitments', priority: 'High', timeline: '2-4 months', category: 'Governance' },
+      { title: 'Remove manual reporting steps', description: 'Generate reporting from the working data instead of assembling it by hand each week', priority: 'Medium', timeline: '2-4 months', category: 'Reporting' },
     ];
   }
   if (score < 75) {
     return [
-      { title: 'Advanced AI Integration', description: 'Implement sophisticated AI solutions for predictive analytics and decision support', priority: 'High', timeline: '6-18 months', category: 'Advanced AI' },
-      { title: 'AI Governance Framework', description: 'Establish proper AI governance and ethics guidelines for responsible AI use', priority: 'Medium', timeline: '3-6 months', category: 'Governance' },
+      { title: 'Portfolio-level delivery health', description: 'Roll project data up to a portfolio view so capacity, forecast and delivery health are visible in one place', priority: 'High', timeline: '3-6 months', category: 'Portfolio' },
+      { title: 'Assistive automation with human review', description: 'Apply retrieval-based assistance to summaries and drafting where it removes a specific manual step, with review before anything is relied on', priority: 'Medium', timeline: '3-6 months', category: 'Automation' },
     ];
   }
   return [
-    { title: 'AI Innovation Leadership', description: 'Lead industry innovation with cutting-edge AI research and development', priority: 'Strategic', timeline: '12+ months', category: 'Innovation' },
-    { title: 'AI Center of Excellence', description: 'Establish an AI Center of Excellence to drive organization-wide AI initiatives', priority: 'Medium', timeline: '6-12 months', category: 'Strategic' },
+    { title: 'Make governance a repeatable standard', description: 'Document the operating rhythm so new projects and teams inherit it without a rebuild', priority: 'Strategic', timeline: '6-12 months', category: 'Operating Model' },
+    { title: 'Decision quality and forecast reliability', description: 'Review decision turnaround and forecast accuracy as standing measures of delivery health', priority: 'Medium', timeline: '6-12 months', category: 'Continuous Improvement' },
   ];
 }
 

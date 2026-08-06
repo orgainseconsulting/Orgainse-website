@@ -193,10 +193,10 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-white text-slate-900 font-manrope antialiased" data-testid="home-page">
       <SEOHead
-        title="AI-Native Delivery Consulting and PMaaS | Orgainse"
+        title="Delivery Consulting, PMaaS and Delivery Governance | Orgainse"
         description="Orgainse helps IT services firms, software teams, startups, and growing businesses improve project delivery, workflow visibility, governance, and practical AI adoption through consulting, Project Management as a Service, and ORQYNE."
         canonical="https://orgainse.com/"
-        keywords="AI-native consulting, Project Management as a Service, PMaaS, delivery governance, workflow transformation, ORQYNE, AI readiness, healthcare revenue intelligence advisory"
+        keywords="delivery consulting, Project Management as a Service, PMaaS, delivery governance, execution visibility, workflow transformation, ORQYNE, AI readiness, healthcare revenue intelligence advisory"
         structuredData={structuredData}
       />
 
@@ -211,7 +211,7 @@ const Home = () => {
                 className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/70 backdrop-blur-sm text-[11px] uppercase tracking-[0.18em] text-slate-500 shadow-sm"
               >
                 <Layers className="h-3 w-3 text-blue-600" />
-                AI-Native Consulting · PMaaS · ORQYNE-Enabled Delivery
+                Delivery Consulting · PMaaS · ORQYNE-Enabled Delivery
               </span>
 
               <h1 data-testid="hero-headline" className="mt-6 font-outfit font-bold text-4xl sm:text-5xl lg:text-[60px] leading-[1.05] text-slate-900">
@@ -482,9 +482,9 @@ const Home = () => {
               <span className="w-11 h-11 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center">
                 <Brain className="h-4 w-4 text-blue-600" />
               </span>
-              <h3 className="mt-6 font-outfit text-xl font-bold text-slate-900 tracking-[-0.02em]">Free AI Readiness Assessment</h3>
+              <h3 className="mt-6 font-outfit text-xl font-bold text-slate-900 tracking-[-0.02em]">Free Execution Readiness Assessment</h3>
               <p className="mt-4 text-[13px] text-slate-600 leading-relaxed flex-1">
-                Evaluate your organisation across strategy, processes, data, governance, technology, and adoption readiness. The result provides a directional view of strengths, gaps, and priorities. It is not a certification or substitute for a detailed assessment.
+                Five questions covering how status is known today, how reliable your delivery reporting is, how clearly ownership is defined, investment readiness, and leadership commitment. The result is a directional view of strengths, gaps and priorities. It is not a certification or a substitute for a detailed assessment.
               </p>
               <Link
                 to="/ai-assessment"
@@ -560,7 +560,7 @@ const Home = () => {
               <div className="mt-8">
                 <SocialShare
                   url="https://orgainse.com/"
-                  title="AI-Native Delivery Consulting and PMaaS | Orgainse"
+                  title="Delivery Consulting, PMaaS and Delivery Governance | Orgainse"
                   description="Orgainse helps IT services firms, software teams, startups, and growing businesses turn fragmented work into visible, governed execution."
                 />
               </div>

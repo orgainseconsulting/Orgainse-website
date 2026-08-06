@@ -247,7 +247,7 @@ const IssueEditor = ({ issueId, onBack, onSaved, onDeleted }) => {
           </Field>
           <Field label="Subtitle / kicker" hint="Short tagline shown under the title in the email + web view.">
             <input value={form.subtitle} onChange={(e) => update({ subtitle: e.target.value })}
-              placeholder="AI-native consulting briefings, delivered fortnightly"
+              placeholder="Delivery governance briefings, delivered fortnightly"
               className="w-full px-3 py-2 text-base border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none" />
           </Field>
           <Field label="Slug" hint={form.slug ? `Public URL: /newsletter/${form.slug}` : 'Auto-generated from title'}>

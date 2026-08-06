@@ -38,16 +38,16 @@ function isValidPhone(phone) {
 // Generate consultation confirmation message
 function generateConfirmationMessage(consultationType, preferredDate) {
   const messages = {
-    'AI Readiness Assessment': 'We will conduct a comprehensive AI readiness assessment for your organization.',
-    'Digital Transformation Planning': 'We will help you create a strategic digital transformation roadmap.',
-    'Project Management Optimization': 'We will analyze and optimize your current project management processes.',
-    'Custom AI Solution Discussion': 'We will discuss custom AI solutions tailored to your specific needs.',
-    'General Business Consultation': 'We will provide general business consultation and strategic guidance.'
+    'AI Readiness Assessment': 'We will review your current execution visibility, governance and data readiness, and share a directional view of gaps and priorities.',
+    'Digital Transformation Planning': 'We will map your current workflow, ownership and decision points, and outline a scoped next step.',
+    'Project Management Optimization': 'We will review your current project leadership, reporting cadence and risk practice, and identify the practical gaps.',
+    'Custom AI Solution Discussion': 'We will discuss where assistive automation removes a specific manual step in your workflow, and where it does not belong.',
+    'General Business Consultation': 'We will discuss the execution problem you are dealing with and whether Orgainse is the right fit for it.'
   };
   
-  const baseMessage = messages[consultationType] || 'We will provide expert consultation tailored to your needs.';
+  const baseMessage = messages[consultationType] || 'We will discuss the execution problem you are dealing with and the most practical next step.';
   
-  return `Thank you for booking a consultation! ${baseMessage} We will contact you within 24 hours to confirm your preferred time slot${preferredDate ? ` on ${preferredDate}` : ''}.`;
+  return `Thank you for booking a discovery call! ${baseMessage} We will contact you within one business day to confirm your preferred time slot${preferredDate ? ` on ${preferredDate}` : ''}.`;
 }
 
 export default async function handler(req, res) {

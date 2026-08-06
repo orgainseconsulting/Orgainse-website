@@ -1,0 +1,72 @@
+{
+  "summary": "Iteration 18 — banned-term scan + copy-cleanup verification across the 12 public routes, all 6 service popups, /services SEO sections, /contact + /ai-assessment + /roi-calculator + /smart-calendar E2E, and backend endpoints. GOOD NEWS: the banned-term audit is clean on 12/12 routes (body innerText, title, meta description, meta keywords, og:title, twitter:title all pass — only 'guarantee' hits found are FAQ questions and negative disclaimers, not positive promises). SEO sections on /services render both new blocks with the required headings and all 12 internal + 12 external links (external links all have target=_blank rel=noopener noreferrer). ALL SIX service popups render 'What It Does' / 'Why Choose Us' / 'What You Get' / 'Discuss this with us' with the two new CTA testids (service-popup-proposal-btn-<id> = 'Request a Scoped Proposal', service-popup-book-btn-<id> = 'Book a Discovery Call'); Escape closes each popup; healthcare popup renders 8 not-included items and 6 who-we-serve items. AI Assessment (/ai-assessment) E2E clean: H1 = 'Execution Readiness Assessment', 5 questions are the new delivery-visibility phrasing (no 'AI adoption' language), result view shows 'Your Execution Readiness Report' + score badge + 'Readiness Level: Reactive Execution' (allowed label set) + 'Suggested Priorities', recommendations contain none of the banned AI-training phrases. ROI Calculator (/roi-calculator) E2E clean: 'Your Modelled Scenario' header, disclaimer with 'planning scenario' + 'not a forecast, a promise, or a guarantee of results', metric cards 'Modelled Return' / 'Modelled Annual Effect' / 'Indicative Payback' / 'Indicative Investment', 'Modelled Effects' block, 'Services That Fit This Scenario', 'Book a Discovery Call' CTA. Empty-services fallback correctly returns 'Project Management as a Service (PMaaS)' + 'Delivery and Operational Governance' (no 'AI Project Management' / 'Digital Transformation'). Backend confirms same for POST /api/roi-calculator. Contact page perfectly clean: 4 cards with new copy, subject placeholder = 'Delivery visibility, project governance, or ORQYNE enquiry', message placeholder rewritten around execution problem, form submits, contact-success-message renders 'within one business day' with 'honest read on fit'. All 12 SPA titles remain unique after this round. No console errors. No mobile overflow on /services at 390x844. Footer 'Execution Readiness Assessment' link -> /ai-assessment works. Backend endpoints: /api/health 200, /api/contact 200, /api/ai-assessment 200 (returns score_label from {Reactive/Developing/Structured/Governed} Execution set — new labels active), /api/roi-calculator 200 with new fallback services list, /api/newsletter 200, /api/admin-login 200, GET /api/admin 200 with bearer.\n\nHOWEVER, the copy cleanup on Smart Calendar / Contact toast / consultation next_steps is INCOMPLETE. Four separate 'within 24 hours' occurrences remain, plus the Smart Calendar form-side H1 and subtitle still use the old AI-transformation positioning that this whole ticket was meant to remove. See action_items — these are the last mile of the same cleanup and are user-facing.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {
+        "endpoint": "POST /api/consultation",
+        "issue": "Response 200 body has an internal inconsistency: 'message' correctly says 'within one business day' but 'next_steps[1]' still hard-codes 'Our team will contact you within 24 hours' (api/_handlers/consultation.js line 189). Same file line 165 also still uses '24 hours' in the duplicate-submission error, which the review copy cleanup was meant to remove."
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "SmartCalendar (form view)",
+        "issue": "H1 still reads 'Book Your AI Consultation' and subtitle still reads 'Schedule a free 30-minute consultation with our AI transformation experts.' — this is the exact positioning the copy cleanup was supposed to remove (frontend/src/pages/SmartCalendar.js lines 141 and 144). Also line 147 label reads 'Prefer to pick a slot yourself?' whereas the confirmation-view heading (line 112) reads 'Prefer to pick a time yourself?' — inconsistent wording between the two states, and the review spec expects the 'time yourself' wording.",
+        "selector": "h1 on /smart-calendar",
+        "priority": "HIGH"
+      },
+      {
+        "component": "SmartCalendar (form view)",
+        "issue": "Consultation Details subtitle still hard-codes 'Fill in your details and we'll confirm your slot within 24 hours.' (SmartCalendar.js line 163). Must be 'within one business day' per the copy cleanup.",
+        "selector": "text on /smart-calendar",
+        "priority": "HIGH"
+      },
+      {
+        "component": "SmartCalendar (confirmation view)",
+        "issue": "Confirmation H1 says 'Consultation Request Received!' and subtitle says 'Our team will contact you within 24 hours to confirm.' (SmartCalendar.js lines 77 & 80). Should read 'within one business day' — this is the exact spec item flagged for /smart-calendar. Note the review's other three copy asks on this page (Prefer to pick a time yourself? / the three PerkRow labels) are already correct.",
+        "selector": "confirmation view on /smart-calendar",
+        "priority": "HIGH"
+      },
+      {
+        "component": "Contact page toast",
+        "issue": "The sonner toast on successful contact submit still says 'Message sent! We'll respond within 24 hours.' (frontend/src/pages/Contact.js line 77). The in-page contact-success-message correctly says 'within one business day', but the toast is stale. User-visible inconsistency between two responses to the same action.",
+        "selector": "sonner toast after contact-submit-btn",
+        "priority": "HIGH"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_backend_endpoints.py",
+    "/app/test_reports/pytest/iter18.xml"
+  ],
+  "action_items": [
+    "SmartCalendar.js: replace 'Book Your AI Consultation' (line 141) and 'AI transformation experts' subtitle (line 144) with the new discovery-call / delivery-execution positioning that matches Home and Products.",
+    "SmartCalendar.js: change form-view subtitle (line 163) 'we'll confirm your slot within 24 hours' -> 'within one business day'.",
+    "SmartCalendar.js: change confirmation-view H1 (line 77) 'Consultation Request Received!' + subtitle (line 80) 'Our team will contact you within 24 hours to confirm.' to the new discovery-call copy with 'within one business day'.",
+    "SmartCalendar.js: align labels (line 147 uses 'Prefer to pick a slot yourself?', line 112 uses 'Prefer to pick a time yourself?'). Standardise on the review spec wording 'Prefer to pick a time yourself?'.",
+    "Contact.js: change toast (line 77) from \"Message sent! We'll respond within 24 hours.\" to \"Message sent! We'll respond within one business day.\" so it matches the contact-success-message copy.",
+    "api/_handlers/consultation.js: fix next_steps[1] on the /api/consultation 200 response (line 189) from 'Our team will contact you within 24 hours' to 'Our team will contact you within one business day'. Also update the duplicate-request error message at line 165 ('...in the last 24 hours...') for the same reason; keep the 24h duplicate-window logic if that is intentional, but reword the user-facing text.",
+    "Restart Node sidecar after api/_handlers/consultation.js edit (does not hot reload)."
+  ],
+  "critical_code_review_comments": [
+    "The 'within 24 hours' cleanup is only ~80% done: it was updated in the Contact page card + success message + assessment / ROI copy, but four occurrences slipped through (2x SmartCalendar.js, 1x Contact.js toast, 2x consultation.js handler). A repo-wide grep for '24 hours' should be a mandatory acceptance gate for this ticket.",
+    "SmartCalendar.js form view still carries the pre-cleanup 'AI Consultation / AI transformation experts' hero copy. Because the confirmation view was updated but the form view was not, the same page now has two different voices depending on state — this is exactly the inconsistency the ticket set out to fix.",
+    "consultation.js currently produces a self-contradictory JSON body (message says 'one business day', next_steps says '24 hours'). This is a user-facing regression — any client rendering next_steps will show conflicting timelines.",
+    "The 'Prefer to pick a slot yourself?' vs 'Prefer to pick a time yourself?' mismatch on SmartCalendar.js (lines 147 vs 112) suggests only the confirmation-view path of the file was reviewed during the copy pass."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_backend_endpoints.py (new pytest suite covering health/contact/ai-assessment/roi/consultation/newsletter/admin)"
+  ],
+  "success_rate": {
+    "backend": "6/7 (86%) — only consultation copy-consistency assertion fails; the endpoint itself is 200 and functional",
+    "frontend": "banned-term scan 12/12 clean; SEO sections + all 6 service popups + AI Assessment E2E + ROI E2E + Contact E2E all pass. SmartCalendar E2E fails on 3 copy points listed above."
+  },
+  "seed_data_creation": "Backend test suite inserts TEST_-prefixed leads on each run (contact, ai_assessment, roi_calculator, newsletter). Frontend E2E added: AI assessment 'testexec18@example.com' (score 10, Reactive Execution), ROI 'test_roi18@example.com' (TEST_ROICo_18), contact 'test_contact_<ts>@example.com'. All safe to delete.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Banned-term scan across all 12 routes is fully green (see BANNED constant in iteration 18 for the exact list). SEO sections and 6 service popups on /services are done — the 4 remaining copy items are all localised to two files: frontend/src/pages/SmartCalendar.js and frontend/src/pages/Contact.js plus one handler api/_handlers/consultation.js (next_steps[1] and duplicate-window message). Once those three files are updated and the node sidecar restarted, re-run: (a) grep -rn '24 hours' /app/frontend/src /app/api should return 0 human-facing hits; (b) POST /api/consultation and assert '24 hours' NOT in response body; (c) revisit /smart-calendar and verify both form and confirmation views. Everything else in this ticket is already verified passing and does not need to be re-tested."
+}

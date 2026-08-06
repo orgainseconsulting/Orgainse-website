@@ -24,7 +24,7 @@ const COPY = {
     kicker: 'Issue zero',
     title: 'The Pulse goes live soon.',
     subtitle:
-      'Fortnightly briefings from the AI-native desk — short, sharp, vendor-neutral. The printing press is warming up; be the first to read Issue #01.',
+      'Fortnightly briefings on delivery execution and governance — short, sharp, vendor-neutral. The printing press is warming up; be the first to read Issue #01.',
     cta: 'Or talk to us directly',
   },
 };
