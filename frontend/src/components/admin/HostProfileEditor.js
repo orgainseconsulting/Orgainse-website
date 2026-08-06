@@ -113,14 +113,14 @@ const HostProfileEditor = ({ user, onSaved }) => {
               // eslint-disable-next-line jsx-a11y/img-redundant-alt
               <img src={form.photo_url} alt="host" className="h-14 w-14 rounded-full object-cover" />
             ) : (
-              <div className="h-14 w-14 rounded-full bg-gradient-to-br from-orange-500 to-rose-500 flex items-center justify-center text-white font-black">
+              <div className="h-14 w-14 rounded-full bg-gradient-to-br from-blue-500 to-violet-500 flex items-center justify-center text-white font-black">
                 {initialsPreview}
               </div>
             )}
             <div className="min-w-0">
               <p className="font-bold text-slate-900 truncate">{user.name || user.email}</p>
               <p className="text-xs text-slate-500 truncate">{form.designation || '— set a designation —'}</p>
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-orange-600 mt-1 inline-flex items-center gap-1">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-blue-600 mt-1 inline-flex items-center gap-1">
                 <Calendar className="h-3 w-3" /> {cantHost ? 'No booking URL' : 'Book a call'}
               </p>
             </div>
@@ -140,7 +140,7 @@ const HostProfileEditor = ({ user, onSaved }) => {
               href={form.booking_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-orange-700 hover:text-orange-900"
+              className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-blue-700 hover:text-blue-900"
             >
               <ExternalLink className="h-3 w-3" /> Open this calendar
             </a>
@@ -157,7 +157,7 @@ const HostProfileEditor = ({ user, onSaved }) => {
                 value={form.designation}
                 onChange={(e) => updateField(() => ({ designation: e.target.value }))}
                 placeholder="Co-founder · Engineering"
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
                 data-testid={`host-profile-${user.email}-designation`}
               />
             </div>
@@ -169,7 +169,7 @@ const HostProfileEditor = ({ user, onSaved }) => {
                 maxLength={4}
                 onChange={(e) => updateField(() => ({ initials: e.target.value.toUpperCase() }))}
                 placeholder="SW"
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm font-mono focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm font-mono focus:ring-2 focus:ring-blue-500"
                 data-testid={`host-profile-${user.email}-initials`}
               />
             </div>
@@ -180,7 +180,7 @@ const HostProfileEditor = ({ user, onSaved }) => {
                 value={form.photo_url}
                 onChange={(e) => updateField(() => ({ photo_url: e.target.value }))}
                 placeholder="https://…"
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
                 data-testid={`host-profile-${user.email}-photo`}
               />
             </div>
@@ -193,7 +193,7 @@ const HostProfileEditor = ({ user, onSaved }) => {
                 value={form.booking_url}
                 onChange={(e) => updateField(() => ({ booking_url: e.target.value }))}
                 placeholder="https://calendar.app.google/XXXXXX"
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
                 data-testid={`host-profile-${user.email}-booking`}
               />
               <p className="text-[11px] text-slate-500 mt-1">
@@ -212,7 +212,7 @@ const HostProfileEditor = ({ user, onSaved }) => {
                 type="button"
                 onClick={addCustom}
                 data-testid={`host-profile-${user.email}-add-custom`}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-orange-600 hover:text-orange-800"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800"
               >
                 <Plus className="h-3 w-3" /> Add field
               </button>
@@ -225,14 +225,14 @@ const HostProfileEditor = ({ user, onSaved }) => {
                     value={cf.label}
                     onChange={(e) => updateCustom(i, 'label', e.target.value)}
                     placeholder="Label (e.g. Languages)"
-                    className="col-span-4 px-2 py-1.5 border border-slate-300 rounded text-sm focus:ring-2 focus:ring-orange-500"
+                    className="col-span-4 px-2 py-1.5 border border-slate-300 rounded text-sm focus:ring-2 focus:ring-blue-500"
                   />
                   <input
                     type="text"
                     value={cf.value}
                     onChange={(e) => updateCustom(i, 'value', e.target.value)}
                     placeholder="Value (e.g. English, Hindi)"
-                    className="col-span-7 px-2 py-1.5 border border-slate-300 rounded text-sm focus:ring-2 focus:ring-orange-500"
+                    className="col-span-7 px-2 py-1.5 border border-slate-300 rounded text-sm focus:ring-2 focus:ring-blue-500"
                   />
                   <button
                     type="button"
@@ -256,7 +256,7 @@ const HostProfileEditor = ({ user, onSaved }) => {
                 onChange={(e) => updateField(() => ({ show_as_host: e.target.checked }))}
                 disabled={cantHost}
                 data-testid={`host-profile-${user.email}-show-toggle`}
-                className="h-4 w-4 rounded border-slate-300 text-orange-600 focus:ring-orange-500 disabled:opacity-50"
+                className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 disabled:opacity-50"
               />
               <span className="text-sm font-semibold text-slate-700 inline-flex items-center gap-1.5">
                 <Eye className="h-4 w-4" /> Show on the public Book-a-Call modal

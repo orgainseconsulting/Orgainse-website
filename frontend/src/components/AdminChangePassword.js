@@ -61,15 +61,15 @@ const AdminChangePassword = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-amber-50 to-orange-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-200 rounded-full blur-3xl opacity-30 animate-pulse" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-200 rounded-full blur-3xl opacity-30 animate-pulse" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200 rounded-full blur-3xl opacity-30 animate-pulse" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-200 rounded-full blur-3xl opacity-30 animate-pulse" />
       </div>
 
       <div className="relative w-full max-w-md" data-testid="change-password-screen">
         <div className="text-center mb-6">
-          <div className="inline-flex p-4 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full shadow-lg mb-4">
+          <div className="inline-flex p-4 bg-gradient-to-r from-blue-500 to-blue-500 rounded-full shadow-lg mb-4">
             <KeyRound className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-slate-900 mb-1">Set your new password</h1>
@@ -93,14 +93,14 @@ const AdminChangePassword = () => {
                   name="current"
                   value={form.current}
                   onChange={onChange}
-                  className="block w-full pl-10 pr-12 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white/80"
+                  className="block w-full pl-10 pr-12 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white/80"
                   required
                   disabled={submitting}
                 />
                 <button
                   type="button"
                   onClick={() => setShowCurrent((v) => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-orange-500"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-500"
                 >
                   {showCurrent ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
@@ -119,7 +119,7 @@ const AdminChangePassword = () => {
                   name="next"
                   value={form.next}
                   onChange={onChange}
-                  className="block w-full pl-10 pr-12 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white/80"
+                  className="block w-full pl-10 pr-12 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white/80"
                   required
                   minLength={8}
                   disabled={submitting}
@@ -127,7 +127,7 @@ const AdminChangePassword = () => {
                 <button
                   type="button"
                   onClick={() => setShowNew((v) => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-orange-500"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-500"
                 >
                   {showNew ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
@@ -146,7 +146,7 @@ const AdminChangePassword = () => {
                   name="confirm"
                   value={form.confirm}
                   onChange={onChange}
-                  className="block w-full pl-10 pr-12 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white/80"
+                  className="block w-full pl-10 pr-12 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white/80"
                   required
                   minLength={8}
                   disabled={submitting}
@@ -164,7 +164,7 @@ const AdminChangePassword = () => {
               data-testid="change-password-submit"
               type="submit"
               disabled={submitting || !form.current || !form.next || !form.confirm}
-              className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold py-3 px-4 rounded-lg hover:from-orange-600 hover:to-amber-600 transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-blue-500 to-blue-500 text-white font-semibold py-3 px-4 rounded-lg hover:from-blue-600 hover:to-blue-600 transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {submitting ? (
                 <>

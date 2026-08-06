@@ -48,7 +48,7 @@ const ToolbarButton = ({ onClick, active, disabled, title, children }) => (
     aria-label={title}
     data-testid={`tiptap-${title.toLowerCase().replace(/\s+/g, '-')}`}
     className={`h-8 w-8 inline-flex items-center justify-center rounded-md border transition
-      ${active ? 'bg-orange-100 text-orange-700 border-orange-300' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'}
+      ${active ? 'bg-blue-100 text-blue-700 border-blue-300' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'}
       disabled:opacity-40 disabled:cursor-not-allowed`}
   >
     {children}
@@ -157,7 +157,7 @@ const TipTapEditor = ({ value, onChange, placeholder = 'Start writing your postâ
         link: false,
       }),
       Image.configure({ inline: false, allowBase64: true, HTMLAttributes: { class: 'mx-auto rounded-lg my-4 max-w-full h-auto' } }),
-      Link.configure({ openOnClick: false, HTMLAttributes: { class: 'text-orange-600 underline underline-offset-2 hover:text-orange-700' } }),
+      Link.configure({ openOnClick: false, HTMLAttributes: { class: 'text-blue-600 underline underline-offset-2 hover:text-blue-700' } }),
       Placeholder.configure({ placeholder }),
     ],
     content: value || '',

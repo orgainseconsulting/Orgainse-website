@@ -12,10 +12,10 @@ import { X, ArrowRight, Calendar } from 'lucide-react';
  *   fallbackUrl: string  (used when no hosts configured)
  */
 const HOST_GRADIENTS = [
-  'from-orange-500 to-rose-500',
-  'from-sky-500 to-indigo-500',
-  'from-emerald-500 to-teal-500',
-  'from-violet-500 to-fuchsia-500',
+  'from-blue-500 to-violet-500',
+  'from-blue-500 to-blue-500',
+  'from-blue-500 to-blue-500',
+  'from-violet-500 to-violet-500',
 ];
 
 const HostAvatar = ({ host, idx }) => {
@@ -93,7 +93,7 @@ const HostPickerModal = ({ open, onClose, hosts = [], fallbackUrl = '' }) => {
           >
             <X className="h-5 w-5" />
           </button>
-          <div className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.24em] text-amber-300 mb-2">
+          <div className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.24em] text-blue-300 mb-2">
             <Calendar className="h-3.5 w-3.5" /> Book a call
           </div>
           <h2 className="text-2xl sm:text-3xl font-black leading-tight">
@@ -120,14 +120,14 @@ const HostPickerModal = ({ open, onClose, hosts = [], fallbackUrl = '' }) => {
                   key={h.id || idx}
                   onClick={(e) => handlePick(e, h.booking_url)}
                   data-testid={`host-picker-card-${(h.name || 'host').toLowerCase().replace(/\s+/g, '-')}`}
-                  className="group text-left flex flex-col gap-3 p-4 border-2 border-slate-200 hover:border-orange-400 hover:bg-orange-50/50 rounded-xl transition-all"
+                  className="group text-left flex flex-col gap-3 p-4 border-2 border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 rounded-xl transition-all"
                 >
                   <div className="flex items-center gap-4">
                     <HostAvatar host={h} idx={idx} />
                     <div className="flex-1 min-w-0">
                       <p className="font-bold text-slate-900 truncate">{h.name}</p>
                       {h.role && <p className="text-xs text-slate-500 truncate">{h.role}</p>}
-                      <p className="text-[11px] font-semibold uppercase tracking-wider text-orange-600 mt-1 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                      <p className="text-[11px] font-semibold uppercase tracking-wider text-blue-600 mt-1 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
                         Open calendar <ArrowRight className="h-3 w-3" />
                       </p>
                     </div>

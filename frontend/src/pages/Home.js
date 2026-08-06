@@ -3,864 +3,636 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import {
   ArrowRight,
+  ArrowUpRight,
   Brain,
-  Calendar,
-  CheckCircle,
-  ExternalLink,
-  Gauge,
-  Globe,
+  Building2,
+  ChevronDown,
+  ClipboardList,
+  Compass,
+  Eye,
+  FileText,
+  GitBranch,
+  Layers,
+  LayoutDashboard,
   Mail,
-  Shield,
-  Sparkles,
-  Star,
+  Network,
+  Radar,
+  ShieldCheck,
+  Split,
   Target,
   TrendingUp,
-  X,
-  Zap,
+  UserCog,
+  Users,
 } from "lucide-react";
-import { Button } from "../components/ui/button";
-import { Card, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { Input } from "../components/ui/input";
-import { Badge } from "../components/ui/badge";
 import { api } from "../lib/api";
 import SEOHead from "../components/SEOHead";
 import SocialShare from "../components/SocialShare";
-import RegionSelector from "../components/RegionSelector";
+import GridBackdrop from "../components/brand/GridBackdrop";
+import WorkflowSpine from "../components/brand/WorkflowSpine";
+import OrbitDiagram from "../components/brand/OrbitDiagram";
 import { useCalendly } from "../context/CalendlyContext";
-import { useRegionalPricing } from "../context/RegionalPricingContext";
+
+const PROBLEMS = [
+  { icon: Eye, title: "Poor Visibility", body: "Leaders cannot quickly see what is on track, what is blocked, what requires a decision, or where delivery is drifting." },
+  { icon: UserCog, title: "Weak Ownership", body: "Responsibilities are spread across people, chats, spreadsheets, and tools without one accountable operating model." },
+  { icon: LayoutDashboard, title: "Reactive Reporting", body: "Status updates consume time but still fail to provide reliable decision context." },
+  { icon: Split, title: "Workflow Leakage", body: "Handoffs, approvals, dependencies, and follow-ups are missed because the process is not visible or governed." },
+  { icon: Building2, title: "Founder Overload", body: "Founders and senior leaders become the operating system because the business has not built one." },
+  { icon: Radar, title: "Low Execution Certainty", body: "Plans exist, but teams lack the cadence, controls, and evidence required to deliver with confidence." },
+];
+
+const SERVICES = [
+  {
+    icon: ClipboardList,
+    title: "Project Management as a Service (PMaaS)",
+    body: "Add structured project leadership without building a full internal Project Management Office. Orgainse supports planning, governance, reporting cadence, risk and dependency management, stakeholder communication, and executive visibility. ORQYNE can be configured as the shared delivery workspace for the engagement.",
+  },
+  {
+    icon: Brain,
+    title: "Artificial Intelligence and Workflow Transformation",
+    body: "Identify where Artificial Intelligence, automation, and workflow redesign can remove friction or improve decision quality. We map current processes, identify high-value opportunities, define human approval points, and establish a practical implementation roadmap before technology is introduced.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Delivery and Operational Governance",
+    body: "Create a consistent operating rhythm across projects, teams, and business functions. This includes portfolio visibility, responsibilities, escalation paths, risks, assumptions, issues, dependencies, decisions, resource visibility, cost oversight, and executive reporting.",
+  },
+  {
+    icon: Layers,
+    title: "ORQYNE Implementation and Adoption",
+    body: "Configure ORQYNE around the way your organisation actually operates. We support workspace design, roles and access, workflow configuration, work import, templates, governance controls, integrations, onboarding, and adoption reviews.",
+  },
+  {
+    icon: Compass,
+    title: "Artificial Intelligence Strategy and Readiness",
+    body: "Determine where Artificial Intelligence can create value before committing significant budget. Orgainse assesses business priorities, process maturity, data availability, operating risk, governance requirements, and adoption readiness to develop a sequenced implementation plan.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Healthcare Revenue Intelligence Advisory",
+    body: "Improve visibility into revenue performance, denial patterns, payer behaviour, operating controls, and executive reporting. Each engagement is separately scoped for data handling, regulatory considerations, and advisory boundaries. Orgainse does not position this service as operational medical billing or coding.",
+  },
+];
+
+const STEPS = [
+  { label: "Diagnose", icon: Compass, description: "Clarify the desired outcome, current workflow, decision owners, constraints, risks, and measurable sources of leakage." },
+  { label: "Design", icon: GitBranch, description: "Create the target workflow, governance model, reporting rhythm, roles, controls, and success measures." },
+  { label: "Implement", icon: Layers, description: "Configure the process, ORQYNE workspace, templates, integrations, and operating cadence." },
+  { label: "Govern", icon: ClipboardList, description: "Review adoption, risks, decisions, delivery health, and measurable outcomes on a defined schedule." },
+];
+
+const AUDIENCES = [
+  { icon: Network, title: "Information Technology Services Firms", body: "Improve delivery visibility across client projects, portfolios, risks, resources, costs, vendors, and executive reporting." },
+  { icon: GitBranch, title: "Software Delivery Teams", body: "Connect planning, work items, engineering delivery signals, governance, knowledge, and stakeholder communication." },
+  { icon: Target, title: "Startups and Growing Businesses", body: "Reduce founder dependency by creating clearer ownership, operating cadence, decision records, and cross-functional visibility." },
+  { icon: Users, title: "Cross-Functional Operating Teams", body: "Bring sales, marketing, finance, operations, people, legal, procurement, and delivery work into a shared execution model." },
+];
+
+const RESOURCES = [
+  { icon: Brain, title: "Artificial Intelligence Implementation Guide", body: "A structured approach for moving from Artificial Intelligence opportunity identification to controlled implementation." },
+  { icon: ClipboardList, title: "Project Management as a Service Evaluation Checklist", body: "Questions to assess whether an internal hire, consulting engagement, or managed project service is the right option." },
+  { icon: FileText, title: "Workflow Visibility Checklist", body: "A practical review of ownership, handoffs, reporting, risks, decisions, and operational leakage." },
+];
+
+const FAQS = [
+  {
+    q: "What does Orgainse Consulting do?",
+    a: "Orgainse Consulting helps organisations improve project delivery, workflow visibility, operational governance, and practical Artificial Intelligence adoption. Services include Project Management as a Service, delivery and workflow transformation, ORQYNE implementation, Artificial Intelligence readiness, and separately scoped advisory engagements.",
+  },
+  {
+    q: "What is Project Management as a Service?",
+    a: "Project Management as a Service (PMaaS) gives an organisation access to structured project leadership, governance, reporting, risk management, stakeholder communication, and delivery support without immediately building a full Internal Project Management Office.",
+  },
+  {
+    q: "How is Orgainse different from a conventional consulting firm?",
+    a: "Orgainse combines advisory, implementation, operating support, and ORQYNE. The engagement is designed to move from recommendation to an operating workflow with defined owners, controls, reporting, and adoption support.",
+  },
+  {
+    q: "Who is Orgainse designed to support?",
+    a: "Orgainse primarily supports Information Technology services firms, software teams, startups, small and medium-sized enterprises, and cross-functional operating teams that need better visibility, governance, and execution discipline.",
+  },
+  {
+    q: "Does Orgainse guarantee delivery improvement or Return on Investment?",
+    a: "No. Timing and outcomes depend on scope, data quality, leadership decisions, adoption, integrations, operating conditions, and customer responsibilities. Success measures are agreed before work begins and reviewed through the engagement.",
+  },
+  {
+    q: "Can Orgainse support a company that already uses Jira, Asana, monday.com, or another work-management platform?",
+    a: "Yes. Orgainse can improve the operating model around an existing tool, introduce ORQYNE for selected workflows, or assess whether consolidation is justified. The recommendation is based on business fit rather than forced replacement.",
+  },
+];
+
+const TRUST_STRIP = [
+  "Outcome-Led Engagements",
+  "Human-Governed Artificial Intelligence",
+  "Service-Backed Implementation",
+  "Built Around Real Business Work",
+];
 
 const Home = () => {
-  const { getRegionalPrice, regionConfig } = useRegionalPricing();
   const { openCalendly } = useCalendly();
-  
-  // Newsletter subscription state
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterStatus, setNewsletterStatus] = useState("");
   const [isNewsletterLoading, setIsNewsletterLoading] = useState(false);
+  const [openFaq, setOpenFaq] = useState(0);
 
-  // Base prices for resources (in USD)
-  const resourceBasePrices = {
-    aiGuide: 197,    // Back to original values
-    roiTemplate: 97,  // Back to original values
-    checklist: 127    // Back to original values
-  };
-
-  // Calculate total value
-  const totalValue = resourceBasePrices.aiGuide + resourceBasePrices.roiTemplate + resourceBasePrices.checklist;
-
-  // Lead generation tracking state
-  const [leadActions, setLeadActions] = useState({
-    assessment: false,
-    consultation: false,
-    resources: []
-  });
-
-  // Newsletter subscription handler
   const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
     setIsNewsletterLoading(true);
     setNewsletterStatus("");
-
     try {
       const res = await api.newsletter({ email: newsletterEmail });
-      if (res?.status === "already_subscribed") {
-        setNewsletterStatus("duplicate");
-      } else {
-        setNewsletterStatus("success");
-        trackLeadAction("newsletter_signup");
-      }
+      setNewsletterStatus(res?.status === "already_subscribed" ? "duplicate" : "success");
       setNewsletterEmail("");
-      setTimeout(() => setNewsletterStatus(""), 4000);
+      setTimeout(() => setNewsletterStatus(""), 5000);
     } catch (error) {
-      console.error("Newsletter submission error:", error);
       toast.error(error.message || "Subscription failed. Please try again.");
       setNewsletterStatus("error");
-      setTimeout(() => setNewsletterStatus(""), 4000);
+      setTimeout(() => setNewsletterStatus(""), 5000);
     } finally {
       setIsNewsletterLoading(false);
     }
   };
 
-  // AI Assessment handler
-  const handleAIAssessment = () => {
-    // Track engagement
-    trackLeadAction('ai_assessment_click');
-    // Navigate to AI Assessment Tool
-    window.location.href = '/ai-assessment';
-  };
-
-  // Free Consultation handler
-  const handleFreeConsultation = () => {
-    // Track engagement
-    trackLeadAction('consultation_click');
-    // Scroll to contact form or open booking modal
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  // Lead action tracking
-  const trackLeadAction = (action) => {
-    console.log(`Lead action tracked: ${action}`);
-    // This could be enhanced to send to analytics
-  };
-
-  const stats = [
+  const structuredData = [
     {
-      icon: Gauge,
-      eyebrow: "Velocity",
-      bigValue: "AI-First",
-      tagline: "GPT-Native Delivery Cadence",
-      gradient: "from-orange-500 to-amber-500",
-      iconBg: "bg-orange-100 text-orange-600",
-      ringTint: "ring-orange-200/50",
-      live: true,
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: FAQS.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
     },
     {
-      icon: Globe,
-      eyebrow: "Global Reach",
-      bigValue: "7",
-      bigValueSuffix: "Countries",
-      tagline: "IN · US · UK · UAE · AU · NZ · ZA",
-      gradient: "from-sky-500 to-cyan-500",
-      iconBg: "bg-sky-100 text-sky-600",
-      ringTint: "ring-sky-200/50",
+      "@context": "https://schema.org",
+      "@type": "Service",
+      serviceType: "Project Management as a Service (PMaaS)",
+      name: "Project Management as a Service",
+      provider: { "@type": "Organization", name: "Orgainse Consulting", url: "https://orgainse.com/" },
+      description:
+        "Structured project leadership, governance, reporting cadence, risk and dependency management, stakeholder communication, and executive visibility without building a full internal Project Management Office.",
+      areaServed: ["India", "United States", "United Kingdom", "United Arab Emirates", "Australia", "New Zealand", "South Africa"],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Orgainse Consulting Services",
+        itemListElement: SERVICES.map((s) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: s.title, description: s.body },
+        })),
+      },
     },
     {
-      icon: Star,
-      eyebrow: "Client CSAT",
-      bigValue: "4.6",
-      bigValueSuffix: "/ 5",
-      tagline: "Verified Across Engagements",
-      gradient: "from-yellow-500 to-amber-500",
-      iconBg: "bg-yellow-100 text-yellow-600",
-      ringTint: "ring-yellow-200/50",
-    },
-    {
-      icon: Sparkles,
-      eyebrow: "Time to Outcome",
-      bigValue: "~90",
-      bigValueSuffix: "Days",
-      tagline: "Kickoff → Live, on Average",
-      gradient: "from-purple-500 to-fuchsia-500",
-      iconBg: "bg-purple-100 text-purple-600",
-      ringTint: "ring-purple-200/50",
-    },
-  ];
-
-  const services = [
-    {
-      title: "AI Project Management Service (PMaaS)",
-      description: "GPT-powered project planning and intelligent PMaaS for startups and SMEs",
-      icon: Target,
-      keywords: "AI project management service, PMaaS for startups, GPT-powered project planning",
-      gradient: "from-orange-400 to-red-500",
-      iconBg: "bg-orange-100",
-      iconColor: "text-orange-600"
-    },
-    {
-      title: "Digital Transformation Consulting", 
-      description: "AI-native digital transformation consulting with multi-agent orchestration platforms",
-      icon: Zap,
-      keywords: "AI-native digital transformation, GPT implementation roadmap, digital transformation UAE SMEs",
-      gradient: "from-yellow-400 to-orange-500",
-      iconBg: "bg-yellow-100",
-      iconColor: "text-yellow-600"
-    },
-    {
-      title: "AI Operational Optimization",
-      description: "AI-driven workflow automation and predictive maintenance solutions",
-      icon: TrendingUp,
-      keywords: "AI operational optimization consulting, reduce OPEX with AI, GPT process mining",
-      gradient: "from-green-400 to-emerald-500",
-      iconBg: "bg-green-100",
-      iconColor: "text-green-600"
-    },
-    {
-      title: "Healthcare Revenue Intelligence Advisory",
-      description: "AI-powered advisory for US healthcare revenue performance — denial intelligence, payer behavior analytics, and governance frameworks",
-      icon: Shield,
-      keywords: "healthcare revenue cycle management consulting, RCM advisory, AI revenue intelligence US healthcare",
-      gradient: "from-blue-400 to-indigo-500",
-      iconBg: "bg-blue-100",
-      iconColor: "text-blue-600"
-    },
-    {
-      title: "Business Strategy Development",
-      description: "AI-driven business strategy consulting with automated market intelligence",
-      icon: Globe,
-      keywords: "AI-driven business strategy consulting, GPT competitive analysis, strategy development India SMEs",
-      gradient: "from-purple-400 to-pink-500",
-      iconBg: "bg-purple-100",
-      iconColor: "text-purple-600"
-    },
-    {
-      title: "AI Risk Management & Compliance",
-      description: "AI risk management consulting with real-time compliance monitoring",
-      icon: Shield,
-      keywords: "AI risk management consulting, GPT-based risk co-pilot, predictive risk analytics SMEs",
-      gradient: "from-slate-400 to-slate-600",
-      iconBg: "bg-slate-100",
-      iconColor: "text-slate-600"
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      name: "From Business Problem to Operating System",
+      description: "How Orgainse Consulting moves an organisation from a business problem to a governed operating model.",
+      step: STEPS.map((s, i) => ({ "@type": "HowToStep", position: i + 1, name: s.label, text: s.description })),
     },
   ];
 
   return (
-    <div className="min-h-screen">
-      <SEOHead 
-        title="Orgainse Consulting - AI Project Management Service & Digital Transformation | PMaaS for Startups"
-        description="AI-native consulting firm offering GPT-powered project management, digital transformation, and operational optimization for startups & SMEs in India, USA, UK, UAE, Australia. Get 25% faster delivery with AI PMaaS."
+    <div className="min-h-screen bg-white text-slate-900 font-manrope antialiased" data-testid="home-page">
+      <SEOHead
+        title="AI-Native Delivery Consulting and PMaaS | Orgainse"
+        description="Orgainse helps IT services firms, software teams, startups, and growing businesses improve project delivery, workflow visibility, governance, and practical AI adoption through consulting, Project Management as a Service, and ORQYNE."
         canonical="https://orgainse.com/"
+        keywords="AI-native consulting, Project Management as a Service, PMaaS, delivery governance, workflow transformation, ORQYNE, AI readiness, healthcare revenue intelligence advisory"
+        structuredData={structuredData}
       />
-      
-      {/* Hero Section with Professional AI-Themed Background */}
-      <section className="relative bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-8 sm:py-12 lg:py-16 overflow-hidden">
-        {/* Mobile-Optimized Background Elements */}
-        <div className="absolute inset-0">
-          {/* AI Neural Network Background */}
-          <div className="absolute top-10 left-5 sm:left-10 w-48 h-48 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-gradient-to-r from-orange-200 to-yellow-200 rounded-full blur-3xl opacity-20 sm:opacity-30 animate-pulse float-animation"></div>
-          <div className="absolute top-20 right-5 sm:right-20 w-40 h-40 sm:w-64 sm:h-64 lg:w-80 lg:h-80 bg-gradient-to-r from-green-200 to-blue-200 rounded-full blur-3xl opacity-20 sm:opacity-30 animate-pulse float-animation animation-delay-2000"></div>
-          <div className="absolute bottom-20 left-1/4 w-32 h-32 sm:w-56 sm:h-56 lg:w-72 lg:h-72 bg-gradient-to-r from-purple-200 to-pink-200 rounded-full blur-3xl opacity-20 sm:opacity-30 animate-pulse float-animation animation-delay-500"></div>
-          
-          {/* VISIBLE AI ROBOTS */}
-          <div className="hidden sm:block absolute top-1/4 left-1/3">
-            {/* Robot 1 */}
-            <div className="w-12 h-16 bg-gradient-to-b from-orange-400 to-orange-500 rounded-lg opacity-60 animate-bounce shadow-lg">
-              {/* Robot Head */}
-              <div className="w-8 h-8 bg-gradient-to-br from-orange-300 to-orange-400 rounded-full mx-auto mb-1 relative">
-                <div className="absolute top-2 left-2 w-1.5 h-1.5 bg-white rounded-full animate-ping"></div>
-                <div className="absolute top-2 right-2 w-1.5 h-1.5 bg-white rounded-full animate-ping animation-delay-300"></div>
-              </div>
-              {/* Robot Body */}
-              <div className="w-10 h-6 bg-gradient-to-b from-orange-400 to-orange-500 rounded-md mx-auto relative">
-                <div className="absolute inset-x-3 top-1 h-0.5 bg-white rounded-full opacity-80"></div>
-                <div className="absolute inset-x-3 bottom-1 h-0.5 bg-white rounded-full opacity-80"></div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Robot 2 */}
-          <div className="hidden sm:block absolute top-3/4 right-1/4">
-            <div className="w-10 h-14 bg-gradient-to-b from-green-400 to-green-500 rounded-lg opacity-60 animate-pulse shadow-lg">
-              {/* Robot Head */}
-              <div className="w-7 h-7 bg-gradient-to-br from-green-300 to-green-400 rounded-full mx-auto mb-1 relative">
-                <div className="absolute top-1.5 left-1.5 w-1 h-1 bg-white rounded-full animate-ping"></div>
-                <div className="absolute top-1.5 right-1.5 w-1 h-1 bg-white rounded-full animate-ping animation-delay-500"></div>
-                <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-0.5 bg-white rounded-full"></div>
-              </div>
-              {/* Robot Body */}
-              <div className="w-8 h-5 bg-gradient-to-b from-green-400 to-green-500 rounded-md mx-auto relative">
-                <div className="absolute top-1 left-1 w-1 h-1 bg-white rounded-full animate-pulse"></div>
-                <div className="absolute top-1 right-1 w-1 h-1 bg-white rounded-full animate-pulse animation-delay-200"></div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Robot 3 */}
-          <div className="hidden lg:block absolute top-1/2 left-1/5">
-            <div className="w-8 h-12 bg-gradient-to-b from-blue-400 to-blue-500 rounded-lg opacity-50 animate-bounce animation-delay-1000 shadow-lg">
-              {/* Robot Head */}
-              <div className="w-6 h-6 bg-gradient-to-br from-blue-300 to-blue-400 rounded-full mx-auto mb-1 relative">
-                <div className="absolute top-1 left-1 w-1 h-1 bg-white rounded-full animate-ping animation-delay-700"></div>
-                <div className="absolute top-1 right-1 w-1 h-1 bg-white rounded-full animate-ping animation-delay-900"></div>
-              </div>
-              {/* Robot Body */}
-              <div className="w-6 h-4 bg-gradient-to-b from-blue-400 to-blue-500 rounded-md mx-auto"></div>
-            </div>
-          </div>
-          
-          {/* LARGE AI CIRCUIT PATTERNS */}
-          <div className="hidden lg:block absolute bottom-1/4 left-1/3">
-            <div className="relative w-20 h-20 opacity-40">
-              {/* Circuit Lines */}
-              <div className="absolute top-0 left-1/2 w-1 h-10 bg-gradient-to-b from-cyan-400 to-transparent rounded-full animate-pulse"></div>
-              <div className="absolute bottom-0 left-1/2 w-1 h-10 bg-gradient-to-t from-orange-400 to-transparent rounded-full animate-pulse animation-delay-500"></div>
-              <div className="absolute top-1/2 left-0 w-10 h-1 bg-gradient-to-r from-green-400 to-transparent rounded-full animate-pulse animation-delay-200"></div>
-              <div className="absolute top-1/2 right-0 w-10 h-1 bg-gradient-to-l from-purple-400 to-transparent rounded-full animate-pulse animation-delay-700"></div>
-              {/* Central Processor */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-gradient-to-br from-orange-400 to-green-400 rounded-lg animate-spin-slow shadow-lg">
-                <div className="absolute inset-1 bg-white rounded-lg opacity-60"></div>
-                <div className="absolute inset-2 bg-gradient-to-br from-orange-500 to-green-500 rounded-full animate-pulse"></div>
-              </div>
-            </div>
-          </div>
-          
-          {/* AI DATA STREAMS */}
-          <div className="hidden lg:block absolute top-1/3 right-1/3">
-            <div className="flex flex-col space-y-2">
-              <div className="flex items-center space-x-1">
-                <div className="w-3 h-1 bg-cyan-400 rounded-full animate-ping"></div>
-                <div className="w-2 h-1 bg-blue-500 rounded-full animate-ping animation-delay-200"></div>
-                <div className="w-4 h-1 bg-green-400 rounded-full animate-ping animation-delay-400"></div>
-                <div className="w-2 h-1 bg-orange-400 rounded-full animate-ping animation-delay-600"></div>
-              </div>
-              <div className="flex items-center space-x-1 animation-delay-300">
-                <div className="w-2 h-1 bg-purple-400 rounded-full animate-ping animation-delay-800"></div>
-                <div className="w-3 h-1 bg-pink-400 rounded-full animate-ping animation-delay-1000"></div>
-                <div className="w-2 h-1 bg-indigo-400 rounded-full animate-ping animation-delay-1200"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-center">
-            <div className="animate-fade-in text-center lg:text-left">
-              <div className="mb-4 sm:mb-6">
-                <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight">
-                  <span className="block text-slate-800">Let Us Plan</span>
-                  <span className="block bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient-text text-4xl sm:text-5xl lg:text-7xl">
-                    Your SUCCESS!!
-                  </span>
-                </h1>
-              </div>
-              
-              <div className="relative mb-4 sm:mb-6">
-                <h2 className="text-lg sm:text-xl lg:text-2xl text-orange-600 font-bold mb-2 sm:mb-3">
-                  AI-Native Business & Digital Transformation
-                </h2>
-                <div className="hidden lg:block absolute -left-4 top-0 w-2 h-full bg-gradient-to-b from-orange-500 to-green-500 rounded-full animate-pulse"></div>
-              </div>
-              
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed mb-4 sm:mb-6 max-w-2xl mx-auto lg:mx-0 text-justify">
-                <strong>AI-native business consulting</strong> with comprehensive digital transformation solutions for 
-                <span className="text-orange-600 font-bold"> startups</span> and <span className="text-green-600 font-bold">SMEs </span>  
-                across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
+
+      {/* ── SECTION 1 · Hero ─────────────────────────────────────────── */}
+      <section className="relative overflow-hidden pt-16 lg:pt-24 pb-16" data-testid="home-hero">
+        <GridBackdrop />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7">
+              <span
+                data-testid="hero-eyebrow"
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/70 backdrop-blur-sm text-[11px] uppercase tracking-[0.18em] text-slate-500 shadow-sm"
+              >
+                <Layers className="h-3 w-3 text-blue-600" />
+                AI-Native Consulting · PMaaS · ORQYNE-Enabled Delivery
+              </span>
+
+              <h1 data-testid="hero-headline" className="mt-6 font-outfit font-bold text-4xl sm:text-5xl lg:text-[60px] leading-[1.05] text-slate-900">
+                <span className="block">Turn Fragmented Work Into</span>
+                <span className="relative inline-block">
+                  <span className="relative z-10 text-blue-600">Visible, Governed Execution</span>
+                  <span aria-hidden="true" className="absolute inset-x-0 bottom-1.5 h-3 bg-blue-100 rounded-sm" />
+                </span>
+              </h1>
+
+              <h2 className="mt-7 text-base md:text-lg text-slate-700 font-semibold max-w-2xl leading-relaxed">
+                Build stronger delivery systems, improve operational visibility, and apply Artificial Intelligence where it creates measurable business value.
+              </h2>
+
+              <p className="mt-5 text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
+                Orgainse Consulting helps Information Technology services companies, software teams, startups, and growing businesses move from disconnected tools and reactive reporting to structured, accountable execution. We combine business consulting, Project Management as a Service (PMaaS), workflow transformation, and ORQYNE to help teams establish clearer ownership, stronger governance, reliable reporting, and better-informed decisions.
               </p>
-              
-              <p className="text-sm sm:text-base text-slate-600 mb-4 sm:mb-6 max-w-xl mx-auto lg:mx-0 text-justify">
-                <strong>Comprehensive consulting services</strong> including project management, digital transformation,
-                AI strategy, risk management, revenue cycle intelligence, and operational optimization for IT Services,
-                Healthcare Revenue Intelligence Advisory, and SMEs across industries. Built for <strong>measurable, data-driven outcomes</strong>
-                and <strong>faster delivery</strong>.
+              <p className="mt-4 text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
+                Whether the starting point is one critical project, a growing delivery portfolio, or an organisation-wide workflow problem, we help define the operating model, configure the right systems, and support adoption through execution.
               </p>
 
-              {/* External Links for SEO Authority */}
-              <div className="text-xs sm:text-sm text-slate-500 mb-4 sm:mb-6 max-w-2xl mx-auto lg:mx-0">
-                Learn more about industry standards: 
-                <a href="https://www.pmi.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 font-medium ml-1 mr-2">
-                  PMI.org
-                </a>
-                |
-                <a href="https://www.mckinsey.com/capabilities/operations/our-insights" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 font-medium ml-2 mr-2">
-                  McKinsey Insights
-                </a>
-                |
-                <a href="https://www.gartner.com/en/information-technology" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 font-medium ml-2">
-                  Gartner Research
-                </a>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4 sm:mb-6 items-center">
-                <button 
+              <div className="mt-9 flex flex-wrap items-center gap-3">
+                <button
+                  data-testid="hero-discovery-btn"
                   onClick={openCalendly}
-                  className="group relative px-4 sm:px-6 py-3 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden w-full sm:w-auto"
+                  className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-slate-900 text-white font-semibold text-sm hover:bg-slate-800 transition-[background,transform] duration-200 hover:-translate-y-[1px] shadow-[0_10px_40px_-10px_rgba(15,23,42,0.4)]"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <span className="relative z-10 flex items-center justify-center text-sm sm:text-base">
-                    Book Free AI Consultation
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
+                  Book an Execution Discovery Call
+                  <ArrowRight className="h-[15px] w-[15px] transition-transform duration-200 group-hover:translate-x-1" />
                 </button>
-                
-                {/* Share Button replacing View Success Stories */}
-                <div className="w-full sm:w-auto">
-                  <SocialShare 
-                    url="https://orgainse.com/"
-                    title="AI Business Consulting | Digital Transformation | Orgainse Consulting"
-                  description="Transform your business with comprehensive consulting services delivering measurable, data-driven outcomes. AI-powered digital transformation consulting across India, USA, UK, UAE, Australia."
-                  />
-                </div>
-              </div>
-
-              {/* Internal Links for SEO */}
-              <div className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mb-4 sm:mb-6">
-                <Link to="/services" className="text-xs sm:text-sm text-orange-600 hover:text-orange-700 font-medium border-b border-orange-200 hover:border-orange-400 transition-colors">
-                  Our Services
+                <Link
+                  to="/products"
+                  data-testid="hero-explore-orqyne-btn"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-slate-300 text-slate-900 text-sm font-semibold hover:bg-slate-50 hover:border-slate-400 transition-colors"
+                >
+                  Explore ORQYNE
+                  <ArrowUpRight className="h-[15px] w-[15px]" />
                 </Link>
-                <span className="text-xs sm:text-sm text-slate-400">•</span>
-                <Link to="/ai-assessment" className="text-xs sm:text-sm text-green-600 hover:text-green-700 font-medium border-b border-green-200 hover:border-green-400 transition-colors">
-                  AI Assessment
-                </Link>
-                <span className="text-xs sm:text-sm text-slate-400">•</span>
-                <Link to="/roi-calculator" className="text-xs sm:text-sm text-blue-600 hover:text-blue-700 font-medium border-b border-blue-200 hover:border-blue-400 transition-colors">
-                  ROI Calculator
-                </Link>
-                <span className="text-xs sm:text-sm text-slate-400">•</span>
-                <Link to="/about" className="text-xs sm:text-sm text-purple-600 hover:text-purple-700 font-medium border-b border-purple-200 hover:border-purple-400 transition-colors">
-                  About Us
-                </Link>
-                <span className="text-xs sm:text-sm text-slate-400">•</span>
-                <Link to="/contact" className="text-xs sm:text-sm text-slate-600 hover:text-slate-700 font-medium border-b border-slate-200 hover:border-slate-400 transition-colors">
-                  Contact
-                </Link>
-              </div>
-
-              {/* Mobile-Optimized Stats Display */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                {stats.map((stat, index) => (
-                  <div
-                    key={index}
-                    data-testid={`hero-stat-card-${index}`}
-                    className="group relative transform hover:scale-105 hover:-translate-y-1 transition-all duration-500 animate-fade-in"
-                    style={{ animationDelay: `${index * 200 + 1000}ms` }}
-                  >
-                    {/* Soft glow halo */}
-                    <div className={`absolute -inset-0.5 bg-gradient-to-br ${stat.gradient} rounded-2xl opacity-20 group-hover:opacity-40 transition-opacity blur-md`}></div>
-
-                    <div className={`relative bg-white/95 backdrop-blur-lg rounded-2xl p-4 sm:p-5 ring-1 ${stat.ringTint} shadow-lg group-hover:shadow-2xl transition-all duration-300 min-h-[128px] sm:min-h-[148px] overflow-hidden`}>
-                      {/* Watermark icon backdrop */}
-                      <stat.icon
-                        className="absolute -right-4 -bottom-4 w-24 h-24 sm:w-28 sm:h-28 text-slate-900 opacity-[0.04] pointer-events-none"
-                        strokeWidth={1.2}
-                      />
-
-                      {/* Top row: icon chip + eyebrow + live dot */}
-                      <div className="flex items-center justify-between mb-2 sm:mb-3">
-                        <div className={`p-1.5 sm:p-2 rounded-lg ${stat.iconBg} shadow-sm flex items-center justify-center`}>
-                          <stat.icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          {stat.live && (
-                            <span className="relative inline-flex h-2 w-2">
-                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                              <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
-                            </span>
-                          )}
-                          <span className={`text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.16em] bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}>
-                            {stat.eyebrow}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Big hero value */}
-                      <div className="flex items-baseline gap-1.5 mt-1">
-                        <span className={`text-2xl sm:text-3xl lg:text-[2.1rem] font-black tracking-tight leading-none bg-gradient-to-br ${stat.gradient} bg-clip-text text-transparent`}>
-                          {stat.bigValue}
-                        </span>
-                        {stat.bigValueSuffix && (
-                          <span className="text-xs sm:text-sm font-bold text-slate-500 leading-none">
-                            {stat.bigValueSuffix}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Tagline */}
-                      <div className="text-[10px] sm:text-xs text-slate-600 font-medium leading-snug mt-2">
-                        {stat.tagline}
-                      </div>
-
-                      {/* Bottom accent bar */}
-                      <div className={`absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r ${stat.gradient} opacity-70 group-hover:opacity-100 transition-opacity`}></div>
-                    </div>
-                  </div>
-                ))}
               </div>
             </div>
 
-            <div className="relative animate-fade-in animation-delay-500 mt-6 lg:mt-0">
-              {/* Mobile-Optimized Image Container */}
-              <div className="relative group">
-                <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-orange-400 via-yellow-400 to-green-400 rounded-2xl sm:rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
-                <img
-                  src="https://images.unsplash.com/photo-1644088379091-d574269d422f?w=800&h=600&fit=crop"
-                  alt="AI Neural Network Visualization - Advanced neural network connections representing intelligent automation and cross-industry AI implementation for IT Services & Software, Healthcare Revenue Intelligence Advisory, and SMEs of all sizes"
-                  className="relative rounded-xl sm:rounded-2xl w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover transform group-hover:scale-105 transition-all duration-700 shadow-2xl"
-                  loading="lazy"
-                  decoding="async"
-                  fetchPriority="low"
-                  width="800"
-                  height="500"
-                />
-                
-                {/* AI-Enhanced Floating UI Elements */}
-                <div className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full p-2 sm:p-3 animate-bounce ai-robot-element">
-                  <Brain className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
-                  <div className="absolute -top-1 -right-1 w-2 h-2 bg-yellow-400 rounded-full animate-ping"></div>
-                </div>
-                
-                <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 bg-gradient-to-br from-green-500 to-green-600 rounded-full p-2 sm:p-3 animate-pulse ai-neural-node">
-                  <Zap className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
-                  <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-blue-400 rounded-full animate-ping animation-delay-500"></div>
-                </div>
-                
-                <div className="hidden sm:block absolute top-1/2 -right-2 sm:-right-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full p-3 sm:p-4 transform rotate-12 animate-spin-slow ai-circuit-element">
-                  <Target className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
-                  <div className="absolute top-0 right-0 w-3 h-3 bg-pink-400 rounded-full animate-pulse animation-delay-1000"></div>
-                </div>
-                
-                {/* AI Data Streams */}
-                <div className="hidden lg:block absolute top-1/4 left-4">
-                  <div className="flex flex-col space-y-1 ai-data-particle">
-                    <div className="w-8 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></div>
-                    <div className="w-6 h-0.5 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animation-delay-200"></div>
-                    <div className="w-4 h-0.5 bg-gradient-to-r from-orange-400 to-red-500 rounded-full animation-delay-400"></div>
-                  </div>
-                </div>
-                
-                {/* AI Circuit Connections */}
-                <div className="hidden lg:block absolute bottom-1/4 right-4">
-                  <div className="relative w-8 h-8 ai-neural-node">
-                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full"></div>
-                    <div className="absolute inset-1 bg-white rounded-full opacity-80"></div>
-                    <div className="absolute inset-3 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full animate-pulse"></div>
-                  </div>
-                </div>
-              </div>
+            <div className="lg:col-span-5">
+              <WorkflowSpine title="From problem to operating system" steps={STEPS} testId="hero-spine" />
             </div>
+          </div>
+
+          <div className="mt-16 border-t border-slate-200 pt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-testid="hero-trust-strip">
+            {TRUST_STRIP.map((item) => (
+              <div key={item} className="flex items-start gap-3">
+                <span className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center shrink-0">
+                  <ShieldCheck className="h-[15px] w-[15px] text-blue-600" />
+                </span>
+                <p className="font-outfit font-semibold text-slate-900 text-[15px] leading-snug pt-1.5">{item}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Compact Services Preview */}
-      <section className="py-12 bg-gradient-to-br from-slate-50 via-white to-orange-50 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-10 animate-fade-in">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-slate-800 via-orange-600 to-green-600 bg-clip-text text-transparent">
-                Our AI-Native
-              </span>
-              <span className="text-slate-800"> Consulting Arsenal</span>
-            </h2>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto text-center">
-              Transforming businesses with GPT-powered solutions across key industries.
-            </p>
-          </div>
+      {/* ── SECTION 2 · Problem and Outcome ─────────────────────────── */}
+      <section className="border-y border-slate-200 bg-slate-50 py-20" data-testid="home-problem-section">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
+            Strategy Is Not the Problem. <span className="text-slate-400">Execution Usually Is.</span>
+          </h2>
+          <p className="mt-6 text-sm sm:text-base text-slate-600 leading-relaxed max-w-3xl">
+            Most growing organisations do not suffer from a shortage of ideas, tools, or meetings. They struggle because work is fragmented, ownership is unclear, risks surface late, reporting is inconsistent, and leaders spend too much time reconstructing what is happening. Orgainse helps create an execution system that makes priorities, responsibilities, dependencies, decisions, progress, and risks easier to see and manage.
+          </p>
 
-          {/* Compact Services Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, index) => (
-              <div key={index} className="block">
-                <div 
-                  className="group relative animate-fade-in"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <Card className="relative bg-white/80 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 group overflow-hidden rounded-2xl flex flex-col cursor-pointer">
-                    <div className={`h-1 bg-gradient-to-r ${service.gradient}`}></div>
-                    
-                    <CardHeader className="p-4 flex-1">
-                      <div className="flex items-start space-x-3 mb-3">
-                        <div className={`p-2 ${service.iconBg} rounded-xl group-hover:scale-105 group-hover:rotate-6 transition-all duration-500 shadow-md`}>
-                          <service.icon className={`h-5 w-5 ${service.iconColor}`} />
-                        </div>
-                        <div className="flex-1">
-                          <CardTitle className="text-base group-hover:text-orange-600 transition-colors leading-tight">
-                            {service.title}
-                          </CardTitle>
-                        </div>
-                        <ExternalLink className="h-4 w-4 text-slate-400 group-hover:text-orange-500 transition-colors opacity-0 group-hover:opacity-100" />
-                      </div>
-                      <CardDescription className="text-slate-600 group-hover:text-slate-700 transition-colors leading-relaxed text-sm">
-                        {service.description}
-                      </CardDescription>
-                      {service.scopeNote && (
-                        <div
-                          data-testid={`home-service-scope-note-${index}`}
-                          className="mt-3 text-[11px] leading-snug text-amber-800 bg-amber-50 border border-amber-200 rounded-md px-2.5 py-2"
-                        >
-                          <span className="font-bold uppercase tracking-wider text-amber-700 mr-1">Scope</span>
-                          {service.scopeNote}
-                        </div>
-                      )}
-                    </CardHeader>
-                  </Card>
-                </div>
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {PROBLEMS.map((p) => (
+              <div key={p.title} data-testid={`problem-card-${p.title.toLowerCase().replace(/\s+/g, "-")}`} className="org-hover-lift bg-white rounded-2xl border border-slate-200 p-7">
+                <span className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center">
+                  <p.icon className="h-4 w-4 text-blue-600" />
+                </span>
+                <p className="mt-5 font-outfit font-bold text-slate-900 text-lg tracking-[-0.02em]">{p.title}</p>
+                <p className="mt-2 text-[13px] text-slate-600 leading-relaxed">{p.body}</p>
               </div>
             ))}
           </div>
 
-          {/* Compact CTA Section */}
-          <div className="text-center mt-10 animate-fade-in">
-            <Link 
+          <div className="mt-10 rounded-2xl border border-slate-300 bg-white p-6 max-w-3xl" data-testid="outcome-statement">
+            <p className="text-sm sm:text-base text-slate-800 leading-relaxed font-semibold">
+              The objective is not to add another tool. The objective is to create greater execution certainty.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 3 · Services ────────────────────────────────────── */}
+      <section className="py-24" data-testid="home-services-section">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-slate-500">What we do</p>
+          <h2 className="mt-4 font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
+            Services Built Around Execution, <span className="text-slate-400">Not Activity</span>
+          </h2>
+          <p className="mt-6 text-sm sm:text-base text-slate-600 leading-relaxed max-w-3xl">
+            Start with the business outcome that matters most. Orgainse combines focused advisory, implementation, and operating support so that strategy is translated into visible, repeatable execution.
+          </p>
+
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {SERVICES.map((s, i) => (
+              <div key={s.title} data-testid={`home-service-card-${i}`} className="org-hover-lift bg-white rounded-2xl border border-slate-200 p-8 flex flex-col">
+                <span className="w-11 h-11 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center">
+                  <s.icon className="h-4 w-4 text-blue-600" />
+                </span>
+                <h3 className="mt-6 font-outfit font-bold text-slate-900 text-lg tracking-[-0.02em] leading-snug">{s.title}</h3>
+                <p className="mt-3 text-[13px] text-slate-600 leading-relaxed flex-1">{s.body}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 flex flex-wrap gap-3">
+            <Link
               to="/services"
-              className="group relative inline-block px-6 py-3 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden"
+              data-testid="services-explore-btn"
+              className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-slate-900 text-white font-semibold text-sm hover:bg-slate-800 transition-[background,transform] duration-200 hover:-translate-y-[1px] shadow-[0_10px_40px_-10px_rgba(15,23,42,0.4)]"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <span className="relative z-10 flex items-center justify-center">
-                Explore Our AI Arsenal
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </span>
+              Explore Orgainse Services
+              <ArrowRight className="h-[14px] w-[14px] transition-transform duration-200 group-hover:translate-x-1" />
+            </Link>
+            <Link
+              to="/contact"
+              data-testid="services-discuss-btn"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-slate-300 text-slate-900 text-sm font-semibold hover:bg-slate-50 hover:border-slate-400 transition-colors"
+            >
+              Discuss Your Priority
+              <ArrowUpRight className="h-[14px] w-[14px]" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Revolutionary Lead Generation Hub */}
-      <section className="py-12 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
-        {/* Dynamic Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-10 left-1/4 w-80 h-80 bg-gradient-to-r from-orange-200 to-yellow-200 rounded-full blur-3xl opacity-20 animate-pulse float-animation"></div>
-          <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-gradient-to-r from-green-200 to-blue-200 rounded-full blur-3xl opacity-20 animate-pulse float-animation animation-delay-2000"></div>
-          <div className="absolute top-1/2 left-1/3 w-4 h-12 bg-yellow-300 rounded-full animate-pulse opacity-30"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-6 h-6 bg-orange-300 rotate-45 animate-spin-slow opacity-30"></div>
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Header Section */}
-          <div className="text-center mb-10 animate-fade-in">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-              <span className="text-slate-800">Accelerate Your </span>
-              <span className="bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500 bg-clip-text text-transparent animate-gradient-text">
-                AI Transformation
-              </span>
+      {/* ── SECTION 4 · How Orgainse Works ──────────────────────────── */}
+      <section className="py-24 bg-slate-50 border-y border-slate-200" data-testid="home-how-section">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="lg:col-span-6">
+            <p className="text-[11px] uppercase tracking-[0.24em] text-slate-500">How Orgainse works</p>
+            <h2 className="mt-4 font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-slate-900 max-w-md">
+              From Business Problem to Operating System
             </h2>
-            <p className="text-lg text-slate-700 max-w-3xl mx-auto mb-6 leading-relaxed text-justify">
-              Get exclusive insights, free resources, and expert guidance to transform your business with 
-              <span className="text-orange-600 font-bold"> AI-native solutions</span>. Join us to accelerate and write your own success story.
-            </p>
-          </div>
-
-          {/* Lead Generation Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            
-            {/* Newsletter Subscription Card */}
-            <div className="group relative animate-fade-in" style={{ animationDelay: '200ms' }}>
-              <div className="absolute -inset-2 bg-gradient-to-r from-orange-400 to-yellow-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 overflow-hidden rounded-2xl flex flex-col">
-                <div className="h-1 bg-gradient-to-r from-orange-400 to-yellow-500"></div>
-                <CardHeader className="p-5 flex-1">
-                  <div className="flex items-center space-x-3 mb-3">
-                    <div className="p-2 bg-orange-100 rounded-lg group-hover:scale-105 group-hover:rotate-6 transition-all duration-500 shadow-md">
-                      <Mail className="h-5 w-5 text-orange-600" />
-                    </div>
-                    <div className="flex-1">
-                      <CardTitle className="text-base text-slate-800 group-hover:text-orange-600 transition-colors leading-tight">
-                        AI Strategy Newsletter
-                      </CardTitle>
-                    </div>
-                  </div>
-                  <CardDescription className="text-slate-700 group-hover:text-slate-800 transition-colors leading-relaxed mb-4 text-sm">
-                    Weekly insights on AI project management, digital transformation trends, and exclusive case studies.
-                  </CardDescription>
-                  
-                  {/* Newsletter Form */}
-                  <form onSubmit={handleNewsletterSubmit} className="space-y-3">
-                    <Input 
-                      data-testid="newsletter-email-input"
-                      type="email" 
-                      value={newsletterEmail}
-                      onChange={(e) => setNewsletterEmail(e.target.value)}
-                      placeholder="Enter your email address"
-                      className="bg-slate-50 border-slate-200 text-slate-800 placeholder-slate-500 focus:border-orange-400 focus:ring-orange-400 h-10"
-                      required
-                      disabled={isNewsletterLoading}
-                    />
-                    <button 
-                      data-testid="newsletter-submit-btn"
-                      type="submit"
-                      disabled={isNewsletterLoading || !newsletterEmail.trim()}
-                      className="w-full group relative px-4 py-2.5 bg-gradient-to-r from-orange-500 to-yellow-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-sm"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <span className="relative z-10 flex items-center justify-center">
-                        {isNewsletterLoading ? "Subscribing..." : "Get Free AI Insights"}
-                        {!isNewsletterLoading && <ArrowRight className="ml-2 h-3 w-3 group-hover:translate-x-1 transition-transform" />}
-                      </span>
-                    </button>
-                    
-                    {/* Status Messages */}
-                    {newsletterStatus === "success" && (
-                      <p data-testid="newsletter-status-success" className="text-green-600 text-xs text-center font-medium">
-                        🎉 Welcome! Check your email for resources.
-                      </p>
-                    )}
-                    {newsletterStatus === "duplicate" && (
-                      <p data-testid="newsletter-status-duplicate" className="text-yellow-600 text-xs text-center font-medium">
-                        📧 Already subscribed! Check your email.
-                      </p>
-                    )}
-                    {newsletterStatus === "error" && (
-                      <p data-testid="newsletter-status-error" className="text-red-500 text-xs text-center font-medium">
-                        ❌ Something went wrong. Try again.
-                      </p>
-                    )}
-                    
-                    <p className="text-xs text-slate-600 text-center">
-                      🎁 Free "AI Transformation Checklist" (worth {getRegionalPrice(297)})
-                    </p>
-                  </form>
-                </CardHeader>
-              </Card>
-            </div>
-
-            {/* Free AI Assessment Card */}
-            <div className="group relative animate-fade-in" style={{ animationDelay: '400ms' }}>
-              <div className="absolute -inset-2 bg-gradient-to-r from-green-400 to-blue-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 overflow-hidden rounded-2xl flex flex-col">
-                <div className="h-1 bg-gradient-to-r from-green-400 to-blue-500"></div>
-                <CardHeader className="p-5 flex-1">
-                  <div className="flex items-center space-x-3 mb-3">
-                    <div className="p-2 bg-green-100 rounded-lg group-hover:scale-105 group-hover:rotate-6 transition-all duration-500 shadow-md">
-                      <Brain className="h-5 w-5 text-green-600" />
-                    </div>
-                    <div className="flex-1">
-                      <CardTitle className="text-base text-slate-800 group-hover:text-green-600 transition-colors leading-tight">
-                        Free AI Readiness Assessment
-                      </CardTitle>
-                    </div>
-                  </div>
-                  <CardDescription className="text-slate-700 group-hover:text-slate-800 transition-colors leading-relaxed mb-4 text-sm">
-                    Discover your company's AI maturity score and get a personalized roadmap for digital transformation in just 5 minutes.
-                  </CardDescription>
-                  
-                  <button 
-                    onClick={() => window.location.href = '/ai-assessment'}
-                    className="w-full group relative px-4 py-2.5 bg-gradient-to-r from-green-500 to-blue-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-green-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden mb-3 text-sm"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <span className="relative z-10 flex items-center justify-center">
-                      Start Free Assessment
-                      <Target className="ml-2 h-3 w-3 group-hover:rotate-180 transition-transform duration-500" />
-                    </span>
-                  </button>
-                  
-                  <div className="flex items-center justify-center space-x-4 text-xs text-slate-600">
-                    <span className="flex items-center"><CheckCircle className="h-3 w-3 mr-1 text-green-500" /> No signup required</span>
-                    <span className="flex items-center"><CheckCircle className="h-3 w-3 mr-1 text-green-500" /> Instant results</span>
-                  </div>
-                </CardHeader>
-              </Card>
-            </div>
-
-            {/* ROI Calculator Card */}
-            <div className="group relative animate-fade-in" style={{ animationDelay: '600ms' }}>
-              <div className="absolute -inset-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 overflow-hidden rounded-2xl flex flex-col">
-                <div className="h-1 bg-gradient-to-r from-purple-400 to-pink-500"></div>
-                <CardHeader className="p-5 flex-1">
-                  <div className="flex items-center space-x-3 mb-3">
-                    <div className="p-2 bg-purple-100 rounded-lg group-hover:scale-105 group-hover:rotate-6 transition-all duration-500 shadow-md">
-                      <TrendingUp className="h-5 w-5 text-purple-600" />
-                    </div>
-                    <div className="flex-1">
-                      <CardTitle className="text-base text-slate-800 group-hover:text-purple-600 transition-colors leading-tight">
-                        ROI Calculator
-                      </CardTitle>
-                    </div>
-                  </div>
-                  <CardDescription className="text-slate-700 group-hover:text-slate-800 transition-colors leading-relaxed mb-4 text-sm">
-                    Calculate your potential return on investment with region-specific pricing and see your transformation savings.
-                  </CardDescription>
-                  
-                  <button 
-                    onClick={() => window.location.href = '/roi-calculator'}
-                    className="w-full group relative px-4 py-2.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden mb-3 text-sm"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <span className="relative z-10 flex items-center justify-center">
-                      Calculate ROI
-                      <TrendingUp className="ml-2 h-3 w-3 group-hover:scale-110 transition-transform duration-500" />
-                    </span>
-                  </button>
-                  
-                  <div className="flex items-center justify-center space-x-4 text-xs text-slate-600">
-                    <span className="flex items-center"><CheckCircle className="h-3 w-3 mr-1 text-purple-500" /> Regional pricing</span>
-                    <span className="flex items-center"><CheckCircle className="h-3 w-3 mr-1 text-purple-500" /> PPP adjusted</span>
-                  </div>
-                </CardHeader>
-              </Card>
-            </div>
-          </div>
-
-          {/* Smart Calendar Section */}
-          <div className="text-center animate-fade-in mb-10" style={{ animationDelay: '800ms' }}>
-            <div className="group relative">
-              <div className="absolute -inset-2 bg-gradient-to-r from-orange-400 to-green-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden rounded-2xl">
-                <div className="h-1 bg-gradient-to-r from-orange-400 to-green-500"></div>
-                <CardHeader className="p-8">
-                  <div className="flex items-center justify-center space-x-3 mb-4">
-                    <div className="p-3 bg-gradient-to-r from-orange-100 to-green-100 rounded-xl">
-                      <Calendar className="h-6 w-6 text-orange-600" />
-                    </div>
-                    <CardTitle className="text-xl text-slate-800">
-                      Ready for Your Free Strategy Session?
-                    </CardTitle>
-                  </div>
-                  <CardDescription className="text-slate-700 mb-6 max-w-2xl mx-auto">
-                    Book a personalized 30-minute consultation with our AI transformation experts. 
-                    Discuss your specific challenges and get a custom roadmap for success.
-                  </CardDescription>
-                  
-                  <button 
-                    onClick={openCalendly}
-                    className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden w-full sm:w-auto"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <span className="relative z-10 flex items-center justify-center text-sm sm:text-base">
-                      Book Free Consultation
-                      <Calendar className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:scale-110 transition-transform" />
-                    </span>
-                  </button>
-                  
-                  <div className="flex items-center justify-center space-x-6 mt-4 text-sm text-slate-600">
-                    <span className="flex items-center"><CheckCircle className="h-4 w-4 mr-1 text-green-500" /> 30-minute session</span>
-                    <span className="flex items-center"><CheckCircle className="h-4 w-4 mr-1 text-green-500" /> Global timezones</span>
-                    <span className="flex items-center"><CheckCircle className="h-4 w-4 mr-1 text-green-500" /> No commitment</span>
-                  </div>
-                </CardHeader>
-              </Card>
-            </div>
-          </div>
-
-          {/* Compact Resources Section */}
-          <div className="text-center animate-fade-in" style={{ animationDelay: '800ms' }}>
-            <div className="text-center animate-fade-in mb-6" style={{ animationDelay: '750ms' }}>
-              <RegionSelector />
-            </div>
-            
-            <h3 className="text-2xl font-bold text-slate-800 mb-6">
-              <span className="bg-gradient-to-r from-orange-500 to-yellow-500 bg-clip-text text-transparent">
-                Free Resources
-              </span>
-              <span className="text-slate-800"> to Accelerate Growth</span>
-            </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-6">
-              {[
-                {
-                  title: "AI Implementation Guide",
-                  description: "Step-by-step roadmap for AI adoption",
-                  baseValue: resourceBasePrices.aiGuide,
-                  icon: Target,
-                  gradient: "from-orange-400 to-yellow-500"
-                },
-                {
-                  title: "ROI Calculator Template",
-                  description: "Calculate AI project ROI instantly",
-                  baseValue: resourceBasePrices.roiTemplate,
-                  icon: TrendingUp,
-                  gradient: "from-green-400 to-blue-500"
-                },
-                {
-                  title: "Digital Transformation Checklist",
-                  description: "25-point transformation checklist",
-                  baseValue: resourceBasePrices.checklist,
-                  icon: CheckCircle,
-                  gradient: "from-purple-400 to-pink-500"
-                }
-              ].map((resource, index) => (
-                <div key={index} className="group relative">
-                  <div className={`absolute -inset-1 bg-gradient-to-r ${resource.gradient} rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-500`}></div>
-                  <div className="relative bg-white/80 backdrop-blur-lg rounded-xl p-4 border border-white/40 hover:border-orange-300 transition-all duration-300">
-                    <div className="flex items-center justify-between mb-2">
-                      <resource.icon className="h-5 w-5 text-slate-700" />
-                      <Badge className="bg-gradient-to-r from-orange-400 to-yellow-400 text-white font-bold text-xs">
-                        Worth {getRegionalPrice(resource.baseValue)}
-                      </Badge>
-                    </div>
-                    <h4 className="text-slate-800 font-semibold mb-1 text-sm">{resource.title}</h4>
-                    <p className="text-slate-600 text-xs">{resource.description}</p>
+            <div className="mt-10 space-y-4">
+              {STEPS.map((s, i) => (
+                <div key={s.label} data-testid={`how-step-${i}`} className="org-hover-lift bg-white rounded-2xl border border-slate-200 p-6 flex gap-4">
+                  <span className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center shrink-0">
+                    <span className="font-outfit text-[13px] font-bold text-blue-600">{i + 1}</span>
+                  </span>
+                  <div>
+                    <p className="font-outfit font-bold text-slate-900 text-base tracking-[-0.02em]">{s.label}</p>
+                    <p className="mt-1.5 text-[13px] text-slate-600 leading-relaxed">{s.description}</p>
                   </div>
                 </div>
               ))}
             </div>
-            
-            <p className="text-slate-700 text-base">
-              Join our newsletter and get instant access to all resources - 
-              <span className="text-orange-600 font-bold"> FREE ({getRegionalPrice(totalValue)} value)</span>
+            <p className="mt-8 text-sm text-slate-700 leading-relaxed max-w-lg" data-testid="how-supporting-statement">
+              Technology is introduced only where it improves the operating model. The objective is not to deploy more tools; it is to create greater execution certainty.
             </p>
+          </div>
+
+          <div className="lg:col-span-6 lg:sticky lg:top-32">
+            <OrbitDiagram
+              coreLabel="Execution System"
+              coreSub="Governed operating model"
+              coreIcon={Network}
+              innerChips={["Ownership", "Cadence", "Decisions"]}
+              outerChips={["Risks", "Dependencies", "Reporting", "Costs", "Resources", "Adoption"]}
+              caption="Illustration of the Orgainse operating model. No client data is shown."
+              testId="how-orbit-diagram"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 5 · Who We Help ─────────────────────────────────── */}
+      <section className="py-24" data-testid="home-audience-section">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
+            Built for Teams That Need More Control <span className="text-slate-400">Without More Complexity</span>
+          </h2>
+
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {AUDIENCES.map((a, i) => (
+              <div key={a.title} data-testid={`audience-card-${i}`} className="org-hover-lift bg-white rounded-2xl border border-slate-200 p-7 flex flex-col">
+                <span className="w-11 h-11 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center">
+                  <a.icon className="h-4 w-4 text-blue-600" />
+                </span>
+                <h3 className="mt-6 font-outfit font-bold text-slate-900 text-base tracking-[-0.02em] leading-snug">{a.title}</h3>
+                <p className="mt-3 text-[13px] text-slate-600 leading-relaxed flex-1">{a.body}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6 max-w-4xl" data-testid="buyer-statement">
+            <p className="text-sm text-slate-700 leading-relaxed">
+              Orgainse typically works with founders, Chief Executive Officers, Chief Operating Officers, delivery leaders, project leaders, operations heads, and business owners who need a clearer view of execution.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 6 · Accelerate Your AI Transformation ───────────── */}
+      <section className="py-24 bg-slate-50 border-y border-slate-200" data-testid="home-accelerate-section">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
+            Accelerate Your AI Transformation
+          </h2>
+          <p className="mt-6 text-sm sm:text-base text-slate-600 leading-relaxed max-w-3xl">
+            Use practical insights and objective tools to evaluate where Artificial Intelligence can improve your organisation before committing significant time or budget.
+          </p>
+
+          <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-5">
+            {/* Newsletter */}
+            <div className="bg-white rounded-3xl border border-slate-200 p-8 flex flex-col org-hover-lift">
+              <span className="w-11 h-11 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center">
+                <Mail className="h-4 w-4 text-blue-600" />
+              </span>
+              <h3 className="mt-6 font-outfit text-xl font-bold text-slate-900 tracking-[-0.02em]">AI Strategy Newsletter</h3>
+              <p className="mt-4 text-[13px] text-slate-600 leading-relaxed flex-1">
+                Receive practical briefings on Artificial Intelligence adoption, project delivery, workflow design, operating governance, and implementation risk. The newsletter is written for founders, executives, delivery leaders, and business owners who need decisions rather than hype.
+              </p>
+              <form onSubmit={handleNewsletterSubmit} className="mt-6 space-y-3">
+                <Input
+                  data-testid="newsletter-email-input"
+                  type="email"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  placeholder="Work email address"
+                  required
+                  disabled={isNewsletterLoading}
+                  className="rounded-2xl border-slate-300 h-11 text-sm focus-visible:ring-blue-600"
+                />
+                <button
+                  data-testid="newsletter-submit-btn"
+                  type="submit"
+                  disabled={isNewsletterLoading || !newsletterEmail.trim()}
+                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors disabled:opacity-50"
+                >
+                  {isNewsletterLoading ? "Subscribing…" : "Subscribe for Practical AI Insights"}
+                  {!isNewsletterLoading && <ArrowRight className="h-[13px] w-[13px]" />}
+                </button>
+                {newsletterStatus === "success" && (
+                  <p data-testid="newsletter-status-success" className="text-[12px] text-blue-700 font-semibold text-center">
+                    Subscribed. Look out for the next briefing.
+                  </p>
+                )}
+                {newsletterStatus === "duplicate" && (
+                  <p data-testid="newsletter-status-duplicate" className="text-[12px] text-slate-600 font-semibold text-center">
+                    This address is already subscribed.
+                  </p>
+                )}
+                {newsletterStatus === "error" && (
+                  <p data-testid="newsletter-status-error" className="text-[12px] text-red-600 font-semibold text-center">
+                    Something went wrong. Please try again.
+                  </p>
+                )}
+              </form>
+            </div>
+
+            {/* Assessment */}
+            <div className="bg-white rounded-3xl border border-slate-200 p-8 flex flex-col org-hover-lift">
+              <span className="w-11 h-11 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center">
+                <Brain className="h-4 w-4 text-blue-600" />
+              </span>
+              <h3 className="mt-6 font-outfit text-xl font-bold text-slate-900 tracking-[-0.02em]">Free AI Readiness Assessment</h3>
+              <p className="mt-4 text-[13px] text-slate-600 leading-relaxed flex-1">
+                Evaluate your organisation across strategy, processes, data, governance, technology, and adoption readiness. The result provides a directional view of strengths, gaps, and priorities. It is not a certification or substitute for a detailed assessment.
+              </p>
+              <Link
+                to="/ai-assessment"
+                data-testid="assessment-cta-btn"
+                className="mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors"
+              >
+                Start the Free Assessment
+                <ArrowRight className="h-[13px] w-[13px]" />
+              </Link>
+              <p className="mt-3 text-[11px] text-slate-500 text-center">No payment required · Immediate directional results</p>
+            </div>
+
+            {/* ROI */}
+            <div className="bg-white rounded-3xl border border-slate-200 p-8 flex flex-col org-hover-lift">
+              <span className="w-11 h-11 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center">
+                <TrendingUp className="h-4 w-4 text-blue-600" />
+              </span>
+              <h3 className="mt-6 font-outfit text-xl font-bold text-slate-900 tracking-[-0.02em]">Return on Investment Calculator</h3>
+              <p className="mt-4 text-[13px] text-slate-600 leading-relaxed flex-1">
+                Model potential time, capacity, cost, and operating effects using assumptions specific to your organisation. The calculator provides a business scenario for planning purposes. Actual outcomes depend on implementation scope, adoption, data quality, and operating conditions.
+              </p>
+              <Link
+                to="/roi-calculator"
+                data-testid="roi-cta-btn"
+                className="mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors"
+              >
+                Build an ROI Scenario
+                <ArrowRight className="h-[13px] w-[13px]" />
+              </Link>
+              <p className="mt-3 text-[11px] text-slate-500 text-center">Use your assumptions · Review multiple scenarios</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 7 · Consultation CTA ────────────────────────────── */}
+      <section className="py-24" data-testid="home-consultation-section">
+        <div className="max-w-5xl mx-auto px-6 lg:px-10">
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 lg:p-14 shadow-[0_30px_80px_-40px_rgba(15,23,42,0.25)]">
+            <div
+              aria-hidden="true"
+              className="absolute -top-32 -right-32 w-[420px] h-[420px] rounded-full blur-3xl"
+              style={{ background: "radial-gradient(circle, rgba(37,99,235,0.25), transparent 60%)" }}
+            />
+            <div className="relative">
+              <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-2xl text-slate-900">
+                Bring One Important Execution Problem
+              </h2>
+              <p className="mt-6 text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
+                In a focused discovery session, we will clarify the desired business outcome, current workflow, decision owners, operating constraints, and the most practical next step. The recommendation may involve consulting, Project Management as a Service, ORQYNE, a short diagnostic, or no immediate engagement. The objective is to determine fit before scope expands.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <button
+                  data-testid="consultation-book-btn"
+                  onClick={openCalendly}
+                  className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-slate-900 text-white font-semibold text-sm hover:bg-slate-800 transition-[background,transform] duration-200 hover:-translate-y-[1px] shadow-[0_10px_40px_-10px_rgba(15,23,42,0.4)]"
+                >
+                  Book a 30-Minute Discovery Call
+                  <ArrowRight className="h-[14px] w-[14px] transition-transform duration-200 group-hover:translate-x-1" />
+                </button>
+                <Link
+                  to="/contact"
+                  data-testid="consultation-contact-btn"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-slate-300 text-slate-900 text-sm font-semibold hover:bg-slate-50 hover:border-slate-400 transition-colors"
+                >
+                  Contact Orgainse
+                  <ArrowUpRight className="h-[14px] w-[14px]" />
+                </Link>
+              </div>
+              <p className="mt-6 text-[11px] uppercase tracking-[0.18em] text-slate-500 font-semibold">
+                Focused business discussion · No commitment required · Global scheduling available
+              </p>
+              <div className="mt-8">
+                <SocialShare
+                  url="https://orgainse.com/"
+                  title="AI-Native Delivery Consulting and PMaaS | Orgainse"
+                  description="Orgainse helps IT services firms, software teams, startups, and growing businesses turn fragmented work into visible, governed execution."
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 8 · Resources ───────────────────────────────────── */}
+      <section className="py-24 bg-slate-50 border-y border-slate-200" data-testid="home-resources-section">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
+            Practical Resources for Better Execution
+          </h2>
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4">
+            {RESOURCES.map((r, i) => (
+              <div key={r.title} data-testid={`resource-card-${i}`} className="org-hover-lift bg-white rounded-2xl border border-slate-200 p-8">
+                <span className="w-11 h-11 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center">
+                  <r.icon className="h-4 w-4 text-blue-600" />
+                </span>
+                <h3 className="mt-6 font-outfit font-bold text-slate-900 text-base tracking-[-0.02em] leading-snug">{r.title}</h3>
+                <p className="mt-3 text-[13px] text-slate-600 leading-relaxed">{r.body}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-10 text-sm text-slate-700">
+            Subscribe to the Orgainse newsletter to receive current guides, frameworks, and implementation resources.{" "}
+            <Link to="/newsletter" data-testid="resources-newsletter-link" className="font-semibold text-blue-700 hover:underline">
+              Visit the newsletter archive
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
+
+      {/* ── SECTION 9 · FAQ ────────────────────────────────────────── */}
+      <section className="py-24" data-testid="home-faq-section">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-4">
+            <p className="text-[11px] uppercase tracking-[0.24em] text-slate-500 mb-3">Answers</p>
+            <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-slate-900">Frequently Asked Questions</h2>
+            <p className="mt-6 text-sm text-slate-600 leading-relaxed">
+              Still evaluating? Write to{" "}
+              <a href="mailto:info@orgainse.com" className="font-semibold text-blue-700 hover:underline">
+                info@orgainse.com
+              </a>{" "}
+              or book a discovery call.
+            </p>
+            <button
+              data-testid="faq-cta-btn"
+              onClick={openCalendly}
+              className="mt-8 inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-slate-300 text-slate-900 text-sm font-semibold hover:bg-slate-50 hover:border-slate-400 transition-colors"
+            >
+              Schedule a Discovery Call
+              <ArrowUpRight className="h-[14px] w-[14px]" />
+            </button>
+          </div>
+
+          <div className="lg:col-span-8 min-w-0" data-testid="faq-accordion">
+            {FAQS.map((f, i) => (
+              <div key={f.q} className="border-b border-slate-200 last:border-b-0">
+                <button
+                  type="button"
+                  data-testid={`faq-question-${i}`}
+                  aria-expanded={openFaq === i}
+                  onClick={() => setOpenFaq(openFaq === i ? -1 : i)}
+                  className="flex w-full items-center justify-between gap-4 py-6 text-left font-outfit text-base sm:text-lg font-semibold tracking-[-0.01em] text-slate-900"
+                >
+                  <span className="flex-1 min-w-0 break-words">{f.q}</span>
+                  <ChevronDown className={`h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} />
+                </button>
+                {openFaq === i && (
+                  <p data-testid={`faq-answer-${i}`} className="pb-6 text-sm text-slate-600 leading-relaxed">
+                    {f.a}
+                  </p>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>

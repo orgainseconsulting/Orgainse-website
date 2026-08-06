@@ -14,10 +14,10 @@ const fmt = (iso) => {
 };
 
 const COVER_GRADS = [
-  'from-orange-500 via-amber-500 to-rose-500',
-  'from-sky-500 via-cyan-500 to-blue-600',
-  'from-emerald-500 via-teal-500 to-cyan-600',
-  'from-violet-500 via-purple-500 to-fuchsia-600',
+  'from-blue-500 via-blue-500 to-violet-500',
+  'from-blue-500 via-blue-500 to-blue-600',
+  'from-blue-500 via-blue-500 to-blue-600',
+  'from-violet-500 via-violet-500 to-violet-600',
 ];
 
 const IssueCard = ({ issue }) => {
@@ -43,12 +43,12 @@ const IssueCard = ({ issue }) => {
       </Link>
       <div className="flex flex-col flex-1 p-6">
         {issue.issue_number && (
-          <span className="text-[10px] font-black uppercase tracking-[0.18em] text-orange-600 mb-2">
+          <span className="text-[10px] font-black uppercase tracking-[0.18em] text-blue-600 mb-2">
             Issue #{String(issue.issue_number).padStart(2, '0')}
           </span>
         )}
         <Link to={`/newsletter/${issue.slug}`}>
-          <h2 className="text-xl font-extrabold text-slate-900 group-hover:text-orange-600 transition-colors leading-tight line-clamp-2 mb-2">
+          <h2 className="text-xl font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors leading-tight line-clamp-2 mb-2">
             {issue.title}
           </h2>
         </Link>
@@ -122,11 +122,11 @@ const NewsletterIndex = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7">
-              <span className="inline-block text-[11px] font-black uppercase tracking-[0.24em] text-amber-300 mb-4">
+              <span className="inline-block text-[11px] font-black uppercase tracking-[0.24em] text-blue-300 mb-4">
                 The Orgainse Pulse
               </span>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.05] mb-5">
-                Briefings from the<br /><span className="text-orange-400">AI-native</span> desk.
+                Briefings from the<br /><span className="text-blue-400">AI-native</span> desk.
               </h1>
               <p className="text-lg text-slate-300 max-w-xl leading-relaxed mb-8">
                 Fortnightly, sharp, vendor-neutral. Field-tested perspectives on AI-native project management, digital transformation and revenue intelligence.
@@ -135,18 +135,18 @@ const NewsletterIndex = () => {
                 <input type="email" value={subEmail} onChange={(e) => setSubEmail(e.target.value)} required
                   placeholder="you@company.com"
                   data-testid="newsletter-hero-email"
-                  className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:bg-white/15 focus:border-orange-400 focus:outline-none" />
+                  className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:bg-white/15 focus:border-blue-400 focus:outline-none" />
                 <button type="submit" disabled={subbing} data-testid="newsletter-hero-submit"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 disabled:opacity-50">
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 disabled:opacity-50">
                   <Mail className="h-4 w-4" />{subbing ? 'Subscribing…' : 'Subscribe'}
                 </button>
               </form>
               <p className="text-xs text-slate-400 mt-3">Unsubscribe anytime · No spam, ever · ~2-min read per issue</p>
             </div>
             <div className="lg:col-span-5 hidden lg:block">
-              <div className="aspect-[4/5] rounded-2xl bg-gradient-to-br from-orange-500 via-amber-500 to-rose-500 p-8 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
+              <div className="aspect-[4/5] rounded-2xl bg-gradient-to-br from-blue-500 via-blue-500 to-violet-500 p-8 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
                 <div className="bg-white/95 rounded-xl h-full p-6 flex flex-col">
-                  <div className="text-xs font-black uppercase tracking-[0.18em] text-orange-600 mb-2">Latest issue</div>
+                  <div className="text-xs font-black uppercase tracking-[0.18em] text-blue-600 mb-2">Latest issue</div>
                   <h3 className="text-2xl font-extrabold text-slate-900 leading-tight line-clamp-3 flex-1">
                     {featured?.title || 'Subscribe to read the next issue.'}
                   </h3>

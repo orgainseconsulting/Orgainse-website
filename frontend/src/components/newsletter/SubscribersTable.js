@@ -5,7 +5,7 @@ import { newsletterApi } from '../../lib/newsletterApi';
 
 const StatusBadge = ({ s }) => {
   const map = {
-    active: 'bg-emerald-100 text-emerald-700 border-emerald-200',
+    active: 'bg-blue-100 text-blue-700 border-blue-200',
     unsubscribed: 'bg-slate-200 text-slate-600 border-slate-300',
     bounced: 'bg-red-100 text-red-700 border-red-200',
   };
@@ -97,7 +97,7 @@ const SubscribersTable = () => {
         <div>
           <h2 className="text-xl font-bold text-slate-900">Subscribers</h2>
           <p className="text-sm text-slate-500">
-            <span className="text-emerald-600 font-semibold">{counts.active}</span> active ·
+            <span className="text-blue-600 font-semibold">{counts.active}</span> active ·
             <span className="text-slate-500"> {counts.unsubscribed}</span> unsubscribed ·
             <span className="text-red-600"> {counts.bounced}</span> bounced
           </p>
@@ -108,7 +108,7 @@ const SubscribersTable = () => {
             <Download className="h-4 w-4" />Export CSV
           </button>
           <button type="button" onClick={() => setShowAdd(true)} data-testid="subs-add-btn"
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-orange-500 text-white rounded-lg hover:bg-orange-600">
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-blue-500 text-white rounded-lg hover:bg-blue-600">
             <Plus className="h-4 w-4" />Add subscriber
           </button>
         </div>
@@ -120,17 +120,17 @@ const SubscribersTable = () => {
           <Search className="h-4 w-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
           <input value={filters.q} onChange={(e) => setFilters((f) => ({ ...f, q: e.target.value }))}
             placeholder="Search email or name…" data-testid="subs-filter-search"
-            className="w-full pl-9 pr-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none" />
+            className="w-full pl-9 pr-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none" />
         </div>
         <select value={filters.state} onChange={(e) => setFilters((f) => ({ ...f, state: e.target.value }))} data-testid="subs-filter-state"
-          className="px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:border-orange-400 focus:outline-none">
+          className="px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:border-blue-400 focus:outline-none">
           <option value="">All states</option>
           <option value="active">Active</option>
           <option value="unsubscribed">Unsubscribed</option>
           <option value="bounced">Bounced</option>
         </select>
         <select value={filters.segment} onChange={(e) => setFilters((f) => ({ ...f, segment: e.target.value }))} data-testid="subs-filter-segment"
-          className="px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:border-orange-400 focus:outline-none">
+          className="px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:border-blue-400 focus:outline-none">
           <option value="">All segments</option>
           {segments.map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
         </select>
@@ -138,7 +138,7 @@ const SubscribersTable = () => {
 
       {loading ? (
         <div className="py-12 text-center text-slate-500">
-          <div className="animate-spin h-10 w-10 border-b-2 border-orange-500 rounded-full mx-auto mb-3" />Loading…
+          <div className="animate-spin h-10 w-10 border-b-2 border-blue-500 rounded-full mx-auto mb-3" />Loading…
         </div>
       ) : subs.length === 0 ? (
         <div className="py-16 text-center border-2 border-dashed border-slate-200 rounded-lg">
@@ -196,7 +196,7 @@ const SubscribersTable = () => {
             </div>
             <div className="flex justify-end gap-2 mt-6">
               <button onClick={() => setShowAdd(false)} className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50">Cancel</button>
-              <button onClick={addSub} data-testid="subs-add-confirm" className="px-4 py-2 text-sm font-semibold bg-orange-500 text-white rounded-lg hover:bg-orange-600">Add</button>
+              <button onClick={addSub} data-testid="subs-add-confirm" className="px-4 py-2 text-sm font-semibold bg-blue-500 text-white rounded-lg hover:bg-blue-600">Add</button>
             </div>
           </div>
         </div>
@@ -233,7 +233,7 @@ const RowEditable = ({ sub, segments, editing, onStartEdit, onCancel, onSave, on
         <td className="px-4 py-3 text-xs text-slate-500">{fmt(sub.subscribed_at)}</td>
         <td className="px-4 py-3">
           <div className="flex justify-end gap-2">
-            <button onClick={onStartEdit} className="p-1 text-slate-500 hover:text-orange-600" title="Edit"><Edit3 className="h-4 w-4" /></button>
+            <button onClick={onStartEdit} className="p-1 text-slate-500 hover:text-blue-600" title="Edit"><Edit3 className="h-4 w-4" /></button>
             <button onClick={onDelete} className="p-1 text-slate-500 hover:text-red-600" title="Delete"><Trash2 className="h-4 w-4" /></button>
           </div>
         </td>
@@ -242,7 +242,7 @@ const RowEditable = ({ sub, segments, editing, onStartEdit, onCancel, onSave, on
   }
 
   return (
-    <tr className="bg-orange-50/50">
+    <tr className="bg-blue-50/50">
       <td className="px-4 py-3 text-sm font-mono text-slate-900">{sub.email}</td>
       <td className="px-4 py-3">
         <input value={name} onChange={(e) => setName(e.target.value)}
@@ -266,7 +266,7 @@ const RowEditable = ({ sub, segments, editing, onStartEdit, onCancel, onSave, on
             name,
             tags: tags.split(',').map((t) => t.trim()).filter(Boolean),
             unsubscribed,
-          })} className="p-1 text-emerald-600 hover:text-emerald-700"><Check className="h-4 w-4" /></button>
+          })} className="p-1 text-blue-600 hover:text-blue-700"><Check className="h-4 w-4" /></button>
         </div>
       </td>
     </tr>

@@ -50,16 +50,16 @@ const AdminLogin = ({ onLogin }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-orange-200 to-yellow-200 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-green-200 to-blue-200 rounded-full blur-3xl opacity-20 animate-pulse animation-delay-2000"></div>
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-blue-200 to-blue-200 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-blue-200 to-blue-200 rounded-full blur-3xl opacity-20 animate-pulse animation-delay-2000"></div>
       </div>
 
       <div className="relative w-full max-w-md">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <div className="p-4 bg-gradient-to-r from-orange-500 to-green-500 rounded-full shadow-lg">
+            <div className="p-4 bg-gradient-to-r from-blue-500 to-blue-500 rounded-full shadow-lg">
               <Shield className="w-8 h-8 text-white" />
             </div>
           </div>
@@ -84,7 +84,7 @@ const AdminLogin = ({ onLogin }) => {
                   name="email"
                   value={credentials.email}
                   onChange={handleInputChange}
-                  className="block w-full pl-10 pr-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors bg-white/80"
+                  className="block w-full pl-10 pr-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white/80"
                   placeholder="you@orgainse.com"
                   required
                   disabled={isLoading}
@@ -108,7 +108,7 @@ const AdminLogin = ({ onLogin }) => {
                   name="password"
                   value={credentials.password}
                   onChange={handleInputChange}
-                  className="block w-full pl-10 pr-12 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors bg-white/80"
+                  className="block w-full pl-10 pr-12 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white/80"
                   placeholder="Enter your password"
                   required
                   disabled={isLoading}
@@ -118,7 +118,7 @@ const AdminLogin = ({ onLogin }) => {
                   type="button"
                   data-testid="admin-toggle-password-btn"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center hover:text-orange-500 transition-colors"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center hover:text-blue-500 transition-colors"
                   disabled={isLoading}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
@@ -137,7 +137,7 @@ const AdminLogin = ({ onLogin }) => {
               data-testid="admin-login-submit-btn"
               type="submit"
               disabled={isLoading || !credentials.email || !credentials.password}
-              className="w-full bg-gradient-to-r from-orange-500 to-green-500 text-white font-semibold py-3 px-4 rounded-lg hover:from-orange-600 hover:to-green-600 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center"
+              className="w-full bg-gradient-to-r from-blue-500 to-blue-500 text-white font-semibold py-3 px-4 rounded-lg hover:from-blue-600 hover:to-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center"
             >
               {isLoading ? (
                 <>

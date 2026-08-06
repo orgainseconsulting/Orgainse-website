@@ -16,7 +16,10 @@
 | `swarag@orgainse.com`  | Super Admin | Swarag |
 | `rajesh@orgainse.com`  | Admin       | Rajesh |
 
-- **Temporary password (all 4 seed users)**: `Orgainse25%Web..`
+- **Temporary password (seed users `info@`, `rajesh@`)**: `Orgainse25%Web..`
+- **QA / testing super-admin (use this for automated tests)**: `support@orgainse.com` / `QaTest!2026#Org`
+  (password already set, `must_change_password=false`, `is_super_admin=true` — logs straight into the dashboard)
+- `swarag@orgainse.com` has a user-chosen password (not known to agents).
 - On first login each user is forced to set a new password via `POST /api/admin-change-password`.
 - Once the user changes their password, `temp_password_plain` is unset on their record (no longer visible in the Users tab).
 - **Super-admin (`swarag@orgainse.com`)** is the only user who can:

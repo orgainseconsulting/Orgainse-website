@@ -81,7 +81,7 @@ const ImageUpload = ({ label, value, onChange, testId }) => {
           type="button"
           onClick={() => fileRef.current?.click()}
           data-testid={`${testId}-pick`}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border-2 border-dashed border-slate-300 text-slate-600 hover:border-orange-300 hover:text-orange-600 transition"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border-2 border-dashed border-slate-300 text-slate-600 hover:border-blue-300 hover:text-blue-600 transition"
         >
           <ImageIcon className="h-4 w-4" />
           <span className="text-sm">Choose image</span>
@@ -223,7 +223,7 @@ const BlogEditor = ({ postId, onBack, onSaved, onDeleted }) => {
   if (loading) {
     return (
       <div className="py-12 text-center text-slate-500">
-        <div className="animate-spin h-10 w-10 border-b-2 border-orange-500 rounded-full mx-auto mb-3"></div>
+        <div className="animate-spin h-10 w-10 border-b-2 border-blue-500 rounded-full mx-auto mb-3"></div>
         Loading post…
       </div>
     );
@@ -268,7 +268,7 @@ const BlogEditor = ({ postId, onBack, onSaved, onDeleted }) => {
             type="button"
             onClick={() => handleSave(true)}
             disabled={saving}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-orange-500 text-white rounded-lg hover:bg-orange-600 disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
             data-testid="blog-editor-publish"
           >
             <Send className="h-4 w-4" />
@@ -286,7 +286,7 @@ const BlogEditor = ({ postId, onBack, onSaved, onDeleted }) => {
               value={form.title}
               onChange={(e) => update({ title: e.target.value })}
               placeholder="A great title catches readers in 6–8 words"
-              className="w-full px-4 py-3 text-2xl font-bold border border-slate-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-300 focus:outline-none"
+              className="w-full px-4 py-3 text-2xl font-bold border border-slate-200 rounded-lg focus:border-blue-400 focus:ring-1 focus:ring-blue-300 focus:outline-none"
               data-testid="blog-editor-title"
             />
           </Field>
@@ -297,7 +297,7 @@ const BlogEditor = ({ postId, onBack, onSaved, onDeleted }) => {
               value={form.slug}
               onChange={(e) => { setSlugTouched(true); update({ slug: e.target.value.toLowerCase() }); }}
               placeholder="my-post-slug"
-              className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-300 focus:outline-none font-mono"
+              className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-blue-400 focus:ring-1 focus:ring-blue-300 focus:outline-none font-mono"
               data-testid="blog-editor-slug"
             />
           </Field>
@@ -308,7 +308,7 @@ const BlogEditor = ({ postId, onBack, onSaved, onDeleted }) => {
               value={form.excerpt}
               onChange={(e) => update({ excerpt: e.target.value })}
               placeholder="1–2 sentence summary…"
-              className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-300 focus:outline-none"
+              className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-blue-400 focus:ring-1 focus:ring-blue-300 focus:outline-none"
               data-testid="blog-editor-excerpt"
             />
           </Field>
@@ -331,7 +331,7 @@ const BlogEditor = ({ postId, onBack, onSaved, onDeleted }) => {
               <select
                 value={form.status}
                 onChange={(e) => update({ status: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:border-orange-400 focus:outline-none"
+                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:border-blue-400 focus:outline-none"
                 data-testid="blog-editor-status"
               >
                 <option value="draft">Draft</option>
@@ -343,7 +343,7 @@ const BlogEditor = ({ postId, onBack, onSaved, onDeleted }) => {
                 type="text"
                 value={form.author}
                 onChange={(e) => update({ author: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none"
+                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none"
                 data-testid="blog-editor-author"
               />
             </Field>
@@ -353,7 +353,7 @@ const BlogEditor = ({ postId, onBack, onSaved, onDeleted }) => {
                 value={form.category}
                 onChange={(e) => update({ category: e.target.value })}
                 placeholder="e.g. AI Strategy"
-                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none"
+                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none"
                 data-testid="blog-editor-category"
               />
             </Field>
@@ -363,7 +363,7 @@ const BlogEditor = ({ postId, onBack, onSaved, onDeleted }) => {
                 value={form.tags}
                 onChange={(e) => update({ tags: e.target.value })}
                 placeholder="ai, project management, roi"
-                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none"
+                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none"
                 data-testid="blog-editor-tags"
               />
             </Field>
@@ -387,7 +387,7 @@ const BlogEditor = ({ postId, onBack, onSaved, onDeleted }) => {
                 value={form.seo_title}
                 onChange={(e) => update({ seo_title: e.target.value })}
                 maxLength={250}
-                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none"
+                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none"
                 data-testid="blog-editor-seo-title"
               />
             </Field>
@@ -397,7 +397,7 @@ const BlogEditor = ({ postId, onBack, onSaved, onDeleted }) => {
                 value={form.seo_description}
                 onChange={(e) => update({ seo_description: e.target.value })}
                 maxLength={320}
-                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none"
+                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none"
                 data-testid="blog-editor-seo-description"
               />
             </Field>

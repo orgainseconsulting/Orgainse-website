@@ -1,7 +1,7 @@
 {
   "short_name": "Orgainse",
-  "name": "Orgainse Consulting - AI-Native Business Transformation",
-  "description": "AI-native consulting firm offering GPT-powered project management, digital transformation, and operational optimization.",
+  "name": "Orgainse Consulting — Delivery Consulting, PMaaS and ORQYNE",
+  "description": "Orgainse helps IT services firms, software teams, startups, and growing businesses improve project delivery, workflow visibility, governance, and practical AI adoption.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -11,9 +11,9 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#E07A5F",
+  "theme_color": "#2563EB",
   "background_color": "#ffffff",
   "orientation": "portrait-primary",
-  "categories": ["business", "consulting", "ai", "productivity"],
+  "categories": ["business", "consulting", "productivity"],
   "lang": "en-US"
 }

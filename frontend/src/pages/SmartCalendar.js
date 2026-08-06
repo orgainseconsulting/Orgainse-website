@@ -60,13 +60,13 @@ export default function SmartCalendar() {
 
   if (result) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-12">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 mb-6 mx-auto">
+            <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 mb-6 mx-auto">
               <CheckCircle className="h-12 w-12 text-white" />
             </div>
-            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
               Consultation Request Received!
             </h1>
             <p className="text-lg text-slate-600">
@@ -85,7 +85,7 @@ export default function SmartCalendar() {
                 <DetailRow label="Timezone" value={TIMEZONES.find((t) => t.value === result.timezone)?.label || result.timezone} />
                 <div>
                   <label className="text-sm font-medium text-slate-600">Status</label>
-                  <div className="mt-1"><Badge className="bg-green-100 text-green-700">Pending Confirmation</Badge></div>
+                  <div className="mt-1"><Badge className="bg-blue-100 text-blue-700">Pending Confirmation</Badge></div>
                 </div>
               </div>
               {result.message && (
@@ -94,7 +94,7 @@ export default function SmartCalendar() {
                   <p className="text-slate-700 bg-slate-50 p-3 rounded-lg mt-1">{result.message}</p>
                 </div>
               )}
-              <div className="mt-6 p-4 bg-orange-50 rounded-xl text-sm text-slate-700">
+              <div className="mt-6 p-4 bg-blue-50 rounded-xl text-sm text-slate-700">
                 <strong>Reference ID:</strong>{' '}
                 <span data-testid="consultation-id" className="font-mono">{result.consultation_id}</span>
               </div>
@@ -109,7 +109,7 @@ export default function SmartCalendar() {
             <button
               data-testid="consultation-book-google-btn"
               onClick={openCalendly}
-              className="px-8 py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 inline-flex items-center"
+              className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 inline-flex items-center"
             >
               <Calendar className="mr-2 h-5 w-5" /> Book Instantly with Google Calendar
               <ExternalLink className="ml-2 h-4 w-4" />
@@ -121,10 +121,10 @@ export default function SmartCalendar() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-blue-500 bg-clip-text text-transparent">
             Book Your AI Consultation
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-4">
@@ -136,7 +136,7 @@ export default function SmartCalendar() {
               type="button"
               data-testid="consultation-google-link"
               onClick={openCalendly}
-              className="text-orange-600 hover:text-orange-700 font-semibold text-sm inline-flex items-center"
+              className="text-blue-600 hover:text-blue-700 font-semibold text-sm inline-flex items-center"
             >
               Open Google booking <ExternalLink className="ml-1 h-3 w-3" />
             </button>
@@ -169,7 +169,7 @@ export default function SmartCalendar() {
               </div>
 
               <Field label="Service Type *">
-                <select data-testid="consultation-service-select" value={form.service_type} onChange={(e) => setField('service_type', e.target.value)} required className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none">
+                <select data-testid="consultation-service-select" value={form.service_type} onChange={(e) => setField('service_type', e.target.value)} required className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none">
                   <option value="">Select service type</option>
                   {SERVICE_TYPES.map((s) => <option key={s} value={s}>{s}</option>)}
                 </select>
@@ -185,7 +185,7 @@ export default function SmartCalendar() {
                   />
                 </Field>
                 <Field label="Timezone *">
-                  <select data-testid="consultation-tz-select" value={form.timezone} onChange={(e) => setField('timezone', e.target.value)} required className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none">
+                  <select data-testid="consultation-tz-select" value={form.timezone} onChange={(e) => setField('timezone', e.target.value)} required className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none">
                     {TIMEZONES.map((tz) => <option key={tz.value} value={tz.value}>{tz.label}</option>)}
                   </select>
                 </Field>
@@ -206,7 +206,7 @@ export default function SmartCalendar() {
                   data-testid="consultation-submit-btn"
                   type="submit"
                   disabled={loading || !form.name || !form.email || !form.service_type}
-                  className="px-8 py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
+                  className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
                 >
                   {loading ? 'Submitting...' : 'Request Consultation'}
                   {!loading && <Calendar className="ml-2 h-5 w-5" />}
@@ -250,7 +250,7 @@ function DetailRow({ label, value }) {
 }
 
 function PerkRow({ icon: Icon, color, label }) {
-  const bg = { orange: 'bg-orange-100 text-orange-600', green: 'bg-green-100 text-green-600', blue: 'bg-blue-100 text-blue-600' }[color];
+  const bg = { orange: 'bg-blue-100 text-blue-600', green: 'bg-blue-100 text-blue-600', blue: 'bg-blue-100 text-blue-600' }[color];
   return (
     <div className="text-center">
       <div className={`inline-flex items-center justify-center w-10 h-10 rounded-full ${bg} mb-2`}>

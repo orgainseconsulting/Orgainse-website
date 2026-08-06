@@ -36,13 +36,13 @@ const Unsubscribe = () => {
       <div className="bg-white rounded-2xl shadow-lg max-w-md w-full p-8 sm:p-10 text-center" data-testid="unsubscribe-card">
         {state === 'loading' && (
           <div>
-            <div className="animate-spin h-10 w-10 border-b-2 border-orange-500 rounded-full mx-auto mb-4" />
+            <div className="animate-spin h-10 w-10 border-b-2 border-blue-500 rounded-full mx-auto mb-4" />
             <p className="text-slate-500">Checking your subscription…</p>
           </div>
         )}
         {state === 'confirm' && (
           <>
-            <Mail className="h-12 w-12 text-orange-500 mx-auto mb-4" />
+            <Mail className="h-12 w-12 text-blue-500 mx-auto mb-4" />
             <h1 className="text-2xl font-extrabold text-slate-900 mb-2">Unsubscribe from the Orgainse Pulse?</h1>
             <p className="text-slate-600 mb-1">We'll stop sending newsletter emails to:</p>
             <p className="font-mono text-sm text-slate-800 bg-slate-100 px-3 py-2 rounded inline-block mb-6" data-testid="unsubscribe-email">{email}</p>
@@ -51,7 +51,7 @@ const Unsubscribe = () => {
                 Keep me subscribed
               </Link>
               <button onClick={confirm} data-testid="unsubscribe-confirm"
-                className="px-5 py-2.5 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600">
+                className="px-5 py-2.5 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600">
                 Unsubscribe
               </button>
             </div>
@@ -59,7 +59,7 @@ const Unsubscribe = () => {
         )}
         {state === 'already' && (
           <>
-            <CheckCircle2 className="h-12 w-12 text-emerald-500 mx-auto mb-4" />
+            <CheckCircle2 className="h-12 w-12 text-blue-500 mx-auto mb-4" />
             <h1 className="text-2xl font-extrabold text-slate-900 mb-2">You're already unsubscribed</h1>
             <p className="text-slate-600 mb-6">{email} is no longer receiving newsletter emails from us.</p>
             <Link to="/" className="inline-block px-5 py-2.5 bg-slate-900 text-white rounded-lg font-semibold hover:bg-slate-800">Back to home</Link>
@@ -67,7 +67,7 @@ const Unsubscribe = () => {
         )}
         {state === 'done' && (
           <>
-            <CheckCircle2 className="h-12 w-12 text-emerald-500 mx-auto mb-4" />
+            <CheckCircle2 className="h-12 w-12 text-blue-500 mx-auto mb-4" />
             <h1 className="text-2xl font-extrabold text-slate-900 mb-2" data-testid="unsubscribe-success">Unsubscribed</h1>
             <p className="text-slate-600 mb-6">We won't send newsletter emails to {email} anymore. Sorry to see you go.</p>
             <Link to="/" className="inline-block px-5 py-2.5 bg-slate-900 text-white rounded-lg font-semibold hover:bg-slate-800">Back to home</Link>

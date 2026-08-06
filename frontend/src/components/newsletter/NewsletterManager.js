@@ -49,7 +49,7 @@ const NewsletterManager = () => {
             value: (analytics.active_subscribers || 0).toLocaleString(),
             hint: `+${analytics.new_subscribers_7d || 0} in 7d · +${analytics.new_subscribers_30d || 0} in 30d`,
             icon: ANALYTICS_ICONS.Users,
-            gradient: 'from-emerald-500 to-green-500',
+            gradient: 'from-blue-500 to-blue-500',
           },
           {
             testid: 'analytics-news-total-views',
@@ -57,7 +57,7 @@ const NewsletterManager = () => {
             value: (analytics.total_views || 0).toLocaleString(),
             hint: `${analytics.avg_views_per_published || 0} avg/published`,
             icon: ANALYTICS_ICONS.Eye,
-            gradient: 'from-orange-500 to-amber-500',
+            gradient: 'from-blue-500 to-blue-500',
           },
           {
             testid: 'analytics-news-sent',
@@ -65,7 +65,7 @@ const NewsletterManager = () => {
             value: analytics.sent_issues || 0,
             hint: `${analytics.published_issues || 0} published · ${analytics.draft_issues || 0} draft`,
             icon: ANALYTICS_ICONS.Send,
-            gradient: 'from-sky-500 to-cyan-500',
+            gradient: 'from-blue-500 to-blue-500',
           },
           {
             testid: 'analytics-news-top-issue',
@@ -73,7 +73,7 @@ const NewsletterManager = () => {
             value: (analytics.top_issues?.[0]?.view_count || 0).toLocaleString(),
             hint: analytics.top_issues?.[0]?.title?.slice(0, 32) || '—',
             icon: ANALYTICS_ICONS.TrendingUp,
-            gradient: 'from-purple-500 to-fuchsia-500',
+            gradient: 'from-violet-500 to-violet-500',
           },
         ] : []}
         topTitle="Top 5 issues by views"
@@ -99,7 +99,7 @@ const NewsletterManager = () => {
               <button key={t.id} type="button" onClick={() => setTab(t.id)}
                 data-testid={`newsletter-subtab-${t.id}`}
                 className={`inline-flex items-center gap-2 whitespace-nowrap py-3 px-1 border-b-2 text-sm font-semibold transition-colors
-                  ${active ? 'border-orange-500 text-orange-600' : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}>
+                  ${active ? 'border-blue-500 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}>
                 <Icon className="h-4 w-4" />{t.label}
               </button>
             );

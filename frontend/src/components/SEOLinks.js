@@ -130,7 +130,7 @@ const SEOLinks = () => {
   ];
 
   return (
-    <div className="py-12 bg-gradient-to-br from-slate-50 to-orange-50">
+    <div className="py-12 bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-slate-900 mb-4">
@@ -145,7 +145,7 @@ const SEOLinks = () => {
           {/* Internal Links Section */}
           <div>
             <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
-              <ArrowRight className="h-6 w-6 mr-3 text-orange-500" />
+              <ArrowRight className="h-6 w-6 mr-3 text-blue-500" />
               Our AI Services & Tools
             </h3>
             <div className="space-y-4">
@@ -153,9 +153,9 @@ const SEOLinks = () => {
                 <Link
                   key={index}
                   to={link.to}
-                  className="block p-4 bg-white rounded-lg border border-slate-200 hover:border-orange-300 hover:shadow-lg transition-all duration-300 group"
+                  className="block p-4 bg-white rounded-lg border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 group"
                 >
-                  <h4 className="font-semibold text-slate-900 group-hover:text-orange-600 transition-colors">
+                  <h4 className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">
                     {link.text}
                   </h4>
                   <p className="text-sm text-slate-600 mt-1">
@@ -169,7 +169,7 @@ const SEOLinks = () => {
           {/* External Links Section */}
           <div>
             <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
-              <ExternalLink className="h-6 w-6 mr-3 text-green-500" />
+              <ExternalLink className="h-6 w-6 mr-3 text-blue-500" />
               Industry Resources & Research
             </h3>
             <div className="space-y-4">
@@ -179,9 +179,9 @@ const SEOLinks = () => {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block p-4 bg-white rounded-lg border border-slate-200 hover:border-green-300 hover:shadow-lg transition-all duration-300 group"
+                  className="block p-4 bg-white rounded-lg border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 group"
                 >
-                  <h4 className="font-semibold text-slate-900 group-hover:text-green-600 transition-colors flex items-center">
+                  <h4 className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors flex items-center">
                     {link.text}
                     <ExternalLink className="h-4 w-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </h4>
@@ -199,14 +199,14 @@ const SEOLinks = () => {
           <div className="inline-flex flex-col sm:flex-row gap-4">
             <Link
               to="/contact"
-              className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-orange-500 to-green-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+              className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
             >
               Start Your AI Transformation
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
             <Link
               to="/ai-assessment"
-              className="inline-flex items-center px-8 py-3 bg-white border-2 border-orange-500 text-orange-600 font-semibold rounded-lg hover:bg-orange-50 transition-all"
+              className="inline-flex items-center px-8 py-3 bg-white border-2 border-blue-500 text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all"
             >
               Take Free Assessment
             </Link>

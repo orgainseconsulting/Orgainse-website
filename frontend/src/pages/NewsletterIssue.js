@@ -83,7 +83,7 @@ const NewsletterIssuePage = () => {
           <p className="text-xs uppercase tracking-widest text-slate-400 mb-4">404 · Issue</p>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Issue not found</h1>
           <p className="text-slate-600 mb-8">The issue you're looking for hasn't been published yet.</p>
-          <Link to="/newsletter" className="inline-flex items-center gap-2 px-5 py-2.5 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600">
+          <Link to="/newsletter" className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600">
             <ArrowLeft className="h-4 w-4" />Back to archive
           </Link>
         </div>
@@ -110,10 +110,10 @@ const NewsletterIssuePage = () => {
       <header className="bg-slate-900 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
           <Link to="/newsletter" data-testid="issue-back-link"
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-amber-300 mb-8">
+            className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-blue-300 mb-8">
             <ArrowLeft className="h-4 w-4" />The Orgainse Pulse
           </Link>
-          <div className="flex flex-wrap items-center gap-4 text-xs font-black uppercase tracking-[0.24em] text-amber-300 mb-6">
+          <div className="flex flex-wrap items-center gap-4 text-xs font-black uppercase tracking-[0.24em] text-blue-300 mb-6">
             {issue.issue_number && <span>Issue #{String(issue.issue_number).padStart(2, '0')}</span>}
             {issue.edition_date && <><span className="text-slate-600">·</span><span className="text-slate-400">{fmt(issue.edition_date)}</span></>}
             {issue.category && <><span className="text-slate-600">·</span><span className="text-slate-400">{issue.category}</span></>}
@@ -142,7 +142,7 @@ const NewsletterIssuePage = () => {
       <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12" data-testid="newsletter-issue-article">
         <div className="bg-white border border-slate-200 rounded-2xl p-8 sm:p-12 shadow-sm">
           <div
-            className="prose prose-slate prose-lg max-w-none prose-headings:font-extrabold prose-headings:text-slate-900 prose-a:text-orange-600 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-blockquote:border-l-4 prose-blockquote:border-orange-400 prose-blockquote:bg-orange-50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-code:bg-slate-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:hidden prose-code:after:hidden"
+            className="prose prose-slate prose-lg max-w-none prose-headings:font-extrabold prose-headings:text-slate-900 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-blockquote:border-l-4 prose-blockquote:border-blue-400 prose-blockquote:bg-blue-50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-code:bg-slate-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:hidden prose-code:after:hidden"
             dangerouslySetInnerHTML={{ __html: issue.content_html || '' }}
             data-testid="newsletter-issue-body"
           />
@@ -157,15 +157,15 @@ const NewsletterIssuePage = () => {
 
         {/* Subscribe CTA */}
         <div className="mt-12 bg-slate-900 text-white rounded-2xl p-8 sm:p-10 text-center">
-          <Mail className="h-8 w-8 text-amber-300 mx-auto mb-3" />
+          <Mail className="h-8 w-8 text-blue-300 mx-auto mb-3" />
           <h3 className="text-2xl font-extrabold mb-2">Don't miss the next issue.</h3>
           <p className="text-slate-300 mb-6">Get The Orgainse Pulse delivered to your inbox.</p>
           <form onSubmit={subscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input type="email" value={subEmail} onChange={(e) => setSubEmail(e.target.value)} required
               placeholder="you@company.com"
-              className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:bg-white/15 focus:border-orange-400 focus:outline-none" />
+              className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:bg-white/15 focus:border-blue-400 focus:outline-none" />
             <button type="submit" disabled={subbing}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 disabled:opacity-50">
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 disabled:opacity-50">
               {subbing ? 'Subscribing…' : 'Subscribe'}
             </button>
           </form>

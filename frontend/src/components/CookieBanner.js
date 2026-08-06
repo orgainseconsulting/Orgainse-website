@@ -32,7 +32,7 @@ export default function CookieBanner() {
       <p className="text-sm leading-relaxed mb-4">
         We use essential cookies and (with your consent) analytics cookies to
         understand how visitors interact with the site. See our{' '}
-        <a href="/privacy" className="underline hover:text-orange-300">
+        <a href="/privacy" className="underline hover:text-blue-300">
           Privacy Policy
         </a>{' '}
         for details.
@@ -48,7 +48,7 @@ export default function CookieBanner() {
         <button
           data-testid="cookie-accept-btn"
           onClick={() => setDecision('accepted')}
-          className="flex-1 px-4 py-2 text-sm font-semibold rounded-lg bg-gradient-to-r from-orange-500 to-green-500 hover:opacity-90 transition"
+          className="flex-1 px-4 py-2 text-sm font-semibold rounded-lg bg-gradient-to-r from-blue-500 to-blue-500 hover:opacity-90 transition"
         >
           Accept all
         </button>

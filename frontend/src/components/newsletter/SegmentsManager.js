@@ -47,7 +47,7 @@ const SegmentsManager = () => {
           <p className="text-sm text-slate-500">Group subscribers by audience type to target sends.</p>
         </div>
         <button onClick={() => setShowAdd(true)} data-testid="segments-add"
-          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-orange-500 text-white rounded-lg hover:bg-orange-600">
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-blue-500 text-white rounded-lg hover:bg-blue-600">
           <Plus className="h-4 w-4" />New segment
         </button>
       </div>
@@ -98,7 +98,7 @@ const SegmentsManager = () => {
             </div>
             <div className="flex justify-end gap-2 mt-6">
               <button onClick={() => setShowAdd(false)} className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50">Cancel</button>
-              <button onClick={add} data-testid="segments-confirm" className="px-4 py-2 text-sm font-semibold bg-orange-500 text-white rounded-lg hover:bg-orange-600">Create</button>
+              <button onClick={add} data-testid="segments-confirm" className="px-4 py-2 text-sm font-semibold bg-blue-500 text-white rounded-lg hover:bg-blue-600">Create</button>
             </div>
           </div>
         </div>

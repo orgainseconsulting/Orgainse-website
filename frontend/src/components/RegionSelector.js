@@ -24,7 +24,7 @@ const RegionSelector = () => {
         value={currentRegion}
         onChange={(e) => changeRegion(e.target.value)}
         data-testid="region-selector-select"
-        className="px-3 py-1 bg-white border border-slate-200 rounded-lg text-sm focus:border-orange-400 focus:ring-orange-400 focus:outline-none"
+        className="px-3 py-1 bg-white border border-slate-200 rounded-lg text-sm focus:border-blue-400 focus:ring-blue-400 focus:outline-none"
       >
         {Object.entries(allRegions).map(([code, config]) => (
           <option key={code} value={code}>

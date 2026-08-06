@@ -1,0 +1,40 @@
+{
+  "summary": "Iteration-11 — Regression + acceptance testing of the site-wide palette migration + Home/Products rewrite + footer legal popups + ORGAINSE wordmark work. All 13/13 backend regression tests pass (health, blog, newsletter, contact + orqyne_pilot, ai-assessment, roi-calculator, consultation, app-settings/public, admin-login, admin lead listing). Frontend: all 14 required routes render (200 + non-blank), Home has all listed data-testids, FAQ accordion toggles with correct aria-expanded, newsletter signup + duplicate flow works end-to-end with backend, all hero/section CTAs route correctly, discovery + consultation CTAs open the Book-a-Call host picker modal, Products experience switcher swaps Canvas/IT services blocks, Products FAQ accordion works, ORQYNE pilot lead form submits and lead is visible in the Admin Dashboard, product-site-btn / agents-capabilities-btn correctly target=_blank to https://orgainse.live, footer privacy + terms popups open (portal), lock body scroll, close via Escape / close button / backdrop / full-page link, and /privacy + /terms full-page routes still render. Admin login with support@orgainse.com works and lands directly on dashboard; all 5 top tabs (Lead Management, Blog Posts, Newsletter, Users, Settings) render post-palette-migration. Palette audit across /, /products, /services, /about, /blog, /newsletter, /contact found ZERO banned hues (orange/amber/yellow/green/emerald/teal/pink/fuchsia). Mobile 390x844 spot-check of / and /products has no horizontal overflow; footer legal popup usable on mobile after cookie banner is dismissed.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Mobile footer (390x844)", "issues": ["Cookie consent banner sits fixed at the bottom and, on the first visit, visually overlaps the footer-privacy-btn / footer-terms-btn. Buttons ARE clickable via scroll-into-view but a first-time user might not see them until they dismiss cookies. Consider adding bottom-padding to the footer while banner is visible, or raising banner z-index awareness. Low priority."]},
+      {"screen": "Book-a-Call host picker modal (all breakpoints)", "issues": ["Rajesh's designation currently shows 'Director-5a67' (stale seed data left over from a prior partial-update regression test in iteration_10). Should be reset to 'Director, Delivery & Operations'. This is a data issue, not a code issue."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_repalette_regression.py",
+    "/app/test_reports/pytest/repalette_regression.xml"
+  ],
+  "action_items": [
+    "(SEED DATA) Reset Rajesh admin user designation back to 'Director, Delivery & Operations' — currently shows 'Director-5a67' in the public Book-a-Call host picker.",
+    "(LOW / DESIGN) Consider raising footer above the cookie consent banner on mobile so first-time visitors can see the Privacy / Terms popup buttons without dismissing cookies first."
+  ],
+  "critical_code_review_comments": [
+    "Home.js correctly wires newsletter success/duplicate/error states off api.newsletter() response.status; frontend maps backend 'already_subscribed' -> 'duplicate' testid, verified end-to-end.",
+    "Products.js pilot form posts to /api/contact with leadType 'orqyne_pilot'; the contact.js handler falls into the default 'contact_messages' collection because the switch has no explicit case — the lead IS stored and IS visible in admin, but if the client asks for a dedicated 'orqyne_pilot_leads' bucket in admin, add a switch case in /app/api/_handlers/contact.js.",
+    "LegalModal is a proper portal component: body scroll-lock (document.body.style.overflow='hidden') is applied while open and cleared on close; Escape/backdrop/close-button all dismiss correctly; and the modal still exposes a full-page /privacy or /terms deep link.",
+    "Palette migration is clean — automated scan across 7 public routes found ZERO banned hues (orange, amber, yellow, green, emerald, teal, pink, fuchsia). Only the multi-coloured Orgainse Consulting logo PNG retains legacy colours (intentional brand asset).",
+    "Every public API endpoint touched by the palette work still passes regression: /api/health, /api/blog, /api/newsletter-issues, /api/app-settings/public, /api/newsletter, /api/contact, /api/ai-assessment, /api/roi-calculator, /api/consultation, /api/admin-login, /api/admin. Backend was untouched by the repalette script as expected."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_repalette_regression.py (new — 13 tests, all pass)"
+  ],
+  "success_rate": {"backend": "100% (13/13)", "frontend": "100% (all required flows verified)"},
+  "test_credentials": "support@orgainse.com / QaTest!2026#Org (super-admin, must_change_password=false).",
+  "seed_data_creation": "Two newsletter subscribers created for signup + duplicate flow (TEST_ and test_dup_ prefixed). One ORQYNE pilot lead created via /products form and one via API — visible in Admin > Lead Management > Contact Messages.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend Node handlers live at /app/api/_handlers/**. FastAPI is only a reverse proxy. Contact form's ORQYNE pilot leads land in the 'contact_messages' collection (default branch in contact.js switch — no dedicated bucket). Admin GET /api/admin returns { data: { <collection_name>: [...] } } grouped by collection with _id already excluded. Emails are stored lowercased at top level of contact/newsletter docs — use lowercase when searching for pilot leads via API.",
+  "rca of the issue": "n/a — no critical bugs found. Palette migration + Home/Products rewrite + LegalModal + footer wordmark all verified working end-to-end."
+}

@@ -16,7 +16,7 @@ const PasswordReveal = ({ value, testid }) => {
   }
   return (
     <div className="inline-flex items-center gap-2" data-testid={testid}>
-      <code className="font-mono text-xs bg-amber-50 border border-amber-200 text-amber-900 px-2 py-1 rounded">
+      <code className="font-mono text-xs bg-blue-50 border border-blue-200 text-blue-900 px-2 py-1 rounded">
         {shown ? value : '•'.repeat(Math.min(value.length, 12))}
       </code>
       <button
@@ -33,7 +33,7 @@ const PasswordReveal = ({ value, testid }) => {
           navigator.clipboard?.writeText(value);
           toast.success('Temporary password copied');
         }}
-        className="text-xs text-orange-600 hover:text-orange-800 font-semibold"
+        className="text-xs text-blue-600 hover:text-blue-800 font-semibold"
       >
         Copy
       </button>
@@ -80,7 +80,7 @@ const InviteModal = ({ onClose, onCreated }) => {
               value={form.email}
               onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
               placeholder="newadmin@orgainse.com"
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               data-testid="users-invite-email"
             />
             <p className="text-[11px] text-slate-500 mt-1">Must end with <code>@orgainse.com</code>.</p>
@@ -93,7 +93,7 @@ const InviteModal = ({ onClose, onCreated }) => {
               value={form.name}
               onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
               placeholder="Jane Doe"
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               data-testid="users-invite-name"
             />
           </div>
@@ -105,7 +105,7 @@ const InviteModal = ({ onClose, onCreated }) => {
               minLength={8}
               value={form.temp_password}
               onChange={(e) => setForm((p) => ({ ...p, temp_password: e.target.value }))}
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               data-testid="users-invite-temp-password"
             />
             <p className="text-[11px] text-slate-500 mt-1">They will be forced to change this on first login.</p>
@@ -167,7 +167,7 @@ const ResetModal = ({ user, onClose, onDone }) => {
               minLength={8}
               value={pw}
               onChange={(e) => setPw(e.target.value)}
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               data-testid="users-reset-password-input"
             />
           </div>
@@ -177,7 +177,7 @@ const ResetModal = ({ user, onClose, onDone }) => {
               type="submit"
               disabled={submitting}
               data-testid="users-reset-submit"
-              className="px-5 py-2 text-sm font-semibold text-white bg-amber-600 hover:bg-amber-700 rounded-lg disabled:opacity-50 inline-flex items-center gap-2"
+              className="px-5 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg disabled:opacity-50 inline-flex items-center gap-2"
             >
               <KeyRound className="h-4 w-4" />
               {submitting ? 'Saving…' : 'Reset password'}
@@ -313,7 +313,7 @@ const AdminUsersManager = () => {
                           className="px-2 py-1 border border-slate-300 rounded text-sm w-40"
                           data-testid={`users-edit-name-${u.email}`}
                         />
-                        <button onClick={() => saveName(u)} className="text-xs text-orange-600 font-semibold">Save</button>
+                        <button onClick={() => saveName(u)} className="text-xs text-blue-600 font-semibold">Save</button>
                         <button onClick={() => setEditingName((p) => { const c = { ...p }; delete c[u.id]; return c; })} className="text-xs text-slate-400">Cancel</button>
                       </div>
                     ) : (
@@ -335,7 +335,7 @@ const AdminUsersManager = () => {
                   <td className="px-4 py-3 text-slate-700">{u.email}</td>
                   <td className="px-4 py-3">
                     {u.is_super_admin ? (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold uppercase tracking-wider">
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold uppercase tracking-wider">
                         <ShieldCheck className="h-3 w-3" /> Super admin
                       </span>
                     ) : (
@@ -345,7 +345,7 @@ const AdminUsersManager = () => {
                   </td>
                   <td className="px-4 py-3" data-testid={`users-host-status-${u.email}`}>
                     {u.show_as_host && u.booking_url ? (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider">
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold uppercase tracking-wider">
                         <Calendar className="h-3 w-3" /> Live
                       </span>
                     ) : u.booking_url ? (
@@ -367,7 +367,7 @@ const AdminUsersManager = () => {
                       <button
                         onClick={() => setResetTarget(u)}
                         data-testid={`users-reset-${u.email}`}
-                        className="text-xs font-semibold text-amber-700 hover:text-amber-900 inline-flex items-center gap-1"
+                        className="text-xs font-semibold text-blue-700 hover:text-blue-900 inline-flex items-center gap-1"
                       >
                         <KeyRound className="h-3.5 w-3.5" /> Reset
                       </button>

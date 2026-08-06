@@ -69,7 +69,7 @@ const ImageUpload = ({ label, value, onChange, testId }) => {
         </div>
       ) : (
         <button type="button" onClick={() => fileRef.current?.click()} data-testid={`${testId}-pick`}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border-2 border-dashed border-slate-300 text-slate-600 hover:border-orange-300 hover:text-orange-600">
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border-2 border-dashed border-slate-300 text-slate-600 hover:border-blue-300 hover:text-blue-600">
           <ImageIcon className="h-4 w-4" /><span className="text-sm">Choose image</span>
         </button>
       )}
@@ -204,7 +204,7 @@ const IssueEditor = ({ issueId, onBack, onSaved, onDeleted }) => {
   if (loading) {
     return (
       <div className="py-12 text-center text-slate-500">
-        <div className="animate-spin h-10 w-10 border-b-2 border-orange-500 rounded-full mx-auto mb-3" />
+        <div className="animate-spin h-10 w-10 border-b-2 border-blue-500 rounded-full mx-auto mb-3" />
         Loading issue…
       </div>
     );
@@ -232,7 +232,7 @@ const IssueEditor = ({ issueId, onBack, onSaved, onDeleted }) => {
             Publish to web
           </button>
           <button type="button" onClick={() => setSendOpen(true)} disabled={!form.id} data-testid="issue-editor-send"
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-orange-500 text-white rounded-lg hover:bg-orange-600 disabled:opacity-50">
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50">
             <Send className="h-4 w-4" />Send email
           </button>
         </div>
@@ -243,21 +243,21 @@ const IssueEditor = ({ issueId, onBack, onSaved, onDeleted }) => {
           <Field label="Title">
             <input value={form.title} onChange={(e) => update({ title: e.target.value })} data-testid="issue-editor-title"
               placeholder="Orgainse Pulse — Issue 01"
-              className="w-full px-4 py-3 text-2xl font-bold border border-slate-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-300 focus:outline-none" />
+              className="w-full px-4 py-3 text-2xl font-bold border border-slate-200 rounded-lg focus:border-blue-400 focus:ring-1 focus:ring-blue-300 focus:outline-none" />
           </Field>
           <Field label="Subtitle / kicker" hint="Short tagline shown under the title in the email + web view.">
             <input value={form.subtitle} onChange={(e) => update({ subtitle: e.target.value })}
               placeholder="AI-native consulting briefings, delivered fortnightly"
-              className="w-full px-3 py-2 text-base border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none" />
+              className="w-full px-3 py-2 text-base border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none" />
           </Field>
           <Field label="Slug" hint={form.slug ? `Public URL: /newsletter/${form.slug}` : 'Auto-generated from title'}>
             <input value={form.slug} onChange={(e) => { setSlugTouched(true); update({ slug: e.target.value.toLowerCase() }); }}
-              className="w-full px-3 py-2 text-sm font-mono border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none" />
+              className="w-full px-3 py-2 text-sm font-mono border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none" />
           </Field>
           <Field label="Preview text" hint="Inbox preview / pre-header text. Up to ~150 chars.">
             <input value={form.preview_text} maxLength={200} onChange={(e) => update({ preview_text: e.target.value })}
               placeholder="A line that previews this issue in subscribers' inboxes…"
-              className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none" />
+              className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none" />
           </Field>
           <Field label="Body">
             <TipTapEditor value={form.content_html} onChange={(html) => update({ content_html: html })}
@@ -271,25 +271,25 @@ const IssueEditor = ({ issueId, onBack, onSaved, onDeleted }) => {
             <div className="grid grid-cols-2 gap-3">
               <Field label="Issue #">
                 <input type="number" value={form.issue_number} onChange={(e) => update({ issue_number: e.target.value })}
-                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none" />
+                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none" />
               </Field>
               <Field label="Edition date">
                 <input type="date" value={form.edition_date} onChange={(e) => update({ edition_date: e.target.value })}
-                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none" />
+                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none" />
               </Field>
             </div>
             <Field label="Status">
               <select value={form.status} onChange={(e) => update({ status: e.target.value })} data-testid="issue-editor-status"
-                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:border-orange-400 focus:outline-none">
+                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:border-blue-400 focus:outline-none">
                 <option value="draft">Draft</option>
                 <option value="published">Published (web only)</option>
                 <option value="sent">Sent</option>
               </select>
             </Field>
             <Field label="Category"><input value={form.category} onChange={(e) => update({ category: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none" /></Field>
+              className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none" /></Field>
             <Field label="Tags" hint="Comma-separated"><input value={form.tags} onChange={(e) => update({ tags: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none" /></Field>
+              className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none" /></Field>
           </div>
 
           <div className="border border-slate-200 rounded-lg p-4 bg-slate-50/50">
@@ -300,14 +300,14 @@ const IssueEditor = ({ issueId, onBack, onSaved, onDeleted }) => {
           <div className="border border-slate-200 rounded-lg p-4 bg-slate-50/50 space-y-4">
             <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wide">SEO</h3>
             <Field label="SEO title"><input value={form.seo_title} onChange={(e) => update({ seo_title: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none" /></Field>
+              className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none" /></Field>
             <Field label="Meta description"><textarea rows={3} value={form.seo_description} onChange={(e) => update({ seo_description: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none" /></Field>
+              className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none" /></Field>
             <ImageUpload label="OG / social image" value={form.og_image_url} onChange={(v) => update({ og_image_url: v })} testId="issue-og" />
           </div>
 
           {form.id && (
-            <div className="border border-slate-200 rounded-lg p-4 bg-emerald-50/40">
+            <div className="border border-slate-200 rounded-lg p-4 bg-blue-50/40">
               <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wide mb-2">Send history</h3>
               <p className="text-xs text-slate-600">Use <strong>Send email</strong> above to test or broadcast this issue via Resend.</p>
             </div>
@@ -320,7 +320,7 @@ const IssueEditor = ({ issueId, onBack, onSaved, onDeleted }) => {
         <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4" onClick={() => setSendOpen(false)}>
           <div className="bg-white rounded-xl max-w-lg w-full p-6" onClick={(e) => e.stopPropagation()} data-testid="issue-editor-send-modal">
             <div className="flex items-center gap-2 mb-4">
-              <Mail className="h-5 w-5 text-orange-500" />
+              <Mail className="h-5 w-5 text-blue-500" />
               <h3 className="text-lg font-bold text-slate-900">Send issue</h3>
             </div>
             <div className="space-y-4">
@@ -339,19 +339,19 @@ const IssueEditor = ({ issueId, onBack, onSaved, onDeleted }) => {
                   <input type="email" value={sendForm.test_email} onChange={(e) => setSendForm((s) => ({ ...s, test_email: e.target.value }))}
                     data-testid="issue-send-test-email"
                     placeholder="you@example.com"
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none" />
+                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none" />
                 </Field>
               ) : (
                 <>
                   <Field label="Segment (optional)" hint="Leave blank to send to ALL active subscribers.">
                     <select value={sendForm.segment_slug} onChange={(e) => setSendForm((s) => ({ ...s, segment_slug: e.target.value }))}
                       data-testid="issue-send-segment"
-                      className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:border-orange-400 focus:outline-none">
+                      className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:border-blue-400 focus:outline-none">
                       <option value="">All active subscribers</option>
                       {segments.map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
                     </select>
                   </Field>
-                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-amber-800">
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-800">
                     ⚠️ This will send the email to <strong>every active matching subscriber</strong> immediately. Test first.
                   </div>
                 </>
@@ -361,7 +361,7 @@ const IssueEditor = ({ issueId, onBack, onSaved, onDeleted }) => {
               <button type="button" onClick={() => setSendOpen(false)}
                 className="px-4 py-2 text-sm font-medium border border-slate-300 rounded-lg hover:bg-slate-50">Cancel</button>
               <button type="button" onClick={doSend} disabled={sending} data-testid="issue-send-confirm"
-                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-orange-500 text-white rounded-lg hover:bg-orange-600 disabled:opacity-50">
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50">
                 <Send className="h-4 w-4" />{sending ? 'Sending…' : (sendForm.mode === 'test' ? 'Send test' : 'Send now')}
               </button>
             </div>

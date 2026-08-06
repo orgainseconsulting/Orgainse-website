@@ -7,6 +7,11 @@ module.exports = {
   ],
   theme: {
   	extend: {
+  		fontFamily: {
+  			outfit: ['Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+  			manrope: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+  			sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif']
+  		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',

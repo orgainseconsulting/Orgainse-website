@@ -46,7 +46,7 @@ const SocialShare = ({
       {/* Share Button */}
       <button
         onClick={() => setShowDropdown(!showDropdown)}
-        className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-orange-500 to-green-500 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+        className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
         aria-label="Share this page"
       >
         <Share2 className="h-4 w-4 mr-2" />
@@ -55,11 +55,11 @@ const SocialShare = ({
 
       {/* Dropdown Menu */}
       {showDropdown && (
-        <div className="absolute top-full mt-2 right-0 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50 min-w-[200px]">
+        <div className="absolute top-full mt-2 right-0 bg-white rounded-lg shadow-xl border border-slate-200 py-2 z-50 min-w-[200px]">
           {/* Twitter */}
           <button
             onClick={() => handleShare('twitter')}
-            className="w-full flex items-center px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+            className="w-full flex items-center px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
           >
             <Twitter className="h-4 w-4 mr-3 text-blue-500" />
             Share on Twitter
@@ -68,7 +68,7 @@ const SocialShare = ({
           {/* LinkedIn */}
           <button
             onClick={() => handleShare('linkedin')}
-            className="w-full flex items-center px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+            className="w-full flex items-center px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
           >
             <Linkedin className="h-4 w-4 mr-3 text-blue-700" />
             Share on LinkedIn
@@ -77,7 +77,7 @@ const SocialShare = ({
           {/* Facebook */}
           <button
             onClick={() => handleShare('facebook')}
-            className="w-full flex items-center px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 transition-colors"
+            className="w-full flex items-center px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-800 transition-colors"
           >
             <Facebook className="h-4 w-4 mr-3 text-blue-800" />
             Share on Facebook
@@ -86,18 +86,18 @@ const SocialShare = ({
           {/* Email */}
           <button
             onClick={() => handleShare('email')}
-            className="w-full flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+            className="w-full flex items-center px-4 py-2 text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors"
           >
-            <Mail className="h-4 w-4 mr-3 text-gray-600" />
+            <Mail className="h-4 w-4 mr-3 text-slate-600" />
             Share via Email
           </button>
 
           {/* Copy Link */}
           <button
             onClick={handleCopyLink}
-            className="w-full flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+            className="w-full flex items-center px-4 py-2 text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors"
           >
-            <Link className="h-4 w-4 mr-3 text-gray-600" />
+            <Link className="h-4 w-4 mr-3 text-slate-600" />
             {copySuccess ? 'Link Copied!' : 'Copy Link'}
           </button>
         </div>

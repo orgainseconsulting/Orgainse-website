@@ -120,7 +120,7 @@ img {
 
 /* Revolutionary Gradient Text Animation */
 .animate-gradient-text {
-  background: linear-gradient(-45deg, #f97316, #10b981, #f59e0b, #8b5cf6, #ef4444, #06b6d4);
+  background: linear-gradient(-45deg, #2563eb, #7c3aed, #2563eb, #7c3aed, #ef4444, #2563eb);
   background-size: 400% 400%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -179,7 +179,7 @@ img {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(249, 115, 22, 0.3) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, transparent 70%);
   border-radius: 50%;
   animation: orbPulse 3s ease-in-out infinite;
 }
@@ -199,7 +199,7 @@ img {
 .btn-advanced-hover {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #f97316, #10b981);
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
   background-size: 200% 200%;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -222,7 +222,7 @@ img {
 .btn-advanced-hover:hover {
   background-position: 100% 0%;
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 15px 35px rgba(249, 115, 22, 0.4);
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.4);
 }
 
 /* Morphing Shapes Animation */
@@ -247,7 +247,7 @@ img {
 
 /* Text Shimmer Effect */
 .text-shimmer {
-  background: linear-gradient(90deg, #f97316, #fbbf24, #10b981, #3b82f6, #8b5cf6);
+  background: linear-gradient(90deg, #2563eb, #3b82f6, #7c3aed, #3b82f6, #7c3aed);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -274,10 +274,10 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(2px 2px at 20% 30%, #f97316, transparent),
-                    radial-gradient(2px 2px at 40% 70%, #10b981, transparent),
-                    radial-gradient(1px 1px at 90% 40%, #fbbf24, transparent),
-                    radial-gradient(1px 1px at 50% 50%, #8b5cf6, transparent),
+  background-image: radial-gradient(2px 2px at 20% 30%, #2563eb, transparent),
+                    radial-gradient(2px 2px at 40% 70%, #7c3aed, transparent),
+                    radial-gradient(1px 1px at 90% 40%, #3b82f6, transparent),
+                    radial-gradient(1px 1px at 50% 50%, #7c3aed, transparent),
                     radial-gradient(2px 2px at 80% 10%, #ef4444, transparent);
   background-size: 100% 100%;
   animation: particleMove 20s linear infinite;
@@ -302,7 +302,7 @@ img {
   position: absolute;
   inset: -2px;
   padding: 2px;
-  background: linear-gradient(45deg, #f97316, #10b981, #8b5cf6, #ef4444);
+  background: linear-gradient(45deg, #2563eb, #7c3aed, #7c3aed, #ef4444);
   border-radius: inherit;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
@@ -316,7 +316,7 @@ img {
 
 .hover-card-extreme:hover {
   transform: translateY(-15px) rotateX(15deg) scale(1.05);
-  filter: drop-shadow(0 25px 50px rgba(249, 115, 22, 0.3));
+  filter: drop-shadow(0 25px 50px rgba(37, 99, 235, 0.3));
 }
 
 /* Liquid Button Effect */
@@ -324,7 +324,7 @@ img {
   position: relative;
   overflow: hidden;
   border-radius: 2rem;
-  background: linear-gradient(45deg, #f97316, #10b981);
+  background: linear-gradient(45deg, #2563eb, #7c3aed);
   transition: all 0.3s ease;
 }
 
@@ -345,15 +345,15 @@ img {
 
 .liquid-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(249, 115, 22, 0.4);
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
 }
 
 /* Advanced Section Dividers */
 .section-divider {
   position: relative;
   height: 100px;
-  background: linear-gradient(45deg, transparent 49%, #f97316 49%, #f97316 51%, transparent 51%),
-              linear-gradient(-45deg, transparent 49%, #10b981 49%, #10b981 51%, transparent 51%);
+  background: linear-gradient(45deg, transparent 49%, #2563eb 49%, #2563eb 51%, transparent 51%),
+              linear-gradient(-45deg, transparent 49%, #7c3aed 49%, #7c3aed 51%, transparent 51%);
   background-size: 20px 20px;
   animation: dividerMove 10s linear infinite;
 }
@@ -365,7 +365,7 @@ img {
 
 /* Typing Animation */
 .typing-animation {
-  border-right: 2px solid #f97316;
+  border-right: 2px solid #2563eb;
   animation: typing 3s steps(20, end), blink 0.75s step-end infinite;
 }
 
@@ -376,7 +376,7 @@ img {
 
 @keyframes blink {
   from, to { border-color: transparent; }
-  50% { border-color: #f97316; }
+  50% { border-color: #2563eb; }
 }
 
 /* Parallax Scroll Effect */
@@ -413,10 +413,10 @@ img {
 
 @keyframes ai-robot-scan {
   0%, 100% { 
-    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4);
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
   }
   50% { 
-    box-shadow: 0 0 0 8px rgba(249, 115, 22, 0.1);
+    box-shadow: 0 0 0 8px rgba(37, 99, 235, 0.1);
   }
 }
 
@@ -477,7 +477,7 @@ img {
 
 /* Gradient Text Animation */
 .animate-gradient-text {
-  background: linear-gradient(-45deg, var(--coral), var(--sage), #ff6b4a, #4ade80);
+  background: linear-gradient(-45deg, var(--coral), var(--sage), #2563eb, #a78bfa);
   background-size: 400% 400%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -654,7 +654,7 @@ html {
 
 /* Enhanced button styles */
 .btn-gradient-advanced {
-  background: linear-gradient(135deg, var(--coral) 0%, #ff6b4a 50%, var(--sage) 100%);
+  background: linear-gradient(135deg, var(--coral) 0%, #2563eb 50%, var(--sage) 100%);
   background-size: 200% 200%;
   transition: all 0.4s ease;
   position: relative;

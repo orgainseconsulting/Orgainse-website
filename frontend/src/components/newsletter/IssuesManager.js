@@ -6,9 +6,9 @@ import IssueEditor from './IssueEditor';
 
 const StatusBadge = ({ status }) => {
   const map = {
-    published: 'bg-sky-100 text-sky-700 border-sky-200',
-    sent: 'bg-emerald-100 text-emerald-700 border-emerald-200',
-    draft: 'bg-amber-100 text-amber-700 border-amber-200',
+    published: 'bg-blue-100 text-blue-700 border-blue-200',
+    sent: 'bg-blue-100 text-blue-700 border-blue-200',
+    draft: 'bg-blue-100 text-blue-700 border-blue-200',
   };
   return (
     <span className={`inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded border ${map[status] || map.draft}`}>
@@ -62,20 +62,20 @@ const IssuesManager = () => {
           </p>
         </div>
         <button type="button" onClick={() => setEditing(null)} data-testid="issues-manager-new"
-          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-orange-500 text-white rounded-lg hover:bg-orange-600">
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-blue-500 text-white rounded-lg hover:bg-blue-600">
           <Plus className="h-4 w-4" />New issue
         </button>
       </div>
 
       {loading ? (
         <div className="py-12 text-center text-slate-500">
-          <div className="animate-spin h-10 w-10 border-b-2 border-orange-500 rounded-full mx-auto mb-3" />Loading…
+          <div className="animate-spin h-10 w-10 border-b-2 border-blue-500 rounded-full mx-auto mb-3" />Loading…
         </div>
       ) : issues.length === 0 ? (
         <div className="py-16 text-center border-2 border-dashed border-slate-200 rounded-lg">
           <p className="text-slate-500 mb-4">No newsletter issues yet.</p>
           <button onClick={() => setEditing(null)} data-testid="issues-manager-empty-new"
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-orange-500 text-white rounded-lg hover:bg-orange-600">
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-blue-500 text-white rounded-lg hover:bg-blue-600">
             <Plus className="h-4 w-4" />Compose your first issue
           </button>
         </div>
@@ -98,7 +98,7 @@ const IssuesManager = () => {
                 <tr key={i.id} className="hover:bg-slate-50" data-testid={`issue-row-${i.slug || i.id}`}>
                   <td className="px-4 py-3">
                     <div className="font-semibold text-slate-900">
-                      {i.issue_number ? <span className="text-orange-600 font-bold mr-2">#{i.issue_number}</span> : null}
+                      {i.issue_number ? <span className="text-blue-600 font-bold mr-2">#{i.issue_number}</span> : null}
                       {i.title || '(untitled)'}
                     </div>
                     <div className="text-xs text-slate-400 font-mono">/newsletter/{i.slug}</div>
@@ -132,7 +132,7 @@ const IssuesManager = () => {
                         </a>
                       )}
                       <button onClick={() => setEditing(i.id)} data-testid={`issue-row-${i.slug}-edit`}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-orange-700 bg-orange-50 hover:bg-orange-100 rounded-md">
+                        className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-md">
                         <Edit3 className="h-3.5 w-3.5" />Edit
                       </button>
                     </div>

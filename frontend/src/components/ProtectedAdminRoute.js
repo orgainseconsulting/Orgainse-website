@@ -12,10 +12,10 @@ const ProtectedAdminRoute = () => {
   // Show loading spinner while checking authentication
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-100 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-orange-500 mx-auto mb-4"></div>
-          <p className="text-gray-600">Checking authentication...</p>
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-slate-600">Checking authentication...</p>
         </div>
       </div>
     );
@@ -33,23 +33,23 @@ const ProtectedAdminRoute = () => {
 
   // Show admin dashboard with logout option if authenticated
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-slate-100">
       {/* Admin Header with Logout */}
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <Shield className="w-6 h-6 text-orange-500 mr-2" />
-              <h1 className="text-lg font-semibold text-gray-900">Admin Portal</h1>
+              <Shield className="w-6 h-6 text-blue-500 mr-2" />
+              <h1 className="text-lg font-semibold text-slate-900">Admin Portal</h1>
             </div>
             
             <div className="flex items-center space-x-4">
-              <div className="flex items-center text-sm text-gray-600" data-testid="admin-current-user">
+              <div className="flex items-center text-sm text-slate-600" data-testid="admin-current-user">
                 <User className="w-4 h-4 mr-1" />
                 <span>
                   Welcome, {user?.name || user?.email}
                   {user?.is_super_admin && (
-                    <span className="ml-2 inline-block bg-amber-100 text-amber-800 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">
+                    <span className="ml-2 inline-block bg-blue-100 text-blue-800 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">
                       Super Admin
                     </span>
                   )}
@@ -59,7 +59,7 @@ const ProtectedAdminRoute = () => {
               <button
                 onClick={() => setShowLogoutConfirm(true)}
                 data-testid="admin-logout-btn"
-                className="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                className="flex items-center px-3 py-2 text-sm text-slate-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
               >
                 <LogOut className="w-4 h-4 mr-1" />
                 Logout
@@ -73,8 +73,8 @@ const ProtectedAdminRoute = () => {
       {showLogoutConfirm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 max-w-sm mx-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Confirm Logout</h3>
-            <p className="text-gray-600 mb-4">Are you sure you want to logout from the admin dashboard?</p>
+            <h3 className="text-lg font-semibold text-slate-900 mb-2">Confirm Logout</h3>
+            <p className="text-slate-600 mb-4">Are you sure you want to logout from the admin dashboard?</p>
             <div className="flex space-x-3">
               <button
                 onClick={logout}
@@ -84,7 +84,7 @@ const ProtectedAdminRoute = () => {
               </button>
               <button
                 onClick={() => setShowLogoutConfirm(false)}
-                className="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors"
+                className="flex-1 bg-slate-200 text-slate-800 px-4 py-2 rounded-lg hover:bg-slate-300 transition-colors"
               >
                 Cancel
               </button>

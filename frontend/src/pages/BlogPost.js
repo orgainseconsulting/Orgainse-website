@@ -90,7 +90,7 @@ const BlogPostPage = () => {
           <p className="text-xs uppercase tracking-widest text-slate-400 mb-4">404 · Blog</p>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Post not found</h1>
           <p className="text-slate-600 mb-8">The post you’re looking for doesn’t exist or hasn’t been published yet.</p>
-          <Link to="/blog" className="inline-flex items-center gap-2 px-5 py-2.5 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600">
+          <Link to="/blog" className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600">
             <ArrowLeft className="h-4 w-4" />
             Back to blog
           </Link>
@@ -117,7 +117,7 @@ const BlogPostPage = () => {
       <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16" data-testid="blog-post-article">
         <Link
           to="/blog"
-          className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-orange-600 mb-8"
+          className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-blue-600 mb-8"
           data-testid="blog-post-back"
         >
           <ArrowLeft className="h-4 w-4" />
@@ -126,7 +126,7 @@ const BlogPostPage = () => {
 
         <header className="mb-8">
           {post.category && (
-            <span className="inline-block text-[10px] font-bold uppercase tracking-[0.18em] text-orange-600 mb-4">
+            <span className="inline-block text-[10px] font-bold uppercase tracking-[0.18em] text-blue-600 mb-4">
               {post.category}
             </span>
           )}
@@ -164,7 +164,7 @@ const BlogPostPage = () => {
         )}
 
         <div
-          className="prose prose-slate prose-lg max-w-none prose-headings:font-extrabold prose-headings:text-slate-900 prose-a:text-orange-600 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-blockquote:border-l-4 prose-blockquote:border-orange-400 prose-blockquote:bg-orange-50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-code:bg-slate-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:hidden prose-code:after:hidden"
+          className="prose prose-slate prose-lg max-w-none prose-headings:font-extrabold prose-headings:text-slate-900 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-blockquote:border-l-4 prose-blockquote:border-blue-400 prose-blockquote:bg-blue-50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-code:bg-slate-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:hidden prose-code:after:hidden"
           dangerouslySetInnerHTML={{ __html: post.content_html || '' }}
           data-testid="blog-post-body"
         />
@@ -179,12 +179,12 @@ const BlogPostPage = () => {
                 </span>
               ))}
             </div>
-            <div className="bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-6 sm:p-8 text-center">
+            <div className="bg-gradient-to-br from-blue-50 to-blue-50 border border-blue-200 rounded-xl p-6 sm:p-8 text-center">
               <h3 className="text-xl font-bold text-slate-900 mb-2">Found this useful?</h3>
               <p className="text-sm text-slate-600 mb-4">Talk to our team about how this applies to your business.</p>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600"
               >
                 Book a free consultation
               </Link>

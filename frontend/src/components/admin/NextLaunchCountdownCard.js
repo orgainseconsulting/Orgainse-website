@@ -130,7 +130,7 @@ const NextLaunchCountdownCard = ({ kind }) => {
     <div className="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-5 sm:p-6" data-testid={`next-launch-card-${kind}`}>
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <div className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.24em] text-amber-300 mb-1">
+          <div className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.24em] text-blue-300 mb-1">
             <Clock className="h-3.5 w-3.5" /> Stay-tuned countdown
           </div>
           <h3 className="text-lg sm:text-xl font-bold leading-tight">{LABELS[kind]}</h3>
@@ -142,7 +142,7 @@ const NextLaunchCountdownCard = ({ kind }) => {
 
         <div className="text-right shrink-0">
           <p className="text-[10px] uppercase tracking-wider text-slate-400 mb-0.5">Current target</p>
-          <p className="text-sm font-mono font-bold text-amber-200" data-testid={`next-launch-current-${kind}`}>
+          <p className="text-sm font-mono font-bold text-blue-200" data-testid={`next-launch-current-${kind}`}>
             {loading ? '…' : (currentIso ? fmtUTC(currentIso) : 'none')}
           </p>
         </div>
@@ -155,14 +155,14 @@ const NextLaunchCountdownCard = ({ kind }) => {
           onChange={(e) => setDraft(e.target.value)}
           disabled={loading || saving}
           data-testid={`next-launch-input-${kind}`}
-          className="flex-1 bg-slate-950/40 border border-white/10 text-white rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 disabled:opacity-50"
+          className="flex-1 bg-slate-950/40 border border-white/10 text-white rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50"
         />
         <button
           type="button"
           onClick={save}
           disabled={loading || saving}
           data-testid={`next-launch-save-${kind}`}
-          className="inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold text-sm px-4 py-2 rounded-lg disabled:opacity-50"
+          className="inline-flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-400 text-slate-900 font-bold text-sm px-4 py-2 rounded-lg disabled:opacity-50"
         >
           <Save className="h-4 w-4" /> {saving ? 'Saving…' : 'Save target'}
         </button>

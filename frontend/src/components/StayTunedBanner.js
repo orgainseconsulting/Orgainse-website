@@ -68,9 +68,9 @@ const Pip = ({ value, label, testid }) => (
 
 const AnimatedDots = () => (
   <span className="inline-flex items-center gap-1.5" aria-hidden>
-    <span className="h-2 w-2 rounded-full bg-orange-400 animate-bounce" style={{ animationDelay: '0ms' }} />
-    <span className="h-2 w-2 rounded-full bg-amber-400 animate-bounce" style={{ animationDelay: '120ms' }} />
-    <span className="h-2 w-2 rounded-full bg-rose-400 animate-bounce" style={{ animationDelay: '240ms' }} />
+    <span className="h-2 w-2 rounded-full bg-blue-400 animate-bounce" style={{ animationDelay: '0ms' }} />
+    <span className="h-2 w-2 rounded-full bg-blue-400 animate-bounce" style={{ animationDelay: '120ms' }} />
+    <span className="h-2 w-2 rounded-full bg-violet-400 animate-bounce" style={{ animationDelay: '240ms' }} />
   </span>
 );
 
@@ -112,9 +112,9 @@ const StayTunedBanner = ({
     >
       {/* Animated background blobs */}
       <div className="pointer-events-none absolute inset-0 opacity-60">
-        <div className="absolute -top-24 -left-16 h-72 w-72 rounded-full bg-orange-500/30 blur-3xl animate-pulse" />
-        <div className="absolute top-1/3 -right-20 h-80 w-80 rounded-full bg-rose-500/20 blur-3xl animate-pulse" style={{ animationDelay: '1.2s' }} />
-        <div className="absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-amber-400/20 blur-3xl animate-pulse" style={{ animationDelay: '2.4s' }} />
+        <div className="absolute -top-24 -left-16 h-72 w-72 rounded-full bg-blue-500/30 blur-3xl animate-pulse" />
+        <div className="absolute top-1/3 -right-20 h-80 w-80 rounded-full bg-violet-500/20 blur-3xl animate-pulse" style={{ animationDelay: '1.2s' }} />
+        <div className="absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-blue-400/20 blur-3xl animate-pulse" style={{ animationDelay: '2.4s' }} />
       </div>
 
       {/* Grid texture */}
@@ -129,8 +129,8 @@ const StayTunedBanner = ({
 
       <div className="relative max-w-3xl mx-auto text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 backdrop-blur-sm mb-6">
-          <Sparkles className="h-3.5 w-3.5 text-amber-300" />
-          <span className="text-[11px] font-black uppercase tracking-[0.24em] text-amber-200">
+          <Sparkles className="h-3.5 w-3.5 text-blue-300" />
+          <span className="text-[11px] font-black uppercase tracking-[0.24em] text-blue-200">
             {copy.kicker}
           </span>
           <AnimatedDots />
@@ -139,7 +139,7 @@ const StayTunedBanner = ({
         <h2 className="text-3xl sm:text-5xl font-black leading-tight mb-5">
           {title || copy.title.split('—')[0].trim()}{' '}
           {(title || copy.title).includes('—') && (
-            <span className="text-orange-400">— {(title || copy.title).split('—').slice(1).join('—').trim()}</span>
+            <span className="text-blue-400">— {(title || copy.title).split('—').slice(1).join('—').trim()}</span>
           )}
         </h2>
 
@@ -168,7 +168,7 @@ const StayTunedBanner = ({
             <Link
               to="/newsletter"
               data-testid={`stay-tuned-${kind}-newsletter-link`}
-              className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
             >
               <Mail className="h-4 w-4" /> Subscribe to The Pulse instead
             </Link>
@@ -181,7 +181,7 @@ const StayTunedBanner = ({
                 const el = document.querySelector('[data-testid="newsletter-hero-email"]');
                 if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.focus(); }
               }}
-              className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
             >
               <Mail className="h-4 w-4" /> Reserve your seat — subscribe
             </a>

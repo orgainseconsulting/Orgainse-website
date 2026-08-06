@@ -45,7 +45,7 @@ const BlogPost = ({ post }) => {
               {post.tags.map((tag, index) => (
                 <span 
                   key={index}
-                  className="px-2 py-1 bg-orange-100 text-orange-800 text-xs font-medium rounded-full"
+                  className="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full"
                 >
                   {tag}
                 </span>
@@ -57,12 +57,12 @@ const BlogPost = ({ post }) => {
       
       {/* Blog Content */}
       <div 
-        className="prose prose-lg max-w-none prose-headings:text-slate-900 prose-a:text-orange-600 prose-a:no-underline hover:prose-a:underline"
+        className="prose prose-lg max-w-none prose-headings:text-slate-900 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline"
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
       
       {/* Call to Action */}
-      <div className="mt-12 p-8 bg-gradient-to-r from-orange-50 to-green-50 rounded-2xl border border-orange-100">
+      <div className="mt-12 p-8 bg-gradient-to-r from-blue-50 to-blue-50 rounded-2xl border border-blue-100">
         <h3 className="text-2xl font-bold text-slate-900 mb-4">
           Ready to Transform Your Business with AI?
         </h3>
@@ -72,14 +72,14 @@ const BlogPost = ({ post }) => {
         <div className="flex flex-col sm:flex-row gap-4">
           <Link 
             to="/contact"
-            className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-orange-500 to-green-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+            className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
           >
             Get Free Consultation
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
           <Link 
             to="/ai-assessment"
-            className="inline-flex items-center px-6 py-3 bg-white border-2 border-orange-500 text-orange-600 font-semibold rounded-lg hover:bg-orange-50 transition-all"
+            className="inline-flex items-center px-6 py-3 bg-white border-2 border-blue-500 text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all"
           >
             Take AI Assessment
           </Link>

@@ -4,10 +4,14 @@ Allow: /
 # Important pages for indexing
 Allow: /about
 Allow: /services
+Allow: /products
+Allow: /blog
+Allow: /newsletter
 Allow: /ai-assessment
 Allow: /roi-calculator
 Allow: /smart-calendar
 Allow: /contact
+Allow: /llms.txt
 
 # Static assets
 Allow: /static/

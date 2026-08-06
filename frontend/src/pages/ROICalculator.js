@@ -79,10 +79,10 @@ export default function ROICalculator() {
   if (result) {
     const sym = result.currency_symbol || '$';
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-12">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 py-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-blue-500 bg-clip-text text-transparent">
               Your ROI Analysis Report
             </h1>
             <p className="text-lg text-slate-600">
@@ -91,10 +91,10 @@ export default function ROICalculator() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-            <MetricCard icon={TrendingUp} title="ROI Percentage" value={`${result.roi_percentage}%`} color="from-green-500 to-emerald-600" testId="roi-pct" />
-            <MetricCard icon={Award} title="Annual Savings" value={fmtCurrency(result.potential_savings, sym)} color="from-blue-500 to-green-500" testId="roi-savings" />
-            <MetricCard icon={Calendar} title="Payback Period" value={`${result.payback_period_months} mo`} color="from-purple-500 to-blue-500" testId="roi-payback" />
-            <MetricCard icon={Target} title="Investment" value={fmtCurrency(result.estimated_project_cost, sym)} color="from-orange-500 to-red-500" testId="roi-investment" />
+            <MetricCard icon={TrendingUp} title="ROI Percentage" value={`${result.roi_percentage}%`} color="from-blue-500 to-blue-600" testId="roi-pct" />
+            <MetricCard icon={Award} title="Annual Savings" value={fmtCurrency(result.potential_savings, sym)} color="from-blue-500 to-blue-500" testId="roi-savings" />
+            <MetricCard icon={Calendar} title="Payback Period" value={`${result.payback_period_months} mo`} color="from-violet-500 to-blue-500" testId="roi-payback" />
+            <MetricCard icon={Target} title="Investment" value={fmtCurrency(result.estimated_project_cost, sym)} color="from-blue-500 to-blue-500" testId="roi-investment" />
           </div>
 
           <div className="bg-white/90 backdrop-blur-lg rounded-2xl p-6 shadow-xl mb-10">
@@ -115,13 +115,13 @@ export default function ROICalculator() {
                     <CardHeader className="p-6">
                       <div className="flex items-start justify-between mb-3">
                         <CardTitle className="text-lg text-slate-800">{svc.name}</CardTitle>
-                        <Badge className="bg-green-100 text-green-700">{svc.duration}</Badge>
+                        <Badge className="bg-blue-100 text-blue-700">{svc.duration}</Badge>
                       </div>
                       <CardDescription className="text-slate-700 mb-4">{svc.description}</CardDescription>
                       <div className="flex items-center justify-between">
-                        <span className="text-2xl font-bold text-orange-600">{fmtCurrency(Math.round(svc.price), sym)}</span>
+                        <span className="text-2xl font-bold text-blue-600">{fmtCurrency(Math.round(svc.price), sym)}</span>
                         <div className="flex items-center text-sm text-slate-600">
-                          <CheckCircle className="h-4 w-4 mr-1 text-green-500" /> ROI focused
+                          <CheckCircle className="h-4 w-4 mr-1 text-blue-500" /> ROI focused
                         </div>
                       </div>
                     </CardHeader>
@@ -137,7 +137,7 @@ export default function ROICalculator() {
             <button
               data-testid="roi-book-btn"
               onClick={openCalendly}
-              className="px-8 py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 inline-flex items-center"
+              className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 inline-flex items-center"
             >
               Schedule Strategy Session <ArrowRight className="ml-2 h-5 w-5" />
             </button>
@@ -148,10 +148,10 @@ export default function ROICalculator() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-blue-500 bg-clip-text text-transparent">
             ROI Calculator
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
@@ -177,7 +177,7 @@ export default function ROICalculator() {
                   <Input data-testid="roi-phone-input" value={form.phone} onChange={(e) => setField('phone', e.target.value)} />
                 </Field>
                 <Field label="Industry *">
-                  <select data-testid="roi-industry-select" value={form.industry} onChange={(e) => setField('industry', e.target.value)} required className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none">
+                  <select data-testid="roi-industry-select" value={form.industry} onChange={(e) => setField('industry', e.target.value)} required className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none">
                     <option value="">Select your industry</option>
                     {INDUSTRIES.map((i) => <option key={i} value={i}>{i}</option>)}
                   </select>
@@ -186,13 +186,13 @@ export default function ROICalculator() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Field label="Company Size *">
-                  <select data-testid="roi-size-select" value={form.company_size} onChange={(e) => setField('company_size', e.target.value)} required className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none">
+                  <select data-testid="roi-size-select" value={form.company_size} onChange={(e) => setField('company_size', e.target.value)} required className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none">
                     <option value="">Select company size</option>
                     {SIZES.map((s) => <option key={s} value={s}>{s} employees</option>)}
                   </select>
                 </Field>
                 <Field label="Region (for currency) *">
-                  <select data-testid="roi-region-select" value={form.user_region} onChange={(e) => setField('user_region', e.target.value)} required className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:border-orange-400 focus:outline-none">
+                  <select data-testid="roi-region-select" value={form.user_region} onChange={(e) => setField('user_region', e.target.value)} required className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:border-blue-400 focus:outline-none">
                     {REGIONS.map((r) => <option key={r.code} value={r.code}>{r.name}</option>)}
                   </select>
                 </Field>
@@ -212,7 +212,7 @@ export default function ROICalculator() {
                   <span className="text-sm text-slate-600">1</span>
                   <input data-testid="roi-efficiency-slider" type="range" min="1" max="10" value={form.current_efficiency_rating} onChange={(e) => setField('current_efficiency_rating', e.target.value)} className="flex-1 h-2 bg-slate-200 rounded-lg cursor-pointer" />
                   <span className="text-sm text-slate-600">10</span>
-                  <Badge className="bg-orange-100 text-orange-700 ml-2">{form.current_efficiency_rating}</Badge>
+                  <Badge className="bg-blue-100 text-blue-700 ml-2">{form.current_efficiency_rating}</Badge>
                 </div>
               </Field>
 
@@ -227,10 +227,10 @@ export default function ROICalculator() {
                         type="button"
                         data-testid={`roi-service-${s.replace(/\W+/g, '-').toLowerCase()}`}
                         onClick={() => toggleService(s)}
-                        className={`p-3 rounded-lg border-2 text-left transition ${checked ? 'border-orange-500 bg-orange-50 text-orange-700' : 'border-slate-200 hover:border-orange-300'}`}
+                        className={`p-3 rounded-lg border-2 text-left transition ${checked ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-slate-200 hover:border-blue-300'}`}
                       >
                         <div className="flex items-center space-x-3">
-                          <div className={`w-4 h-4 rounded border-2 ${checked ? 'border-orange-500 bg-orange-500' : 'border-slate-300'}`}>
+                          <div className={`w-4 h-4 rounded border-2 ${checked ? 'border-blue-500 bg-blue-500' : 'border-slate-300'}`}>
                             {checked && <CheckCircle className="h-3 w-3 text-white" />}
                           </div>
                           <span className="text-sm font-medium">{s}</span>
@@ -246,7 +246,7 @@ export default function ROICalculator() {
                   data-testid="roi-submit-btn"
                   type="submit"
                   disabled={loading || !form.company_name || !form.email || !form.industry || !form.company_size || !form.current_project_cost || !form.project_duration_months}
-                  className="px-8 py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
+                  className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
                 >
                   {loading ? 'Calculating...' : 'Calculate My ROI'}
                   {!loading && <TrendingUp className="ml-2 h-5 w-5" />}
@@ -289,7 +289,7 @@ function ImpactRow({ label, value }) {
   return (
     <div className="bg-slate-50 rounded-xl p-4 text-center">
       <div className="text-sm text-slate-600 mb-1">{label}</div>
-      <div className="text-2xl font-bold text-orange-600">{value}</div>
+      <div className="text-2xl font-bold text-blue-600">{value}</div>
     </div>
   );
 }

@@ -77,9 +77,9 @@ const ServicePopup = ({
                       </div>
 
                       {/* Why Choose This Service */}
-                      <div className="bg-green-50 rounded-xl p-4 border border-green-100">
+                      <div className="bg-blue-50 rounded-xl p-4 border border-blue-100">
                         <div className="flex items-center mb-3">
-                          <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                          <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
                           <h3 className="font-bold text-slate-800">Why Choose Us</h3>
                         </div>
                         <p className="text-slate-700 text-sm leading-relaxed">
@@ -88,9 +88,9 @@ const ServicePopup = ({
                       </div>
 
                       {/* What You'll Get */}
-                      <div className="bg-orange-50 rounded-xl p-4 border border-green-100">
+                      <div className="bg-blue-50 rounded-xl p-4 border border-blue-100">
                         <div className="flex items-center mb-3">
-                          <Award className="h-5 w-5 text-orange-600 mr-2" />
+                          <Award className="h-5 w-5 text-blue-600 mr-2" />
                           <h3 className="font-bold text-slate-800">What You Get</h3>
                         </div>
                         <p className="text-slate-700 text-sm leading-relaxed mb-3">
@@ -103,11 +103,11 @@ const ServicePopup = ({
                     {(service.detailedInfo.rightFit || service.detailedInfo.notRightFit) && (
                       <div
                         data-testid={`service-fit-block-${service.id}`}
-                        className="rounded-xl border-2 border-amber-200 bg-amber-50/70 p-5 grid md:grid-cols-2 gap-4"
+                        className="rounded-xl border-2 border-blue-200 bg-blue-50/70 p-5 grid md:grid-cols-2 gap-4"
                       >
                         {service.detailedInfo.rightFit && (
                           <div data-testid={`service-right-fit-${service.id}`}>
-                            <h4 className="text-sm font-extrabold uppercase tracking-wider text-emerald-700 mb-2 flex items-center gap-2">
+                            <h4 className="text-sm font-extrabold uppercase tracking-wider text-blue-700 mb-2 flex items-center gap-2">
                               <CheckCircle className="h-4 w-4" /> Right fit
                             </h4>
                             <p className="text-slate-800 text-sm leading-relaxed">
@@ -117,8 +117,8 @@ const ServicePopup = ({
                         )}
                         {service.detailedInfo.notRightFit && (
                           <div data-testid={`service-not-right-fit-${service.id}`}>
-                            <h4 className="text-sm font-extrabold uppercase tracking-wider text-rose-700 mb-2 flex items-center gap-2">
-                              <span className="inline-block h-4 w-4 rounded-full border-2 border-rose-600 flex items-center justify-center text-rose-600 text-[10px] font-bold leading-none">×</span>
+                            <h4 className="text-sm font-extrabold uppercase tracking-wider text-violet-700 mb-2 flex items-center gap-2">
+                              <span className="inline-block h-4 w-4 rounded-full border-2 border-violet-600 flex items-center justify-center text-violet-600 text-[10px] font-bold leading-none">×</span>
                               Not the right fit
                             </h4>
                             <p className="text-slate-800 text-sm leading-relaxed">
@@ -135,7 +135,7 @@ const ServicePopup = ({
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
                         {service.detailedInfo.benefits.map((benefit, index) => (
                           <div key={index} className="flex items-start space-x-2">
-                            <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
+                            <CheckCircle className="h-4 w-4 text-blue-500 flex-shrink-0 mt-0.5" />
                             <span className="text-slate-700 text-sm">{benefit}</span>
                           </div>
                         ))}
@@ -221,7 +221,7 @@ const ServicePopup = ({
                             value={formData.name}
                             onChange={(e) => setFormData({...formData, name: e.target.value})}
                             required
-                            className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                            className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                             placeholder="Your full name"
                           />
                         </div>
@@ -235,7 +235,7 @@ const ServicePopup = ({
                             value={formData.email}
                             onChange={(e) => setFormData({...formData, email: e.target.value})}
                             required
-                            className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                            className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                             placeholder="your.email@company.com"
                           />
                         </div>
@@ -250,7 +250,7 @@ const ServicePopup = ({
                             type="tel"
                             value={formData.phone}
                             onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                            className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                            className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                             placeholder="+1 (555) 123-4567"
                           />
                         </div>
@@ -263,7 +263,7 @@ const ServicePopup = ({
                             type="text"
                             value={formData.company}
                             onChange={(e) => setFormData({...formData, company: e.target.value})}
-                            className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                            className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                             placeholder="Your company name"
                           />
                         </div>
@@ -276,7 +276,7 @@ const ServicePopup = ({
                         <Textarea
                           value={formData.message}
                           onChange={(e) => setFormData({...formData, message: e.target.value})}
-                          className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                          className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                           rows={4}
                           placeholder="Tell us about your specific needs..."
                         />
@@ -305,8 +305,8 @@ const ServicePopup = ({
             ) : (
               // Compact Thank You Message
               <div className="text-center py-8">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <CheckCircle className="h-10 w-10 text-green-600" />
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle className="h-10 w-10 text-blue-600" />
                 </div>
                 
                 <h3 className="text-2xl font-bold text-slate-800 mb-4">
@@ -320,7 +320,7 @@ const ServicePopup = ({
                 
                 <Button 
                   onClick={onClose}
-                  className="bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                  className="bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
                 >
                   Continue Exploring
                 </Button>

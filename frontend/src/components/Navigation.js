@@ -54,7 +54,7 @@ const Navigation = () => {
   return (
     <nav
       data-testid="site-nav"
-      className={`bg-white/95 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50 transition-all duration-300 ${
+      className={`bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 transition-all duration-300 ${
         isScrolled ? "shadow-lg" : "shadow-sm"
       }`}
     >
@@ -69,7 +69,7 @@ const Navigation = () => {
             <img
               src="/orgainse-logo.png"
               alt="Orgainse Consulting — Let us plan your SUCCESS"
-              className={`w-auto object-contain bg-white rounded-2xl px-3.5 py-2 sm:px-5 sm:py-2.5 shadow-lg ring-1 ring-slate-200/70 hover:shadow-xl hover:ring-orange-300/60 transition-all duration-300 transform hover:scale-105 ${
+              className={`w-auto object-contain bg-white rounded-2xl px-3.5 py-2 sm:px-5 sm:py-2.5 shadow-lg ring-1 ring-slate-200/70 hover:shadow-xl hover:ring-blue-300/60 transition-all duration-300 transform hover:scale-105 ${
                 isScrolled ? "h-14 sm:h-16 lg:h-20" : "h-16 sm:h-20 lg:h-28"
               }`}
               width="1689"
@@ -88,22 +88,22 @@ const Navigation = () => {
                 key={link.href}
                 to={link.href}
                 data-testid={`nav-link-${link.label.toLowerCase()}`}
-                className={`text-sm font-medium transition-colors hover:text-orange-500 ${
-                  location.pathname === link.href ? "text-orange-500" : "text-slate-600"
+                className={`text-sm font-medium transition-colors hover:text-blue-500 ${
+                  location.pathname === link.href ? "text-blue-500" : "text-slate-600"
                 }`}
               >
                 {link.label}
               </Link>
             ))}
 
-            <div className="hidden xl:flex items-center space-x-3 border-l border-gray-200 pl-6">
+            <div className="hidden xl:flex items-center space-x-3 border-l border-slate-200 pl-6">
               {socialLinks.map((social, idx) => (
                 <a
                   key={idx}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-600 hover:text-orange-500 transition-colors transform hover:scale-110"
+                  className="text-slate-600 hover:text-blue-500 transition-colors transform hover:scale-110"
                   aria-label={social.label}
                 >
                   <social.icon className="h-4 w-4" />
@@ -114,7 +114,7 @@ const Navigation = () => {
             <Button
               data-testid="nav-book-consultation"
               onClick={openCalendly}
-              className="bg-orange-500 hover:bg-orange-600 text-white transform hover:scale-105 transition-all duration-300 text-sm px-4 py-2"
+              className="bg-slate-900 hover:bg-slate-800 text-white rounded-full font-semibold transition-all duration-200 hover:-translate-y-[1px] text-sm px-5 py-2.5 shadow-[0_10px_30px_-12px_rgba(15,23,42,0.5)]"
             >
               Book Consultation
             </Button>
@@ -142,13 +142,13 @@ const Navigation = () => {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="block px-3 py-2 text-base font-medium text-slate-600 hover:text-orange-500 hover:bg-gray-50 rounded-md"
+                  className="block px-3 py-2 text-base font-medium text-slate-600 hover:text-blue-500 hover:bg-slate-50 rounded-md"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
-              <div className="px-3 py-2 border-t border-gray-200 mt-2">
+              <div className="px-3 py-2 border-t border-slate-200 mt-2">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-slate-600 font-medium">Follow us:</span>
                   <div className="flex items-center space-x-3">
@@ -158,7 +158,7 @@ const Navigation = () => {
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate-600 hover:text-orange-500"
+                        className="text-slate-600 hover:text-blue-500"
                         aria-label={social.label}
                       >
                         <social.icon className="h-5 w-5" />
@@ -173,7 +173,7 @@ const Navigation = () => {
                     openCalendly();
                     setIsMobileMenuOpen(false);
                   }}
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-white"
+                  className="w-full bg-slate-900 hover:bg-slate-800 text-white rounded-full font-semibold"
                 >
                   Book Free Consultation
                 </Button>

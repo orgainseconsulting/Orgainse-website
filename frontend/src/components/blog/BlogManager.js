@@ -9,8 +9,8 @@ import AnalyticsPanel, { ANALYTICS_ICONS } from '../admin/AnalyticsPanel';
 const StatusBadge = ({ status }) => {
   const styles =
     status === 'published'
-      ? 'bg-emerald-100 text-emerald-700 border-emerald-200'
-      : 'bg-amber-100 text-amber-700 border-amber-200';
+      ? 'bg-blue-100 text-blue-700 border-blue-200'
+      : 'bg-blue-100 text-blue-700 border-blue-200';
   return (
     <span className={`inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded border ${styles}`}>
       {status === 'published' ? 'Published' : 'Draft'}
@@ -102,7 +102,7 @@ const BlogManager = () => {
             value: (analytics.total_views || 0).toLocaleString(),
             hint: `${analytics.avg_views_per_published || 0} avg/published`,
             icon: ANALYTICS_ICONS.Eye,
-            gradient: 'from-orange-500 to-amber-500',
+            gradient: 'from-blue-500 to-blue-500',
           },
           {
             testid: 'analytics-blog-published',
@@ -110,7 +110,7 @@ const BlogManager = () => {
             value: analytics.published_posts || 0,
             hint: `${analytics.draft_posts || 0} draft${analytics.draft_posts === 1 ? '' : 's'}`,
             icon: ANALYTICS_ICONS.FileText,
-            gradient: 'from-emerald-500 to-green-500',
+            gradient: 'from-blue-500 to-blue-500',
           },
           {
             testid: 'analytics-blog-last-30d',
@@ -118,7 +118,7 @@ const BlogManager = () => {
             value: analytics.published_last_30d || 0,
             hint: 'Newly published posts',
             icon: ANALYTICS_ICONS.TrendingUp,
-            gradient: 'from-sky-500 to-cyan-500',
+            gradient: 'from-blue-500 to-blue-500',
           },
           {
             testid: 'analytics-blog-top-post',
@@ -126,7 +126,7 @@ const BlogManager = () => {
             value: (analytics.top_posts?.[0]?.view_count || 0).toLocaleString(),
             hint: analytics.top_posts?.[0]?.title?.slice(0, 32) || '—',
             icon: ANALYTICS_ICONS.TrendingUp,
-            gradient: 'from-purple-500 to-fuchsia-500',
+            gradient: 'from-violet-500 to-violet-500',
           },
         ] : []}
         topTitle="Top 5 posts by views"
@@ -147,7 +147,7 @@ const BlogManager = () => {
         <button
           type="button"
           onClick={() => setEditorPostId(null)}
-          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-orange-500 text-white rounded-lg hover:bg-orange-600"
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-blue-500 text-white rounded-lg hover:bg-blue-600"
           data-testid="blog-manager-new"
         >
           <Plus className="h-4 w-4" />
@@ -157,7 +157,7 @@ const BlogManager = () => {
 
       {loading ? (
         <div className="py-12 text-center text-slate-500">
-          <div className="animate-spin h-10 w-10 border-b-2 border-orange-500 rounded-full mx-auto mb-3"></div>
+          <div className="animate-spin h-10 w-10 border-b-2 border-blue-500 rounded-full mx-auto mb-3"></div>
           Loading posts…
         </div>
       ) : posts.length === 0 ? (
@@ -166,7 +166,7 @@ const BlogManager = () => {
           <button
             type="button"
             onClick={() => setEditorPostId(null)}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-orange-500 text-white rounded-lg hover:bg-orange-600"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-blue-500 text-white rounded-lg hover:bg-blue-600"
             data-testid="blog-manager-empty-new"
           >
             <Plus className="h-4 w-4" />
@@ -225,7 +225,7 @@ const BlogManager = () => {
                       <button
                         type="button"
                         onClick={() => setEditorPostId(p.id)}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-orange-700 bg-orange-50 hover:bg-orange-100 rounded-md"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-md"
                         data-testid={`blog-row-${p.slug}-edit`}
                       >
                         <Edit3 className="h-3.5 w-3.5" />

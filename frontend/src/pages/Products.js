@@ -1,1002 +1,774 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 import {
   ArrowRight,
-  CheckCircle,
-  Sparkles,
-  Database,
-  Search,
-  Shield,
-  FileSpreadsheet,
+  ArrowUpRight,
+  BadgeCheck,
   Bot,
-  Layers,
-  Globe,
-  Lock,
-  Cpu,
-  Workflow,
-  MessageSquare,
+  Boxes,
+  Check,
   ChevronDown,
-  ExternalLink,
-  Zap,
-  Users,
-  Award,
-  Brain,
-  KeyRound,
+  CircuitBoard,
+  ClipboardList,
+  Database,
+  FileSpreadsheet,
+  Fingerprint,
+  GitBranch,
+  Landmark,
+  Layers,
+  Lock,
+  MessageSquare,
+  Network,
+  PanelsTopLeft,
+  Radar,
+  ScrollText,
   Server,
-  Code2,
+  ShieldCheck,
+  Users,
+  Workflow,
 } from "lucide-react";
+import { Input } from "../components/ui/input";
+import { Textarea } from "../components/ui/textarea";
+import { api } from "../lib/api";
 import SEOHead from "../components/SEOHead";
-import { OrqyneLogo, OrqyneMark } from "../components/OrqyneLogo";
+import GridBackdrop from "../components/brand/GridBackdrop";
+import OrbitDiagram from "../components/brand/OrbitDiagram";
+import UiMockPanel from "../components/brand/UiMockPanel";
+import { OrqyneLogo } from "../components/OrqyneLogo";
+import { useCalendly } from "../context/CalendlyContext";
 
-const SIGNUP_URL = "https://orgainse.live/signup";
+const ORQYNE_SITE = "https://orgainse.live";
 
-// ---------- DATA ---------------------------------------------------------
-
-const HERO_STATS = [
-  { key: "agents", value: "25", label: "RAG-grounded AI agents" },
-  { key: "cockpits", value: "8", label: "PMI cockpit tabs per project" },
-  { key: "integrations", value: "40+", label: "Live MCP integrations" },
-  { key: "byok", value: "BYOK", label: "OpenAI · Anthropic · Gemini" },
+const CAPABILITY_MARKERS = [
+  { icon: Layers, label: "Two Industry-Native Experiences" },
+  { icon: Boxes, label: "Tenant-Aware Architecture" },
+  { icon: Database, label: "AI Grounded in Approved Knowledge" },
+  { icon: ShieldCheck, label: "Service-Backed Implementation" },
 ];
 
-const COCKPITS = [
-  {
-    id: "it",
-    name: "IT Services & Software",
-    accent: "from-blue-500 to-indigo-600",
-    tag: "Most chosen for engineering teams",
-    headline: "A RAG-grounded AI sprint team that already knows your codebase.",
+const EXPERIENCES = {
+  it_services: {
+    id: "it_services",
+    tab: "IT Services and Software",
+    icon: CircuitBoard,
+    accent: "37, 99, 235",
+    headline: "Run Delivery With One View of Work, Risk, Resources, Cost, and Outcomes.",
+    intro:
+      "ORQYNE for Information Technology Services and Software supports structured delivery across projects and portfolios.",
     bullets: [
-      "AI Sprint Planner trained on your own backlog, retrospectives, and ADRs",
-      "Six platform agents on day one — Delivery, Risk, Quality, Comms, Knowledge, Planner",
-      "Tribes / Squads / Chapters org model + on-call rotations",
-      "40+ engineering connectors (GitHub, GitLab, Jira, Azure DevOps, PagerDuty…)",
-      "Engineering Excellence Scorecard with industry benchmarks",
+      "Projects, portfolios, backlogs, sprints, and delivery boards.",
+      "Epics, stories, tasks, sub-tasks, bugs, incidents, spikes, and change requests.",
+      "Configurable work-item numbering.",
+      "Risk, Assumption, Issue, and Dependency registers.",
+      "Decisions, approvals, compliance records, and audit visibility.",
+      "Resource, time, cost, vendor, stakeholder, and communication management.",
+      "Project health, portfolio reporting, Earned Value Management, and engineering delivery metrics.",
+      "Information Technology-focused Artificial Intelligence agents grounded in approved project and knowledge sources.",
     ],
+    cta: "Explore the IT Services Experience",
+    coreLabel: "IT Services",
+    coreSub: "Tenant-aware core",
+    innerChips: ["Projects", "Portfolios", "Work items"],
+    outerChips: ["Risks", "Dependencies", "Decisions", "Resources", "Costs", "Vendors"],
   },
-  {
+  canvas: {
     id: "canvas",
-    name: "Canvas",
-    accent: "from-emerald-500 to-teal-600",
-    tag: "Customizable for any industry",
-    headline: "A blank cockpit that learns your industry from your data.",
+    tab: "Canvas Business Management",
+    icon: PanelsTopLeft,
+    accent: "124, 58, 237",
+    headline: "Turn Cross-Functional Priorities Into Visible Business Execution.",
+    intro:
+      "Canvas is designed for operating teams, departments, and business owners that need a shared model for managing work across functions.",
     bullets: [
-      "Define your own object model — projects, milestones, KPIs",
-      "Same 7 canonical agents, retuned with your own RAG corpus",
-      "Mix and match templates from IT, Healthcare, or build from scratch",
-      "Ideal for consulting practices and multi-vertical SMEs",
-      "Marketplace-ready: package your playbook as a sellable agent",
+      "Department-owned stories and cross-functional work.",
+      "Configurable boards, priorities, owners, and dependencies.",
+      "Business Pulse, Business Health, and money-impact views.",
+      "Documents, templates, knowledge, and decision records.",
+      "Workflows, automations, and approval queues.",
+      "Organisation, team, access, and module visibility controls.",
+      "Business-function Artificial Intelligence agent catalogue for operations, sales, marketing, finance, people, legal, procurement, and delivery.",
     ],
+    cta: "Explore Canvas Business Management",
+    coreLabel: "Canvas",
+    coreSub: "Business execution core",
+    innerChips: ["Departments", "Stories", "Owners"],
+    outerChips: ["Approvals", "Automations", "Business Pulse", "Documents", "Money impact", "Access"],
   },
-  {
-    id: "rcm",
-    name: "US Healthcare Analytics",
-    accent: "from-purple-500 to-pink-600",
-    tag: "Built for revenue intelligence",
-    headline: "AR leakage, denial trends, and payer behavior — surfaced in 90 seconds.",
-    bullets: [
-      "Healthcare-specific agents for denial intelligence and payer analytics",
-      "Closed-loop audit log for every PHI access, export, and AI prompt",
-      "HIPAA-modelled BAA template + region-locked US data residency",
-      "Aligns with our Healthcare Revenue Intelligence Advisory engagement",
-      "Strictly advisory + analytics — never operational billing or coding",
-    ],
-  },
-];
+};
 
-const PLATFORM_AGENTS = [
-  { name: "Strategic Advisor", desc: "Portfolio-level outcomes, OKR alignment, exec narratives.", icon: Brain },
-  { name: "Sprint Planner", desc: "Sprint planning, capacity, and dependency resolution.", icon: Workflow },
-  { name: "Delivery Ops", desc: "Standup synthesis, blocker triage, daily progress.", icon: Zap },
-  { name: "Risk & RAID", desc: "Predictive risk + What-If forecasting on your data.", icon: Shield },
-  { name: "Communications", desc: "Stakeholder updates, release notes, exec briefings.", icon: MessageSquare },
-  { name: "Quality Guardian", desc: "Quality trends, code-health, retro analysis.", icon: Award },
-  { name: "Knowledge / Runbook", desc: "Runbook-aware AI tutor for onboarding & search.", icon: Database },
+const IMPLEMENTATION_STEPS = [
+  { title: "Map the Workflow", body: "Document the work types, ownership, handoffs, decisions, governance, reporting, and success measures." },
+  { title: "Configure the Experience", body: "Select the relevant ORQYNE experience and configure terminology, roles, modules, workflows, templates, and controls." },
+  { title: "Import and Validate Work", body: "Use structured imports or templates to move existing projects and work items into the platform. Data is reviewed before it becomes part of the operating workspace." },
+  { title: "Operate and Improve", body: "Run work through ORQYNE, review adoption and delivery health, and refine the operating model using real usage and outcome data." },
 ];
 
 const RAG_STEPS = [
-  { step: "1", name: "Index", desc: "Your docs + runbooks + history embedded per tenant.", icon: Database },
-  { step: "2", name: "Retrieve", desc: "Top-k passages pulled before any token is generated.", icon: Search },
-  { step: "3", name: "Ground", desc: "Model writes ONLY from the retrieved context.", icon: Lock },
-  { step: "4", name: "Cite", desc: "Every answer points back at the source paragraph.", icon: CheckCircle },
+  { title: "Index", body: "Approved documents and work records are added to the tenant knowledge environment.", icon: Database },
+  { title: "Retrieve", body: "Relevant passages are selected based on the user's request and access permissions.", icon: Radar },
+  { title: "Generate", body: "The configured model uses the retrieved context to prepare an answer, summary, recommendation, or draft.", icon: Bot },
+  { title: "Review", body: "Users review important outputs before decisions, external communication, or system actions are completed.", icon: BadgeCheck },
 ];
 
-const HOW_IT_WORKS = [
-  { step: "1", title: "Download the engineering template", desc: "Epics + stories + owners + capacity. Three sheets, five minutes." },
-  { step: "2", title: "Upload & validate", desc: "We extract every row, parse story points, and surface dependency loops before commit." },
-  { step: "3", title: "Board + delivery agents", desc: "Scrum / Kanban board, owners, on-call rota, and 7 canonical agents — auto-provisioned." },
-  { step: "4", title: "Live industry cockpit", desc: "Smart Briefing, sprint velocity, productivity score — running on real data." },
+const AGENTS = [
+  { name: "Project Advisor", body: "Supports schedule, scope, Earned Value Management interpretation, forecasting, and project reporting using available tenant context.", icon: ClipboardList },
+  { name: "RAID Analyst", body: "Helps organise and review Risks, Assumptions, Issues, and Dependencies, including scoring, ownership, staleness, and mitigation context.", icon: Radar },
+  { name: "Vendor Intelligence", body: "Supports vendor scorecards, renewal visibility, bid evaluation, total-cost analysis, and contract-related operating context.", icon: Landmark },
+  { name: "Governance Copilot", body: "Supports policy, control, audit-evidence, approval, and governance workflows as a starting point for qualified professional review.", icon: ScrollText },
+  { name: "Site Reliability Engineering and Incident Assistant", body: "Supports incident triage, runbook retrieval, service-level context, incident analysis, and post-incident documentation.", icon: Server },
+  { name: "Canvas Business-Function Agents", body: "Canvas provides an agent catalogue designed around delivery, operations, finance, marketing, sales, people, legal, procurement, and portfolio management.", icon: PanelsTopLeft },
 ];
 
-const INTEGRATIONS = [
-  "GitHub", "GitLab", "Bitbucket", "Jira", "Azure DevOps", "Linear",
-  "Asana", "Monday", "ClickUp", "Jenkins", "CircleCI", "Confluence",
-  "Notion", "Slack", "Microsoft Teams", "Discord", "PagerDuty", "Sentry",
-  "DataDog", "Splunk", "Snowflake",
+const CONNECTORS = [
+  { name: "Source Control", body: "Connect relevant repository and development signals where supported.", icon: GitBranch },
+  { name: "Project Management", body: "Import, synchronise, or reference work-management records according to connector capability.", icon: ClipboardList },
+  { name: "IT Service Management", body: "Bring incidents, service requests, changes, and operating records into delivery context.", icon: Workflow },
+  { name: "Observability", body: "Use supported monitoring and incident signals to strengthen project and service visibility.", icon: Radar },
+  { name: "Communications", body: "Connect relevant collaboration channels and notifications according to approved access.", icon: MessageSquare },
+  { name: "Business Systems", body: "Use supported customer, finance, human resources, legal, and procurement connections for cross-functional workflows.", icon: Network },
+];
+
+const PLANS = [
+  { name: "Guided Pilot", body: "Best for organisations evaluating one live workflow or project. Includes success-measure definition, initial configuration, structured import, user onboarding, and an executive review.", featured: false },
+  { name: "Startup", body: "Best for small teams that need one structured environment for projects, knowledge, and governance.", featured: false },
+  { name: "Small and Medium-Sized Business", body: "Best for organisations managing multiple teams, projects, departments, integrations, or reporting requirements.", featured: true },
+  { name: "Enterprise", body: "Best for organisations requiring advanced access controls, Single Sign-On, optional physical data segregation, custom implementation, or formal security review.", featured: false },
 ];
 
 const SECURITY = [
-  { icon: Lock, title: "AES-256 at rest", desc: "TLS 1.3 in transit. Customer-managed keys on Enterprise." },
-  { icon: Layers, title: "Multi-tenant isolation", desc: "Physical collection prefix + logical tenant scoping. Cross-tenant reads physically impossible." },
-  { icon: KeyRound, title: "BYOK or managed", desc: "Use our managed AI key or bring your own provider keys per workspace." },
-  { icon: Shield, title: "Closed-loop audit", desc: "Every PHI access, export, integration mutation, and AI prompt logged with full context." },
-  { icon: Globe, title: "Choose your region", desc: "US · EU · India residency. Pick at signup, locked at provision time." },
-  { icon: Server, title: "BYO compliance template", desc: "HIPAA-modelled BAA, GDPR DPA, SOC2-aligned report templates — generate and adapt." },
-];
-
-const TIERS = [
-  {
-    name: "Starter",
-    audience: "1 – 10 users",
-    sub: "Single-team programmes ready to ship faster.",
-    highlight: false,
-    items: [
-      "Projects · epics · tasks · subtasks",
-      "Scrum & Kanban boards",
-      "AI Planner + Delivery Ops + Comms agents",
-      "Team Chat — 5 public channels + 1-on-1 DMs",
-      "Knowledge base (1 space)",
-      "GitHub + 1 issue tracker connector",
-      "Email/password + 2FA",
-      "30-day audit retention",
-      "Managed AI key included",
-    ],
-  },
-  {
-    name: "Professional",
-    audience: "11 – 50 users",
-    sub: "Multi-team portfolios with cross-industry visibility.",
-    highlight: true,
-    items: [
-      "Everything in Starter +",
-      "Portfolio + cross-team views",
-      "All 7 canonical AI agents incl. Risk & RAID + Knowledge",
-      "Full Industry Cockpit (IT · Canvas · RCM Analytics)",
-      "Team Chat — unlimited channels, threads, reactions",
-      "@orqyne AI in chat (5/day) — grounded in Project / Sprint / Epic",
-      "40+ engineering connectors",
-      "SSO (Google / Microsoft)",
-      "5 RBAC roles · 90-day audit retention",
-      "Region choice (US · EU · India)",
-      "BYOK at workspace level",
-    ],
-  },
-  {
-    name: "Enterprise",
-    audience: "51+ users",
-    sub: "Regulated industries, custom agents, dedicated infra.",
-    highlight: false,
-    items: [
-      "Everything in Professional +",
-      "Predictive risk + What-If forecast",
-      "Custom AI Agent Builder + Agent Studio",
-      "Unlimited @orqyne AI · 500MB files · custom retention",
-      "Marketplace publishing rights",
-      "SAML / SCIM SSO",
-      "1+ year audit + SIEM export",
-      "Dedicated infrastructure option",
-      "Customer-managed encryption keys",
-      "BYO compliance template (BAA · DPA · SOC2)",
-    ],
-  },
-  {
-    name: "Custom",
-    audience: "Talk to us",
-    sub: "Air-gapped, sovereign-cloud, or unique scopes.",
-    highlight: false,
-    items: [
-      "Everything in Enterprise +",
-      "Air-gapped or sovereign-cloud deployment",
-      "Custom AI agents built by our team",
-      "Industry-specific cockpit co-development",
-      "White-glove migration & training",
-      "Dedicated CSM + 24×7 priority support",
-      "Negotiated SLAs",
-    ],
-  },
+  { name: "Role-Based Access Control", body: "Role-Based Access Control, custom roles, and permission matrices help restrict access according to responsibilities.", icon: Users },
+  { name: "Tenant-Aware Data Model", body: "Tenant-scoped records and optional physical collection segregation support different customer isolation requirements.", icon: Layers },
+  { name: "Identity Controls", body: "Multi-Factor Authentication is enforced for platform administration. Tenant-level Single Sign-On options are supported.", icon: Fingerprint },
+  { name: "Audit and Secret Management", body: "Audit records, environment-based secrets management, encryption services, and administrative controls support traceability and operational security.", icon: Lock },
+  { name: "Environment Separation", body: "Development, staging, and production environments are independently deployed and operated.", icon: Server },
+  { name: "Artificial Intelligence Governance", body: "Provider configuration, agent autonomy, approval gates, and access controls support governed use of Artificial Intelligence workflows.", icon: Bot },
 ];
 
 const FAQS = [
-  {
-    q: "How is ORQYNE different from Jira, Linear, or Azure DevOps?",
-    a: "Those are tracking tools. ORQYNE is a Service-as-a-Platform with an AI delivery workforce. 25 RAG-grounded agents actively plan sprints from your backlog, surface delivery risks before standup, draft stakeholder updates, and score quality trends. Tracking tools log what already happened — ORQYNE drives what happens next.",
-  },
-  {
-    q: 'What does "RAG-grounded" actually mean?',
-    a: "Retrieval-Augmented Generation. Every ORQYNE agent runs over a per-tenant index of your repos, runbooks, ADRs, retrospectives, and project history. The model is only allowed to generate from retrieved context, and every answer cites the line of code or document it came from. Hallucinations are blocked by design.",
-  },
-  {
-    q: "How do I start? Can I just upload a spreadsheet?",
-    a: "Yes. Use our universal template (or your own). ORQYNE parses tasks, owners, dependencies and milestones, lets you rewrite terminology to fit your domain (Sprint → Cycle, Project → Campaign), and provisions a tailored workspace + the 25 RAG-grounded agents — typically in 180 seconds.",
-  },
-  {
-    q: "Who owns the AI? Can I bring my own keys?",
-    a: "Both modes are first-class. Use our managed AI key for zero key management and predictable cost, or plug in your own AI-provider keys (OpenAI, Anthropic, Gemini) at the workspace or project level (BYOK). We never see your BYOK traffic.",
-  },
-  {
-    q: "How do you handle compliance?",
-    a: "TLS 1.3 in transit, AES-256 at rest, multi-tenant isolation (physical + logical), and a closed-loop audit trail you can export to your SIEM. HIPAA-modelled BAA, GDPR DPA, and SOC2 report templates are generated from your workspace settings and adaptable to your regulator. Region residency (US/EU/India) is locked at provision time.",
-  },
-  {
-    q: "What is the AI Agent Marketplace?",
-    a: "Every PM has a hard-won playbook. The ORQYNE Agent Marketplace lets you turn yours into a packaged AI agent — system prompt, input fields, runner — and ship it to thousands of teams via a tier-gated Custom Agent Builder. Build for your team first; sell to the world second. Curated for prompt-injection safety + grounding hygiene before listing.",
-  },
+  { q: "What is ORQYNE?", a: "ORQYNE is a multi-tenant delivery-governance platform by Orgainse Consulting. It brings projects, workflows, knowledge, decisions, governance, analytics, and Artificial Intelligence-assisted execution into one operating environment." },
+  { q: "Is ORQYNE a replacement for Jira, Asana, monday.com, or ClickUp?", a: "Not necessarily. ORQYNE can operate as the primary workspace for selected teams or complement existing systems through imports and connectors. The decision depends on workflow complexity, governance requirements, migration effort, and integration availability." },
+  { q: "Who is ORQYNE designed for?", a: "The primary experience is designed for Information Technology services and software-delivery organisations. Canvas Business Management supports cross-functional operating teams and business departments." },
+  { q: "How does ORQYNE use customer data for Artificial Intelligence?", a: "Approved tenant content can be indexed and retrieved to provide context for Artificial Intelligence-assisted outputs. Access and provider configuration are controlled at the workspace level." },
+  { q: "Can customers use their own Artificial Intelligence provider?", a: "ORQYNE supports Bring Your Own Key configurations for supported providers, subject to plan and implementation scope. A platform-managed model configuration may also be available." },
+  { q: "Which integrations are available?", a: "ORQYNE has a growing catalogue of connectors. Production availability, authentication, read or write capability, and commercial inclusion should be confirmed for each required integration." },
+  { q: "Is ORQYNE compliant with the Health Insurance Portability and Accountability Act, System and Organization Controls 2, or International Organization for Standardization 27001?", a: "Orgainse does not claim certification or legal compliance unless it has been formally established and independently verified. ORQYNE includes security and governance controls that may support a customer's compliance programme when combined with appropriate configuration, contracts, processes, and customer controls." },
+  { q: "How should a company start?", a: "Start with one live project or workflow, define measurable success criteria, configure the relevant experience, and assess usage and operating value before expanding." },
 ];
 
-// ---------- COMPONENT ---------------------------------------------------
+const Products = () => {
+  const { openCalendly } = useCalendly();
+  const [activeExp, setActiveExp] = useState("it_services");
+  const [openFaq, setOpenFaq] = useState(0);
+  const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-const ProductsPage = () => {
-  const [activeCockpit, setActiveCockpit] = useState("it");
-  const [openFaq, setOpenFaq] = useState(null);
-  const current = COCKPITS.find((c) => c.id === activeCockpit);
+  const exp = EXPERIENCES[activeExp];
 
-  // -------- Page-scoped JSON-LD (SoftwareApplication + FAQPage + SoftwareSourceCode) --------
-  const structuredData = React.useMemo(
-    () => [
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "ORQYNE",
-        "alternateName": ["Orqyne AI", "Orqyne PMaaS", "ORQYNE by Orgainse"],
-        "applicationCategory": "BusinessApplication",
-        "applicationSubCategory": "Project Management",
-        "operatingSystem": "Web",
-        "url": "https://orgainse.live",
-        "sameAs": [
-          "https://orgainse.live",
-          "https://www.orgainse.com/products"
-        ],
-        "image": "https://www.orgainse.com/orqyne/long-1200.png",
-        "logo": "https://www.orgainse.com/orqyne/mark-400.png",
-        "description":
-          "ORQYNE is Orgainse's first Service-as-a-Platform (SaaP). Productised consulting outcomes, 25 RAG-grounded AI agents, an 8-tab PMI project cockpit, and 40+ live MCP integrations. Pre-built playbooks for IT Services & Software, Canvas (any industry), and US Healthcare Revenue Cycle. BYOK or managed AI key.",
-        "softwareVersion": "2026.1",
-        "brand": { "@type": "Brand", "name": "ORQYNE" },
-        "creator": {
-          "@type": "Organization",
-          "name": "Orgainse Consulting",
-          "url": "https://www.orgainse.com"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Orgainse Consulting",
-          "url": "https://www.orgainse.com"
-        },
-        "offers": {
-          "@type": "AggregateOffer",
-          "priceCurrency": "USD",
-          "offerCount": "4",
-          "lowPrice": "0",
-          "highPrice": "0",
-          "availability": "https://schema.org/InStock",
-          "url": "https://www.orgainse.com/contact?product=orqyne",
-          "description": "Four tiers: Starter (1-10 users), Professional (11-50 users), Enterprise (51+ users), Custom. Contact sales for region- and team-specific pricing."
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.9",
-          "bestRating": "5",
-          "ratingCount": "42"
-        },
-        "featureList": [
-          "25 RAG-grounded AI agents per workspace (7 canonical + 12 RCM specialist + 6 universal library)",
-          "8-tab PMI project cockpit (Dashboard, Planning, Sprints, Backlog, RAID, Resources, Time, Cost, Communications, Closure)",
-          "3 industry-native cockpits: IT Services & Software, Canvas (any industry), US Healthcare Revenue Cycle",
-          "Spreadsheet-to-workspace customisation in 180 seconds",
-          "7 canonical platform agents: Strategic Advisor, Sprint Planner, Delivery Ops, Risk & RAID, Communications, Quality Guardian, Knowledge / Runbook",
-          "Team Chat with @orqyne AI grounded in Project / Sprint / Epic",
-          "Tier-gated Custom Agent Builder + ORQYNE Agent Marketplace publishing rights",
-          "40+ live MCP integrations (GitHub, GitLab, Bitbucket, Jira, Azure DevOps, Linear, Asana, Monday, ClickUp, Jenkins, CircleCI, Confluence, Notion, Slack, Microsoft Teams, Discord, PagerDuty, Sentry, DataDog, Splunk, Snowflake)",
-          "BYOK (OpenAI, Anthropic, Gemini) or managed AI key",
-          "TLS 1.3 in transit, AES-256 at rest, multi-tenant isolation",
-          "Region choice (US / EU / India) locked at provision time",
-          "SSO (Google, Microsoft, SAML, SCIM)",
-          "HIPAA-modelled BAA, GDPR DPA, SOC2-aligned audit report templates"
-        ],
-        "audience": {
-          "@type": "BusinessAudience",
-          "audienceType": [
-            "Software engineering teams",
-            "IT services and consulting firms",
-            "US healthcare revenue cycle leaders",
-            "PMO and delivery management",
-            "Startups and SMEs"
-          ]
-        }
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "@id": "https://www.orgainse.com/products#faq",
-        "mainEntity": FAQS.map((f) => ({
-          "@type": "Question",
-          "name": f.q,
-          "acceptedAnswer": { "@type": "Answer", "text": f.a }
-        }))
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "TechArticle",
-        "headline": "How ORQYNE Provisions a RAG-Grounded AI Workspace From a Spreadsheet",
-        "description":
-          "Technical overview: ORQYNE — Orgainse's first Service-as-a-Platform — parses an industry-agnostic project spreadsheet, builds per-tenant RAG indexes over your repos, runbooks, ADRs, retrospectives, and project history, provisions an 8-tab PMI cockpit (Dashboard, Planning, Sprints, Backlog, RAID, Resources, Time, Cost, Communications, Closure), and hires 25 RAG-grounded AI agents — workspace customisable in 180 seconds.",
-        "keywords":
-          "RAG, retrieval-augmented generation, AI project management, PMaaS, multi-tenant SaaS, BYOK AI, healthcare revenue cycle analytics",
-        "proficiencyLevel": "Expert",
-        "dependencies":
-          "OpenAI / Anthropic / Google AI compatible LLM providers; PostgreSQL or MongoDB-compatible datastore; OIDC/SAML SSO for identity",
-        "about": [
-          { "@type": "Thing", "name": "Retrieval-Augmented Generation (RAG)" },
-          { "@type": "Thing", "name": "AI Agents" },
-          { "@type": "Thing", "name": "Multi-tenant SaaS architecture" }
-        ],
-        "author": {
-          "@type": "Organization",
-          "name": "Orgainse Consulting",
-          "url": "https://www.orgainse.com"
-        }
-      }
-    ],
-    []
-  );
+  const handlePilotSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+    try {
+      await api.contact({
+        name: form.name,
+        email: form.email,
+        company: form.company,
+        service_type: "ORQYNE Guided Pilot",
+        message: `[ORQYNE Guided Pilot request · ${exp.tab}] ${form.message}`,
+        leadType: "orqyne_pilot",
+      });
+      setSubmitted(true);
+      setForm({ name: "", email: "", company: "", message: "" });
+      toast.success("Request received. Orgainse will be in touch shortly.");
+    } catch (err) {
+      toast.error(err.message || "Could not send your request. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: "ORQYNE",
+      applicationCategory: "BusinessApplication",
+      applicationSubCategory: "Delivery Governance Platform",
+      operatingSystem: "Web",
+      url: "https://orgainse.com/products",
+      sameAs: ORQYNE_SITE,
+      description:
+        "ORQYNE is a service-backed, multi-tenant delivery-governance platform connecting projects, workflows, governance, knowledge, analytics, and Artificial Intelligence assistance for Information Technology delivery and business operations.",
+      publisher: { "@type": "Organization", name: "Orgainse Consulting", url: "https://orgainse.com/" },
+      offers: { "@type": "AggregateOffer", priceCurrency: "USD", availability: "https://schema.org/InStock", offerCount: PLANS.length },
+      featureList: [
+        "Projects, portfolios, backlogs, sprints, and delivery boards",
+        "Risk, Assumption, Issue, and Dependency registers",
+        "Earned Value Management and engineering delivery metrics",
+        "Retrieval-Augmented Generation grounded in approved tenant knowledge",
+        "Industry-scoped Artificial Intelligence agents",
+        "Role-Based Access Control and tenant-aware data model",
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: FAQS.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      name: "How ORQYNE Is Implemented",
+      step: IMPLEMENTATION_STEPS.map((s, i) => ({ "@type": "HowToStep", position: i + 1, name: s.title, text: s.body })),
+    },
+  ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white text-slate-900 font-manrope antialiased" data-testid="products-page">
       <SEOHead
-        title="ORQYNE — Service-as-a-Platform by Orgainse Consulting"
-        description="ORQYNE is Orgainse's first Service-as-a-Platform: productised consulting outcomes, 25 RAG-grounded AI agents, an 8-tab PMI project cockpit, 40+ live MCP integrations, BYOK keys, and pre-built playbooks for IT Services & Software, Canvas (any industry), and US Healthcare Revenue Cycle. No setup calls. No 90-day onboarding."
+        title="ORQYNE Delivery Governance Platform | Orgainse Consulting"
+        description="Explore ORQYNE, a service-backed platform connecting projects, workflows, governance, knowledge, analytics, and Artificial Intelligence assistance for Information Technology delivery and business operations."
         canonical="https://orgainse.com/products"
-        keywords="ORQYNE, Service-as-a-Platform, SaaP, AI project management, PMaaS, RAG-grounded AI agents, AI sprint planner, US healthcare analytics, BYOK AI, agent marketplace, MCP integrations"
+        keywords="ORQYNE, delivery governance platform, project portfolio governance, RAID registers, Earned Value Management, RAG AI agents, Canvas business management, PMaaS platform"
         structuredData={structuredData}
       />
 
-      {/* ─────────────────────────────────── HERO ─────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/40 pt-20 pb-24 lg:pt-28 lg:pb-32">
-        {/* Soft background bloom */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-gradient-to-br from-orange-300/30 via-blue-300/20 to-purple-300/20 blur-3xl rounded-full pointer-events-none" />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-blue-100 shadow-sm mb-6">
-              <Sparkles className="h-4 w-4 text-orange-500" />
-              <span className="text-xs font-semibold tracking-wider uppercase text-slate-600">
-                Orgainse&apos;s first Service-as-a-Platform · Built by Orgainse Consulting
+      {/* ── SECTION 1 · Product Hero ─────────────────────────────────── */}
+      <section className="relative overflow-hidden pt-16 lg:pt-24 pb-16" data-testid="product-hero">
+        <GridBackdrop />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/70 backdrop-blur-sm text-[11px] uppercase tracking-[0.2em] text-slate-500 shadow-sm" data-testid="product-eyebrow">
+                <Layers className="h-3 w-3 text-blue-600" />
+                ORQYNE · A Product by Orgainse Consulting
               </span>
+
+              <div className="mt-7">
+                <OrqyneLogo className="h-11 sm:h-14" />
+              </div>
+
+              <h1 data-testid="product-headline" className="mt-7 font-outfit font-bold text-4xl sm:text-5xl lg:text-[58px] leading-[1.06] text-slate-900">
+                Delivery Governance for Teams That Have{" "}
+                <span className="relative inline-block">
+                  <span className="relative z-10 text-blue-600">Outgrown Task Tracking</span>
+                  <span aria-hidden="true" className="absolute inset-x-0 bottom-1.5 h-3 bg-blue-100 rounded-sm" />
+                </span>
+              </h1>
+
+              <p className="mt-7 text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
+                ORQYNE is a service-backed, multi-tenant platform that connects project execution, portfolio visibility, governance, team knowledge, decisions, and Artificial Intelligence-assisted workflows. It is designed for Information Technology services and software delivery teams as well as cross-functional business operations that need more than lists of tasks. ORQYNE helps establish a shared operating environment where work, ownership, risks, costs, decisions, and business context can be viewed together.
+              </p>
+              <p className="mt-4 text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
+                Orgainse Consulting supports configuration, implementation, workflow design, governance, and adoption. The product and service model work together so customers are not left to configure a complex operating system alone.
+              </p>
+
+              <div className="mt-9 flex flex-wrap items-center gap-3">
+                <a
+                  href="#pilot"
+                  data-testid="product-pilot-btn"
+                  className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-slate-900 text-white font-semibold text-sm hover:bg-slate-800 transition-[background,transform] duration-200 hover:-translate-y-[1px] shadow-[0_10px_40px_-10px_rgba(15,23,42,0.4)]"
+                >
+                  Request a Guided ORQYNE Pilot
+                  <ArrowRight className="h-[15px] w-[15px] transition-transform duration-200 group-hover:translate-x-1" />
+                </a>
+                <a
+                  href={ORQYNE_SITE}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid="product-site-btn"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-slate-300 text-slate-900 text-sm font-semibold hover:bg-slate-50 hover:border-slate-400 transition-colors"
+                >
+                  Open the ORQYNE Website
+                  <ArrowUpRight className="h-[15px] w-[15px]" />
+                </a>
+              </div>
             </div>
 
-            <div className="flex justify-center mb-10" data-testid="orqyne-logo-hero">
-              <OrqyneLogo className="h-20 sm:h-24 lg:h-28" />
+            <div className="lg:col-span-5">
+              <UiMockPanel
+                title="Governed delivery workspace"
+                rows={[
+                  { icon: ClipboardList, label: "Portfolio review · Q3 delivery" },
+                  { icon: Radar, label: "RAID register · 4 items need an owner" },
+                  { icon: Bot, label: "Project Advisor drafted the status summary" },
+                  { icon: ScrollText, label: "Decision log updated and approved" },
+                ]}
+                chips={["Tenant-aware", "Role-aware access", "Human review"]}
+                testId="product-hero-panel"
+              />
             </div>
-
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 max-w-4xl mx-auto leading-[1.1]">
-              Stop renting software.{" "}
-              <span className="bg-gradient-to-r from-orange-500 via-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Start owning outcomes.
-              </span>
-            </h1>
-
-            <p className="mt-6 text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              ORQYNE is Orgainse&apos;s first <strong>Service-as-a-Platform</strong> — productised consulting outcomes, RAG-grounded AI agents, and a complete project lifecycle cockpit. One platform that becomes your engineering team, your revenue ops team, or your branded delivery workspace.
-              <span className="block mt-3 text-base text-slate-500">
-                <strong>No setup calls. No 90-day onboarding. No false promises.</strong>
-              </span>
-            </p>
-
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <Link
-                data-testid="hero-cta-sales"
-                to="/contact?product=orqyne"
-                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40 hover:scale-105 transition-all"
-              >
-                Talk to Sales
-                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <a
-                data-testid="hero-cta-pilot"
-                href={SIGNUP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-white border-2 border-slate-200 text-slate-800 font-bold shadow-md hover:border-blue-300 hover:text-blue-700 hover:scale-105 transition-all"
-              >
-                Start 7-day free pilot
-                <ExternalLink className="h-4 w-4 opacity-70 group-hover:opacity-100" />
-              </a>
-            </div>
-
-            <p className="mt-6 text-xs uppercase tracking-wider text-slate-500">
-              Trusted by IT leaders, healthcare operators, and PMOs that ship outcomes
-            </p>
           </div>
 
-          {/* Stat row */}
-          <div className="mt-14 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-            {HERO_STATS.map((s) => (
-              <div
-                key={s.key}
-                data-testid={`stat-${s.key}`}
-                className="bg-white/70 backdrop-blur-sm border border-slate-200/80 rounded-2xl p-5 text-center shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5"
-              >
-                <div className="text-3xl lg:text-4xl font-extrabold bg-gradient-to-br from-blue-600 to-orange-500 bg-clip-text text-transparent">
-                  {s.value}
-                </div>
-                <div className="mt-1 text-xs sm:text-sm text-slate-600 font-medium">{s.label}</div>
+          <div className="mt-16 border-t border-slate-200 pt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-testid="product-capability-markers">
+            {CAPABILITY_MARKERS.map((m) => (
+              <div key={m.label} className="flex items-start gap-3">
+                <span className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center shrink-0">
+                  <m.icon className="h-[15px] w-[15px] text-blue-600" />
+                </span>
+                <p className="font-outfit font-semibold text-slate-900 text-[15px] leading-snug pt-1.5">{m.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ──────────────────────────── INDUSTRY COCKPITS ──────────────────────────── */}
-      <section className="py-20 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-xs font-semibold tracking-wider uppercase text-orange-600 mb-3">
-              Choose your cockpit
-            </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900">
-              One platform.{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Industry-native by design.
-              </span>
-            </h2>
-            <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
-              Click an industry. Everything below — narrative, screenshots, outcomes —
-              re-renders for that cockpit only.
-            </p>
-          </div>
+      {/* ── SECTION 2 · Choose Your Experience ─────────────────────── */}
+      <section id="experiences" className="scroll-mt-28 py-24 bg-slate-50 border-y border-slate-200" data-testid="experience-picker">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-slate-500">Choose your experience</p>
+          <h2 className="mt-4 font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
+            One Platform. <span className="text-slate-400">Two Purpose-Built Experiences.</span>
+          </h2>
 
-          {/* Cockpit selector */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {COCKPITS.map((c) => (
+          <div className="mt-10 flex flex-wrap items-center gap-2 mb-10">
+            {Object.values(EXPERIENCES).map((e) => (
               <button
-                key={c.id}
-                data-testid={`cockpit-tab-${c.id}`}
-                onClick={() => setActiveCockpit(c.id)}
-                className={`px-5 py-2.5 rounded-full font-semibold text-sm transition-all ${
-                  activeCockpit === c.id
-                    ? `bg-gradient-to-r ${c.accent} text-white shadow-lg scale-105`
-                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                key={e.id}
+                data-testid={`experience-tab-${e.id}`}
+                onClick={() => setActiveExp(e.id)}
+                className={`inline-flex items-center gap-2 px-5 py-3 rounded-full border transition-colors text-sm font-semibold ${
+                  activeExp === e.id
+                    ? "bg-slate-900 text-white border-slate-900"
+                    : "bg-white text-slate-700 border-slate-200 hover:border-slate-400"
                 }`}
               >
-                {c.name}
+                <e.icon className="h-[15px] w-[15px]" style={{ color: activeExp === e.id ? `rgb(${e.accent})` : undefined }} />
+                {e.tab}
               </button>
             ))}
           </div>
 
-          {/* Active cockpit */}
-          {current && (
-            <div
-              data-testid={`cockpit-panel-${current.id}`}
-              className="grid lg:grid-cols-2 gap-10 items-center bg-gradient-to-br from-slate-50 to-white rounded-3xl border border-slate-200 p-8 lg:p-12 shadow-sm"
-            >
-              <div>
-                <div className={`inline-block text-xs font-bold tracking-wider uppercase px-3 py-1 rounded-full bg-gradient-to-r ${current.accent} text-white mb-4`}>
-                  {current.tag}
-                </div>
-                <h3 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-5 leading-tight">
-                  {current.headline}
-                </h3>
-                <ul className="space-y-3">
-                  {current.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-3 text-slate-700">
-                      <CheckCircle className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                      <span>{b}</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start" data-testid={`experience-block-${exp.id}`}>
+            <div className="lg:col-span-6 bg-white rounded-3xl border border-slate-200 p-8 lg:p-10 shadow-[0_20px_60px_-30px_rgba(15,23,42,0.15)] relative overflow-hidden">
+              <div aria-hidden="true" className="absolute -top-32 -right-32 w-72 h-72 rounded-full blur-3xl opacity-40" style={{ backgroundColor: `rgba(${exp.accent},0.15)` }} />
+              <div className="relative">
+                <p className="text-[11px] uppercase tracking-[0.22em] font-bold" style={{ color: `rgb(${exp.accent})` }}>
+                  {exp.tab}
+                </p>
+                <h3 className="mt-4 font-outfit text-2xl sm:text-3xl font-bold text-slate-900 tracking-[-0.03em] leading-[1.12] max-w-xl">{exp.headline}</h3>
+                <p className="mt-5 text-sm sm:text-base text-slate-600 leading-relaxed">{exp.intro}</p>
+                <ul className="mt-8 space-y-3">
+                  {exp.bullets.map((b) => (
+                    <li key={b} className="flex items-start gap-3 text-sm text-slate-800 leading-relaxed">
+                      <span className="mt-0.5 w-5 h-5 rounded-full grid place-items-center shrink-0" style={{ backgroundColor: `rgba(${exp.accent},0.10)` }}>
+                        <Check className="h-[11px] w-[11px]" style={{ color: `rgb(${exp.accent})` }} />
+                      </span>
+                      {b}
                     </li>
                   ))}
                 </ul>
-                <Link
-                  to={`/contact?product=orqyne&cockpit=${current.id}`}
-                  className={`mt-7 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r ${current.accent} text-white font-semibold hover:scale-105 transition-transform shadow`}
+                <a
+                  href="#pilot"
+                  data-testid={`experience-cta-${exp.id}`}
+                  className="mt-8 inline-flex items-center gap-2 px-5 py-3 rounded-full text-sm font-semibold text-white transition-transform duration-200 hover:-translate-y-[1px]"
+                  style={{ backgroundColor: `rgb(${exp.accent})` }}
                 >
-                  Talk to sales about {current.name}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-
-              {/* Schematic preview block */}
-              <div className={`relative rounded-2xl overflow-hidden bg-gradient-to-br ${current.accent} p-1 shadow-2xl`}>
-                <div className="bg-slate-900 rounded-xl p-6 font-mono text-xs sm:text-sm text-slate-300">
-                  <div className="flex items-center gap-1.5 mb-4">
-                    <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
-                    <span className="ml-3 text-slate-500">orqyne · cockpit · {current.id}</span>
-                  </div>
-                  <div className="space-y-2 leading-relaxed">
-                    <div><span className="text-emerald-400">$</span> orqyne provision --industry={current.id}</div>
-                    <div className="text-slate-400">→ Parsing rows… <span className="text-emerald-300">every row</span></div>
-                    <div className="text-slate-400">→ Mapping owners… <span className="text-emerald-300">auto</span></div>
-                    <div className="text-slate-400">→ Building dependency graph… <span className="text-emerald-300">conflicts flagged</span></div>
-                    <div className="text-slate-400">→ Hiring AI agents… <span className="text-orange-300">25 RAG-grounded</span></div>
-                    <div className="text-slate-400">→ Indexing knowledge base… <span className="text-blue-300">per-tenant</span></div>
-                    <div className="mt-3 text-emerald-300">✓ Workspace ready · 180s</div>
-                  </div>
-                </div>
+                  {exp.cta}
+                  <ArrowRight className="h-[13px] w-[13px]" />
+                </a>
               </div>
             </div>
-          )}
+
+            <div className="lg:col-span-6 lg:sticky lg:top-32">
+              <OrbitDiagram
+                coreLabel={exp.coreLabel}
+                coreSub={exp.coreSub}
+                coreIcon={exp.icon}
+                innerChips={exp.innerChips}
+                outerChips={exp.outerChips}
+                accent={exp.accent}
+                caption={`Illustration of the ${exp.tab} module vocabulary. No tenant data is shown.`}
+                testId="experience-visual"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ─────────────────────────────── HOW IT WORKS ─────────────────────────────── */}
-      <section className="py-20 lg:py-24 bg-gradient-to-br from-slate-50 via-white to-orange-50/40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <p className="text-xs font-semibold tracking-wider uppercase text-blue-600 mb-3">
-              Starts with a spreadsheet. Ships with a delivery AI.
-            </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 max-w-3xl mx-auto leading-tight">
-              Drop your sprint sheet. We launch the{" "}
-              <span className="bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">
-                AI delivery team.
-              </span>
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {HOW_IT_WORKS.map((s, i) => (
-              <div
-                key={s.step}
-                data-testid={`how-step-${s.step}`}
-                className="relative bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all"
-              >
-                <div className="absolute -top-4 -left-2">
-                  <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-orange-500 to-pink-500 text-white font-bold flex items-center justify-center shadow-lg">
-                    {s.step}
-                  </div>
-                </div>
-                <div className="pt-5">
-                  <div className="flex items-center gap-2 mb-2">
-                    <FileSpreadsheet className="h-5 w-5 text-orange-500" />
-                    <h3 className="font-bold text-slate-900 text-base lg:text-lg leading-snug">
-                      {s.title}
-                    </h3>
-                  </div>
-                  <p className="text-sm text-slate-600 leading-relaxed">{s.desc}</p>
-                </div>
+      {/* ── SECTION 3 · How ORQYNE Is Implemented ──────────────────── */}
+      <section className="py-24" data-testid="product-implementation">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
+            Start With the Operating Model, <span className="text-slate-400">Not a Blank Tool</span>
+          </h2>
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {IMPLEMENTATION_STEPS.map((s, i) => (
+              <div key={s.title} data-testid={`implementation-step-${i}`} className="org-hover-lift bg-white rounded-2xl border border-slate-200 p-7">
+                <span className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center">
+                  <span className="font-outfit text-[13px] font-bold text-blue-600">{i + 1}</span>
+                </span>
+                <p className="mt-5 font-outfit font-bold text-slate-900 text-base tracking-[-0.02em]">{s.title}</p>
+                <p className="mt-2 text-[13px] text-slate-600 leading-relaxed">{s.body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─────────────────────────────── RAG EXPLAINER ─────────────────────────────── */}
-      <section className="py-20 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            <div>
-              <p className="text-xs font-semibold tracking-wider uppercase text-purple-600 mb-3">
-                RAG-first for engineering teams
-              </p>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
-                AI agents that already{" "}
-                <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                  read your codebase.
-                </span>
-              </h2>
-              <p className="mt-5 text-slate-600 leading-relaxed">
-                Every ORQYNE agent runs on a RAG pipeline indexed over your repos,
-                runbooks, ADRs, retrospectives, and Jira history. Outputs cite the line
-                of code or the doc they came from. Hallucinations are blocked by design.
-              </p>
+      {/* ── SECTION 4 · AI and Knowledge ───────────────────────────── */}
+      <section className="py-24 bg-slate-50 border-y border-slate-200" data-testid="product-rag">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
+            Artificial Intelligence Assistance Grounded in the Knowledge Your Team Approves
+          </h2>
+          <p className="mt-6 text-sm sm:text-base text-slate-600 leading-relaxed max-w-3xl">
+            ORQYNE can use Retrieval-Augmented Generation (RAG) to retrieve relevant information from approved tenant documents, project records, decisions, and operating knowledge before producing an Artificial Intelligence-assisted response. This gives Artificial Intelligence workflows more organisational context than a generic chatbot. Access, model selection, approvals, and data sources remain governed by the customer's workspace configuration.
+          </p>
 
-              <div className="mt-7 grid grid-cols-3 gap-4">
-                <div className="rounded-xl bg-slate-50 p-4 border border-slate-200 text-center">
-                  <div className="text-2xl font-bold text-purple-600">isolated</div>
-                  <div className="text-xs text-slate-600 mt-1">Per-tenant index</div>
-                </div>
-                <div className="rounded-xl bg-slate-50 p-4 border border-slate-200 text-center">
-                  <div className="text-2xl font-bold text-blue-600">100%</div>
-                  <div className="text-xs text-slate-600 mt-1">Source-citation</div>
-                </div>
-                <div className="rounded-xl bg-slate-50 p-4 border border-slate-200 text-center">
-                  <div className="text-2xl font-bold text-orange-600">every run</div>
-                  <div className="text-xs text-slate-600 mt-1">Audit trail</div>
-                </div>
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {RAG_STEPS.map((s, i) => (
+              <div key={s.title} data-testid={`rag-step-${i}`} className="org-hover-lift bg-white rounded-2xl border border-slate-200 p-7">
+                <span className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center">
+                  <s.icon className="h-4 w-4 text-blue-600" />
+                </span>
+                <p className="mt-5 font-outfit font-bold text-slate-900 text-base tracking-[-0.02em]">{s.title}</p>
+                <p className="mt-2 text-[13px] text-slate-600 leading-relaxed">{s.body}</p>
               </div>
-            </div>
-
-            <div className="space-y-4">
-              {RAG_STEPS.map((s) => (
-                <div
-                  key={s.name}
-                  className="flex gap-4 bg-gradient-to-r from-slate-50 to-white rounded-2xl p-5 border border-slate-200"
-                >
-                  <div className="flex-shrink-0 h-12 w-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 text-white font-bold flex items-center justify-center text-lg">
-                    {s.step}
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <s.icon className="h-4 w-4 text-purple-600" />
-                      <h3 className="font-bold text-slate-900">{s.name}</h3>
-                    </div>
-                    <p className="text-sm text-slate-600">{s.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* 7 canonical platform agents */}
-          <div className="mt-20">
-            <div className="text-center mb-10">
-              <h3 className="text-2xl sm:text-3xl font-bold text-slate-900">
-                7 canonical agents.{" "}
-                <span className="bg-gradient-to-r from-orange-500 to-blue-600 bg-clip-text text-transparent">
-                  Hired on day one.
-                </span>
-              </h3>
-              <p className="mt-3 text-sm text-slate-500 max-w-2xl mx-auto">
-                Plus 12 RCM specialist agents in the Healthcare cockpit and an opt-in Universal Library — 25 RAG-grounded agents across the platform.
-              </p>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {PLATFORM_AGENTS.map((a) => (
-                <div
-                  key={a.name}
-                  data-testid={`agent-${a.name.toLowerCase()}`}
-                  className="group bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-lg hover:border-blue-300 transition-all"
-                >
-                  <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 text-white flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <a.icon className="h-5 w-5" />
-                  </div>
-                  <h4 className="font-bold text-slate-900 mb-1">{a.name}</h4>
-                  <p className="text-xs text-slate-600 leading-relaxed">{a.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ────────────────────────────── INTEGRATIONS ────────────────────────────── */}
-      <section className="py-16 bg-gradient-to-br from-blue-50/40 via-white to-purple-50/40 border-y border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <p className="text-xs font-semibold tracking-wider uppercase text-slate-500 mb-2">
-              Plugs into your stack
-            </p>
-            <h3 className="text-2xl sm:text-3xl font-bold text-slate-900">
-              <span className="text-orange-500">40+</span> engineering connectors out of the box.
-            </h3>
-          </div>
-          <div className="flex flex-wrap justify-center gap-3">
-            {INTEGRATIONS.map((i) => (
-              <span
-                key={i}
-                className="px-4 py-2 rounded-xl bg-white border border-slate-200 text-sm font-semibold text-slate-700 shadow-sm hover:shadow-md hover:border-blue-300 transition-all flex items-center gap-2"
-              >
-                <Code2 className="h-3.5 w-3.5 text-blue-500" />
-                {i}
-              </span>
             ))}
-            <span className="px-4 py-2 rounded-xl bg-slate-900 text-white text-sm font-semibold shadow flex items-center gap-2">
-              <Sparkles className="h-3.5 w-3.5 text-orange-400" />
-              + 28 more
-            </span>
           </div>
-        </div>
-      </section>
 
-      {/* ────────────────────────────── TEAM CHAT ────────────────────────────── */}
-      <section className="py-20 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-xs font-semibold tracking-wider uppercase text-emerald-600 mb-3">
-                Works where your projects live
-              </p>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
-                Team Chat with an{" "}
-                <span className="bg-gradient-to-r from-emerald-500 to-blue-600 bg-clip-text text-transparent">
-                  AI teammate
-                </span>{" "}
-                that reads your project.
-              </h2>
-              <p className="mt-5 text-slate-600 leading-relaxed">
-                No more flipping between Slack and your PM tool. Channels, DMs, threads —
-                and an embedded AI you can ground in a specific Project, Sprint, or Epic.
-                Strictly tenant-scoped — only your organisation can see it.
-              </p>
-              <ul className="mt-6 space-y-2 text-sm text-slate-700">
-                {["@orqyne AI in chat — grounded answers, no tab switching",
-                  "One click attaches a Project / Sprint / Epic",
-                  "Public + private channels, threaded replies, reactions, pins",
-                  "Files & uploads — limits scale with your plan",
-                  "Strictly tenant-scoped — cross-tenant access is physically impossible"].map((x) => (
-                    <li key={x} className="flex items-start gap-2">
-                      <CheckCircle className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-0.5" />
-                      {x}
-                    </li>
-                  ))}
-              </ul>
-            </div>
-
-            {/* Chat mock */}
-            <div className="rounded-2xl bg-slate-900 p-5 shadow-2xl border border-slate-800">
-              <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
-                <div className="flex items-center gap-2">
-                  <MessageSquare className="h-4 w-4 text-emerald-400" />
-                  <span className="text-sm font-semibold text-slate-200">#delivery-standup</span>
-                  <span className="text-xs text-slate-500">· 12 members</span>
-                </div>
-                <span className="text-[10px] uppercase tracking-wider text-emerald-400">Enterprise plan</span>
-              </div>
-
-              <div className="space-y-4 text-sm">
-                <div className="flex gap-3">
-                  <div className="h-8 w-8 rounded-full bg-orange-500 flex items-center justify-center text-white text-xs font-bold">SR</div>
-                  <div>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-slate-200 font-semibold">Sarah Reyes</span>
-                      <span className="text-xs text-slate-500">10:14 AM</span>
-                    </div>
-                    <div className="text-slate-300 mt-0.5">@orqyne what tasks are blocked in Sprint 12?</div>
-                  </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-xs font-bold">
-                    <Bot className="h-4 w-4" />
-                  </div>
-                  <div>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-blue-300 font-semibold">Orqyne AI</span>
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-900/50 text-blue-300 uppercase tracking-wider">grounded · sprint 12</span>
-                    </div>
-                    <div className="text-slate-300 mt-0.5 leading-relaxed">
-                      Sprint 12 has <span className="font-bold text-white">2 blocked tasks</span>:{" "}
-                      <span className="text-orange-300">RCM-LEAK-1</span> (AR Leakage recovery, $157,577) blocked on payer remit reconciliation, and{" "}
-                      <span className="text-orange-300">WEB-204</span> awaiting API contract from the partner team. Capacity is at 78%.
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-5 rounded-lg bg-slate-800/60 border border-slate-700 p-3 text-xs text-slate-500 flex items-center justify-between">
-                  <span>Cmd+J to open · @orqyne to ask AI</span>
-                  <Sparkles className="h-3.5 w-3.5 text-orange-400" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ────────────────────────────── PRICING ────────────────────────────── */}
-      <section className="py-20 lg:py-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <p className="text-xs font-semibold tracking-wider uppercase text-orange-600 mb-3">
-              Find your fit
+          <div className="mt-10 flex items-start gap-3 rounded-2xl border border-slate-300 bg-white p-6 max-w-4xl" data-testid="ai-governance-statement">
+            <ShieldCheck className="h-[17px] w-[17px] text-slate-500 mt-0.5 shrink-0" />
+            <p className="text-sm text-slate-700 leading-relaxed">
+              Artificial Intelligence output may be incomplete or incorrect. Material operational, financial, legal, security, healthcare, or employment decisions must retain appropriate human review.
             </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900">
-              Four tiers.{" "}
-              <span className="bg-gradient-to-r from-orange-500 to-blue-600 bg-clip-text text-transparent">
-                One conversation away.
-              </span>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 5 · Industry-Scoped Agents ─────────────────────── */}
+      <section className="py-24" data-testid="product-agents">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
+            Industry-Scoped Agents for Delivery and Operations
+          </h2>
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {AGENTS.map((a, i) => (
+              <div key={a.name} data-testid={`agent-card-${i}`} className="org-hover-lift bg-white rounded-2xl border border-slate-200 p-7">
+                <span className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center">
+                  <a.icon className="h-4 w-4 text-blue-600" />
+                </span>
+                <p className="mt-5 font-outfit font-bold text-slate-900 text-base tracking-[-0.02em] leading-snug">{a.name}</p>
+                <p className="mt-2 text-[13px] text-slate-600 leading-relaxed">{a.body}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6 max-w-4xl" data-testid="custom-agent-builder">
+            <p className="text-[11px] uppercase tracking-[0.2em] text-slate-500 font-bold">Custom agent builder</p>
+            <p className="mt-3 text-sm text-slate-700 leading-relaxed">
+              Where enabled, customers can configure agent instructions, inputs, data access, triggers, autonomy levels, and approval requirements.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href={ORQYNE_SITE}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="agents-capabilities-btn"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors"
+              >
+                See ORQYNE AI Capabilities
+                <ArrowUpRight className="h-[14px] w-[14px]" />
+              </a>
+              <button
+                onClick={openCalendly}
+                data-testid="agents-governance-btn"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-slate-300 text-slate-900 text-sm font-semibold hover:bg-slate-50 hover:border-slate-400 transition-colors"
+              >
+                Discuss Agent Governance
+                <ArrowRight className="h-[14px] w-[14px]" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 6 · Connectors ─────────────────────────────────── */}
+      <section className="py-24 bg-slate-50 border-y border-slate-200" data-testid="product-connectors">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
+            Connect the Systems That Already Hold Your Delivery Signals
+          </h2>
+          <p className="mt-6 text-sm sm:text-base text-slate-600 leading-relaxed max-w-3xl">
+            ORQYNE includes a growing connector catalogue spanning source control, project management, Information Technology service management, observability, communications, customer systems, finance, human resources, and business operations. Connector availability, direction of data flow, authentication method, and production status vary by integration. Required integrations should be confirmed during the pilot or implementation scope.
+          </p>
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {CONNECTORS.map((c, i) => (
+              <div key={c.name} data-testid={`connector-card-${i}`} className="org-hover-lift bg-white rounded-2xl border border-slate-200 p-7">
+                <span className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center">
+                  <c.icon className="h-4 w-4 text-blue-600" />
+                </span>
+                <p className="mt-5 font-outfit font-bold text-slate-900 text-[15px] tracking-[-0.01em]">{c.name}</p>
+                <p className="mt-2 text-[13px] text-slate-600 leading-relaxed">{c.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 7 · Team Collaboration ─────────────────────────── */}
+      <section className="py-24" data-testid="product-collaboration">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-6">
+            <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-slate-900 max-w-lg">
+              Keep Delivery Conversations Closer to the Work
             </h2>
-            <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
-              We size every deployment to your team and industry. Tell us about your
-              workspace and we&apos;ll match you with the right tier — usually within the same
-              business day.
+            <p className="mt-6 text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl">
+              ORQYNE supports project and team collaboration through channels, direct messages, mentions, notifications, presence, comments, and agent-assisted conversations. Teams can connect discussions to the relevant project, work item, sprint, document, or decision so that operating context is easier to retain.
             </p>
+            <p className="mt-4 text-sm text-slate-500 leading-relaxed max-w-xl">
+              Advanced retention, threaded discussions, compliance exports, and administrative controls vary by plan and current product availability.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-2" data-testid="collaboration-highlights">
+              {["Project-linked conversations", "Direct messages and channels", "Mentions and notifications", "Agent-assisted discussions", "Role-aware access"].map((h) => (
+                <span key={h} className="text-[11px] font-semibold px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 border border-blue-100">
+                  {h}
+                </span>
+              ))}
+            </div>
           </div>
+          <div className="lg:col-span-6">
+            <UiMockPanel
+              title="Project channel"
+              rows={[
+                { icon: MessageSquare, label: "#delivery-portfolio · 3 mentions" },
+                { icon: Users, label: "Stakeholder update drafted for review" },
+                { icon: Bot, label: "RAID Analyst flagged a stale dependency" },
+                { icon: ScrollText, label: "Decision linked to work item DEL-1284" },
+              ]}
+              chips={["Work-linked context", "Role-aware access"]}
+              testId="collaboration-panel"
+            />
+          </div>
+        </div>
+      </section>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {TIERS.map((t) => (
+      {/* ── SECTION 8 · Plans and Evaluation ───────────────────────── */}
+      <section id="plans" className="scroll-mt-28 py-24 bg-slate-50 border-y border-slate-200" data-testid="product-plans">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
+            Choose the Operating Support Your Team Needs
+          </h2>
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {PLANS.map((p) => (
               <div
-                key={t.name}
-                data-testid={`tier-${t.name.toLowerCase()}`}
-                className={`relative rounded-3xl p-6 border-2 transition-all hover:-translate-y-1 ${
-                  t.highlight
-                    ? "border-orange-300 bg-white shadow-2xl shadow-orange-500/10"
-                    : "border-slate-200 bg-white shadow-sm hover:shadow-lg"
+                key={p.name}
+                data-testid={`plan-${p.name.toLowerCase().replace(/\s+/g, "-")}`}
+                className={`relative rounded-3xl border p-8 flex flex-col ${
+                  p.featured
+                    ? "border-slate-900 bg-slate-900 text-white shadow-[0_20px_60px_-20px_rgba(15,23,42,0.5)]"
+                    : "border-slate-200 bg-white org-hover-lift"
                 }`}
               >
-                {t.highlight && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-orange-500 to-pink-500 text-white text-xs font-bold uppercase tracking-wider shadow">
-                    Most chosen
-                  </div>
-                )}
-                <h3 className="text-xl font-bold text-slate-900">{t.name}</h3>
-                <div className="text-xs uppercase tracking-wider font-semibold text-orange-600 mt-1">
-                  {t.audience}
-                </div>
-                <p className="text-sm text-slate-600 mt-3 min-h-[40px]">{t.sub}</p>
-                <ul className="mt-5 space-y-2.5 text-sm text-slate-700">
-                  {t.items.map((i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <CheckCircle className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-0.5" />
-                      <span>{i}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  data-testid={`tier-cta-${t.name.toLowerCase()}`}
-                  to={`/contact?product=orqyne&tier=${t.name.toLowerCase()}`}
-                  className={`mt-6 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm transition-all ${
-                    t.highlight
-                      ? "bg-gradient-to-r from-orange-500 to-pink-500 text-white hover:scale-105 shadow-lg"
-                      : "bg-slate-900 text-white hover:bg-slate-700"
+                <p className={`font-outfit font-bold text-xl tracking-[-0.02em] leading-snug ${p.featured ? "text-white" : "text-slate-900"}`}>{p.name}</p>
+                <p className={`mt-4 text-sm leading-relaxed flex-1 ${p.featured ? "text-slate-300" : "text-slate-600"}`}>{p.body}</p>
+                <a
+                  href="#pilot"
+                  data-testid={`plan-cta-${p.name.toLowerCase().replace(/\s+/g, "-")}`}
+                  className={`mt-8 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold transition-colors ${
+                    p.featured ? "bg-white text-slate-900 hover:bg-slate-100" : "bg-slate-900 text-white hover:bg-slate-800"
                   }`}
                 >
-                  Contact Sales
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+                  Talk to Orgainse
+                  <ArrowRight className="h-[13px] w-[13px]" />
+                </a>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* ────────────────────────────── SECURITY ────────────────────────────── */}
-      <section className="py-20 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <p className="text-xs font-semibold tracking-wider uppercase text-purple-600 mb-3">
-              Technology that earns trust
+          <div className="mt-10 rounded-2xl border border-slate-200 bg-white p-6 max-w-4xl" data-testid="pricing-statement">
+            <p className="text-sm text-slate-700 leading-relaxed">
+              Pricing is determined by users, enabled modules, implementation requirements, Artificial Intelligence usage model, integration scope, and support requirements. Final scope and commercial terms are confirmed before implementation.
             </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 max-w-3xl mx-auto leading-tight">
-              Security primitives engineering teams{" "}
-              <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                actually need.
-              </span>
-            </h2>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {SECURITY.map((s) => (
-              <div
-                key={s.title}
-                className="rounded-2xl bg-gradient-to-br from-slate-50 to-white p-6 border border-slate-200 hover:border-purple-300 hover:shadow-lg transition-all"
+            <div className="mt-6 flex flex-wrap gap-3">
+              <button
+                onClick={openCalendly}
+                data-testid="plans-discuss-btn"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors"
               >
-                <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 text-white flex items-center justify-center mb-4">
-                  <s.icon className="h-5 w-5" />
-                </div>
-                <h3 className="font-bold text-slate-900 mb-1.5">{s.title}</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">{s.desc}</p>
+                Discuss the Right ORQYNE Plan
+                <ArrowRight className="h-[14px] w-[14px]" />
+              </button>
+              <a
+                href="#pilot"
+                data-testid="plans-pilot-btn"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-slate-300 text-slate-900 text-sm font-semibold hover:bg-slate-50 hover:border-slate-400 transition-colors"
+              >
+                Request a Guided Pilot
+                <ArrowUpRight className="h-[14px] w-[14px]" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 9 · Security and Governance ────────────────────── */}
+      <section className="py-24" data-testid="product-security">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
+            Built With Tenant Awareness and Operational Safeguards
+          </h2>
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {SECURITY.map((s, i) => (
+              <div key={s.name} data-testid={`security-card-${i}`} className="org-hover-lift bg-white rounded-2xl border border-slate-200 p-7">
+                <span className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center">
+                  <s.icon className="h-4 w-4 text-blue-600" />
+                </span>
+                <p className="mt-5 font-outfit font-semibold text-slate-900 text-[15px] tracking-[-0.01em]">{s.name}</p>
+                <p className="mt-2 text-[13px] text-slate-600 leading-relaxed">{s.body}</p>
               </div>
             ))}
           </div>
-
-          {/* BYOK callout */}
-          <div className="mt-12 grid md:grid-cols-2 gap-5">
-            <div className="rounded-2xl bg-gradient-to-br from-blue-50 to-white p-7 border-2 border-blue-200">
-              <div className="flex items-center gap-3 mb-3">
-                <Cpu className="h-6 w-6 text-blue-600" />
-                <h3 className="text-lg font-bold text-slate-900">Managed AI key</h3>
-              </div>
-              <p className="text-sm text-slate-700 leading-relaxed">
-                We provide the AI. You provide the data. Generous usage included in every
-                plan — no per-token billing surprise. Best for teams that want zero key management.
-              </p>
-            </div>
-            <div className="rounded-2xl bg-gradient-to-br from-orange-50 to-white p-7 border-2 border-orange-200">
-              <div className="flex items-center gap-3 mb-3">
-                <KeyRound className="h-6 w-6 text-orange-600" />
-                <h3 className="text-lg font-bold text-slate-900">Bring your own keys (BYOK)</h3>
-              </div>
-              <p className="text-sm text-slate-700 leading-relaxed">
-                Plug in your own AI provider keys at the workspace or project level.
-                We never see your traffic. Best for regulated industries, procurement-locked
-                orgs, or teams with negotiated provider contracts.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ────────────────────────────── FAQ ────────────────────────────── */}
-      <section className="py-20 lg:py-24 bg-gradient-to-br from-slate-50 via-white to-orange-50/40">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-xs font-semibold tracking-wider uppercase text-orange-600 mb-3">
-              FAQ
+          <div className="mt-10 flex items-start gap-3 rounded-2xl border border-slate-300 bg-slate-50 p-6 max-w-4xl" data-testid="compliance-disclaimer">
+            <BadgeCheck className="h-[17px] w-[17px] text-slate-500 mt-0.5 shrink-0" />
+            <p className="text-sm text-slate-700 leading-relaxed">
+              These controls do not represent an independent certification or a guarantee of compliance. Applicability to the Health Insurance Portability and Accountability Act, General Data Protection Regulation, System and Organization Controls 2, International Organization for Standardization 27001, or other requirements depends on configuration, contracts, operating procedures, customer responsibilities, and independent professional review.
             </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900">
-              Common questions,{" "}
-              <span className="bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">
-                straight answers.
-              </span>
-            </h2>
-          </div>
-
-          <div className="space-y-3">
-            {FAQS.map((f, i) => {
-              const open = openFaq === i;
-              return (
-                <div
-                  key={f.q}
-                  data-testid={`faq-${i}`}
-                  className={`rounded-2xl border transition-all ${
-                    open ? "border-orange-300 bg-white shadow-lg" : "border-slate-200 bg-white"
-                  }`}
-                >
-                  <button
-                    onClick={() => setOpenFaq(open ? null : i)}
-                    className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
-                  >
-                    <span className="font-semibold text-slate-900">{f.q}</span>
-                    <ChevronDown
-                      className={`h-5 w-5 text-slate-400 flex-shrink-0 transition-transform ${open ? "rotate-180 text-orange-500" : ""}`}
-                    />
-                  </button>
-                  {open && (
-                    <div className="px-6 pb-5 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-4">
-                      {f.a}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
           </div>
         </div>
       </section>
 
-      {/* ────────────────────────────── FINAL CTA ────────────────────────────── */}
-      <section className="py-20 lg:py-28 bg-gradient-to-br from-slate-900 via-blue-950 to-purple-950 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(249,115,22,0.15),transparent_60%)] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(59,130,246,0.15),transparent_60%)] pointer-events-none" />
-
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="flex flex-col items-center gap-3 mb-6">
-            <OrqyneMark className="h-14 w-14 sm:h-16 sm:w-16" />
-            <div className="text-2xl sm:text-3xl font-extrabold tracking-[0.12em] bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 bg-clip-text text-transparent">
-              ORQYNE
-            </div>
-            <div className="text-[10px] uppercase tracking-[0.25em] text-slate-400 font-medium flex items-center gap-2">
-              <span className="text-purple-400">✦</span>
-              A product of Orgainse Consulting
-              <span className="text-purple-400">✦</span>
-            </div>
-          </div>
-          <p className="text-xs font-semibold tracking-wider uppercase text-orange-300 mb-3">
-            Ready to ship outcomes
-          </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
-            Stop tracking work.{" "}
-            <span className="bg-gradient-to-r from-orange-400 to-pink-400 bg-clip-text text-transparent">
-              Start shipping outcomes.
-            </span>
-          </h2>
-          <p className="mt-5 text-slate-300 leading-relaxed max-w-2xl mx-auto">
-            Tell us about your team. We&apos;ll show you the workspace you&apos;d have if AI was
-            actually doing the project management.
-          </p>
-
-          <div className="mt-9 flex flex-wrap justify-center gap-4">
-            <Link
-              data-testid="final-cta-sales"
-              to="/contact?product=orqyne"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-orange-500 to-pink-500 text-white font-bold shadow-xl hover:scale-105 transition-all"
+      {/* ── SECTION 10 · FAQ ──────────────────────────────────────── */}
+      <section className="py-24 bg-slate-50 border-y border-slate-200" data-testid="product-faq">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-4">
+            <p className="text-[11px] uppercase tracking-[0.24em] text-slate-500 mb-3">Answers</p>
+            <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-slate-900">Frequently Asked Questions</h2>
+            <p className="mt-6 text-sm text-slate-600 leading-relaxed">
+              Still evaluating? Write to{" "}
+              <a href="mailto:support@orgainse.com" className="font-semibold text-blue-700 hover:underline">
+                support@orgainse.com
+              </a>{" "}
+              or request a guided pilot.
+            </p>
+            <button
+              onClick={openCalendly}
+              data-testid="product-faq-cta-btn"
+              className="mt-8 inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-slate-300 text-slate-900 text-sm font-semibold hover:bg-slate-50 hover:border-slate-400 transition-colors"
             >
-              Talk to Sales
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <a
-              data-testid="final-cta-pilot"
-              href={SIGNUP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/30 text-white font-bold hover:bg-white/20 hover:scale-105 transition-all"
-            >
-              Start 7-day free pilot
-              <ExternalLink className="h-4 w-4 opacity-80 group-hover:opacity-100" />
-            </a>
+              Schedule a Product Discussion
+              <ArrowUpRight className="h-[14px] w-[14px]" />
+            </button>
           </div>
-
-          <div className="mt-8 flex items-center justify-center gap-6 text-xs text-slate-400">
-            <span className="flex items-center gap-1.5"><CheckCircle className="h-3.5 w-3.5 text-emerald-400" /> Reply within one business day</span>
-            <span className="flex items-center gap-1.5"><CheckCircle className="h-3.5 w-3.5 text-emerald-400" /> Personalised demo</span>
-            <span className="flex items-center gap-1.5"><CheckCircle className="h-3.5 w-3.5 text-emerald-400" /> ROI estimate</span>
+          <div className="lg:col-span-8 min-w-0" data-testid="product-faq-accordion">
+            {FAQS.map((f, i) => (
+              <div key={f.q} className="border-b border-slate-200 last:border-b-0">
+                <button
+                  type="button"
+                  data-testid={`product-faq-question-${i}`}
+                  aria-expanded={openFaq === i}
+                  onClick={() => setOpenFaq(openFaq === i ? -1 : i)}
+                  className="flex w-full items-center justify-between gap-4 py-6 text-left font-outfit text-base sm:text-lg font-semibold tracking-[-0.01em] text-slate-900"
+                >
+                  <span className="flex-1 min-w-0 break-words">{f.q}</span>
+                  <ChevronDown className={`h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} />
+                </button>
+                {openFaq === i && (
+                  <p data-testid={`product-faq-answer-${i}`} className="pb-6 text-sm text-slate-600 leading-relaxed">
+                    {f.a}
+                  </p>
+                )}
+              </div>
+            ))}
           </div>
+        </div>
+      </section>
 
-          <div className="mt-12 flex items-center justify-center gap-2 text-xs text-slate-400">
-            <Users className="h-3.5 w-3.5" />
-            ORQYNE is an Orgainse Consulting product ·
-            <a href="https://orgainse.live" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline">
-              orgainse.live
-            </a>
+      {/* ── SECTION 11 · Final CTA + pilot form ───────────────────── */}
+      <section id="pilot" className="scroll-mt-28 py-24" data-testid="product-final-cta">
+        <div className="max-w-5xl mx-auto px-6 lg:px-10">
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 lg:p-14 shadow-[0_30px_80px_-40px_rgba(15,23,42,0.25)]">
+            <div aria-hidden="true" className="absolute -top-32 -right-32 w-[420px] h-[420px] rounded-full blur-3xl" style={{ background: "radial-gradient(circle, rgba(37,99,235,0.25), transparent 60%)" }} />
+            <div className="relative">
+              <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-2xl text-slate-900">Evaluate ORQYNE on Real Work</h2>
+              <p className="mt-6 text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
+                Bring one active project, delivery workflow, or cross-functional operating problem. Orgainse will help define the success measures, configure an initial ORQYNE workspace, import relevant work, and evaluate whether the platform improves visibility, governance, and adoption before a wider rollout.
+              </p>
+
+              <form onSubmit={handlePilotSubmit} className="mt-10" data-testid="pilot-form">
+                <p className="text-[11px] uppercase tracking-[0.2em] text-slate-500 font-bold">Your request</p>
+                <p className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-slate-900" data-testid="pilot-intent">
+                  <Check className="h-[14px] w-[14px] text-blue-600" />
+                  Request a Guided Pilot
+                  <span className="text-slate-400 font-normal">· {exp.tab}</span>
+                </p>
+
+                <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <Input
+                    data-testid="pilot-name-input"
+                    placeholder="Full name"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    required
+                    className="rounded-2xl border-slate-300 h-12 text-sm focus-visible:ring-blue-600"
+                  />
+                  <Input
+                    data-testid="pilot-email-input"
+                    type="email"
+                    placeholder="Work email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    required
+                    className="rounded-2xl border-slate-300 h-12 text-sm focus-visible:ring-blue-600"
+                  />
+                  <Input
+                    data-testid="pilot-company-input"
+                    placeholder="Organisation"
+                    value={form.company}
+                    onChange={(e) => setForm({ ...form, company: e.target.value })}
+                    className="rounded-2xl border-slate-300 h-12 text-sm focus-visible:ring-blue-600 sm:col-span-2"
+                  />
+                </div>
+                <Textarea
+                  data-testid="pilot-message-input"
+                  rows={3}
+                  placeholder="Which project, workflow, or reporting problem should the pilot cover?"
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  required
+                  className="mt-3 rounded-2xl border-slate-300 text-sm resize-none focus-visible:ring-blue-600"
+                />
+                <div className="mt-4 flex flex-wrap items-center gap-3">
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    data-testid="pilot-submit-btn"
+                    className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-slate-900 text-white font-semibold text-sm hover:bg-slate-800 transition-[background,transform] duration-200 hover:-translate-y-[1px] shadow-[0_10px_40px_-10px_rgba(15,23,42,0.4)] disabled:opacity-50"
+                  >
+                    {submitting ? "Sending…" : "Request a Guided Pilot"}
+                    <ArrowRight className="h-[14px] w-[14px] transition-transform duration-200 group-hover:translate-x-1" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={openCalendly}
+                    data-testid="pilot-book-discussion-btn"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-slate-300 text-slate-900 text-sm font-semibold hover:bg-slate-50 hover:border-slate-400 transition-colors"
+                  >
+                    Book a Product Discussion
+                    <ArrowUpRight className="h-[14px] w-[14px]" />
+                  </button>
+                </div>
+                {submitted && (
+                  <p data-testid="pilot-success-message" className="mt-4 text-sm font-semibold text-blue-700">
+                    Request received. An Orgainse consultant will respond with next steps.
+                  </p>
+                )}
+              </form>
+
+              <p className="mt-8 text-xs text-slate-500">
+                Prefer to browse first? Open the{" "}
+                <a href={ORQYNE_SITE} target="_blank" rel="noopener noreferrer" className="text-slate-900 font-semibold hover:underline">
+                  ORQYNE product site
+                </a>{" "}
+                or read about{" "}
+                <Link to="/services" className="text-slate-900 font-semibold hover:underline">
+                  Orgainse consulting services
+                </Link>
+                .
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -1004,4 +776,4 @@ const ProductsPage = () => {
   );
 };
 
-export default ProductsPage;
+export default Products;

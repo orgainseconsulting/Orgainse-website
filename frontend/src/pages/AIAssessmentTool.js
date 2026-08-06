@@ -76,10 +76,10 @@ const QUESTIONS = [
 ];
 
 const scoreColor = (s) =>
-  s >= 80 ? 'from-green-500 to-emerald-600'
-  : s >= 60 ? 'from-yellow-500 to-orange-500'
-  : s >= 40 ? 'from-orange-500 to-red-500'
-  : 'from-red-500 to-red-600';
+  s >= 80 ? 'from-blue-500 to-blue-600'
+  : s >= 60 ? 'from-blue-500 to-blue-500'
+  : s >= 40 ? 'from-blue-500 to-blue-500'
+  : 'from-blue-500 to-blue-600';
 
 export default function AIAssessmentTool() {
   const { openCalendly } = useCalendly();
@@ -113,10 +113,10 @@ export default function AIAssessmentTool() {
   // Results view
   if (result) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-12">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-blue-500 bg-clip-text text-transparent">
               Your AI Readiness Report
             </h1>
             <p className="text-lg text-slate-600">Personalized AI transformation roadmap</p>
@@ -138,16 +138,16 @@ export default function AIAssessmentTool() {
               <Card key={i} className="bg-white/90 backdrop-blur-lg border-0 shadow-lg rounded-xl">
                 <CardHeader className="p-4">
                   <div className="flex items-start space-x-3">
-                    <div className="p-2 bg-orange-100 rounded-lg shrink-0">
-                      <CheckCircle className="h-5 w-5 text-orange-600" />
+                    <div className="p-2 bg-blue-100 rounded-lg shrink-0">
+                      <CheckCircle className="h-5 w-5 text-blue-600" />
                     </div>
                     <div>
                       <CardTitle className="text-lg mb-1">{rec.title}</CardTitle>
                       <CardDescription className="text-slate-700 mb-2">{rec.description}</CardDescription>
                       <div className="flex flex-wrap gap-2 text-xs">
-                        <Badge className="bg-orange-100 text-orange-700">Priority: {rec.priority}</Badge>
+                        <Badge className="bg-blue-100 text-blue-700">Priority: {rec.priority}</Badge>
                         <Badge className="bg-blue-100 text-blue-700">Timeline: {rec.timeline}</Badge>
-                        <Badge className="bg-green-100 text-green-700">{rec.category}</Badge>
+                        <Badge className="bg-blue-100 text-blue-700">{rec.category}</Badge>
                       </div>
                     </div>
                   </div>
@@ -162,7 +162,7 @@ export default function AIAssessmentTool() {
             <button
               data-testid="assessment-book-btn"
               onClick={openCalendly}
-              className="px-8 py-4 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 inline-flex items-center"
+              className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 inline-flex items-center"
             >
               Book Free Consultation <ArrowRight className="ml-2 h-5 w-5" />
             </button>
@@ -173,10 +173,10 @@ export default function AIAssessmentTool() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-blue-500 bg-clip-text text-transparent">
             AI Readiness Assessment
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
@@ -193,7 +193,7 @@ export default function AIAssessmentTool() {
           </div>
           <div className="w-full bg-slate-200 rounded-full h-2">
             <div
-              className="bg-gradient-to-r from-orange-500 to-green-500 h-2 rounded-full transition-all duration-500"
+              className="bg-gradient-to-r from-blue-500 to-blue-500 h-2 rounded-full transition-all duration-500"
               style={{ width: `${(step / (QUESTIONS.length + 1)) * 100}%` }}
             />
           </div>
@@ -253,7 +253,7 @@ export default function AIAssessmentTool() {
                   data-testid="assessment-start-btn"
                   onClick={() => setStep(1)}
                   disabled={!user.name || !user.email || !user.company}
-                  className="px-6 py-3 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
+                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
                 >
                   Start Assessment <ArrowRight className="ml-2 h-4 w-4" />
                 </button>
@@ -266,7 +266,7 @@ export default function AIAssessmentTool() {
           <Card className="bg-white/90 backdrop-blur-lg border-0 shadow-xl rounded-2xl">
             <CardHeader className="p-8">
               <div className="text-center mb-6">
-                <Badge className="bg-orange-100 text-orange-700 mb-4">{QUESTIONS[step - 1].title}</Badge>
+                <Badge className="bg-blue-100 text-blue-700 mb-4">{QUESTIONS[step - 1].title}</Badge>
                 <CardTitle className="text-2xl mb-4">{QUESTIONS[step - 1].question}</CardTitle>
               </div>
               <div className="space-y-3">
@@ -277,10 +277,10 @@ export default function AIAssessmentTool() {
                       key={i}
                       data-testid={`assessment-option-${step}-${i}`}
                       onClick={() => setResponses({ ...responses, [QUESTIONS[step - 1].id]: { answer: opt.text, score: opt.score } })}
-                      className={`w-full text-left p-4 rounded-xl border-2 transition ${selected ? 'border-orange-500 bg-orange-50' : 'border-slate-200 hover:border-orange-300'}`}
+                      className={`w-full text-left p-4 rounded-xl border-2 transition ${selected ? 'border-blue-500 bg-blue-50' : 'border-slate-200 hover:border-blue-300'}`}
                     >
                       <div className="flex items-center space-x-3">
-                        <div className={`w-4 h-4 rounded-full border-2 ${selected ? 'border-orange-500 bg-orange-500' : 'border-slate-300'}`}>
+                        <div className={`w-4 h-4 rounded-full border-2 ${selected ? 'border-blue-500 bg-blue-500' : 'border-slate-300'}`}>
                           {selected && <div className="w-full h-full rounded-full bg-white scale-50" />}
                         </div>
                         <span className="flex-1 text-slate-700">{opt.text}</span>
@@ -301,7 +301,7 @@ export default function AIAssessmentTool() {
                     data-testid="assessment-submit-btn"
                     onClick={submit}
                     disabled={!responses[QUESTIONS[step - 1].id] || loading}
-                    className="px-6 py-3 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
+                    className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
                   >
                     {loading ? 'Analyzing...' : 'Get My Results'}
                     {!loading && <Target className="ml-2 h-4 w-4" />}
@@ -311,7 +311,7 @@ export default function AIAssessmentTool() {
                     data-testid="assessment-next-btn"
                     onClick={() => setStep(step + 1)}
                     disabled={!responses[QUESTIONS[step - 1].id]}
-                    className="px-6 py-3 bg-gradient-to-r from-orange-500 to-green-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
+                    className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
                   >
                     Next Question <ArrowRight className="ml-2 h-4 w-4" />
                   </button>

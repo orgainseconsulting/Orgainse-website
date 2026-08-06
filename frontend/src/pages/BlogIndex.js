@@ -16,11 +16,11 @@ const formatDate = (iso) => {
 };
 
 const PLACEHOLDER_GRADIENTS = [
-  'from-orange-400 via-rose-400 to-pink-500',
-  'from-sky-400 via-cyan-400 to-blue-500',
-  'from-emerald-400 via-teal-400 to-cyan-500',
-  'from-violet-400 via-purple-400 to-fuchsia-500',
-  'from-amber-400 via-orange-400 to-red-500',
+  'from-blue-400 via-violet-400 to-violet-500',
+  'from-blue-400 via-blue-400 to-blue-500',
+  'from-blue-400 via-blue-400 to-blue-500',
+  'from-violet-400 via-violet-400 to-violet-500',
+  'from-blue-400 via-blue-400 to-blue-500',
   'from-slate-500 via-slate-700 to-slate-900',
 ];
 
@@ -47,20 +47,20 @@ const CoverImage = ({ post }) => {
 
 const BlogCard = ({ post }) => (
   <article
-    className="group flex flex-col bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-lg hover:border-orange-200 transition-all duration-300"
+    className="group flex flex-col bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-lg hover:border-blue-200 transition-all duration-300"
     data-testid={`blog-card-${post.slug}`}
   >
     <Link to={`/blog/${post.slug}`} className="block relative aspect-[16/10] overflow-hidden bg-slate-100">
       <CoverImage post={post} />
       {post.category && (
-        <span className="absolute top-3 left-3 inline-block bg-white/95 backdrop-blur-sm text-orange-700 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
+        <span className="absolute top-3 left-3 inline-block bg-white/95 backdrop-blur-sm text-blue-700 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
           {post.category}
         </span>
       )}
     </Link>
     <div className="flex flex-col flex-1 p-5">
       <Link to={`/blog/${post.slug}`} className="block">
-        <h2 className="text-xl font-bold text-slate-900 group-hover:text-orange-600 transition-colors leading-snug line-clamp-2 mb-2">
+        <h2 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug line-clamp-2 mb-2">
           {post.title}
         </h2>
       </Link>
@@ -138,11 +138,11 @@ const BlogIndexPage = () => {
       {/* Hero */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-20 pb-10">
         <div className="max-w-3xl">
-          <span className="inline-block text-xs font-bold uppercase tracking-[0.18em] text-orange-600 mb-3">
+          <span className="inline-block text-xs font-bold uppercase tracking-[0.18em] text-blue-600 mb-3">
             Insights & Perspectives
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
-            From the Orgainse <span className="text-orange-500">desk</span>
+            From the Orgainse <span className="text-blue-500">desk</span>
           </h1>
           <p className="text-base text-slate-600 mt-4 max-w-2xl">
             Field-tested perspectives on AI-native project management, digital transformation, healthcare revenue intelligence and the long-term shape of work.

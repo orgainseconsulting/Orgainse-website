@@ -52,13 +52,13 @@ const AnalyticsPanel = ({
     <section className="mb-6" data-testid="admin-analytics-panel">
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-sm font-extrabold uppercase tracking-[0.18em] text-slate-700 flex items-center gap-2">
-          <TrendingUp className="h-4 w-4 text-orange-500" /> {title}
+          <TrendingUp className="h-4 w-4 text-blue-500" /> {title}
         </h3>
         {loading && <Loader2 className="h-4 w-4 text-slate-400 animate-spin" />}
       </div>
 
       {error && (
-        <div className="mb-3 flex items-start gap-2 rounded-md border border-rose-200 bg-rose-50 px-3 py-2 text-xs text-rose-700">
+        <div className="mb-3 flex items-start gap-2 rounded-md border border-violet-200 bg-violet-50 px-3 py-2 text-xs text-violet-700">
           <AlertCircle className="h-3.5 w-3.5 mt-0.5 flex-shrink-0" /> {error}
         </div>
       )}

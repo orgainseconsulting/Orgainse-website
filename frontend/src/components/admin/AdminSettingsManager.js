@@ -80,7 +80,7 @@ const AdminSettingsManager = () => {
         <div className="flex items-start justify-between mb-4">
           <div>
             <h3 className="text-lg font-bold text-slate-900 inline-flex items-center gap-2">
-              <KeyRound className="h-5 w-5 text-amber-600" /> Resend API key
+              <KeyRound className="h-5 w-5 text-blue-600" /> Resend API key
             </h3>
             <p className="text-sm text-slate-500">Used to send newsletter campaigns. Stored encrypted at rest.</p>
           </div>
@@ -111,7 +111,7 @@ const AdminSettingsManager = () => {
             <button
               onClick={() => setReplacingKey(true)}
               data-testid="settings-resend-replace-btn"
-              className="text-sm font-semibold text-orange-600 hover:text-orange-800"
+              className="text-sm font-semibold text-blue-600 hover:text-blue-800"
             >
               Replace
             </button>
@@ -166,7 +166,7 @@ const AdminSettingsManager = () => {
       <section className="bg-white border border-slate-200 rounded-xl p-6">
         <div className="mb-4">
           <h3 className="text-lg font-bold text-slate-900 inline-flex items-center gap-2">
-            <Link2 className="h-5 w-5 text-orange-600" /> Book-a-Call fallback URL
+            <Link2 className="h-5 w-5 text-blue-600" /> Book-a-Call fallback URL
           </h3>
           <p className="text-sm text-slate-500">
             <strong>Hosts</strong> are now configured per-admin under <em>Users</em>: open a row and set their designation, photo, booking URL, and custom fields.

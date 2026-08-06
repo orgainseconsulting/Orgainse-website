@@ -39,11 +39,11 @@ const UnsubscribePage = React.lazy(() => import("./pages/Unsubscribe"));
 const RouteFallback = () => (
   <div
     data-testid="route-loading"
-    className="min-h-screen bg-gray-100 flex items-center justify-center"
+    className="min-h-screen bg-white flex items-center justify-center"
   >
     <div className="text-center">
-      <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-orange-500 mx-auto mb-4"></div>
-      <p className="text-gray-600">Loading...</p>
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+      <p className="text-slate-500 text-sm">Loading…</p>
     </div>
   </div>
 );

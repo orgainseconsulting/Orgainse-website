@@ -322,11 +322,11 @@ const AdminDashboard = () => {
 
   if (loading && section === 'leads') {
     return (
-      <div className="min-h-screen bg-gray-100 p-8">
+      <div className="min-h-screen bg-slate-100 p-8">
         <div className="max-w-7xl mx-auto">
           <div className="bg-white rounded-lg shadow p-8 text-center">
             <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
-            <p className="mt-4 text-gray-600">Loading dashboard data...</p>
+            <p className="mt-4 text-slate-600">Loading dashboard data...</p>
           </div>
         </div>
       </div>
@@ -335,7 +335,7 @@ const AdminDashboard = () => {
 
   if (error && section === 'leads') {
     return (
-      <div className="min-h-screen bg-gray-100 p-8">
+      <div className="min-h-screen bg-slate-100 p-8">
         <div className="max-w-7xl mx-auto">
           <div className="bg-white rounded-lg shadow p-8 text-center">
             <div className="text-red-500 mb-4">
@@ -343,8 +343,8 @@ const AdminDashboard = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Error Loading Data</h2>
-            <p className="text-gray-600 mb-4">{error}</p>
+            <h2 className="text-2xl font-bold text-slate-900 mb-2">Error Loading Data</h2>
+            <p className="text-slate-600 mb-4">{error}</p>
             <button 
               onClick={fetchData}
               className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
@@ -375,7 +375,7 @@ const AdminDashboard = () => {
             
             return (
               <div key={tab.id} className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{tab.name}</h3>
+                <h3 className="text-lg font-semibold text-slate-900 mb-2">{tab.name}</h3>
                 <p className="text-3xl font-bold text-blue-600">{tab.count}</p>
                 <div className="mt-3 flex gap-2">
                   <button
@@ -419,7 +419,7 @@ const AdminDashboard = () => {
       <div className="bg-white rounded-lg shadow">
         <div className="p-6 border-b">
           <div className="flex justify-between items-center">
-            <h2 className="text-xl font-bold text-gray-900">{currentTab?.name}</h2>
+            <h2 className="text-xl font-bold text-slate-900">{currentTab?.name}</h2>
             <div className="flex gap-2">
               <button
                 onClick={() => exportToCSV(tabData, activeTab, activeTab)}
@@ -457,17 +457,17 @@ const AdminDashboard = () => {
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50">
+            <thead className="bg-slate-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name/Email</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Details</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Name/Email</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Company</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Details</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Date</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white divide-y divide-slate-200">
               {tabData.map((item, index) => {
                 const collectionMap = {
                   'newsletters': 'newsletter_subscriptions',
@@ -484,21 +484,21 @@ const AdminDashboard = () => {
 
                 return (
                   <React.Fragment key={rowKey}>
-                    <tr className="hover:bg-gray-50" data-testid={`admin-row-${activeTab}-${rowKey}`}>
+                    <tr className="hover:bg-slate-50" data-testid={`admin-row-${activeTab}-${rowKey}`}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div>
-                          <div className="text-sm font-medium text-gray-900">
-                            {n.name || <span className="italic text-gray-400">(no name)</span>}
+                          <div className="text-sm font-medium text-slate-900">
+                            {n.name || <span className="italic text-slate-400">(no name)</span>}
                           </div>
-                          <div className="text-sm text-gray-500">
-                            {n.email || <span className="italic text-gray-400">(no email)</span>}
+                          <div className="text-sm text-slate-500">
+                            {n.email || <span className="italic text-slate-400">(no email)</span>}
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {n.company || <span className="italic text-gray-400">—</span>}
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900">
+                        {n.company || <span className="italic text-slate-400">—</span>}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-900 max-w-md">
+                      <td className="px-6 py-4 text-sm text-slate-900 max-w-md">
                         {activeTab === 'service_inquiries' && item.service_type && (
                           <div className="mb-1">
                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
@@ -507,17 +507,17 @@ const AdminDashboard = () => {
                           </div>
                         )}
                         <div className="whitespace-pre-wrap break-words" title={n.details}>
-                          {n.details || <span className="italic text-gray-400">No details</span>}
+                          {n.details || <span className="italic text-slate-400">No details</span>}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900">
                         {n.submitted_at ? new Date(n.submitted_at).toLocaleDateString() : '—'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
                           n.status === 'active' || n.status === 'new'
-                            ? 'bg-green-100 text-green-800'
-                            : 'bg-gray-100 text-gray-800'
+                            ? 'bg-blue-100 text-blue-800'
+                            : 'bg-slate-100 text-slate-800'
                         }`}>
                           {n.status}
                         </span>
@@ -557,7 +557,7 @@ const AdminDashboard = () => {
             </tbody>
           </table>
           {tabData.length === 0 && (
-            <div className="text-center py-8 text-gray-500">
+            <div className="text-center py-8 text-slate-500">
               No {currentTab?.name.toLowerCase()} yet.
             </div>
           )}
@@ -571,12 +571,12 @@ const AdminDashboard = () => {
           return (
             <div
               data-testid="admin-pagination"
-              className="flex items-center justify-between px-6 py-3 border-t border-gray-200 bg-gray-50"
+              className="flex items-center justify-between px-6 py-3 border-t border-slate-200 bg-slate-50"
             >
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-slate-600">
                 Showing page <span className="font-semibold">{page}</span> of{" "}
                 <span className="font-semibold">{totalPages}</span>
-                <span className="ml-2 text-gray-400">
+                <span className="ml-2 text-slate-400">
                   ({tabData.length} of {totalForTab} records on this page)
                 </span>
               </div>
@@ -585,7 +585,7 @@ const AdminDashboard = () => {
                   data-testid="admin-pagination-prev"
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={page <= 1}
-                  className="px-3 py-1.5 text-sm rounded-md bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="px-3 py-1.5 text-sm rounded-md bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   ← Previous
                 </button>
@@ -593,7 +593,7 @@ const AdminDashboard = () => {
                   data-testid="admin-pagination-next"
                   onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                   disabled={page >= totalPages}
-                  className="px-3 py-1.5 text-sm rounded-md bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="px-3 py-1.5 text-sm rounded-md bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   Next →
                 </button>
@@ -606,20 +606,20 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen bg-slate-100 p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-6">
           <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-1" data-testid="admin-section-title">
+              <h1 className="text-3xl font-bold text-slate-900 mb-1" data-testid="admin-section-title">
                 {section === 'leads' && 'Lead Management Dashboard'}
                 {section === 'blog' && 'Blog Post Management'}
                 {section === 'newsletter' && 'Newsletter Center'}
                 {section === 'users' && 'Admin Users'}
                 {section === 'settings' && 'Settings'}
               </h1>
-              <p className="text-gray-600">
+              <p className="text-slate-600">
                 {section === 'leads' && 'Manage your captured leads by category'}
                 {section === 'blog' && 'Write, publish and manage blog articles'}
                 {section === 'newsletter' && 'Compose issues, manage subscribers, send branded emails'}
@@ -632,7 +632,7 @@ const AdminDashboard = () => {
                 <button
                   onClick={exportAllLeadsToCSV}
                   data-testid="admin-export-all-csv"
-                  className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition-colors flex items-center shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors flex items-center shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3M7 7h10a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V9a2 2 0 012-2z" />
@@ -694,50 +694,50 @@ const AdminDashboard = () => {
                 </svg>
               </div>
               <div className="ml-4">
-                <p className="text-sm text-gray-600">Total Leads</p>
-                <p className="text-2xl font-bold text-gray-900">{data?.summary?.total_leads || 0}</p>
+                <p className="text-sm text-slate-600">Total Leads</p>
+                <p className="text-2xl font-bold text-slate-900">{data?.summary?.total_leads || 0}</p>
               </div>
             </div>
           </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-green-100 rounded-lg">
-                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="p-2 bg-blue-100 rounded-lg">
+                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
               <div className="ml-4">
-                <p className="text-sm text-gray-600">Newsletter Subscribers</p>
-                <p className="text-2xl font-bold text-gray-900">{data?.summary?.breakdown?.newsletters || 0}</p>
+                <p className="text-sm text-slate-600">Newsletter Subscribers</p>
+                <p className="text-2xl font-bold text-slate-900">{data?.summary?.breakdown?.newsletters || 0}</p>
               </div>
             </div>
           </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-purple-100 rounded-lg">
-                <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="p-2 bg-violet-100 rounded-lg">
+                <svg className="w-6 h-6 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
               <div className="ml-4">
-                <p className="text-sm text-gray-600">AI Assessments</p>
-                <p className="text-2xl font-bold text-gray-900">{data?.summary?.breakdown?.ai_assessments || 0}</p>
+                <p className="text-sm text-slate-600">AI Assessments</p>
+                <p className="text-2xl font-bold text-slate-900">{data?.summary?.breakdown?.ai_assessments || 0}</p>
               </div>
             </div>
           </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-yellow-100 rounded-lg">
-                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="p-2 bg-blue-100 rounded-lg">
+                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                 </svg>
               </div>
               <div className="ml-4">
-                <p className="text-sm text-gray-600">Service Inquiries</p>
-                <p className="text-2xl font-bold text-gray-900">{data?.summary?.breakdown?.service_inquiries || 0}</p>
+                <p className="text-sm text-slate-600">Service Inquiries</p>
+                <p className="text-2xl font-bold text-slate-900">{data?.summary?.breakdown?.service_inquiries || 0}</p>
               </div>
             </div>
           </div>
@@ -757,12 +757,12 @@ const AdminDashboard = () => {
                   className={`py-4 px-1 border-b-2 font-medium text-sm ${
                     activeTab === tab.id
                       ? 'border-blue-500 text-blue-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
                   }`}
                 >
                   {tab.name}
                   {tab.count !== undefined && (
-                    <span className="ml-2 px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-900">
+                    <span className="ml-2 px-2 py-1 text-xs rounded-full bg-slate-100 text-slate-900">
                       {tab.count}
                     </span>
                   )}
@@ -809,7 +809,7 @@ const AdminDashboard = () => {
         <div className="text-center">
           <button
             onClick={fetchData}
-            className="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition-colors flex items-center mx-auto"
+            className="bg-slate-600 text-white px-6 py-2 rounded-lg hover:bg-slate-700 transition-colors flex items-center mx-auto"
           >
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />

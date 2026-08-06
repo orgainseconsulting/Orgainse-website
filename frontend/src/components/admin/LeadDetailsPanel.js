@@ -71,7 +71,7 @@ const Section = ({ title, icon: Icon, children, defaultOpen = true, testid }) =>
         className="w-full flex items-center justify-between px-3 py-2 bg-slate-50 hover:bg-slate-100 transition-colors"
       >
         <div className="flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.14em] text-slate-700">
-          {Icon && <Icon className="h-3.5 w-3.5 text-orange-500" />}
+          {Icon && <Icon className="h-3.5 w-3.5 text-blue-500" />}
           {title}
         </div>
         <ChevronDown className={`h-3.5 w-3.5 text-slate-400 transition-transform ${open ? '' : '-rotate-90'}`} />
@@ -127,7 +127,7 @@ const SubmissionBlock = ({ lead, tabKey }) => {
       <Section title="AI Assessment" icon={Sparkles} testid={`lead-section-submission-${tabKey}`}>
         <Row icon={Star} label="Maturity score" value={
           lead.maturity_score != null
-            ? <span><strong className="text-orange-600 text-base">{lead.maturity_score}/100</strong>{lead.score_label ? <span className="ml-2 text-slate-500">({lead.score_label})</span> : null}</span>
+            ? <span><strong className="text-blue-600 text-base">{lead.maturity_score}/100</strong>{lead.score_label ? <span className="ml-2 text-slate-500">({lead.score_label})</span> : null}</span>
             : '—'
         } />
         {recs.length > 0 && (
@@ -200,9 +200,9 @@ const SubmissionBlock = ({ lead, tabKey }) => {
   return (
     <Section title="Newsletter subscription" icon={Mail} testid={`lead-section-submission-${tabKey}`}>
       <Row icon={Activity} label="Status" value={
-        lead.unsubscribed ? <span className="text-rose-600 font-semibold">Unsubscribed</span> :
-        lead.bounced ? <span className="text-amber-600 font-semibold">Bounced</span> :
-        <span className="text-emerald-600 font-semibold">Active</span>
+        lead.unsubscribed ? <span className="text-violet-600 font-semibold">Unsubscribed</span> :
+        lead.bounced ? <span className="text-blue-600 font-semibold">Bounced</span> :
+        <span className="text-blue-600 font-semibold">Active</span>
       } />
       <Row icon={Calendar} label="Confirmed" value={lead.confirmed ? 'Yes' : 'No'} />
       {Array.isArray(lead.tags) && lead.tags.length > 0 && (
