@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react';
  * Lightweight cookie / consent banner.
  * - Stored choice in localStorage under "orgainse_consent"
  * - Two-button: Accept all / Reject non-essential
- * - On reject, we noop (analytics scripts already loaded in index.html;
- *   a fuller implementation should gate them based on this value)
+ * - Drives Google Consent Mode v2: analytics_storage stays "denied" until the
+ *   visitor accepts (default is set in index.html before gtag('js'))
  */
 const STORAGE_KEY = 'orgainse_consent';
 
@@ -15,8 +15,12 @@ export default function CookieBanner() {
   });
 
   useEffect(() => {
-    if (decision === 'accepted' || decision === 'rejected') {
-      try { localStorage.setItem(STORAGE_KEY, decision); } catch { /* ignore */ }
+    if (decision !== 'accepted' && decision !== 'rejected') return;
+    try { localStorage.setItem(STORAGE_KEY, decision); } catch { /* ignore */ }
+    if (typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', {
+        analytics_storage: decision === 'accepted' ? 'granted' : 'denied',
+      });
     }
   }, [decision]);
 

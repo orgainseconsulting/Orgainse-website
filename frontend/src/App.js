@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import { AuthProvider } from "./components/AuthContext";
 import { CalendlyProvider } from "./context/CalendlyContext";
@@ -48,6 +48,24 @@ const RouteFallback = () => (
   </div>
 );
 
+/** Sends a GA4 page_view on every client-side route change (SPA navigation). */
+const RouteAnalytics = () => {
+  const location = useLocation();
+  React.useEffect(() => {
+    if (typeof window.gtag !== "function") return undefined;
+    // let the page's SEOHead update document.title before reporting
+    const id = setTimeout(() => {
+      window.gtag("event", "page_view", {
+        page_path: location.pathname + location.search,
+        page_location: window.location.href,
+        page_title: document.title,
+      });
+    }, 400);
+    return () => clearTimeout(id);
+  }, [location.pathname, location.search]);
+  return null;
+};
+
 function App() {
   return (
     <div className="App">
@@ -55,6 +73,7 @@ function App() {
         <CalendlyProvider>
           <RegionalPricingProvider>
             <BrowserRouter>
+              <RouteAnalytics />
               <MobilePerformanceOptimizer />
               <Navigation />
               <main>

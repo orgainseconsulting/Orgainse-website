@@ -16,6 +16,15 @@ const ServicePopup = ({
   onSubmit,
   openCalendly
 }) => {
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [isOpen, onClose]);
+
   if (!isOpen || !service) return null;
 
   return (
@@ -124,6 +133,42 @@ const ServicePopup = ({
                             <p className="text-slate-800 text-sm leading-relaxed">
                               {service.detailedInfo.notRightFit}
                             </p>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Explicit scope boundaries */}
+                    {(service.detailedInfo.notIncluded || service.detailedInfo.whoWeServe) && (
+                      <div className="grid md:grid-cols-2 gap-4">
+                        {service.detailedInfo.notIncluded && (
+                          <div data-testid={`service-not-included-${service.id}`} className="rounded-xl border border-slate-200 bg-white p-5">
+                            <h4 className="text-sm font-extrabold uppercase tracking-wider text-slate-700 mb-3">
+                              Not included in this service
+                            </h4>
+                            <ul className="space-y-1.5">
+                              {service.detailedInfo.notIncluded.map((item, index) => (
+                                <li key={index} className="flex items-start gap-2 text-sm text-slate-700 leading-relaxed">
+                                  <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-slate-400 flex-shrink-0" />
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                        {service.detailedInfo.whoWeServe && (
+                          <div data-testid={`service-who-we-serve-${service.id}`} className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+                            <h4 className="text-sm font-extrabold uppercase tracking-wider text-blue-700 mb-3">
+                              Who we serve
+                            </h4>
+                            <ul className="space-y-1.5">
+                              {service.detailedInfo.whoWeServe.map((item, index) => (
+                                <li key={index} className="flex items-start gap-2 text-sm text-slate-700 leading-relaxed">
+                                  <CheckCircle className="h-4 w-4 text-blue-500 flex-shrink-0 mt-0.5" />
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
                           </div>
                         )}
                       </div>

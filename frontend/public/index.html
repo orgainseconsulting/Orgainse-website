@@ -43,11 +43,22 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-F48RFBBEP7', {
-      page_title: document.title,
-      page_location: window.location.href
+
+    // Consent Mode v2 — analytics stays denied until the visitor accepts
+    var orgainseConsent = null;
+    try { orgainseConsent = localStorage.getItem('orgainse_consent'); } catch (e) {}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: orgainseConsent === 'accepted' ? 'granted' : 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted'
     });
+
+    gtag('js', new Date());
+    gtag('config', 'G-F48RFBBEP7');
+    gtag('config', 'GT-NSSVHXXP');
   </script>
 
   <!-- ─── SEO ─────────────────────────────────────────────────────── -->
