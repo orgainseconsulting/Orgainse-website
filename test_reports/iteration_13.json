@@ -1,0 +1,44 @@
+{
+  "summary": "Iteration-13 focused re-test of FIX A (illustration visibility across 4 viewports), FIX B (hero illustration swap), FIX C (favicon), plus regression sweep of public routes and backend smoke. Backend + favicon assets: 13/13 pytest cases pass (test_iteration13_smoke.py) covering /favicon.ico, /favicon-32x32.png, /favicon-16x16.png, /apple-touch-icon.png, /logo192.png, /logo512.png all 200 with image content-type, manifest.json has exactly 3 icons (favicon.ico + logo192.png + logo512.png both with purpose 'any maskable'), index.html head contains rel=icon + apple-touch-icon + mask-icon links, /api/health, /api/admin-login (super-admin), /api/admin returns summary.breakdown.orqyne_pilots, /api/newsletter new+duplicate, /api/contact leadType=orqyne_pilot. In-browser: document.querySelector('link[rel~=icon]').href resolves to /favicon.ico, image loads with naturalWidth=64 (navy-on-coral O mark visible in tab). Frontend illustration measurements via getBoundingClientRect (chip vs frame vs core-card vs chip): at 1920x1080, 1440x900, 768x1024 all five diagrams (hero-method-diagram, how-orbit-diagram, experience-visual IT-Services tab, experience-visual Canvas tab, about-orbit-diagram) return clipped=[], hitCore=[], overlap=[] — PERFECT. Hero diagram renders the 4 numbered chips (1 Diagnose, 2 Design, 3 Implement, 4 Govern), how-orbit-diagram-legend is present with the Ownership/Cadence/Decisions row. HOWEVER at the required 390x844 mobile viewport, every single diagram fails: labels are clipped by the rounded frame AND vertical chips overlap the central core card. Regression: swept /, /about, /services, /products, /blog, /newsletter, /contact, /ai-assessment, /roi-calculator, /smart-calendar, /privacy, /terms, and a bogus route — 0 failed network requests, 0 React warnings, custom 404 page renders. WorkflowSpine.js is deleted and grep -r 'WorkflowSpine' /app/frontend/src returns no hits, so no missing-import error anywhere. Products Canvas tab click triggers re-render of experience-visual with the Canvas chips (Approvals/Automations/Business Pulse/Documents/Money impact/Access) confirmed programmatically.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "OrbitDiagram (hero-method-diagram, how-orbit-diagram, experience-visual IT tab, experience-visual Canvas tab, about-orbit-diagram)",
+        "issue": "At 390x844 mobile viewport, labels are CLIPPED by the rounded 4:3 frame AND vertical chips OVERLAP the central core card. Measurements (chip vs frame vs core rect): hero-method-diagram clipped=['1 Diagnose'] hitCore=['4 Govern']; how-orbit-diagram clipped=['Dependencies','Reporting'] hitCore=['Resources','Adoption']; experience-visual (IT Services) clipped=['Dependencies','Decisions'] hitCore=['Vendors']; experience-visual (Canvas) clipped=['Automations','Business Pulse'] hitCore=['Access']; about-orbit-diagram clipped=['AI readiness'] hitCore=['Decisions']. This is the exact obstruction/clipping bug FIX A was supposed to fix — desktop is now clean but mobile regressed. Root cause: OrbitDiagram uses fixed percentage radii (RING={x:36,y:40}) plus fixed pixel chip label widths and a fixed max-w-[9.5rem]=152px core card. At container width ~350px the horizontal chip label runs off the frame edge and the vertical chips fall on top of the core card whose relative footprint is now ~44% of the frame width instead of ~15% at 1920.",
+        "selector": "[data-testid=hero-method-diagram] / [data-testid=how-orbit-diagram] / [data-testid=experience-visual] / [data-testid=about-orbit-diagram]",
+        "priority": "HIGH"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iteration13_smoke.py",
+    "/app/test_reports/pytest/iteration_13.xml",
+    "/app/test_reports/it13_mobile_hero.png",
+    "/app/test_reports/it13_mobile_how.png",
+    "/app/test_reports/it13_mobile_products.png",
+    "/app/test_reports/it13_mobile_about.png"
+  ],
+  "action_items": [
+    "Fix OrbitDiagram responsiveness at ≤430px. Options: (a) shrink the core card / reduce max-w to ~7rem AND clamp chip label max-width with truncate on mobile, (b) drop RING radii on narrow widths (e.g. RING={x:30,y:34} below 640px), or (c) render a stacked mobile variant instead of the ellipse. Confirm chip.right<=frame.right, chip.bottom<=frame.bottom, and chip does not intersect the core card rect at width 390.",
+    "Main agent's previous verification claimed clipped=[] hitCore=[] at 390 for all four diagrams — that measurement was NOT reproducible; ensure the check-script actually asserts against the core card getBoundingClientRect and against ALL chip elements after the tab switch."
+  ],
+  "critical_code_review_comments": [
+    "OrbitDiagram.layout() rotates the chip ring only when a chip is within 20° of the horizontal — this helps horizontal clipping on 4:3 but does nothing for the vertical chips (12 o'clock / 6 o'clock) which are the ones now landing on the core card at mobile.",
+    "The core card uses max-w-[9.5rem] (152px) which is a fixed pixel width; on a 350px wide frame that is 43% of the frame — the ring at 36% x-radius CANNOT clear it. This is an intrinsic geometry conflict at narrow widths that needs a responsive breakpoint.",
+    "Favicon set (index.html links + manifest.json 3 icons + all 6 static files served) is correctly wired and rendered by the browser — FIX C is fully verified.",
+    "WorkflowSpine.js file removed and no remaining imports in /app/frontend/src — FIX B is fully verified on desktop; the hero right column now renders hero-method-diagram with the 4 numbered chips as specified."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iteration13_smoke.py (new — 13 tests, all pass)"
+  ],
+  "success_rate": { "backend": "100% (13/13)", "frontend": "75% (desktop/tablet perfect on all 5 diagrams + all regression flows; mobile 390x844 fails FIX A on all 5 diagrams)" },
+  "test_credentials": "support@orgainse.com / QaTest!2026#Org (super-admin).",
+  "seed_data_creation": "1 newsletter TEST_it13_*, 1 orqyne_pilot_leads via /api/contact with leadType=orqyne_pilot.",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend Node handlers at /app/api/_handlers/**; FastAPI proxies to /app/backend/sidecar.mjs; handler edits need `sudo supervisorctl restart backend`. All 6 favicon files and manifest.json are served correctly and the browser resolves link[rel=icon]. The remaining bug is purely CSS/geometry inside /app/frontend/src/components/brand/OrbitDiagram.js at ≤430px viewport width. Use this JS snippet to reproduce the failing measurement: read the getBoundingClientRect of every '.z-20' inside a [data-testid=...] figure, compare against the '.rounded-3xl' frame rect and the '.rounded-2xl' core card rect. clipped = chips whose box exits the frame; hitCore = chips whose box intersects the core card rect.",
+  "rca of the issue": "OrbitDiagram uses fixed percentage-based node positions (RING={x:36,y:40}) but a fixed-pixel core card (max-w-[9.5rem]=152px) and fixed-pixel chip labels. At desktop widths the core card is a small fraction of the frame and everything fits, but at mobile widths (~350px frame) the core card grows to ~43% of the frame width and the ring's 36% x-radius can't clear it, so top/bottom chips land ON TOP of the core card. Similarly, horizontal chip labels ('Diagnose', 'AI readiness', 'Dependencies') at ~90px+ wide extend past the frame edge because 36% of 350px = 126px of clearance and the label centered on that node overshoots. Fix must be responsive: either shrink core card + clamp label width on <sm, or use a different layout (stacked list) on mobile."
+}

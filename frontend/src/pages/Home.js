@@ -29,7 +29,6 @@ import { api } from "../lib/api";
 import SEOHead from "../components/SEOHead";
 import SocialShare from "../components/SocialShare";
 import GridBackdrop from "../components/brand/GridBackdrop";
-import WorkflowSpine from "../components/brand/WorkflowSpine";
 import OrbitDiagram from "../components/brand/OrbitDiagram";
 import { useCalendly } from "../context/CalendlyContext";
 
@@ -255,7 +254,14 @@ const Home = () => {
             </div>
 
             <div className="lg:col-span-5">
-              <WorkflowSpine title="From problem to operating system" steps={STEPS} testId="hero-spine" />
+              <OrbitDiagram
+                coreLabel="Operating System"
+                coreSub="The Orgainse method"
+                coreIcon={Network}
+                innerChips={STEPS.map((s, i) => ({ label: s.label, badge: i + 1 }))}
+                caption="The Orgainse method — diagnose, design, implement, govern."
+                testId="hero-method-diagram"
+              />
             </div>
           </div>
 
