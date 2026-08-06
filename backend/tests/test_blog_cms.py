@@ -5,7 +5,7 @@ import time
 import pytest
 import requests
 
-BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "https://orgainse-dashboard.preview.emergentagent.com").rstrip("/")
+BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "https://cms-dashboard-23.preview.emergentagent.com").rstrip("/")
 ADMIN_USERNAME = "orgainse_admin"
 ADMIN_PASSWORD = "Org@iNs3-Adm!n-2026-x7P9qK"
 
