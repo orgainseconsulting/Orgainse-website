@@ -1,0 +1,51 @@
+{
+  "summary": "Frontend-only verification of the OrbitDiagram mobile fix (iteration 14). All 5 constellation illustrations render cleanly at 360x780, 390x844 and 430x932 with data-layout='stacked'; all 5 render 'orbit' at 1440x900 and 768x1024. 60/60 chip-vs-frame, chip-vs-core and chip-vs-chip checks reported clipped=[], hitCore=[], overlaps=[]. Container-shrink guard exercised on hero-method-diagram, how-orbit-diagram and about-orbit-diagram at 10 widths (300-700px) — all clean, layout flips as designed (6-chip diagrams flip at ~460px, 4-chip hero at ~445px). No ResizeObserver loop warnings, no React warnings, no pageerror on any of the 13 tested routes. Favicon assets and manifest.json (3 icons) all serve 200 with correct content types. FAQ accordion, newsletter subscribe (success + duplicate detection) all functional. Only console noise is external analytics/CDN calls (analytics.google.com, va.vercel-scripts.com, cdn-cgi) blocked in the sandbox — not app bugs.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "measurement_evidence": {
+    "mobile_390x844": {
+      "hero-method-diagram": {"layout": "stacked", "frameWidth": 332, "clipped": [], "hitCore": [], "overlaps": []},
+      "how-orbit-diagram": {"layout": "stacked", "frameWidth": 332, "clipped": [], "hitCore": [], "overlaps": []},
+      "about-orbit-diagram": {"layout": "stacked", "frameWidth": 348, "clipped": [], "hitCore": [], "overlaps": []},
+      "experience-visual IT tab": {"layout": "stacked", "frameWidth": 332, "clipped": [], "hitCore": [], "overlaps": []},
+      "experience-visual Canvas tab": {"layout": "stacked", "frameWidth": 332, "clipped": [], "hitCore": [], "overlaps": []}
+    },
+    "mobile_360x780_all_pass": true,
+    "mobile_430x932_all_pass": true,
+    "tablet_768_all_orbit_pass": true,
+    "desktop_1440_all_orbit_pass": true,
+    "container_shrink_how_orbit": "10 widths 300-700 → 0 failures, flip 445→460",
+    "container_shrink_hero_method": "10 widths 300-700 → 0 failures, flip 430→445",
+    "container_shrink_about_orbit": "10 widths 300-700 → 0 failures, flip 430→445",
+    "products_tab_switch_1440": "IT and Canvas both render orbit cleanly",
+    "products_tab_switch_390": "Canvas tab after switch renders stacked cleanly"
+  },
+  "regression_checks": {
+    "routes_no_errors": ["/", "/about", "/services", "/products", "/blog", "/newsletter", "/contact", "/ai-assessment", "/roi-calculator", "/smart-calendar", "/privacy", "/terms", "/does-not-exist-404"],
+    "resize_observer_warnings": 0,
+    "react_warnings": 0,
+    "favicon_assets": "favicon.ico, favicon-32x32.png, favicon-16x16.png, apple-touch-icon.png, logo192.png, logo512.png all 200 with correct image mime; manifest.json has 3 icons",
+    "faq_accordion": "clickable",
+    "newsletter_subscribe": "first submit shows success ('Subscribed...'), duplicate shows already-subscribed message"
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "OrbitDiagram.js is a clean, self-contained 262-line component; measurement guard using ResizeObserver + rAF + document.fonts.ready is well-scoped and produced zero loop warnings in testing.",
+    "Minor: the containment-guard useEffect calls setCompact(true) but never resets to false when the frame grows again — because lastWidth guard in the width watcher only calls setCompact based on ORBIT_MIN_WIDTH threshold. In practice this is fine (once forced compact by measurement, resizing back triggers width watcher which recomputes), but if a chip measured badly at exactly borderline width the diagram could stay stacked slightly longer than optimal after widening. Not a defect; noting for awareness.",
+    "The Core inner-div coreCard lookup in test relied on '.font-outfit' → closest('div'); production code correctly uses forwardRef'd Core with coreRef.",
+    "REQFAIL entries for /api/app-settings/public and /api/geo on first page load appear once at boot — likely retried by the app and non-fatal; not tied to this fix but worth watching."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "not tested (skipped per request)", "frontend": "100%"},
+  "test_credentials": "N/A for this run (frontend-only, no admin flows exercised beyond public UI)",
+  "seed_data_creation": "One newsletter subscribe test email created (test_it14_<ts>@example.com)",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "OrbitDiagram mobile fix is verified. Approach that worked: set_viewport_size BEFORE goto, then also use the container-shrink JS technique (fig.parentElement.style.width) to force the frame through borderline widths. The audit JS in this run’s script correctly identifies chip elements via `span.flex.items-center.gap-1\\.5.whitespace-nowrap` — reuse it. External analytics REQFAILs are expected sandbox noise, filter them out.",
+  "rca of the issue": "Prior obstruction bug (iteration_13): the constellation used a single orbit ellipse whose x-radius (36% of frame) could not clear a legible ~150px core card inside phone-width frames (~330px). Fix in iteration_14 is architectural, not geometric: OrbitDiagram now switches to a stacked variant (core on top, chip pills wrapping beneath) whenever the measured frame width is below ORBIT_MIN_WIDTH=440, and a post-render measurement effect re-checks every chip's bounding rect against the frame rect and core-card rect; if any chip is clipped or intersects the core it downgrades to stacked. Effect re-runs on ResizeObserver, requestAnimationFrame, and document.fonts.ready. Verified: 60 checks × 5 diagrams × 5 viewports + 30 container-shrink checks → 0 failures."
+}
