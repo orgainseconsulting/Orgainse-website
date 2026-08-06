@@ -202,9 +202,9 @@ const About = () => {
               {/* The Engine - Top Right */}
               <div className="relative animate-fade-in" style={{ animationDelay: '400ms' }}>
                 <div className="absolute -top-4 -right-4 w-full h-full bg-gradient-to-br from-blue-600 to-violet-600 rounded-3xl transform rotate-0 opacity-20"></div>
-                <Card className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-violet-600 text-slate-800 border-none shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 hover:rotate-0 group overflow-hidden">
-                  <div className="absolute top-0 left-0 w-28 h-28 bg-blue-500 opacity-20 rounded-full transform -translate-x-4 -translate-y-4"></div>
-                  <div className="absolute bottom-0 right-0 w-36 h-36 bg-blue-500 opacity-20 rounded-full transform translate-x-6 translate-y-6"></div>
+                <Card className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-violet-600 text-white border-none shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 hover:rotate-0 group overflow-hidden">
+                  <div className="absolute top-0 left-0 w-28 h-28 bg-white opacity-10 rounded-full transform -translate-x-4 -translate-y-4"></div>
+                  <div className="absolute bottom-0 right-0 w-36 h-36 bg-white opacity-10 rounded-full transform translate-x-6 translate-y-6"></div>
                   
                   <CardContent className="p-6 sm:p-6 md:p-8 relative z-10">
                     <div className="flex items-center space-x-3 sm:space-x-4 mb-4 sm:mb-6">
@@ -212,22 +212,22 @@ const About = () => {
                         <Zap className="h-8 w-8 text-blue-600" />
                       </div>
                       <div>
-                        <h3 className="text-xl sm:text-2xl font-bold">The Engine</h3>
-                        <p className="text-blue-800 font-medium">Innovation & Growth</p>
+                        <h3 className="text-xl sm:text-2xl font-bold text-white">The Engine</h3>
+                        <p className="text-blue-100 font-medium">Innovation & Growth</p>
                       </div>
                     </div>
                     
-                    <p className="text-sm leading-relaxed text-blue-900">
+                    <p className="text-sm leading-relaxed text-blue-50">
                       Pure momentum through <span className="font-bold">GPT-powered project planning</span>. Harnesses cutting-edge 
                       <span className="font-bold"> AI operational optimization </span>, breakthrough technologies, and 
                       revolutionary thinking to propel clients beyond their competition.
                     </p>
                     
                     <div className="mt-6 flex items-center space-x-2">
-                      <div className="flex-1 h-2 bg-blue-300 rounded-full overflow-hidden">
-                        <div className="h-full bg-blue-600 rounded-full animate-pulse" style={{width: '95%'}}></div>
+                      <div className="flex-1 h-2 bg-blue-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-white rounded-full animate-pulse" style={{width: '95%'}}></div>
                       </div>
-                      <span className="text-xs text-blue-800">Power: 95%</span>
+                      <span className="text-xs text-blue-100">Power: 95%</span>
                     </div>
                   </CardContent>
                 </Card>

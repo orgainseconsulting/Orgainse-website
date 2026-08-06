@@ -478,3 +478,34 @@ submitted before the fix remain in `contact_messages` — expected data history.
 - P1: Rolling 7-day sparkline per post/issue in Admin Analytics.
 - P2: Welcome / set-your-password email for new admins (Resend).
 - P2: Dynamic public `/about/team` page from Admin host profiles.
+
+## Round 3 (June 15, 2026) — hero illustration swap, favicon, mobile illustration fix, Engine card contrast
+
+1. **Home hero** now shows the constellation illustration instead of the text step
+   list: `hero-method-diagram` with 4 numbered chips (Diagnose/Design/Implement/Govern)
+   around an "Operating System · The Orgainse method" core. `WorkflowSpine.js` deleted.
+2. **Favicon = company logo mark.** Generated from the leading "O" of
+   `orgainse-logo.png`: `favicon.ico` (16/32/48/64), `favicon-16x16.png`,
+   `favicon-32x32.png`, `apple-touch-icon.png` (180), `logo192.png`, `logo512.png`;
+   wired into `index.html` (icon / apple-touch-icon / mask-icon) and `manifest.json`
+   (3 icons, `purpose: any maskable`).
+3. **Illustration obstruction fix (`brand/OrbitDiagram.js`)** — two real root causes:
+   - Labels hung inward from their node and were covered by the core card → secondary
+     labels moved to a legend row under the frame; single chip ring only.
+   - An ellipse with a 36% x-radius **cannot** clear a legible ~152px core card in a
+     ~350px frame → below `ORBIT_MIN_WIDTH` (440px measured **frame** width, via
+     ResizeObserver) the component renders a **stacked** layout (core on top, chips in
+     a wrapped pill row). A second effect measures every chip against the frame and
+     core rects after paint (and after `document.fonts.ready`) and downgrades to
+     stacked if anything would clip or overlap — so it is self-correcting for any
+     label length. Frame exposes `data-layout="orbit|stacked"` for testing.
+   - `layout()` also rotates the ring by half a step when a chip would land within
+     20° of the horizontal axis.
+   - iteration_14: 60/60 containment checks clean at 360/390/430/768/1440, container
+     shrink clean at 10 widths from 300–700px, no ResizeObserver loop warnings.
+   - NOTE for future agents: `page.set_viewport_size()` after load did NOT resize the
+     page in this environment — measure the element's own width or shrink its parent.
+4. **About "The Engine" card** was left with `text-slate-800` / `text-blue-800/900`
+   on a blue→violet gradient after the palette migration (unreadable). Now white
+   heading, `blue-100` subtitle, `blue-50` body, white progress bar — matching the
+   other three ecosystem cards.
