@@ -134,6 +134,29 @@ const Contact = () => {
 
   return (
     <div id="contact" className="min-h-screen">
+      <SEOHead
+        title="Contact Orgainse Consulting | Book an Execution Discovery Call"
+        description="Bring one important execution problem to a focused 30-minute discovery call. Orgainse works with teams across India, the USA, the UK, the UAE, Australia, New Zealand and South Africa."
+        canonical="https://orgainse.com/contact"
+        keywords="contact Orgainse Consulting, book a discovery call, PMaaS enquiry, delivery governance consultation, ORQYNE demo"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          name: "Contact Orgainse Consulting",
+          url: "https://orgainse.com/contact",
+          mainEntity: {
+            "@type": "Organization",
+            name: "Orgainse Consulting",
+            url: "https://orgainse.com/",
+            email: "info@orgainse.com",
+            contactPoint: [
+              { "@type": "ContactPoint", telephone: "+91-9740384683", contactType: "sales", email: "info@orgainse.com", areaServed: ["IN", "US", "GB", "AE", "AU", "NZ", "ZA"] },
+              { "@type": "ContactPoint", telephone: "+91-9740394863", contactType: "customer support", email: "support@orgainse.com", areaServed: ["IN", "US", "GB", "AE", "AU", "NZ", "ZA"] }
+            ]
+          }
+        }}
+      />
+
       {/* Revolutionary Hero Section with SEO */}
       <section className="relative bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12 lg:py-16 overflow-hidden">
         {/* Dynamic Background Elements */}

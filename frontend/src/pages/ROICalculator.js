@@ -7,6 +7,7 @@ import { Badge } from '../components/ui/badge';
 import { api } from '../lib/api';
 import { openBookingPage } from '../lib/booking';
 import { useCalendly } from '../context/CalendlyContext';
+import SEOHead from '../components/SEOHead';
 
 const INDUSTRIES = [
   'IT Services & Software',
@@ -17,8 +18,12 @@ const INDUSTRIES = [
 const SIZES = ['1-10', '11-50', '51-200', '201-500', '500+'];
 
 const SERVICES = [
-  'AI Project Management', 'Digital Transformation', 'Operational Optimization',
-  'Business Strategy Development', 'Healthcare Revenue Intelligence Advisory', 'Risk Management & Compliance',
+  'Project Management as a Service (PMaaS)',
+  'AI & Workflow Transformation',
+  'Delivery & Operational Governance',
+  'ORQYNE Implementation & Adoption',
+  'AI Strategy & Readiness',
+  'Healthcare Revenue Intelligence Advisory',
 ];
 
 const REGIONS = [
@@ -80,6 +85,12 @@ export default function ROICalculator() {
     const sym = result.currency_symbol || '$';
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
+        <SEOHead
+          title="Return on Investment Calculator | Orgainse Consulting"
+          description="Model potential time, capacity, cost and operating effects using assumptions specific to your organisation. A planning scenario, not a guarantee of results."
+          canonical="https://orgainse.com/roi-calculator"
+          keywords="ROI calculator, project management ROI, delivery efficiency modelling, AI investment scenario"
+        />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
@@ -149,13 +160,19 @@ export default function ROICalculator() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
+      <SEOHead
+        title="Return on Investment Calculator | Orgainse Consulting"
+        description="Model potential time, capacity, cost and operating effects using assumptions specific to your organisation. A planning scenario, not a guarantee of results."
+        canonical="https://orgainse.com/roi-calculator"
+        keywords="ROI calculator, project management ROI, delivery efficiency modelling, AI investment scenario"
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
             ROI Calculator
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Calculate your potential return on investment from AI transformation services.
+            Model potential time, capacity and cost effects using your own assumptions. A planning scenario, not a guarantee of results.
           </p>
         </div>
 
@@ -263,6 +280,12 @@ export default function ROICalculator() {
 function Field({ label, children }) {
   return (
     <div>
+      <SEOHead
+        title="Return on Investment Calculator | Orgainse Consulting"
+        description="Model potential time, capacity, cost and operating effects using assumptions specific to your organisation. A planning scenario, not a guarantee of results."
+        canonical="https://orgainse.com/roi-calculator"
+        keywords="ROI calculator, project management ROI, delivery efficiency modelling, AI investment scenario"
+      />
       <label className="block text-sm font-medium text-slate-700 mb-2">{label}</label>
       {children}
     </div>
@@ -288,6 +311,12 @@ function MetricCard({ icon: Icon, title, value, color, testId }) {
 function ImpactRow({ label, value }) {
   return (
     <div className="bg-slate-50 rounded-xl p-4 text-center">
+      <SEOHead
+        title="Return on Investment Calculator | Orgainse Consulting"
+        description="Model potential time, capacity, cost and operating effects using assumptions specific to your organisation. A planning scenario, not a guarantee of results."
+        canonical="https://orgainse.com/roi-calculator"
+        keywords="ROI calculator, project management ROI, delivery efficiency modelling, AI investment scenario"
+      />
       <div className="text-sm text-slate-600 mb-1">{label}</div>
       <div className="text-2xl font-bold text-blue-600">{value}</div>
     </div>

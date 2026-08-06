@@ -8,14 +8,15 @@ import { Badge } from '../components/ui/badge';
 import { api } from '../lib/api';
 import { BOOKING_URL } from '../lib/booking';
 import { useCalendly } from '../context/CalendlyContext';
+import SEOHead from '../components/SEOHead';
 
 const SERVICE_TYPES = [
-  'AI Project Management Service (PMaaS)',
-  'Digital Transformation Consulting',
-  'AI Operational Optimization',
-  'Business Strategy Development',
+  'Project Management as a Service (PMaaS)',
+  'Artificial Intelligence & Workflow Transformation',
+  'Delivery & Operational Governance',
+  'ORQYNE Implementation & Adoption',
+  'Artificial Intelligence Strategy & Readiness',
   'Healthcare Revenue Intelligence Advisory',
-  'Risk Management & Compliance',
   'General Consultation',
 ];
 
@@ -61,6 +62,12 @@ export default function SmartCalendar() {
   if (result) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
+        <SEOHead
+          title="Book a Discovery Call | Orgainse Consulting"
+          description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
+          canonical="https://orgainse.com/smart-calendar"
+          keywords="book a consultation, discovery call, delivery consulting appointment, PMaaS consultation"
+        />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-r from-blue-600 to-violet-600 mb-6 mx-auto">
@@ -122,6 +129,12 @@ export default function SmartCalendar() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
+      <SEOHead
+        title="Book a Discovery Call | Orgainse Consulting"
+        description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
+        canonical="https://orgainse.com/smart-calendar"
+        keywords="book a consultation, discovery call, delivery consulting appointment, PMaaS consultation"
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
@@ -234,6 +247,12 @@ export default function SmartCalendar() {
 function Field({ label, children }) {
   return (
     <div>
+      <SEOHead
+        title="Book a Discovery Call | Orgainse Consulting"
+        description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
+        canonical="https://orgainse.com/smart-calendar"
+        keywords="book a consultation, discovery call, delivery consulting appointment, PMaaS consultation"
+      />
       <label className="block text-sm font-medium text-slate-700 mb-2">{label}</label>
       {children}
     </div>
@@ -243,6 +262,12 @@ function Field({ label, children }) {
 function DetailRow({ label, value }) {
   return (
     <div>
+      <SEOHead
+        title="Book a Discovery Call | Orgainse Consulting"
+        description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
+        canonical="https://orgainse.com/smart-calendar"
+        keywords="book a consultation, discovery call, delivery consulting appointment, PMaaS consultation"
+      />
       <label className="text-sm font-medium text-slate-600">{label}</label>
       <p className="text-lg font-semibold text-slate-800">{value || '—'}</p>
     </div>
@@ -253,6 +278,12 @@ function PerkRow({ icon: Icon, color, label }) {
   const bg = { orange: 'bg-blue-100 text-blue-600', green: 'bg-blue-100 text-blue-600', blue: 'bg-blue-100 text-blue-600' }[color];
   return (
     <div className="text-center">
+      <SEOHead
+        title="Book a Discovery Call | Orgainse Consulting"
+        description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
+        canonical="https://orgainse.com/smart-calendar"
+        keywords="book a consultation, discovery call, delivery consulting appointment, PMaaS consultation"
+      />
       <div className={`inline-flex items-center justify-center w-10 h-10 rounded-full ${bg} mb-2`}>
         <Icon className="h-5 w-5" />
       </div>

@@ -6,6 +6,7 @@ import { Input } from '../components/ui/input';
 import { Badge } from '../components/ui/badge';
 import { api } from '../lib/api';
 import { useCalendly } from '../context/CalendlyContext';
+import SEOHead from '../components/SEOHead';
 
 const QUESTIONS = [
   {
@@ -114,6 +115,12 @@ export default function AIAssessmentTool() {
   if (result) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
+        <SEOHead
+          title="Free AI Readiness Assessment | Orgainse Consulting"
+          description="Evaluate your organisation across strategy, processes, data, governance, technology and adoption readiness. A directional view of strengths, gaps and priorities — not a certification."
+          canonical="https://orgainse.com/ai-assessment"
+          keywords="AI readiness assessment, AI maturity evaluation, AI adoption readiness, free AI assessment"
+        />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
@@ -174,6 +181,12 @@ export default function AIAssessmentTool() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
+      <SEOHead
+        title="Free AI Readiness Assessment | Orgainse Consulting"
+        description="Evaluate your organisation across strategy, processes, data, governance, technology and adoption readiness. A directional view of strengths, gaps and priorities — not a certification."
+        canonical="https://orgainse.com/ai-assessment"
+        keywords="AI readiness assessment, AI maturity evaluation, AI adoption readiness, free AI assessment"
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
