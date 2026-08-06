@@ -509,3 +509,50 @@ submitted before the fix remain in `contact_messages` — expected data history.
    on a blue→violet gradient after the palette migration (unreadable). Now white
    heading, `blue-100` subtitle, `blue-50` body, white progress bar — matching the
    other three ecosystem cards.
+
+## Round 4 (June 15, 2026) — About + Services rewrite, Google Analytics, popup fixes
+
+### About + Services enterprise rewrite (iteration_15: 100%)
+The client document only contained Home + ORQYNE copy, so About and Services were
+rewritten in the same voice using the document's six verbatim service descriptions,
+the four-stage method, the audience definitions and its disclaimers.
+- **Services.js**: services array replaced with the six document services
+  (`pmaas`, `ai-workflow-transformation`, `delivery-governance`, `orqyne-implementation`,
+  `ai-strategy-readiness`, `healthcare-revenue-intelligence`), each with
+  `detailedInfo {whatItDoes, whyChooseUs, whatYouGet, benefits, industries}` plus
+  `{rightFit, notRightFit, notIncluded, whoWeServe}` for healthcare. Hero rebuilt
+  (cartoon robot graphics removed, GridBackdrop + left-aligned enterprise hero),
+  section headers, FAQ replaced with 4 honest categories, SEOHead + Service/FAQPage JSON-LD added.
+- **About.js**: hero, fact bullets, the ecosystem section (now "How Orgainse Works"
+  with Diagnose / Design / Implement / Govern and "Output · …" instead of invented
+  percentages), Mission, Vision and C.O.R.E. values all rewritten; SEOHead + AboutPage JSON-LD.
+- **Retired claim language removed site-wide**: "GPT-powered", "AI-Powered Services",
+  "Perfect Harmony", the fake 85/95/88/95% bars, "SOC 2", "GDPR adherence",
+  "full refund / performance guarantee", "24/7", "200+ software platforms".
+
+### Google Analytics (iteration_16 + 17: 100%)
+- `public/index.html`: single gtag.js loader for **G-F48RFBBEP7** plus config calls for
+  **both G-F48RFBBEP7 and GT-NSSVHXXP**.
+- **Consent Mode v2**: defaults set BEFORE `gtag('js')`, reading `localStorage
+  orgainse_consent`; analytics_storage stays `denied` until the visitor accepts.
+  `CookieBanner.js` pushes `gtag('consent','update',…)` on accept/reject, and the
+  choice persists across reloads — so the banner's promise is now actually honoured.
+- **SPA page views**: `RouteAnalytics` in `App.js` (inside BrowserRouter, uses
+  `useLocation`) fires `gtag('event','page_view')` 400 ms after each route change so
+  the page's SEOHead can update `document.title` first.
+- **SEOHead added to /contact, /ai-assessment, /roi-calculator, /smart-calendar**
+  (including the tool pages' results views) — these had no title/meta at all, which was
+  making GA report stale titles. All 13 SPA routes now report a unique, matching title.
+
+### Fixes from iteration_15 findings
+- `ServicePopup.js`: Escape key now closes the popup; the Healthcare popup renders its
+  `notIncluded` ("Not included in this service") and `whoWeServe` blocks.
+- ROI Calculator "Services of Interest" and Smart Calendar "Service Type" lists resynced
+  to the six current services (retired options removed) so lead data stays consistent.
+
+### Backlog after this round
+- P1: "Get Paid" creator-economy section + "Team Chat by Plan" from orgainse.live → Products.
+- P1: Rolling 7-day sparkline per post/issue in Admin Analytics.
+- P2: Instant confirmation email to the prospect + alert to Orgainse on new pilot/contact leads (Resend).
+- P2: Welcome / set-your-password email for new admins.
+- P2: Dynamic public `/about/team` page from Admin host profiles.
