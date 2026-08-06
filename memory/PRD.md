@@ -311,3 +311,95 @@ local dev (preview pod).
   `{"detail": "..."}` error envelope. The JS handlers use `{"error": "..."}`.
   Tests assertions need a one-line update (`.get("detail")` → `.get("error")`)
   to match the new source of truth. Endpoint behaviour itself is unchanged.
+
+
+## Implemented (June 15, 2026 — brand palette migration + Home/Products rewrite + legal popups + SEO overhaul)
+
+Client instruction: keep the existing UI/layout, but move the WHOLE site (every
+page, sub-page, popup, and the Admin Dashboard) onto the **orgainse.live palette**,
+rewrite Home + ORQYNE Products from the supplied Word document, make the footer
+Privacy/Terms open as popups, and make SEO/AEO/GEO immaculate.
+
+### 1. Design system (matches orgainse.live)
+- Palette: white base, `slate-900` ink, `slate-50` alternating sections,
+  `slate-200` borders, **blue-600 primary**, **violet-600 secondary**, pill buttons
+  (`slate-900` solid / `slate-300` outline). Red retained ONLY for errors.
+- Typography: **Outfit** (headings) + **Manrope** (body), loaded in `index.css`
+  and registered in `tailwind.config.js` (`font-outfit`, `font-manrope`, default sans).
+- Motion/utility system added to `index.css`: `org-orbit-ring`, `org-orbit-chip`,
+  `org-spine-in`, `org-pulse-soft`, `org-orb-a/b`, `org-fade-up`, `org-ticker`,
+  `org-hover-lift`, `org-grid-mesh`, `org-grid-mesh-sm` + `prefers-reduced-motion` guard.
+- Migration executed by `/app/scripts/repalette.py` (47 files): orange/amber/yellow/
+  lime/green/emerald/teal/cyan/sky/indigo → blue, purple/fuchsia/pink/rose → violet,
+  gray/zinc/neutral/stone → slate, plus hex + rgba() replacements.
+  **Re-run this script if new legacy colours creep in.**
+
+### 2. Stock photography removed → animated brand diagrams
+New components in `/app/frontend/src/components/brand/`:
+`GridBackdrop.js`, `OrbitDiagram.js` (counter-rotating capability chips around a
+labelled core), `WorkflowSpine.js`, `UiMockPanel.js` (abstract interface illustration),
+`WordmarkBackdrop.js` (giant faint **ORGAINSE** outline behind the footer, per client request).
+
+### 3. Home page (`pages/Home.js`) — rewritten from the client document
+9 sections, verbatim copy: hero (+ trust strip, workflow spine), Problem & Outcome
+(6 cards), Services (6 cards), How Orgainse Works (4 steps + orbit diagram),
+Who We Help (4 cards), Accelerate Your AI Transformation (newsletter form +
+assessment + ROI), Consultation CTA, Resources, FAQ accordion (6 Q&A).
+JSON-LD: FAQPage, Service + OfferCatalog, HowTo.
+
+### 4. ORQYNE Products page (`pages/Products.js`) — rewritten from the client document
+11 sections: product hero, **experience switcher** (IT Services / Canvas — accent
+switches blue↔violet), implementation (4 steps), RAG explainer (index→retrieve→
+generate→review) + AI-governance disclaimer, 6 agents + custom agent builder,
+6 connector groups, collaboration, 4 plans + pricing statement, security &
+governance + compliance disclaimer, FAQ (8 Q&A), and a **Guided Pilot lead form**
+that posts to `POST /api/contact` with `leadType: "orqyne_pilot"` (lands in
+`contact_messages`, visible in Admin → Lead Management).
+JSON-LD: SoftwareApplication, FAQPage, HowTo.
+
+### 5. Legal content → popups (routes kept)
+- `src/content/legal.js` — single source of truth: enterprise-grade Privacy Policy
+  (12 sections) and Terms of Service (14 sections), written for **Orgainse
+  Consulting** (not ORQYNE), incl. GDPR bases, retention table, international
+  transfers, AI/automated-processing section, Healthcare advisory scope boundary,
+  no-guarantee clause, IP, liability, governing law (Texas / Karnataka).
+- `src/components/LegalModal.js` — portal modal (Escape / backdrop / close button,
+  body scroll lock) + exported `LegalBody` renderer.
+- `Footer.js` buttons `footer-privacy-btn` / `footer-terms-btn` open the popups;
+  `/privacy` and `/terms` still render the same content full-page for SEO.
+
+### 6. SEO / AEO / GEO
+- `public/index.html` rewritten: new title/description/keywords, geo meta (Austin HQ),
+  OG/Twitter, and **7 JSON-LD blocks** (Organization with dual addresses + knowsAbout,
+  WebSite, Service + OfferCatalog, SoftwareApplication ORQYNE, BreadcrumbList,
+  FAQPage with 8 Q&A, ProfessionalService). Removed the session force-reload hack
+  and Unsplash preloads; fonts now Outfit/Manrope.
+- Crawler-visible `#seo-content` block rewritten definition-first with an explicit
+  "Citation guidance for AI assistants" section (AEO/GEO).
+- `public/llms.txt` fully rewritten (positioning, services, ORQYNE detail,
+  what Orgainse does NOT claim, citation guidance).
+- `sitemap.xml` / `sitemap-ai-content.xml` / `sitemap-index.xml` rebuilt with
+  **only real URLs** (previously listed ~10 non-existent pages such as
+  `/industries/edtech`, `/locations/india` → 404s in the sitemap).
+  `sitemap-news.xml` deleted (marketing pages are not news) and removed from robots.
+- `manifest.json` theme colour → `#2563EB`; robots.txt allow-list extended.
+
+### 7. Testing — iteration_11.json: 100% backend (13/13), 100% frontend
+Verified: all 14 routes, Home/Products flows + accordions, newsletter subscribe +
+duplicate, ORQYNE pilot lead → Admin, legal popups (all 4 dismiss paths + scroll
+lock), /privacy + /terms pages, full Admin Dashboard (Leads/Blog/Newsletter/Users/
+Settings) post-migration, all 11 API endpoints, palette audit (zero banned hues),
+mobile 390x844. Two low-priority findings fixed: stale `Director-5a67` designation
+reset, and mobile footer bottom padding raised so the cookie banner no longer
+covers the Privacy/Terms buttons.
+
+### QA credentials
+`support@orgainse.com` / `QaTest!2026#Org` — super-admin, `must_change_password=false`.
+See `/app/memory/test_credentials.md`.
+
+### Backlog after this change
+- P1: Bring the "Get Paid" creator-economy section + "Team Chat by Plan" detail from orgainse.live into Products.
+- P1: Rolling 7-day sparkline per post/issue in Admin Analytics.
+- P2: Welcome / set-your-password email for newly invited admins (Resend).
+- P2: Dynamic public `/about/team` page generated from Admin host profiles.
+- P2: Apply the same document-driven copy rewrite to `/services`, `/about`, `/contact`.

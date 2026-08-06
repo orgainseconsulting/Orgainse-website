@@ -38,7 +38,7 @@ const Footer = () => {
 
   return (
     <footer data-testid="site-footer" className="relative overflow-hidden bg-white text-slate-800 border-t border-slate-200">
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-40">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-52 sm:pb-40">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div className="space-y-5">
             <Link to="/" className="inline-flex items-center" data-testid="footer-logo-home">

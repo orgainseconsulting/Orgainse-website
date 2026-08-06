@@ -135,7 +135,6 @@ Cache-delay: 86400
 # Sitemap locations
 Sitemap: https://www.orgainse.com/sitemap.xml
 Sitemap: https://www.orgainse.com/sitemap-ai-content.xml
-Sitemap: https://www.orgainse.com/sitemap-news.xml
 
 # LLM-readable site overview (GEO / AI Answer Engine optimization)
 # https://llmstxt.org/
