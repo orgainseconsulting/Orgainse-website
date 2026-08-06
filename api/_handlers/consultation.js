@@ -162,7 +162,7 @@ export default async function handler(req, res) {
     if (existingConsultation) {
       return res.status(409).json({
         error: 'Duplicate request', 
-        message: 'You have already submitted a consultation request in the last 24 hours. We will contact you soon.'
+        message: 'You have already submitted a discovery call request recently. We will contact you soon.'
       });
     }
     
@@ -186,7 +186,7 @@ export default async function handler(req, res) {
       timestamp: consultationData.submitted_at,
       next_steps: [
         "We will review your consultation request",
-        "Our team will contact you within 24 hours", 
+        "Our team will contact you within one business day", 
         "We will confirm your preferred time slot",
         "You will receive a calendar invitation with meeting details"
       ]

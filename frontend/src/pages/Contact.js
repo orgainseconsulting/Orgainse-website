@@ -74,7 +74,7 @@ const Contact = () => {
         subject: formData.subject,
         message: formData.message,
       });
-      toast.success("Message sent! We'll respond within 24 hours.");
+      toast.success("Message sent! We'll respond within one business day.");
       setSubmitStatus("success");
       setFormData({ name: "", email: "", phone: "", company: "", subject: "", message: "" });
     } catch (err) {

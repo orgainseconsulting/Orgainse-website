@@ -364,7 +364,7 @@ const ServicePopup = ({
                 
                 <p className="text-lg text-slate-600 mb-6 max-w-lg mx-auto">
                   Your request for <strong>{service.title}</strong> has been received. 
-                  We'll contact you within 24 hours.
+                  We'll contact you within one business day.
                 </p>
                 
                 <Button 

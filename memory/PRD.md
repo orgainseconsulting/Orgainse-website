@@ -556,3 +556,97 @@ the four-stage method, the audience definitions and its disclaimers.
 - P2: Instant confirmation email to the prospect + alert to Orgainse on new pilot/contact leads (Resend).
 - P2: Welcome / set-your-password email for new admins.
 - P2: Dynamic public `/about/team` page from Admin host profiles.
+
+## Round 5 (June 2026) — site-wide claims audit & message unification (iteration_18)
+
+User report: "The public message is inconsistent across pages… About, Services, AI
+Assessment and ROI Calculator still repeat broad positioning such as 'leading
+AI-native consulting firm', 'comprehensive digital transformation', 'AI operational
+optimization', 'AI-driven business strategy', 'risk and compliance'… look into every
+single page and popup… even if it is hidden in old code, remove it."
+
+### Approved vocabulary (the single standard, from Home + Products)
+visible, governed execution · execution certainty · delivery governance ·
+cross-functional service-led delivery · risks/actions/owners · structured operating
+rhythms · ORQYNE as the delivery-governance workspace · Diagnose → Design →
+Implement → Govern.
+
+### Banned language (must never reappear on any public surface)
+`AI-native`, `AI-first`, `digital transformation`, `leading … consulting firm`,
+`comprehensive` (as a claim), `revolutioniz*`, `GPT-powered`, `24/7`,
+`risk & compliance`, `AI operational optimization`, `AI-driven business strategy`,
+`unprecedented`, `hundreds of`, `satisfaction rate`, `industry-leading`,
+`world-class`, `cutting-edge`, `holistic`, `guaranteed slot`, `AI Maturity Score`,
+`within 24 hours`, invented percentages.
+`guarantee` is allowed ONLY in negative/disclaimer form.
+**Intentionally retained:** "Project Management as a Service (PMaaS)" (real service
+name — user choice) and "Artificial Intelligence readiness" as a scoped service.
+
+### Changed
+- **`components/SEOContent.js` — fully rewritten.** Was the worst offender ("leading
+  business consulting firm", "revolutionized", "client satisfaction rates exceeding
+  95%", "end-to-end solutions", "Join hundreds of successful organizations",
+  "risk & compliance"). Now four honest sections + retained testids
+  `seo-content-section`, `seo-measurable-delivery-title`, `seo-hria-scope-note`.
+- **`components/SEOLinks.js` — fully rewritten.** Internal links now point at real
+  services/tools; the 12 external links were swapped from vendor AI marketing pages
+  (OpenAI Enterprise, Azure AI, IBM AI Consulting…) to delivery/governance standards
+  (PMI, PRINCE2, ISO 21500, SAFe, NIST AI RMF, GDPR, HHS HIPAA, HFMA). New testids
+  `seo-links-section`, `seo-internal-link-N`, `seo-external-link-N`.
+- **`pages/Contact.js`** — removed all GPT-powered / AI-native / 24/7 copy; cards are
+  now Phone / Email ("Replies within one business day") / Book a Discovery Call /
+  Offices; subject + message placeholders rewritten; toast + success message aligned.
+- **`pages/AIAssessmentTool.js` + `api/_handlers/ai-assessment.js`** — the tool is now
+  the **Execution Readiness Assessment**. All five questions reframed to delivery
+  visibility, reporting reliability, ownership, investment readiness and leadership
+  commitment. Score labels changed from `AI Beginner/Developing/Ready/Advanced` to
+  **Reactive Execution / Developing Visibility / Structured Execution / Governed
+  Execution**; recommendations rewritten (no "AI Center of Excellence", no
+  "predictive analytics", no "cutting-edge"). Question ids unchanged so historical
+  lead records still line up.
+- **`pages/ROICalculator.js`** — results reframed as "Your Modelled Scenario" with a
+  `roi-scenario-disclaimer` block; metrics renamed Modelled Return / Modelled Annual
+  Effect / Indicative Payback / Indicative Investment; `api/_handlers/roi-calculator.js`
+  fallback service list changed from `['AI Project Management','Digital
+  Transformation']` to `['Project Management as a Service (PMaaS)','Delivery and
+  Operational Governance']`.
+- **`pages/SmartCalendar.js`** — "Book Your AI Consultation" → "Book a Discovery
+  Call"; "Want a guaranteed slot now?" → "Prefer to pick a time yourself?"; perks now
+  read a read on execution readiness / a scoped practical next step / an honest read
+  on fit; all "24 hours" → "one business day".
+- **`api/_handlers/consultation.js`** — confirmation messages and `next_steps`
+  rewritten (the 24h duplicate-window logic is unchanged, only the wording).
+- **`components/ServicePopup.js`** — CTA "Ready to Get Started? / Get Custom Proposal
+  / Book Free Consultation" → "Discuss this with us / Request a Scoped Proposal /
+  Book a Discovery Call"; new testids `service-popup-close-btn`,
+  `service-popup-proposal-btn-{id}`, `service-popup-book-btn-{id}`,
+  `service-popup-submit-btn`.
+- **Metadata / hidden crawler content** — `public/index.html` title, keywords,
+  og:title, twitter:title and the hidden `#seo-content` `<h1>` changed from
+  "AI-Native Delivery Consulting and PMaaS" to "Delivery Consulting, PMaaS and
+  Delivery Governance". `pages/Home.js` SEOHead + hero badge, `BlogIndex.js`,
+  `NewsletterIndex.js`, `SEOHead.js` route-name map, `Footer.js`,
+  `StayTunedBanner.js`, `SocialShare.js`, `newsletter/IssueEditor.js`,
+  `BlogPost.js` all realigned.
+- **`data/blogPosts.js`** — titles/excerpts/tags/categories rewritten. Bodies left
+  untouched per the user's explicit choice. **This file is dead code — it is not
+  imported anywhere and never renders**, so its remaining body claims (95%
+  satisfaction, 70% faster) are not publicly visible. Candidate for deletion.
+
+### Testing — iteration_18.json
+Banned-term scan **clean on 12/12 public routes** (body text + title + description +
+keywords + og/twitter). All 6 service popups render full content and close on Escape.
+Assessment and ROI Calculator E2E clean with the new labels. Backend 200 on health /
+contact / ai-assessment / roi-calculator / consultation / newsletter / admin.
+Iteration 18 found 6 remaining "within 24 hours" / "AI Consultation" leftovers on
+SmartCalendar, the Contact toast, ServicePopup and consultation.js — **all fixed and
+re-verified** (repo grep clean, live `POST /api/consultation` returns the new wording,
+`/smart-calendar` DOM confirmed free of every flagged phrase).
+
+### Backlog after this round
+- P1: Delete the unused `data/blogPosts.js` (dead code carrying stale statistics).
+- P1: "Get Paid" creator-economy section + "Team Chat by Plan" from orgainse.live → Products.
+- P1: Rolling 7-day sparkline per post/issue in Admin Analytics.
+- P2: Instant confirmation email to the prospect + alert to Orgainse on new leads (Resend).
+- P2: Welcome / set-your-password email for new admins.
+- P2: Dynamic public `/about/team` page from Admin host profiles.

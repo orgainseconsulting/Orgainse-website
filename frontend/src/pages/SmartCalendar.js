@@ -73,11 +73,11 @@ export default function SmartCalendar() {
             <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-r from-blue-600 to-violet-600 mb-6 mx-auto">
               <CheckCircle className="h-12 w-12 text-white" />
             </div>
-            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-              Consultation Request Received!
+            <h1 className="font-outfit text-3xl sm:text-4xl font-bold mb-4 tracking-[-0.02em] text-slate-900">
+              Discovery Call Request Received
             </h1>
-            <p className="text-lg text-slate-600">
-              Our team will contact you within 24 hours to confirm.
+            <p className="text-base text-slate-600">
+              Our team will contact you within one business day to confirm.
             </p>
           </div>
 
@@ -137,14 +137,15 @@ export default function SmartCalendar() {
       />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-            Book Your AI Consultation
+          <h1 className="font-outfit text-3xl sm:text-4xl font-bold mb-4 tracking-[-0.02em] text-slate-900">
+            Book a Discovery Call
           </h1>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-4">
-            Schedule a free 30-minute consultation with our AI transformation experts.
+          <p className="text-base text-slate-600 max-w-2xl mx-auto mb-4">
+            A focused 30-minute conversation about one execution problem — where status becomes unclear,
+            which hand-offs slip, and who owns the decisions.
           </p>
           <div className="inline-flex items-center justify-center gap-3 bg-white/80 rounded-full px-6 py-2 shadow">
-            <span className="text-sm text-slate-600">Prefer to pick a slot yourself?</span>
+            <span className="text-sm text-slate-600">Prefer to pick a time yourself?</span>
             <button
               type="button"
               data-testid="consultation-google-link"
@@ -158,9 +159,9 @@ export default function SmartCalendar() {
 
         <Card className="bg-white/90 backdrop-blur-lg border-0 shadow-xl rounded-2xl">
           <CardHeader className="p-8">
-            <CardTitle className="text-2xl mb-4 text-center">Consultation Details</CardTitle>
+            <CardTitle className="text-2xl mb-4 text-center">Your Details</CardTitle>
             <CardDescription className="text-center mb-6">
-              Fill in your details and we'll confirm your slot within 24 hours.
+              Fill in your details and we'll confirm your slot within one business day.
             </CardDescription>
             <form onSubmit={submit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
