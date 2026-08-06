@@ -36,13 +36,13 @@ const SEOLinks = () => {
     },
     {
       to: "/services",
-      text: "Digital Transformation Consulting",
-      description: "Enterprise AI transformation services"
+      text: "Delivery and Workflow Transformation",
+      description: "Process mapping, governance design and adoption support"
     },
     {
       to: "/services",
-      text: "GPT-Powered PMaaS Solutions",
-      description: "Automated project management systems"
+      text: "Project Management as a Service",
+      description: "Structured project leadership, governance and reporting"
     },
     {
       to: "/ai-assessment",

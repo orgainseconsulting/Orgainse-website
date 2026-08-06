@@ -1,0 +1,69 @@
+{
+  "summary": "Frontend-only verification of the About + Services enterprise rewrite. Retired-phrase audit on /about and /services returned ZERO hits for the 15 retired phrases (GPT-powered, AI-Powered Services, Perfect Harmony, Impact/Power/Accuracy/Delivery %, SOC 2, GDPR adherence, full refund, performance guarantee, 24/7, 200+ software platforms, 340%). The About page renders all required content (H1, execution-partner subhead, Founded 2025 + Austin Texas + Bengaluru fact bullets, 'How Orgainse Works' with Diagnose/Design/Implement/Govern stage cards showing white headings rgb(255,255,255) on their gradients, Mission, Vision, C.O.R.E. Values, and the about-orbit-diagram). Services page renders the new left-aligned hero (services-hero) with H1 'Services Built Around Execution, Not Activity'; services-hero-book-btn opens the Book-a-Call host picker modal; services-hero-orqyne-btn navigates to /products. The 6 service cards appear in the exact required order, each with description, 3 feature bullets and identical slate-900 'Learn More' pill; the Learn More buttons align at the same y within each row (row1=1581, row2=2091 at 1440x900). All 6 popups open with the correct matching title; PMaaS and ORQYNE Implementation popups both contain a /products productLink; the Healthcare popup renders 'RIGHT FIT' and 'NOT THE RIGHT FIT' blocks. FAQ has 4 categories with 15 questions total, the ROI-guarantee answer starts with 'No.', and the 'What is explicitly not included?' FAQ answer contains all 7 required items (medical billing, medical coding, accounts receivable follow-up, denial follow-up, payment posting, patient billing, revenue cycle staffing). SEO: /about title, canonical=https://orgainse.com/about, AboutPage JSON-LD all present and valid; /services title correct, canonical=https://orgainse.com/services, 4 JSON-LD blocks including valid Service (OfferCatalog with 6 items) and valid FAQPage (6 questions). No console errors, pageerrors or app-owned request failures on /, /about, /services, /products, /contact, /blog, /newsletter, /privacy, /terms. No horizontal overflow at 1440x900 or 390x844 on /about or /services; the 6 Services cards stack cleanly on mobile (all left=33px). Only console noise is analytics.google.com and va.vercel-scripts.com blocked at the sandbox edge (expected).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "ServicePopup", "issue": "Escape key does NOT close the popup. Spec explicitly requires 'closes cleanly (X, Escape, backdrop)'. X-button close works; backdrop close works; Escape leaves the modal open. No keydown listener wired in /app/frontend/src/components/ServicePopup.js.", "selector": ".fixed.inset-0.z-50", "priority": "MEDIUM"},
+      {"component": "ServicePopup (Healthcare Revenue Intelligence Advisory)", "issue": "Popup renders rightFit and notRightFit blocks, but does NOT render the notIncluded list or the whoWeServe list. The data exists in /app/frontend/src/pages/Services.js (services[5].detailedInfo.notIncluded has 8 items and .whoWeServe has 6 items) but ServicePopup.js has no JSX to render those two fields. Spec asked to 'confirm the Healthcare popup renders ... the not included list containing medical billing, medical coding, accounts receivable follow-up, claims processing/appeals, payment posting, patient billing and revenue cycle staffing' — those items are only present in the popup's short notRightFit paragraph (which lists 5 of the 7), not as the explicit dedicated list, and revenue cycle staffing / payment posting / patient billing are missing from the popup entirely. (They DO appear in the /services FAQ 'What is explicitly not included?' answer, so page-level coverage is fine, but the popup itself is incomplete.)", "selector": "Popup for card index 5", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "content_audit_evidence": {
+    "retired_phrase_hits_about": [],
+    "retired_phrase_hits_services": [],
+    "about_h1": "About Orgainse Consulting (visible hero H1). Note: SEOContent hidden block still contributes an SEO H1 'AI-Native Delivery Consulting and Project Management as a Service | Orgainse Consulting' — that is expected non-hero SEO content and not part of the retired-phrase list.",
+    "diagnose_design_implement_govern_heading_color": "rgb(255, 255, 255) for all four",
+    "about_orbit_diagram": "present (data-testid='about-orbit-diagram')",
+    "services_hero_h1": "Services Built Around Execution, Not Activity",
+    "services_hero_book_btn_opens_host_picker": true,
+    "services_hero_orqyne_btn_navigates_to_products": true,
+    "service_card_order_matches_spec": true,
+    "learn_more_button_alignment_row1_y": 1581,
+    "learn_more_button_alignment_row2_y": 2091,
+    "popup_title_matches_all_6": true,
+    "pmaas_popup_product_link": "/products",
+    "orqyne_impl_popup_product_link": "/products",
+    "healthcare_popup_rightFit_block": true,
+    "healthcare_popup_notRightFit_block": true,
+    "healthcare_popup_notIncluded_block": false,
+    "healthcare_popup_whoWeServe_block": false,
+    "healthcare_faq_not_included_answer_contains_all_items": true,
+    "roi_guarantee_faq_answer_starts_with_No": true,
+    "faq_categories_all_4_present": true,
+    "faq_questions_total": 15,
+    "seo_about": {"title_ok": true, "canonical": "https://orgainse.com/about", "AboutPage_jsonld": true, "all_jsonld_parse": true},
+    "seo_services": {"title_ok": true, "canonical": "https://orgainse.com/services", "Service_jsonld_offercatalog_items": 6, "FAQPage_jsonld_questions": 6, "all_jsonld_parse": true},
+    "responsive_overflow_desktop_about": -10,
+    "responsive_overflow_desktop_services": -10,
+    "responsive_overflow_mobile_about": -10,
+    "responsive_overflow_mobile_services": -10,
+    "mobile_services_cards_stack": "all 6 Learn More buttons at left=33px (single column)"
+  },
+  "regression_checks": {
+    "routes_no_console_errors": ["/", "/about", "/services", "/products", "/contact", "/blog", "/newsletter", "/privacy", "/terms"],
+    "book_a_call_host_picker_modal_opens": true,
+    "product_tabs_present": ["IT Services and Software", "Canvas Business Management"],
+    "guided_pilot_buttons_present_on_products": true
+  },
+  "test_report_links": [],
+  "action_items": [
+    "ServicePopup.js: wire an Escape keydown listener that calls onClose when isOpen is true (spec requires Escape to close cleanly).",
+    "ServicePopup.js: render service.detailedInfo.notIncluded (as a titled 'Not Included' list) and service.detailedInfo.whoWeServe for services that provide those fields. The Healthcare card's notIncluded currently has 8 items in Services.js data but zero of them are rendered inside the popup — 3 of the 7 spec-required items (payment posting, patient billing, revenue cycle staffing) never appear in the popup at all.",
+    "Minor: add data-testid attributes to the 6 service cards and their Learn More buttons for stable automated coverage in future iterations (currently only hero has data-testid). Cards had to be located by text match."
+  ],
+  "critical_code_review_comments": [
+    "Services.js at 693 lines is close to the 700-line split threshold; the six-service data array (~230 lines) is a good candidate to hoist into /app/frontend/src/data/services.js so the page component stays under 500 lines and the copy is reusable.",
+    "ServicePopup.js gates rightFit/notRightFit rendering behind `(service.detailedInfo.rightFit || service.detailedInfo.notRightFit)` but has no equivalent block for notIncluded/whoWeServe — the data model is richer than the view; either extend the view or drop the unused data to prevent drift.",
+    "The Services page FAQ uses native <details>/<summary>, which is accessible and keyboard-friendly and works well; keep this pattern. The service popup, in contrast, is a manual modal without a role='dialog', aria-modal='true', aria-labelledby, or a focus trap — consider promoting it to a proper dialog for accessibility (would also fix the Escape-to-close gap listed above).",
+    "The visible-check idiom for the popup requires querying `.fixed.inset-0.z-50` (not `.fixed.inset-0`) because the cookie banner also uses `.fixed.inset-0` structurally; documenting this for the next testing agent (offsetParent is null on fixed elements, so use element presence, not offsetParent)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "not tested (skipped per request)", "frontend": "~92% (all spec items verified; 2 popup-level defects reported)"},
+  "test_credentials": "Not exercised in this run (public-only surface tested).",
+  "seed_data_creation": "None. Booking modal opened but not submitted; no newsletter subscribe performed this round.",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Popup close behaviour: X button and backdrop click both work; Escape does NOT — do not re-test until ServicePopup.js gets a keydown listener. Popup visibility must be checked via `document.querySelector('.fixed.inset-0.z-50')` presence, NOT offsetParent (fixed elements return null). Cookie banner also uses `.fixed.inset-0` so avoid the broader selector. Services cards have no data-testid — locate by `button:has-text('Learn More')` and use nth(0..5) which is stable across the row order verified this run. FAQ uses <details>/<summary>; to read collapsed answers programmatically, set the `open` attribute first (browsers keep the <p> text out of innerText until expanded). Retired-phrase audit list is finalised — do not re-flag standalone 'AI' or blog slugs like 'ai-project-management-guide-2025'.",
+  "rca of the issue": "ServicePopup.js was not touched this iteration ('unchanged this round' per review request) but the new Healthcare service model in Services.js added two data blocks (notIncluded, whoWeServe) that the popup component was never taught to render. Similarly, ServicePopup.js has no Escape key handler — this pre-existed but the current spec explicitly requires it, so it becomes a fresh defect against this iteration's acceptance criteria. Fix requires editing /app/frontend/src/components/ServicePopup.js: (1) add `useEffect(() => { if(!isOpen) return; const h=(e)=>{if(e.key==='Escape') onClose();}; window.addEventListener('keydown',h); return()=>window.removeEventListener('keydown',h); },[isOpen,onClose]);` and (2) add a conditional JSX block after the existing rightFit/notRightFit section that renders service.detailedInfo.notIncluded as a titled list and service.detailedInfo.whoWeServe (probably reusing the same slate/blue card styling)."
+}

@@ -17,25 +17,25 @@ const About = () => {
   const values = [
     {
       title: "Collaborative",
-      description: "We work as an extension of your team with AI-powered collaboration tools and GPT-powered project management",
+      description: "We work as an extension of your team, inside your operating rhythm, with clear ownership and shared visibility rather than parallel reporting.",
       icon: Users,
       gradient: "from-blue-400 to-blue-500"
     },
     {
       title: "Outcomes-focused", 
-      description: "Results that matter to your business with measurable AI-driven improvements and data-backed growth planning",
+      description: "Success measures are agreed before work begins and reviewed through the engagement. We do not publish guaranteed percentages.",
       icon: Target,
       gradient: "from-blue-400 to-blue-500"
     },
     {
       title: "Reliable",
-      description: "Consistent delivery and 24/7 AI-powered support across global time zones with predictive maintenance",
+      description: "A consistent operating cadence across time zones, with risks, decisions and delivery health reviewed on a defined schedule.",
       icon: Shield,
       gradient: "from-blue-400 to-blue-500"
     },
     {
       title: "Excellence",
-      description: "Best-in-class AI-native solutions and world-class service delivery with automated scenario modeling",
+      description: "Technology is introduced only where it improves the operating model, and material decisions retain appropriate human review.",
       icon: Award,
       gradient: "from-violet-400 to-violet-500"
     },
@@ -43,6 +43,31 @@ const About = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="About Orgainse Consulting | Execution, Governance and Practical AI"
+        description="Orgainse Consulting is an execution partner for IT services firms, software teams, startups and growing businesses — combining consulting, Project Management as a Service, workflow transformation and the ORQYNE delivery-governance platform."
+        canonical="https://orgainse.com/about"
+        keywords="about Orgainse Consulting, delivery execution partner, PMaaS firm, delivery governance consultancy, ORQYNE, Austin Bengaluru consulting"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          name: "About Orgainse Consulting",
+          url: "https://orgainse.com/about",
+          mainEntity: {
+            "@type": "Organization",
+            name: "Orgainse Consulting",
+            url: "https://orgainse.com/",
+            foundingDate: "2025",
+            slogan: "Turn Fragmented Work Into Visible, Governed Execution",
+            address: [
+              { "@type": "PostalAddress", addressLocality: "Austin", addressRegion: "TX", addressCountry: "US" },
+              { "@type": "PostalAddress", addressLocality: "Bengaluru", addressRegion: "Karnataka", addressCountry: "IN" }
+            ],
+            owns: { "@type": "SoftwareApplication", name: "ORQYNE", url: "https://orgainse.live" }
+          }
+        }}
+      />
+
       {/* Revolutionary Hero Section with SEO */}
       <section className="relative bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12 lg:py-16 overflow-hidden">
         {/* Optimized Background Elements */}
@@ -56,34 +81,40 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="animate-fade-in">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">
-                <span className="text-slate-800">About </span>
-                <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 bg-clip-text text-transparent animate-gradient-text">
-                  Orgainse Consulting
-                </span>
+                <span className="text-slate-900">About </span>
+                <span className="text-blue-600">Orgainse Consulting</span>
               </h1>
               
-              <h2 className="text-xl lg:text-2xl text-blue-600 font-bold mb-4">
-                AI-Native Digital Transformation Leaders & GPT-Powered Project Management Experts
+              <h2 className="text-base md:text-lg font-semibold text-slate-700 mb-5 max-w-2xl leading-relaxed">
+                An execution partner for organisations that need visibility, governance, and practical
+                Artificial Intelligence adoption.
               </h2>
-              
-              <p className="text-lg text-slate-700 leading-relaxed mb-6">
-                We are an AI-native consulting firm specializing in <span className="text-blue-600 font-bold">GPT-powered project management</span>, 
-                intelligent business strategy, and <span className="text-blue-600 font-bold">automated operational optimization </span>  
-                for startups and SMEs across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
+
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-4 max-w-2xl">
+                Orgainse Consulting helps Information Technology services companies, software teams, startups, and
+                growing businesses move from disconnected tools and reactive reporting to structured, accountable
+                execution. We combine business consulting, Project Management as a Service, workflow transformation,
+                and ORQYNE — our delivery-governance platform — so that ownership, governance, reporting and
+                decisions become easier to see and manage.
+              </p>
+
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-6 max-w-2xl">
+                We work across India, the United States, the United Kingdom, the United Arab Emirates, Australia,
+                New Zealand, and South Africa. Technology is introduced only where it improves the operating model.
               </p>
               
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="h-5 w-5 text-blue-600" />
-                  <span className="text-slate-700 text-sm">Founded in 2025 with <span className="text-blue-600 font-semibold">AI-first approach</span> — headquartered in Austin, Texas, USA with our corporate office in Bengaluru, India, operational within 4 months.</span>
+                  <span className="text-slate-700 text-sm">Founded in 2025. <span className="text-blue-600 font-semibold">Headquartered in Austin, Texas, USA</span>, with our corporate office in Bengaluru, India.</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="h-5 w-5 text-blue-600" />
-                  <span className="text-slate-700 text-sm">Global operations: <span className="text-blue-600 font-semibold">AI project management service</span> across the globe. </span>
+                  <span className="text-slate-700 text-sm">A <span className="text-blue-600 font-semibold">service-backed model</span>: advisory, implementation, and operating support — not recommendations alone.</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="h-5 w-5 text-blue-600" />
-                  <span className="text-slate-700 text-sm">AI-powered methodologies with <span className="text-violet-600 font-semibold">GPT implementation roadmap</span> integration.</span>
+                  <span className="text-slate-700 text-sm">Human-governed Artificial Intelligence, with <span className="text-violet-600 font-semibold">approval points designed in</span> from the start.</span>
                 </div>
               </div>
             </div>
@@ -115,17 +146,12 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Enhanced Header Section with SEO */}
           <div className="text-center mb-20 animate-fade-in">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 bg-clip-text text-transparent">
-                The ORGAINSE
-              </span>
-              <br />
-              <span className="text-slate-800">Ecosystem</span>
+            <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] mb-6 text-slate-900">
+              How Orgainse Works
             </h2>
-            <p className="text-xl text-slate-600 max-w-4xl mx-auto mb-8 leading-relaxed">
-              Four interconnected forces delivering <span className="font-bold text-blue-600">AI-driven business strategy consulting</span> and 
-              <span className="font-bold text-blue-600"> GPT-powered agile coaching </span>. Not hierarchy, but 
-              <span className="font-bold text-slate-700"> predictive risk analytics. </span>.
+            <p className="text-sm sm:text-base text-slate-600 max-w-3xl mx-auto mb-8 leading-relaxed">
+              Four connected stages that take an organisation from a business problem to an operating system with
+              defined owners, controls, reporting, and measurable outcomes.
             </p>
             
             {/* Visual Connection Lines */}
@@ -178,22 +204,22 @@ const About = () => {
                         <Target className="h-8 w-8 text-blue-500" />
                       </div>
                       <div>
-                        <h3 className="text-xl sm:text-2xl font-bold">The Foundation</h3>
-                        <p className="text-blue-100 font-medium">Strategy & Vision</p>
+                        <h3 className="text-xl sm:text-2xl font-bold">Diagnose</h3>
+                        <p className="text-blue-100 font-medium">Stage one</p>
                       </div>
                     </div>
                     
                     <p className="text-sm leading-relaxed text-blue-50">
-                      The bedrock of <span className="font-bold">AI-driven business strategy consulting</span>. Sets unwavering standards, builds 
-                      strategic frameworks with <span className="font-bold">automated market intelligence GPT</span>, and ensures every engagement 
-                      delivers measurable impact with crystal-clear alignment.
+                      Clarify the desired outcome, the current workflow, the decision owners, the operating
+                      constraints, the risks, and the measurable sources of leakage — before anything is designed
+                      or bought.
                     </p>
                     
                     <div className="mt-6 flex items-center space-x-2">
                       <div className="flex-1 h-2 bg-blue-200 rounded-full overflow-hidden">
                         <div className="h-full bg-white rounded-full animate-pulse" style={{width: '85%'}}></div>
                       </div>
-                      <span className="text-xs text-blue-100">Impact: 85%</span>
+                      <span className="text-xs text-blue-100 font-semibold">Output · Agreed problem statement</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -212,22 +238,22 @@ const About = () => {
                         <Zap className="h-8 w-8 text-blue-600" />
                       </div>
                       <div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-white">The Engine</h3>
-                        <p className="text-blue-100 font-medium">Innovation & Growth</p>
+                        <h3 className="text-xl sm:text-2xl font-bold text-white">Design</h3>
+                        <p className="text-blue-100 font-medium">Stage two</p>
                       </div>
                     </div>
                     
                     <p className="text-sm leading-relaxed text-blue-50">
-                      Pure momentum through <span className="font-bold">GPT-powered project planning</span>. Harnesses cutting-edge 
-                      <span className="font-bold"> AI operational optimization </span>, breakthrough technologies, and 
-                      revolutionary thinking to propel clients beyond their competition.
+                      Create the target workflow, the governance model, the reporting rhythm, the roles, the
+                      controls, and the success measures — including where Artificial Intelligence genuinely
+                      improves decision quality and where a human approval point belongs.
                     </p>
                     
                     <div className="mt-6 flex items-center space-x-2">
                       <div className="flex-1 h-2 bg-blue-200 rounded-full overflow-hidden">
                         <div className="h-full bg-white rounded-full animate-pulse" style={{width: '95%'}}></div>
                       </div>
-                      <span className="text-xs text-blue-100">Power: 95%</span>
+                      <span className="text-xs text-blue-100 font-semibold">Output · Target operating model</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -246,22 +272,22 @@ const About = () => {
                         <Globe className="h-8 w-8 text-blue-500" />
                       </div>
                       <div>
-                        <h3 className="text-xl sm:text-2xl font-bold">The Compass</h3>
-                        <p className="text-blue-100 font-medium">Navigation & Direction</p>
+                        <h3 className="text-xl sm:text-2xl font-bold">Implement</h3>
+                        <p className="text-blue-100 font-medium">Stage three</p>
                       </div>
                     </div>
                     
                     <p className="text-sm leading-relaxed text-blue-50">
-                      Strategic navigation mastery with <span className="font-bold">data-driven agile transformation</span>. Guides intelligent 
-                      decision-making through complex markets using <span className="font-bold">AI risk management consulting</span>, ensuring 
-                      clients always stay ahead of industry curves.
+                      Configure the process, the ORQYNE workspace, the templates, the integrations, and the
+                      operating cadence. Existing work is imported and validated before it becomes part of the
+                      live workspace.
                     </p>
                     
                     <div className="mt-6 flex items-center space-x-2">
                       <div className="flex-1 h-2 bg-blue-200 rounded-full overflow-hidden">
                         <div className="h-full bg-white rounded-full animate-pulse" style={{width: '88%'}}></div>
                       </div>
-                      <span className="text-xs text-blue-100">Accuracy: 88%</span>
+                      <span className="text-xs text-blue-100 font-semibold">Output · Configured workspace</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -280,22 +306,21 @@ const About = () => {
                         <Users className="h-8 w-8 text-slate-700" />
                       </div>
                       <div>
-                        <h3 className="text-xl sm:text-2xl font-bold">The Spark</h3>
-                        <p className="text-slate-300 font-medium">Execution & Delivery</p>
+                        <h3 className="text-xl sm:text-2xl font-bold">Govern</h3>
+                        <p className="text-slate-300 font-medium">Stage four</p>
                       </div>
                     </div>
                     
                     <p className="text-sm leading-relaxed text-slate-200">
-                      Transformation catalyst with <span className="font-bold">GPT-based risk co-pilot</span>. Converts strategies into reality 
-                      with surgical precision, optimizing performance through <span className="font-bold">predictive maintenance AI agent</span> 
-                      and maximizing ROI for unprecedented client success.
+                      Review adoption, risks, decisions, delivery health, and measurable outcomes on a defined
+                      schedule — so the operating model keeps working after the engagement, not just during it.
                     </p>
                     
                     <div className="mt-6 flex items-center space-x-2">
                       <div className="flex-1 h-2 bg-slate-400 rounded-full overflow-hidden">
                         <div className="h-full bg-white rounded-full animate-pulse" style={{width: '95%'}}></div>
                       </div>
-                      <span className="text-xs text-slate-300">Delivery: 95%</span>
+                      <span className="text-xs text-slate-300 font-semibold">Output · Reviewed delivery health</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -311,7 +336,7 @@ const About = () => {
                   <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse animation-delay-500"></div>
                   <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse animation-delay-700"></div>
                 </div>
-                <span className="text-slate-600 font-medium">Working in Perfect Harmony</span>
+                <span className="text-slate-600 font-medium">One continuous operating loop</span>
               </div>
             </div>
           </div>
@@ -329,25 +354,24 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div className="space-y-6 animate-fade-in">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">Our Mission</span>
-              </h2>
-              <p className="text-xl text-slate-200 leading-relaxed">
-                To democratize access to world-class <span className="text-blue-400 font-bold">AI-native digital transformation consulting</span> through  
-                <span className="text-blue-400 font-bold"> GPT-powered solutions</span>, enabling organizations of all sizes to achieve 
-                breakthrough performance and sustainable growth with <span className="text-blue-400 font-bold">intelligent automation</span> and  
-                <span className="text-violet-400 font-bold"> real-time compliance monitoring</span>.
+              <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] mb-6 text-white">Our Mission</h2>
+              <p className="text-base sm:text-lg text-slate-200 leading-relaxed">
+                To give growing organisations the <span className="text-blue-300 font-semibold">execution certainty</span> that
+                usually only large enterprises can afford — clear ownership, dependable governance, honest reporting,
+                and Artificial Intelligence applied where it genuinely improves a decision. We deliver advisory,
+                implementation and operating support together, so a recommendation becomes a
+                <span className="text-blue-300 font-semibold"> working operating model</span> rather than a document.
               </p>
             </div>
 
             <div className="space-y-6 animate-fade-in animation-delay-300">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">Our Vision</span>
-              </h2>
-              <p className="text-xl text-slate-200 leading-relaxed">
-                To be the global leader in <span className="text-blue-400 font-bold">AI-native consulting</span>, setting the standard 
-                for innovation, excellence, and measurable business outcomes through <span className="text-blue-400 font-bold">cutting-edge GPT</span> and  
-                <span className="text-blue-400 font-bold"> AI technologies</span> across all industries we serve with <span className="text-violet-400 font-bold">outcome-based AI strategy consulting</span>.
+              <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] mb-6 text-white">Our Vision</h2>
+              <p className="text-base sm:text-lg text-slate-200 leading-relaxed">
+                A world where delivery is <span className="text-blue-300 font-semibold">visible by default</span> — where every team
+                knows what is on track, what is blocked, who decides, and what it costs, and where Artificial
+                Intelligence is adopted with governance rather than guesswork. We are building that operating
+                standard through consulting, Project Management as a Service, and
+                <span className="text-violet-300 font-semibold"> ORQYNE</span>.
               </p>
             </div>
           </div>
@@ -365,13 +389,9 @@ const About = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 bg-clip-text text-transparent">
-                Our C.O.R.E. Values
-              </span>
-            </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              The AI-powered principles that guide our <span className="font-bold text-blue-600">multi-agent orchestration platform</span> approach
+            <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] mb-6 text-slate-900">Our C.O.R.E. Values</h2>
+            <p className="text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
+              The four principles that shape how every Orgainse engagement is scoped, run, and reviewed.
             </p>
           </div>
 

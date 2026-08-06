@@ -21,6 +21,7 @@ import SocialShare from "../components/SocialShare";
 import SEOLinks from "../components/SEOLinks";
 import SEOContent from "../components/SEOContent";
 import SEOHead from "../components/SEOHead";
+import GridBackdrop from "../components/brand/GridBackdrop";
 import { useCalendly } from "../context/CalendlyContext";
 
 const BACKEND_URL = (typeof window !== 'undefined' && window.location?.origin)
@@ -48,138 +49,201 @@ const Services = () => {
 
   const services = [
     {
-      id: 'ai-project-management',
-      title: "AI Project Management Service (PMaaS)",
-      description: "Comprehensive AI project management service with GPT-powered SOW auto-generation, intelligent project planning, and automated risk assessment for startups and SMEs across India, USA, UK, UAE, Australia, New Zealand, and South Africa.",
-      features: ["GPT-powered Project Planning & SOW Auto-generation", "Automated Risk Assessment & Scenario Modeling", "AI Resource Allocation & Timeline Optimization", "Intelligent Performance Analytics & Reporting"],
+      id: 'pmaas',
+      title: "Project Management as a Service (PMaaS)",
+      description: "Add structured project leadership without building a full internal Project Management Office. Orgainse supports planning, governance, reporting cadence, risk and dependency management, stakeholder communication, and executive visibility. ORQYNE can be configured as the shared delivery workspace for the engagement.",
+      features: [
+        "Planning, governance and reporting cadence",
+        "Risk, assumption, issue and dependency management",
+        "Stakeholder communication and executive visibility",
+        "ORQYNE configured as the shared delivery workspace"
+      ],
       icon: Target,
-      image: "https://images.pexels.com/photos/16053029/pexels-photo-16053029.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1",
-      keywords: "AI project management service, PMaaS for startups, GPT-powered project planning",
+      keywords: "Project Management as a Service, PMaaS, delivery governance, project leadership, executive reporting",
       gradient: "from-blue-600 to-violet-600",
       detailedInfo: {
-        whatItDoes: "Our AI Project Management Service (PMaaS) revolutionizes how you manage projects by leveraging GPT-powered automation. We create intelligent SOWs, automate risk assessments, optimize resource allocation, and provide real-time analytics — built for measurable, data-driven outcomes and faster delivery.",
-        whyChooseUs: "Unlike traditional project management, our AI-native approach compresses planning time, eliminates scope creep through intelligent boundary detection, and provides predictive insights that surface common project failures before they materialise.",
-        whatYouGet: "Complete AI-powered project ecosystem including automated project planning, intelligent resource allocation, real-time risk monitoring, GPT-generated documentation, predictive analytics dashboard, and 24/7 AI project assistant.",
-        benefits: ["Compressed project planning cycles", "Higher project success rates", "Reduced scope creep through intelligent boundary detection", "Real-time predictive insights", "Automated documentation generation", "24/7 AI project support"],
-        industries: ["IT Services & Software", "Healthcare Revenue Intelligence Advisory", "Industry-Agnostic SMEs & Startups"]
+        whatItDoes: "Orgainse provides the project leadership layer your delivery needs without you having to stand up a full internal Project Management Office. We take responsibility for planning, the reporting rhythm, risk and dependency management, stakeholder communication, and the executive view of delivery health.",
+        whyChooseUs: "The engagement is designed to move from recommendation to an operating workflow. Owners, controls, reporting and escalation paths are defined and then actually run, rather than handed over as a document.",
+        whatYouGet: "An agreed operating model with defined roles and responsibilities, a reporting cadence, RAID registers, decision and approval records, resource and cost visibility, and an executive view of delivery health. Where useful, ORQYNE is configured as the shared workspace for the engagement.",
+        benefits: [
+          "Structured project leadership without a permanent hire",
+          "One reporting rhythm across projects and stakeholders",
+          "Risks, assumptions, issues and dependencies tracked with owners",
+          "Decisions and approvals recorded rather than remembered",
+          "Clearer resource, cost and vendor visibility",
+          "Executive reporting that supports decisions"
+        ],
+        industries: ["Information Technology Services Firms", "Software Delivery Teams", "Startups and Growing Businesses"]
       },
       productLink: {
         href: "/products",
-        label: "Powered by ORQYNE",
-        tagline: "Upload a spreadsheet → 20+ RAG-grounded AI agents running on your data in 90 seconds. See the product →"
+        label: "Delivered with ORQYNE",
+        tagline: "Run the engagement in a governed workspace with projects, RAID registers, decisions and reporting in one place. See the platform →"
       }
     },
     {
-      id: 'digital-transformation',
-      title: "AI-Native Digital Transformation",
-      description: "Complete digital transformation consulting with AI maturity assessment, multi-agent orchestration platforms, and a GPT implementation roadmap — industry-agnostic for SMEs &amp; startups, with deep specialization in IT Services and Healthcare Revenue Intelligence Advisory.",
-      features: ["AI Maturity Assessment & Digital Readiness Audit", "Multi-agent Orchestration Platform Setup", "GPT Implementation Roadmap & Integration", "Cloud-First Architecture with AI-Powered Analytics"],
-      icon: Zap,
-      image: "https://images.unsplash.com/photo-1530825894095-9c184b068fcb?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHw0fHxkaWdpdGFsJTIwdHJhbnNmb3JtYXRpb258ZW58MHx8fGJsdWV8MTc1NDU4ODMwN3ww&ixlib=rb-4.1.0&q=75&w=400&h=300",
-      keywords: "AI-native digital transformation, GPT implementation roadmap, digital transformation UAE SMEs",
+      id: 'ai-workflow-transformation',
+      title: "Artificial Intelligence and Workflow Transformation",
+      description: "Identify where Artificial Intelligence, automation, and workflow redesign can remove friction or improve decision quality. We map current processes, identify high-value opportunities, define human approval points, and establish a practical implementation roadmap before technology is introduced.",
+      features: [
+        "Current-state process and handoff mapping",
+        "High-value opportunity identification",
+        "Human approval points and governance design",
+        "Practical, sequenced implementation roadmap"
+      ],
+      icon: Brain,
+      keywords: "AI workflow transformation, process redesign, automation opportunity assessment, human in the loop governance",
       gradient: "from-blue-600 to-violet-600",
       detailedInfo: {
-        whatItDoes: "Transform your entire business operations with our AI-native digital transformation service. We conduct comprehensive AI maturity assessments, design multi-agent orchestration platforms, and create custom GPT implementation roadmaps that digitize and optimize every aspect of your business.",
-        whyChooseUs: "Our transformations are built for measurable, data-driven outcomes and faster delivery — we use AI to design, implement, and optimise simultaneously. We don't just digitise — we intelligentise your operations with AI agents that continuously improve your processes.",
-        whatYouGet: "Complete digital ecosystem transformation including AI maturity assessment, custom multi-agent platform, GPT integration roadmap, cloud-first architecture, AI-powered analytics suite, and ongoing optimization support.",
-        benefits: ["Faster transformation timeline", "Reduced operational costs", "Improved process efficiency", "AI-powered continuous optimization", "Future-ready scalable architecture", "Real-time business intelligence"],
-        industries: ["IT Services & Software", "Healthcare Revenue Intelligence Advisory", "Industry-Agnostic SMEs & Startups"]
-      }
-    },
-    {
-      id: 'operational-optimization',
-      title: "AI Operational Optimization", 
-      description: "Intelligent operational optimization using AI-driven workflow automation, predictive maintenance agents, and GPT process mining to reduce OPEX — for SMEs across IT Services, Healthcare Revenue Intelligence Advisory, and industry-agnostic engagements.",
-      features: ["AI Workflow Automation & Process Intelligence", "Predictive Maintenance AI Agent & Monitoring", "GPT Process Mining & Bottleneck Detection", "Real-time Performance Analytics & Cost Optimization"],
-      icon: TrendingUp,
-      image: "https://images.pexels.com/photos/8728559/pexels-photo-8728559.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1",
-      keywords: "AI operational optimization consulting, reduce OPEX with AI, GPT process mining",
-      gradient: "from-blue-600 to-violet-600",
-      detailedInfo: {
-        whatItDoes: "Optimize your operations with AI agents that continuously monitor, analyse, and improve your business processes. Our system uses GPT-powered process mining to identify bottlenecks, implements predictive maintenance, and automates workflows — built for measurable, data-driven outcomes and faster delivery.",
-        whyChooseUs: "Our AI optimisation is proactive, not reactive. While others optimise after problems occur, our AI agents predict and prevent operational issues, delivering continuous, compounding cost savings backed by transparent KPIs.",
-        whatYouGet: "Comprehensive operational intelligence platform with AI workflow automation, predictive maintenance system, GPT process mining tools, real-time analytics dashboard, automated cost optimization, and performance monitoring suite.",
-        benefits: ["Reduced operational costs", "Fewer operational disruptions", "Automated process optimization", "Predictive maintenance alerts", "Real-time performance insights", "Continuous improvement automation"],
-        industries: ["IT Services & Software", "Healthcare Revenue Intelligence Advisory", "Industry-Agnostic SMEs & Startups"]
-      }
-    },
-    {
-      id: 'revenue-cycle-management',
-      title: "Healthcare Revenue Intelligence Advisory",
-      description: "AI-powered strategy, analytics, and governance advisory for US healthcare organizations that need a clearer view of revenue performance — working alongside your existing operational teams and vendor relationships, not in place of them.",
-      features: ["Revenue Performance Assessment", "Denial Intelligence & Trend Analysis", "Payer Behavior & Contract Advisory", "Revenue Cycle Governance & Process Advisory", "AI Readiness & Transformation Advisory"],
-      icon: Shield,
-      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=400&h=300",
-      keywords: "healthcare revenue cycle management consulting, RCM advisory, AI revenue intelligence US healthcare, denial intelligence, payer behavior analytics",
-      gradient: "from-blue-600 to-violet-600",
-      detailedInfo: {
-        whatItDoes: "Healthcare revenue performance depends on more than billing accuracy — it depends on visibility. Our Healthcare Revenue Intelligence Advisory delivers that visibility through strategic consulting, AI-powered analytics, and governance frameworks. We provide independent, unbiased insight into where revenue is being lost, how denial patterns are shifting, and how payer behavior is affecting financial outcomes — working alongside your existing RCM operations.",
-        whyChooseUs: "Independence is the trust signal. We are not a billing or coding vendor — we are an advisory layer that helps CFOs, COOs, and VPs of Revenue Cycle interpret performance with disciplined, AI-driven analytics typically reserved for large health systems. First leadership deliverable within 30 days, with no system access or patient data required.",
-        whatYouGet: "Executive-ready deliverables across six advisory areas: revenue performance assessment, denial intelligence, payer & contract advisory, governance & process advisory, AI readiness assessment, and vendor oversight & accountability advisory. Each engagement is available standalone or as part of a broader programme. Conservative financial guidance (e.g., '3% or more' uplift potential, never guaranteed).",
-        rightFit: "Organizations with RCM operations in place that need an independent, AI-powered view of what those operations are delivering — and where revenue performance can be strengthened through better governance, analytics, or technology readiness.",
-        notRightFit: "Organizations seeking outsourced billing, coding, AR (Accounts Receivable) follow-up, claims processing, or operational RCM delivery. Orgainse does not provide these services.",
+        whatItDoes: "We map how work actually moves through your organisation, then identify where Artificial Intelligence, automation, or plain workflow redesign would remove friction or improve the quality of a decision. Technology is introduced only where it improves the operating model.",
+        whyChooseUs: "The starting point is the business outcome and the workflow, not the tool. Human approval points, data boundaries, and review responsibilities are designed in from the beginning rather than retrofitted after an incident.",
+        whatYouGet: "A current-state process map, a prioritised list of opportunities with the reasoning behind each, the target workflow with defined approval points, and a sequenced implementation roadmap with success measures agreed before build begins.",
         benefits: [
-          "Independent, unbiased visibility into revenue leakage",
-          "AI-powered denial trend analytics and reduction strategy",
-          "Strategic payer behavior and contract performance insight",
-          "Executive dashboard design and KPI framework",
-          "AI readiness assessment and transformation roadmap",
-          "Vendor oversight, accountability, and transition advisory"
+          "Clear view of where work leaks time and quality",
+          "Opportunities prioritised by business value, not novelty",
+          "Human review retained for material decisions",
+          "Target workflow with named owners",
+          "Sequenced roadmap instead of a big-bang programme",
+          "Success measures agreed before implementation"
+        ],
+        industries: ["Information Technology Services Firms", "Cross-Functional Operating Teams", "Startups and Growing Businesses"]
+      }
+    },
+    {
+      id: 'delivery-governance',
+      title: "Delivery and Operational Governance",
+      description: "Create a consistent operating rhythm across projects, teams, and business functions. This includes portfolio visibility, responsibilities, escalation paths, risks, assumptions, issues, dependencies, decisions, resource visibility, cost oversight, and executive reporting.",
+      features: [
+        "Portfolio visibility and delivery health reporting",
+        "Responsibilities, escalation paths and decision rights",
+        "RAID registers with owners and review cadence",
+        "Resource, cost and vendor oversight"
+      ],
+      icon: Shield,
+      keywords: "delivery governance, portfolio visibility, RAID management, operating cadence, executive reporting",
+      gradient: "from-blue-600 to-violet-600",
+      detailedInfo: {
+        whatItDoes: "We establish one operating rhythm across projects, teams, and business functions so that leaders can see what is on track, what is blocked, what needs a decision, and where delivery is drifting.",
+        whyChooseUs: "Most reporting consumes time without producing reliable decision context. We design the smallest governance model that produces trustworthy information, then run it until it is habit.",
+        whatYouGet: "A defined governance model covering portfolio visibility, responsibilities, escalation paths, RAID registers, decision records, resource and cost oversight, and an executive reporting pack with an agreed review schedule.",
+        benefits: [
+          "One view of portfolio and delivery health",
+          "Clear ownership and escalation paths",
+          "Risks and dependencies surfaced earlier",
+          "Decisions recorded with context",
+          "Cost and resource visibility for leadership",
+          "Reporting that shortens meetings rather than filling them"
+        ],
+        industries: ["Information Technology Services Firms", "Software Delivery Teams", "Cross-Functional Operating Teams"]
+      }
+    },
+    {
+      id: 'orqyne-implementation',
+      title: "ORQYNE Implementation and Adoption",
+      description: "Configure ORQYNE around the way your organisation actually operates. We support workspace design, roles and access, workflow configuration, work import, templates, governance controls, integrations, onboarding, and adoption reviews.",
+      features: [
+        "Workspace design, roles and access",
+        "Workflow configuration, templates and governance controls",
+        "Structured work import and validation",
+        "Onboarding, integrations and adoption reviews"
+      ],
+      icon: Zap,
+      keywords: "ORQYNE implementation, delivery governance platform rollout, workspace configuration, adoption support",
+      gradient: "from-blue-600 to-violet-600",
+      detailedInfo: {
+        whatItDoes: "We configure ORQYNE around your operating model rather than handing over an empty platform: terminology, roles and access, modules, workflows, templates, imports, integrations, and the governance controls that keep the workspace trustworthy.",
+        whyChooseUs: "Product and service work together. Customers are not left to configure a complex operating system alone, and adoption is reviewed against real usage rather than assumed after go-live.",
+        whatYouGet: "A configured workspace, validated imports of existing work, templates and workflows that match how your teams operate, connected systems where supported, onboarding for each role, and scheduled adoption reviews.",
+        benefits: [
+          "Configuration that matches how your teams actually work",
+          "Existing work imported and reviewed before go-live",
+          "Roles, access and governance controls set up correctly",
+          "Onboarding tailored to each role",
+          "Integrations confirmed during scoping, not assumed",
+          "Adoption reviewed on a defined schedule"
+        ],
+        industries: ["Information Technology Services Firms", "Software Delivery Teams", "Cross-Functional Operating Teams"]
+      },
+      productLink: {
+        href: "/products",
+        label: "About ORQYNE",
+        tagline: "Two purpose-built experiences: IT Services and Software, and Canvas Business Management. See the platform →"
+      }
+    },
+    {
+      id: 'ai-strategy-readiness',
+      title: "Artificial Intelligence Strategy and Readiness",
+      description: "Determine where Artificial Intelligence can create value before committing significant budget. Orgainse assesses business priorities, process maturity, data availability, operating risk, governance requirements, and adoption readiness to develop a sequenced implementation plan.",
+      features: [
+        "Business priority and process maturity assessment",
+        "Data availability and operating risk review",
+        "Governance and adoption readiness review",
+        "Sequenced implementation plan with success measures"
+      ],
+      icon: Globe,
+      keywords: "AI readiness assessment, AI strategy consulting, data readiness, AI governance, adoption readiness",
+      gradient: "from-blue-600 to-violet-600",
+      detailedInfo: {
+        whatItDoes: "We assess where Artificial Intelligence would create value for your organisation and, just as importantly, where it would not — reviewing business priorities, process maturity, data availability, operating risk, governance requirements, and adoption readiness.",
+        whyChooseUs: "The output is a decision, not a demonstration. You get a clear view of what is worth funding now, what should wait, and what needs to be fixed in the process or the data first.",
+        whatYouGet: "A readiness view across strategy, process, data, governance, technology and adoption; a prioritised opportunity list; the risks and controls that apply; and a sequenced implementation plan with defined success measures.",
+        benefits: [
+          "Evidence before budget commitment",
+          "Priorities separated from experiments",
+          "Data and process gaps identified early",
+          "Governance requirements defined up front",
+          "Adoption risk assessed alongside technology",
+          "A plan sequenced by value and readiness"
+        ],
+        industries: ["Startups and Growing Businesses", "Information Technology Services Firms", "Cross-Functional Operating Teams"]
+      }
+    },
+    {
+      id: 'healthcare-revenue-intelligence',
+      title: "Healthcare Revenue Intelligence Advisory",
+      description: "Improve visibility into revenue performance, denial patterns, payer behaviour, operating controls, and executive reporting. Each engagement is separately scoped for data handling, regulatory considerations, and advisory boundaries. Orgainse does not position this service as operational medical billing or coding.",
+      features: [
+        "Revenue performance assessment",
+        "Denial pattern and trend analysis",
+        "Payer behaviour and contract advisory",
+        "Revenue governance, controls and executive reporting"
+      ],
+      icon: Shield,
+      keywords: "healthcare revenue intelligence advisory, denial pattern analysis, payer behaviour analytics, revenue governance advisory",
+      gradient: "from-blue-600 to-violet-600",
+      detailedInfo: {
+        whatItDoes: "Revenue performance depends on visibility as much as on billing accuracy. This service provides an independent advisory and analytics layer over your existing operations: where revenue performance is weakening, how denial patterns are shifting, how payer behaviour is affecting outcomes, and which controls and reports leadership is missing.",
+        whyChooseUs: "Independence is the point. Orgainse is not a billing or coding vendor, so the analysis is not shaped by an operational contract. We work alongside your internal teams and existing vendors rather than in place of them.",
+        whatYouGet: "Executive-ready deliverables across revenue performance assessment, denial intelligence, payer and contract advisory, governance and process advisory, Artificial Intelligence readiness, and vendor oversight. Each engagement is separately scoped for data handling, regulatory considerations, and advisory boundaries.",
+        rightFit: "Organisations that already have revenue cycle operations in place — internal or outsourced — and need an independent view of what those operations are delivering, and where performance can be strengthened through better governance, analytics, or technology readiness.",
+        notRightFit: "Organisations seeking outsourced billing, coding, accounts receivable follow-up, claims processing, or operational revenue cycle delivery. Orgainse does not provide these services.",
+        benefits: [
+          "Independent visibility into revenue performance",
+          "Denial pattern analysis with practical next steps",
+          "Payer behaviour and contract performance insight",
+          "Executive reporting and key performance indicator design",
+          "Artificial Intelligence readiness view for revenue operations",
+          "Vendor oversight and accountability advisory"
         ],
         notIncluded: [
           "Medical billing or claims submission",
           "Medical coding or clinical documentation",
-          "AR follow-up or collections",
+          "Accounts receivable follow-up or collections",
           "Denial follow-up or appeal submission",
           "Payment posting or remittance processing",
           "Patient billing or collections",
-          "Offshore or onshore RCM staffing",
+          "Onshore or offshore revenue cycle staffing",
           "Outsourced revenue cycle operations of any kind"
         ],
         whoWeServe: [
           "Physician groups and multi-specialty practices",
           "Regional hospital systems and health networks",
-          "Healthcare startups and MedTech companies",
-          "Value-based care and risk-bearing organizations",
-          "Ambulatory Surgical Centers (ASCs) and Clinical Laboratories",
-          "Independent Practice Associations (IPAs) and ACOs",
-          "Health plans with provider analytics requirements"
+          "Ambulatory surgical centres and clinical laboratories",
+          "Independent practice associations and accountable care organisations",
+          "Value-based care and risk-bearing organisations",
+          "Healthcare technology companies and health plans with provider analytics requirements"
         ],
-        industries: ["Healthcare Revenue Intelligence Advisory", "US Hospital Systems", "Physician Groups", "ASCs & Laboratories", "Value-Based Care Organizations", "Health Plans"]
-      }
-    },
-    {
-      id: 'business-strategy',
-      title: "AI-Driven Business Strategy Development",
-      description: "Advanced business strategy development using automated market intelligence GPT, competitive analysis AI, and scenario planning tools — industry-agnostic for SMEs and startups, with deep specialization in IT Services and Healthcare Revenue Intelligence Advisory.",
-      features: ["Automated Market Intelligence & Competitor Analysis", "AI-Powered Competitive Strategy & Positioning", "Scenario Planning Tools & Market Forecasting", "Growth Strategy Optimization & ROI Modeling"],
-      icon: Globe,
-      image: "https://images.unsplash.com/photo-1573164574230-db1d5e960238?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwxfHxjb25zdWx0aW5nfGVufDB8fHxibHVlfDE3NTQ1ODg0NDR8MA&ixlib=rb-4.1.0&q=75&w=400&h=300",
-      keywords: "AI-driven business strategy consulting, GPT competitive analysis, strategy development India SMEs",
-      gradient: "from-blue-600 to-violet-600",
-      detailedInfo: {
-        whatItDoes: "Develop winning business strategies using AI-powered market intelligence, competitive analysis, and scenario planning. Our GPT-driven approach analyses thousands of data points to create strategies built for measurable, data-driven outcomes and faster delivery.",
-        whyChooseUs: "While traditional strategy consulting takes months and relies on historical data, our AI-driven approach delivers real-time insights and predictive strategies in weeks — analysing orders of magnitude more data points to surface opportunities others miss.",
-        whatYouGet: "Comprehensive strategy development suite including automated market intelligence system, AI competitive analysis platform, scenario planning tools, growth optimization roadmap, ROI modeling dashboard, and strategic implementation support.",
-        benefits: ["Higher strategy success rate", "Faster strategy development", "Real-time market intelligence", "Predictive opportunity identification", "Data-driven decision making", "Continuous strategy optimization"],
-        industries: ["IT Services & Software", "Healthcare Revenue Intelligence Advisory", "Industry-Agnostic SMEs & Startups"]
-      }
-    },
-    {
-      id: 'risk-management',
-      title: "AI Risk Management & Compliance",
-      description: "Comprehensive AI risk management with GPT-based risk co-pilots, automated scenario modeling, and real-time compliance monitoring — industry-agnostic for SMEs and startups, with deep specialization in IT Services and Healthcare Revenue Intelligence Advisory.",
-      features: ["GPT-Based Risk Assessment & Co-pilot Support", "Automated Scenario Modeling & Stress Testing", "Real-time Compliance Monitoring & Reporting", "Predictive Risk Analytics & Mitigation Planning"],
-      icon: Shield,
-      image: "https://images.unsplash.com/photo-1497409988347-cbfaac2f0b12?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxhZ2lsZSUyMHNjcnVtfGVufDB8fHxibHVlfDE3NTQ1ODg0Mzl8MA&ixlib=rb-4.1.0&q=75&w=400&h=300",
-      keywords: "AI risk management consulting, GPT-based risk co-pilot, predictive risk analytics SMEs",
-      gradient: "from-blue-600 to-violet-600",
-      detailedInfo: {
-        whatItDoes: "Protect your business with AI-powered risk management that predicts, prevents, and mitigates risks before they impact your operations. Our GPT-based risk co-pilot continuously monitors your business environment and provides real-time risk assessment and compliance monitoring.",
-        whyChooseUs: "Traditional risk management is reactive and manual. Our AI approach is predictive and automated — built for measurable, data-driven outcomes and faster delivery, with continuous compliance across changing regulations and multiple jurisdictions.",
-        whatYouGet: "Complete risk intelligence platform including GPT-based risk co-pilot, automated scenario modeling system, real-time compliance monitoring dashboard, predictive risk analytics, automated reporting suite, and mitigation planning tools.",
-        benefits: ["Early risk detection", "Reduced compliance violations", "Real-time regulatory updates", "Automated risk reporting", "Predictive risk modeling", "24/7 compliance monitoring"],
-        industries: ["IT Services & Software", "Healthcare Revenue Intelligence Advisory", "Industry-Agnostic SMEs & Startups"]
+        industries: ["Healthcare Revenue Intelligence Advisory", "Hospital Systems and Physician Groups", "Value-Based Care Organisations"]
       }
     },
   ];
@@ -247,121 +311,97 @@ const Services = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Revolutionary Hero Section with SEO */}
-      <section className="relative bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12 lg:py-16 overflow-hidden">
-        {/* Dynamic Background Elements */}
-        <div className="absolute inset-0 opacity-30">
-          {/* AI Neural Network Backgrounds */}
-          <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-r from-slate-50 via-white to-blue-50 rounded-full blur-3xl animate-pulse float-animation will-change-transform"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-slate-50 via-white to-blue-50 rounded-full blur-3xl animate-pulse float-animation animation-delay-2000 will-change-transform"></div>
-          
-          {/* LARGE VISIBLE AI ROBOTS */}
-          <div className="absolute top-1/4 left-1/3">
-            {/* Advanced AI Robot */}
-            <div className="w-16 h-20 bg-gradient-to-b from-blue-600 to-violet-600 rounded-lg opacity-70 animate-bounce shadow-xl">
-              {/* Robot Head */}
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-violet-600 rounded-full mx-auto mb-2 relative border-2 border-blue-400">
-                <div className="absolute top-3 left-3 w-2 h-2 bg-blue-400 rounded-full animate-ping"></div>
-                <div className="absolute top-3 right-3 w-2 h-2 bg-blue-400 rounded-full animate-ping animation-delay-500"></div>
-                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-1 bg-slate-600 rounded-full"></div>
-                {/* Antenna */}
-                <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-1 h-3 bg-blue-400 rounded-full"></div>
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
-              </div>
-              {/* Robot Body */}
-              <div className="w-14 h-6 bg-gradient-to-b from-blue-600 to-violet-600 rounded-md mx-auto relative border-2 border-blue-500">
-                <div className="absolute top-1 left-2 w-2 h-1 bg-white rounded-full opacity-80"></div>
-                <div className="absolute top-1 right-2 w-2 h-1 bg-white rounded-full opacity-80"></div>
-                <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-6 h-1 bg-slate-600 rounded-full"></div>
-              </div>
-            </div>
-          </div>
-          
-          {/* AI Processing Hub */}
-          <div className="absolute bottom-1/4 right-1/3">
-            <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-violet-600 rotate-45 animate-spin-slow opacity-60 rounded-lg shadow-xl">
-              <div className="absolute inset-2 bg-white rounded-lg opacity-80"></div>
-              <div className="absolute inset-4 bg-gradient-to-br from-blue-600 to-violet-600 rounded-full animate-pulse"></div>
-              {/* Circuit connections */}
-              <div className="absolute -top-2 left-1/2 w-1 h-4 bg-blue-400"></div>
-              <div className="absolute -bottom-2 left-1/2 w-1 h-4 bg-blue-400"></div>
-              <div className="absolute -left-2 top-1/2 w-4 h-1 bg-blue-400"></div>
-              <div className="absolute -right-2 top-1/2 w-4 h-1 bg-blue-400"></div>
-            </div>
-          </div>
-          
-          {/* AI Data Network */}
-          <div className="absolute top-3/4 left-1/4">
-            <div className="flex items-center space-x-3">
-              <div className="w-4 h-4 bg-blue-400 rounded-full animate-ping opacity-80"></div>
-              <div className="w-6 h-1 bg-gradient-to-r from-blue-600 to-violet-600 animate-pulse"></div>
-              <div className="w-4 h-4 bg-blue-400 rounded-full animate-ping animation-delay-500 opacity-80"></div>
-              <div className="w-6 h-1 bg-gradient-to-r from-blue-600 to-violet-600 animate-pulse animation-delay-300"></div>
-              <div className="w-4 h-4 bg-blue-400 rounded-full animate-ping animation-delay-1000 opacity-80"></div>
-            </div>
-          </div>
-          
-          {/* Mini Robot Swarm */}
-          <div className="absolute top-1/2 right-1/4">
-            <div className="grid grid-cols-2 gap-2">
-              <div className="w-6 h-8 bg-gradient-to-b from-blue-600 to-violet-600 rounded opacity-60 animate-bounce">
-                <div className="w-4 h-4 bg-violet-200 rounded-full mx-auto mb-1 relative">
-                  <div className="absolute top-1 left-1 w-1 h-1 bg-white rounded-full animate-ping"></div>
-                  <div className="absolute top-1 right-1 w-1 h-1 bg-white rounded-full animate-ping"></div>
-                </div>
-              </div>
-              <div className="w-6 h-8 bg-gradient-to-b from-blue-600 to-violet-600 rounded opacity-60 animate-bounce animation-delay-300">
-                <div className="w-4 h-4 bg-violet-200 rounded-full mx-auto mb-1 relative">
-                  <div className="absolute top-1 left-1 w-1 h-1 bg-white rounded-full animate-ping animation-delay-200"></div>
-                  <div className="absolute top-1 right-1 w-1 h-1 bg-white rounded-full animate-ping animation-delay-400"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 animate-fade-in">
-          <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6">
-            <span className="text-slate-800">AI-Native </span>
-            <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 bg-clip-text text-transparent animate-gradient-text">
-              Consulting
-            </span>
-            <br />
-            <span className="text-slate-800">Arsenal</span>
+      <SEOHead
+        title="Consulting, PMaaS and Delivery Governance Services | Orgainse"
+        description="Project Management as a Service, Artificial Intelligence and workflow transformation, delivery and operational governance, ORQYNE implementation, AI strategy and readiness, and Healthcare Revenue Intelligence Advisory."
+        canonical="https://orgainse.com/services"
+        keywords="Project Management as a Service, PMaaS, delivery governance, workflow transformation, ORQYNE implementation, AI readiness, healthcare revenue intelligence advisory"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            serviceType: "Delivery consulting and Project Management as a Service",
+            provider: { "@type": "Organization", name: "Orgainse Consulting", url: "https://orgainse.com/" },
+            areaServed: ["India", "United States", "United Kingdom", "United Arab Emirates", "Australia", "New Zealand", "South Africa"],
+            hasOfferCatalog: {
+              "@type": "OfferCatalog",
+              name: "Orgainse Consulting Services",
+              itemListElement: services.map((s) => ({
+                "@type": "Offer",
+                itemOffered: { "@type": "Service", name: s.title, description: s.description }
+              }))
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              { "@type": "Question", name: "What is Project Management as a Service?", acceptedAnswer: { "@type": "Answer", text: "Project Management as a Service (PMaaS) gives an organisation access to structured project leadership, governance, reporting, risk management, stakeholder communication, and delivery support without immediately building a full internal Project Management Office." } },
+              { "@type": "Question", name: "How does an Orgainse engagement start?", acceptedAnswer: { "@type": "Answer", text: "With a focused discovery session on one important execution problem, clarifying the desired outcome, current workflow, decision owners, operating constraints, and the most practical next step." } },
+              { "@type": "Question", name: "Does Orgainse guarantee delivery improvement or Return on Investment?", acceptedAnswer: { "@type": "Answer", text: "No. Outcomes depend on scope, data quality, leadership decisions, adoption, integrations, operating conditions, and customer responsibilities. Success measures are agreed before work begins and reviewed through the engagement." } },
+              { "@type": "Question", name: "What is included in Healthcare Revenue Intelligence Advisory?", acceptedAnswer: { "@type": "Answer", text: "Advisory and analytics on revenue performance, denial patterns, payer behaviour, operating controls, and executive reporting. It excludes medical billing, coding, accounts receivable follow-up, claims processing, collections and revenue cycle staffing." } },
+              { "@type": "Question", name: "Can Orgainse work with our existing tools?", acceptedAnswer: { "@type": "Answer", text: "Yes. Orgainse can improve the operating model around an existing tool such as Jira, Asana or monday.com, introduce ORQYNE for selected workflows, or assess whether consolidation is justified." } },
+              { "@type": "Question", name: "How is pricing determined?", acceptedAnswer: { "@type": "Answer", text: "Pricing depends on scope, engagement duration, services involved, operating support required and, where ORQYNE is included, users, enabled modules, implementation requirements, AI usage model and integration scope. Terms are confirmed in writing before work begins." } }
+            ]
+          }
+        ]}
+      />
+
+      {/* Hero */}
+      <section className="relative overflow-hidden py-16 lg:py-24" data-testid="services-hero">
+        <GridBackdrop />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 animate-fade-in">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/70 backdrop-blur-sm text-[11px] uppercase tracking-[0.18em] text-slate-500 shadow-sm">
+            Consulting · PMaaS · ORQYNE-Enabled Delivery
+          </span>
+
+          <h1 className="mt-6 font-outfit text-4xl sm:text-5xl font-bold leading-[1.06] tracking-[-0.03em] max-w-3xl">
+            <span className="text-slate-900">Services Built Around Execution, </span>
+            <span className="text-slate-400">Not Activity</span>
           </h1>
-          
-          <h2 className="text-2xl lg:text-3xl text-blue-600 font-bold mb-6">
-            GPT-Powered Solutions for Digital Transformation & Project Management
+
+          <h2 className="mt-6 text-base md:text-lg font-semibold text-slate-700 max-w-2xl leading-relaxed">
+            Start with the business outcome that matters most.
           </h2>
-          
-          <p className="text-xl text-slate-700 max-w-4xl mx-auto mb-8 leading-relaxed">
-            Comprehensive <span className="text-blue-600 font-bold">AI-native consulting services</span> designed to transform your business
-            with <span className="text-blue-600 font-bold">GPT-powered project management</span>, intelligent automation, and
-            <span className="text-violet-600 font-bold"> AI-driven strategy</span> — industry-agnostic for SMEs &amp; startups, with deep specialization in IT Services and Healthcare Revenue Intelligence Advisory.
+
+          <p className="mt-5 text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
+            Orgainse combines focused advisory, implementation, and operating support so that strategy is
+            translated into visible, repeatable execution. Engagements are scoped around one measurable
+            problem — a critical project, a growing delivery portfolio, or an organisation-wide workflow issue —
+            and success measures are agreed before work begins.
           </p>
-          
-          <div className="flex justify-center flex-wrap gap-4 mb-12">
+
+          <div className="mt-9 flex flex-wrap items-center gap-3">
+            <button
+              onClick={openCalendly}
+              data-testid="services-hero-book-btn"
+              className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-slate-900 text-white font-semibold text-sm hover:bg-slate-800 transition-colors duration-200 shadow-[0_12px_34px_-14px_rgba(15,23,42,0.6)]"
+            >
+              Book an Execution Discovery Call
+              <ArrowRight className="h-[15px] w-[15px] transition-transform duration-200 group-hover:translate-x-1" />
+            </button>
+            <Link
+              to="/products"
+              data-testid="services-hero-orqyne-btn"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-slate-300 text-slate-900 text-sm font-semibold hover:bg-slate-50 hover:border-slate-400 transition-colors"
+            >
+              Explore ORQYNE
+            </Link>
+          </div>
+
+          <div className="mt-14 border-t border-slate-200 pt-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { name: "IT Services & Software", color: "from-blue-600 to-violet-600" },
-              { name: "Healthcare Revenue Intelligence Advisory", color: "from-blue-600 to-violet-600" },
-              { name: "Industry-Agnostic for SMEs & Startups", color: "from-blue-600 to-violet-600" },
-            ].map((industry, index) => (
-              <div 
-                key={index}
-                className="group relative animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className={`absolute inset-0 bg-gradient-to-r ${industry.color} rounded-2xl opacity-20 group-hover:opacity-40 transition-opacity blur-sm`}></div>
-                <div className="relative bg-white/80 backdrop-blur-lg rounded-2xl px-4 py-2 border border-blue-200 hover:border-blue-400 transition-all duration-300 transform hover:scale-[1.02] shadow-sm">
-                  <span className="text-slate-700 font-medium text-sm">{industry.name}</span>
-                </div>
+              "Information Technology Services and Software",
+              "Startups, Small and Medium-Sized Enterprises",
+              "Healthcare Revenue Intelligence Advisory",
+            ].map((item) => (
+              <div key={item} className="flex items-start gap-3">
+                <span className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center shrink-0">
+                  <CheckCircle className="h-[14px] w-[14px] text-blue-600" />
+                </span>
+                <p className="font-outfit font-semibold text-slate-900 text-[15px] leading-snug pt-1.5">{item}</p>
               </div>
             ))}
-          </div>
-          
-          {/* Animated Divider */}
-          <div className="flex justify-center">
-            <div className="w-40 h-1 bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 rounded-full animate-pulse"></div>
           </div>
         </div>
       </section>
@@ -371,14 +411,12 @@ const Services = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center mb-12 animate-fade-in">
-            <h2 className="text-4xl font-bold mb-6">
-              <span className="text-slate-800">Our </span>
-              <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-                AI-Powered Services
-              </span>
+            <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] mb-6 text-slate-900">
+              Six ways we improve execution
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              Comprehensive AI solutions designed to transform your business operations, optimize processes, and accelerate sustainable growth
+            <p className="text-sm sm:text-base text-slate-600 max-w-3xl mx-auto leading-relaxed">
+              Each service can run on its own or as part of a wider engagement. Select any service to see what it
+              covers, what you receive, and where the scope boundaries sit.
             </p>
           </div>
 
@@ -485,44 +523,52 @@ const Services = () => {
               <h2 className="text-4xl font-bold text-slate-900 mb-6">
                 Frequently Asked Questions
               </h2>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                Get answers to common questions about our AI consulting services, pricing, and implementation process
+              <p className="text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
+                Scope, engagement model, boundaries, and how pricing is determined.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
               {[
                 {
-                  category: "AI Consulting Services",
+                  category: "Scope and Engagement",
                   questions: [
                     {
-                      question: "What is AI-native consulting and how does it differ from traditional consulting?",
-                      answer: "AI-native consulting integrates artificial intelligence tools and methodologies from the ground up to enhance business strategies, optimize processes, and drive innovation. Unlike traditional consulting that relies primarily on human analysis, AI-native consulting leverages machine learning, predictive analytics, and automation to deliver faster, more accurate insights and solutions with measurable ROI."
+                      question: "What does Orgainse Consulting actually do?",
+                      answer: "Orgainse helps organisations improve project delivery, workflow visibility, operational governance, and practical Artificial Intelligence adoption. Services include Project Management as a Service, Artificial Intelligence and workflow transformation, delivery and operational governance, ORQYNE implementation and adoption, Artificial Intelligence strategy and readiness, and separately scoped Healthcare Revenue Intelligence Advisory."
                     },
                     {
-                      question: "Which industries benefit most from AI consulting services?",
-                      answer: "Our AI consulting is industry-agnostic — designed to scale with SMEs and startups across any sector. We have particularly deep specialization in IT Services & Software and Healthcare Revenue Intelligence Advisory, where data-rich, process-intensive operations consistently see the strongest results from AI-driven optimization."
+                      question: "What is Project Management as a Service?",
+                      answer: "Project Management as a Service (PMaaS) gives an organisation access to structured project leadership, governance, reporting, risk management, stakeholder communication, and delivery support without immediately building a full internal Project Management Office. It can be scoped to one critical project or to a delivery portfolio."
                     },
                     {
-                      question: "How do I know if my business is ready for AI transformation?",
-                      answer: "Your business is ready for AI transformation if you have: consistent data collection processes, manual tasks that consume significant time, need for faster decision-making, scaling challenges, or desire to improve customer experience. Our free AI Assessment tool can evaluate your readiness and provide a custom roadmap."
+                      question: "How is Orgainse different from a conventional consulting firm?",
+                      answer: "Orgainse combines advisory, implementation, operating support, and ORQYNE. The engagement is designed to move from recommendation to an operating workflow with defined owners, controls, reporting, and adoption support, rather than ending at a deck."
+                    },
+                    {
+                      question: "Who does Orgainse work with?",
+                      answer: "Primarily Information Technology services firms, software delivery teams, startups, small and medium-sized enterprises, and cross-functional operating teams. Typical buyers are founders, Chief Executive Officers, Chief Operating Officers, delivery leaders, project leaders, operations heads, and business owners."
                     }
                   ]
                 },
                 {
-                  category: "Implementation & Timeline",
+                  category: "How Engagements Run",
                   questions: [
                     {
-                      question: "How long does a typical AI implementation project take?",
-                      answer: "Implementation timelines vary based on project scope: Simple automation (2-4 weeks), Process optimization (1-3 months), Complete digital transformation (3-12 months). Our PMaaS approach ensures projects stay on schedule with weekly progress updates and milestone-based delivery."
+                      question: "How does an engagement start?",
+                      answer: "It starts with a focused discovery session on one important execution problem. We clarify the desired outcome, current workflow, decision owners, operating constraints, and the most practical next step. The recommendation may involve consulting, Project Management as a Service, ORQYNE, a short diagnostic, or no immediate engagement."
                     },
                     {
-                      question: "What is PMaaS (Project Management as a Service) and why do you use it?",
-                      answer: "PMaaS is our dedicated project management service that provides expert project managers, proven methodologies, and advanced tools to ensure successful AI implementation. It eliminates the need to hire internal PM resources and guarantees projects are delivered on time, within budget, and with full accountability."
+                      question: "What are the four stages of delivery?",
+                      answer: "Diagnose: clarify the desired outcome, current workflow, decision owners, constraints, risks, and measurable sources of leakage. Design: create the target workflow, governance model, reporting rhythm, roles, controls, and success measures. Implement: configure the process, ORQYNE workspace, templates, integrations, and operating cadence. Govern: review adoption, risks, decisions, delivery health, and measurable outcomes on a defined schedule."
                     },
                     {
-                      question: "How do you ensure smooth integration with our existing systems?",
-                      answer: "We conduct comprehensive system audits, use API-based integrations, implement gradual rollouts, and provide extensive testing before full deployment. Our team has experience with 200+ software platforms and ensures zero disruption to your current operations during the transition."
+                      question: "Can Orgainse work with our existing tools?",
+                      answer: "Yes. Orgainse can improve the operating model around an existing tool such as Jira, Asana or monday.com, introduce ORQYNE for selected workflows, or assess whether consolidation is justified. The recommendation is based on business fit rather than forced replacement, and integration availability is confirmed during scoping."
+                    },
+                    {
+                      question: "How is Artificial Intelligence introduced safely?",
+                      answer: "We map the process first, identify where Artificial Intelligence improves decision quality or removes friction, and define human approval points before anything is built. Artificial Intelligence output may be incomplete or incorrect, so material operational, financial, legal, security, healthcare, or employment decisions retain appropriate human review."
                     }
                   ]
                 },
@@ -531,53 +577,36 @@ const Services = () => {
                   questions: [
                     {
                       question: "What is Healthcare Revenue Intelligence Advisory?",
-                      answer: "Healthcare Revenue Intelligence Advisory is our AI-powered advisory service for US healthcare organizations. We deliver strategic consulting, AI-driven analytics, and governance frameworks that provide independent visibility into revenue performance — working alongside your existing RCM operations rather than replacing them. It is advisory and analytics only; we do not provide billing, coding, AR follow-up, claims processing, or operational delivery of any kind."
+                      answer: "It is an advisory and analytics service that improves visibility into revenue performance, denial patterns, payer behaviour, operating controls, and executive reporting. It works alongside your existing revenue cycle operations and vendors rather than replacing them. Each engagement is separately scoped for data handling, regulatory considerations, and advisory boundaries."
                     },
                     {
-                      question: "Who is the right fit for Orgainse's RCM Advisory?",
-                      answer: "The right fit is US healthcare organizations that already have revenue cycle operations in place — internally managed or via a third-party vendor — and need an independent, AI-powered view of what those operations are delivering. This includes physician groups, multi-specialty practices, regional hospital systems, ASCs, clinical laboratories, IPAs, ACOs, value-based-care organizations, healthcare startups, MedTech companies, and health plans with provider analytics needs."
+                      question: "Who is the right fit for this service?",
+                      answer: "Organisations that already have revenue cycle operations in place, internally or through a third party, and need an independent view of what those operations are delivering and where performance can be strengthened through better governance, analytics, or technology readiness."
                     },
                     {
-                      question: "What is explicitly not included in this service?",
-                      answer: "We are not an outsourced operations vendor. We do not provide: medical billing or claims submission, medical coding or clinical documentation, AR follow-up or collections, denial follow-up or appeal submission operations, payment posting or remittance processing, patient billing or collections, or any onshore/offshore RCM staffing. Our scope is strictly advisory, analytics, and governance."
-                    },
-                    {
-                      question: "How quickly do you deliver insights?",
-                      answer: "Engagements are structured for speed and minimal internal burden. The first leadership deliverable lands within 30 days. No system access or patient data is required for the initial assessment."
+                      question: "What is explicitly not included?",
+                      answer: "Orgainse does not provide medical billing or claims submission, medical coding or clinical documentation, accounts receivable follow-up or collections, denial follow-up or appeal submission, payment posting or remittance processing, patient billing, or onshore and offshore revenue cycle staffing. The scope is strictly advisory, analytics, and governance."
                     }
                   ]
                 },
                 {
-                  category: "Pricing & ROI",
+                  category: "Pricing, Outcomes and Data",
                   questions: [
                     {
-                      question: "How do you calculate ROI for AI consulting projects?",
-                      answer: "Our engagements are built for measurable, data-driven outcomes and faster delivery, not headline ROI percentages. We model value across cost savings from automation, revenue improvements from better processes, time savings for employees, reduced error rates, and customer-experience gains — and we report against KPIs agreed at SOW. We deliberately do not publish guaranteed ROI multiples; your numbers will depend on baseline maturity and scope."
+                      question: "How is pricing determined?",
+                      answer: "Pricing depends on scope, engagement duration, the services involved, the operating support required, and — where ORQYNE is included — users, enabled modules, implementation requirements, Artificial Intelligence usage model, and integration scope. Final scope and commercial terms are confirmed in writing before work begins."
                     },
                     {
-                      question: "What factors influence the pricing of AI consulting services?",
-                      answer: "Pricing depends on: project complexity and scope, required technology integrations, implementation timeline, ongoing support needs, and team size. We offer flexible pricing models including fixed-price projects, monthly retainers, and performance-based pricing aligned with your budget and goals."
+                      question: "Does Orgainse guarantee delivery improvement or Return on Investment?",
+                      answer: "No. Timing and outcomes depend on scope, data quality, leadership decisions, adoption, integrations, operating conditions, and customer responsibilities. Success measures are agreed before work begins and reviewed through the engagement, and we deliberately do not publish guaranteed percentages."
                     },
                     {
-                      question: "Do you offer guarantees on project outcomes?",
-                      answer: "Yes, we provide performance guarantees based on agreed KPIs and success metrics. If we don't achieve the promised results within the specified timeframe, we continue working at no additional cost until targets are met or provide a full refund. This reflects our confidence in delivering measurable value."
-                    }
-                  ]
-                },
-                {
-                  category: "Support & Maintenance",
-                  questions: [
-                    {
-                      question: "What kind of ongoing support do you provide after implementation?",
-                      answer: "We provide comprehensive post-implementation support including: 24/7 technical monitoring, monthly performance reviews, continuous optimization, staff training sessions, priority support tickets, and regular updates to keep your AI systems current with the latest technologies."
+                      question: "Are the assessment and calculator on this site an audit?",
+                      answer: "No. The Artificial Intelligence readiness assessment and the Return on Investment calculator are directional planning aids based entirely on the answers and assumptions you supply. They are not a certification, an audit, or professional advice for your specific circumstances."
                     },
                     {
-                      question: "How do you handle data security and compliance?",
-                      answer: "We maintain enterprise-grade security with SOC 2 compliance, GDPR adherence, encrypted data transmission, regular security audits, and strict access controls. Your data never leaves your infrastructure during analysis, and we provide detailed compliance reporting for regulated industries."
-                    },
-                    {
-                      question: "Can you scale the AI solutions as our business grows?",
-                      answer: "Absolutely. Our AI solutions are designed with scalability in mind, using cloud-native architectures and modular components. We provide capacity planning, performance monitoring, and automatic scaling capabilities to ensure your AI systems grow seamlessly with your business needs."
+                      question: "How is our data handled?",
+                      answer: "Data handling, access, retention, and confidentiality are defined in the engagement agreement, and Healthcare engagements are separately scoped for regulatory considerations. Orgainse does not claim certification or legal compliance under any standard unless it has been formally established and independently verified."
                     }
                   ]
                 }
@@ -617,15 +646,16 @@ const Services = () => {
             {/* CTA Section */}
             <div className="text-center mt-16">
               <div className="bg-gradient-to-r from-blue-600 to-violet-600 rounded-3xl p-8 text-white">
-                <h3 className="text-3xl font-bold mb-4">Still Have Questions?</h3>
-                <p className="text-xl mb-6 text-blue-100">
-                  Get personalized answers and a free consultation with our AI experts
+                <h3 className="font-outfit text-3xl font-bold tracking-[-0.02em] mb-4">Still evaluating?</h3>
+                <p className="text-base mb-6 text-blue-100 max-w-2xl mx-auto">
+                  Bring one execution problem to a focused 30-minute discovery call. We will clarify the outcome,
+                  the workflow, the decision owners, and the most practical next step.
                 </p>
                 <Button 
                   onClick={openCalendly}
                   className="bg-white text-slate-900 hover:bg-blue-100 px-8 py-4 text-lg font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02]"
                 >
-                  Book Free Consultation
+                  Book a Discovery Call
                 </Button>
               </div>
             </div>
@@ -642,16 +672,16 @@ const Services = () => {
         <div className="py-8 bg-gradient-to-r from-slate-50 via-white to-blue-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <h3 className="text-2xl font-bold text-slate-900 mb-4">
-                Share Our AI Transformation Story
+              <h3 className="font-outfit text-2xl font-bold tracking-[-0.02em] text-slate-900 mb-4">
+                Share this with your delivery leaders
               </h3>
               <p className="text-slate-600 mb-6">
-                Help others discover the power of AI-driven digital transformation
+                Practical execution, governance and Artificial Intelligence adoption for teams that need visibility.
               </p>
               <SocialShare 
-                title="Comprehensive Business Consulting Services | Digital Transformation | Orgainse Consulting"
-                description="Transform your business with comprehensive consulting services delivering measurable, data-driven outcomes. Expert business consulting across India, USA, UK, UAE, Australia."
-                hashtags="BusinessConsulting,DigitalTransformation,BusinessStrategy,Consulting,AIConsulting"
+                title="Consulting, PMaaS and Delivery Governance Services | Orgainse Consulting"
+                description="Project Management as a Service, workflow transformation, delivery governance, ORQYNE implementation, AI readiness, and Healthcare Revenue Intelligence Advisory."
+                hashtags="ProjectManagement,PMaaS,DeliveryGovernance,ORQYNE,AIAdoption"
               />
             </div>
           </div>
