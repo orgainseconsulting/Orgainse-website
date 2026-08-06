@@ -403,3 +403,78 @@ See `/app/memory/test_credentials.md`.
 - P2: Welcome / set-your-password email for newly invited admins (Resend).
 - P2: Dynamic public `/about/team` page generated from Admin host profiles.
 - P2: Apply the same document-driven copy rewrite to `/services`, `/about`, `/contact`.
+
+
+## Implemented (June 15, 2026 — round 2: illustration rebuild, alignment pass, brand scrollbar, pilot lead bucket)
+
+User feedback after the rebrand: illustrations misaligned, site should look perfectly
+aligned/professional, gradients not reflected in the scrollbar, gradients uneven
+across pages, and any new form must land in the Admin Dashboard.
+
+### 1. Illustrations rebuilt (root cause fixed)
+`brand/OrbitDiagram.js` previously animated `transform: rotate()` on the chip
+elements, which **overrode the Tailwind `-translate-x/y-1/2` centring** and left the
+labels tilted, off-centre and clipped. Replaced with a deterministic SVG
+constellation: chip positions computed from fixed angles
+(`INNER_ANGLES [-90,30,150]` @ `{x:24,y:32}`, `OUTER_ANGLES [0,60,120,180,240,300]`
+@ `{x:32,y:40}`), centred with a static `translate(-50%,-50%)`; only the dashed
+ellipses and two tracer dots animate. Labels can no longer rotate or drift.
+Verified upright, unclipped and non-overlapping at 1920, 1440 and 390 widths.
+
+### 2. Gradient system unified (`/app/scripts/normalize_gradients.py`)
+The first migration had collapsed multi-hue gradients into degenerate same-colour
+runs (`from-blue-500 to-blue-500`), which is what "gradients are not even" meant.
+Every gradient run across 24 files is now snapped to one of THREE canonical ramps:
+- light `from-slate-50 via-white to-blue-50`
+- brand `from-blue-600 [via-blue-500] to-violet-600`
+- dark  `from-slate-900 via-blue-900 to-slate-900`
+Also removed decorative card tilts (`rotate-1/2/3/6`, kept `rotate-180` chevrons),
+tamed oversized hover lifts/scales.
+
+### 3. Brand scrollbar
+`index.css`: `scrollbar-color` (Firefox) + `::-webkit-scrollbar*` rules — blue→violet
+gradient thumb on a `slate-100` track, `scrollbar-gutter: stable` to avoid layout
+shift, plus a `.org-scroll-slim` variant used by the legal popup.
+Also added `smooth` scroll and a `:focus-visible` brand ring.
+
+### 4. Alignment / professional polish
+- Removed `text-justify` everywhere (ragged word spacing).
+- Normalised oversized headings (`text-5xl lg:text-6xl` → `text-3xl sm:text-4xl`) and
+  fixed conflicting duplicated size classes on Blog/Newsletter headings.
+- **Services**: all six `Learn More` buttons unified to one slate-900 pill and the
+  features block uses `mt-auto`, so buttons align across each row (verified: 2 unique Y values).
+- **Contact**: hero and "Start the conversation" section rebuilt left-aligned with
+  Outfit headings and copy aligned to the new positioning.
+- **Newsletter/Issue/Unsubscribe**: off-palette cream `#f6f5f1` → `slate-50`; the empty
+  "Latest issue" hero card no longer a fixed 4/5 aspect void.
+- Dark-surface CTAs converted to white pills (newsletter hero Subscribe, cookie
+  banner "Accept all") so they are readable.
+- Primary buttons standardised site-wide to the slate-900 pill.
+
+### 5. New form now captured in the Admin Dashboard
+The ORQYNE Guided Pilot form previously fell into `contact_messages`. Added a
+dedicated bucket end-to-end:
+- `api/_handlers/contact.js` — switch cases `orqyne_pilot` / `ORQYNE Guided Pilot`
+  → collection `orqyne_pilot_leads`
+- `api/_handlers/admin.js` — `VALID_COLLECTIONS`, `summary.total_orqyne_pilots`,
+  `breakdown.orqyne_pilots`, `data.orqyne_pilot_leads`
+- `api/_handlers/admin-delete.js` — collection whitelisted (single + bulk delete)
+- `AdminDashboard.js` — new **ORQYNE Pilot Requests** tab (`admin-tab-orqyne_pilots`),
+  wired into all three collectionMaps, `getDataForTab`, `normalizeLead` and the
+  Export-All buckets; `LeadDetailsPanel` renders it with the contact-style block.
+**Reminder: the Node sidecar does not hot-reload — `sudo supervisorctl restart backend`
+after editing any handler.**
+
+### Testing — iteration_12.json: 100% backend (14/14), 100% frontend
+All 5 reported issues verified fixed, including programmatic checks that every chip
+is inside its container with no rotation, and an end-to-end pilot submission
+appearing in the new admin tab (and NOT in Contact Messages). Historical pilot leads
+submitted before the fix remain in `contact_messages` — expected data history.
+
+### Still open / next
+- P1: About + Services still carry the older "GPT-powered / AI-native" copy; rewrite
+  them (and /contact body copy) with the document-driven enterprise messaging.
+- P1: "Get Paid" creator-economy section + "Team Chat by Plan" from orgainse.live.
+- P1: Rolling 7-day sparkline per post/issue in Admin Analytics.
+- P2: Welcome / set-your-password email for new admins (Resend).
+- P2: Dynamic public `/about/team` page from Admin host profiles.
