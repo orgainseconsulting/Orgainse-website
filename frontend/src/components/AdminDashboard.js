@@ -86,7 +86,8 @@ const normalizeLead = (item, collectionKey) => {
       details = [item.service_type, item.message].filter(Boolean).join(' — ');
       break;
     case 'contacts':
-      details = [item.subject, item.message].filter(Boolean).join(' — ');
+    case 'orqyne_pilots':
+      details = [item.service_type, item.subject, item.message].filter(Boolean).join(' — ');
       break;
     case 'newsletters':
     default:
@@ -207,6 +208,7 @@ const AdminDashboard = () => {
       { rows: data.data.roi_calculator_leads || [], collectionKey: 'roi_calculators', category: 'ROI Calculator' },
       { rows: data.data.service_inquiries || [], collectionKey: 'service_inquiries', category: 'Service Inquiry' },
       { rows: data.data.consultation_leads || [], collectionKey: 'consultations', category: 'Consultation Request' },
+      { rows: data.data.orqyne_pilot_leads || [], collectionKey: 'orqyne_pilots', category: 'ORQYNE Pilot Request' },
     ];
 
     const allLeads = buckets.flatMap(({ rows, collectionKey, category }) =>
@@ -308,7 +310,8 @@ const AdminDashboard = () => {
     { id: 'ai_assessments', name: 'AI Assessments', count: data?.summary?.breakdown?.ai_assessments || 0 },
     { id: 'roi_calculators', name: 'ROI Calculators', count: data?.summary?.breakdown?.roi_calculators || 0 },
     { id: 'service_inquiries', name: 'Service Inquiries', count: data?.summary?.breakdown?.service_inquiries || 0 },
-    { id: 'consultations', name: 'Consultations', count: data?.summary?.breakdown?.consultations || 0 }
+    { id: 'consultations', name: 'Consultations', count: data?.summary?.breakdown?.consultations || 0 },
+    { id: 'orqyne_pilots', name: 'ORQYNE Pilot Requests', count: data?.summary?.breakdown?.orqyne_pilots || 0 }
   ];
 
   // Reset to page 1 whenever the active tab changes
@@ -369,7 +372,8 @@ const AdminDashboard = () => {
               'ai_assessments': 'ai_assessment_leads',
               'roi_calculators': 'roi_calculator_leads',
               'service_inquiries': 'service_inquiries',
-              'consultations': 'consultation_leads'
+              'consultations': 'consultation_leads',
+              'orqyne_pilots': 'orqyne_pilot_leads'
             };
             const collection = collectionMap[tab.id];
             
@@ -408,6 +412,7 @@ const AdminDashboard = () => {
         case 'roi_calculators': return data?.data?.roi_calculator_leads || [];
         case 'service_inquiries': return data?.data?.service_inquiries || [];
         case 'consultations': return data?.data?.consultation_leads || [];
+        case 'orqyne_pilots': return data?.data?.orqyne_pilot_leads || [];
         default: return [];
       }
     };
@@ -439,7 +444,8 @@ const AdminDashboard = () => {
                       'ai_assessments': 'ai_assessment_leads',
                       'roi_calculators': 'roi_calculator_leads',
                       'service_inquiries': 'service_inquiries',
-                      'consultations': 'consultation_leads'
+                      'consultations': 'consultation_leads',
+                      'orqyne_pilots': 'orqyne_pilot_leads'
                     };
                     const collection = collectionMap[activeTab];
                     deleteCollectionLeads(collection, currentTab?.name);
@@ -475,7 +481,8 @@ const AdminDashboard = () => {
                   'ai_assessments': 'ai_assessment_leads',
                   'roi_calculators': 'roi_calculator_leads',
                   'service_inquiries': 'service_inquiries',
-                  'consultations': 'consultation_leads'
+                  'consultations': 'consultation_leads',
+                  'orqyne_pilots': 'orqyne_pilot_leads'
                 };
                 const collection = collectionMap[activeTab];
                 const n = normalizeLead(item, activeTab);
@@ -632,7 +639,7 @@ const AdminDashboard = () => {
                 <button
                   onClick={exportAllLeadsToCSV}
                   data-testid="admin-export-all-csv"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors flex items-center shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors flex items-center shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
                 >
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3M7 7h10a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V9a2 2 0 012-2z" />
@@ -642,7 +649,7 @@ const AdminDashboard = () => {
                 <button
                   onClick={deleteAllLeads}
                   data-testid="admin-delete-all-leads"
-                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-colors flex items-center shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-colors flex items-center shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
                 >
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />

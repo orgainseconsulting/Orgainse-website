@@ -46,7 +46,7 @@ const SocialShare = ({
       {/* Share Button */}
       <button
         onClick={() => setShowDropdown(!showDropdown)}
-        className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+        className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-violet-600 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]"
         aria-label="Share this page"
       >
         <Share2 className="h-4 w-4 mr-2" />

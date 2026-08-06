@@ -63,7 +63,7 @@ const NewsletterIssuePage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#f6f5f1]">
+      <div className="min-h-screen bg-slate-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="animate-pulse space-y-6">
             <div className="h-3 bg-slate-300 rounded w-1/4" />
@@ -78,7 +78,7 @@ const NewsletterIssuePage = () => {
 
   if (notFound || !issue) {
     return (
-      <div className="min-h-screen bg-[#f6f5f1] flex items-center justify-center px-4">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
         <div className="text-center" data-testid="newsletter-issue-not-found">
           <p className="text-xs uppercase tracking-widest text-slate-400 mb-4">404 · Issue</p>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Issue not found</h1>
@@ -95,7 +95,7 @@ const NewsletterIssuePage = () => {
   const ogImage = issue.og_image_url || issue.cover_image_url || undefined;
 
   return (
-    <div className="min-h-screen bg-[#f6f5f1]">
+    <div className="min-h-screen bg-slate-50">
       <SEOHead
         title={`${issue.seo_title || issue.title} — Orgainse Pulse`}
         description={issue.seo_description || issue.excerpt || ''}
@@ -118,7 +118,7 @@ const NewsletterIssuePage = () => {
             {issue.edition_date && <><span className="text-slate-600">·</span><span className="text-slate-400">{fmt(issue.edition_date)}</span></>}
             {issue.category && <><span className="text-slate-600">·</span><span className="text-slate-400">{issue.category}</span></>}
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.05] mb-5">{issue.title}</h1>
+          <h1 className="text-4xl sm:text-5xl font-black leading-[1.05] mb-5">{issue.title}</h1>
           {issue.subtitle && <p className="text-xl text-slate-300 leading-relaxed italic">{issue.subtitle}</p>}
           <div className="flex items-center gap-5 text-xs text-slate-400 mt-8 pt-6 border-t border-slate-700">
             <span className="inline-flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" />{issue.reading_minutes || 1} min read</span>
@@ -134,7 +134,7 @@ const NewsletterIssuePage = () => {
             <img src={issue.cover_image_url} alt={issue.title}
               className="w-full h-auto rounded-2xl shadow-2xl object-cover" data-testid="issue-cover" />
           </div>
-          <div className="h-16 sm:h-24 bg-[#f6f5f1]" />
+          <div className="h-16 sm:h-24 bg-slate-50" />
         </div>
       )}
 
@@ -165,7 +165,7 @@ const NewsletterIssuePage = () => {
               placeholder="you@company.com"
               className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:bg-white/15 focus:border-blue-400 focus:outline-none" />
             <button type="submit" disabled={subbing}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 disabled:opacity-50">
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-slate-100 text-slate-900 font-semibold rounded-full shadow-[0_12px_34px_-14px_rgba(0,0,0,0.5)] transition-colors duration-200 disabled:opacity-50">
               {subbing ? 'Subscribing…' : 'Subscribe'}
             </button>
           </form>

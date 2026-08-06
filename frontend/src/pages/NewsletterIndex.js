@@ -28,7 +28,7 @@ const IssueCard = ({ issue }) => {
       <Link to={`/newsletter/${issue.slug}`} className="block relative aspect-[16/10] overflow-hidden">
         {issue.cover_image_url ? (
           <img src={issue.cover_image_url} alt={issue.title} loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            className="absolute inset-0 h-full w-full object-cover group-hover:scale-[1.02] transition-transform duration-500" />
         ) : (
           <div className={`absolute inset-0 bg-gradient-to-br ${grad} flex flex-col justify-between p-6`}>
             <div className="text-xs font-black uppercase tracking-[0.18em] text-white/90">
@@ -109,7 +109,7 @@ const NewsletterIndex = () => {
   const rest = issues.slice(1);
 
   return (
-    <div className="min-h-screen bg-[#f6f5f1]">
+    <div className="min-h-screen bg-slate-50">
       <SEOHead
         title="Orgainse Pulse — Newsletter | AI-native consulting briefings"
         description="The Orgainse Pulse newsletter: fortnightly briefings on AI-native project management, digital transformation and revenue intelligence — straight from the desk that ships the work."
@@ -125,7 +125,7 @@ const NewsletterIndex = () => {
               <span className="inline-block text-[11px] font-black uppercase tracking-[0.24em] text-blue-300 mb-4">
                 The Orgainse Pulse
               </span>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.05] mb-5">
+              <h1 className="text-4xl sm:text-5xl font-black leading-[1.05] mb-5">
                 Briefings from the<br /><span className="text-blue-400">AI-native</span> desk.
               </h1>
               <p className="text-lg text-slate-300 max-w-xl leading-relaxed mb-8">
@@ -137,15 +137,15 @@ const NewsletterIndex = () => {
                   data-testid="newsletter-hero-email"
                   className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:bg-white/15 focus:border-blue-400 focus:outline-none" />
                 <button type="submit" disabled={subbing} data-testid="newsletter-hero-submit"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 disabled:opacity-50">
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-slate-100 text-slate-900 font-semibold rounded-full shadow-[0_12px_34px_-14px_rgba(0,0,0,0.5)] transition-colors duration-200 disabled:opacity-50">
                   <Mail className="h-4 w-4" />{subbing ? 'Subscribing…' : 'Subscribe'}
                 </button>
               </form>
               <p className="text-xs text-slate-400 mt-3">Unsubscribe anytime · No spam, ever · ~2-min read per issue</p>
             </div>
             <div className="lg:col-span-5 hidden lg:block">
-              <div className="aspect-[4/5] rounded-2xl bg-gradient-to-br from-blue-500 via-blue-500 to-violet-500 p-8 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
-                <div className="bg-white/95 rounded-xl h-full p-6 flex flex-col">
+              <div className="rounded-3xl bg-gradient-to-br from-blue-600 via-blue-500 to-violet-600 p-6 shadow-2xl">
+                <div className="bg-white/95 rounded-2xl p-6 flex flex-col min-h-[15rem]">
                   <div className="text-xs font-black uppercase tracking-[0.18em] text-blue-600 mb-2">Latest issue</div>
                   <h3 className="text-2xl font-extrabold text-slate-900 leading-tight line-clamp-3 flex-1">
                     {featured?.title || 'Subscribe to read the next issue.'}

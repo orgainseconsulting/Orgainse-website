@@ -1,17 +1,23 @@
 import React from "react";
 
-const ringPos = (i, total, radiusX, radiusY) => {
-  const angle = (i / total) * Math.PI * 2 - Math.PI / 2;
-  return {
-    left: `${50 + Math.cos(angle) * radiusX}%`,
-    top: `${50 + Math.sin(angle) * radiusY}%`,
-  };
+/**
+ * Capability constellation — a deterministic, pixel-aligned diagram.
+ * Chip positions are computed from fixed angles and centred on their point,
+ * so nothing can drift, tilt, or clip. Only the dashed rings and the tracer
+ * dot animate; text always stays upright.
+ */
+
+const INNER_ANGLES = [-90, 30, 150];
+const OUTER_ANGLES = [0, 60, 120, 180, 240, 300];
+
+const INNER_R = { x: 24, y: 32 };
+const OUTER_R = { x: 32, y: 40 };
+
+const point = (angleDeg, r) => {
+  const a = (angleDeg * Math.PI) / 180;
+  return { x: 50 + Math.cos(a) * r.x, y: 50 + Math.sin(a) * r.y };
 };
 
-/**
- * Animated orbit diagram — two counter-rotating rings of capability chips
- * around a labelled core. Replaces stock photography site-wide.
- */
 export const OrbitDiagram = ({
   coreLabel,
   coreSub,
@@ -22,57 +28,93 @@ export const OrbitDiagram = ({
   caption,
   testId = "orbit-diagram",
 }) => {
-  const chip = (label, key, style, reverseDuration) => (
-    <span
-      key={key}
-      className="absolute -translate-x-1/2 -translate-y-1/2 org-orbit-chip"
-      style={{ ...style, animationDuration: reverseDuration, animationDirection: "reverse" }}
-    >
-      <span
-        className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border bg-white/90 px-3 py-1.5 text-[11px] font-semibold text-slate-700 shadow-[0_8px_24px_-14px_rgba(15,23,42,0.4)] backdrop-blur-sm"
-        style={{ borderColor: `rgba(${accent},0.25)` }}
-      >
-        <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: `rgb(${accent})` }} />
-        {label}
-      </span>
-    </span>
-  );
+  const inner = innerChips.slice(0, 3).map((label, i) => ({ label, ...point(INNER_ANGLES[i], INNER_R) }));
+  const outer = outerChips.slice(0, 6).map((label, i) => ({ label, ...point(OUTER_ANGLES[i], OUTER_R) }));
+  const nodes = [...inner, ...outer];
 
   return (
-    <div data-testid={testId}>
+    <figure data-testid={testId} className="m-0">
       <div className="relative w-full aspect-[4/3] rounded-3xl border border-slate-200 bg-white overflow-hidden">
-        <div aria-hidden="true" className="absolute inset-0 org-grid-mesh-sm" style={{ maskImage: "radial-gradient(black 25%, transparent 78%)", WebkitMaskImage: "radial-gradient(black 25%, transparent 78%)" }} />
-        <div aria-hidden="true" className="absolute inset-0" style={{ background: `radial-gradient(rgba(${accent},0.12), transparent 62%)` }} />
+        {/* backdrop */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 org-grid-mesh-sm"
+          style={{ maskImage: "radial-gradient(black 20%, transparent 76%)", WebkitMaskImage: "radial-gradient(black 20%, transparent 76%)" }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{ background: `radial-gradient(60% 60% at 50% 50%, rgba(${accent},0.10), rgba(255,255,255,0) 70%)` }}
+        />
 
-        <div aria-hidden="true" className="absolute rounded-full border border-dashed" style={{ borderColor: `rgba(${accent},0.2)`, left: "26%", top: "18%", width: "48%", height: "64%" }} />
-        <div aria-hidden="true" className="absolute rounded-full border border-dashed" style={{ borderColor: `rgba(${accent},0.2)`, left: "19%", top: "9%", width: "62%", height: "82%" }} />
+        {/* rings, connectors, tracer */}
+        <svg aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
+          {nodes.map((n) => (
+            <line key={`l-${n.label}`} x1="50" y1="50" x2={n.x} y2={n.y} stroke={`rgba(${accent},0.16)`} strokeWidth="0.25" />
+          ))}
+          <ellipse cx="50" cy="50" rx={INNER_R.x} ry={INNER_R.y} fill="none" stroke={`rgba(${accent},0.28)`} strokeWidth="0.25" strokeDasharray="1.6 2.2" className="org-orbit-ring" style={{ animationDuration: "60s", transformOrigin: "50% 50%" }} />
+          <ellipse cx="50" cy="50" rx={OUTER_R.x} ry={OUTER_R.y} fill="none" stroke={`rgba(${accent},0.22)`} strokeWidth="0.25" strokeDasharray="1.2 2.6" className="org-orbit-ring" style={{ animationDuration: "90s", animationDirection: "reverse", transformOrigin: "50% 50%" }} />
+          <g className="org-orbit-ring" style={{ animationDuration: "26s", transformOrigin: "50% 50%" }}>
+            <circle cx={50 + OUTER_R.x} cy="50" r="0.9" fill={`rgb(${accent})`} opacity="0.75" />
+          </g>
+          <g className="org-orbit-ring" style={{ animationDuration: "18s", animationDirection: "reverse", transformOrigin: "50% 50%" }}>
+            <circle cx={50 - INNER_R.x} cy="50" r="0.75" fill={`rgb(${accent})`} opacity="0.55" />
+          </g>
+        </svg>
 
-        <div className="absolute inset-0 org-orbit-ring" style={{ animationDuration: "46s" }}>
-          {innerChips.map((label, i) => chip(label, `in-${i}`, ringPos(i, innerChips.length, 24, 32), "46s"))}
-        </div>
-        <div className="absolute inset-0 org-orbit-ring" style={{ animationDuration: "68s", animationDirection: "reverse" }}>
-          {outerChips.map((label, i) => chip(label, `out-${i}`, ringPos(i, outerChips.length, 31, 41), "68s"))}
-        </div>
+        {/* node dots */}
+        {nodes.map((n) => (
+          <span
+            key={`d-${n.label}`}
+            aria-hidden="true"
+            className="absolute h-1.5 w-1.5 rounded-full"
+            style={{ left: `${n.x}%`, top: `${n.y}%`, transform: "translate(-50%, -50%)", backgroundColor: `rgba(${accent},0.35)` }}
+          />
+        ))}
 
+        {/* chips — centred on their point, always upright */}
+        {nodes.map((n, i) => (
+          <span
+            key={n.label}
+            className="absolute org-fade-up"
+            style={{ left: `${n.x}%`, top: `${n.y}%`, transform: "translate(-50%, -50%)", animationDelay: `${0.08 * i}s` }}
+          >
+            <span
+              className="block whitespace-nowrap rounded-full border bg-white/95 px-2 py-1 text-[10px] font-semibold leading-none text-slate-700 shadow-[0_6px_18px_-10px_rgba(15,23,42,0.45)] backdrop-blur-sm"
+              style={{ borderColor: `rgba(${accent},0.28)` }}
+            >
+              {n.label}
+            </span>
+          </span>
+        ))}
+
+        {/* core */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div className="relative flex flex-col items-center gap-2 rounded-2xl border bg-white px-4 py-4 shadow-[0_24px_60px_-28px_rgba(15,23,42,0.45)]" style={{ borderColor: `rgba(${accent},0.33)` }}>
-            <span aria-hidden="true" className="absolute -inset-3 rounded-3xl org-pulse-soft" style={{ background: `radial-gradient(circle, rgba(${accent},0.14), transparent 70%)` }} />
+          <span
+            aria-hidden="true"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-28 w-28 rounded-full org-pulse-soft"
+            style={{ background: `radial-gradient(circle, rgba(${accent},0.18), rgba(255,255,255,0) 68%)` }}
+          />
+          <div
+            className="relative flex flex-col items-center gap-1.5 rounded-2xl border bg-white px-4 py-3 text-center shadow-[0_22px_55px_-30px_rgba(15,23,42,0.5)]"
+            style={{ borderColor: `rgba(${accent},0.3)` }}
+          >
             {CoreIcon && (
-              <span className="relative grid h-10 w-10 place-items-center rounded-xl" style={{ backgroundColor: `rgba(${accent},0.08)`, color: `rgb(${accent})` }}>
-                <CoreIcon className="h-[18px] w-[18px]" />
+              <span className="grid h-8 w-8 place-items-center rounded-xl" style={{ backgroundColor: `rgba(${accent},0.09)`, color: `rgb(${accent})` }}>
+                <CoreIcon className="h-4 w-4" />
               </span>
             )}
-            <p className="relative font-outfit text-sm font-bold tracking-[-0.01em] text-slate-900">{coreLabel}</p>
+            <span className="font-outfit text-[13px] font-bold leading-tight tracking-[-0.01em] text-slate-900">{coreLabel}</span>
             {coreSub && (
-              <p className="relative text-[10px] uppercase tracking-[0.2em] font-bold" style={{ color: `rgb(${accent})` }}>
+              <span className="text-[9px] font-bold uppercase leading-tight tracking-[0.16em]" style={{ color: `rgb(${accent})` }}>
                 {coreSub}
-              </p>
+              </span>
             )}
           </div>
         </div>
       </div>
-      {caption && <p className="mt-3 text-[11px] text-slate-400 text-center">{caption}</p>}
-    </div>
+      {caption && <figcaption className="mt-3 text-center text-[11px] text-slate-400">{caption}</figcaption>}
+    </figure>
   );
 };
 

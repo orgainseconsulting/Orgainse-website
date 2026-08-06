@@ -17,7 +17,7 @@ const NotFound = () => {
         <div className="bg-white rounded-3xl shadow-2xl p-8 lg:p-12">
           <div className="mb-8">
             <h1 className="text-6xl font-bold text-slate-300 mb-4">404</h1>
-            <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">
+            <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
               Page Not Found
             </h2>
             <p className="text-slate-600 text-lg mb-8">
@@ -29,7 +29,7 @@ const NotFound = () => {
             <Link
               data-testid="notfound-home-link"
               to="/"
-              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-violet-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]"
             >
               <ArrowRight className="mr-3 h-5 w-5" />
               Back to Homepage

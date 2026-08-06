@@ -127,7 +127,7 @@ const NextLaunchCountdownCard = ({ kind }) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-5 sm:p-6" data-testid={`next-launch-card-${kind}`}>
+    <div className="bg-gradient-to-br from-slate-900 to-blue-950 text-white rounded-2xl p-5 sm:p-6" data-testid={`next-launch-card-${kind}`}>
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
           <div className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.24em] text-blue-300 mb-1">

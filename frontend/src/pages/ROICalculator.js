@@ -79,10 +79,10 @@ export default function ROICalculator() {
   if (result) {
     const sym = result.currency_symbol || '$';
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 py-12">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-blue-500 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
               Your ROI Analysis Report
             </h1>
             <p className="text-lg text-slate-600">
@@ -137,7 +137,7 @@ export default function ROICalculator() {
             <button
               data-testid="roi-book-btn"
               onClick={openCalendly}
-              className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 inline-flex items-center"
+              className="px-7 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-full shadow-[0_12px_34px_-14px_rgba(15,23,42,0.6)] transition-colors duration-200 inline-flex items-center"
             >
               Schedule Strategy Session <ArrowRight className="ml-2 h-5 w-5" />
             </button>
@@ -148,10 +148,10 @@ export default function ROICalculator() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-blue-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
             ROI Calculator
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
@@ -246,7 +246,7 @@ export default function ROICalculator() {
                   data-testid="roi-submit-btn"
                   type="submit"
                   disabled={loading || !form.company_name || !form.email || !form.industry || !form.company_size || !form.current_project_cost || !form.project_duration_months}
-                  className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
+                  className="px-7 py-3.5 bg-white hover:bg-slate-100 text-slate-900 font-semibold rounded-full shadow-[0_12px_34px_-14px_rgba(0,0,0,0.5)] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
                 >
                   {loading ? 'Calculating...' : 'Calculate My ROI'}
                   {!loading && <TrendingUp className="ml-2 h-5 w-5" />}

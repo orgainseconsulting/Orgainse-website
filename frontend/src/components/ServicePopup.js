@@ -33,7 +33,7 @@ const ServicePopup = ({
         {/* Close Button */}
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all hover:scale-110"
+          className="absolute top-4 right-4 z-10 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all hover:scale-[1.03]"
         >
           <X className="h-5 w-5 text-slate-700" />
         </button>
@@ -147,7 +147,7 @@ const ServicePopup = ({
                       <a
                         href={service.productLink.href}
                         data-testid={`product-crosslink-${service.id}`}
-                        className="block group relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 border-2 border-blue-400/40 p-5 hover:border-blue-300 hover:shadow-2xl hover:shadow-blue-500/20 transition-all"
+                        className="block group relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 border-2 border-blue-400/40 p-5 hover:border-blue-300 hover:shadow-2xl hover:shadow-blue-500/20 transition-all"
                       >
                         <div className="flex items-center gap-4">
                           <div className="flex-shrink-0 h-14 w-14 rounded-xl bg-black/40 ring-1 ring-blue-400/30 flex items-center justify-center p-1.5">
@@ -178,20 +178,20 @@ const ServicePopup = ({
                     )}
 
                     {/* Compact CTA Section */}
-                    <div className="text-center bg-gradient-to-r from-slate-50 to-slate-100 rounded-xl p-6">
+                    <div className="text-center bg-gradient-to-r from-slate-50 via-white to-blue-50 rounded-xl p-6">
                       <h3 className="text-xl font-bold text-slate-800 mb-3">
                         Ready to Get Started?
                       </h3>
                       <div className="flex flex-col sm:flex-row gap-3 justify-center">
                         <button
                           onClick={() => setShowContactForm(true)}
-                          className={`px-6 py-3 bg-gradient-to-r ${service.gradient} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105`}
+                          className={`px-6 py-3 bg-gradient-to-r ${service.gradient} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02]`}
                         >
                           Get Custom Proposal
                         </button>
                         <button
                           onClick={openCalendly}
-                          className="px-6 py-3 bg-white border-2 border-slate-300 text-slate-700 font-bold rounded-xl hover:border-slate-400 hover:shadow-lg transition-all transform hover:scale-105"
+                          className="px-6 py-3 bg-white border-2 border-slate-300 text-slate-700 font-bold rounded-xl hover:border-slate-400 hover:shadow-lg transition-all transform hover:scale-[1.02]"
                         >
                           Book Free Consultation
                         </button>
@@ -293,7 +293,7 @@ const ServicePopup = ({
                         
                         <button
                           type="submit"
-                          className={`px-8 py-3 bg-gradient-to-r ${service.gradient} text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105`}
+                          className={`px-8 py-3 bg-gradient-to-r ${service.gradient} text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02]`}
                         >
                           Send My Request
                         </button>
@@ -320,7 +320,7 @@ const ServicePopup = ({
                 
                 <Button 
                   onClick={onClose}
-                  className="bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                  className="bg-gradient-to-r from-blue-600 to-violet-600 text-white font-bold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02]"
                 >
                   Continue Exploring
                 </Button>

@@ -30,7 +30,7 @@ const Unsubscribe = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f6f5f1] flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-12">
       <SEOHead title="Unsubscribe — Orgainse Consulting" description="Manage your subscription to the Orgainse Pulse newsletter."
         canonical="https://www.orgainse.com/unsubscribe" noindex />
       <div className="bg-white rounded-2xl shadow-lg max-w-md w-full p-8 sm:p-10 text-center" data-testid="unsubscribe-card">

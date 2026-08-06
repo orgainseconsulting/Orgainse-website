@@ -108,7 +108,7 @@ const StayTunedBanner = ({
   return (
     <section
       data-testid={`stay-tuned-${kind}`}
-      className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white px-6 sm:px-12 py-14 sm:py-20"
+      className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white px-6 sm:px-12 py-14 sm:py-20"
     >
       {/* Animated background blobs */}
       <div className="pointer-events-none absolute inset-0 opacity-60">

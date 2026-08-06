@@ -61,7 +61,7 @@ const AdminChangePassword = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200 rounded-full blur-3xl opacity-30 animate-pulse" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-200 rounded-full blur-3xl opacity-30 animate-pulse" />
@@ -69,7 +69,7 @@ const AdminChangePassword = () => {
 
       <div className="relative w-full max-w-md" data-testid="change-password-screen">
         <div className="text-center mb-6">
-          <div className="inline-flex p-4 bg-gradient-to-r from-blue-500 to-blue-500 rounded-full shadow-lg mb-4">
+          <div className="inline-flex p-4 bg-gradient-to-r from-blue-600 to-violet-600 rounded-full shadow-lg mb-4">
             <KeyRound className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-slate-900 mb-1">Set your new password</h1>
@@ -164,7 +164,7 @@ const AdminChangePassword = () => {
               data-testid="change-password-submit"
               type="submit"
               disabled={submitting || !form.current || !form.next || !form.confirm}
-              className="w-full bg-gradient-to-r from-blue-500 to-blue-500 text-white font-semibold py-3 px-4 rounded-lg hover:from-blue-600 hover:to-blue-600 transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-blue-600 to-violet-600 text-white font-semibold py-3 px-4 rounded-lg hover:from-blue-600 hover:to-blue-600 transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {submitting ? (
                 <>

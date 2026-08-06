@@ -113,7 +113,7 @@ const HostProfileEditor = ({ user, onSaved }) => {
               // eslint-disable-next-line jsx-a11y/img-redundant-alt
               <img src={form.photo_url} alt="host" className="h-14 w-14 rounded-full object-cover" />
             ) : (
-              <div className="h-14 w-14 rounded-full bg-gradient-to-br from-blue-500 to-violet-500 flex items-center justify-center text-white font-black">
+              <div className="h-14 w-14 rounded-full bg-gradient-to-br from-blue-600 to-violet-600 flex items-center justify-center text-white font-black">
                 {initialsPreview}
               </div>
             )}

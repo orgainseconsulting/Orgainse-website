@@ -113,10 +113,10 @@ export default function AIAssessmentTool() {
   // Results view
   if (result) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 py-12">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-blue-500 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
               Your AI Readiness Report
             </h1>
             <p className="text-lg text-slate-600">Personalized AI transformation roadmap</p>
@@ -162,7 +162,7 @@ export default function AIAssessmentTool() {
             <button
               data-testid="assessment-book-btn"
               onClick={openCalendly}
-              className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 inline-flex items-center"
+              className="px-7 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-full shadow-[0_12px_34px_-14px_rgba(15,23,42,0.6)] transition-colors duration-200 inline-flex items-center"
             >
               Book Free Consultation <ArrowRight className="ml-2 h-5 w-5" />
             </button>
@@ -173,10 +173,10 @@ export default function AIAssessmentTool() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-blue-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
             AI Readiness Assessment
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
@@ -193,7 +193,7 @@ export default function AIAssessmentTool() {
           </div>
           <div className="w-full bg-slate-200 rounded-full h-2">
             <div
-              className="bg-gradient-to-r from-blue-500 to-blue-500 h-2 rounded-full transition-all duration-500"
+              className="bg-gradient-to-r from-blue-600 to-violet-600 h-2 rounded-full transition-all duration-500"
               style={{ width: `${(step / (QUESTIONS.length + 1)) * 100}%` }}
             />
           </div>
@@ -253,7 +253,7 @@ export default function AIAssessmentTool() {
                   data-testid="assessment-start-btn"
                   onClick={() => setStep(1)}
                   disabled={!user.name || !user.email || !user.company}
-                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
+                  className="px-6 py-3 bg-white hover:bg-slate-100 text-slate-900 font-semibold rounded-full shadow-[0_12px_34px_-14px_rgba(0,0,0,0.5)] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
                 >
                   Start Assessment <ArrowRight className="ml-2 h-4 w-4" />
                 </button>
@@ -301,7 +301,7 @@ export default function AIAssessmentTool() {
                     data-testid="assessment-submit-btn"
                     onClick={submit}
                     disabled={!responses[QUESTIONS[step - 1].id] || loading}
-                    className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
+                    className="px-6 py-3 bg-white hover:bg-slate-100 text-slate-900 font-semibold rounded-full shadow-[0_12px_34px_-14px_rgba(0,0,0,0.5)] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
                   >
                     {loading ? 'Analyzing...' : 'Get My Results'}
                     {!loading && <Target className="ml-2 h-4 w-4" />}
@@ -311,7 +311,7 @@ export default function AIAssessmentTool() {
                     data-testid="assessment-next-btn"
                     onClick={() => setStep(step + 1)}
                     disabled={!responses[QUESTIONS[step - 1].id]}
-                    className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
+                    className="px-6 py-3 bg-white hover:bg-slate-100 text-slate-900 font-semibold rounded-full shadow-[0_12px_34px_-14px_rgba(0,0,0,0.5)] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
                   >
                     Next Question <ArrowRight className="ml-2 h-4 w-4" />
                   </button>

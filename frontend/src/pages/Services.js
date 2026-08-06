@@ -55,7 +55,7 @@ const Services = () => {
       icon: Target,
       image: "https://images.pexels.com/photos/16053029/pexels-photo-16053029.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1",
       keywords: "AI project management service, PMaaS for startups, GPT-powered project planning",
-      gradient: "from-blue-400 to-blue-500",
+      gradient: "from-blue-600 to-violet-600",
       detailedInfo: {
         whatItDoes: "Our AI Project Management Service (PMaaS) revolutionizes how you manage projects by leveraging GPT-powered automation. We create intelligent SOWs, automate risk assessments, optimize resource allocation, and provide real-time analytics — built for measurable, data-driven outcomes and faster delivery.",
         whyChooseUs: "Unlike traditional project management, our AI-native approach compresses planning time, eliminates scope creep through intelligent boundary detection, and provides predictive insights that surface common project failures before they materialise.",
@@ -77,7 +77,7 @@ const Services = () => {
       icon: Zap,
       image: "https://images.unsplash.com/photo-1530825894095-9c184b068fcb?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHw0fHxkaWdpdGFsJTIwdHJhbnNmb3JtYXRpb258ZW58MHx8fGJsdWV8MTc1NDU4ODMwN3ww&ixlib=rb-4.1.0&q=75&w=400&h=300",
       keywords: "AI-native digital transformation, GPT implementation roadmap, digital transformation UAE SMEs",
-      gradient: "from-blue-400 to-blue-500",
+      gradient: "from-blue-600 to-violet-600",
       detailedInfo: {
         whatItDoes: "Transform your entire business operations with our AI-native digital transformation service. We conduct comprehensive AI maturity assessments, design multi-agent orchestration platforms, and create custom GPT implementation roadmaps that digitize and optimize every aspect of your business.",
         whyChooseUs: "Our transformations are built for measurable, data-driven outcomes and faster delivery — we use AI to design, implement, and optimise simultaneously. We don't just digitise — we intelligentise your operations with AI agents that continuously improve your processes.",
@@ -94,7 +94,7 @@ const Services = () => {
       icon: TrendingUp,
       image: "https://images.pexels.com/photos/8728559/pexels-photo-8728559.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1",
       keywords: "AI operational optimization consulting, reduce OPEX with AI, GPT process mining",
-      gradient: "from-blue-400 to-blue-500",
+      gradient: "from-blue-600 to-violet-600",
       detailedInfo: {
         whatItDoes: "Optimize your operations with AI agents that continuously monitor, analyse, and improve your business processes. Our system uses GPT-powered process mining to identify bottlenecks, implements predictive maintenance, and automates workflows — built for measurable, data-driven outcomes and faster delivery.",
         whyChooseUs: "Our AI optimisation is proactive, not reactive. While others optimise after problems occur, our AI agents predict and prevent operational issues, delivering continuous, compounding cost savings backed by transparent KPIs.",
@@ -111,7 +111,7 @@ const Services = () => {
       icon: Shield,
       image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=400&h=300",
       keywords: "healthcare revenue cycle management consulting, RCM advisory, AI revenue intelligence US healthcare, denial intelligence, payer behavior analytics",
-      gradient: "from-blue-400 to-blue-500",
+      gradient: "from-blue-600 to-violet-600",
       detailedInfo: {
         whatItDoes: "Healthcare revenue performance depends on more than billing accuracy — it depends on visibility. Our Healthcare Revenue Intelligence Advisory delivers that visibility through strategic consulting, AI-powered analytics, and governance frameworks. We provide independent, unbiased insight into where revenue is being lost, how denial patterns are shifting, and how payer behavior is affecting financial outcomes — working alongside your existing RCM operations.",
         whyChooseUs: "Independence is the trust signal. We are not a billing or coding vendor — we are an advisory layer that helps CFOs, COOs, and VPs of Revenue Cycle interpret performance with disciplined, AI-driven analytics typically reserved for large health systems. First leadership deliverable within 30 days, with no system access or patient data required.",
@@ -156,7 +156,7 @@ const Services = () => {
       icon: Globe,
       image: "https://images.unsplash.com/photo-1573164574230-db1d5e960238?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwxfHxjb25zdWx0aW5nfGVufDB8fHxibHVlfDE3NTQ1ODg0NDR8MA&ixlib=rb-4.1.0&q=75&w=400&h=300",
       keywords: "AI-driven business strategy consulting, GPT competitive analysis, strategy development India SMEs",
-      gradient: "from-violet-400 to-violet-500",
+      gradient: "from-blue-600 to-violet-600",
       detailedInfo: {
         whatItDoes: "Develop winning business strategies using AI-powered market intelligence, competitive analysis, and scenario planning. Our GPT-driven approach analyses thousands of data points to create strategies built for measurable, data-driven outcomes and faster delivery.",
         whyChooseUs: "While traditional strategy consulting takes months and relies on historical data, our AI-driven approach delivers real-time insights and predictive strategies in weeks — analysing orders of magnitude more data points to surface opportunities others miss.",
@@ -173,7 +173,7 @@ const Services = () => {
       icon: Shield,
       image: "https://images.unsplash.com/photo-1497409988347-cbfaac2f0b12?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxhZ2lsZSUyMHNjcnVtfGVufDB8fHxibHVlfDE3NTQ1ODg0Mzl8MA&ixlib=rb-4.1.0&q=75&w=400&h=300",
       keywords: "AI risk management consulting, GPT-based risk co-pilot, predictive risk analytics SMEs",
-      gradient: "from-slate-400 to-slate-600",
+      gradient: "from-blue-600 to-violet-600",
       detailedInfo: {
         whatItDoes: "Protect your business with AI-powered risk management that predicts, prevents, and mitigates risks before they impact your operations. Our GPT-based risk co-pilot continuously monitors your business environment and provides real-time risk assessment and compliance monitoring.",
         whyChooseUs: "Traditional risk management is reactive and manual. Our AI approach is predictive and automated — built for measurable, data-driven outcomes and faster delivery, with continuous compliance across changing regulations and multiple jurisdictions.",
@@ -248,19 +248,19 @@ const Services = () => {
   return (
     <div className="min-h-screen">
       {/* Revolutionary Hero Section with SEO */}
-      <section className="relative bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 py-12 lg:py-16 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12 lg:py-16 overflow-hidden">
         {/* Dynamic Background Elements */}
         <div className="absolute inset-0 opacity-30">
           {/* AI Neural Network Backgrounds */}
-          <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-r from-blue-200 to-blue-200 rounded-full blur-3xl animate-pulse float-animation will-change-transform"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-blue-200 to-blue-200 rounded-full blur-3xl animate-pulse float-animation animation-delay-2000 will-change-transform"></div>
+          <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-r from-slate-50 via-white to-blue-50 rounded-full blur-3xl animate-pulse float-animation will-change-transform"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-slate-50 via-white to-blue-50 rounded-full blur-3xl animate-pulse float-animation animation-delay-2000 will-change-transform"></div>
           
           {/* LARGE VISIBLE AI ROBOTS */}
           <div className="absolute top-1/4 left-1/3">
             {/* Advanced AI Robot */}
-            <div className="w-16 h-20 bg-gradient-to-b from-blue-300 to-blue-400 rounded-lg opacity-70 animate-bounce shadow-xl">
+            <div className="w-16 h-20 bg-gradient-to-b from-blue-600 to-violet-600 rounded-lg opacity-70 animate-bounce shadow-xl">
               {/* Robot Head */}
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-200 to-blue-300 rounded-full mx-auto mb-2 relative border-2 border-blue-400">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-violet-600 rounded-full mx-auto mb-2 relative border-2 border-blue-400">
                 <div className="absolute top-3 left-3 w-2 h-2 bg-blue-400 rounded-full animate-ping"></div>
                 <div className="absolute top-3 right-3 w-2 h-2 bg-blue-400 rounded-full animate-ping animation-delay-500"></div>
                 <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-1 bg-slate-600 rounded-full"></div>
@@ -269,7 +269,7 @@ const Services = () => {
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
               </div>
               {/* Robot Body */}
-              <div className="w-14 h-6 bg-gradient-to-b from-blue-300 to-blue-400 rounded-md mx-auto relative border-2 border-blue-500">
+              <div className="w-14 h-6 bg-gradient-to-b from-blue-600 to-violet-600 rounded-md mx-auto relative border-2 border-blue-500">
                 <div className="absolute top-1 left-2 w-2 h-1 bg-white rounded-full opacity-80"></div>
                 <div className="absolute top-1 right-2 w-2 h-1 bg-white rounded-full opacity-80"></div>
                 <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-6 h-1 bg-slate-600 rounded-full"></div>
@@ -279,9 +279,9 @@ const Services = () => {
           
           {/* AI Processing Hub */}
           <div className="absolute bottom-1/4 right-1/3">
-            <div className="w-14 h-14 bg-gradient-to-br from-blue-300 to-blue-500 rotate-45 animate-spin-slow opacity-60 rounded-lg shadow-xl">
+            <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-violet-600 rotate-45 animate-spin-slow opacity-60 rounded-lg shadow-xl">
               <div className="absolute inset-2 bg-white rounded-lg opacity-80"></div>
-              <div className="absolute inset-4 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full animate-pulse"></div>
+              <div className="absolute inset-4 bg-gradient-to-br from-blue-600 to-violet-600 rounded-full animate-pulse"></div>
               {/* Circuit connections */}
               <div className="absolute -top-2 left-1/2 w-1 h-4 bg-blue-400"></div>
               <div className="absolute -bottom-2 left-1/2 w-1 h-4 bg-blue-400"></div>
@@ -294,9 +294,9 @@ const Services = () => {
           <div className="absolute top-3/4 left-1/4">
             <div className="flex items-center space-x-3">
               <div className="w-4 h-4 bg-blue-400 rounded-full animate-ping opacity-80"></div>
-              <div className="w-6 h-1 bg-gradient-to-r from-blue-400 to-blue-400 animate-pulse"></div>
+              <div className="w-6 h-1 bg-gradient-to-r from-blue-600 to-violet-600 animate-pulse"></div>
               <div className="w-4 h-4 bg-blue-400 rounded-full animate-ping animation-delay-500 opacity-80"></div>
-              <div className="w-6 h-1 bg-gradient-to-r from-blue-400 to-blue-400 animate-pulse animation-delay-300"></div>
+              <div className="w-6 h-1 bg-gradient-to-r from-blue-600 to-violet-600 animate-pulse animation-delay-300"></div>
               <div className="w-4 h-4 bg-blue-400 rounded-full animate-ping animation-delay-1000 opacity-80"></div>
             </div>
           </div>
@@ -304,13 +304,13 @@ const Services = () => {
           {/* Mini Robot Swarm */}
           <div className="absolute top-1/2 right-1/4">
             <div className="grid grid-cols-2 gap-2">
-              <div className="w-6 h-8 bg-gradient-to-b from-violet-300 to-violet-400 rounded opacity-60 animate-bounce">
+              <div className="w-6 h-8 bg-gradient-to-b from-blue-600 to-violet-600 rounded opacity-60 animate-bounce">
                 <div className="w-4 h-4 bg-violet-200 rounded-full mx-auto mb-1 relative">
                   <div className="absolute top-1 left-1 w-1 h-1 bg-white rounded-full animate-ping"></div>
                   <div className="absolute top-1 right-1 w-1 h-1 bg-white rounded-full animate-ping"></div>
                 </div>
               </div>
-              <div className="w-6 h-8 bg-gradient-to-b from-violet-300 to-violet-400 rounded opacity-60 animate-bounce animation-delay-300">
+              <div className="w-6 h-8 bg-gradient-to-b from-blue-600 to-violet-600 rounded opacity-60 animate-bounce animation-delay-300">
                 <div className="w-4 h-4 bg-violet-200 rounded-full mx-auto mb-1 relative">
                   <div className="absolute top-1 left-1 w-1 h-1 bg-white rounded-full animate-ping animation-delay-200"></div>
                   <div className="absolute top-1 right-1 w-1 h-1 bg-white rounded-full animate-ping animation-delay-400"></div>
@@ -323,7 +323,7 @@ const Services = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 animate-fade-in">
           <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6">
             <span className="text-slate-800">AI-Native </span>
-            <span className="bg-gradient-to-r from-blue-500 via-blue-500 to-blue-500 bg-clip-text text-transparent animate-gradient-text">
+            <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 bg-clip-text text-transparent animate-gradient-text">
               Consulting
             </span>
             <br />
@@ -342,9 +342,9 @@ const Services = () => {
           
           <div className="flex justify-center flex-wrap gap-4 mb-12">
             {[
-              { name: "IT Services & Software", color: "from-blue-400 to-blue-500" },
-              { name: "Healthcare Revenue Intelligence Advisory", color: "from-violet-400 to-violet-500" },
-              { name: "Industry-Agnostic for SMEs & Startups", color: "from-blue-400 to-violet-500" },
+              { name: "IT Services & Software", color: "from-blue-600 to-violet-600" },
+              { name: "Healthcare Revenue Intelligence Advisory", color: "from-blue-600 to-violet-600" },
+              { name: "Industry-Agnostic for SMEs & Startups", color: "from-blue-600 to-violet-600" },
             ].map((industry, index) => (
               <div 
                 key={index}
@@ -352,7 +352,7 @@ const Services = () => {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className={`absolute inset-0 bg-gradient-to-r ${industry.color} rounded-2xl opacity-20 group-hover:opacity-40 transition-opacity blur-sm`}></div>
-                <div className="relative bg-white/80 backdrop-blur-lg rounded-2xl px-4 py-2 border border-blue-200 hover:border-blue-400 transition-all duration-300 transform hover:scale-105 shadow-sm">
+                <div className="relative bg-white/80 backdrop-blur-lg rounded-2xl px-4 py-2 border border-blue-200 hover:border-blue-400 transition-all duration-300 transform hover:scale-[1.02] shadow-sm">
                   <span className="text-slate-700 font-medium text-sm">{industry.name}</span>
                 </div>
               </div>
@@ -361,19 +361,19 @@ const Services = () => {
           
           {/* Animated Divider */}
           <div className="flex justify-center">
-            <div className="w-40 h-1 bg-gradient-to-r from-blue-500 via-blue-500 to-blue-500 rounded-full animate-pulse"></div>
+            <div className="w-40 h-1 bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 rounded-full animate-pulse"></div>
           </div>
         </div>
       </section>
 
       {/* Modern Services Grid Layout */}
-      <section className="py-16 bg-gradient-to-br from-white to-slate-50">
+      <section className="py-16 bg-gradient-to-br from-slate-50 via-white to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-4xl font-bold mb-6">
               <span className="text-slate-800">Our </span>
-              <span className="bg-gradient-to-r from-blue-500 to-blue-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
                 AI-Powered Services
               </span>
             </h2>
@@ -409,7 +409,7 @@ const Services = () => {
                   </p>
 
                   {/* Key Features */}
-                  <div className="space-y-2 mb-4 sm:mb-6">
+                  <div className="space-y-2 mb-5 mt-auto">
                     {service.features.slice(0, 3).map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-start space-x-2">
                         <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-blue-500 mt-0.5 flex-shrink-0" />
@@ -421,7 +421,7 @@ const Services = () => {
                   {/* Learn More Button - Responsive */}
                   <button 
                     onClick={() => openServicePopup(service)}
-                    className={`w-full px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r ${service.gradient} text-white font-semibold rounded-lg sm:rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 text-sm sm:text-base`}
+                    className="w-full px-5 py-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-full shadow-[0_10px_30px_-14px_rgba(15,23,42,0.6)] transition-colors duration-200 text-sm"
                   >
                     <span className="flex items-center justify-center">
                       Learn More
@@ -455,23 +455,23 @@ const Services = () => {
             <div className="flex items-center justify-center py-4">
               <div className="flex items-center space-x-2">
                 {/* AI Circuit Pattern */}
-                <div className="w-4 h-0.5 bg-gradient-to-r from-blue-400 to-blue-500"></div>
+                <div className="w-4 h-0.5 bg-gradient-to-r from-blue-600 to-violet-600"></div>
                 <div className="w-1 h-1 bg-blue-500 rounded-full animate-pulse"></div>
-                <div className="w-2 h-0.5 bg-gradient-to-r from-blue-500 to-blue-500"></div>
+                <div className="w-2 h-0.5 bg-gradient-to-r from-blue-600 to-violet-600"></div>
                 
                 {/* AI Brain Icon */}
                 <div className="relative">
-                  <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-500 rounded-full flex items-center justify-center">
+                  <div className="w-6 h-6 bg-gradient-to-br from-blue-600 to-violet-600 rounded-full flex items-center justify-center">
                     <div className="w-3 h-3 bg-white rounded-full flex items-center justify-center">
-                      <div className="w-1.5 h-1.5 bg-gradient-to-br from-blue-400 to-blue-400 rounded-full animate-pulse"></div>
+                      <div className="w-1.5 h-1.5 bg-gradient-to-br from-blue-600 to-violet-600 rounded-full animate-pulse"></div>
                     </div>
                   </div>
                 </div>
                 
                 {/* AI Circuit Pattern */}
-                <div className="w-2 h-0.5 bg-gradient-to-r from-blue-500 to-blue-500"></div>
+                <div className="w-2 h-0.5 bg-gradient-to-r from-blue-600 to-violet-600"></div>
                 <div className="w-1 h-1 bg-blue-500 rounded-full animate-pulse animation-delay-500"></div>
-                <div className="w-4 h-0.5 bg-gradient-to-r from-blue-500 to-blue-400"></div>
+                <div className="w-4 h-0.5 bg-gradient-to-r from-blue-600 to-violet-600"></div>
               </div>
             </div>
           </div>
@@ -479,7 +479,7 @@ const Services = () => {
       </section>
 
         {/* Comprehensive FAQ Section for SEO */}
-        <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+        <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-slate-900 mb-6">
@@ -584,7 +584,7 @@ const Services = () => {
               ].map((category, categoryIndex) => (
                 <div key={categoryIndex} className="space-y-6">
                   <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
-                    <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-500 rounded-lg flex items-center justify-center mr-3">
+                    <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-violet-600 rounded-lg flex items-center justify-center mr-3">
                       <span className="text-white font-bold text-sm">{categoryIndex + 1}</span>
                     </div>
                     {category.category}
@@ -616,14 +616,14 @@ const Services = () => {
 
             {/* CTA Section */}
             <div className="text-center mt-16">
-              <div className="bg-gradient-to-r from-blue-500 to-blue-500 rounded-3xl p-8 text-white">
+              <div className="bg-gradient-to-r from-blue-600 to-violet-600 rounded-3xl p-8 text-white">
                 <h3 className="text-3xl font-bold mb-4">Still Have Questions?</h3>
                 <p className="text-xl mb-6 text-blue-100">
                   Get personalized answers and a free consultation with our AI experts
                 </p>
                 <Button 
                   onClick={openCalendly}
-                  className="bg-white text-slate-900 hover:bg-blue-100 px-8 py-4 text-lg font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                  className="bg-white text-slate-900 hover:bg-blue-100 px-8 py-4 text-lg font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02]"
                 >
                   Book Free Consultation
                 </Button>
@@ -639,7 +639,7 @@ const Services = () => {
         <SEOLinks />
 
         {/* Social Share Component */}
-        <div className="py-8 bg-gradient-to-r from-slate-50 to-blue-50">
+        <div className="py-8 bg-gradient-to-r from-slate-50 via-white to-blue-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h3 className="text-2xl font-bold text-slate-900 mb-4">

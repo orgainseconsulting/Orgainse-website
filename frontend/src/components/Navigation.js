@@ -69,7 +69,7 @@ const Navigation = () => {
             <img
               src="/orgainse-logo.png"
               alt="Orgainse Consulting — Let us plan your SUCCESS"
-              className={`w-auto object-contain bg-white rounded-2xl px-3.5 py-2 sm:px-5 sm:py-2.5 shadow-lg ring-1 ring-slate-200/70 hover:shadow-xl hover:ring-blue-300/60 transition-all duration-300 transform hover:scale-105 ${
+              className={`w-auto object-contain bg-white rounded-2xl px-3.5 py-2 sm:px-5 sm:py-2.5 shadow-lg ring-1 ring-slate-200/70 hover:shadow-xl hover:ring-blue-300/60 transition-all duration-300 transform hover:scale-[1.02] ${
                 isScrolled ? "h-14 sm:h-16 lg:h-20" : "h-16 sm:h-20 lg:h-28"
               }`}
               width="1689"
@@ -103,7 +103,7 @@ const Navigation = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-600 hover:text-blue-500 transition-colors transform hover:scale-110"
+                  className="text-slate-600 hover:text-blue-500 transition-colors transform hover:scale-[1.03]"
                   aria-label={social.label}
                 >
                   <social.icon className="h-4 w-4" />

@@ -110,7 +110,7 @@ const ContactBlock = ({ lead, tabKey }) => {
 };
 
 const SubmissionBlock = ({ lead, tabKey }) => {
-  if (tabKey === 'contacts' || tabKey === 'service_inquiries') {
+  if (tabKey === 'contacts' || tabKey === 'service_inquiries' || tabKey === 'orqyne_pilots') {
     return (
       <Section title="Submission" icon={MessageSquare} testid={`lead-section-submission-${tabKey}`}>
         {lead.subject && <Row icon={LayoutList} label="Subject" value={lead.subject} />}

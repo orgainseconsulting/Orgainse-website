@@ -41,14 +41,14 @@ export default function CookieBanner() {
         <button
           data-testid="cookie-reject-btn"
           onClick={() => setDecision('rejected')}
-          className="flex-1 px-4 py-2 text-sm font-medium rounded-lg border border-white/30 hover:bg-white/10 transition"
+          className="flex-1 px-4 py-2 text-sm font-medium rounded-full border border-white/30 hover:bg-white/10 transition-colors"
         >
           Reject non-essential
         </button>
         <button
           data-testid="cookie-accept-btn"
           onClick={() => setDecision('accepted')}
-          className="flex-1 px-4 py-2 text-sm font-semibold rounded-lg bg-gradient-to-r from-blue-500 to-blue-500 hover:opacity-90 transition"
+          className="flex-1 px-4 py-2 text-sm font-semibold rounded-full bg-white text-slate-900 hover:bg-slate-100 transition-colors"
         >
           Accept all
         </button>

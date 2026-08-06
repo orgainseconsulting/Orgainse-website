@@ -130,7 +130,7 @@ const SEOLinks = () => {
   ];
 
   return (
-    <div className="py-12 bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="py-12 bg-gradient-to-br from-slate-50 via-white to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-slate-900 mb-4">
@@ -199,7 +199,7 @@ const SEOLinks = () => {
           <div className="inline-flex flex-col sm:flex-row gap-4">
             <Link
               to="/contact"
-              className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+              className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-600 to-violet-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02]"
             >
               Start Your AI Transformation
               <ArrowRight className="ml-2 h-5 w-5" />

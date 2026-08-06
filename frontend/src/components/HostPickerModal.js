@@ -84,7 +84,7 @@ const HostPickerModal = ({ open, onClose, hosts = [], fallbackUrl = '' }) => {
         className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden"
       >
         {/* Header */}
-        <div className="relative px-6 sm:px-8 py-6 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white">
+        <div className="relative px-6 sm:px-8 py-6 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
           <button
             onClick={onClose}
             data-testid="host-picker-close"

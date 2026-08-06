@@ -44,20 +44,20 @@ const About = () => {
   return (
     <div className="min-h-screen">
       {/* Revolutionary Hero Section with SEO */}
-      <section className="relative bg-gradient-to-br from-slate-50 via-violet-50 to-blue-50 py-12 lg:py-16 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12 lg:py-16 overflow-hidden">
         {/* Optimized Background Elements */}
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-blue-200 to-violet-200 rounded-full blur-3xl animate-pulse will-change-transform"></div>
-          <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-violet-200 to-violet-200 rounded-full blur-3xl animate-pulse will-change-transform animation-delay-2000"></div>
+          <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-slate-50 via-white to-blue-50 rounded-full blur-3xl animate-pulse will-change-transform"></div>
+          <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-slate-50 via-white to-blue-50 rounded-full blur-3xl animate-pulse will-change-transform animation-delay-2000"></div>
           <div className="absolute top-1/2 left-1/4 w-6 h-16 bg-blue-300 rounded-full animate-pulse opacity-40"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="animate-fade-in">
-              <h1 className="text-4xl lg:text-5xl font-bold leading-tight mb-4">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">
                 <span className="text-slate-800">About </span>
-                <span className="bg-gradient-to-r from-blue-500 via-violet-500 to-violet-500 bg-clip-text text-transparent animate-gradient-text">
+                <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 bg-clip-text text-transparent animate-gradient-text">
                   Orgainse Consulting
                 </span>
               </h1>
@@ -66,7 +66,7 @@ const About = () => {
                 AI-Native Digital Transformation Leaders & GPT-Powered Project Management Experts
               </h2>
               
-              <p className="text-lg text-slate-700 leading-relaxed mb-6 text-justify">
+              <p className="text-lg text-slate-700 leading-relaxed mb-6">
                 We are an AI-native consulting firm specializing in <span className="text-blue-600 font-bold">GPT-powered project management</span>, 
                 intelligent business strategy, and <span className="text-blue-600 font-bold">automated operational optimization </span>  
                 for startups and SMEs across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
@@ -104,7 +104,7 @@ const About = () => {
       </section>
 
       {/* Creative Leadership Ecosystem Section */}
-      <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
         {/* Optimized Background Elements */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-10 left-10 w-32 h-32 bg-blue-400 rounded-full blur-3xl animate-pulse float-animation will-change-transform"></div>
@@ -115,14 +115,14 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Enhanced Header Section with SEO */}
           <div className="text-center mb-20 animate-fade-in">
-            <h2 className="text-5xl lg:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-blue-500 via-blue-500 to-slate-700 bg-clip-text text-transparent">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 bg-clip-text text-transparent">
                 The ORGAINSE
               </span>
               <br />
               <span className="text-slate-800">Ecosystem</span>
             </h2>
-            <p className="text-xl text-slate-600 max-w-4xl mx-auto mb-8 leading-relaxed text-justify">
+            <p className="text-xl text-slate-600 max-w-4xl mx-auto mb-8 leading-relaxed">
               Four interconnected forces delivering <span className="font-bold text-blue-600">AI-driven business strategy consulting</span> and 
               <span className="font-bold text-blue-600"> GPT-powered agile coaching </span>. Not hierarchy, but 
               <span className="font-bold text-slate-700"> predictive risk analytics. </span>.
@@ -130,9 +130,9 @@ const About = () => {
             
             {/* Visual Connection Lines */}
             <div className="relative w-32 h-8 mx-auto mb-8">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-blue-500 to-blue-500 rounded-full opacity-30 animate-pulse"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 rounded-full opacity-30 animate-pulse"></div>
               <div className="absolute inset-1 bg-white rounded-full"></div>
-              <div className="absolute inset-2 bg-gradient-to-r from-blue-500 via-blue-500 to-blue-500 rounded-full"></div>
+              <div className="absolute inset-2 bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 rounded-full"></div>
             </div>
           </div>
 
@@ -140,9 +140,9 @@ const About = () => {
           <div className="relative">
             {/* Central Connection Point */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
-              <div className="w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full shadow-2xl flex items-center justify-center animate-spin-slow will-change-transform">
+              <div className="w-24 h-24 bg-gradient-to-br from-blue-600 to-violet-600 rounded-full shadow-2xl flex items-center justify-center animate-spin-slow will-change-transform">
                 <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-inner">
-                  <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full"></div>
+                  <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-violet-600 rounded-full"></div>
                 </div>
               </div>
             </div>
@@ -167,8 +167,8 @@ const About = () => {
               
               {/* The Foundation - Top Left */}
               <div className="relative animate-fade-in" style={{ animationDelay: '200ms' }}>
-                <div className="absolute -top-4 -left-4 w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 rounded-3xl transform rotate-3 opacity-20"></div>
-                <Card className="relative bg-gradient-to-br from-blue-400 to-blue-600 text-white border-none shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-2 group overflow-hidden">
+                <div className="absolute -top-4 -left-4 w-full h-full bg-gradient-to-br from-blue-600 to-violet-600 rounded-3xl transform rotate-0 opacity-20"></div>
+                <Card className="relative bg-gradient-to-br from-blue-600 to-violet-600 text-white border-none shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 hover:rotate-0 group overflow-hidden">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full transform translate-x-8 -translate-y-8"></div>
                   <div className="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full transform -translate-x-4 translate-y-4"></div>
                   
@@ -201,8 +201,8 @@ const About = () => {
 
               {/* The Engine - Top Right */}
               <div className="relative animate-fade-in" style={{ animationDelay: '400ms' }}>
-                <div className="absolute -top-4 -right-4 w-full h-full bg-gradient-to-br from-blue-300 to-blue-500 rounded-3xl transform -rotate-3 opacity-20"></div>
-                <Card className="relative bg-gradient-to-br from-blue-200 via-blue-300 to-blue-400 text-slate-800 border-none shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-4 hover:-rotate-2 group overflow-hidden">
+                <div className="absolute -top-4 -right-4 w-full h-full bg-gradient-to-br from-blue-600 to-violet-600 rounded-3xl transform rotate-0 opacity-20"></div>
+                <Card className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-violet-600 text-slate-800 border-none shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 hover:rotate-0 group overflow-hidden">
                   <div className="absolute top-0 left-0 w-28 h-28 bg-blue-500 opacity-20 rounded-full transform -translate-x-4 -translate-y-4"></div>
                   <div className="absolute bottom-0 right-0 w-36 h-36 bg-blue-500 opacity-20 rounded-full transform translate-x-6 translate-y-6"></div>
                   
@@ -235,8 +235,8 @@ const About = () => {
 
               {/* The Compass - Bottom Left */}
               <div className="relative animate-fade-in" style={{ animationDelay: '600ms' }}>
-                <div className="absolute -bottom-4 -left-4 w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 rounded-3xl transform rotate-2 opacity-20"></div>
-                <Card className="relative bg-gradient-to-br from-blue-400 to-blue-600 text-white border-none shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-1 group overflow-hidden">
+                <div className="absolute -bottom-4 -left-4 w-full h-full bg-gradient-to-br from-blue-600 to-violet-600 rounded-3xl transform rotate-0 opacity-20"></div>
+                <Card className="relative bg-gradient-to-br from-blue-600 to-violet-600 text-white border-none shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 hover:rotate-0 group overflow-hidden">
                   <div className="absolute top-0 right-0 w-40 h-40 bg-blue-300 opacity-20 rounded-full transform translate-x-10 -translate-y-10"></div>
                   <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-300 opacity-20 rounded-full transform -translate-x-6 translate-y-6"></div>
                   
@@ -269,14 +269,14 @@ const About = () => {
 
               {/* The Spark - Bottom Right */}
               <div className="relative animate-fade-in" style={{ animationDelay: '800ms' }}>
-                <div className="absolute -bottom-4 -right-4 w-full h-full bg-gradient-to-br from-slate-600 to-slate-800 rounded-3xl transform -rotate-2 opacity-20"></div>
-                <Card className="relative bg-gradient-to-br from-slate-700 to-slate-900 text-white border-none shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-4 hover:-rotate-1 group overflow-hidden">
+                <div className="absolute -bottom-4 -right-4 w-full h-full bg-gradient-to-br from-slate-900 to-blue-950 rounded-3xl transform rotate-0 opacity-20"></div>
+                <Card className="relative bg-gradient-to-br from-slate-900 to-blue-950 text-white border-none shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 hover:rotate-0 group overflow-hidden">
                   <div className="absolute top-0 left-0 w-44 h-44 bg-slate-500 opacity-10 rounded-full transform -translate-x-12 -translate-y-12"></div>
                   <div className="absolute bottom-0 right-0 w-28 h-28 bg-slate-400 opacity-10 rounded-full transform translate-x-8 translate-y-8"></div>
                   
                   <CardContent className="p-6 sm:p-6 md:p-8 relative z-10">
                     <div className="flex items-center space-x-3 sm:space-x-4 mb-4 sm:mb-6">
-                      <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500">
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-[1.03] transition-transform duration-500">
                         <Users className="h-8 w-8 text-slate-700" />
                       </div>
                       <div>
@@ -319,18 +319,18 @@ const About = () => {
       </section>
 
       {/* Enhanced Mission & Vision with Creative Design */}
-      <section className="py-20 bg-gradient-to-br from-blue-900 via-violet-900 to-violet-900 relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-1/4 w-72 h-72 bg-gradient-to-r from-blue-400 to-violet-500 rounded-full blur-3xl animate-pulse will-change-transform"></div>
-          <div className="absolute bottom-20 right-1/4 w-80 h-80 bg-gradient-to-r from-violet-400 to-violet-500 rounded-full blur-3xl animate-pulse animation-delay-2000 will-change-transform"></div>
+          <div className="absolute top-20 left-1/4 w-72 h-72 bg-gradient-to-r from-blue-600 to-violet-600 rounded-full blur-3xl animate-pulse will-change-transform"></div>
+          <div className="absolute bottom-20 right-1/4 w-80 h-80 bg-gradient-to-r from-blue-600 to-violet-600 rounded-full blur-3xl animate-pulse animation-delay-2000 will-change-transform"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div className="space-y-6 animate-fade-in">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">Our Mission</span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">Our Mission</span>
               </h2>
               <p className="text-xl text-slate-200 leading-relaxed">
                 To democratize access to world-class <span className="text-blue-400 font-bold">AI-native digital transformation consulting</span> through  
@@ -341,8 +341,8 @@ const About = () => {
             </div>
 
             <div className="space-y-6 animate-fade-in animation-delay-300">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-violet-400 to-violet-400 bg-clip-text text-transparent">Our Vision</span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">Our Vision</span>
               </h2>
               <p className="text-xl text-slate-200 leading-relaxed">
                 To be the global leader in <span className="text-blue-400 font-bold">AI-native consulting</span>, setting the standard 
@@ -355,7 +355,7 @@ const About = () => {
       </section>
 
       {/* Revolutionary C.O.R.E. Values Section */}
-      <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-full h-full" style={{
@@ -365,8 +365,8 @@ const About = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-blue-500 via-blue-500 to-violet-500 bg-clip-text text-transparent">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 bg-clip-text text-transparent">
                 Our C.O.R.E. Values
               </span>
             </h2>
@@ -386,12 +386,12 @@ const About = () => {
                 <div className={`absolute -inset-2 bg-gradient-to-r ${value.gradient} rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000`}></div>
                 
                 {/* Main Card */}
-                <Card className="relative text-center hover:shadow-xl transition-all duration-500 transform hover:-translate-y-4 bg-white/90 backdrop-blur-lg border-0 shadow-2xl rounded-3xl overflow-hidden h-full flex flex-col">
+                <Card className="relative text-center hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 bg-white/90 backdrop-blur-lg border-0 shadow-2xl rounded-3xl overflow-hidden h-full flex flex-col">
                   {/* Top Gradient Bar */}
                   <div className={`h-2 bg-gradient-to-r ${value.gradient}`}></div>
                   
                   <CardHeader className="pb-6 flex-1 flex flex-col justify-between">
-                    <div className="mx-auto p-4 bg-white rounded-2xl w-20 h-20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
+                    <div className="mx-auto p-4 bg-white rounded-2xl w-20 h-20 flex items-center justify-center mb-6 group-hover:scale-[1.03] group-hover:rotate-12 transition-all duration-500 shadow-lg">
                       <value.icon className="h-10 w-10 text-slate-600" />
                     </div>
                     <CardTitle className="text-xl mb-3 group-hover:text-blue-600 transition-colors">{value.title}</CardTitle>

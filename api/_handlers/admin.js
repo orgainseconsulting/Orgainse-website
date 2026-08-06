@@ -14,6 +14,7 @@ const VALID_COLLECTIONS = [
   'roi_calculator_leads',
   'service_inquiries',
   'consultation_leads',
+  'orqyne_pilot_leads',
 ];
 
 let cachedClient = null;
@@ -71,6 +72,7 @@ export default async function handler(req, res) {
       total_roi_calculators: counts.roi_calculator_leads,
       total_service_inquiries: counts.service_inquiries,
       total_consultations: counts.consultation_leads,
+      total_orqyne_pilots: counts.orqyne_pilot_leads,
       last_updated: new Date().toISOString(),
       breakdown: {
         newsletters: counts.newsletter_subscriptions,
@@ -79,6 +81,7 @@ export default async function handler(req, res) {
         roi_calculators: counts.roi_calculator_leads,
         service_inquiries: counts.service_inquiries,
         consultations: counts.consultation_leads,
+        orqyne_pilots: counts.orqyne_pilot_leads,
       },
     };
 
@@ -94,6 +97,7 @@ export default async function handler(req, res) {
         roi_calculator_leads: data.roi_calculator_leads,
         service_inquiries: data.service_inquiries,
         consultation_leads: data.consultation_leads,
+        orqyne_pilot_leads: data.orqyne_pilot_leads,
       },
       timestamp: new Date().toISOString(),
     });

@@ -179,7 +179,7 @@ const BlogPostPage = () => {
                 </span>
               ))}
             </div>
-            <div className="bg-gradient-to-br from-blue-50 to-blue-50 border border-blue-200 rounded-xl p-6 sm:p-8 text-center">
+            <div className="bg-gradient-to-br from-slate-50 via-white to-blue-50 border border-blue-200 rounded-xl p-6 sm:p-8 text-center">
               <h3 className="text-xl font-bold text-slate-900 mb-2">Found this useful?</h3>
               <p className="text-sm text-slate-600 mb-4">Talk to our team about how this applies to your business.</p>
               <Link

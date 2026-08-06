@@ -95,6 +95,10 @@ export default async function handler(req, res) {
       case 'Consultation':
         collectionName = 'consultation_leads';
         break;
+      case 'orqyne_pilot':
+      case 'ORQYNE Guided Pilot':
+        collectionName = 'orqyne_pilot_leads';
+        break;
       case 'Newsletter Subscription':
         collectionName = 'newsletter_subscriptions';
         break;

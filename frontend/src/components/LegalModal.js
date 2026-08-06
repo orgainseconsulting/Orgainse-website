@@ -83,7 +83,7 @@ const LegalModal = ({ doc, onClose }) => {
             <X className="h-4 w-4" />
           </button>
         </div>
-        <div className="overflow-y-auto px-6 sm:px-9 py-7" style={{ maxHeight: "calc(86vh - 96px)" }}>
+        <div className="overflow-y-auto org-scroll-slim px-6 sm:px-9 py-7" style={{ maxHeight: "calc(86vh - 96px)" }}>
           <LegalBody doc={doc} testIdPrefix={`legal-modal-${doc.id}`} />
           <div className="mt-10 flex flex-wrap items-center gap-3 border-t border-slate-200 pt-6">
             <a

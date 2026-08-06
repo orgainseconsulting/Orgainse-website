@@ -1,0 +1,36 @@
+{
+  "summary": "Iteration-12 — verified the 5 reported fixes + regression suite after the ORQYNE-pilot admin bucket, orbit-diagram rebuild, scrollbar theming, gradient normalisation and Services page unification. Backend: 14/14 pytest cases pass (test_orqyne_pilot_and_regression.py) covering health, blog, newsletter-issues, app-settings/public, newsletter new+duplicate, contact default->contact_messages, contact leadType=orqyne_pilot->orqyne_pilot_leads, contact leadType='ORQYNE Guided Pilot'->orqyne_pilot_leads, ai-assessment, roi-calculator, consultation, admin-login (is_super_admin true), admin unauthenticated 401, and single-row admin-delete against orqyne_pilot_leads. GET /api/admin now returns summary.breakdown.orqyne_pilots and data.orqyne_pilot_leads as expected. Frontend at 1920x1080 + 1440x900 + 390x844: (1) All THREE orbit constellations (Home how-orbit-diagram, Products experience-visual for both IT-Services + Canvas tabs, About about-orbit-diagram) render with upright horizontal chip labels, no rotation transforms, chips fully inside the rounded container (inside=true), no chip-on-chip or chip-on-core overlap, and dashed rings + tracer dots visible — verified programmatically via getBoundingClientRect + getComputedStyle. (2) Services page has SIX identical Learn More buttons (334x44, bg rgb(15,23,42) slate-900, white text) aligned to exactly 2 unique Y-coordinates (perfect row alignment across two rows of three) — clicking one opens a palette-consistent Service popup. (3) Brand scrollbar CSS confirmed in index.css: html { scrollbar-color: rgb(37,99,235) rgb(241,245,249) } + ::-webkit-scrollbar-thumb { background-image: linear-gradient(rgb(37,99,235), rgb(124,58,237)) } on a slate-100 track, plus .org-scroll-slim variant for the footer legal popup. (4) Sweep of all 12 public routes (/, /about, /services, /products, /blog, /newsletter, /contact, /ai-assessment, /roi-calculator, /smart-calendar, /privacy, /terms) — every route returns 200, ZERO horizontal scroll at 1440x900, and ZERO degenerate same-hue gradient class-name patterns (from-X-N to-X-N without via-). (5) End-to-end pilot flow verified in the browser: filled /products pilot-name/email/company/message-input, clicked pilot-submit-btn, pilot-success-message rendered ('Request received. An Orgainse consultant will respond with next steps.'), then logged into /admin as support@orgainse.com, saw the new 'ORQYNE Pilot Requests' tab with count=5, opened it, confirmed the newly submitted row is present with name/email/company/message + Details/Delete row actions + tab-level Export CSV + Delete All buttons, AND confirmed the same email does NOT appear in the Contact Messages tab. All 5 top admin sections + all 8 lead tabs render.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Mobile 390x844 (all pages)", "issues": ["Same cookie banner overlaps the very bottom of the viewport on first visit — carried over from iteration_11, not a new regression. Low priority."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_orqyne_pilot_and_regression.py",
+    "/app/test_reports/pytest/iteration_12.xml",
+    "/app/test_reports/screenshots_it12/"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "contact.js switch cleanly routes leadType 'orqyne_pilot' and 'ORQYNE Guided Pilot' to collection orqyne_pilot_leads; default branch still lands in contact_messages — verified with dedicated tests for both paths.",
+    "admin.js exposes orqyne_pilot_leads in VALID_COLLECTIONS, summary.total_orqyne_pilots, summary.breakdown.orqyne_pilots and data.orqyne_pilot_leads — all confirmed via live GET /api/admin during the delete test.",
+    "admin-delete.js accepts collection=orqyne_pilot_leads for both single (deleteType=single&collection=orqyne_pilot_leads&leadId=...) and bulk (deleteType=collection) — single-row delete verified end-to-end (create → find id → delete → verify absent).",
+    "OrbitDiagram.js: chips use translate(-50%,-50%) centring with no runtime rotation, so alignment is deterministic and unaffected by viewport width — reflects in the 100% inside-container verdict across Home/Products/About at 1920x1080.",
+    "index.css scrollbar rules use scrollbar-gutter: stable which avoids layout shift when scrollbars appear/disappear — good practice.",
+    "Services.js Learn More buttons all resolve to the identical solid slate-900 pill (rgb(15,23,42), 334x44) and align to exactly 2 Y-values, confirming the mt-auto features block and the shared button component are working.",
+    "Historical note (also in iteration_11): pilots submitted BEFORE the handler fix remain in contact_messages. This is expected data history, not a live bug."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_orqyne_pilot_and_regression.py (new — 14 tests, all pass)"
+  ],
+  "success_rate": { "backend": "100% (14/14)", "frontend": "100% (all requested flows verified)" },
+  "test_credentials": "support@orgainse.com / QaTest!2026#Org (super-admin, must_change_password=false).",
+  "seed_data_creation": "Created 3 orqyne_pilot_leads via API (2 test_it12_pilot_*, 1 test_it12_pilot2_* string-variant) + 1 via UI submission on /products (test_it12_ui_pilot_b8def4d4@example.com) + 1 throwaway created-and-deleted in the delete test. Plus TEST_ prefixed newsletter/ai-assessment/roi/consultation records from the tool-form tests.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend Node handlers live at /app/api/_handlers/**. FastAPI is only a proxy to /app/backend/sidecar.mjs. Any handler edit needs `sudo supervisorctl restart backend`. The admin-delete endpoint uses query params `deleteType`, `collection`, and `leadId` (NOT `id`). GET /api/admin returns { summary: { breakdown: { orqyne_pilots, ... } }, data: { orqyne_pilot_leads: [...], contact_messages: [...], ... } } with _id excluded. Screenshots for this iteration are under /app/test_reports/screenshots_it12/ (orbit diagrams at 1920 for Home/Products-IT/Products-Canvas/About + 390 for Home, Services Learn More row, Services popup, admin dashboard on ORQYNE tab and after row expansion, products pilot filled + success toast).",
+  "rca of the issue": "n/a — no critical or minor bugs uncovered. All 5 fixes from the review request work as designed."
+}

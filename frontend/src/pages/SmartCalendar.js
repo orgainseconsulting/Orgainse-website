@@ -60,13 +60,13 @@ export default function SmartCalendar() {
 
   if (result) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 py-12">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 mb-6 mx-auto">
+            <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-r from-blue-600 to-violet-600 mb-6 mx-auto">
               <CheckCircle className="h-12 w-12 text-white" />
             </div>
-            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
               Consultation Request Received!
             </h1>
             <p className="text-lg text-slate-600">
@@ -109,7 +109,7 @@ export default function SmartCalendar() {
             <button
               data-testid="consultation-book-google-btn"
               onClick={openCalendly}
-              className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 inline-flex items-center"
+              className="px-7 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-full shadow-[0_12px_34px_-14px_rgba(15,23,42,0.6)] transition-colors duration-200 inline-flex items-center"
             >
               <Calendar className="mr-2 h-5 w-5" /> Book Instantly with Google Calendar
               <ExternalLink className="ml-2 h-4 w-4" />
@@ -121,10 +121,10 @@ export default function SmartCalendar() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-blue-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
             Book Your AI Consultation
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-4">
@@ -206,7 +206,7 @@ export default function SmartCalendar() {
                   data-testid="consultation-submit-btn"
                   type="submit"
                   disabled={loading || !form.name || !form.email || !form.service_type}
-                  className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
+                  className="px-7 py-3.5 bg-white hover:bg-slate-100 text-slate-900 font-semibold rounded-full shadow-[0_12px_34px_-14px_rgba(0,0,0,0.5)] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none inline-flex items-center"
                 >
                   {loading ? 'Submitting...' : 'Request Consultation'}
                   {!loading && <Calendar className="ml-2 h-5 w-5" />}

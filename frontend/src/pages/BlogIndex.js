@@ -31,7 +31,7 @@ const CoverImage = ({ post }) => {
         src={post.cover_image_url}
         alt={post.title}
         loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+        className="absolute inset-0 h-full w-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
       />
     );
   }
@@ -127,7 +127,7 @@ const BlogIndexPage = () => {
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-blue-50">
       <SEOHead
         title="Blog — Orgainse Consulting | AI Strategy, PMaaS & Digital Transformation Insights"
         description="Practical, vendor-neutral guides on AI-native project management, digital transformation, and revenue intelligence — from the team building Orgainse Consulting."
@@ -141,7 +141,7 @@ const BlogIndexPage = () => {
           <span className="inline-block text-xs font-bold uppercase tracking-[0.18em] text-blue-600 mb-3">
             Insights & Perspectives
           </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 leading-tight">
             From the Orgainse <span className="text-blue-500">desk</span>
           </h1>
           <p className="text-base text-slate-600 mt-4 max-w-2xl">

@@ -135,40 +135,33 @@ const Contact = () => {
   return (
     <div id="contact" className="min-h-screen">
       {/* Revolutionary Hero Section with SEO */}
-      <section className="relative bg-gradient-to-br from-slate-50 via-blue-50 to-blue-50 py-12 lg:py-16 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12 lg:py-16 overflow-hidden">
         {/* Dynamic Background Elements */}
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-r from-blue-200 to-violet-200 rounded-full blur-3xl animate-pulse float-animation will-change-transform"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-violet-200 to-violet-200 rounded-full blur-3xl animate-pulse float-animation animation-delay-2000 will-change-transform"></div>
+          <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-r from-slate-50 via-white to-blue-50 rounded-full blur-3xl animate-pulse float-animation will-change-transform"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-slate-50 via-white to-blue-50 rounded-full blur-3xl animate-pulse float-animation animation-delay-2000 will-change-transform"></div>
           <div className="absolute top-1/2 left-1/4 w-8 h-8 bg-blue-300 rotate-45 animate-spin-slow opacity-60"></div>
           <div className="absolute bottom-1/3 right-1/4 w-6 h-16 bg-violet-300 rounded-full animate-pulse opacity-50"></div>
         </div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 animate-fade-in">
-          <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6">
-            <span className="text-slate-800">Contact </span>
-            <span className="bg-gradient-to-r from-blue-500 via-violet-500 to-violet-500 bg-clip-text text-transparent animate-gradient-text">
-              Orgainse
-            </span>
-            <br />
-            <span className="text-slate-800">Consulting</span>
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10 animate-fade-in">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/70 backdrop-blur-sm text-[11px] uppercase tracking-[0.18em] text-slate-500 shadow-sm">
+            Contact Orgainse
+          </span>
+          <h1 className="mt-6 font-outfit text-4xl sm:text-5xl font-bold leading-[1.06] tracking-[-0.03em] max-w-3xl">
+            <span className="text-slate-900">Bring one important </span>
+            <span className="text-blue-600">execution problem</span>
           </h1>
-          
-          <h2 className="text-2xl lg:text-3xl text-blue-600 font-bold mb-6">
-            Get Your Free AI Consultation & GPT-Powered Strategy Session
+
+          <h2 className="mt-6 text-base md:text-lg font-semibold text-slate-700 max-w-2xl leading-relaxed">
+            Book a focused discovery session with an Orgainse consultant — no commitment required.
           </h2>
-          
-          <p className="text-xl text-slate-700 max-w-4xl mx-auto mb-8 leading-relaxed text-justify">
-            Ready to transform your business with <span className="text-blue-600 font-bold">AI-native consulting</span>? Let's discuss how our 
-            <span className="text-blue-600 font-bold"> GPT-powered solutions</span> can drive your success across 
-            <span className="text-violet-600 font-bold"> project management</span>, digital transformation, 
-            and operational optimization for startups and SMEs globally.
+
+          <p className="mt-5 text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
+            We will clarify the desired business outcome, the current workflow, decision owners, operating
+            constraints, and the most practical next step. The recommendation may involve consulting,
+            Project Management as a Service, ORQYNE, a short diagnostic, or no immediate engagement.
           </p>
-          
-          {/* Animated Divider */}
-          <div className="flex justify-center mb-8">
-            <div className="w-40 h-1 bg-gradient-to-r from-blue-500 via-violet-500 to-violet-500 rounded-full animate-pulse"></div>
-          </div>
         </div>
       </section>
 
@@ -183,17 +176,14 @@ const Contact = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Enhanced Header Section */}
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-3xl lg:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-                Let's Start Your AI Transformation
-              </span>
+          <div className="mb-14 animate-fade-in">
+            <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-slate-900 max-w-3xl">
+              Start the conversation
             </h2>
-            <p className="text-xl text-slate-600 max-w-5xl mx-auto leading-relaxed text-justify">
-              Whether you're looking to implement <span className="font-bold text-blue-600">AI project management</span>, 
-              optimize operations with <span className="font-bold text-violet-600">GPT-powered solutions</span>, 
-              or accelerate <span className="font-bold text-blue-600">digital transformation</span>, we're here to help you succeed 
-              with our AI-native approach across India, USA, UK, UAE, Australia, New Zealand, and South Africa.
+            <p className="mt-6 text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed">
+              Whether the priority is project delivery, workflow visibility, operational governance, ORQYNE
+              implementation, or practical Artificial Intelligence adoption, we work with teams across India,
+              the United States, the United Kingdom, the United Arab Emirates, Australia, New Zealand, and South Africa.
             </p>
           </div>
 
@@ -202,14 +192,14 @@ const Contact = () => {
             {/* Enhanced Contact Form */}
             <div className="animate-fade-in">
               <div className="relative group">
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-400 via-violet-400 to-violet-400 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-1000"></div>
+                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-1000"></div>
                 
                 <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 rounded-3xl overflow-hidden h-full">
                   {/* Top Gradient Bar */}
-                  <div className="h-2 bg-gradient-to-r from-blue-500 via-violet-500 to-violet-500"></div>
+                  <div className="h-2 bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600"></div>
                   
                   <CardHeader className="pb-6">
-                    <CardTitle className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
+                    <CardTitle className="font-outfit text-2xl font-bold tracking-[-0.02em] text-slate-900">
                       Send us a message
                     </CardTitle>
                     <CardDescription className="text-lg text-slate-600">
@@ -322,9 +312,9 @@ const Contact = () => {
                         data-testid="contact-submit-btn"
                         type="submit"
                         disabled={isSubmitting}
-                        className="group w-full relative px-8 py-4 bg-gradient-to-r from-blue-500 to-violet-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed"
+                        className="group w-full relative px-8 py-4 bg-gradient-to-r from-blue-600 to-violet-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-[1.02] overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed"
                       >
-                        <div className="absolute inset-0 bg-gradient-to-r from-violet-500 to-violet-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         <span className="relative z-10 flex items-center justify-center text-lg">
                           {isSubmitting ? "Sending..." : "Send Message & Get Consultation"}
                           {!isSubmitting && <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform" />}
@@ -341,14 +331,14 @@ const Contact = () => {
             <div className="space-y-6 animate-fade-in animation-delay-300">
               {/* Phone Card */}
               <div className="group relative">
-                <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 to-blue-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-violet-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
                 
-                <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 rounded-3xl overflow-hidden">
-                  <div className="h-1 bg-gradient-to-r from-blue-400 to-blue-500"></div>
+                <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 rounded-3xl overflow-hidden">
+                  <div className="h-1 bg-gradient-to-r from-blue-600 to-violet-600"></div>
                   
                   <CardContent className="p-6">
                     <div className="flex items-start space-x-4">
-                      <div className="p-4 bg-white rounded-2xl shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+                      <div className="p-4 bg-white rounded-2xl shadow-lg group-hover:scale-[1.03] group-hover:rotate-12 transition-all duration-500">
                         <Phone className="h-8 w-8 text-slate-600" />
                       </div>
                       <div className="flex-1">
@@ -370,14 +360,14 @@ const Contact = () => {
 
               {/* Email Support Card */}
               <div className="group relative">
-                <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 to-blue-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-violet-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
                 
-                <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 rounded-3xl overflow-hidden">
-                  <div className="h-1 bg-gradient-to-r from-blue-400 to-blue-500"></div>
+                <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 rounded-3xl overflow-hidden">
+                  <div className="h-1 bg-gradient-to-r from-blue-600 to-violet-600"></div>
                   
                   <CardContent className="p-6">
                     <div className="flex items-start space-x-4">
-                      <div className="p-4 bg-white rounded-2xl shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+                      <div className="p-4 bg-white rounded-2xl shadow-lg group-hover:scale-[1.03] group-hover:rotate-12 transition-all duration-500">
                         <Mail className="h-8 w-8 text-slate-600" />
                       </div>
                       <div className="flex-1">
@@ -395,14 +385,14 @@ const Contact = () => {
 
               {/* Book Consultation Card */}
               <div className="group relative">
-                <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 to-blue-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-violet-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
                 
-                <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 rounded-3xl overflow-hidden">
-                  <div className="h-1 bg-gradient-to-r from-blue-400 to-blue-500"></div>
+                <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 rounded-3xl overflow-hidden">
+                  <div className="h-1 bg-gradient-to-r from-blue-600 to-violet-600"></div>
                   
                   <CardContent className="p-6">
                     <div className="flex items-start space-x-4">
-                      <div className="p-4 bg-white rounded-2xl shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+                      <div className="p-4 bg-white rounded-2xl shadow-lg group-hover:scale-[1.03] group-hover:rotate-12 transition-all duration-500">
                         <Calendar className="h-8 w-8 text-slate-600" />
                       </div>
                       <div className="flex-1">
@@ -420,14 +410,14 @@ const Contact = () => {
 
               {/* Global Offices Card */}
               <div className="group relative">
-                <div className="absolute -inset-2 bg-gradient-to-r from-violet-400 to-violet-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-violet-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
                 
-                <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 rounded-3xl overflow-hidden">
-                  <div className="h-1 bg-gradient-to-r from-violet-400 to-violet-500"></div>
+                <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 rounded-3xl overflow-hidden">
+                  <div className="h-1 bg-gradient-to-r from-blue-600 to-violet-600"></div>
                   
                   <CardContent className="p-6">
                     <div className="flex items-start space-x-4">
-                      <div className="p-4 bg-white rounded-2xl shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+                      <div className="p-4 bg-white rounded-2xl shadow-lg group-hover:scale-[1.03] group-hover:rotate-12 transition-all duration-500">
                         <MapPin className="h-8 w-8 text-slate-600" />
                       </div>
                       <div className="flex-1">
@@ -449,10 +439,10 @@ const Contact = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Enhanced Social Media Card */}
             <div className="group relative animate-fade-in" style={{ animationDelay: '800ms' }}>
-              <div className="absolute -inset-2 bg-gradient-to-r from-violet-400 via-violet-400 to-blue-400 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+              <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
               
-              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 rounded-3xl overflow-hidden h-full">
-                <div className="h-1 bg-gradient-to-r from-violet-500 via-violet-500 to-blue-500"></div>
+              <Card className="relative bg-white/90 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 rounded-3xl overflow-hidden h-full">
+                <div className="h-1 bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600"></div>
                 
                 <CardContent className="p-6 h-full flex flex-col justify-center">
                   <h3 className="text-xl font-bold text-slate-800 mb-4 text-center">
@@ -473,7 +463,7 @@ const Contact = () => {
                           href={social.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="relative flex items-center justify-center w-12 h-12 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-125 hover:-translate-y-2"
+                          className="relative flex items-center justify-center w-12 h-12 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-125 hover:-translate-y-1"
                           aria-label={social.label}
                         >
                           <social.icon className="h-6 w-6 text-slate-600" />
@@ -487,9 +477,9 @@ const Contact = () => {
 
             {/* Revolutionary CTA Card */}
             <div className="group relative animate-fade-in" style={{ animationDelay: '1000ms' }}>
-              <div className="absolute -inset-4 bg-gradient-to-r from-blue-400 via-violet-400 to-violet-500 rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-1000 animate-pulse"></div>
+              <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-1000 animate-pulse"></div>
               
-              <Card className="relative bg-gradient-to-br from-blue-500 to-violet-600 text-white border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-4 rounded-3xl overflow-hidden h-full">
+              <Card className="relative bg-gradient-to-br from-blue-600 to-violet-600 text-white border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 rounded-3xl overflow-hidden h-full">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full transform translate-x-8 -translate-y-8 animate-pulse"></div>
                 <div className="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full transform -translate-x-4 translate-y-4 animate-pulse animation-delay-500"></div>
                 
@@ -501,7 +491,7 @@ const Contact = () => {
                   </p>
                   <button 
                     onClick={openCalendly}
-                    className="group/btn bg-white text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-full font-bold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                    className="group/btn bg-white text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-full font-bold transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl"
                   >
                     <Calendar className="inline-block mr-2 h-5 w-5" />
                     Schedule Free AI Consultation

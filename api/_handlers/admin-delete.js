@@ -13,6 +13,7 @@ const VALID_COLLECTIONS = [
   'roi_calculator_leads',
   'service_inquiries',
   'consultation_leads',
+  'orqyne_pilot_leads',
 ];
 
 let cachedClient = null;
