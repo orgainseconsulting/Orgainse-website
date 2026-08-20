@@ -40,6 +40,7 @@ const Navigation = () => {
     { href: "/products", label: "Products" },
     { href: "/blog", label: "Blog" },
     { href: "/newsletter", label: "Newsletter" },
+    { href: "/careers", label: "Careers" },
     { href: "/contact", label: "Contact" },
   ];
 

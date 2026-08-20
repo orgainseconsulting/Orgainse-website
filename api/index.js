@@ -31,6 +31,9 @@ import aiAssessmentHandler from './_handlers/ai-assessment.js';
 import roiCalculatorHandler from './_handlers/roi-calculator.js';
 import consultationHandler from './_handlers/consultation.js';
 import blogHandler from './_handlers/blog.js';
+import careersHandler from './_handlers/careers.js';
+import careersShareHandler from './_handlers/careers-share.js';
+import careersApplyHandler from './_handlers/careers-apply.js';
 import newsletterIssuesHandler from './_handlers/newsletter-issues.js';
 import unsubscribeHandler from './_handlers/unsubscribe.js';
 import appSettingsPublicHandler from './_handlers/app-settings/public.js';
@@ -45,6 +48,7 @@ import adminUsersResetPasswordHandler from './_handlers/admin-users/reset-passwo
 import authMeHandler from './_handlers/auth/me.js';
 import appSettingsHandler from './_handlers/app-settings.js';
 import blogAdminHandler from './_handlers/blog-admin.js';
+import careersAdminHandler from './_handlers/careers-admin.js';
 import newsletterAdminHandler from './_handlers/newsletter-admin/index.js';
 
 // Vercel function config:
@@ -87,6 +91,13 @@ export default async function handler(req, res) {
   const second = segments[1] || '';
 
   // Two-segment routes first (most specific).
+  //
+  // `/careers/<slug>` (NOT under /api) is rewritten here by vercel.json so we
+  // can serve index.html with per-role Open Graph tags for link-preview
+  // crawlers. `/api/careers?slug=…` still returns JSON.
+  if (first === 'careers' && second && !rawPath.replace(/^\/+/, '').startsWith('api')) {
+    return careersShareHandler(req, res);
+  }
   if (first === 'admin-users' && second === 'reset-password') {
     return adminUsersResetPasswordHandler(req, res);
   }
@@ -116,6 +127,8 @@ export default async function handler(req, res) {
     case 'roi-calculator': return roiCalculatorHandler(req, res);
     case 'consultation': return consultationHandler(req, res);
     case 'blog': return blogHandler(req, res);
+    case 'careers': return careersHandler(req, res);
+    case 'careers-apply': return careersApplyHandler(req, res);
     case 'newsletter-issues': return newsletterIssuesHandler(req, res);
     case 'unsubscribe': return unsubscribeHandler(req, res);
     case 'admin-login': return adminLoginHandler(req, res);
@@ -125,6 +138,7 @@ export default async function handler(req, res) {
     case 'admin-users': return adminUsersHandler(req, res);
     case 'app-settings': return appSettingsHandler(req, res);
     case 'blog-admin': return blogAdminHandler(req, res);
+    case 'careers-admin': return careersAdminHandler(req, res);
     default: return notFound(res, rawPath);
   }
 }

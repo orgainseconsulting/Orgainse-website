@@ -650,3 +650,95 @@ re-verified** (repo grep clean, live `POST /api/consultation` returns the new wo
 - P2: Instant confirmation email to the prospect + alert to Orgainse on new leads (Resend).
 - P2: Welcome / set-your-password email for new admins.
 - P2: Dynamic public `/about/team` page from Admin host profiles.
+
+## Round 6 (June 2026) — Careers module (iterations 19 & 20)
+
+User request: a "Careers" entry under Explore in the footer (later also in the top
+nav) with a general introduction to Orgainse, roles managed from the Admin Dashboard
+just like Blogs and Newsletters, each role shown as a card that opens a popup with an
+Apply Now button at the bottom, resume + a ~500 character "why" emailed to
+info@orgainse.com, and shareable per-role URLs for LinkedIn.
+
+### User decisions (explicit)
+- Resumes are **EMAIL ONLY**. Nothing is stored on the site or in the Admin
+  Dashboard. An application not appearing in Admin is correct behaviour.
+- Resume rules: PDF / DOC / DOCX, max 5 MB, plus an **optional** portfolio link.
+- Careers link in **both** the footer (Explore) and the top navigation.
+- Blog post bodies stay untouched (Round 5 decision carried forward).
+- Per-role LinkedIn previews were requested → server-side meta shim built.
+
+### Data model — `job_postings` collection
+`id, slug, title, department (free text, 140), layer, hiring_stage, location,
+work_type, employment_type, experience_level, experience_range, compensation,
+summary, about_role, responsibilities[], requirements[], nice_to_have[],
+what_we_offer[], application_deadline, status (draft|published), seo_title,
+seo_description, view_count, created_at, updated_at, published_at`
+
+Taxonomy lives in `frontend/src/lib/careersTaxonomy.js`:
+- **Layer** (5): C-Suite · First Line Management · Second Line Management ·
+  Associates · Interns
+- **Department** (13, plus "Other — type my own…" free text): AI Engineering and
+  Agentic Systems · Business Intelligence, Sales and Partnerships · Customer Success
+  and Support · Delivery and PMO · Finance and Commercials · Knowledge and Enablement
+  · Leadership · Legal, Risk and Compliance · Marketing and Brand · Operations and
+  RCM · People and Culture / HR · Product, Platform and R&D · Technology,
+  Infrastructure and Security
+- **Employment Type** (9): Founder / Director · Full-Time · Future Full-Time ·
+  Outsourced Partner · External Advisor · Contractor · Intern · Future · Part-Time
+- **Hiring stage** (7): Open Role · Receiving Profiles · Shortlisting · Interviewing ·
+  Offer Stage · On Hold · Role Closed.
+  `STAGES_NOT_ACCEPTING = ['Role Closed', 'On Hold']` disables Apply in the UI **and**
+  returns 409 from the apply endpoint.
+
+### Files added
+Backend: `api/_handlers/careers.js` (public list + `?slug=`),
+`careers-admin.js` (JWT CRUD + `?action=analytics`), `careers-apply.js` (chunked
+resume intake → Resend email → chunks deleted), `careers-share.js` (HTML meta shim).
+Dispatcher cases added in `api/index.js`; `/careers/:slug` rewrite added to
+`vercel.json` **before** the index.html catch-all.
+
+Frontend: `lib/careersApi.js`, `lib/careersTaxonomy.js`, `pages/Careers.js`,
+`components/careers/JobPopup.js`, `ApplyForm.js`, `CareersManager.js`, `JobEditor.js`.
+Wired into `App.js` (`/careers`, `/careers/:slug`), `Navigation.js` (navLinks),
+`Footer.js` (`footer-careers-link`), `SEOHead.js` path map, `AdminDashboard.js`
+(new `careers` section, Briefcase icon), `public/sitemap.xml`.
+
+### Resume handling (privacy-critical)
+The browser base64-encodes the file and POSTs it in 480 KB chunks to
+`/api/careers-apply` (`action:'chunk'`) to stay under the serverless body limit.
+`action:'submit'` reassembles the buffer in memory, sends it as a Resend attachment
+to `CAREERS_INBOX` (`info@orgainse.com`, overridable via `CAREERS_EMAIL`), then
+deletes the staged `career_upload_chunks` — **including on send failure**, plus a
+sweep of anything abandoned for over an hour. No resume ever persists.
+
+### Link previews
+`careers-share.js` fetches the built `index.html`, swaps in the per-role `<title>`,
+`description`, `og:*`, `twitter:*` and `canonical`, appends `JobPosting` JSON-LD, and
+returns the shell so React still boots for humans. Falls back to a 302 to `/careers`
+if the shell cannot be fetched. **Active in production only** — in the preview pod the
+ingress routes `/careers/*` to the CRA dev server, so the deep link works
+client-side but without server-rendered meta. Verified by direct handler invocation.
+
+### Testing
+- `iteration_19.json` — 22/22 backend cases + full frontend pass on the initial build.
+- `iteration_20.json` — 14/14 backend cases + full frontend pass on the taxonomy,
+  stage gating, add/delete, department filter and share shim. Zero open issues.
+
+### BLOCKER awaiting the user
+**The `RESEND_API_KEY` in `backend/.env` is revoked.** Resend's own API returns
+`400 API key is invalid` for it. Consequence: the careers application email returns
+502, and **newsletter sending is broken for the same reason**. The old newsletter code
+never checked Resend's response, so this failed silently; `careers-apply.js` now
+inspects `sendResult.error` and surfaces a real error. The user must generate a new
+key (resend.com → API Keys) and set it in `backend/.env` or Admin → Settings.
+Recommend adding the same `sendResult.error` check to `newsletter-admin/index.js`.
+
+### Backlog after this round
+- P0: Rotate the Resend key, then re-run the apply flow and a newsletter test send.
+- P1: Add the `sendResult.error` check to `newsletter-admin/index.js` so newsletter
+  send failures stop being silent.
+- P1: Delete the unused `data/blogPosts.js` (dead code carrying stale statistics).
+- P1: "Get Paid" creator-economy section + "Team Chat by Plan" from orgainse.live.
+- P2: Confirmation email to the candidate on application (needs the key first).
+- P2: Rolling 7-day sparkline per post/issue in Admin Analytics.
+- P2: Dynamic public `/about/team` page from Admin host profiles.

@@ -16,6 +16,10 @@
       "destination": "/api"
     },
     {
+      "source": "/careers/:slug",
+      "destination": "/api"
+    },
+    {
       "source": "/((?!api/|static/|favicon|robots\\.txt|sitemap).*)",
       "destination": "/index.html"
     }

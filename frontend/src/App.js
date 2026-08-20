@@ -31,6 +31,7 @@ const PrivacyPolicyPage = React.lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfServicePage = React.lazy(() => import("./pages/TermsOfService"));
 const ProductsPage = React.lazy(() => import("./pages/Products"));
 const BlogIndexPage = React.lazy(() => import("./pages/BlogIndex"));
+const CareersPage = React.lazy(() => import("./pages/Careers"));
 const BlogPostPage = React.lazy(() => import("./pages/BlogPost"));
 const NewsletterIndexPage = React.lazy(() => import("./pages/NewsletterIndex"));
 const NewsletterIssuePage = React.lazy(() => import("./pages/NewsletterIssue"));
@@ -88,6 +89,8 @@ function App() {
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/products" element={<ProductsPage />} />
                     <Route path="/blog" element={<BlogIndexPage />} />
+                    <Route path="/careers" element={<CareersPage />} />
+                    <Route path="/careers/:slug" element={<CareersPage />} />
                     <Route path="/blog/:slug" element={<BlogPostPage />} />
                     <Route path="/newsletter" element={<NewsletterIndexPage />} />
                     <Route path="/newsletter/:slug" element={<NewsletterIssuePage />} />

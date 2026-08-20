@@ -3,11 +3,12 @@ import { toast } from 'sonner';
 import { api } from '../lib/api';
 import { useAuth } from './AuthContext';
 import BlogManager from './blog/BlogManager';
+import CareersManager from './careers/CareersManager';
 import NewsletterManager from './newsletter/NewsletterManager';
 import AdminUsersManager from './admin/AdminUsersManager';
 import AdminSettingsManager from './admin/AdminSettingsManager';
 import LeadDetailsPanel from './admin/LeadDetailsPanel';
-import { LayoutDashboard, FileText, Mail, Users, Settings } from 'lucide-react';
+import { LayoutDashboard, FileText, Mail, Users, Settings, Briefcase } from 'lucide-react';
 
 /**
  * Flatten a lead document so the table & CSV exports show human-readable
@@ -141,7 +142,7 @@ const AdminDashboard = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [section, setSection] = useState('leads'); // leads | blog | newsletter | users | settings
+  const [section, setSection] = useState('leads'); // leads | blog | newsletter | careers | users | settings
   const [activeTab, setActiveTab] = useState('overview');
   const [page, setPage] = useState(1);
   const [expandedId, setExpandedId] = useState(null);
@@ -623,6 +624,7 @@ const AdminDashboard = () => {
                 {section === 'leads' && 'Lead Management Dashboard'}
                 {section === 'blog' && 'Blog Post Management'}
                 {section === 'newsletter' && 'Newsletter Center'}
+                {section === 'careers' && 'Careers'}
                 {section === 'users' && 'Admin Users'}
                 {section === 'settings' && 'Settings'}
               </h1>
@@ -630,6 +632,7 @@ const AdminDashboard = () => {
                 {section === 'leads' && 'Manage your captured leads by category'}
                 {section === 'blog' && 'Write, publish and manage blog articles'}
                 {section === 'newsletter' && 'Compose issues, manage subscribers, send branded emails'}
+                {section === 'careers' && 'Post, edit and publish open roles on the public careers page'}
                 {section === 'users' && 'Invite teammates, reset passwords, manage access'}
                 {section === 'settings' && 'API keys, sender identity, and Book-a-Call hosts'}
               </p>
@@ -668,6 +671,7 @@ const AdminDashboard = () => {
               { id: 'leads', label: 'Lead Management', icon: LayoutDashboard, testid: 'admin-section-leads', show: true },
               { id: 'blog', label: 'Blog Posts', icon: FileText, testid: 'admin-section-blog', show: true },
               { id: 'newsletter', label: 'Newsletter', icon: Mail, testid: 'admin-section-newsletter', show: true },
+              { id: 'careers', label: 'Careers', icon: Briefcase, testid: 'admin-section-careers', show: true },
               { id: 'users', label: 'Users', icon: Users, testid: 'admin-section-users', show: isSuper },
               { id: 'settings', label: 'Settings', icon: Settings, testid: 'admin-section-settings', show: isSuper },
             ].filter((s) => s.show).map(({ id, label, icon: Icon, testid }) => {
@@ -794,6 +798,13 @@ const AdminDashboard = () => {
         {section === 'newsletter' && (
           <div className="bg-white rounded-lg shadow mb-8 p-6">
             <NewsletterManager />
+          </div>
+        )}
+
+        {/* Careers section */}
+        {section === 'careers' && (
+          <div className="bg-white rounded-lg shadow mb-8 p-6">
+            <CareersManager />
           </div>
         )}
 

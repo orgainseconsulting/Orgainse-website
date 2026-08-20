@@ -1,0 +1,52 @@
+{
+  "summary": "Iteration 19 — Careers feature end-to-end test. 22/22 backend pytest cases pass (public list/slug/404, admin auth guard, admin CRUD incl. duplicate-slug + required-field validation, analytics, apply-flow validation on all rejection paths, persistence guarantee — no applications/resume collection present). Frontend /careers renders correctly: title, hero, six discipline cards, view-roles + general-interest buttons, jobs grid, seeded card present, no banned marketing phrases found. Popup opens on card click with URL push to /careers/<slug>, contains title/about/responsibilities/requirements/nice-to-have/offer + apply/copy-link/linkedin/close testids, body scroll locked, closes cleanly via Escape / backdrop / close button and URL returns to /careers each time. LinkedIn share href correctly points to linkedin.com/sharing/share-offsite/?url=... with encoded /careers/<slug> and target=_blank. Deep-link direct load of /careers/senior-delivery-lead-pmaas opens popup already, document.title updates to '<role> | Careers at Orgainse Consulting', JobPosting JSON-LD is injected. /careers/does-not-exist redirects to /careers with no popup and no crash. Apply form loads with all required testids, the why field is enforced to a 500-char cap and the live counter (e.g. '365 characters left', '0 characters left') decrements correctly. Invalid file type (.txt) is rejected with a toast and NO file chip appears; valid PDF creates apply-file-chip with filename + size; 'Back to role details' returns to detail view. Admin Dashboard shows the new 'Careers' pill (data-testid='admin-section-careers') alongside Lead Management / Blog Posts / Newsletter / Users / Settings; careers-manager renders with careers-manager-new + careers-manager-table + seeded senior-delivery-lead-pmaas row; New role opens the job-editor with all required fields (title/slug/location/summary/about + save-draft/publish). ONE integration issue: the Resend API key used by the server is being reported as invalid (401 validation_error 'API key is invalid'), so the final email send in the apply flow returns 502 to the client — every other step (chunk upload, buffer assembly, staged-chunk cleanup, error surfacing to the UI) works correctly.",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "/api/careers-apply (submit action)",
+        "issue": "Resend .send() returns 401 'API key is invalid' — email never sends and API returns 502. Backend log: 'careers-apply resend error: { statusCode: 401, name: validation_error, message: API key is invalid }'. Handler + validation logic are correct; the RESEND_API_KEY env var (or the app_settings.resend_api_key override) on the sidecar is stale/invalid. This directly contradicts the review-request note that 'Resend is already configured with a live key'. Fix by rotating the key in backend .env or via Admin Portal → Settings.",
+        "priority": "HIGH"
+      }
+    ],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {
+        "flow": "Career application submit",
+        "issue": "Submit returns 502 because Resend key is invalid on the server. Client behavior is correct — no apply-success shown, no chunks left behind — but users will hit an error until the key is rotated.",
+        "affected_selectors": ["[data-testid='apply-submit-btn']", "[data-testid='apply-success']"]
+      }
+    ],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_careers.py",
+    "/app/test_reports/pytest/careers_results.xml"
+  ],
+  "action_items": [
+    "Rotate/repair the Resend API key. It is currently returning 401 validation_error 'API key is invalid' on every apply submission (see backend.err.log). Set RESEND_API_KEY in /app/backend/.env or update app_settings.resend_api_key via Admin Portal → Settings, then retry the /careers apply flow end-to-end."
+  ],
+  "critical_code_review_comments": [
+    "careers.js line 67 uses `result?.value ?? result` to be safe across MongoDB driver versions — good defensive code.",
+    "careers-apply.js correctly enforces MIME allow-list, WHY_MAX=500, size limit 5MB, chunk base64 validation and deletes staged chunks after send. No resume persistence path exists — matches the user's explicit 'email only' requirement.",
+    "Duplicate-slug guard in careers-admin.js buildJobDoc uses `{ slug, id: { $ne: existing.id } }` correctly on updates so a role can keep its own slug while forbidding collisions.",
+    "Frontend Careers page correctly injects JobPosting JSON-LD on deep-link and updates document.title/meta client-side (no SSR expected — noted in agent context).",
+    "Recommend adding a lightweight 'careers-apply' unit test for the 502-resend-error path so this regression is caught in CI even without live Resend."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_careers.py (new)"
+  ],
+  "success_rate": {
+    "backend": "100% (22/22 pytest — all careers backend contracts)",
+    "frontend": "~90% (all UI/UX flows pass; apply email delivery blocked by invalid Resend key)"
+  },
+  "test_credentials": "support@orgainse.com / QaTest!2026#Org (super-admin)",
+  "seed_data_creation": "Created + deleted TEST_ role 'test-role-<uuid>' via admin API during CRUD test; seeded 'senior-delivery-lead-pmaas' left untouched.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "main_agent_can_self_test": false,
+  "context_for_next_testing_agent": "Backend + frontend structure fully validated. If main agent rotates the Resend key, re-run the E2E apply flow (see the playwright block that fills apply form and expects [data-testid='apply-success']) — the only expected failure right now is the final email delivery. All 22 pytest cases in /app/backend/tests/test_careers.py should continue passing.",
+  "rca of the issue": "RCA: /api/careers-apply returns 502 on submit. Reproduction: POST /api/careers-apply with valid chunk then valid submit payload → server logs 'careers-apply resend error: {statusCode:401, message: API key is invalid}' → handler returns 502 with the user-facing 'We could not deliver your application right now' message. Root cause: RESEND_API_KEY on the backend sidecar (or the override stored at app_settings.resend_api_key) is invalid/rotated-out. Mitigation: update the key in backend/.env or via Admin Portal → Settings; no code change required."
+}

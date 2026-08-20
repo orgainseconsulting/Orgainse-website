@@ -23,7 +23,8 @@ const SEOHead = ({ title, description, canonical, noindex = false, structuredDat
       'contact': 'Contact Us',
       'ai-assessment': 'Execution Readiness Assessment',
       'roi-calculator': 'ROI Calculator',
-      'smart-calendar': 'Book Consultation'
+      'smart-calendar': 'Book Consultation',
+      'careers': 'Careers'
     };
     
     if (pathSegments.length > 0) {
