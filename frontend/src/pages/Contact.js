@@ -125,7 +125,7 @@ const Contact = () => {
     },
     {
       title: "Offices",
-      description: "Remote-first delivery across regions",
+      description: "Serving clients globally",
       details: ["Austin, Texas, USA (HQ)", "Bengaluru, India (Corporate Office)"],
       icon: MapPin,
       gradient: "from-violet-400 to-violet-500"
@@ -445,7 +445,7 @@ const Contact = () => {
                       </div>
                       <div className="flex-1">
                         <h3 className="text-xl font-bold text-slate-800 mb-2">Offices</h3>
-                        <p className="text-slate-600 text-sm mb-3">Remote-first delivery across regions</p>
+                        <p className="text-slate-600 text-sm mb-3">Serving clients globally</p>
                         <div className="space-y-1">
                           <p className="text-slate-700 font-medium">Austin, Texas, USA (HQ)</p>
                           <p className="text-slate-700 font-medium">Bengaluru, India (Corporate Office)</p>

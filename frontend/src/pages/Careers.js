@@ -18,12 +18,11 @@ const DISCIPLINES = [
   { icon: Handshake, title: 'Sales & Partnerships', body: 'Consultative sellers who qualify honestly, scope carefully and would rather walk away than oversell.' },
   { icon: Stethoscope, title: 'Revenue Cycle & Data Analysis', body: 'Analysts with United States healthcare revenue cycle depth for our Revenue Intelligence Advisory work.' },
 ];
-
 const PRINCIPLES = [
   'We scope work around one measurable problem, then agree how success will be judged before we start.',
   'Ownership is explicit. Every risk, action and decision has a name against it — including ours.',
   'We say no to work we are not the right fit for, and we say it early.',
-  'Remote-first across India, the United States and the wider markets we serve, with a real overlap window rather than always-on expectations.',
+  'We work a hybrid model — time together in the office where it helps, and focused time wherever you work best.',
 ];
 
 const Chip = ({ icon: Icon, children }) => (children ? (
@@ -201,9 +200,9 @@ export default function Careers() {
               How we work
             </h2>
             <p className="mt-4 text-base text-slate-600 leading-relaxed">
-              We are a small, senior team operating from Austin, Texas and Bengaluru, India, serving
-              clients across India, the United States, the United Kingdom, the United Arab Emirates,
-              Australia, New Zealand and South Africa. There is no layer between you and the work.
+              We are a small, senior team with offices in Austin, Texas and Bengaluru, India, serving
+              clients globally. We work a hybrid model — time together in the office where it helps,
+              and focused time wherever you do your best work. There is no layer between you and the work.
             </p>
           </div>
           <ul className="space-y-4">
@@ -228,7 +227,11 @@ export default function Careers() {
                 Open roles
               </h2>
               <p className="mt-3 text-base text-slate-600">
-                {loading ? 'Loading roles…' : `${visibleJobs.length} open ${visibleJobs.length === 1 ? 'role' : 'roles'}${deptFilter !== 'All' ? ` in ${deptFilter}` : ''}`}
+                {loading
+                  ? 'Loading roles…'
+                  : jobs.length === 0
+                    ? 'Nothing posted at the moment — introductions still welcome'
+                    : `${visibleJobs.length} open ${visibleJobs.length === 1 ? 'role' : 'roles'}${deptFilter !== 'All' ? ` in ${deptFilter}` : ''}`}
               </p>
             </div>
           </div>
@@ -262,23 +265,61 @@ export default function Careers() {
           ) : jobs.length === 0 ? (
             <div
               data-testid="careers-empty-state"
-              className="mt-10 rounded-3xl border-2 border-dashed border-slate-300 bg-white px-6 py-16 text-center"
+              className="mt-10 relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 px-6 sm:px-12 py-14 sm:py-16"
             >
-              <span className="grid place-items-center w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 mx-auto">
-                <Briefcase className="h-5 w-5 text-blue-600" />
-              </span>
-              <h3 className="mt-5 font-outfit text-xl font-bold text-slate-900">No roles open right now</h3>
-              <p className="mt-3 text-sm text-slate-600 max-w-md mx-auto">
-                We still want to hear from specialists. Send your resume and a short note about the work
-                you want to do and we will keep it on file for the next opening.
-              </p>
-              <a
-                href="mailto:info@orgainse.com?subject=General%20interest%20—%20Orgainse%20Consulting"
-                data-testid="careers-empty-email-btn"
-                className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold transition-colors"
-              >
-                <Mail className="h-4 w-4" /> Email info@orgainse.com
-              </a>
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 opacity-[0.18]"
+                style={{ backgroundImage: 'radial-gradient(circle at 18% 20%, #3b82f6 0%, transparent 42%), radial-gradient(circle at 82% 78%, #7c3aed 0%, transparent 45%)' }}
+              />
+              <div className="relative max-w-3xl">
+                <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-blue-200 bg-white/10 border border-white/15 rounded-full px-3.5 py-1.5">
+                  <Sparkles className="h-3 w-3" /> Always reading
+                </span>
+                <h3 className="mt-6 font-outfit text-3xl sm:text-4xl font-bold text-white tracking-[-0.02em] leading-[1.1]">
+                  No roles posted today.<br />
+                  <span className="text-blue-300">That has never stopped a good introduction.</span>
+                </h3>
+                <p className="mt-6 text-[15px] text-blue-100/90 leading-relaxed">
+                  We are a small team, so we hire when we meet someone we cannot stop thinking about —
+                  not when a requisition opens. If you are strong at what you do and the work here
+                  sounds like your kind of problem, write to us anyway. Every note reaches a person,
+                  and the good ones stay on our desk until there is a role worth calling you about.
+                </p>
+
+                <div className="mt-9 grid sm:grid-cols-3 gap-4">
+                  {[
+                    { t: 'Tell us the problem you want', d: 'Not your job title — the kind of work you want to be handed on a Monday.' },
+                    { t: 'Show us something real', d: 'A project, a repo, a process you fixed, a deck you would defend.' },
+                    { t: 'We reply either way', d: 'A clear yes, not yet, or no. Never silence.' },
+                  ].map((c) => (
+                    <div key={c.t} className="rounded-2xl bg-white/[0.07] border border-white/10 p-5 backdrop-blur-sm">
+                      <p className="font-outfit text-sm font-bold text-white">{c.t}</p>
+                      <p className="mt-2 text-xs text-blue-100/80 leading-relaxed">{c.d}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                  <a
+                    href="mailto:info@orgainse.com?subject=Introduction%20—%20I%20want%20to%20work%20at%20Orgainse&body=Hi%20Orgainse%20team%2C%0A%0AThe%20work%20I%20want%20to%20be%20doing%3A%0A%0AWhat%20I%20have%20built%20or%20fixed%20that%20I%20am%20proud%20of%3A%0A%0AMy%20resume%20is%20attached.%0A%0AThanks%2C%0A"
+                    data-testid="careers-empty-email-btn"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-white hover:bg-blue-50 text-slate-900 text-sm font-semibold transition-colors"
+                  >
+                    <Mail className="h-4 w-4" /> Introduce yourself
+                  </a>
+                  <a
+                    href="/about"
+                    data-testid="careers-empty-about-btn"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full border border-white/25 text-white text-sm font-semibold hover:bg-white/10 transition-colors"
+                  >
+                    See what we actually do <ArrowRight className="h-4 w-4" />
+                  </a>
+                </div>
+                <p className="mt-5 text-[11px] text-blue-200/70">
+                  Attach a resume and a few lines on why. That is genuinely enough to start.
+                </p>
+              </div>
             </div>
           ) : (
             <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5" data-testid="careers-jobs-grid">

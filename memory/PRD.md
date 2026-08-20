@@ -742,3 +742,21 @@ Recommend adding the same `sendResult.error` check to `newsletter-admin/index.js
 - P2: Confirmation email to the candidate on application (needs the key first).
 - P2: Rolling 7-day sparkline per post/issue in Admin Analytics.
 - P2: Dynamic public `/about/team` page from Admin host profiles.
+
+### Round 6b — corrections (June 2026)
+- **Seed role removed.** `job_postings` is intentionally empty; the careers page now
+  ships with no roles until the user posts real ones.
+- **Motivating empty state.** `careers-empty-state` is now a dark gradient panel:
+  "No roles posted today. That has never stopped a good introduction." plus three
+  cards (tell us the problem you want / show us something real / we reply either way),
+  a prefilled `mailto:` introduction and a link to /about. The count line reads
+  "Nothing posted at the moment — introductions still welcome" when empty.
+- **Geography corrected (user instruction).** Offices are ONLY Austin, Texas and
+  Bengaluru, India; we "serve clients globally". Do NOT list India/US/UK/UAE/
+  Australia/New Zealand/South Africa again. Fixed in `pages/Careers.js`,
+  `components/SEOContent.js`, `pages/Contact.js`.
+- **Working model corrected (user instruction).** The company is **hybrid**, not
+  remote-first. The phrase "Remote-first" is now banned copy site-wide — verified
+  absent from the rendered DOM.
+Self-tested: DOM assertions for the empty state and the removed phrases, plus desktop
+(1920) and mobile (390) screenshots. No testing-agent run for this copy-only delta.

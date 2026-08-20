@@ -125,8 +125,8 @@ const SEOContent = () => {
                   <div className="flex-1">
                     <h3 className="text-lg font-bold text-slate-900 mb-2">Where we work</h3>
                     <p className="text-slate-700 leading-relaxed text-sm">
-                      Remote-first delivery across India, the United States, the United Kingdom, the
-                      United Arab Emirates, Australia, New Zealand and South Africa.
+                      Offices in Austin, Texas and Bengaluru, India, working a hybrid model and serving
+                      clients globally.
                     </p>
                   </div>
                 </div>
