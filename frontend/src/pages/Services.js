@@ -312,17 +312,17 @@ const Services = () => {
   return (
     <div className="min-h-screen">
       <SEOHead
-        title="Consulting, PMaaS and Delivery Governance Services | Orgainse"
-        description="Project Management as a Service, Artificial Intelligence and workflow transformation, delivery and operational governance, ORQYNE implementation, AI strategy and readiness, and Healthcare Revenue Intelligence Advisory."
-        canonical="https://orgainse.com/services"
+        title="PMaaS, PMO and Delivery Governance Services | Orgainse"
+        description="Outsourced project management (PMaaS), PMO setup, delivery and operational governance, workflow transformation, AI readiness and ORQYNE implementation, scoped for teams worldwide."
+        canonical="https://www.orgainse.com/services"
         keywords="Project Management as a Service, PMaaS, delivery governance, workflow transformation, ORQYNE implementation, AI readiness, healthcare revenue intelligence advisory"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "Service",
             serviceType: "Delivery consulting and Project Management as a Service",
-            provider: { "@type": "Organization", name: "Orgainse", url: "https://orgainse.com/" },
-            areaServed: ["India", "United States", "United Kingdom", "United Arab Emirates", "Australia", "New Zealand", "South Africa"],
+            provider: { "@type": "Organization", name: "Orgainse", url: "https://www.orgainse.com/" },
+            areaServed: ["United States", "India", "United Kingdom", "Ireland", "Germany", "France", "Netherlands", "United Arab Emirates", "Saudi Arabia", "Qatar", "Australia", "New Zealand", "South Africa"],
             hasOfferCatalog: {
               "@type": "OfferCatalog",
               name: "Orgainse Services",
@@ -679,7 +679,7 @@ const Services = () => {
                 Practical execution, governance and Artificial Intelligence adoption for teams that need visibility.
               </p>
               <SocialShare 
-                title="Consulting, PMaaS and Delivery Governance Services | Orgainse"
+                title="PMaaS, PMO and Delivery Governance Services | Orgainse"
                 description="Project Management as a Service, workflow transformation, delivery governance, ORQYNE implementation, AI readiness, and Healthcare Revenue Intelligence Advisory."
                 hashtags="ProjectManagement,PMaaS,DeliveryGovernance,ORQYNE,AIAdoption"
               />

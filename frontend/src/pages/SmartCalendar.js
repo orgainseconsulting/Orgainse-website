@@ -63,9 +63,9 @@ export default function SmartCalendar() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
         <SEOHead
-          title="Book a Discovery Call | Orgainse"
+          title="Book a Free Discovery Call | Orgainse"
           description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
-          canonical="https://orgainse.com/smart-calendar"
+          canonical="https://www.orgainse.com/smart-calendar"
           keywords="book a discovery call, delivery consulting appointment, project governance consultation"
         />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -130,9 +130,9 @@ export default function SmartCalendar() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
       <SEOHead
-        title="Book a Discovery Call | Orgainse"
+        title="Book a Free Discovery Call | Orgainse"
         description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
-        canonical="https://orgainse.com/smart-calendar"
+        canonical="https://www.orgainse.com/smart-calendar"
         keywords="book a discovery call, delivery consulting appointment, project governance consultation"
       />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -249,9 +249,9 @@ function Field({ label, children }) {
   return (
     <div>
       <SEOHead
-        title="Book a Discovery Call | Orgainse"
+        title="Book a Free Discovery Call | Orgainse"
         description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
-        canonical="https://orgainse.com/smart-calendar"
+        canonical="https://www.orgainse.com/smart-calendar"
         keywords="book a discovery call, delivery consulting appointment, project governance consultation"
       />
       <label className="block text-sm font-medium text-slate-700 mb-2">{label}</label>
@@ -264,9 +264,9 @@ function DetailRow({ label, value }) {
   return (
     <div>
       <SEOHead
-        title="Book a Discovery Call | Orgainse"
+        title="Book a Free Discovery Call | Orgainse"
         description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
-        canonical="https://orgainse.com/smart-calendar"
+        canonical="https://www.orgainse.com/smart-calendar"
         keywords="book a discovery call, delivery consulting appointment, project governance consultation"
       />
       <label className="text-sm font-medium text-slate-600">{label}</label>
@@ -280,9 +280,9 @@ function PerkRow({ icon: Icon, color, label }) {
   return (
     <div className="text-center">
       <SEOHead
-        title="Book a Discovery Call | Orgainse"
+        title="Book a Free Discovery Call | Orgainse"
         description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
-        canonical="https://orgainse.com/smart-calendar"
+        canonical="https://www.orgainse.com/smart-calendar"
         keywords="book a discovery call, delivery consulting appointment, project governance consultation"
       />
       <div className={`inline-flex items-center justify-center w-10 h-10 rounded-full ${bg} mb-2`}>

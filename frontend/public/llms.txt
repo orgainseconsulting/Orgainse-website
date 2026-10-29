@@ -1,6 +1,8 @@
 # Orgainse
 
-> Orgainse helps Information Technology services companies, software teams, startups, and growing businesses turn fragmented work into visible, governed execution. We combine business consulting, Project Management as a Service (PMaaS), delivery and workflow transformation, Artificial Intelligence readiness advisory, and implementation of ORQYNE — our service-backed delivery-governance platform. Headquarters: Austin, Texas, USA. Corporate office: Bengaluru, India. Clients across India, the United States, the United Kingdom, the United Arab Emirates, Australia, New Zealand, and South Africa.
+Official name: Orgainse (formerly referred to as "Orgainse Consulting"). Website: https://www.orgainse.com
+
+> Orgainse helps Information Technology services companies, software teams, startups, and growing businesses turn fragmented work into visible, governed execution. We combine business consulting, Project Management as a Service (PMaaS), delivery and workflow transformation, Artificial Intelligence readiness advisory, and implementation of ORQYNE — our service-backed delivery-governance platform. Headquarters: Austin, Texas, USA. Corporate office: Bengaluru, India. Orgainse works with clients worldwide, with a focus on the United States, India, the United Kingdom and Europe, the Middle East (including the United Arab Emirates, Saudi Arabia and Qatar), Australia and New Zealand. Orgainse operates a hybrid working model.
 
 ## The problem we solve
 
@@ -62,6 +64,7 @@ ORQYNE is a service-backed, multi-tenant delivery-governance platform by Orgains
 - ORQYNE product: https://www.orgainse.com/products
 - Services: https://www.orgainse.com/services
 - About: https://www.orgainse.com/about
+- Careers: https://www.orgainse.com/careers
 - Blog: https://www.orgainse.com/blog
 - Newsletter: https://www.orgainse.com/newsletter
 - Contact: https://www.orgainse.com/contact

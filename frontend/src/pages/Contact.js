@@ -135,19 +135,19 @@ const Contact = () => {
   return (
     <div id="contact" className="min-h-screen">
       <SEOHead
-        title="Contact Orgainse | Book an Execution Discovery Call"
-        description="Bring one important execution problem to a focused 30-minute discovery call. Orgainse works with teams across India, the USA, the UK, the UAE, Australia, New Zealand and South Africa."
-        canonical="https://orgainse.com/contact"
+        title="Contact Orgainse | Free 30-Minute Discovery Call"
+        description="Bring one important execution problem to a focused 30-minute discovery call. Offices in Austin and Bengaluru, working with teams in the US, India, UK, Europe, the Middle East and Australia."
+        canonical="https://www.orgainse.com/contact"
         keywords="contact Orgainse, book a discovery call, PMaaS enquiry, delivery governance consultation, ORQYNE demo"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "ContactPage",
           name: "Contact Orgainse",
-          url: "https://orgainse.com/contact",
+          url: "https://www.orgainse.com/contact",
           mainEntity: {
             "@type": "Organization",
             name: "Orgainse",
-            url: "https://orgainse.com/",
+            url: "https://www.orgainse.com/",
             email: "info@orgainse.com",
             contactPoint: [
               { "@type": "ContactPoint", telephone: "+91-9740384683", contactType: "sales", email: "info@orgainse.com", areaServed: ["IN", "US", "GB", "AE", "AU", "NZ", "ZA"] },
@@ -205,8 +205,8 @@ const Contact = () => {
             </h2>
             <p className="mt-6 text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed">
               Whether the priority is project delivery, workflow visibility, operational governance, ORQYNE
-              implementation, or practical Artificial Intelligence adoption, we work with teams across India,
-              the United States, the United Kingdom, the United Arab Emirates, Australia, New Zealand, and South Africa.
+              implementation, or practical Artificial Intelligence adoption, we work with teams across the globe
+              from our offices in Austin and Bengaluru.
             </p>
           </div>
 

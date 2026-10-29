@@ -11,7 +11,7 @@ const BlogPost = ({ post }) => {
       <SEOHead 
         title={`${post.title} | Orgainse Blog`}
         description={post.excerpt}
-        canonical={`https://orgainse.com/blog/${post.slug}`}
+        canonical={`https://www.orgainse.com/blog/${post.slug}`}
       />
       
       {/* Blog Header */}

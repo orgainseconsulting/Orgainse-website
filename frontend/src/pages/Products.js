@@ -196,11 +196,11 @@ const Products = () => {
       applicationCategory: "BusinessApplication",
       applicationSubCategory: "Delivery Governance Platform",
       operatingSystem: "Web",
-      url: "https://orgainse.com/products",
+      url: "https://www.orgainse.com/products",
       sameAs: ORQYNE_SITE,
       description:
         "ORQYNE is a service-backed, multi-tenant delivery-governance platform connecting projects, workflows, governance, knowledge, analytics, and Artificial Intelligence assistance for Information Technology delivery and business operations.",
-      publisher: { "@type": "Organization", name: "Orgainse", url: "https://orgainse.com/" },
+      publisher: { "@type": "Organization", name: "Orgainse", url: "https://www.orgainse.com/" },
       offers: { "@type": "AggregateOffer", priceCurrency: "USD", availability: "https://schema.org/InStock", offerCount: PLANS.length },
       featureList: [
         "Projects, portfolios, backlogs, sprints, and delivery boards",
@@ -227,9 +227,9 @@ const Products = () => {
   return (
     <div className="min-h-screen bg-white text-slate-900 font-manrope antialiased" data-testid="products-page">
       <SEOHead
-        title="ORQYNE Delivery Governance Platform | Orgainse"
+        title="ORQYNE Delivery Governance Software | Orgainse"
         description="Explore ORQYNE, a service-backed platform connecting projects, workflows, governance, knowledge, analytics, and Artificial Intelligence assistance for Information Technology delivery and business operations."
-        canonical="https://orgainse.com/products"
+        canonical="https://www.orgainse.com/products"
         keywords="ORQYNE, delivery governance platform, project portfolio governance, RAID registers, Earned Value Management, RAG AI agents, Canvas business management, PMaaS platform"
         structuredData={structuredData}
       />

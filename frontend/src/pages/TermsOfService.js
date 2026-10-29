@@ -9,14 +9,14 @@ const TermsOfService = () => (
     <SEOHead
       title="Terms of Service | Orgainse"
       description="The terms governing use of the Orgainse website, its informational tools, and the framework for consulting, PMaaS, and ORQYNE implementation engagements."
-      canonical="https://orgainse.com/terms"
+      canonical="https://www.orgainse.com/terms"
       structuredData={{
         "@context": "https://schema.org",
         "@type": "WebPage",
         name: "Terms of Service",
-        url: "https://orgainse.com/terms",
+        url: "https://www.orgainse.com/terms",
         dateModified: "2026-06-01",
-        publisher: { "@type": "Organization", name: "Orgainse", url: "https://orgainse.com/" },
+        publisher: { "@type": "Organization", name: "Orgainse", url: "https://www.orgainse.com/" },
       }}
     />
     <div className="max-w-3xl mx-auto px-6 lg:px-10">

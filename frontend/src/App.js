@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, StaticRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import { AuthProvider } from "./components/AuthContext";
 import { CalendlyProvider } from "./context/CalendlyContext";
@@ -67,13 +67,14 @@ const RouteAnalytics = () => {
   return null;
 };
 
-function App() {
+function App({ location }) {
+  const Router = location ? StaticRouter : BrowserRouter;
   return (
     <div className="App">
       <AuthProvider>
         <CalendlyProvider>
           <RegionalPricingProvider>
-            <BrowserRouter>
+            <Router {...(location ? { location } : {})}>
               <RouteAnalytics />
               <MobilePerformanceOptimizer />
               <Navigation />
@@ -103,7 +104,7 @@ function App() {
                 </Suspense>
               </main>
               <Footer />
-            </BrowserRouter>
+            </Router>
           </RegionalPricingProvider>
         </CalendlyProvider>
       </AuthProvider>

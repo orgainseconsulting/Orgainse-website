@@ -44,8 +44,11 @@ const Footer = () => {
             <Link to="/" className="inline-flex items-center" data-testid="footer-logo-home">
               <img
                 src="/orgainse-logo-v2.png"
+                srcSet="/orgainse-logo-v2-900.png 900w, /orgainse-logo-v2.png 1665w"
+                sizes="360px"
+                loading="lazy"
                 alt="Orgainse — Let us plan your SUCCESS"
-                className="h-16 sm:h-20 w-auto object-contain bg-white rounded-2xl px-4 py-2 ring-1 ring-slate-200/70 hover:ring-blue-300/60 transition-all duration-300"
+                className="h-[76px] sm:h-24 w-auto max-w-full object-contain bg-white rounded-2xl px-4 py-2 ring-1 ring-slate-200/70 hover:ring-blue-300/60 transition-all duration-300"
                 width="1665"
                 height="370"
                 style={{

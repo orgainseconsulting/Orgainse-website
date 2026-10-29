@@ -9,7 +9,7 @@ const NotFound = () => {
       <SEOHead
         title="Page Not Found - Orgainse"
         description="The page you're looking for could not be found. Return to Orgainse homepage for AI project management services."
-        canonical="https://orgainse.com/404"
+        canonical="https://www.orgainse.com/404"
         noindex={true}
       />
 

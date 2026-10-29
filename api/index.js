@@ -34,6 +34,7 @@ import blogHandler from './_handlers/blog.js';
 import careersHandler from './_handlers/careers.js';
 import careersShareHandler from './_handlers/careers-share.js';
 import careersApplyHandler from './_handlers/careers-apply.js';
+import sitemapContentHandler from './_handlers/sitemap-content.js';
 import newsletterIssuesHandler from './_handlers/newsletter-issues.js';
 import unsubscribeHandler from './_handlers/unsubscribe.js';
 import appSettingsPublicHandler from './_handlers/app-settings/public.js';
@@ -129,6 +130,7 @@ export default async function handler(req, res) {
     case 'blog': return blogHandler(req, res);
     case 'careers': return careersHandler(req, res);
     case 'careers-apply': return careersApplyHandler(req, res);
+    case 'sitemap-content.xml': return sitemapContentHandler(req, res);
     case 'newsletter-issues': return newsletterIssuesHandler(req, res);
     case 'unsubscribe': return unsubscribeHandler(req, res);
     case 'admin-login': return adminLoginHandler(req, res);

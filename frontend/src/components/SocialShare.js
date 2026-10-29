@@ -2,7 +2,7 @@ import React from 'react';
 import { Share2, Twitter, Linkedin, Facebook, Mail, Link, MessageCircle, Send } from 'lucide-react';
 
 const SocialShare = ({ 
-  url = window.location.href, 
+  url = typeof window !== 'undefined' ? window.location.href : 'https://www.orgainse.com/', 
   title = "Delivery Governance & PMaaS | Orgainse",
   description = "Turn fragmented work into visible, governed execution — clearer ownership, tracked risks and reporting you can rely on.",
   hashtags = "ProjectManagement,DeliveryGovernance,PMaaS,ORQYNE"

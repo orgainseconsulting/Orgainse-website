@@ -168,10 +168,10 @@ const Home = () => {
       "@type": "Service",
       serviceType: "Project Management as a Service (PMaaS)",
       name: "Project Management as a Service",
-      provider: { "@type": "Organization", name: "Orgainse", url: "https://orgainse.com/" },
+      provider: { "@type": "Organization", name: "Orgainse", url: "https://www.orgainse.com/" },
       description:
         "Structured project leadership, governance, reporting cadence, risk and dependency management, stakeholder communication, and executive visibility without building a full internal Project Management Office.",
-      areaServed: ["India", "United States", "United Kingdom", "United Arab Emirates", "Australia", "New Zealand", "South Africa"],
+      areaServed: ["United States", "India", "United Kingdom", "Ireland", "Germany", "France", "Netherlands", "United Arab Emirates", "Saudi Arabia", "Qatar", "Australia", "New Zealand", "South Africa"],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Orgainse Services",
@@ -193,9 +193,9 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-white text-slate-900 font-manrope antialiased" data-testid="home-page">
       <SEOHead
-        title="Delivery Consulting, PMaaS and Delivery Governance | Orgainse"
-        description="Orgainse helps IT services firms, software teams, startups, and growing businesses improve project delivery, workflow visibility, governance, and practical AI adoption through consulting, Project Management as a Service, and ORQYNE."
-        canonical="https://orgainse.com/"
+        title="Orgainse | Delivery Governance Consulting and PMaaS"
+        description="Delivery consulting, Project Management as a Service (PMaaS) and the ORQYNE platform that turn fragmented work into governed execution. Serving the US, India, UK, Europe, the Middle East and Australia."
+        canonical="https://www.orgainse.com/"
         keywords="delivery consulting, Project Management as a Service, PMaaS, delivery governance, execution visibility, workflow transformation, ORQYNE, AI readiness, healthcare revenue intelligence advisory"
         structuredData={structuredData}
       />
@@ -559,8 +559,8 @@ const Home = () => {
               </p>
               <div className="mt-8">
                 <SocialShare
-                  url="https://orgainse.com/"
-                  title="Delivery Consulting, PMaaS and Delivery Governance | Orgainse"
+                  url="https://www.orgainse.com/"
+                  title="Orgainse | Delivery Governance Consulting and PMaaS"
                   description="Orgainse helps IT services firms, software teams, startups, and growing businesses turn fragmented work into visible, governed execution."
                 />
               </div>

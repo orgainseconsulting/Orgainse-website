@@ -89,7 +89,7 @@ export default function Careers() {
       <SEOHead
         title={seoTitle}
         description={seoDescription}
-        canonical={selected ? `https://orgainse.com/careers/${selected.slug}` : 'https://orgainse.com/careers'}
+        canonical={selected ? `https://www.orgainse.com/careers/${selected.slug}` : 'https://www.orgainse.com/careers'}
         keywords="Orgainse careers, delivery governance jobs, project management jobs, AI engineering jobs, ORQYNE careers, remote consulting jobs"
         ogType="website"
         structuredData={selected ? {
@@ -102,7 +102,7 @@ export default function Careers() {
           hiringOrganization: {
             '@type': 'Organization',
             name: 'Orgainse',
-            sameAs: 'https://orgainse.com',
+            sameAs: 'https://www.orgainse.com',
           },
           jobLocation: {
             '@type': 'Place',
@@ -117,7 +117,7 @@ export default function Careers() {
             '@type': 'ListItem',
             position: i + 1,
             name: j.title,
-            url: `https://orgainse.com/careers/${j.slug}`,
+            url: `https://www.orgainse.com/careers/${j.slug}`,
           })),
         }}
       />

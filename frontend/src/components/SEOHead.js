@@ -12,7 +12,7 @@ const SEOHead = ({ title, description, canonical, noindex = false, structuredDat
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://orgainse.com/"
+        "item": "https://www.orgainse.com/"
       }
     ];
     
@@ -24,14 +24,18 @@ const SEOHead = ({ title, description, canonical, noindex = false, structuredDat
       'ai-assessment': 'Execution Readiness Assessment',
       'roi-calculator': 'ROI Calculator',
       'smart-calendar': 'Book Consultation',
-      'careers': 'Careers'
+      'careers': 'Careers',
+      'blog': 'Blog',
+      'newsletter': 'Newsletter',
+      'privacy': 'Privacy Policy',
+      'terms': 'Terms of Service'
     };
     
     if (pathSegments.length > 0) {
       pathSegments.forEach((segment, index) => {
         const name = pathMap[segment] || segment.charAt(0).toUpperCase() + segment.slice(1);
         const position = index + 2;
-        const item = `https://orgainse.com/${pathSegments.slice(0, index + 1).join('/')}`;
+        const item = `https://www.orgainse.com/${pathSegments.slice(0, index + 1).join('/')}`;
         
         breadcrumbs.push({
           "@type": "ListItem",
@@ -45,6 +49,16 @@ const SEOHead = ({ title, description, canonical, noindex = false, structuredDat
     return breadcrumbs;
   };
   
+  // Build-time prerender (scripts/prerender.mjs) collects head data here.
+  // eslint-disable-next-line no-undef
+  if (typeof window === 'undefined' && globalThis.__SEO_COLLECT__) {
+    // eslint-disable-next-line no-undef
+    globalThis.__SEO_COLLECT__({
+      title, description, canonical, noindex, structuredData, keywords, ogImage, ogType,
+      breadcrumbs: location.pathname !== '/' ? generateBreadcrumbs(location.pathname) : null,
+    });
+  }
+
   useEffect(() => {
     // Update document title
     if (title) {
@@ -65,7 +79,7 @@ const SEOHead = ({ title, description, canonical, noindex = false, structuredDat
       document.head.appendChild(canonicalLink);
     }
     
-    const canonicalUrl = canonical || `https://orgainse.com${location.pathname}`;
+    const canonicalUrl = canonical || `https://www.orgainse.com${location.pathname}`;
     canonicalLink.href = canonicalUrl;
     
     // Update robots meta tag

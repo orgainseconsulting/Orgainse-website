@@ -78,7 +78,7 @@ function buildEmailHtml({ job, full_name, email, phone, portfolio_url, why, file
       ${row('Role', esc(job?.title || '—'))}
       ${row('Layer', esc(job?.layer || ''))}
       ${row('Hiring stage', esc(job?.hiring_stage || ''))}
-      ${row('Job link', job?.slug ? `<a href="https://orgainse.com/careers/${esc(job.slug)}" style="color:#2563eb">/careers/${esc(job.slug)}</a>` : '')}
+      ${row('Job link', job?.slug ? `<a href="https://www.orgainse.com/careers/${esc(job.slug)}" style="color:#2563eb">/careers/${esc(job.slug)}</a>` : '')}
       ${row('Department', esc(job?.department || ''))}
       ${row('Location', esc(job?.location || ''))}
       ${row('Candidate', esc(full_name))}

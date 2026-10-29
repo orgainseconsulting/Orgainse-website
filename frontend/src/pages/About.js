@@ -44,19 +44,19 @@ const About = () => {
   return (
     <div className="min-h-screen">
       <SEOHead
-        title="About Orgainse | Execution, Governance and Practical AI"
+        title="About Orgainse | Delivery Consulting, Austin and Bengaluru"
         description="Orgainse is an execution partner for IT services firms, software teams, startups and growing businesses — combining consulting, Project Management as a Service, workflow transformation and the ORQYNE delivery-governance platform."
-        canonical="https://orgainse.com/about"
+        canonical="https://www.orgainse.com/about"
         keywords="about Orgainse, delivery execution partner, PMaaS firm, delivery governance consultancy, ORQYNE, Austin Bengaluru consulting"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "AboutPage",
           name: "About Orgainse",
-          url: "https://orgainse.com/about",
+          url: "https://www.orgainse.com/about",
           mainEntity: {
             "@type": "Organization",
             name: "Orgainse",
-            url: "https://orgainse.com/",
+            url: "https://www.orgainse.com/",
             foundingDate: "2025",
             slogan: "Turn Fragmented Work Into Visible, Governed Execution",
             address: [
@@ -99,8 +99,8 @@ const About = () => {
               </p>
 
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-6 max-w-2xl">
-                We work across India, the United States, the United Kingdom, the United Arab Emirates, Australia,
-                New Zealand, and South Africa. Technology is introduced only where it improves the operating model.
+                From our offices in Austin and Bengaluru, we work with clients across the globe — including the
+                United States, India, the United Kingdom and Europe, the Middle East, and Australia and New Zealand. Technology is introduced only where it improves the operating model.
               </p>
               
               <div className="space-y-3">

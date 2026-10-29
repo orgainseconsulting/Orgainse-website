@@ -20,8 +20,12 @@
       "destination": "/api"
     },
     {
+      "source": "/sitemap-content.xml",
+      "destination": "/api"
+    },
+    {
       "source": "/((?!api/|static/|favicon|robots\\.txt|sitemap).*)",
-      "destination": "/index.html"
+      "destination": "/spa"
     }
   ],
   "redirects": [
@@ -31,7 +35,7 @@
       "permanent": true
     },
     {
-      "source": "/contactus", 
+      "source": "/contactus",
       "destination": "/contact",
       "permanent": true
     },
@@ -59,6 +63,11 @@
       "source": "/forum/(.*)",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/index",
+      "destination": "/",
+      "permanent": true
     }
   ],
   "headers": [
@@ -78,7 +87,7 @@
           "value": "DENY"
         },
         {
-          "key": "X-Content-Type-Options", 
+          "key": "X-Content-Type-Options",
           "value": "nosniff"
         },
         {
@@ -183,5 +192,7 @@
         }
       ]
     }
-  ]
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }

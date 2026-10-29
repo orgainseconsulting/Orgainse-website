@@ -44,7 +44,8 @@ export default async function handler(req, res) {
 
   let baseHtml = '';
   try {
-    const r = await fetch(`${origin}/index.html`, { headers: { 'User-Agent': 'orgainse-share-shim' } });
+    // `/spa` is the neutral shell; `/index.html` is the prerendered home page.
+    const r = await fetch(`${origin}/spa`, { headers: { 'User-Agent': 'orgainse-share-shim' } });
     if (r.ok) baseHtml = await r.text();
   } catch (e) {
     console.error('careers-share: could not load base html', e?.message);
@@ -67,7 +68,7 @@ export default async function handler(req, res) {
     console.error('careers-share db error:', e?.message);
   }
 
-  const url = `${origin}/careers/${slug}`;
+  const url = `https://www.orgainse.com/careers/${slug}`;
   const title = job
     ? clamp(`${job.seo_title || job.title} | Careers at Orgainse`, 90)
     : 'Careers at Orgainse | Open Roles';
@@ -85,7 +86,9 @@ export default async function handler(req, res) {
   html = replaceMeta(html, 'property', 'twitter:title', esc(title));
   html = replaceMeta(html, 'property', 'twitter:description', esc(description));
   html = replaceMeta(html, 'property', 'twitter:url', esc(url));
-  html = html.replace(/<link\s+rel=["']canonical["'][^>]*>/i, `<link rel="canonical" href="${esc(url)}" />`);
+  html = html.replace(/<link\s+rel=["']canonical["'][^>]*>/i, '');
+  html = html.replace('</head>', `  <link rel="canonical" href="${esc(url)}" />\n</head>`);
+  if (!job) html = replaceMeta(html, 'name', 'robots', 'noindex, follow');
 
   if (job) {
     const ld = {
@@ -95,7 +98,7 @@ export default async function handler(req, res) {
       description: job.about_role,
       datePosted: job.published_at,
       employmentType: String(job.employment_type || 'Full-Time').toUpperCase().replace(/[^A-Z]+/g, '_'),
-      hiringOrganization: { '@type': 'Organization', name: 'Orgainse', sameAs: 'https://orgainse.com' },
+      hiringOrganization: { '@type': 'Organization', name: 'Orgainse', sameAs: 'https://www.orgainse.com' },
       jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: job.location } },
       ...(job.department ? { industry: job.department } : {}),
       ...(job.application_deadline ? { validThrough: job.application_deadline } : {}),

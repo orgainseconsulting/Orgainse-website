@@ -66,12 +66,16 @@ const Navigation = () => {
           }`}
         >
           {/* Logo */}
-          <Link to="/" className="flex items-center shrink-0 group mr-6 lg:mr-6 xl:mr-10" data-testid="nav-logo-home">
+          <Link to="/" className="flex items-center shrink-0 group mr-4 xl:mr-6" data-testid="nav-logo-home">
             <img
               src="/orgainse-logo-v2.png"
+              srcSet="/orgainse-logo-v2-900.png 900w, /orgainse-logo-v2.png 1665w"
+              sizes="(min-width: 640px) 300px, 260px"
               alt="Orgainse — Let us plan your SUCCESS"
-              className={`shrink-0 max-w-none w-auto object-contain bg-white rounded-2xl px-3.5 py-2 sm:px-5 sm:py-2.5 shadow-lg ring-1 ring-slate-200/70 hover:shadow-xl hover:ring-blue-300/60 transition-all duration-300 transform hover:scale-[1.02] ${
-                isScrolled ? "h-12 sm:h-14 lg:h-12" : "h-14 sm:h-16 lg:h-14"
+              fetchPriority="high"
+              decoding="async"
+              className={`shrink-0 max-w-none w-auto object-contain bg-white rounded-2xl px-3 py-2 sm:px-3.5 sm:py-2 shadow-lg ring-1 ring-slate-200/70 hover:shadow-xl hover:ring-blue-300/60 transition-all duration-300 transform hover:scale-[1.02] ${
+                isScrolled ? "h-14 sm:h-[60px]" : "h-[66px] sm:h-[72px] lg:h-[66px]"
               }`}
               width="1665"
               height="370"
@@ -83,7 +87,7 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden lg:flex items-center space-x-5">
+          <div className="hidden lg:flex items-center space-x-4 xl:space-x-[18px]">
             {navLinks.map((link) => (
               <Link
                 key={link.href}

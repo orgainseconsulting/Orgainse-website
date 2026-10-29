@@ -9,14 +9,14 @@ const PrivacyPolicy = () => (
     <SEOHead
       title="Privacy Policy | Orgainse"
       description="How Orgainse collects, uses, shares, retains, and protects personal information across its consulting, PMaaS, and ORQYNE implementation services."
-      canonical="https://orgainse.com/privacy"
+      canonical="https://www.orgainse.com/privacy"
       structuredData={{
         "@context": "https://schema.org",
         "@type": "WebPage",
         name: "Privacy Policy",
-        url: "https://orgainse.com/privacy",
+        url: "https://www.orgainse.com/privacy",
         dateModified: "2026-06-01",
-        publisher: { "@type": "Organization", name: "Orgainse", url: "https://orgainse.com/" },
+        publisher: { "@type": "Organization", name: "Orgainse", url: "https://www.orgainse.com/" },
       }}
     />
     <div className="max-w-3xl mx-auto px-6 lg:px-10">
