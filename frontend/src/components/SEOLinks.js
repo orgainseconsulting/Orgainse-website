@@ -6,7 +6,7 @@ const SEOLinks = () => {
   const internalLinks = [
     {
       to: "/about",
-      text: "About Orgainse Consulting",
+      text: "About Orgainse",
       description: "How we work, who we work with, and what we deliberately do not claim"
     },
     {

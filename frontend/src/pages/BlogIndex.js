@@ -129,8 +129,8 @@ const BlogIndexPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-blue-50">
       <SEOHead
-        title="Blog — Orgainse Consulting | Delivery Execution & Governance Insights"
-        description="Practical, vendor-neutral notes on project delivery, execution visibility, governance practice and revenue intelligence — from the team building Orgainse Consulting."
+        title="Blog — Orgainse | Delivery Execution & Governance Insights"
+        description="Practical, vendor-neutral notes on project delivery, execution visibility, governance practice and revenue intelligence — from the team building Orgainse."
         keywords="delivery governance blog, project management blog, execution visibility, PMaaS, revenue cycle advisory"
         canonical="https://www.orgainse.com/blog"
       />

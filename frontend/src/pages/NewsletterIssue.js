@@ -42,8 +42,8 @@ const NewsletterIssuePage = () => {
       dateModified: issue.updated_at || issue.published_at,
       mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
       url: canonical,
-      author: { '@type': 'Organization', name: 'Orgainse Consulting' },
-      publisher: { '@type': 'Organization', name: 'Orgainse Consulting' },
+      author: { '@type': 'Organization', name: 'Orgainse' },
+      publisher: { '@type': 'Organization', name: 'Orgainse' },
       image: issue.og_image_url || issue.cover_image_url || undefined,
       isPartOf: { '@type': 'PublicationIssue', issueNumber: issue.issue_number, name: 'The Orgainse Pulse' },
     };

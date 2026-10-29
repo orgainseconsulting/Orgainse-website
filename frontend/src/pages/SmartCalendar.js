@@ -63,7 +63,7 @@ export default function SmartCalendar() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
         <SEOHead
-          title="Book a Discovery Call | Orgainse Consulting"
+          title="Book a Discovery Call | Orgainse"
           description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
           canonical="https://orgainse.com/smart-calendar"
           keywords="book a discovery call, delivery consulting appointment, project governance consultation"
@@ -130,7 +130,7 @@ export default function SmartCalendar() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
       <SEOHead
-        title="Book a Discovery Call | Orgainse Consulting"
+        title="Book a Discovery Call | Orgainse"
         description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
         canonical="https://orgainse.com/smart-calendar"
         keywords="book a discovery call, delivery consulting appointment, project governance consultation"
@@ -249,7 +249,7 @@ function Field({ label, children }) {
   return (
     <div>
       <SEOHead
-        title="Book a Discovery Call | Orgainse Consulting"
+        title="Book a Discovery Call | Orgainse"
         description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
         canonical="https://orgainse.com/smart-calendar"
         keywords="book a discovery call, delivery consulting appointment, project governance consultation"
@@ -264,7 +264,7 @@ function DetailRow({ label, value }) {
   return (
     <div>
       <SEOHead
-        title="Book a Discovery Call | Orgainse Consulting"
+        title="Book a Discovery Call | Orgainse"
         description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
         canonical="https://orgainse.com/smart-calendar"
         keywords="book a discovery call, delivery consulting appointment, project governance consultation"
@@ -280,7 +280,7 @@ function PerkRow({ icon: Icon, color, label }) {
   return (
     <div className="text-center">
       <SEOHead
-        title="Book a Discovery Call | Orgainse Consulting"
+        title="Book a Discovery Call | Orgainse"
         description="Schedule a focused 30-minute discovery call with an Orgainse consultant to review one execution problem and agree the most practical next step."
         canonical="https://orgainse.com/smart-calendar"
         keywords="book a discovery call, delivery consulting appointment, project governance consultation"

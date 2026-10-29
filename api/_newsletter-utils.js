@@ -19,8 +19,8 @@ export const MAX_IMAGE_BYTES = 1.5 * 1024 * 1024;
 export const MAX_HTML_BYTES = 800 * 1024;
 export const PUBLIC_SITE_URL = (process.env.PUBLIC_SITE_URL || 'https://www.orgainse.com').replace(/\/$/, '');
 export const SENDER_EMAIL = process.env.SENDER_EMAIL || 'onboarding@resend.dev';
-export const SENDER_NAME = process.env.SENDER_NAME || 'Orgainse Consulting';
-export const LOGO_URL = 'https://customer-assets.emergentagent.com/job_digital-presence-29/artifacts/xx6a5zd7_Copy%20of%20OrgAInse%20Consulting%20%28Website%29.png';
+export const SENDER_NAME = process.env.SENDER_NAME || 'Orgainse';
+export const LOGO_URL = 'https://customer-assets-gfyr7b9c.emergentagent.net/job_d5dbe448-345b-462d-8993-62292646be70/artifacts/d36745fb0cc2c5cc_1.png';
 
 export function slugify(s) {
   return String(s || '')
@@ -212,7 +212,7 @@ export function renderEmailHtml(issue, token) {
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f6f5f1;padding:24px 12px;"><tr><td align="center">
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="max-width:600px;background:#ffffff;border-radius:14px;overflow:hidden;box-shadow:0 4px 30px rgba(15,23,42,0.06);">
 <tr><td style="background:#0f172a;padding:18px 28px;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
-<td align="left" style="vertical-align:middle;"><img src="${LOGO_URL}" alt="Orgainse Consulting" width="160" style="display:block;background:#ffffff;border-radius:8px;padding:6px 10px;max-width:160px;height:auto;"></td>
+<td align="left" style="vertical-align:middle;"><img src="${LOGO_URL}" alt="Orgainse" width="160" style="display:block;background:#ffffff;border-radius:8px;padding:6px 10px;max-width:160px;height:auto;"></td>
 <td align="right" style="vertical-align:middle;color:#fbbf24;font-size:11px;letter-spacing:1.2px;font-weight:700;text-transform:uppercase;">${chip}</td>
 </tr></table></td></tr>${coverHtml}
 <tr><td style="padding:36px 32px 8px 32px;"><p style="margin:0 0 10px 0;font-size:11px;letter-spacing:1.5px;color:#f97316;font-weight:700;text-transform:uppercase;">From the Orgainse desk</p>
@@ -221,11 +221,11 @@ export function renderEmailHtml(issue, token) {
 <tr><td align="center" style="padding:16px 32px 32px 32px;"><a href="${viewUrl}" style="display:inline-block;background:#f97316;color:#ffffff;font-weight:700;text-decoration:none;padding:14px 28px;border-radius:10px;font-size:14px;">Read on the web →</a></td></tr>
 <tr><td style="padding:0 32px;"><hr style="border:none;border-top:1px solid #e2e8f0;margin:0;"></td></tr>
 <tr><td style="padding:24px 32px 28px 32px;font-size:12px;line-height:1.6;color:#64748b;text-align:center;">
-<p style="margin:0 0 6px 0;"><strong style="color:#0f172a;">Orgainse Consulting</strong> · AI-native consulting for ambitious businesses.</p>
+<p style="margin:0 0 6px 0;"><strong style="color:#0f172a;">Orgainse</strong> · AI-native consulting for ambitious businesses.</p>
 <p style="margin:0 0 12px 0;">Bangalore (HQ) · Austin · <a href="${PUBLIC_SITE_URL}" style="color:#64748b;text-decoration:underline;">orgainse.com</a></p>
 <p style="margin:0;"><a href="${viewUrl}" style="color:#64748b;text-decoration:underline;">View in browser</a> · <a href="${unsubscribeUrl}" style="color:#64748b;text-decoration:underline;">Unsubscribe</a></p>
 </td></tr></table>
-<p style="margin:18px 0 0 0;font-size:11px;color:#94a3b8;">© ${new Date().getUTCFullYear()} Orgainse Consulting. All rights reserved.</p>
+<p style="margin:18px 0 0 0;font-size:11px;color:#94a3b8;">© ${new Date().getUTCFullYear()} Orgainse. All rights reserved.</p>
 </td></tr></table></body></html>`;
 }
 
@@ -233,5 +233,5 @@ export function renderEmailText(issue, token) {
   const unsubUrl = `${PUBLIC_SITE_URL}/unsubscribe?token=${token}`;
   const viewUrl = `${PUBLIC_SITE_URL}/newsletter/${issue.slug}`;
   const text = String(issue.content_html || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-  return `${issue.title || ''}\n${'='.repeat((issue.title || '').length)}\n\n${issue.subtitle ? issue.subtitle + '\n\n' : ''}${text}\n\nRead on the web: ${viewUrl}\n\n---\nOrgainse Consulting · orgainse.com\nUnsubscribe: ${unsubUrl}\n`;
+  return `${issue.title || ''}\n${'='.repeat((issue.title || '').length)}\n\n${issue.subtitle ? issue.subtitle + '\n\n' : ''}${text}\n\nRead on the web: ${viewUrl}\n\n---\nOrgainse · orgainse.com\nUnsubscribe: ${unsubUrl}\n`;
 }

@@ -2,7 +2,7 @@
   "name": "orgainse-website",
   "version": "1.0.0",
   "private": true,
-  "description": "Orgainse Consulting marketing site — React SPA + Vercel Node.js serverless functions.",
+  "description": "Orgainse marketing site — React SPA + Vercel Node.js serverless functions.",
   "type": "module",
   "engines": {
     "node": "22.x"

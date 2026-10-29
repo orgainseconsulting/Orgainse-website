@@ -3,7 +3,7 @@ import React from "react";
 /**
  * ORQYNE logo components — uses the official PNG assets in /public/orqyne/.
  *
- *   <OrqyneLogo />        full wordmark + "A product of ORGAINSE CONSULTING"
+ *   <OrqyneLogo />        full wordmark + "A product of ORGAINSE"
  *   <OrqyneMark />        icon-only mark (square)
  *
  * Logos are pre-optimised at 200 / 400 / 800 / 1200 widths and use
@@ -13,7 +13,7 @@ import React from "react";
 
 const ORIGIN = "/orqyne";
 
-export const OrqyneLogo = ({ className = "h-12", alt = "ORQYNE — a product of Orgainse Consulting" }) => (
+export const OrqyneLogo = ({ className = "h-12", alt = "ORQYNE — a product of Orgainse" }) => (
   <img
     src={`${ORIGIN}/long-800.png`}
     srcSet={`${ORIGIN}/long-400.png 1x, ${ORIGIN}/long-800.png 2x, ${ORIGIN}/long-1200.png 3x`}

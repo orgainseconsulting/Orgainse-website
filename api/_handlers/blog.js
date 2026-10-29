@@ -50,7 +50,7 @@ const reshape = (doc, full = false) => {
     slug: doc.slug,
     title: doc.title,
     excerpt: doc.excerpt || '',
-    author: doc.author || 'Orgainse Consulting',
+    author: doc.author || 'Orgainse',
     category: doc.category || '',
     tags: Array.isArray(doc.tags) ? doc.tags : [],
     reading_minutes: doc.reading_minutes || 1,

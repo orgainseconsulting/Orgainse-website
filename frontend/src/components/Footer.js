@@ -43,11 +43,11 @@ const Footer = () => {
           <div className="space-y-5">
             <Link to="/" className="inline-flex items-center" data-testid="footer-logo-home">
               <img
-                src="/orgainse-logo.png"
-                alt="Orgainse Consulting — Let us plan your SUCCESS"
+                src="/orgainse-logo-v2.png"
+                alt="Orgainse — Let us plan your SUCCESS"
                 className="h-16 sm:h-20 w-auto object-contain bg-white rounded-2xl px-4 py-2 ring-1 ring-slate-200/70 hover:ring-blue-300/60 transition-all duration-300"
-                width="1689"
-                height="476"
+                width="1665"
+                height="370"
                 style={{
                   boxShadow:
                     "0 1px 0 rgba(255,255,255,0.9) inset, 0 -1px 0 rgba(0,0,0,0.04) inset, 0 8px 18px -8px rgba(15,23,42,0.18), 0 2px 4px rgba(15,23,42,0.06)",
@@ -151,7 +151,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-14 border-t border-slate-200 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
-          <p>&copy; {new Date().getFullYear()} Orgainse Consulting. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Orgainse. All rights reserved.</p>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             <button
               type="button"

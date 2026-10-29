@@ -9,7 +9,7 @@ const BlogPost = ({ post }) => {
   return (
     <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <SEOHead 
-        title={`${post.title} | Orgainse Consulting Blog`}
+        title={`${post.title} | Orgainse Blog`}
         description={post.excerpt}
         canonical={`https://orgainse.com/blog/${post.slug}`}
       />

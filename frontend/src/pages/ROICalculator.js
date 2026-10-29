@@ -86,7 +86,7 @@ export default function ROICalculator() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
         <SEOHead
-          title="Return on Investment Calculator | Orgainse Consulting"
+          title="Return on Investment Calculator | Orgainse"
           description="Model potential time, capacity, cost and operating effects using assumptions specific to your organisation. A planning scenario, not a guarantee of results."
           canonical="https://orgainse.com/roi-calculator"
           keywords="ROI calculator, project management ROI, delivery efficiency modelling, AI investment scenario"
@@ -166,7 +166,7 @@ export default function ROICalculator() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12">
       <SEOHead
-        title="Return on Investment Calculator | Orgainse Consulting"
+        title="Return on Investment Calculator | Orgainse"
         description="Model potential time, capacity, cost and operating effects using assumptions specific to your organisation. A planning scenario, not a guarantee of results."
         canonical="https://orgainse.com/roi-calculator"
         keywords="ROI calculator, project management ROI, delivery efficiency modelling, AI investment scenario"
@@ -286,7 +286,7 @@ function Field({ label, children }) {
   return (
     <div>
       <SEOHead
-        title="Return on Investment Calculator | Orgainse Consulting"
+        title="Return on Investment Calculator | Orgainse"
         description="Model potential time, capacity, cost and operating effects using assumptions specific to your organisation. A planning scenario, not a guarantee of results."
         canonical="https://orgainse.com/roi-calculator"
         keywords="ROI calculator, project management ROI, delivery efficiency modelling, AI investment scenario"
@@ -317,7 +317,7 @@ function ImpactRow({ label, value }) {
   return (
     <div className="bg-slate-50 rounded-xl p-4 text-center">
       <SEOHead
-        title="Return on Investment Calculator | Orgainse Consulting"
+        title="Return on Investment Calculator | Orgainse"
         description="Model potential time, capacity, cost and operating effects using assumptions specific to your organisation. A planning scenario, not a guarantee of results."
         canonical="https://orgainse.com/roi-calculator"
         keywords="ROI calculator, project management ROI, delivery efficiency modelling, AI investment scenario"

@@ -71,7 +71,7 @@ const LegalModal = ({ doc, onClose }) => {
       <div className="relative w-full max-w-3xl max-h-[92vh] sm:max-h-[86vh] overflow-hidden rounded-t-3xl sm:rounded-3xl border border-slate-200 bg-white shadow-[0_40px_120px_-40px_rgba(15,23,42,0.6)] org-fade-up">
         <div className="flex items-start justify-between gap-4 border-b border-slate-200 px-6 sm:px-9 py-5">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.24em] text-blue-600 font-bold">Orgainse Consulting</p>
+            <p className="text-[10px] uppercase tracking-[0.24em] text-blue-600 font-bold">Orgainse</p>
             <h2 className="mt-1 font-outfit text-xl sm:text-2xl font-bold tracking-[-0.03em] text-slate-900">{doc.title}</h2>
           </div>
           <button

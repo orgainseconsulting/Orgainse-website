@@ -1,5 +1,5 @@
 """
-Orgainse Consulting — FastAPI backend (entrypoint).
+Orgainse — FastAPI backend (entrypoint).
 
 DESIGN: this Python process exists only to keep the supervisor-managed
 backend port (8001) up. The actual API logic lives in the SAME Node
@@ -192,7 +192,7 @@ async def lifespan(app: FastAPI):
             pass
 
 
-app = FastAPI(title="Orgainse Consulting API", version="4.0.0", lifespan=lifespan)
+app = FastAPI(title="Orgainse API", version="4.0.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,

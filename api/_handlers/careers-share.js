@@ -69,11 +69,11 @@ export default async function handler(req, res) {
 
   const url = `${origin}/careers/${slug}`;
   const title = job
-    ? clamp(`${job.seo_title || job.title} | Careers at Orgainse Consulting`, 90)
-    : 'Careers at Orgainse Consulting | Open Roles';
+    ? clamp(`${job.seo_title || job.title} | Careers at Orgainse`, 90)
+    : 'Careers at Orgainse | Open Roles';
   const description = job
     ? clamp(job.seo_description || job.summary || job.about_role, 200)
-    : 'Open roles at Orgainse Consulting — a delivery-execution partner helping teams turn fragmented work into visible, governed execution.';
+    : 'Open roles at Orgainse — a delivery-execution partner helping teams turn fragmented work into visible, governed execution.';
 
   let html = baseHtml;
   html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${esc(title)}</title>`);
@@ -95,7 +95,7 @@ export default async function handler(req, res) {
       description: job.about_role,
       datePosted: job.published_at,
       employmentType: String(job.employment_type || 'Full-Time').toUpperCase().replace(/[^A-Z]+/g, '_'),
-      hiringOrganization: { '@type': 'Organization', name: 'Orgainse Consulting', sameAs: 'https://orgainse.com' },
+      hiringOrganization: { '@type': 'Organization', name: 'Orgainse', sameAs: 'https://orgainse.com' },
       jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: job.location } },
       ...(job.department ? { industry: job.department } : {}),
       ...(job.application_deadline ? { validThrough: job.application_deadline } : {}),

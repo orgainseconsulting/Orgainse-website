@@ -1,4 +1,4 @@
-// SEO-Optimized Blog Posts for Orgainse Consulting
+// SEO-Optimized Blog Posts for Orgainse
 // Focus on high-value keywords and topics that drive organic traffic
 
 export const blogPosts = [
@@ -78,7 +78,7 @@ export const blogPosts = [
       <h2>Next Steps: Getting Started</h2>
       <p>Ready to transform your project management capabilities? Our experts can help you implement AI-driven PMaaS tailored to your specific industry and business requirements.</p>
     `,
-    author: "Orgainse Consulting Team",
+    author: "Orgainse Team",
     publishDate: "2025-09-10",
     publishDateFormatted: "September 10, 2025",
     readTime: 8,
@@ -173,7 +173,7 @@ export const blogPosts = [
         <li><strong>Customer Satisfaction:</strong> 90%+ satisfaction scores</li>
       </ul>
     `,
-    author: "Orgainse Consulting Team",
+    author: "Orgainse Team",
     publishDate: "2025-09-08",
     publishDateFormatted: "September 8, 2025",
     readTime: 10,
@@ -285,7 +285,7 @@ export const blogPosts = [
         <li>Annual comprehensive reviews</li>
       </ul>
     `,
-    author: "Orgainse Consulting Team",
+    author: "Orgainse Team",
     publishDate: "2025-09-05",
     publishDateFormatted: "September 5, 2025",
     readTime: 12,

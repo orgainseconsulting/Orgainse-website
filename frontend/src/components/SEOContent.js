@@ -23,7 +23,7 @@ const SEOContent = () => {
             <div className="space-y-6">
               <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-slate-200">
                 <p className="text-lg text-slate-700 leading-relaxed">
-                  <strong>Orgainse Consulting</strong> is a delivery-execution partner for
+                  <strong>Orgainse</strong> is a delivery-execution partner for
                   <strong> Information Technology services firms</strong>, <strong>software teams</strong>,
                   startups and growing businesses. We work on one operating condition: service-led,
                   cross-functional work that needs stronger <strong>execution visibility</strong> and
@@ -47,7 +47,7 @@ const SEOContent = () => {
 
               <div className="bg-gradient-to-r from-slate-50 via-white to-blue-50 rounded-xl p-6 shadow-lg border border-slate-200">
                 <p className="text-base text-slate-700 leading-relaxed">
-                  Orgainse Consulting was founded in <strong>2025</strong> and operates from Austin, Texas
+                  Orgainse was founded in <strong>2025</strong> and operates from Austin, Texas
                   (headquarters) and Bengaluru, India (corporate office). We do not publish guaranteed
                   percentages, savings figures or delivery improvements. Success measures are agreed in
                   writing before work begins and reviewed through the engagement.

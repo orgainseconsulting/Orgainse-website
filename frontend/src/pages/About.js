@@ -44,18 +44,18 @@ const About = () => {
   return (
     <div className="min-h-screen">
       <SEOHead
-        title="About Orgainse Consulting | Execution, Governance and Practical AI"
-        description="Orgainse Consulting is an execution partner for IT services firms, software teams, startups and growing businesses — combining consulting, Project Management as a Service, workflow transformation and the ORQYNE delivery-governance platform."
+        title="About Orgainse | Execution, Governance and Practical AI"
+        description="Orgainse is an execution partner for IT services firms, software teams, startups and growing businesses — combining consulting, Project Management as a Service, workflow transformation and the ORQYNE delivery-governance platform."
         canonical="https://orgainse.com/about"
-        keywords="about Orgainse Consulting, delivery execution partner, PMaaS firm, delivery governance consultancy, ORQYNE, Austin Bengaluru consulting"
+        keywords="about Orgainse, delivery execution partner, PMaaS firm, delivery governance consultancy, ORQYNE, Austin Bengaluru consulting"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "AboutPage",
-          name: "About Orgainse Consulting",
+          name: "About Orgainse",
           url: "https://orgainse.com/about",
           mainEntity: {
             "@type": "Organization",
-            name: "Orgainse Consulting",
+            name: "Orgainse",
             url: "https://orgainse.com/",
             foundingDate: "2025",
             slogan: "Turn Fragmented Work Into Visible, Governed Execution",
@@ -82,7 +82,7 @@ const About = () => {
             <div className="animate-fade-in">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">
                 <span className="text-slate-900">About </span>
-                <span className="text-blue-600">Orgainse Consulting</span>
+                <span className="text-blue-600">Orgainse</span>
               </h1>
               
               <h2 className="text-base md:text-lg font-semibold text-slate-700 mb-5 max-w-2xl leading-relaxed">
@@ -91,7 +91,7 @@ const About = () => {
               </h2>
 
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-4 max-w-2xl">
-                Orgainse Consulting helps Information Technology services companies, software teams, startups, and
+                Orgainse helps Information Technology services companies, software teams, startups, and
                 growing businesses move from disconnected tools and reactive reporting to structured, accountable
                 execution. We combine business consulting, Project Management as a Service, workflow transformation,
                 and ORQYNE — our delivery-governance platform — so that ownership, governance, reporting and

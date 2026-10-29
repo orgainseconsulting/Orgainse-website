@@ -94,7 +94,7 @@ async function buildPostDoc(input, existing, db) {
   const cleaned = sanitizeInput({
     title: String(input.title || '').slice(0, 250),
     excerpt: String(input.excerpt || '').slice(0, 500),
-    author: String(input.author || 'Orgainse Consulting').slice(0, 100),
+    author: String(input.author || 'Orgainse').slice(0, 100),
     category: String(input.category || '').slice(0, 80),
     seo_title: String(input.seo_title || '').slice(0, 250),
     seo_description: String(input.seo_description || '').slice(0, 320),

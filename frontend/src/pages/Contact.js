@@ -135,18 +135,18 @@ const Contact = () => {
   return (
     <div id="contact" className="min-h-screen">
       <SEOHead
-        title="Contact Orgainse Consulting | Book an Execution Discovery Call"
+        title="Contact Orgainse | Book an Execution Discovery Call"
         description="Bring one important execution problem to a focused 30-minute discovery call. Orgainse works with teams across India, the USA, the UK, the UAE, Australia, New Zealand and South Africa."
         canonical="https://orgainse.com/contact"
-        keywords="contact Orgainse Consulting, book a discovery call, PMaaS enquiry, delivery governance consultation, ORQYNE demo"
+        keywords="contact Orgainse, book a discovery call, PMaaS enquiry, delivery governance consultation, ORQYNE demo"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "ContactPage",
-          name: "Contact Orgainse Consulting",
+          name: "Contact Orgainse",
           url: "https://orgainse.com/contact",
           mainEntity: {
             "@type": "Organization",
-            name: "Orgainse Consulting",
+            name: "Orgainse",
             url: "https://orgainse.com/",
             email: "info@orgainse.com",
             contactPoint: [

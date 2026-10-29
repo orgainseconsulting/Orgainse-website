@@ -1,4 +1,4 @@
-# Orgainse Consulting — Website
+# Orgainse — Website
 
 AI-native consulting marketing site with lead-capture tools (AI maturity assessment, ROI calculator, regional pricing, consultation booking) and a JWT-protected admin dashboard.
 

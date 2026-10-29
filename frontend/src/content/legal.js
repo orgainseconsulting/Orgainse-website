@@ -1,12 +1,12 @@
 /**
- * Single source of truth for Orgainse Consulting legal copy.
+ * Single source of truth for Orgainse legal copy.
  * Rendered both in the footer popups and on the /privacy and /terms routes.
  */
 
 export const LEGAL_UPDATED = "June 2026";
 
 export const CONTACT_BLOCK = {
-  heading: "How to Contact Orgainse Consulting",
+  heading: "How to Contact Orgainse",
   paragraphs: [
     "Questions, requests, or complaints relating to this document can be sent to the addresses below. We aim to acknowledge written requests within five business days.",
   ],
@@ -23,12 +23,12 @@ export const PRIVACY_POLICY = {
   id: "privacy",
   title: "Privacy Policy",
   intro:
-    "Orgainse Consulting provides business consulting, Project Management as a Service (PMaaS), delivery and workflow transformation, Artificial Intelligence readiness advisory, and implementation support for the ORQYNE platform. This Privacy Policy explains what information we collect through www.orgainse.com, why we collect it, how it is used, who it is shared with, how long it is retained, and the choices available to you.",
+    "Orgainse provides business consulting, Project Management as a Service (PMaaS), delivery and workflow transformation, Artificial Intelligence readiness advisory, and implementation support for the ORQYNE platform. This Privacy Policy explains what information we collect through www.orgainse.com, why we collect it, how it is used, who it is shared with, how long it is retained, and the choices available to you.",
   sections: [
     {
       heading: "1. Scope of This Policy",
       paragraphs: [
-        "This policy applies to the Orgainse Consulting corporate website, our marketing communications, our lead-capture tools (contact forms, newsletter subscription, Artificial Intelligence readiness assessment, Return on Investment calculator, and consultation booking), and to information exchanged during pre-sales conversations.",
+        "This policy applies to the Orgainse corporate website, our marketing communications, our lead-capture tools (contact forms, newsletter subscription, Artificial Intelligence readiness assessment, Return on Investment calculator, and consultation booking), and to information exchanged during pre-sales conversations.",
         "Client project environments, contracted engagements, and the ORQYNE platform are governed by the separate agreements, data processing terms, and configuration decisions applicable to those engagements. Where the two overlap, the engagement contract prevails.",
       ],
     },
@@ -137,7 +137,7 @@ export const TERMS_OF_SERVICE = {
   id: "terms",
   title: "Terms of Service",
   intro:
-    "These Terms of Service govern your use of the Orgainse Consulting website and the informational tools published on it. They also describe the general framework within which Orgainse provides consulting, Project Management as a Service, workflow transformation, Artificial Intelligence readiness advisory, and ORQYNE implementation support. Paid engagements are always governed by a separate signed agreement, statement of work, or order form.",
+    "These Terms of Service govern your use of the Orgainse website and the informational tools published on it. They also describe the general framework within which Orgainse provides consulting, Project Management as a Service, workflow transformation, Artificial Intelligence readiness advisory, and ORQYNE implementation support. Paid engagements are always governed by a separate signed agreement, statement of work, or order form.",
   sections: [
     {
       heading: "1. Acceptance",
@@ -188,7 +188,7 @@ export const TERMS_OF_SERVICE = {
     {
       heading: "7. Intellectual Property",
       paragraphs: [
-        "The Orgainse Consulting name, the ORQYNE name, our logos, website content, frameworks, templates, methodologies, and tooling are owned by Orgainse Consulting or its licensors. You may view and share published content with attribution for internal, non-commercial purposes.",
+        "The Orgainse name, the ORQYNE name, our logos, website content, frameworks, templates, methodologies, and tooling are owned by Orgainse or its licensors. You may view and share published content with attribution for internal, non-commercial purposes.",
         "You may not resell, republish as your own, or create derivative commercial products from our materials without written permission. Rights granted in a client engagement are defined in that engagement's agreement; ownership of our underlying methodologies and platform remains with Orgainse.",
       ],
     },
@@ -213,7 +213,7 @@ export const TERMS_OF_SERVICE = {
     {
       heading: "11. Limitation of Liability",
       paragraphs: [
-        "To the maximum extent permitted by law, Orgainse Consulting shall not be liable for indirect, incidental, special, consequential, exemplary, or punitive damages, or for lost profits, lost revenue, lost data, or business interruption, arising from use of the website or its informational tools.",
+        "To the maximum extent permitted by law, Orgainse shall not be liable for indirect, incidental, special, consequential, exemplary, or punitive damages, or for lost profits, lost revenue, lost data, or business interruption, arising from use of the website or its informational tools.",
         "For paid engagements, Orgainse's aggregate liability is limited to the amounts paid for the specific services giving rise to the claim, as further defined in the applicable engagement agreement. Nothing in these terms excludes liability that cannot lawfully be excluded.",
       ],
     },

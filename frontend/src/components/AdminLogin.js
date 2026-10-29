@@ -64,7 +64,7 @@ const AdminLogin = ({ onLogin }) => {
             </div>
           </div>
           <h1 className="text-3xl font-bold text-slate-800 mb-2">Admin Portal</h1>
-          <p className="text-slate-600">Orgainse Consulting · @orgainse.com only</p>
+          <p className="text-slate-600">Orgainse · @orgainse.com only</p>
         </div>
 
         <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 p-8">

@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     const healthData = {
       status: 'healthy',
       timestamp: new Date().toISOString(),
-      service: 'Orgainse Consulting API',
+      service: 'Orgainse API',
       version: '2.0.0',
       environment: process.env.NODE_ENV || 'development',
       uptime: process.uptime(),
@@ -52,7 +52,7 @@ export default async function handler(req, res) {
     res.status(500).json({
       status: 'unhealthy',
       timestamp: new Date().toISOString(),
-      service: 'Orgainse Consulting API',
+      service: 'Orgainse API',
       error: 'Health check failed'
     });
   }

@@ -146,7 +146,7 @@ const SECURITY = [
 ];
 
 const FAQS = [
-  { q: "What is ORQYNE?", a: "ORQYNE is a multi-tenant delivery-governance platform by Orgainse Consulting. It brings projects, workflows, knowledge, decisions, governance, analytics, and Artificial Intelligence-assisted execution into one operating environment." },
+  { q: "What is ORQYNE?", a: "ORQYNE is a multi-tenant delivery-governance platform by Orgainse. It brings projects, workflows, knowledge, decisions, governance, analytics, and Artificial Intelligence-assisted execution into one operating environment." },
   { q: "Is ORQYNE a replacement for Jira, Asana, monday.com, or ClickUp?", a: "Not necessarily. ORQYNE can operate as the primary workspace for selected teams or complement existing systems through imports and connectors. The decision depends on workflow complexity, governance requirements, migration effort, and integration availability." },
   { q: "Who is ORQYNE designed for?", a: "The primary experience is designed for Information Technology services and software-delivery organisations. Canvas Business Management supports cross-functional operating teams and business departments." },
   { q: "How does ORQYNE use customer data for Artificial Intelligence?", a: "Approved tenant content can be indexed and retrieved to provide context for Artificial Intelligence-assisted outputs. Access and provider configuration are controlled at the workspace level." },
@@ -200,7 +200,7 @@ const Products = () => {
       sameAs: ORQYNE_SITE,
       description:
         "ORQYNE is a service-backed, multi-tenant delivery-governance platform connecting projects, workflows, governance, knowledge, analytics, and Artificial Intelligence assistance for Information Technology delivery and business operations.",
-      publisher: { "@type": "Organization", name: "Orgainse Consulting", url: "https://orgainse.com/" },
+      publisher: { "@type": "Organization", name: "Orgainse", url: "https://orgainse.com/" },
       offers: { "@type": "AggregateOffer", priceCurrency: "USD", availability: "https://schema.org/InStock", offerCount: PLANS.length },
       featureList: [
         "Projects, portfolios, backlogs, sprints, and delivery boards",
@@ -227,7 +227,7 @@ const Products = () => {
   return (
     <div className="min-h-screen bg-white text-slate-900 font-manrope antialiased" data-testid="products-page">
       <SEOHead
-        title="ORQYNE Delivery Governance Platform | Orgainse Consulting"
+        title="ORQYNE Delivery Governance Platform | Orgainse"
         description="Explore ORQYNE, a service-backed platform connecting projects, workflows, governance, knowledge, analytics, and Artificial Intelligence assistance for Information Technology delivery and business operations."
         canonical="https://orgainse.com/products"
         keywords="ORQYNE, delivery governance platform, project portfolio governance, RAID registers, Earned Value Management, RAG AI agents, Canvas business management, PMaaS platform"
@@ -242,7 +242,7 @@ const Products = () => {
             <div className="lg:col-span-7">
               <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/70 backdrop-blur-sm text-[11px] uppercase tracking-[0.2em] text-slate-500 shadow-sm" data-testid="product-eyebrow">
                 <Layers className="h-3 w-3 text-blue-600" />
-                ORQYNE · A Product by Orgainse Consulting
+                ORQYNE · A Product by Orgainse
               </span>
 
               <div className="mt-7">
@@ -261,7 +261,7 @@ const Products = () => {
                 ORQYNE is a service-backed, multi-tenant platform that connects project execution, portfolio visibility, governance, team knowledge, decisions, and Artificial Intelligence-assisted workflows. It is designed for Information Technology services and software delivery teams as well as cross-functional business operations that need more than lists of tasks. ORQYNE helps establish a shared operating environment where work, ownership, risks, costs, decisions, and business context can be viewed together.
               </p>
               <p className="mt-4 text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
-                Orgainse Consulting supports configuration, implementation, workflow design, governance, and adoption. The product and service model work together so customers are not left to configure a complex operating system alone.
+                Orgainse supports configuration, implementation, workflow design, governance, and adoption. The product and service model work together so customers are not left to configure a complex operating system alone.
               </p>
 
               <div className="mt-9 flex flex-wrap items-center gap-3">
@@ -764,7 +764,7 @@ const Products = () => {
                 </a>{" "}
                 or read about{" "}
                 <Link to="/services" className="text-slate-900 font-semibold hover:underline">
-                  Orgainse consulting services
+                  Orgainse services
                 </Link>
                 .
               </p>

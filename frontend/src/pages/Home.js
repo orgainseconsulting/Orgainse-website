@@ -96,8 +96,8 @@ const RESOURCES = [
 
 const FAQS = [
   {
-    q: "What does Orgainse Consulting do?",
-    a: "Orgainse Consulting helps organisations improve project delivery, workflow visibility, operational governance, and practical Artificial Intelligence adoption. Services include Project Management as a Service, delivery and workflow transformation, ORQYNE implementation, Artificial Intelligence readiness, and separately scoped advisory engagements.",
+    q: "What does Orgainse do?",
+    a: "Orgainse helps organisations improve project delivery, workflow visibility, operational governance, and practical Artificial Intelligence adoption. Services include Project Management as a Service, delivery and workflow transformation, ORQYNE implementation, Artificial Intelligence readiness, and separately scoped advisory engagements.",
   },
   {
     q: "What is Project Management as a Service?",
@@ -168,13 +168,13 @@ const Home = () => {
       "@type": "Service",
       serviceType: "Project Management as a Service (PMaaS)",
       name: "Project Management as a Service",
-      provider: { "@type": "Organization", name: "Orgainse Consulting", url: "https://orgainse.com/" },
+      provider: { "@type": "Organization", name: "Orgainse", url: "https://orgainse.com/" },
       description:
         "Structured project leadership, governance, reporting cadence, risk and dependency management, stakeholder communication, and executive visibility without building a full internal Project Management Office.",
       areaServed: ["India", "United States", "United Kingdom", "United Arab Emirates", "Australia", "New Zealand", "South Africa"],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
-        name: "Orgainse Consulting Services",
+        name: "Orgainse Services",
         itemListElement: SERVICES.map((s) => ({
           "@type": "Offer",
           itemOffered: { "@type": "Service", name: s.title, description: s.body },
@@ -185,7 +185,7 @@ const Home = () => {
       "@context": "https://schema.org",
       "@type": "HowTo",
       name: "From Business Problem to Operating System",
-      description: "How Orgainse Consulting moves an organisation from a business problem to a governed operating model.",
+      description: "How Orgainse moves an organisation from a business problem to a governed operating model.",
       step: STEPS.map((s, i) => ({ "@type": "HowToStep", position: i + 1, name: s.label, text: s.description })),
     },
   ];
@@ -227,7 +227,7 @@ const Home = () => {
               </h2>
 
               <p className="mt-5 text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
-                Orgainse Consulting helps Information Technology services companies, software teams, startups, and growing businesses move from disconnected tools and reactive reporting to structured, accountable execution. We combine business consulting, Project Management as a Service (PMaaS), workflow transformation, and ORQYNE to help teams establish clearer ownership, stronger governance, reliable reporting, and better-informed decisions.
+                Orgainse helps Information Technology services companies, software teams, startups, and growing businesses move from disconnected tools and reactive reporting to structured, accountable execution. We combine business consulting, Project Management as a Service (PMaaS), workflow transformation, and ORQYNE to help teams establish clearer ownership, stronger governance, reliable reporting, and better-informed decisions.
               </p>
               <p className="mt-4 text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
                 Whether the starting point is one critical project, a growing delivery portfolio, or an organisation-wide workflow problem, we help define the operating model, configure the right systems, and support adoption through execution.

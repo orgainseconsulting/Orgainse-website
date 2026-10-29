@@ -321,11 +321,11 @@ const Services = () => {
             "@context": "https://schema.org",
             "@type": "Service",
             serviceType: "Delivery consulting and Project Management as a Service",
-            provider: { "@type": "Organization", name: "Orgainse Consulting", url: "https://orgainse.com/" },
+            provider: { "@type": "Organization", name: "Orgainse", url: "https://orgainse.com/" },
             areaServed: ["India", "United States", "United Kingdom", "United Arab Emirates", "Australia", "New Zealand", "South Africa"],
             hasOfferCatalog: {
               "@type": "OfferCatalog",
-              name: "Orgainse Consulting Services",
+              name: "Orgainse Services",
               itemListElement: services.map((s) => ({
                 "@type": "Offer",
                 itemOffered: { "@type": "Service", name: s.title, description: s.description }
@@ -534,7 +534,7 @@ const Services = () => {
                   category: "Scope and Engagement",
                   questions: [
                     {
-                      question: "What does Orgainse Consulting actually do?",
+                      question: "What does Orgainse actually do?",
                       answer: "Orgainse helps organisations improve project delivery, workflow visibility, operational governance, and practical Artificial Intelligence adoption. Services include Project Management as a Service, Artificial Intelligence and workflow transformation, delivery and operational governance, ORQYNE implementation and adoption, Artificial Intelligence strategy and readiness, and separately scoped Healthcare Revenue Intelligence Advisory."
                     },
                     {
@@ -679,7 +679,7 @@ const Services = () => {
                 Practical execution, governance and Artificial Intelligence adoption for teams that need visibility.
               </p>
               <SocialShare 
-                title="Consulting, PMaaS and Delivery Governance Services | Orgainse Consulting"
+                title="Consulting, PMaaS and Delivery Governance Services | Orgainse"
                 description="Project Management as a Service, workflow transformation, delivery governance, ORQYNE implementation, AI readiness, and Healthcare Revenue Intelligence Advisory."
                 hashtags="ProjectManagement,PMaaS,DeliveryGovernance,ORQYNE,AIAdoption"
               />

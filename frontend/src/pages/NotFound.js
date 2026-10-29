@@ -7,8 +7,8 @@ const NotFound = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 flex items-center justify-center py-20">
       <SEOHead
-        title="Page Not Found - Orgainse Consulting"
-        description="The page you're looking for could not be found. Return to Orgainse Consulting homepage for AI project management services."
+        title="Page Not Found - Orgainse"
+        description="The page you're looking for could not be found. Return to Orgainse homepage for AI project management services."
         canonical="https://orgainse.com/404"
         noindex={true}
       />

@@ -42,7 +42,7 @@ ALLOWED_ORIGINS = [o.strip() for o in os.environ.get("ALLOWED_ORIGINS", "").spli
 
 RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
 SENDER_EMAIL = os.environ.get("SENDER_EMAIL", "onboarding@resend.dev")
-SENDER_NAME = os.environ.get("SENDER_NAME", "Orgainse Consulting")
+SENDER_NAME = os.environ.get("SENDER_NAME", "Orgainse")
 PUBLIC_SITE_URL = os.environ.get("PUBLIC_SITE_URL", "https://www.orgainse.com").rstrip("/")
 if RESEND_API_KEY:
     resend.api_key = RESEND_API_KEY

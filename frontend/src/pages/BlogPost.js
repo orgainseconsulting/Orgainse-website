@@ -49,13 +49,13 @@ const BlogPostPage = () => {
       dateModified: post.updated_at || post.published_at,
       mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
       url: canonical,
-      author: { '@type': 'Person', name: post.author || 'Orgainse Consulting' },
+      author: { '@type': 'Person', name: post.author || 'Orgainse' },
       publisher: {
         '@type': 'Organization',
-        name: 'Orgainse Consulting',
+        name: 'Orgainse',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://www.orgainse.com/orgainse-logo.png',
+          url: 'https://www.orgainse.com/orgainse-logo-v2.png',
         },
       },
       image: post.og_image_url || post.cover_image_url || undefined,
@@ -105,7 +105,7 @@ const BlogPostPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <SEOHead
-        title={`${post.seo_title || post.title} — Orgainse Consulting Blog`}
+        title={`${post.seo_title || post.title} — Orgainse Blog`}
         description={post.seo_description || post.excerpt || ''}
         keywords={Array.isArray(post.tags) ? post.tags.join(', ') : ''}
         canonical={canonical}
@@ -139,7 +139,7 @@ const BlogPostPage = () => {
           <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500 mt-6 pt-6 border-t border-slate-100">
             <span className="inline-flex items-center gap-1.5">
               <UserIcon className="h-3.5 w-3.5" />
-              {post.author || 'Orgainse Consulting'}
+              {post.author || 'Orgainse'}
             </span>
             <span className="inline-flex items-center gap-1.5">
               <Calendar className="h-3.5 w-3.5" />

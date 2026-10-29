@@ -65,7 +65,7 @@ function buildEmailHtml({ job, full_name, email, phone, portfolio_url, why, file
   return `<!doctype html><html><body style="margin:0;padding:24px;background:#f1f5f9">
 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:640px;margin:0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden">
   <tr><td style="background:#0f172a;padding:20px 24px">
-    <div style="font:700 11px/1 Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#93c5fd">Orgainse Consulting · Careers</div>
+    <div style="font:700 11px/1 Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#93c5fd">Orgainse · Careers</div>
     <div style="font:700 20px/1.3 Arial,sans-serif;color:#ffffff;margin-top:8px">New application received</div>
   </td></tr>
   <tr><td style="padding:24px">
@@ -94,7 +94,7 @@ function buildEmailHtml({ job, full_name, email, phone, portfolio_url, why, file
     </div>
   </td></tr>
   <tr><td style="background:#f8fafc;padding:14px 24px;border-top:1px solid #e2e8f0;font:400 11px/1.5 Arial,sans-serif;color:#64748b">
-    Sent automatically from the Orgainse Consulting careers page. Reply directly to reach the candidate.
+    Sent automatically from the Orgainse careers page. Reply directly to reach the candidate.
   </td></tr>
 </table></body></html>`;
 }
@@ -181,7 +181,7 @@ export default async function handler(req, res) {
     const key = (settings?.resend_api_key && settings.resend_api_key.trim()) || process.env.RESEND_API_KEY;
     if (!key) return res.status(500).json({ error: 'Email delivery is not configured. Please email us directly.' });
     const senderEmail = settings?.sender_email || process.env.SENDER_EMAIL || 'info@orgainse.com';
-    const senderName = settings?.sender_name || process.env.SENDER_NAME || 'Orgainse Consulting';
+    const senderName = settings?.sender_name || process.env.SENDER_NAME || 'Orgainse';
 
     const ext = EXT_BY_MIME[mime];
     const filename = clean.filename.toLowerCase().endsWith(`.${ext}`)

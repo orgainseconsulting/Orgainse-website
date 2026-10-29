@@ -78,11 +78,11 @@ export default function Careers() {
   const closeJob = useCallback(() => navigate('/careers'), [navigate]);
 
   const seoTitle = selected
-    ? `${selected.seo_title || selected.title} | Careers at Orgainse Consulting`
-    : 'Careers at Orgainse Consulting | Open Roles';
+    ? `${selected.seo_title || selected.title} | Careers at Orgainse`
+    : 'Careers at Orgainse | Open Roles';
   const seoDescription = selected
-    ? (selected.seo_description || selected.summary || `${selected.title} — ${selected.location}. Apply to join Orgainse Consulting.`)
-    : 'Join Orgainse Consulting — a delivery-execution partner helping IT services firms, software teams and growing businesses turn fragmented work into visible, governed execution. Open roles across AI, engineering, delivery, marketing, sales and revenue analysis.';
+    ? (selected.seo_description || selected.summary || `${selected.title} — ${selected.location}. Apply to join Orgainse.`)
+    : 'Join Orgainse — a delivery-execution partner helping IT services firms, software teams and growing businesses turn fragmented work into visible, governed execution. Open roles across AI, engineering, delivery, marketing, sales and revenue analysis.';
 
   return (
     <div className="min-h-screen bg-white">
@@ -90,7 +90,7 @@ export default function Careers() {
         title={seoTitle}
         description={seoDescription}
         canonical={selected ? `https://orgainse.com/careers/${selected.slug}` : 'https://orgainse.com/careers'}
-        keywords="Orgainse Consulting careers, delivery governance jobs, project management jobs, AI engineering jobs, ORQYNE careers, remote consulting jobs"
+        keywords="Orgainse careers, delivery governance jobs, project management jobs, AI engineering jobs, ORQYNE careers, remote consulting jobs"
         ogType="website"
         structuredData={selected ? {
           '@context': 'https://schema.org',
@@ -101,7 +101,7 @@ export default function Careers() {
           employmentType: (selected.employment_type || '').toUpperCase().replace(/[^A-Z]/g, '_') || 'FULL_TIME',
           hiringOrganization: {
             '@type': 'Organization',
-            name: 'Orgainse Consulting',
+            name: 'Orgainse',
             sameAs: 'https://orgainse.com',
           },
           jobLocation: {
@@ -112,7 +112,7 @@ export default function Careers() {
         } : {
           '@context': 'https://schema.org',
           '@type': 'ItemList',
-          name: 'Open roles at Orgainse Consulting',
+          name: 'Open roles at Orgainse',
           itemListElement: jobs.map((j, i) => ({
             '@type': 'ListItem',
             position: i + 1,
@@ -133,7 +133,7 @@ export default function Careers() {
             Build the practice that makes execution visible
           </h1>
           <p className="mt-6 text-base text-slate-600 leading-relaxed max-w-2xl">
-            Orgainse Consulting is a delivery-execution partner for Information Technology services
+            Orgainse is a delivery-execution partner for Information Technology services
             firms, software teams, startups and growing businesses. We work on one operating condition:
             service-led, cross-functional work that needs stronger execution visibility and governance.
             That happens through consulting, Project Management as a Service, workflow transformation
@@ -155,7 +155,7 @@ export default function Careers() {
               See open roles <ArrowRight className="h-4 w-4" />
             </a>
             <a
-              href="mailto:info@orgainse.com?subject=General%20interest%20—%20Orgainse%20Consulting"
+              href="mailto:info@orgainse.com?subject=General%20interest%20—%20Orgainse"
               data-testid="careers-general-interest-btn"
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white border border-slate-300 hover:border-slate-400 text-slate-900 text-sm font-semibold transition-colors"
             >

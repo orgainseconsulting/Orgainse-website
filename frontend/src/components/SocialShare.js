@@ -3,7 +3,7 @@ import { Share2, Twitter, Linkedin, Facebook, Mail, Link, MessageCircle, Send } 
 
 const SocialShare = ({ 
   url = window.location.href, 
-  title = "Delivery Governance & PMaaS | Orgainse Consulting",
+  title = "Delivery Governance & PMaaS | Orgainse",
   description = "Turn fragmented work into visible, governed execution — clearer ownership, tracked risks and reporting you can rely on.",
   hashtags = "ProjectManagement,DeliveryGovernance,PMaaS,ORQYNE"
 }) => {

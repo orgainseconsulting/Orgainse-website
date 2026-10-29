@@ -760,3 +760,9 @@ Recommend adding the same `sendResult.error` check to `newsletter-admin/index.js
   absent from the rendered DOM.
 Self-tested: DOM assertions for the empty state and the removed phrases, plus desktop
 (1920) and mobile (390) screenshots. No testing-agent run for this copy-only delta.
+
+## 2026-06 — Rebrand: "Orgainse Consulting" → "Orgainse" + new logo
+- Replaced every "Orgainse Consulting" variant (incl. ORGAINSE CONSULTING, OrgAInse Consulting, URL-encoded mailto) across frontend src/public (pages, popups, SEO, llms.txt, index.html JSON-LD, manifest), api handlers (careers share titles, blog, newsletter utils, health), backend proxy, README/package.json, SENDER_NAME env, and app_settings in MongoDB. docs/archive left untouched.
+- Kept social handles/URLs (orgainseconsult, orgainse-consulting) and DB_NAME unchanged — they are real account/infra identifiers.
+- New logo: /frontend/public/orgainse-logo-v2.png (also overwrote orgainse-logo.png/.jpg); nav, footer, OG/Twitter image, JSON-LD logo, BlogPost schema, newsletter email header all point to new logo. Favicons kept (orange "O" matches new logo).
+- Header resized (logo h-14 desktop, nav space-x-5) so wider logo fits without overflow at 1024–1920.
