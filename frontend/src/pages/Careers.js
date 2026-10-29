@@ -90,7 +90,7 @@ export default function Careers() {
         title={seoTitle}
         description={seoDescription}
         canonical={selected ? `https://www.orgainse.com/careers/${selected.slug}` : 'https://www.orgainse.com/careers'}
-        keywords="Orgainse careers, delivery governance jobs, project management jobs, AI engineering jobs, ORQYNE careers, remote consulting jobs"
+        keywords="Orgainse careers, delivery governance jobs, project management jobs, AI engineering jobs, ORQYNE careers, hybrid consulting jobs"
         ogType="website"
         structuredData={selected ? {
           '@context': 'https://schema.org',

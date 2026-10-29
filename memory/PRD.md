@@ -766,3 +766,15 @@ Self-tested: DOM assertions for the empty state and the removed phrases, plus de
 - Kept social handles/URLs (orgainseconsult, orgainse-consulting) and DB_NAME unchanged — they are real account/infra identifiers.
 - New logo: /frontend/public/orgainse-logo-v2.png (also overwrote orgainse-logo.png/.jpg); nav, footer, OG/Twitter image, JSON-LD logo, BlogPost schema, newsletter email header all point to new logo. Favicons kept (orange "O" matches new logo).
 - Header resized (logo h-14 desktop, nav space-x-5) so wider logo fits without overflow at 1024–1920.
+
+## 2026-10 — Logo +20% (HD srcset) and SEO/GEO indexing overhaul
+- Header logo 56→66px (srcSet orgainse-logo-v2-900.png / full 1665px), footer logo larger; nav spacing tuned so no overflow 390–1920.
+- ROOT CAUSE FIXES: all canonicals/breadcrumbs pointed to non-www https://orgainse.com (a redirect) → now https://www.orgainse.com everywhere; every route served identical HTML (home canonical + hidden home text block + global FAQ/Service JSON-LD).
+- Build-time prerender: frontend `yarn build` = craco build + scripts/prerender.mjs (esbuild SSR bundle of src/ssr-entry.js, React 19 prerenderToNodeStream w/ progressiveChunkSize=MAX). Writes build/<route>.html with real content, per-page title/description/canonical/OG/JSON-LD/breadcrumbs, build/spa.html shell for other routes, and build/sitemap.xml + sitemap-index.xml (13 URLs, lastmod = build date). Failure never blocks deploy.
+- index.js hydrates when #root has prerendered children; App.js uses StaticRouter when given `location`; SEOHead reports head data to globalThis.__SEO_COLLECT__ during SSR. CookieBanner reads consent after mount (prevents hydration #418).
+- vercel.json: cleanUrls, trailingSlash false, catch-all → /spa, /sitemap-content.xml → /api (new handler api/_handlers/sitemap-content.js: live blog/newsletter/open-role URLs).
+- careers-share fetches /spa shell, www canonical, 404 + noindex for unknown roles. Blog/newsletter not-found states are noindex.
+- robots.txt cleaned (removed invalid directives, AI bots allowed, sitemaps listed); llms.txt + Organization/ProfessionalService JSON-LD updated (both offices, areaServed US/IN/UK/EU/Middle East/AU/NZ/ZA). Titles/descriptions rewritten for CTR and de-duplicated Home vs Services.
+- ORQYNE wordmark raster now reads "A product of ORGAINSE" (original saved at /root/long-transparent.orig.png).
+- Tested: iteration_21 (prerender/SEO 27/27; hydration bug fixed after).
+- User action needed in Google Search Console after deploy: submit sitemap.xml + sitemap-content.xml, URL-Inspect & Request Indexing for key pages, Validate Fix on issues.

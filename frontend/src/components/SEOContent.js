@@ -16,9 +16,9 @@ const SEOContent = () => {
           <div className="max-w-none mb-12 relative">
             <div className="w-20 h-1 bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 rounded-full mb-8"></div>
 
-            <h1 className="font-outfit text-3xl sm:text-4xl font-bold mb-8 leading-tight tracking-[-0.02em] text-slate-900">
+            <h2 className="font-outfit text-3xl sm:text-4xl font-bold mb-8 leading-tight tracking-[-0.02em] text-slate-900">
               Delivery consulting, Project Management as a Service and delivery governance
-            </h1>
+            </h2>
 
             <div className="space-y-6">
               <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-slate-200">

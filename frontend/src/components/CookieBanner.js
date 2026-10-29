@@ -10,9 +10,12 @@ import React, { useEffect, useState } from 'react';
 const STORAGE_KEY = 'orgainse_consent';
 
 export default function CookieBanner() {
-  const [decision, setDecision] = useState(() => {
-    try { return localStorage.getItem(STORAGE_KEY); } catch { return null; }
-  });
+  // 'pending' until mounted so prerendered HTML and first client render match.
+  const [decision, setDecision] = useState('pending');
+
+  useEffect(() => {
+    try { setDecision(localStorage.getItem(STORAGE_KEY)); } catch { setDecision(null); }
+  }, []);
 
   useEffect(() => {
     if (decision !== 'accepted' && decision !== 'rejected') return;
@@ -24,7 +27,7 @@ export default function CookieBanner() {
     }
   }, [decision]);
 
-  if (decision === 'accepted' || decision === 'rejected') return null;
+  if (decision === 'pending' || decision === 'accepted' || decision === 'rejected') return null;
 
   return (
     <div

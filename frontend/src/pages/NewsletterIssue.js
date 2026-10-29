@@ -80,6 +80,7 @@ const NewsletterIssuePage = () => {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
         <div className="text-center" data-testid="newsletter-issue-not-found">
+          <SEOHead title="Issue not found | Orgainse" description="This page is not available." noindex />
           <p className="text-xs uppercase tracking-widest text-slate-400 mb-4">404 · Issue</p>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Issue not found</h1>
           <p className="text-slate-600 mb-8">The issue you're looking for hasn't been published yet.</p>

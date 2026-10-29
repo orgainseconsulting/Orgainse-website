@@ -11,7 +11,7 @@ async function getDb() {
     cachedClient = new MongoClient(process.env.MONGO_URL);
     await cachedClient.connect();
   }
-  return cachedClient.db(process.env.DB_NAME);
+  return cachedClient.db(process.env.DB_NAME || 'orgainse-consulting');
 }
 
 const xmlEsc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

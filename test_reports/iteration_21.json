@@ -1,0 +1,46 @@
+{
+  "summary": "Tested build-time prerender + SEO/GEO changes, hydration on the 3100 static server, the sitemap-content API, careers-share handler, logo sizing and the preview app. All 13 prerendered pages are correct: real HTML in #root (h1/nav/footer), no '<template id=\"B:' placeholders, unique titles and descriptions, www canonical/og:url/twitter:url/hreflang, valid JSON-LD + BreadcrumbList, index,follow. spa.html is a neutral shell with no canonical and an empty root. Sitemap and robots are correct. The interactive flows work: client-side nav, cookie accept, service popup, host picker, careers empty state, 404. ONE REAL BUG: every returning visitor who already accepted/rejected cookies gets React hydration error #418 on every prerendered page.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/sitemap-content.xml", "issue": "Works (200, application/xml, empty urlset because DB is empty). Not checked with real published posts/issues/jobs. Status filters assume newsletter_issues.status in ['published','sent'] and job_postings.hiring_stage != 'Role Closed'. Main agent should check these match the real schema."},
+      {"endpoint": "api/_handlers/careers-share.js", "issue": "Verified directly in Node with mock req/res against the 3100 shell: unknown slug -> 200, canonical https://www.orgainse.com/careers/<slug>, robots 'noindex, follow', empty #root (spa shell). Two notes: getDb still uses the fallback DB_NAME || 'orgainse-consulting' (violates the env-only rule), and an unknown slug returns 200 instead of 404 (soft-404)."},
+      {"endpoint": "backend/tests/test_careers.py", "issue": "4 old tests fail (test_list_published, test_get_seed_by_slug, test_list_includes_drafts, test_upload_expired_no_chunks). They depend on seed job postings that no longer exist (DB is empty). This is stale test data, not a regression."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "CookieBanner (src/components/CookieBanner.js)", "issue": "Hydration mismatch, React error #418 'HTML', on EVERY prerendered page (/, /services, /about, /careers, /contact, /privacy, /blog, /products) once localStorage has orgainse_consent set. useState(() => localStorage.getItem(...)) returns 'accepted' on the client, so the banner renders null. The prerendered HTML always contains the banner because SSR has no localStorage. React 19 then discards the server HTML and client-renders the whole root (flash plus lost SSR perf for returning visitors). First-time visitors get no error. Region IN/US in localStorage causes no mismatch.", "selector": "[data-testid='cookie-banner']", "priority": "HIGH"}
+    ],
+    "integration_issues": [
+      {"flow": "Unknown blog/newsletter slugs (SPA shell)", "issue": "/newsletter/some-issue and /blog/unknown-post show 'Issue not found' / 'Post not found' but keep the shell's robots 'index, follow' and the home page title. Soft-404 risk in GSC. They should set noindex (like NotFound does).", "affected_selectors": ["meta[name=robots]"]},
+      {"flow": "/careers/<unknown-slug>", "issue": "The Vercel share handler emits canonical /careers/<slug> + noindex. After boot, Careers.js SEOHead switches the canonical to /careers with robots 'index, follow'. Server and client signals disagree.", "affected_selectors": ["link[rel=canonical]"]}
+    ],
+    "design_issues": [
+      {"screen": "Products hero", "issues": ["The ORQYNE logo image still reads 'A product of ORGAINSE CONSULTING' (raster text). This conflicts with the 'No Orgainse Consulting anywhere in UI' goal."]},
+      {"screen": "Services", "issues": ["The prerendered services.html has 2 <h1> elements (hero plus a second 'Delivery consulting, Project Management as a Service...' h1). Make the second one an h2 or sr-only p."]},
+      {"screen": "About", "issues": ["The About copy still lists regions ('United States, India, the United Kingdom and Europe, the Middle East, and Australia and New Zealand'). It is no longer 7 countries, but the brief said 'clients across the globe'. Confirm this is intentional for GEO targeting."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_prerender_seo.py", "/app/test_reports/pytest/pytest_prerender.xml"],
+  "action_items": [
+    "HIGH: Fix the CookieBanner hydration mismatch. Initialise decision with useState(null) plus a 'mounted' flag, read localStorage in useEffect, and render nothing until mounted. Or keep the SSR markup identical and hide it after mount. Then rebuild (yarn build) and confirm no #418 with orgainse_consent=accepted in localStorage.",
+    "Set robots noindex on the BlogPost/NewsletterIssue 'not found' states to avoid soft-404s.",
+    "Careers.js: when the slug is not found, keep canonical /careers/<slug> + noindex (or redirect to /careers) so it matches careers-share.js.",
+    "Remove the DB_NAME fallback 'orgainse-consulting' in careers-share.js.",
+    "Optional: replace the ORQYNE logo asset that contains 'ORGAINSE CONSULTING'; demote the second h1 on /services.",
+    "robots.txt: the bot-specific groups (GPTBot, ClaudeBot, etc.) override '*', so those bots are not disallowed /api/admin, /unsubscribe, /spa. Copy those Disallow lines into each group if needed."
+  ],
+  "critical_code_review_comments": [
+    "Any component that reads localStorage/window inside a useState initializer will break hydration now that pages are prerendered. Audit the others: RegionSelector is fine in tests, but grep for useState(() => localStorage / window.",
+    "prerender.mjs swallows all errors (main().catch -> console.error). If prerender fails, the deploy silently ships an unprerendered index.html and no route .html files, and Vercel's catch-all serves spa.html with no canonical. Consider failing loudly in CI, or at least writing a marker.",
+    "The spa.html shell keeps robots 'index, follow' and og:url = home. That is fine for real SPA routes, but every not-found page inherits it.",
+    "vercel.json is valid JSON: cleanUrls true, trailingSlash false, the /sitemap-content.xml and /careers/:slug rewrites go to /api, and the catch-all goes to /spa (static files win first under Vercel's filesystem precedence)."
+  ],
+  "updated_files": ["/app/backend/tests/test_prerender_seo.py"],
+  "success_rate": {"backend": "100% (27/27 prerender/SEO/API tests)", "frontend": "~90% (all flows work; hydration #418 for returning visitors)"},
+  "seed_data_creation": "None",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Static Vercel-like server on :3100 (node serve.mjs) serves /app/frontend/build; do not kill it. Run `pytest /app/backend/tests/test_prerender_seo.py` for the prerender regression. To reproduce the hydration bug: load localhost:3100, click cookie-accept-btn, reload any page, and listen for pageerror 'Minified React error #418'. Ignore the 'Unexpected token <' errors from /_vercel/insights and speed-insights scripts. The logo is 66px tall at 1024-1920 and 390 (72px at 768), there is no horizontal overflow, Book Consultation is fully visible, and the footer logo is 96px (76px on mobile)."
+}
