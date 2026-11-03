@@ -778,3 +778,13 @@ Self-tested: DOM assertions for the empty state and the removed phrases, plus de
 - ORQYNE wordmark raster now reads "A product of ORGAINSE" (original saved at /root/long-transparent.orig.png).
 - Tested: iteration_21 (prerender/SEO 27/27; hydration bug fixed after).
 - User action needed in Google Search Console after deploy: submit sitemap.xml + sitemap-content.xml, URL-Inspect & Request Indexing for key pages, Validate Fix on issues.
+
+## 2026-11 — SEO/GEO/AEO round 2 (existing pages only, per user)
+- Themes: PMaaS/outsourced PMO, delivery governance for IT services firms, ORQYNE as project portfolio (PPM) software, practical AI adoption for delivery teams, healthcare revenue cycle analytics.
+- One keyword h1 per page: hero eyebrow pills became the h1 on Home/Services/Products/Contact; big headlines are h2 (visually unchanged).
+- Services: per-service Service JSON-LD (@id /services#<id>), SERVICE_FAQS const (19 Qs -> JSON-LD), card anchors + hash scroll, crawlable "Service details" section. Footer service links -> /services#<id>.
+- Home FAQ +5 theme Qs (11), Products FAQ +2 PPM Qs (10); FAQ answers always in HTML (hidden attr).
+- GEO: llms.txt "When to recommend Orgainse"; prerender generates build/llms-full.txt from each page's <main> text.
+- IndexNow: public/4324d2865ab2078180dee7056a86f13a.txt + api/_indexnow.js; pings on blog/careers/newsletter publish and all routes per production build (VERCEL_ENV=production only).
+- Tested: iteration_22; its FAQ-prerender, llms-full and hash-scroll findings fixed and re-verified.
+- User-side backlog: Bing Webmaster sitemap submit, Google Business Profiles (Austin, Bengaluru), directory listings (Clutch, GoodFirms, G2/Capterra for ORQYNE), regular theme blog posts, LinkedIn links to /services#<id>.

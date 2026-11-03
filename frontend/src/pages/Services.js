@@ -142,14 +142,14 @@ const Services = () => {
     message: ''
   });
   const { openCalendly } = useCalendly();
-  const { hash } = useLocation();
+  const { hash, key } = useLocation();
 
-  // Deep links like /services#pmaas scroll to that service.
+  // Deep links like /services#pmaas scroll to that service (re-runs on repeat clicks via key).
   useEffect(() => {
     if (!hash) return;
-    const t = setTimeout(() => document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
+    const t = setTimeout(() => document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 450);
     return () => clearTimeout(t);
-  }, [hash]);
+  }, [hash, key]);
 
   // Backend URL for API calls (same-origin to avoid stale Vercel aliases)
   const BACKEND_URL = (typeof window !== 'undefined' && window.location?.origin)

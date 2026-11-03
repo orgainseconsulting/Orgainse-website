@@ -1,0 +1,40 @@
+{
+  "summary": "Tested the SEO/GEO/AEO changes on the prerendered build (localhost:3100) and on the preview dev server. New file tests/test_seo_geo_aeo.py: 32 of 35 tests pass, and test_prerender_seo.py passes in full. What works: (1) Exactly one h1 on all 13 prerendered pages, confirmed live on both servers. Home and Products h1 = 11px eyebrow; the headlines are now h2 at 60px/58px, weight 700, and look unchanged. (2) Products title is correct. (3) Services has the 6 service-detail articles; all 6 'See scope and boundaries' buttons open the popup; product links go to /products; /ai-assessment and /roi-calculator links are present. (4) Service cards have id anchors, and all 6 Service JSON-LD @ids are correct. (5) The FAQPage JSON-LD question counts are 11/19/10, all questions are visible, and the new Home and Products PPM FAQs are present. (6) llms.txt has 'When to recommend Orgainse'; the IndexNow key file returns the key on both servers; llms-full.txt is served on :3100. (7) Admin blog, careers and newsletter-issue create -> update(publish) -> public GET -> delete all work with the support@ QA account, and all test data was deleted. (8) No React #418/#425 hydration errors on /, /services, /products, /contact or /about, for fresh and returning (cookie-accepted) visitors. (9) Footer service links go to /services#<id> and scroll to the card, on desktop and on mobile. Defects found: FAQ answers are missing from the prerendered HTML on Home and Products, and llms-full.txt drops every accordion FAQ question.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/llms-full.txt (preview dev server)", "issue": "Returns 404 on REACT_APP_BACKEND_URL because the file is generated only by prerender.mjs into build/. This is expected for the CRA dev server, but llms.txt links to it."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Home FAQ accordion (Home.js ~L655) and Products FAQ (Products.js ~L670)", "issue": "Answers render only when openFaq===i, so the prerendered HTML contains only the first answer. 10 of 11 Home answers and 9 of 10 Products answers are not in the HTML, even though the FAQPage JSON-LD includes them. This mismatch between JSON-LD and on-page content makes them ineligible for Google FAQ rich results, and AI crawlers / llms-full.txt never see them. Services is fine because it uses <details>.", "selector": "[data-testid^=faq-answer-], [data-testid^=product-faq-answer-]", "priority": "HIGH"},
+      {"component": "Services hash scroll (desktop, prerendered)", "issue": "Opening /services#delivery-governance directly, or using the footer link on desktop, puts the card top at 60-95px instead of the intended 128px (scroll-mt-32). The card heading is partly hidden under the sticky header. The ~150ms timeout fires before layout settles. Mobile on preview lands correctly at 128px.", "selector": "#delivery-governance", "priority": "LOW"},
+      {"component": "Footer service links on /services", "issue": "Clicking the same footer link again after scrolling away does nothing, because the effect depends only on [hash] and the hash did not change.", "selector": "[data-testid^=footer-service-]", "priority": "LOW"}
+    ],
+    "integration_issues": [
+      {"flow": "prerender.mjs pageText() -> llms-full.txt", "issue": "pageText strips <button>…</button>, which removes every Home and Products FAQ question, all 'See scope and boundaries' labels and every CTA label. As a result, 'What is ORQYNE?' and 'Is ORQYNE project portfolio management (PPM) software?' do not appear in llms-full.txt. Answers would be orphaned even after the accordion fix.", "affected_selectors": ["[data-testid^=faq-question-]", "[data-testid^=product-faq-question-]"]}
+    ],
+    "design_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_seo_geo_aeo.py", "/app/backend/tests/test_prerender_seo.py", "/app/test_reports/pytest/pytest_iter22.xml"],
+  "action_items": [
+    "Home.js and Products.js FAQ: always render the answer <p> and hide it with the `hidden` attribute or CSS (or use <details>/<summary> like Services) instead of `{openFaq === i && ...}`. Then rebuild and confirm that test_faq_answers_in_html passes.",
+    "prerender.mjs pageText(): stop stripping <button> elements (keep their text, or strip only svg/script/style/form), so FAQ questions reach llms-full.txt. Rebuild and run test_llms_full_has_faq_questions.",
+    "Services hash scroll: increase the delay or retry after layout and fonts settle (for example requestAnimationFrame after load, or re-scroll once at ~600ms), so cards clear the sticky header. Optionally also scroll when the same hash link is clicked again (key the effect on location.key).",
+    "Optional: remove the debug console.log in openServicePopup (Services.js ~L364)."
+  ],
+  "critical_code_review_comments": [
+    "Services.js (784 lines) and Products.js (781 lines) are over 700 lines. Move the SERVICE_FAQS/services data and the FAQ blocks into src/content/* modules.",
+    "blog-admin, careers-admin and newsletter-admin `await pingIndexNow(...)` inside the request path. In production this adds up to 4s latency to admin saves if IndexNow is slow. It is guarded with a timeout and try/catch, but consider not awaiting it, or using waitUntil.",
+    "The IndexNow key is hard-coded in both api/_indexnow.js and scripts/prerender.mjs (DRY). It is public by design, so this is acceptable, but share one constant.",
+    "Stale regression tests: test_blog_cms.py expects 200 on create but the API returns 201. Its failed asserts left TEST posts behind (I removed them by id). test_careers.py and test_newsletter.py depend on seed records that no longer exist, and they trigger the 60/15-minute rate limit. Update these tests."
+  ],
+  "updated_files": ["/app/backend/tests/test_seo_geo_aeo.py"],
+  "success_rate": {"backend": "100% (admin create/update/publish for blog, careers and newsletter; IndexNow key; llms)", "frontend": "~88% (SEO structure, hydration and interactions pass; FAQ answer prerender and llms-full FAQ text fail)"},
+  "seed_data_creation": "None kept. My first run of the stale legacy tests leaked 4 blog_posts (test-cms-post-*, test-draft-*) and 1 job_posting (test-role-68780479), all created during this session. I deleted them by explicit id. All test-seo-* records from the new tests were deleted via the API. The backend was restarted once to clear the in-memory rate limiter.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run `pytest /app/backend/tests/test_seo_geo_aeo.py /app/backend/tests/test_prerender_seo.py` after `cd /app/frontend && yarn build`. The static server on :3100 (node serve.mjs) serves build/; do not kill it. Expected failures until fixed: test_faq_answers_in_html[index|products] and test_llms_full_has_faq_questions. Avoid running the legacy test_blog_cms/test_careers/test_newsletter files: they are stale, leak data and trip the rate limit. If you get 429, restart the backend (the limiter is in memory in the node sidecar). Use support@orgainse.com / QaTest!2026#Org.",
+  "rca of the issue": "FAQ parity: the accordion uses conditional rendering, so collapsed answers never reach the server-rendered HTML; JSON-LD is built from the full FAQS array. llms-full gaps: pageText's regex `<(script|style|svg|button|form)[\\s\\S]*?</\\1>` removes the button elements that hold the FAQ questions."
+}

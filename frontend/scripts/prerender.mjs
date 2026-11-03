@@ -89,7 +89,7 @@ function writeSitemap(today) {
 const pageText = (html) => {
   const main = (html.match(/<main[^>]*>([\s\S]*?)<\/main>/) || [, html])[1];
   return main
-    .replace(/<(script|style|svg|button|form)[\s\S]*?<\/\1>/g, " ")
+    .replace(/<(script|style|svg|form)[\s\S]*?<\/\1>/g, " ")
     .replace(/<\/(h[1-6]|p|li|div|section|article|summary|tr)>/g, "\n")
     .replace(/<[^>]+>/g, " ")
     .replace(/&amp;/g, "&").replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&nbsp;/g, " ").replace(/&lt;/g, "<").replace(/&gt;/g, ">")

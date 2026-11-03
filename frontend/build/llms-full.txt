@@ -14,7 +14,7 @@ Turn Fragmented Work Into Visible, Governed Execution
 Build stronger delivery systems, improve operational visibility, and apply Artificial Intelligence where it creates measurable business value.
 Orgainse helps Information Technology services companies, software teams, startups, and growing businesses move from disconnected tools and reactive reporting to structured, accountable execution. We combine business consulting, Project Management as a Service (PMaaS), workflow transformation, and ORQYNE to help teams establish clearer ownership, stronger governance, reliable reporting, and better-informed decisions.
 Whether the starting point is one critical project, a growing delivery portfolio, or an organisation-wide workflow problem, we help define the operating model, configure the right systems, and support adoption through execution.
-Explore ORQYNE
+Book an Execution Discovery Call Explore ORQYNE
 1 Diagnose 2 Design 3 Implement 4 Govern Operating System The Orgainse method
 The Orgainse method — diagnose, design, implement, govern.
 Outcome-Led Engagements
@@ -88,8 +88,9 @@ Model potential time, capacity, cost, and operating effects using assumptions sp
 Build an ROI Scenario Use your assumptions · Review multiple scenarios
 Bring One Important Execution Problem
 In a focused discovery session, we will clarify the desired business outcome, current workflow, decision owners, operating constraints, and the most practical next step. The recommendation may involve consulting, Project Management as a Service, ORQYNE, a short diagnostic, or no immediate engagement. The objective is to determine fit before scope expands.
-Contact Orgainse
+Book a 30-Minute Discovery Call Contact Orgainse
 Focused business discussion · No commitment required · Global scheduling available
+Share
 Practical Resources for Better Execution
 Artificial Intelligence Implementation Guide
 A structured approach for moving from Artificial Intelligence opportunity identification to controlled implementation.
@@ -101,7 +102,18 @@ Subscribe to the Orgainse newsletter to receive current guides, frameworks, and 
 Answers
 Frequently Asked Questions
 Still evaluating? Write to info@orgainse.com or book a discovery call.
-Orgainse helps organisations improve project delivery, workflow visibility, operational governance, and practical Artificial Intelligence adoption. Services include Project Management as a Service, delivery and workflow transformation, ORQYNE implementation, Artificial Intelligence readiness, and separately scoped advisory engagements.
+Schedule a Discovery Call
+What does Orgainse do? Orgainse helps organisations improve project delivery, workflow visibility, operational governance, and practical Artificial Intelligence adoption. Services include Project Management as a Service, delivery and workflow transformation, ORQYNE implementation, Artificial Intelligence readiness, and separately scoped advisory engagements.
+What is Project Management as a Service? Project Management as a Service (PMaaS) gives an organisation access to structured project leadership, governance, reporting, risk management, stakeholder communication, and delivery support without immediately building a full Internal Project Management Office.
+How is Orgainse different from a conventional consulting firm? Orgainse combines advisory, implementation, operating support, and ORQYNE. The engagement is designed to move from recommendation to an operating workflow with defined owners, controls, reporting, and adoption support.
+What is an outsourced PMO? An outsourced Project Management Office (PMO) gives you the governance, reporting cadence, risk and dependency management and portfolio visibility of an internal PMO, delivered by an external partner. Orgainse provides this through Project Management as a Service, scoped to one critical project or a whole delivery portfolio.
+What is delivery governance for Information Technology services firms? It is the operating rhythm that keeps client delivery visible and controlled: named owners, escalation paths, Risk, Assumption, Issue and Dependency (RAID) registers, decision and change records, resource and margin visibility, and an executive view of delivery health across every engagement.
+What is ORQYNE? ORQYNE is project portfolio and delivery governance software built by Orgainse. It brings projects, portfolios, RAID registers, decisions, knowledge and Artificial Intelligence-assisted workflows into one governed workspace, and is implemented with Orgainse support rather than left for customers to configure alone.
+How can delivery teams adopt Artificial Intelligence practically? Begin with one workflow where time or quality is visibly lost, such as status reporting or RAID upkeep. Map the process, define where Artificial Intelligence assists and where a person approves, agree success measures, and pilot before scaling.
+Does Orgainse offer healthcare revenue cycle analytics? Yes, as independent advisory. Orgainse analyses revenue performance, denial patterns, payer behaviour and operating controls over your existing revenue cycle operations. It does not provide medical billing, coding, claims processing or collections.
+Who is Orgainse designed to support? Orgainse primarily supports Information Technology services firms, software teams, startups, small and medium-sized enterprises, and cross-functional operating teams that need better visibility, governance, and execution discipline.
+Does Orgainse guarantee delivery improvement or Return on Investment? No. Timing and outcomes depend on scope, data quality, leadership decisions, adoption, integrations, operating conditions, and customer responsibilities. Success measures are agreed before work begins and reviewed through the engagement.
+Can Orgainse support a company that already uses Jira, Asana, monday.com, or another work-management platform? Yes. Orgainse can improve the operating model around an existing tool, introduce ORQYNE for selected workflows, or assess whether consolidation is justified. The recommendation is based on business fit rather than forced replacement.
 
 ---
 
@@ -114,7 +126,7 @@ PMaaS and Outsourced PMO · Delivery Governance · AI Adoption · Revenue Cycle 
 Services Built Around Execution, Not Activity
 Start with the business outcome that matters most.
 Orgainse combines focused advisory, implementation, and operating support so that strategy is translated into visible, repeatable execution. Engagements are scoped around one measurable problem — a critical project, a growing delivery portfolio, or an organisation-wide workflow issue — and success measures are agreed before work begins.
-Explore ORQYNE
+Book an Execution Discovery Call Explore ORQYNE
 Information Technology Services and Software
 Startups, Small and Medium-Sized Enterprises
 Healthcare Revenue Intelligence Advisory
@@ -125,6 +137,7 @@ Add structured project leadership, effectively an outsourced Project Management 
 Planning, governance and reporting cadence
 Risk, assumption, issue and dependency management
 Stakeholder communication and executive visibility
+Learn More
 Artificial Intelligence and Workflow Transformation
 Practical Artificial Intelligence adoption for delivery teams. Identify where Artificial Intelligence, automation, and workflow redesign can remove friction or improve decision quality. We map current processes, identify high-value opportunities, define human approval points, and establish a practical implementation roadmap before technology is introduced.
 Current-state process and handoff mapping
@@ -153,6 +166,7 @@ Service details
 What each engagement covers
 The detail behind each service: what we do, what you receive, and who it suits. Every engagement is scoped in writing before work begins.
 Information Technology Services Firms Software Delivery Teams Startups and Growing Businesses
+See scope and boundaries
 What it does
 Orgainse provides the project leadership layer your delivery needs without you having to stand up a full internal Project Management Office. We take responsibility for planning, the reporting rhythm, risk and dependency management, stakeholder communication, and the executive view of delivery health.
 What you receive
@@ -232,6 +246,7 @@ How is our data handled?
 Data handling, access, retention, and confidentiality are defined in the engagement agreement, and Healthcare engagements are separately scoped for regulatory considerations. Orgainse does not claim certification or legal compliance under any standard unless it has been formally established and independently verified.
 Still evaluating?
 Bring one execution problem to a focused 30-minute discovery call. We will clarify the outcome, the workflow, the decision owners, and the most practical next step.
+Book a Discovery Call
 Delivery consulting, Project Management as a Service and delivery governance
 Orgainse is a delivery-execution partner for Information Technology services firms , software teams , startups and growing businesses. We work on one operating condition: service-led, cross-functional work that needs stronger execution visibility and governance . Engagements combine consulting, Project Management as a Service , workflow transformation and implementation of ORQYNE , our delivery-governance workspace.
 The problem we work on is narrow and specific: work is spread across disconnected tools, status is reconstructed manually, ownership is unclear, risks surface late, and decisions are made without a reliable view of delivery health. Our role is to replace that with structured operating rhythms — named owners, tracked risks and actions, agreed reporting cadence and a single view leadership can rely on.
@@ -321,6 +336,7 @@ Context-driven guidance for choosing a way of working
 Book a discovery call Take the readiness assessment
 Share this with your delivery leaders
 Practical execution, governance and Artificial Intelligence adoption for teams that need visibility.
+Share
 
 ---
 
@@ -347,6 +363,7 @@ AI Grounded in Approved Knowledge
 Service-Backed Implementation
 Choose your experience
 One Platform. Two Purpose-Built Experiences.
+IT Services and Software Canvas Business Management
 IT Services and Software
 Run Delivery With One View of Work, Risk, Resources, Cost, and Outcomes.
 ORQYNE for Information Technology Services and Software supports structured delivery across projects and portfolios.
@@ -397,7 +414,7 @@ Canvas Business-Function Agents
 Canvas provides an agent catalogue designed around delivery, operations, finance, marketing, sales, people, legal, procurement, and portfolio management.
 Custom agent builder
 Where enabled, customers can configure agent instructions, inputs, data access, triggers, autonomy levels, and approval requirements.
-See ORQYNE AI Capabilities
+See ORQYNE AI Capabilities Discuss Agent Governance
 Connect the Systems That Already Hold Your Delivery Signals
 ORQYNE includes a growing connector catalogue spanning source control, project management, Information Technology service management, observability, communications, customer systems, finance, human resources, and business operations. Connector availability, direction of data flow, authentication method, and production status vary by integration. Required integrations should be confirmed during the pilot or implementation scope.
 Source Control
@@ -433,7 +450,7 @@ Best for organisations managing multiple teams, projects, departments, integrati
 Enterprise
 Best for organisations requiring advanced access controls, Single Sign-On, optional physical data segregation, custom implementation, or formal security review.
 Pricing is determined by users, enabled modules, implementation requirements, Artificial Intelligence usage model, integration scope, and support requirements. Final scope and commercial terms are confirmed before implementation.
-Request a Guided Pilot
+Discuss the Right ORQYNE Plan Request a Guided Pilot
 Built With Tenant Awareness and Operational Safeguards
 Role-Based Access Control
 Role-Based Access Control, custom roles, and permission matrices help restrict access according to responsibilities.
@@ -451,7 +468,17 @@ These controls do not represent an independent certification or a guarantee of c
 Answers
 Frequently Asked Questions
 Still evaluating? Write to support@orgainse.com or request a guided pilot.
-ORQYNE is a multi-tenant delivery-governance platform by Orgainse. It brings projects, workflows, knowledge, decisions, governance, analytics, and Artificial Intelligence-assisted execution into one operating environment.
+Schedule a Product Discussion
+What is ORQYNE? ORQYNE is a multi-tenant delivery-governance platform by Orgainse. It brings projects, workflows, knowledge, decisions, governance, analytics, and Artificial Intelligence-assisted execution into one operating environment.
+Is ORQYNE project portfolio management (PPM) software? Yes. ORQYNE covers the core of project portfolio management: portfolios, projects, backlogs and sprints, Risk, Assumption, Issue and Dependency (RAID) registers, Earned Value Management, resource and cost visibility, and executive reporting. It adds delivery governance controls and Artificial Intelligence assistance grounded in approved workspace knowledge.
+Who should consider ORQYNE as their project portfolio software? Information Technology services firms, software delivery organisations and cross-functional operating teams that run several projects at once and need one governed view of delivery health, decisions and risk rather than scattered task lists and status decks.
+Is ORQYNE a replacement for Jira, Asana, monday.com, or ClickUp? Not necessarily. ORQYNE can operate as the primary workspace for selected teams or complement existing systems through imports and connectors. The decision depends on workflow complexity, governance requirements, migration effort, and integration availability.
+Who is ORQYNE designed for? The primary experience is designed for Information Technology services and software-delivery organisations. Canvas Business Management supports cross-functional operating teams and business departments.
+How does ORQYNE use customer data for Artificial Intelligence? Approved tenant content can be indexed and retrieved to provide context for Artificial Intelligence-assisted outputs. Access and provider configuration are controlled at the workspace level.
+Can customers use their own Artificial Intelligence provider? ORQYNE supports Bring Your Own Key configurations for supported providers, subject to plan and implementation scope. A platform-managed model configuration may also be available.
+Which integrations are available? ORQYNE has a growing catalogue of connectors. Production availability, authentication, read or write capability, and commercial inclusion should be confirmed for each required integration.
+Is ORQYNE compliant with the Health Insurance Portability and Accountability Act, System and Organization Controls 2, or International Organization for Standardization 27001? Orgainse does not claim certification or legal compliance unless it has been formally established and independently verified. ORQYNE includes security and governance controls that may support a customer's compliance programme when combined with appropriate configuration, contracts, processes, and customer controls.
+How should a company start? Start with one live project or workflow, define measurable success criteria, configure the relevant experience, and assess usage and operating value before expanding.
 Evaluate ORQYNE on Real Work
 Bring one active project, delivery workflow, or cross-functional operating problem. Orgainse will help define the success measures, configure an initial ORQYNE workspace, import relevant work, and evaluate whether the platform improves visibility, governance, and adoption before a wider rollout.
 Prefer to browse first? Open the ORQYNE product site or read about Orgainse services .
@@ -542,6 +569,7 @@ Connect With Our Community
 Follow us for practical notes on delivery execution, governance and visible progress
 Ready to Get Started?
 Book a free 30-minute discovery call and bring one execution problem you want a clearer view of.
+Schedule a Free Discovery Call
 
 ---
 
@@ -559,6 +587,7 @@ Full Name *
 Email Address *
 Company Name *
 Phone (Optional)
+Start Assessment
 
 ---
 
@@ -580,7 +609,7 @@ Summary: Schedule a focused 30-minute discovery call with an Orgainse consultant
 
 Book a Discovery Call
 A focused 30-minute conversation about one execution problem — where status becomes unclear, which hand-offs slip, and who owns the decisions.
-Prefer to pick a time yourself?
+Prefer to pick a time yourself? Open Google booking
 Your Details
 Fill in your details and we'll confirm your slot within one business day.
 What This Discovery Call Covers

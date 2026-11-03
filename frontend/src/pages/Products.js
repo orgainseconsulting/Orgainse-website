@@ -667,11 +667,10 @@ const Products = () => {
                   <span className="flex-1 min-w-0 break-words">{f.q}</span>
                   <ChevronDown className={`h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} />
                 </button>
-                {openFaq === i && (
-                  <p data-testid={`product-faq-answer-${i}`} className="pb-6 text-sm text-slate-600 leading-relaxed">
-                    {f.a}
-                  </p>
-                )}
+                {/* Always in the HTML (crawlers, AI); collapsed visually. */}
+                <p data-testid={`product-faq-answer-${i}`} hidden={openFaq !== i} className="pb-6 text-sm text-slate-600 leading-relaxed">
+                  {f.a}
+                </p>
               </div>
             ))}
           </div>
