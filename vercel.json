@@ -7,7 +7,8 @@
   "installCommand": "yarn install",
   "functions": {
     "api/index.js": {
-      "maxDuration": 60
+      "maxDuration": 60,
+      "includeFiles": "api/_assets/**"
     }
   },
   "rewrites": [
@@ -17,6 +18,14 @@
     },
     {
       "source": "/careers/:slug",
+      "destination": "/api"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/api"
+    },
+    {
+      "source": "/newsletter/:slug",
       "destination": "/api"
     },
     {

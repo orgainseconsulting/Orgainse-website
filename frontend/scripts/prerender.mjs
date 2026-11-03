@@ -7,22 +7,22 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const BUILD = path.join(ROOT, "build");
 const SITE = "https://www.orgainse.com";
-const DEFAULT_OG = `${SITE}/orgainse-logo-v2.png`;
+const DEFAULT_OG = `${SITE}/og/home.jpg`;
 
 export const ROUTES = [
-  { path: "/", file: "index.html", priority: "1.0", changefreq: "weekly" },
-  { path: "/services", file: "services.html", priority: "0.95", changefreq: "monthly" },
-  { path: "/products", file: "products.html", priority: "0.95", changefreq: "weekly" },
-  { path: "/about", file: "about.html", priority: "0.85", changefreq: "monthly" },
-  { path: "/contact", file: "contact.html", priority: "0.85", changefreq: "monthly" },
-  { path: "/ai-assessment", file: "ai-assessment.html", priority: "0.8", changefreq: "monthly" },
-  { path: "/roi-calculator", file: "roi-calculator.html", priority: "0.8", changefreq: "monthly" },
-  { path: "/smart-calendar", file: "smart-calendar.html", priority: "0.75", changefreq: "monthly" },
-  { path: "/blog", file: "blog.html", priority: "0.8", changefreq: "weekly" },
-  { path: "/newsletter", file: "newsletter.html", priority: "0.7", changefreq: "weekly" },
-  { path: "/careers", file: "careers.html", priority: "0.7", changefreq: "weekly" },
-  { path: "/privacy", file: "privacy.html", priority: "0.3", changefreq: "yearly" },
-  { path: "/terms", file: "terms.html", priority: "0.3", changefreq: "yearly" },
+  { path: "/", og: "home.jpg", file: "index.html", priority: "1.0", changefreq: "weekly" },
+  { path: "/services", og: "services.jpg", file: "services.html", priority: "0.95", changefreq: "monthly" },
+  { path: "/products", og: "products.jpg", file: "products.html", priority: "0.95", changefreq: "weekly" },
+  { path: "/about", og: "about.jpg", file: "about.html", priority: "0.85", changefreq: "monthly" },
+  { path: "/contact", og: "contact.jpg", file: "contact.html", priority: "0.85", changefreq: "monthly" },
+  { path: "/ai-assessment", og: "ai-assessment.jpg", file: "ai-assessment.html", priority: "0.8", changefreq: "monthly" },
+  { path: "/roi-calculator", og: "roi-calculator.jpg", file: "roi-calculator.html", priority: "0.8", changefreq: "monthly" },
+  { path: "/smart-calendar", og: "smart-calendar.jpg", file: "smart-calendar.html", priority: "0.75", changefreq: "monthly" },
+  { path: "/blog", og: "blog.jpg", file: "blog.html", priority: "0.8", changefreq: "weekly" },
+  { path: "/newsletter", og: "newsletter.jpg", file: "newsletter.html", priority: "0.7", changefreq: "weekly" },
+  { path: "/careers", og: "careers.jpg", file: "careers.html", priority: "0.7", changefreq: "weekly" },
+  { path: "/privacy", og: "privacy.jpg", file: "privacy.html", priority: "0.3", changefreq: "yearly" },
+  { path: "/terms", og: "terms.jpg", file: "terms.html", priority: "0.3", changefreq: "yearly" },
 ];
 
 const esc = (s = "") =>
@@ -37,7 +37,7 @@ const setMeta = (html, attr, key, value) => {
 const ldScript = (obj) =>
   `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g, "\\u003c")}</script>`;
 
-function applyHead(template, seo, routePath) {
+function applyHead(template, seo, routePath, ogFile) {
   const url = seo.canonical || `${SITE}${routePath === "/" ? "/" : routePath}`;
   let html = template;
   if (seo.title) {
@@ -56,8 +56,12 @@ function applyHead(template, seo, routePath) {
     : "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1");
   html = setMeta(html, "property", "og:url", url);
   html = setMeta(html, "property", "twitter:url", url);
-  html = setMeta(html, "property", "og:image", seo.ogImage || DEFAULT_OG);
-  html = setMeta(html, "property", "twitter:image", seo.ogImage || DEFAULT_OG);
+  const card = seo.ogImage || (ogFile ? `${SITE}/og/${ogFile}` : DEFAULT_OG);
+  html = setMeta(html, "property", "og:image", card);
+  html = setMeta(html, "property", "twitter:image", card);
+  html = setMeta(html, "property", "og:image:width", "1200");
+  html = setMeta(html, "property", "og:image:height", "630");
+  html = setMeta(html, "property", "og:image:alt", seo.title || "Orgainse");
   if (seo.ogType) html = setMeta(html, "property", "og:type", seo.ogType);
   html = html.replace(/<link rel="canonical" href="[^"]*"\s*\/?>/, `<link rel="canonical" href="${url}" />`);
   html = html.replace(/<link rel="alternate" hreflang="(en|x-default)" href="[^"]*"\s*\/?>/g,
@@ -157,7 +161,7 @@ async function main() {
     const body = await render(route.path);
     if (body.includes("<template id=\"B:")) console.warn(`  ! ${route.path} still has suspended segments`);
     globalThis.__SEO_COLLECT__ = null;
-    const page = applyHead(template, seo, route.path).replace('<div id="root"></div>', `<div id="root">${body}</div>`);
+    const page = applyHead(template, seo, route.path, route.og).replace('<div id="root"></div>', `<div id="root">${body}</div>`);
     fs.writeFileSync(path.join(BUILD, route.file), page);
     if (!seo.noindex) llms.push(`\n---\n\n## ${seo.title || route.path}\n\nURL: ${SITE}${route.path}\n${seo.description ? `Summary: ${seo.description}\n` : ""}\n${pageText(body)}\n`);
     console.log(`prerendered ${route.path.padEnd(16)} ${(body.length / 1024).toFixed(0)} KB  ${seo.title || "(no title)"}`);

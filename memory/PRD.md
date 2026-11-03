@@ -788,3 +788,10 @@ Self-tested: DOM assertions for the empty state and the removed phrases, plus de
 - IndexNow: public/4324d2865ab2078180dee7056a86f13a.txt + api/_indexnow.js; pings on blog/careers/newsletter publish and all routes per production build (VERCEL_ENV=production only).
 - Tested: iteration_22; its FAQ-prerender, llms-full and hash-scroll findings fixed and re-verified.
 - User-side backlog: Bing Webmaster sitemap submit, Google Business Profiles (Austin, Bengaluru), directory listings (Clutch, GoodFirms, G2/Capterra for ORQYNE), regular theme blog posts, LinkedIn links to /services#<id>.
+
+## 2026-11 — Share cards (LinkedIn / WhatsApp / X)
+- Design: branded 1200x630 card (logo, coral kicker, navy Outfit headline, www.orgainse.com + logo dots); main pages add an AI photo panel on the right; items without photo show the logo's coral/cream/teal circles.
+- Renderer: api/_og-card.js (@vercel/og + api/_assets fonts/logo; vercel.json functions.includeFiles api/_assets/**).
+- Static: frontend/public/og/<route>.jpg (13, ~100KB) made by `node scripts/make-og-cards.mjs` (outputs PNG, then converted to JPEG with PIL), photos in design-assets/og/. prerender.mjs sets per-route og:image + width/height/alt.
+- Dynamic: GET /api/og?type=blog|newsletter|career&slug= → uploaded OG/cover image if present, else branded card. Share shims: /blog/:slug + /newsletter/:slug → api/_handlers/content-share.js (title/desc/canonical/og:image/BlogPosting JSON-LD, 404+noindex if missing); careers-share now sets og:image too.
+- Self-tested handlers locally (og 200 PNG, missing 404, share meta correct). Live check after deploy: LinkedIn Post Inspector.

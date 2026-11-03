@@ -33,6 +33,8 @@ import consultationHandler from './_handlers/consultation.js';
 import blogHandler from './_handlers/blog.js';
 import careersHandler from './_handlers/careers.js';
 import careersShareHandler from './_handlers/careers-share.js';
+import contentShareHandler from './_handlers/content-share.js';
+import ogHandler from './_handlers/og.js';
 import careersApplyHandler from './_handlers/careers-apply.js';
 import sitemapContentHandler from './_handlers/sitemap-content.js';
 import newsletterIssuesHandler from './_handlers/newsletter-issues.js';
@@ -99,6 +101,9 @@ export default async function handler(req, res) {
   if (first === 'careers' && second && !rawPath.replace(/^\/+/, '').startsWith('api')) {
     return careersShareHandler(req, res);
   }
+  if ((first === 'blog' || first === 'newsletter') && second && !rawPath.replace(/^\/+/, '').startsWith('api')) {
+    return contentShareHandler(req, res);
+  }
   if (first === 'admin-users' && second === 'reset-password') {
     return adminUsersResetPasswordHandler(req, res);
   }
@@ -131,6 +136,7 @@ export default async function handler(req, res) {
     case 'careers': return careersHandler(req, res);
     case 'careers-apply': return careersApplyHandler(req, res);
     case 'sitemap-content.xml': return sitemapContentHandler(req, res);
+    case 'og': return ogHandler(req, res);
     case 'newsletter-issues': return newsletterIssuesHandler(req, res);
     case 'unsubscribe': return unsubscribeHandler(req, res);
     case 'admin-login': return adminLoginHandler(req, res);
