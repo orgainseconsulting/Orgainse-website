@@ -174,7 +174,7 @@ export default function ROICalculator() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-            ROI Calculator
+            Project Delivery ROI Calculator
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
             Model potential time, capacity and cost effects using your own assumptions. A planning scenario, not a guarantee of results.

@@ -147,6 +147,8 @@ const SECURITY = [
 
 const FAQS = [
   { q: "What is ORQYNE?", a: "ORQYNE is a multi-tenant delivery-governance platform by Orgainse. It brings projects, workflows, knowledge, decisions, governance, analytics, and Artificial Intelligence-assisted execution into one operating environment." },
+  { q: "Is ORQYNE project portfolio management (PPM) software?", a: "Yes. ORQYNE covers the core of project portfolio management: portfolios, projects, backlogs and sprints, Risk, Assumption, Issue and Dependency (RAID) registers, Earned Value Management, resource and cost visibility, and executive reporting. It adds delivery governance controls and Artificial Intelligence assistance grounded in approved workspace knowledge." },
+  { q: "Who should consider ORQYNE as their project portfolio software?", a: "Information Technology services firms, software delivery organisations and cross-functional operating teams that run several projects at once and need one governed view of delivery health, decisions and risk rather than scattered task lists and status decks." },
   { q: "Is ORQYNE a replacement for Jira, Asana, monday.com, or ClickUp?", a: "Not necessarily. ORQYNE can operate as the primary workspace for selected teams or complement existing systems through imports and connectors. The decision depends on workflow complexity, governance requirements, migration effort, and integration availability." },
   { q: "Who is ORQYNE designed for?", a: "The primary experience is designed for Information Technology services and software-delivery organisations. Canvas Business Management supports cross-functional operating teams and business departments." },
   { q: "How does ORQYNE use customer data for Artificial Intelligence?", a: "Approved tenant content can be indexed and retrieved to provide context for Artificial Intelligence-assisted outputs. Access and provider configuration are controlled at the workspace level." },
@@ -194,7 +196,7 @@ const Products = () => {
       "@type": "SoftwareApplication",
       name: "ORQYNE",
       applicationCategory: "BusinessApplication",
-      applicationSubCategory: "Delivery Governance Platform",
+      applicationSubCategory: "Project Portfolio Management and Delivery Governance Software",
       operatingSystem: "Web",
       url: "https://www.orgainse.com/products",
       sameAs: ORQYNE_SITE,
@@ -227,10 +229,10 @@ const Products = () => {
   return (
     <div className="min-h-screen bg-white text-slate-900 font-manrope antialiased" data-testid="products-page">
       <SEOHead
-        title="ORQYNE Delivery Governance Software | Orgainse"
+        title="ORQYNE: Project Portfolio and Delivery Governance Software"
         description="Explore ORQYNE, a service-backed platform connecting projects, workflows, governance, knowledge, analytics, and Artificial Intelligence assistance for Information Technology delivery and business operations."
         canonical="https://www.orgainse.com/products"
-        keywords="ORQYNE, delivery governance platform, project portfolio governance, RAID registers, Earned Value Management, RAG AI agents, Canvas business management, PMaaS platform"
+        keywords="ORQYNE, project portfolio management software, PPM software, delivery governance software, RAID register software, Earned Value Management, AI project management software, PMO software"
         structuredData={structuredData}
       />
 
@@ -240,22 +242,22 @@ const Products = () => {
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/70 backdrop-blur-sm text-[11px] uppercase tracking-[0.2em] text-slate-500 shadow-sm" data-testid="product-eyebrow">
+              <h1 className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/70 backdrop-blur-sm text-[11px] font-normal uppercase tracking-[0.2em] text-slate-500 shadow-sm" data-testid="product-eyebrow">
                 <Layers className="h-3 w-3 text-blue-600" />
-                ORQYNE · A Product by Orgainse
-              </span>
+                ORQYNE · Project Portfolio and Delivery Governance Software by Orgainse
+              </h1>
 
               <div className="mt-7">
                 <OrqyneLogo className="h-11 sm:h-14" />
               </div>
 
-              <h1 data-testid="product-headline" className="mt-7 font-outfit font-bold text-4xl sm:text-5xl lg:text-[58px] leading-[1.06] text-slate-900">
+              <h2 data-testid="product-headline" className="mt-7 font-outfit font-bold text-4xl sm:text-5xl lg:text-[58px] leading-[1.06] text-slate-900">
                 Delivery Governance for Teams That Have{" "}
                 <span className="relative inline-block">
                   <span className="relative z-10 text-blue-600">Outgrown Task Tracking</span>
                   <span aria-hidden="true" className="absolute inset-x-0 bottom-1.5 h-3 bg-blue-100 rounded-sm" />
                 </span>
-              </h1>
+              </h2>
 
               <p className="mt-7 text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
                 ORQYNE is a service-backed, multi-tenant platform that connects project execution, portfolio visibility, governance, team knowledge, decisions, and Artificial Intelligence-assisted workflows. It is designed for Information Technology services and software delivery teams as well as cross-functional business operations that need more than lists of tasks. ORQYNE helps establish a shared operating environment where work, ownership, risks, costs, decisions, and business context can be viewed together.

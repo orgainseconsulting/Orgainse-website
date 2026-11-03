@@ -39,6 +39,8 @@ function getSegments(req) {
   return m ? m[1].split('/').filter(Boolean) : [];
 }
 
+import { pingIndexNow } from '../../_indexnow.js';
+
 export default async function handler(req, res) {
   securityHeaders(req, res);
   if (req.method === 'OPTIONS') return res.status(200).end();
@@ -152,6 +154,7 @@ export default async function handler(req, res) {
         const dup = await col.findOne({ slug: doc.slug }, { projection: { _id: 1 } });
         if (dup) return res.status(400).json({ error: 'slug already in use' });
         await col.insertOne(doc);
+        if (['published', 'sent'].includes(doc.status)) await pingIndexNow([`/newsletter/${doc.slug}`, '/newsletter']);
         return res.status(201).json({ success: true, issue: issueToAdminShape(doc) });
       }
 
@@ -165,6 +168,7 @@ export default async function handler(req, res) {
         const dup = await col.findOne({ slug: doc.slug, id: { $ne: doc.id } }, { projection: { _id: 1 } });
         if (dup) return res.status(400).json({ error: 'slug already in use' });
         await col.replaceOne({ id }, doc);
+        if (['published', 'sent'].includes(doc.status)) await pingIndexNow([`/newsletter/${doc.slug}`, '/newsletter']);
         return res.status(200).json({ success: true, issue: issueToAdminShape(doc) });
       }
 

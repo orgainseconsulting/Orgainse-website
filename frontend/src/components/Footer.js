@@ -25,12 +25,12 @@ const socialLinks = [
 ];
 
 const SERVICE_LINKS = [
-  "Project Management as a Service (PMaaS)",
-  "Artificial Intelligence and Workflow Transformation",
-  "Delivery and Operational Governance",
-  "ORQYNE Implementation and Adoption",
-  "Artificial Intelligence Strategy and Readiness",
-  "Healthcare Revenue Intelligence Advisory",
+  ["Project Management as a Service (PMaaS)", "pmaas"],
+  ["Artificial Intelligence and Workflow Transformation", "ai-workflow-transformation"],
+  ["Delivery and Operational Governance", "delivery-governance"],
+  ["ORQYNE Implementation and Adoption", "orqyne-implementation"],
+  ["Artificial Intelligence Strategy and Readiness", "ai-strategy-readiness"],
+  ["Healthcare Revenue Intelligence Advisory", "healthcare-revenue-intelligence"],
 ];
 
 const Footer = () => {
@@ -79,10 +79,10 @@ const Footer = () => {
           <div>
             <h3 className="font-outfit font-bold text-slate-900 text-[13px] uppercase tracking-[0.18em] mb-5">Services</h3>
             <ul className="space-y-2.5 text-sm text-slate-600">
-              {SERVICE_LINKS.map((s) => (
-                <li key={s}>
-                  <Link to="/services" className="hover:text-blue-700 transition-colors">
-                    {s}
+              {SERVICE_LINKS.map(([label, id]) => (
+                <li key={id}>
+                  <Link to={`/services#${id}`} data-testid={`footer-service-${id}`} className="hover:text-blue-700 transition-colors">
+                    {label}
                   </Link>
                 </li>
               ))}

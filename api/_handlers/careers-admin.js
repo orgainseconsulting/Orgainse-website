@@ -117,6 +117,8 @@ const toAdminShape = (doc) => {
   return rest;
 };
 
+import { pingIndexNow } from '../_indexnow.js';
+
 export default async function handler(req, res) {
   securityHeaders(req, res);
   if (req.method === 'OPTIONS') return res.status(200).end();
@@ -184,6 +186,7 @@ export default async function handler(req, res) {
       const body = await readJsonBody(req);
       const doc = await buildJobDoc(body, null, db);
       await col.insertOne(doc);
+      if (doc.status === 'published') await pingIndexNow([`/careers/${doc.slug}`, '/careers']);
       return res.status(201).json({ success: true, job: toAdminShape(doc) });
     }
 
@@ -195,6 +198,7 @@ export default async function handler(req, res) {
       const body = await readJsonBody(req);
       const doc = await buildJobDoc(body, existing, db);
       await col.replaceOne({ id }, doc);
+      if (doc.status === 'published' || existing.status === 'published') await pingIndexNow([`/careers/${doc.slug}`, '/careers']);
       return res.status(200).json({ success: true, job: toAdminShape(doc) });
     }
 

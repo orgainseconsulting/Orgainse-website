@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { toast } from "sonner";
 import {
   ArrowRight,
@@ -28,6 +28,107 @@ const BACKEND_URL = (typeof window !== 'undefined' && window.location?.origin)
   ? window.location.origin
   : (process.env.REACT_APP_BACKEND_URL || "");
 
+const AREA_SERVED = ["United States", "India", "United Kingdom", "Ireland", "Germany", "France", "Netherlands", "United Arab Emirates", "Saudi Arabia", "Qatar", "Australia", "New Zealand", "South Africa"];
+
+const SERVICE_FAQS = [
+  {
+    category: "Scope and Engagement",
+    questions: [
+      {
+        question: "What does Orgainse actually do?",
+        answer: "Orgainse helps organisations improve project delivery, workflow visibility, operational governance, and practical Artificial Intelligence adoption. Services include Project Management as a Service, Artificial Intelligence and workflow transformation, delivery and operational governance, ORQYNE implementation and adoption, Artificial Intelligence strategy and readiness, and separately scoped Healthcare Revenue Intelligence Advisory."
+      },
+      {
+        question: "What is Project Management as a Service?",
+        answer: "Project Management as a Service (PMaaS) gives an organisation access to structured project leadership, governance, reporting, risk management, stakeholder communication, and delivery support without immediately building a full internal Project Management Office. It can be scoped to one critical project or to a delivery portfolio."
+      },
+      {
+        question: "What is an outsourced PMO, and when does it make sense?",
+        answer: "An outsourced Project Management Office (PMO) provides the governance, reporting cadence, Risk, Assumption, Issue and Dependency (RAID) management and portfolio visibility of an internal PMO, delivered by an external partner. It suits organisations whose delivery portfolio has outgrown informal coordination but who are not yet ready to hire and run a permanent PMO team. Orgainse delivers this through Project Management as a Service."
+      },
+      {
+        question: "How is Orgainse different from a conventional consulting firm?",
+        answer: "Orgainse combines advisory, implementation, operating support, and ORQYNE. The engagement is designed to move from recommendation to an operating workflow with defined owners, controls, reporting, and adoption support, rather than ending at a deck."
+      },
+      {
+        question: "Who does Orgainse work with?",
+        answer: "Primarily Information Technology services firms, software delivery teams, startups, small and medium-sized enterprises, and cross-functional operating teams. Typical buyers are founders, Chief Executive Officers, Chief Operating Officers, delivery leaders, project leaders, operations heads, and business owners."
+      }
+    ]
+  },
+  {
+    category: "How Engagements Run",
+    questions: [
+      {
+        question: "How does an engagement start?",
+        answer: "It starts with a focused discovery session on one important execution problem. We clarify the desired outcome, current workflow, decision owners, operating constraints, and the most practical next step. The recommendation may involve consulting, Project Management as a Service, ORQYNE, a short diagnostic, or no immediate engagement."
+      },
+      {
+        question: "What are the four stages of delivery?",
+        answer: "Diagnose: clarify the desired outcome, current workflow, decision owners, constraints, risks, and measurable sources of leakage. Design: create the target workflow, governance model, reporting rhythm, roles, controls, and success measures. Implement: configure the process, ORQYNE workspace, templates, integrations, and operating cadence. Govern: review adoption, risks, decisions, delivery health, and measurable outcomes on a defined schedule."
+      },
+      {
+        question: "What does delivery governance look like for an Information Technology services firm?",
+        answer: "For an Information Technology services firm, delivery governance means every client engagement runs on the same operating rhythm: clear owners and escalation paths, RAID registers, change and decision records, resource and margin visibility, and an executive view of delivery health across the portfolio. The aim is to see drift early enough to act, without adding reporting overhead."
+      },
+      {
+        question: "How can delivery teams adopt Artificial Intelligence practically?",
+        answer: "Start with one workflow where time or quality is visibly lost, such as status reporting, RAID upkeep or meeting follow-ups. Map the current process, decide where Artificial Intelligence assists and where a person approves, agree success measures, then pilot before scaling. Orgainse supports this through Artificial Intelligence strategy and readiness and workflow transformation engagements."
+      },
+      {
+        question: "Can Orgainse work with our existing tools?",
+        answer: "Yes. Orgainse can improve the operating model around an existing tool such as Jira, Asana or monday.com, introduce ORQYNE for selected workflows, or assess whether consolidation is justified. The recommendation is based on business fit rather than forced replacement, and integration availability is confirmed during scoping."
+      },
+      {
+        question: "How is Artificial Intelligence introduced safely?",
+        answer: "We map the process first, identify where Artificial Intelligence improves decision quality or removes friction, and define human approval points before anything is built. Artificial Intelligence output may be incomplete or incorrect, so material operational, financial, legal, security, healthcare, or employment decisions retain appropriate human review."
+      }
+    ]
+  },
+  {
+    category: "Healthcare Revenue Intelligence Advisory",
+    questions: [
+      {
+        question: "What is Healthcare Revenue Intelligence Advisory?",
+        answer: "It is an advisory and analytics service that improves visibility into revenue performance, denial patterns, payer behaviour, operating controls, and executive reporting. It works alongside your existing revenue cycle operations and vendors rather than replacing them. Each engagement is separately scoped for data handling, regulatory considerations, and advisory boundaries."
+      },
+      {
+        question: "What is healthcare revenue cycle analytics?",
+        answer: "Healthcare revenue cycle analytics is the analysis of revenue cycle data, including claims, denials, payer behaviour, collections and operating controls, to show where revenue performance is weakening and why. Orgainse provides it as independent advisory and analytics over your existing revenue cycle operations; it does not perform billing, coding or claims work."
+      },
+      {
+        question: "Who is the right fit for this service?",
+        answer: "Organisations that already have revenue cycle operations in place, internally or through a third party, and need an independent view of what those operations are delivering and where performance can be strengthened through better governance, analytics, or technology readiness."
+      },
+      {
+        question: "What is explicitly not included?",
+        answer: "Orgainse does not provide medical billing or claims submission, medical coding or clinical documentation, accounts receivable follow-up or collections, denial follow-up or appeal submission, payment posting or remittance processing, patient billing, or onshore and offshore revenue cycle staffing. The scope is strictly advisory, analytics, and governance."
+      }
+    ]
+  },
+  {
+    category: "Pricing, Outcomes and Data",
+    questions: [
+      {
+        question: "How is pricing determined?",
+        answer: "Pricing depends on scope, engagement duration, the services involved, the operating support required, and — where ORQYNE is included — users, enabled modules, implementation requirements, Artificial Intelligence usage model, and integration scope. Final scope and commercial terms are confirmed in writing before work begins."
+      },
+      {
+        question: "Does Orgainse guarantee delivery improvement or Return on Investment?",
+        answer: "No. Timing and outcomes depend on scope, data quality, leadership decisions, adoption, integrations, operating conditions, and customer responsibilities. Success measures are agreed before work begins and reviewed through the engagement, and we deliberately do not publish guaranteed percentages."
+      },
+      {
+        question: "Are the assessment and calculator on this site an audit?",
+        answer: "No. The Artificial Intelligence readiness assessment and the Return on Investment calculator are directional planning aids based entirely on the answers and assumptions you supply. They are not a certification, an audit, or professional advice for your specific circumstances."
+      },
+      {
+        question: "How is our data handled?",
+        answer: "Data handling, access, retention, and confidentiality are defined in the engagement agreement, and Healthcare engagements are separately scoped for regulatory considerations. Orgainse does not claim certification or legal compliance under any standard unless it has been formally established and independently verified."
+      }
+    ]
+  }
+];
+
 const Services = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -41,6 +142,14 @@ const Services = () => {
     message: ''
   });
   const { openCalendly } = useCalendly();
+  const { hash } = useLocation();
+
+  // Deep links like /services#pmaas scroll to that service.
+  useEffect(() => {
+    if (!hash) return;
+    const t = setTimeout(() => document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
+    return () => clearTimeout(t);
+  }, [hash]);
 
   // Backend URL for API calls (same-origin to avoid stale Vercel aliases)
   const BACKEND_URL = (typeof window !== 'undefined' && window.location?.origin)
@@ -51,7 +160,7 @@ const Services = () => {
     {
       id: 'pmaas',
       title: "Project Management as a Service (PMaaS)",
-      description: "Add structured project leadership without building a full internal Project Management Office. Orgainse supports planning, governance, reporting cadence, risk and dependency management, stakeholder communication, and executive visibility. ORQYNE can be configured as the shared delivery workspace for the engagement.",
+      description: "Add structured project leadership, effectively an outsourced Project Management Office (PMO), without building a full internal PMO. Orgainse supports planning, governance, reporting cadence, risk and dependency management, stakeholder communication, and executive visibility. ORQYNE can be configured as the shared delivery workspace for the engagement.",
       features: [
         "Planning, governance and reporting cadence",
         "Risk, assumption, issue and dependency management",
@@ -59,7 +168,7 @@ const Services = () => {
         "ORQYNE configured as the shared delivery workspace"
       ],
       icon: Target,
-      keywords: "Project Management as a Service, PMaaS, delivery governance, project leadership, executive reporting",
+      keywords: "Project Management as a Service, PMaaS, outsourced PMO, PMO as a service, fractional project management, delivery governance, executive reporting",
       gradient: "from-blue-600 to-violet-600",
       detailedInfo: {
         whatItDoes: "Orgainse provides the project leadership layer your delivery needs without you having to stand up a full internal Project Management Office. We take responsibility for planning, the reporting rhythm, risk and dependency management, stakeholder communication, and the executive view of delivery health.",
@@ -84,7 +193,7 @@ const Services = () => {
     {
       id: 'ai-workflow-transformation',
       title: "Artificial Intelligence and Workflow Transformation",
-      description: "Identify where Artificial Intelligence, automation, and workflow redesign can remove friction or improve decision quality. We map current processes, identify high-value opportunities, define human approval points, and establish a practical implementation roadmap before technology is introduced.",
+      description: "Practical Artificial Intelligence adoption for delivery teams. Identify where Artificial Intelligence, automation, and workflow redesign can remove friction or improve decision quality. We map current processes, identify high-value opportunities, define human approval points, and establish a practical implementation roadmap before technology is introduced.",
       features: [
         "Current-state process and handoff mapping",
         "High-value opportunity identification",
@@ -92,7 +201,7 @@ const Services = () => {
         "Practical, sequenced implementation roadmap"
       ],
       icon: Brain,
-      keywords: "AI workflow transformation, process redesign, automation opportunity assessment, human in the loop governance",
+      keywords: "AI adoption for delivery teams, AI workflow transformation, process redesign, automation opportunity assessment, human in the loop governance",
       gradient: "from-blue-600 to-violet-600",
       detailedInfo: {
         whatItDoes: "We map how work actually moves through your organisation, then identify where Artificial Intelligence, automation, or plain workflow redesign would remove friction or improve the quality of a decision. Technology is introduced only where it improves the operating model.",
@@ -112,7 +221,7 @@ const Services = () => {
     {
       id: 'delivery-governance',
       title: "Delivery and Operational Governance",
-      description: "Create a consistent operating rhythm across projects, teams, and business functions. This includes portfolio visibility, responsibilities, escalation paths, risks, assumptions, issues, dependencies, decisions, resource visibility, cost oversight, and executive reporting.",
+      description: "Delivery governance for Information Technology services firms and software teams. Create a consistent operating rhythm across projects, teams, and business functions. This includes portfolio visibility, responsibilities, escalation paths, risks, assumptions, issues, dependencies, decisions, resource visibility, cost oversight, and executive reporting.",
       features: [
         "Portfolio visibility and delivery health reporting",
         "Responsibilities, escalation paths and decision rights",
@@ -120,7 +229,7 @@ const Services = () => {
         "Resource, cost and vendor oversight"
       ],
       icon: Shield,
-      keywords: "delivery governance, portfolio visibility, RAID management, operating cadence, executive reporting",
+      keywords: "delivery governance for IT services firms, project governance framework, portfolio visibility, RAID management, operating cadence, executive reporting",
       gradient: "from-blue-600 to-violet-600",
       detailedInfo: {
         whatItDoes: "We establish one operating rhythm across projects, teams, and business functions so that leaders can see what is on track, what is blocked, what needs a decision, and where delivery is drifting.",
@@ -140,7 +249,7 @@ const Services = () => {
     {
       id: 'orqyne-implementation',
       title: "ORQYNE Implementation and Adoption",
-      description: "Configure ORQYNE around the way your organisation actually operates. We support workspace design, roles and access, workflow configuration, work import, templates, governance controls, integrations, onboarding, and adoption reviews.",
+      description: "Roll out ORQYNE, project portfolio and delivery governance software, around the way your organisation actually operates. We support workspace design, roles and access, workflow configuration, work import, templates, governance controls, integrations, onboarding, and adoption reviews.",
       features: [
         "Workspace design, roles and access",
         "Workflow configuration, templates and governance controls",
@@ -201,7 +310,7 @@ const Services = () => {
     {
       id: 'healthcare-revenue-intelligence',
       title: "Healthcare Revenue Intelligence Advisory",
-      description: "Improve visibility into revenue performance, denial patterns, payer behaviour, operating controls, and executive reporting. Each engagement is separately scoped for data handling, regulatory considerations, and advisory boundaries. Orgainse does not position this service as operational medical billing or coding.",
+      description: "Healthcare revenue cycle analytics and advisory. Improve visibility into revenue performance, denial patterns, payer behaviour, operating controls, and executive reporting. Each engagement is separately scoped for data handling, regulatory considerations, and advisory boundaries. Orgainse does not position this service as operational medical billing or coding.",
       features: [
         "Revenue performance assessment",
         "Denial pattern and trend analysis",
@@ -209,7 +318,7 @@ const Services = () => {
         "Revenue governance, controls and executive reporting"
       ],
       icon: Shield,
-      keywords: "healthcare revenue intelligence advisory, denial pattern analysis, payer behaviour analytics, revenue governance advisory",
+      keywords: "healthcare revenue cycle analytics, revenue cycle management analytics, RCM analytics, denial analytics, payer behaviour analytics, revenue integrity advisory",
       gradient: "from-blue-600 to-violet-600",
       detailedInfo: {
         whatItDoes: "Revenue performance depends on visibility as much as on billing accuracy. This service provides an independent advisory and analytics layer over your existing operations: where revenue performance is weakening, how denial patterns are shifting, how payer behaviour is affecting outcomes, and which controls and reports leadership is missing.",
@@ -315,35 +424,30 @@ const Services = () => {
         title="PMaaS, PMO and Delivery Governance Services | Orgainse"
         description="Outsourced project management (PMaaS), PMO setup, delivery and operational governance, workflow transformation, AI readiness and ORQYNE implementation, scoped for teams worldwide."
         canonical="https://www.orgainse.com/services"
-        keywords="Project Management as a Service, PMaaS, delivery governance, workflow transformation, ORQYNE implementation, AI readiness, healthcare revenue intelligence advisory"
+        keywords="Project Management as a Service, PMaaS, outsourced PMO, delivery governance for IT services firms, AI adoption for delivery teams, project portfolio management software, healthcare revenue cycle analytics"
         structuredData={[
-          {
+          ...services.map((svc) => ({
             "@context": "https://schema.org",
             "@type": "Service",
-            serviceType: "Delivery consulting and Project Management as a Service",
-            provider: { "@type": "Organization", name: "Orgainse", url: "https://www.orgainse.com/" },
-            areaServed: ["United States", "India", "United Kingdom", "Ireland", "Germany", "France", "Netherlands", "United Arab Emirates", "Saudi Arabia", "Qatar", "Australia", "New Zealand", "South Africa"],
-            hasOfferCatalog: {
-              "@type": "OfferCatalog",
-              name: "Orgainse Services",
-              itemListElement: services.map((s) => ({
-                "@type": "Offer",
-                itemOffered: { "@type": "Service", name: s.title, description: s.description }
-              }))
-            }
-          },
+            "@id": `https://www.orgainse.com/services#${svc.id}`,
+            name: svc.title,
+            serviceType: svc.title,
+            description: svc.description,
+            url: `https://www.orgainse.com/services#${svc.id}`,
+            keywords: svc.keywords,
+            provider: { "@id": "https://www.orgainse.com/#organization" },
+            areaServed: AREA_SERVED,
+            audience: { "@type": "BusinessAudience", audienceType: svc.detailedInfo.industries.join(", ") },
+          })),
           {
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            mainEntity: [
-              { "@type": "Question", name: "What is Project Management as a Service?", acceptedAnswer: { "@type": "Answer", text: "Project Management as a Service (PMaaS) gives an organisation access to structured project leadership, governance, reporting, risk management, stakeholder communication, and delivery support without immediately building a full internal Project Management Office." } },
-              { "@type": "Question", name: "How does an Orgainse engagement start?", acceptedAnswer: { "@type": "Answer", text: "With a focused discovery session on one important execution problem, clarifying the desired outcome, current workflow, decision owners, operating constraints, and the most practical next step." } },
-              { "@type": "Question", name: "Does Orgainse guarantee delivery improvement or Return on Investment?", acceptedAnswer: { "@type": "Answer", text: "No. Outcomes depend on scope, data quality, leadership decisions, adoption, integrations, operating conditions, and customer responsibilities. Success measures are agreed before work begins and reviewed through the engagement." } },
-              { "@type": "Question", name: "What is included in Healthcare Revenue Intelligence Advisory?", acceptedAnswer: { "@type": "Answer", text: "Advisory and analytics on revenue performance, denial patterns, payer behaviour, operating controls, and executive reporting. It excludes medical billing, coding, accounts receivable follow-up, claims processing, collections and revenue cycle staffing." } },
-              { "@type": "Question", name: "Can Orgainse work with our existing tools?", acceptedAnswer: { "@type": "Answer", text: "Yes. Orgainse can improve the operating model around an existing tool such as Jira, Asana or monday.com, introduce ORQYNE for selected workflows, or assess whether consolidation is justified." } },
-              { "@type": "Question", name: "How is pricing determined?", acceptedAnswer: { "@type": "Answer", text: "Pricing depends on scope, engagement duration, services involved, operating support required and, where ORQYNE is included, users, enabled modules, implementation requirements, AI usage model and integration scope. Terms are confirmed in writing before work begins." } }
-            ]
-          }
+            mainEntity: SERVICE_FAQS.flatMap((c) => c.questions).map((q) => ({
+              "@type": "Question",
+              name: q.question,
+              acceptedAnswer: { "@type": "Answer", text: q.answer },
+            })),
+          },
         ]}
       />
 
@@ -351,18 +455,18 @@ const Services = () => {
       <section className="relative overflow-hidden py-16 lg:py-24" data-testid="services-hero">
         <GridBackdrop />
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10 animate-fade-in">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/70 backdrop-blur-sm text-[11px] uppercase tracking-[0.18em] text-slate-500 shadow-sm">
-            Consulting · PMaaS · ORQYNE-Enabled Delivery
-          </span>
-
-          <h1 className="mt-6 font-outfit text-4xl sm:text-5xl font-bold leading-[1.06] tracking-[-0.03em] max-w-3xl">
-            <span className="text-slate-900">Services Built Around Execution, </span>
-            <span className="text-slate-400">Not Activity</span>
+          <h1 data-testid="services-h1" className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/70 backdrop-blur-sm text-[11px] font-normal uppercase tracking-[0.18em] text-slate-500 shadow-sm">
+            PMaaS and Outsourced PMO · Delivery Governance · AI Adoption · Revenue Cycle Analytics
           </h1>
 
-          <h2 className="mt-6 text-base md:text-lg font-semibold text-slate-700 max-w-2xl leading-relaxed">
-            Start with the business outcome that matters most.
+          <h2 className="mt-6 font-outfit text-4xl sm:text-5xl font-bold leading-[1.06] tracking-[-0.03em] max-w-3xl">
+            <span className="text-slate-900">Services Built Around Execution, </span>
+            <span className="text-slate-400">Not Activity</span>
           </h2>
+
+          <p className="mt-6 text-base md:text-lg font-semibold text-slate-700 max-w-2xl leading-relaxed">
+            Start with the business outcome that matters most.
+          </p>
 
           <p className="mt-5 text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
             Orgainse combines focused advisory, implementation, and operating support so that strategy is
@@ -425,7 +529,8 @@ const Services = () => {
             {services.map((service, index) => (
               <div 
                 key={service.id || index} 
-                className="group animate-fade-in"
+                id={service.id}
+                className="group animate-fade-in scroll-mt-32"
                 style={{ animationDelay: `${index * 150}ms` }}
               >
                 {/* Service Card - Responsive */}
@@ -486,6 +591,72 @@ const Services = () => {
           />
         </div>
 
+        {/* Service details: crawlable depth for every service */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24" data-testid="service-details">
+          <div className="max-w-3xl mb-12">
+            <p className="text-[11px] uppercase tracking-[0.2em] text-blue-700 font-semibold">Service details</p>
+            <h2 className="mt-3 font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-slate-900">
+              What each engagement covers
+            </h2>
+            <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed">
+              The detail behind each service: what we do, what you receive, and who it suits. Every engagement is scoped
+              in writing before work begins.
+            </p>
+          </div>
+          <div className="divide-y divide-slate-200 border-y border-slate-200">
+            {services.map((svc) => (
+              <article key={svc.id} id={`${svc.id}-details`} className="grid lg:grid-cols-12 gap-6 lg:gap-10 py-10 scroll-mt-32" data-testid={`service-detail-${svc.id}`}>
+                <div className="lg:col-span-4">
+                  <h3 className="font-outfit text-xl sm:text-2xl font-bold tracking-[-0.02em] text-slate-900 leading-snug">{svc.title}</h3>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {svc.detailedInfo.industries.map((ind) => (
+                      <span key={ind} className="text-[11px] px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">{ind}</span>
+                    ))}
+                  </div>
+                  <button
+                    onClick={() => openServicePopup(svc)}
+                    data-testid={`service-detail-scope-${svc.id}`}
+                    className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-900 transition-colors"
+                  >
+                    See scope and boundaries <ArrowRight className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+                <div className="lg:col-span-8 grid sm:grid-cols-2 gap-6 text-sm text-slate-600 leading-relaxed">
+                  <div>
+                    <h4 className="font-semibold text-slate-900 mb-2">What it does</h4>
+                    <p>{svc.detailedInfo.whatItDoes}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-900 mb-2">What you receive</h4>
+                    <p>{svc.detailedInfo.whatYouGet}</p>
+                  </div>
+                  <div className={svc.detailedInfo.rightFit ? "" : "sm:col-span-2"}>
+                    <h4 className="font-semibold text-slate-900 mb-2">Why it works</h4>
+                    <p>{svc.detailedInfo.whyChooseUs}</p>
+                  </div>
+                  {svc.detailedInfo.rightFit && (
+                    <div>
+                      <h4 className="font-semibold text-slate-900 mb-2">The right fit</h4>
+                      <p>{svc.detailedInfo.rightFit}</p>
+                    </div>
+                  )}
+                  {svc.productLink && (
+                    <Link to={svc.productLink.href} className="sm:col-span-2 inline-flex items-center gap-1.5 font-semibold text-slate-900 hover:text-blue-700 transition-colors" data-testid={`service-detail-product-${svc.id}`}>
+                      {svc.productLink.label}: ORQYNE project portfolio and delivery governance software <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+          <p className="mt-8 text-sm text-slate-600">
+            Not sure where to start? Try the free{" "}
+            <Link to="/ai-assessment" className="font-semibold text-blue-700 hover:underline">Execution Readiness Assessment</Link>{" "}
+            or model a scenario with the{" "}
+            <Link to="/roi-calculator" className="font-semibold text-blue-700 hover:underline">project delivery ROI calculator</Link>.
+          </p>
+        </div>
+
         {/* Creative Section Separator */}
         <div className="mt-20 mb-16">
           <div className="max-w-6xl mx-auto">
@@ -529,88 +700,7 @@ const Services = () => {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              {[
-                {
-                  category: "Scope and Engagement",
-                  questions: [
-                    {
-                      question: "What does Orgainse actually do?",
-                      answer: "Orgainse helps organisations improve project delivery, workflow visibility, operational governance, and practical Artificial Intelligence adoption. Services include Project Management as a Service, Artificial Intelligence and workflow transformation, delivery and operational governance, ORQYNE implementation and adoption, Artificial Intelligence strategy and readiness, and separately scoped Healthcare Revenue Intelligence Advisory."
-                    },
-                    {
-                      question: "What is Project Management as a Service?",
-                      answer: "Project Management as a Service (PMaaS) gives an organisation access to structured project leadership, governance, reporting, risk management, stakeholder communication, and delivery support without immediately building a full internal Project Management Office. It can be scoped to one critical project or to a delivery portfolio."
-                    },
-                    {
-                      question: "How is Orgainse different from a conventional consulting firm?",
-                      answer: "Orgainse combines advisory, implementation, operating support, and ORQYNE. The engagement is designed to move from recommendation to an operating workflow with defined owners, controls, reporting, and adoption support, rather than ending at a deck."
-                    },
-                    {
-                      question: "Who does Orgainse work with?",
-                      answer: "Primarily Information Technology services firms, software delivery teams, startups, small and medium-sized enterprises, and cross-functional operating teams. Typical buyers are founders, Chief Executive Officers, Chief Operating Officers, delivery leaders, project leaders, operations heads, and business owners."
-                    }
-                  ]
-                },
-                {
-                  category: "How Engagements Run",
-                  questions: [
-                    {
-                      question: "How does an engagement start?",
-                      answer: "It starts with a focused discovery session on one important execution problem. We clarify the desired outcome, current workflow, decision owners, operating constraints, and the most practical next step. The recommendation may involve consulting, Project Management as a Service, ORQYNE, a short diagnostic, or no immediate engagement."
-                    },
-                    {
-                      question: "What are the four stages of delivery?",
-                      answer: "Diagnose: clarify the desired outcome, current workflow, decision owners, constraints, risks, and measurable sources of leakage. Design: create the target workflow, governance model, reporting rhythm, roles, controls, and success measures. Implement: configure the process, ORQYNE workspace, templates, integrations, and operating cadence. Govern: review adoption, risks, decisions, delivery health, and measurable outcomes on a defined schedule."
-                    },
-                    {
-                      question: "Can Orgainse work with our existing tools?",
-                      answer: "Yes. Orgainse can improve the operating model around an existing tool such as Jira, Asana or monday.com, introduce ORQYNE for selected workflows, or assess whether consolidation is justified. The recommendation is based on business fit rather than forced replacement, and integration availability is confirmed during scoping."
-                    },
-                    {
-                      question: "How is Artificial Intelligence introduced safely?",
-                      answer: "We map the process first, identify where Artificial Intelligence improves decision quality or removes friction, and define human approval points before anything is built. Artificial Intelligence output may be incomplete or incorrect, so material operational, financial, legal, security, healthcare, or employment decisions retain appropriate human review."
-                    }
-                  ]
-                },
-                {
-                  category: "Healthcare Revenue Intelligence Advisory",
-                  questions: [
-                    {
-                      question: "What is Healthcare Revenue Intelligence Advisory?",
-                      answer: "It is an advisory and analytics service that improves visibility into revenue performance, denial patterns, payer behaviour, operating controls, and executive reporting. It works alongside your existing revenue cycle operations and vendors rather than replacing them. Each engagement is separately scoped for data handling, regulatory considerations, and advisory boundaries."
-                    },
-                    {
-                      question: "Who is the right fit for this service?",
-                      answer: "Organisations that already have revenue cycle operations in place, internally or through a third party, and need an independent view of what those operations are delivering and where performance can be strengthened through better governance, analytics, or technology readiness."
-                    },
-                    {
-                      question: "What is explicitly not included?",
-                      answer: "Orgainse does not provide medical billing or claims submission, medical coding or clinical documentation, accounts receivable follow-up or collections, denial follow-up or appeal submission, payment posting or remittance processing, patient billing, or onshore and offshore revenue cycle staffing. The scope is strictly advisory, analytics, and governance."
-                    }
-                  ]
-                },
-                {
-                  category: "Pricing, Outcomes and Data",
-                  questions: [
-                    {
-                      question: "How is pricing determined?",
-                      answer: "Pricing depends on scope, engagement duration, the services involved, the operating support required, and — where ORQYNE is included — users, enabled modules, implementation requirements, Artificial Intelligence usage model, and integration scope. Final scope and commercial terms are confirmed in writing before work begins."
-                    },
-                    {
-                      question: "Does Orgainse guarantee delivery improvement or Return on Investment?",
-                      answer: "No. Timing and outcomes depend on scope, data quality, leadership decisions, adoption, integrations, operating conditions, and customer responsibilities. Success measures are agreed before work begins and reviewed through the engagement, and we deliberately do not publish guaranteed percentages."
-                    },
-                    {
-                      question: "Are the assessment and calculator on this site an audit?",
-                      answer: "No. The Artificial Intelligence readiness assessment and the Return on Investment calculator are directional planning aids based entirely on the answers and assumptions you supply. They are not a certification, an audit, or professional advice for your specific circumstances."
-                    },
-                    {
-                      question: "How is our data handled?",
-                      answer: "Data handling, access, retention, and confidentiality are defined in the engagement agreement, and Healthcare engagements are separately scoped for regulatory considerations. Orgainse does not claim certification or legal compliance under any standard unless it has been formally established and independently verified."
-                    }
-                  ]
-                }
-              ].map((category, categoryIndex) => (
+              {SERVICE_FAQS.map((category, categoryIndex) => (
                 <div key={categoryIndex} className="space-y-6">
                   <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
                     <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-violet-600 rounded-lg flex items-center justify-center mr-3">

@@ -108,6 +108,26 @@ const FAQS = [
     a: "Orgainse combines advisory, implementation, operating support, and ORQYNE. The engagement is designed to move from recommendation to an operating workflow with defined owners, controls, reporting, and adoption support.",
   },
   {
+    q: "What is an outsourced PMO?",
+    a: "An outsourced Project Management Office (PMO) gives you the governance, reporting cadence, risk and dependency management and portfolio visibility of an internal PMO, delivered by an external partner. Orgainse provides this through Project Management as a Service, scoped to one critical project or a whole delivery portfolio.",
+  },
+  {
+    q: "What is delivery governance for Information Technology services firms?",
+    a: "It is the operating rhythm that keeps client delivery visible and controlled: named owners, escalation paths, Risk, Assumption, Issue and Dependency (RAID) registers, decision and change records, resource and margin visibility, and an executive view of delivery health across every engagement.",
+  },
+  {
+    q: "What is ORQYNE?",
+    a: "ORQYNE is project portfolio and delivery governance software built by Orgainse. It brings projects, portfolios, RAID registers, decisions, knowledge and Artificial Intelligence-assisted workflows into one governed workspace, and is implemented with Orgainse support rather than left for customers to configure alone.",
+  },
+  {
+    q: "How can delivery teams adopt Artificial Intelligence practically?",
+    a: "Begin with one workflow where time or quality is visibly lost, such as status reporting or RAID upkeep. Map the process, define where Artificial Intelligence assists and where a person approves, agree success measures, and pilot before scaling.",
+  },
+  {
+    q: "Does Orgainse offer healthcare revenue cycle analytics?",
+    a: "Yes, as independent advisory. Orgainse analyses revenue performance, denial patterns, payer behaviour and operating controls over your existing revenue cycle operations. It does not provide medical billing, coding, claims processing or collections.",
+  },
+  {
     q: "Who is Orgainse designed to support?",
     a: "Orgainse primarily supports Information Technology services firms, software teams, startups, small and medium-sized enterprises, and cross-functional operating teams that need better visibility, governance, and execution discipline.",
   },
@@ -206,21 +226,21 @@ const Home = () => {
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7">
-              <span
+              <h1
                 data-testid="hero-eyebrow"
-                className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/70 backdrop-blur-sm text-[11px] uppercase tracking-[0.18em] text-slate-500 shadow-sm"
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/70 backdrop-blur-sm text-[11px] font-normal uppercase tracking-[0.18em] text-slate-500 shadow-sm"
               >
                 <Layers className="h-3 w-3 text-blue-600" />
-                Delivery Consulting · PMaaS · ORQYNE-Enabled Delivery
-              </span>
+                Delivery Governance Consulting · PMaaS · ORQYNE Software
+              </h1>
 
-              <h1 data-testid="hero-headline" className="mt-6 font-outfit font-bold text-4xl sm:text-5xl lg:text-[60px] leading-[1.05] text-slate-900">
+              <h2 data-testid="hero-headline" className="mt-6 font-outfit font-bold text-4xl sm:text-5xl lg:text-[60px] leading-[1.05] text-slate-900">
                 <span className="block">Turn Fragmented Work Into</span>
                 <span className="relative inline-block">
                   <span className="relative z-10 text-blue-600">Visible, Governed Execution</span>
                   <span aria-hidden="true" className="absolute inset-x-0 bottom-1.5 h-3 bg-blue-100 rounded-sm" />
                 </span>
-              </h1>
+              </h2>
 
               <h2 className="mt-7 text-base md:text-lg text-slate-700 font-semibold max-w-2xl leading-relaxed">
                 Build stronger delivery systems, improve operational visibility, and apply Artificial Intelligence where it creates measurable business value.

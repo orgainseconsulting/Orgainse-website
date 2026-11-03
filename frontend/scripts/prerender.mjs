@@ -86,6 +86,34 @@ function writeSitemap(today) {
 </sitemapindex>\n`);
 }
 
+const pageText = (html) => {
+  const main = (html.match(/<main[^>]*>([\s\S]*?)<\/main>/) || [, html])[1];
+  return main
+    .replace(/<(script|style|svg|button|form)[\s\S]*?<\/\1>/g, " ")
+    .replace(/<\/(h[1-6]|p|li|div|section|article|summary|tr)>/g, "\n")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&amp;/g, "&").replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&nbsp;/g, " ").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+    .split("\n").map((l) => l.replace(/\s+/g, " ").trim()).filter(Boolean)
+    .filter((l, i, a) => a.indexOf(l) === i)
+    .join("\n");
+};
+
+async function pingIndexNow() {
+  if (process.env.VERCEL_ENV !== "production") return;
+  const key = "4324d2865ab2078180dee7056a86f13a";
+  try {
+    const r = await fetch("https://api.indexnow.org/indexnow", {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify({ host: "www.orgainse.com", key, keyLocation: `${SITE}/${key}.txt`, urlList: ROUTES.map((r) => SITE + r.path) }),
+      signal: AbortSignal.timeout(5000),
+    });
+    console.log(`IndexNow notified (${r.status}) for ${ROUTES.length} URLs`);
+  } catch (e) {
+    console.warn("IndexNow ping skipped:", e.message);
+  }
+}
+
 async function main() {
   const cacheDir = path.join(ROOT, "node_modules", ".cache", "ssr");
   fs.mkdirSync(cacheDir, { recursive: true });
@@ -120,6 +148,7 @@ async function main() {
   });
   const { render } = await import(pathToFileURL(outfile).href);
 
+  const llms = [`# Orgainse — full site text\n\nGenerated ${new Date().toISOString().slice(0, 10)} from ${SITE}. Summary: ${SITE}/llms.txt\n`];
   for (const route of ROUTES) {
     let seo = {};
     // First pass resolves React.lazy chunks; second pass emits them inline (no streaming placeholders).
@@ -130,9 +159,12 @@ async function main() {
     globalThis.__SEO_COLLECT__ = null;
     const page = applyHead(template, seo, route.path).replace('<div id="root"></div>', `<div id="root">${body}</div>`);
     fs.writeFileSync(path.join(BUILD, route.file), page);
+    if (!seo.noindex) llms.push(`\n---\n\n## ${seo.title || route.path}\n\nURL: ${SITE}${route.path}\n${seo.description ? `Summary: ${seo.description}\n` : ""}\n${pageText(body)}\n`);
     console.log(`prerendered ${route.path.padEnd(16)} ${(body.length / 1024).toFixed(0)} KB  ${seo.title || "(no title)"}`);
   }
+  fs.writeFileSync(path.join(BUILD, "llms-full.txt"), llms.join(""));
   writeSitemap(new Date().toISOString().slice(0, 10));
+  await pingIndexNow();
 }
 
 main().catch((err) => {

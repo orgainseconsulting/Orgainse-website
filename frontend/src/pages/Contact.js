@@ -168,13 +168,13 @@ const Contact = () => {
         </div>
         
         <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10 animate-fade-in">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/70 backdrop-blur-sm text-[11px] uppercase tracking-[0.18em] text-slate-500 shadow-sm">
-            Contact Orgainse
-          </span>
-          <h1 className="mt-6 font-outfit text-4xl sm:text-5xl font-bold leading-[1.06] tracking-[-0.03em] max-w-3xl">
+          <h1 className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/70 backdrop-blur-sm text-[11px] font-normal uppercase tracking-[0.18em] text-slate-500 shadow-sm">
+            Contact Orgainse · Delivery Consulting in Austin and Bengaluru
+          </h1>
+          <h2 className="mt-6 font-outfit text-4xl sm:text-5xl font-bold leading-[1.06] tracking-[-0.03em] max-w-3xl">
             <span className="text-slate-900">Bring one important </span>
             <span className="text-blue-600">execution problem</span>
-          </h1>
+          </h2>
 
           <h2 className="mt-6 text-base md:text-lg font-semibold text-slate-700 max-w-2xl leading-relaxed">
             Book a focused discovery session with an Orgainse consultant — no commitment required.
