@@ -16,9 +16,9 @@ async function getDb() {
 }
 
 const SOURCES = {
-  blog: { col: 'blog_posts', filter: { status: 'published' }, kicker: (d) => (d.category ? `Blog · ${d.category}` : 'The Orgainse Blog') },
-  newsletter: { col: 'newsletter_issues', filter: { status: { $in: ['published', 'sent'] } }, kicker: (d) => (d.issue_number ? `Orgainse Pulse · Issue ${d.issue_number}` : 'Orgainse Pulse') },
-  career: { col: 'job_postings', filter: { status: 'published' }, kicker: (d) => ['Careers', d.location].filter(Boolean).join(' · '), subtitle: (d) => d.department },
+  blog: { col: 'blog_posts', filter: { status: 'published' }, theme: 'ink', layout: 'cluster', kicker: (d) => (d.category ? `Blog · ${d.category}` : 'The Orgainse Blog') },
+  newsletter: { col: 'newsletter_issues', filter: { status: { $in: ['published', 'sent'] } }, theme: 'blush', layout: 'orbit', kicker: (d) => (d.issue_number ? `Orgainse Pulse · Issue ${d.issue_number}` : 'Orgainse Pulse') },
+  career: { col: 'job_postings', filter: { status: 'published' }, theme: 'deepTeal', layout: 'arc', kicker: (d) => ['Careers', d.location].filter(Boolean).join(' · '), subtitle: (d) => d.department },
 };
 
 export default async function handler(req, res) {
@@ -44,7 +44,7 @@ export default async function handler(req, res) {
     res.setHeader('Content-Type', own[0] || 'image/jpeg');
     return res.status(200).send(Buffer.from(own[1], 'base64'));
   }
-  const png = await renderCard({ kicker: src.kicker(doc), title: doc.title, subtitle: src.subtitle?.(doc) });
+  const png = await renderCard({ kicker: src.kicker(doc), title: doc.title, subtitle: src.subtitle?.(doc), theme: src.theme, layout: src.layout });
   res.setHeader('Content-Type', 'image/png');
   return res.status(200).send(png);
 }

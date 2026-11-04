@@ -795,3 +795,8 @@ Self-tested: DOM assertions for the empty state and the removed phrases, plus de
 - Static: frontend/public/og/<route>.jpg (13, ~100KB) made by `node scripts/make-og-cards.mjs` (outputs PNG, then converted to JPEG with PIL), photos in design-assets/og/. prerender.mjs sets per-route og:image + width/height/alt.
 - Dynamic: GET /api/og?type=blog|newsletter|career&slug= → uploaded OG/cover image if present, else branded card. Share shims: /blog/:slug + /newsletter/:slug → api/_handlers/content-share.js (title/desc/canonical/og:image/BlogPosting JSON-LD, 404+noindex if missing); careers-share now sets og:image too.
 - Self-tested handlers locally (og 200 PNG, missing 404, share meta correct). Live check after deploy: LinkedIn Post Inspector.
+
+## 2026-11 — Share cards v2 (no people, logo palette)
+- Replaced photo cards with abstract art only: soft colour wash + layered circles + fine rings/arcs, from logo palette (navy, coral, cream, teal).
+- 9 themes (dark: navy, ink, deepTeal, ember; light: cream, ivory, mist, blush, slate) × 3 layouts (cluster, arc, orbit); per-page mapping in scripts/make-og-cards.mjs. Dark cards use api/_assets/logo-light.png (white letters).
+- Dynamic: blog=ink/cluster, newsletter=blush/orbit, career=deepTeal/arc. Static URLs use ?v=2 to bust LinkedIn cache. Photo sources removed.

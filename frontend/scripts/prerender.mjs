@@ -7,7 +7,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const BUILD = path.join(ROOT, "build");
 const SITE = "https://www.orgainse.com";
-const DEFAULT_OG = `${SITE}/og/home.jpg`;
+const DEFAULT_OG = `${SITE}/og/home.jpg?v=2`;
 
 export const ROUTES = [
   { path: "/", og: "home.jpg", file: "index.html", priority: "1.0", changefreq: "weekly" },
@@ -56,7 +56,7 @@ function applyHead(template, seo, routePath, ogFile) {
     : "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1");
   html = setMeta(html, "property", "og:url", url);
   html = setMeta(html, "property", "twitter:url", url);
-  const card = seo.ogImage || (ogFile ? `${SITE}/og/${ogFile}` : DEFAULT_OG);
+  const card = seo.ogImage || (ogFile ? `${SITE}/og/${ogFile}?v=2` : DEFAULT_OG);
   html = setMeta(html, "property", "og:image", card);
   html = setMeta(html, "property", "twitter:image", card);
   html = setMeta(html, "property", "og:image:width", "1200");

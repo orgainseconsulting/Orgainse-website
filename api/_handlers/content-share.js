@@ -97,7 +97,7 @@ export default async function handler(req, res) {
   const description = doc
     ? clamp(doc.seo_description || doc.excerpt || doc.subtitle || doc.preview_text || doc.title, 200)
     : 'Field notes on delivery execution, governance practice and practical AI from Orgainse.';
-  const image = doc ? `${SITE}/api/og?type=${kind.type}&slug=${slug}` : `${SITE}/og/${parts[0]}.jpg`;
+  const image = doc ? `${SITE}/api/og?type=${kind.type}&slug=${slug}` : `${SITE}/og/${parts[0]}.jpg?v=2`;
 
   let html = applyShareMeta(shell, { title, description, url, image, noindex: !doc });
   if (doc) {

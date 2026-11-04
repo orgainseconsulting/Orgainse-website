@@ -86,7 +86,7 @@ export default async function handler(req, res) {
   html = replaceMeta(html, 'property', 'twitter:title', esc(title));
   html = replaceMeta(html, 'property', 'twitter:description', esc(description));
   html = replaceMeta(html, 'property', 'twitter:url', esc(url));
-  const image = job ? `https://www.orgainse.com/api/og?type=career&slug=${slug}` : 'https://www.orgainse.com/og/careers.jpg';
+  const image = job ? `https://www.orgainse.com/api/og?type=career&slug=${slug}` : 'https://www.orgainse.com/og/careers.jpg?v=2';
   html = replaceMeta(html, 'property', 'og:image', esc(image));
   html = replaceMeta(html, 'property', 'twitter:image', esc(image));
   html = replaceMeta(html, 'property', 'og:image:width', '1200');
