@@ -805,3 +805,4 @@ Self-tested: DOM assertions for the empty state and the removed phrases, plus de
 - Preview-only mockups at frontend/public/_mockups/ (index, home, services, products, careers, contact, admin, styles). three.js 0.170 via CDN importmap; shared assets/spatial.css (palette #0062FD/#0BD5FD/#00007D/#000/#FFF/#F7E7BC/#39B29A/#E07A5F/#FFC300; type lookalikes Unbounded/Sora/Urbanist/Archivo/Lexend/Montserrat/Manrope) and assets/scene.js (presets home/services/products/careers/contact/admin/accent; slow spin, mouse tilt, scroll parallax, reduced-motion still).
 - Kept out of production: prerender.mjs deletes build/_mockups when VERCEL_ENV=production; robots Disallow /_mockups/; pages noindex.
 - Live site untouched. Next: user approval → Phase 2 public rollout, Phase 3 admin/emails/licensed fonts.
+- 2026-11: User rejected the Spatial UI look. Mockups removed; redesign cancelled. Keep the current design as is.
