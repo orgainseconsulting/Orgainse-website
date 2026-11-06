@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="robots" content="noindex, nofollow" />
+<title>Snapshot · Style sheet · Orgainse Spatial UI</title>
+<link rel="stylesheet" href="assets/spatial.css" />
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
+<script type="module" src="assets/scene.js"></script>
+<style>
+body{background:var(--paper)}
+.sheet{padding:60px 0 90px}
+.sw{border-radius:22px;overflow:hidden;border:1px solid var(--line);background:#fff}
+.sw .c{height:110px}
+.sw div.l{padding:12px 14px}
+.sw b{font-family:var(--f-heading);font-size:15px;color:var(--navy);display:block}
+.typ{display:grid;grid-template-columns:200px 1fr 170px;gap:20px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line)}
+.shapes{position:relative;height:300px;border-radius:28px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.shapes canvas{position:absolute;inset:0;width:100%;height:100%}
+</style>
+</head>
+<body>
+<div class="snap-tag">Snapshot · Style sheet</div>
+<div class="wrap sheet">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <img src="/orgainse-logo-v2-900.png" alt="Orgainse" style="height:52px" />
+    <span class="t-section">Spatial UI · Design system v1</span>
+  </div>
+
+  <h2 class="t-heading" style="font-size:30px;margin:48px 0 18px">Palette</h2>
+  <div style="display:grid;grid-template-columns:repeat(9,1fr);gap:12px">
+    <div class="sw"><div class="c" style="background:#0062FD"></div><div class="l"><b>Electric</b><span class="t-caption">#0062FD · actions</span></div></div>
+    <div class="sw"><div class="c" style="background:#0BD5FD"></div><div class="l"><b>Sky</b><span class="t-caption">#0BD5FD · glow</span></div></div>
+    <div class="sw"><div class="c" style="background:#00007D"></div><div class="l"><b>Navy</b><span class="t-caption">#00007D · headings</span></div></div>
+    <div class="sw"><div class="c" style="background:#000"></div><div class="l"><b>Black</b><span class="t-caption">#000000 · text</span></div></div>
+    <div class="sw"><div class="c" style="background:#fff;border-bottom:1px solid var(--line)"></div><div class="l"><b>White</b><span class="t-caption">#FFFFFF · surface</span></div></div>
+    <div class="sw"><div class="c" style="background:#F7E7BC"></div><div class="l"><b>Cream</b><span class="t-caption">#F7E7BC · warmth</span></div></div>
+    <div class="sw"><div class="c" style="background:#39B29A"></div><div class="l"><b>Teal</b><span class="t-caption">#39B29A · success</span></div></div>
+    <div class="sw"><div class="c" style="background:#E07A5F"></div><div class="l"><b>Coral</b><span class="t-caption">#E07A5F · accent</span></div></div>
+    <div class="sw"><div class="c" style="background:#FFC300"></div><div class="l"><b>Amber</b><span class="t-caption">#FFC300 · badges</span></div></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1.2fr .8fr;gap:40px;margin-top:56px">
+    <div>
+      <h2 class="t-heading" style="font-size:30px;margin-bottom:10px">Type roles</h2>
+      <div class="typ"><span class="t-caption">Title · Neue Machina</span><span class="t-title" style="font-size:40px">Governed execution</span><span class="t-caption">Lookalike: Unbounded</span></div>
+      <div class="typ"><span class="t-caption">Subtitle · Gabriel Sans</span><span class="t-subtitle" style="font-size:20px">Visible delivery for growing teams</span><span class="t-caption">Lookalike: Sora</span></div>
+      <div class="typ"><span class="t-caption">Heading · Gordita</span><span class="t-heading" style="font-size:28px">Delivery and Operational Governance</span><span class="t-caption">Lookalike: Urbanist</span></div>
+      <div class="typ"><span class="t-caption">Section header · Univers</span><span class="t-section">What we do</span><span class="t-caption">Lookalike: Archivo</span></div>
+      <div class="typ"><span class="t-caption">Body · Nexa</span><span style="font-size:16px">Clear owners, steady cadence and reporting leaders can act on.</span><span class="t-caption">Lookalike: Lexend</span></div>
+      <div class="typ"><span class="t-caption">Quote · Panton</span><span class="t-quote" style="font-size:20px;color:var(--navy)">"Plans exist. Execution needs evidence."</span><span class="t-caption">Lookalike: Montserrat</span></div>
+      <div class="typ"><span class="t-caption">Caption · Hero</span><span class="t-caption" style="font-size:13px">Austin · Bengaluru · Hybrid</span><span class="t-caption">Lookalike: Manrope</span></div>
+    </div>
+    <div>
+      <h2 class="t-heading" style="font-size:30px;margin-bottom:18px">3D shape family</h2>
+      <div class="shapes"><canvas class="scene" data-scene="home" data-x="0" data-y="0" data-scale="0.72"></canvas></div>
+      <p class="t-caption" style="margin-top:12px">Glossy and matte spheres, rings, half-rings and orbits. Abstract only. Slow rotation, mouse tilt, scroll parallax; still image on reduced motion and low-power phones.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-top:56px">
+    <div class="card"><h3>Buttons</h3><div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:18px"><a class="btn btn-primary">Primary <span class="arr">→</span></a><a class="btn btn-ghost">Secondary</a><a class="btn btn-dark">Dark</a><a class="btn btn-sky">Sky</a></div></div>
+    <div class="card"><h3>Inputs</h3><label class="field" style="margin-top:18px"><span>Work email</span><div class="input">name@company.com</div></label><label class="field"><span>Focused</span><div class="input focus">Delivery governance</div></label></div>
+    <div class="card"><h3>Badges and chips</h3><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px"><span class="badge b-amber">Open Role</span><span class="badge b-sky">Receiving Profiles</span><span class="badge b-teal">Shortlisting</span><span class="badge b-coral">Role Closed</span><span class="badge b-navy">Admin</span></div><div style="margin-top:16px"><span class="chip"><i></i>Austin · Bengaluru</span></div><div style="display:flex;gap:10px;margin-top:18px"><div class="orb orb-blue"></div><div class="orb orb-sky"></div><div class="orb orb-teal"></div><div class="orb orb-coral"></div><div class="orb orb-amber"></div><div class="orb orb-cream"></div></div></div>
+  </div>
+</div>
+</body>
+</html>

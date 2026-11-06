@@ -119,6 +119,8 @@ async function pingIndexNow() {
 }
 
 async function main() {
+  // Design snapshots are preview-only; never ship them to production.
+  if (process.env.VERCEL_ENV === "production") fs.rmSync(path.join(BUILD, "_mockups"), { recursive: true, force: true });
   const cacheDir = path.join(ROOT, "node_modules", ".cache", "ssr");
   fs.mkdirSync(cacheDir, { recursive: true });
   const shellCopy = path.join(cacheDir, "shell.html");

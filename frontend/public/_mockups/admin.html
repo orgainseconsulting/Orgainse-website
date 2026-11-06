@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="robots" content="noindex, nofollow" />
+<title>Snapshot · Admin · Orgainse Spatial UI</title>
+<link rel="stylesheet" href="assets/spatial.css" />
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
+<script type="module" src="assets/scene.js"></script>
+<style>
+body{background:var(--ink);color:#DDE3FF}
+.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+.side{background:#03041F;border-right:1px solid rgba(255,255,255,.06);padding:26px 18px;display:flex;flex-direction:column;gap:6px}
+.side a{display:flex;gap:12px;align-items:center;font-family:var(--f-caption);font-weight:600;font-size:14px;color:#9AA3D6;padding:11px 14px;border-radius:12px}
+.side a.on{background:rgba(0,98,253,.18);color:#fff;box-shadow:inset 2px 0 0 var(--sky)}
+.side a i{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.6}
+.main{padding:28px 36px}
+.head{position:relative;height:230px;border-radius:28px;overflow:hidden;background:radial-gradient(600px 300px at 80% 50%,rgba(0,98,253,.35),transparent 70%),var(--ink-2);border:1px solid rgba(255,255,255,.08)}
+.head canvas{position:absolute;inset:0;width:100%;height:100%}
+.head .txt{position:absolute;left:34px;top:40px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
+.stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:20px}
+.stat b{font-family:var(--f-title);font-size:30px;color:#fff;display:block;margin-top:8px}
+.panes{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin-top:16px}
+.pane{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:24px}
+.row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px}
+.dark .field span{color:#CFE9FF}
+.tb{display:flex;gap:6px;padding:8px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);margin-bottom:10px}
+.tb span{font-family:var(--f-caption);font-weight:700;font-size:12px;color:#9AA3D6;padding:6px 10px;border-radius:8px}
+.tb span.on{background:rgba(11,213,253,.15);color:var(--sky)}
+</style>
+</head>
+<body class="dark">
+<div class="snap-tag">Snapshot · Admin overview + careers editor (dark)</div>
+<div class="app">
+  <aside class="side">
+    <img src="assets/logo-light.png" alt="Orgainse" style="height:34px;width:auto;margin:4px 10px 26px" />
+    <a class="on"><i></i>Overview</a><a><i></i>Leads</a><a><i></i>Blog</a><a><i></i>Newsletter</a><a><i></i>Careers</a><a><i></i>Booking hosts</a><a><i></i>Settings</a>
+  </aside>
+  <main class="main">
+    <div class="head">
+      <canvas class="scene" data-scene="admin" data-dark data-x="3.6" data-y="0" data-scale="0.8"></canvas>
+      <div class="txt"><span class="t-section" style="color:var(--sky)">Admin Dashboard</span><div class="t-title" style="color:#fff;font-size:40px;margin-top:14px">Good morning.</div><p class="t-subtitle" style="color:#B9C2F0;margin-top:8px">Three new leads and one role receiving profiles.</p></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="t-caption" style="color:#9AA3D6">New leads</span><b>3</b><span class="badge b-teal" style="margin-top:8px">This week</span></div>
+      <div class="stat"><span class="t-caption" style="color:#9AA3D6">Subscribers</span><b>14</b><span class="badge b-sky" style="margin-top:8px">Newsletter</span></div>
+      <div class="stat"><span class="t-caption" style="color:#9AA3D6">Published posts</span><b>0</b><span class="badge b-amber" style="margin-top:8px">Next launch set</span></div>
+      <div class="stat"><span class="t-caption" style="color:#9AA3D6">Open roles</span><b>0</b><span class="badge b-coral" style="margin-top:8px">Careers</span></div>
+    </div>
+    <div class="panes">
+      <div class="pane">
+        <div style="display:flex;justify-content:space-between;align-items:center"><div class="t-heading" style="color:#fff;font-size:20px">Edit role</div><span class="badge b-amber">Open Role</span></div>
+        <label class="field" style="margin-top:18px"><span>Role title</span><div class="input focus">Senior Delivery Lead</div></label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <label class="field"><span>Department</span><div class="input">Delivery and PMO ▾</div></label>
+          <label class="field"><span>Employment type</span><div class="input">Full-Time ▾</div></label>
+        </div>
+        <label class="field"><span>About the role</span><div class="tb"><span class="on">B</span><span>I</span><span>List</span><span>Link</span></div><div class="input" style="height:92px">Lead governed delivery across client engagements…</div></label>
+        <div style="display:flex;gap:10px;justify-content:flex-end"><a class="btn btn-ghost" style="background:rgba(255,255,255,.06);color:#fff;border-color:rgba(255,255,255,.12)">Save draft</a><a class="btn btn-sky">Publish <span class="arr">→</span></a></div>
+      </div>
+      <div class="pane">
+        <div class="t-heading" style="color:#fff;font-size:20px">Recent leads</div>
+        <div class="row"><span>Execution Readiness Assessment</span><span class="badge b-teal">New</span></div>
+        <div class="row"><span>Consultation request</span><span class="badge b-sky">Contacted</span></div>
+        <div class="row"><span>ROI Calculator</span><span class="badge b-amber">Follow up</span></div>
+        <div class="row" style="border:0"><span>Newsletter signup</span><span class="badge b-navy">Subscribed</span></div>
+        <div class="motion-note" style="position:static;margin-top:20px"><b>Motion</b> 3D only in the header and empty states; the wire orb glows softly. Work areas stay still and fast.</div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

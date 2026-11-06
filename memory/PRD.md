@@ -800,3 +800,8 @@ Self-tested: DOM assertions for the empty state and the removed phrases, plus de
 - Replaced photo cards with abstract art only: soft colour wash + layered circles + fine rings/arcs, from logo palette (navy, coral, cream, teal).
 - 9 themes (dark: navy, ink, deepTeal, ember; light: cream, ivory, mist, blush, slate) × 3 layouts (cluster, arc, orbit); per-page mapping in scripts/make-og-cards.mjs. Dark cards use api/_assets/logo-light.png (white letters).
 - Dynamic: blog=ink/cluster, newsletter=blush/orbit, career=deepTeal/arc. Static URLs use ?v=2 to bust LinkedIn cache. Photo sources removed.
+
+## 2026-11 — Spatial UI redesign · Phase 1 snapshot (approved plan)
+- Preview-only mockups at frontend/public/_mockups/ (index, home, services, products, careers, contact, admin, styles). three.js 0.170 via CDN importmap; shared assets/spatial.css (palette #0062FD/#0BD5FD/#00007D/#000/#FFF/#F7E7BC/#39B29A/#E07A5F/#FFC300; type lookalikes Unbounded/Sora/Urbanist/Archivo/Lexend/Montserrat/Manrope) and assets/scene.js (presets home/services/products/careers/contact/admin/accent; slow spin, mouse tilt, scroll parallax, reduced-motion still).
+- Kept out of production: prerender.mjs deletes build/_mockups when VERCEL_ENV=production; robots Disallow /_mockups/; pages noindex.
+- Live site untouched. Next: user approval → Phase 2 public rollout, Phase 3 admin/emails/licensed fonts.
