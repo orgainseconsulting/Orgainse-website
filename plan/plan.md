@@ -1,79 +1,73 @@
-# ORQYNE Products Page Refresh and Site-Wide Search Accuracy
+# ORQYNE Products Page: Layers of Intelligence and Content Sync
 
-This update brings the Orgainse Products page fully in line with the official ORQYNE website (orgainse.live). It keeps the current page design and adds any information that is missing.
-Every page's search, answer-engine and AI-assistant content is checked so that what the site says about ORQYNE matches orgainse.live exactly.
+The Orgainse Products page gets a new "Layers of Intelligence" section with all nine ORQYNE layers shown as simple cards. The rest of the page is updated to match orgainse.live as it reads today.
 
 ## Who it's for
-- **Buyers evaluating ORQYNE**: IT services firms, software delivery teams and cross-functional business teams, who need accurate, complete product facts.
-- **You (Orgainse admin)**: you receive guided-pilot requests in the Admin Dashboard.
-- **Search engines and AI assistants**: Google, Bing, ChatGPT, Perplexity and others, which should describe ORQYNE the same way orgainse.live does.
+- Delivery leaders, PMO heads and business owners comparing ORQYNE on orgainse.com.
+- Search engines and AI answer tools that read the page to describe ORQYNE.
 
 ## Core features and experience
-- **Keep what works**: the current Products page layout and look stay. Existing sections are corrected wherever they differ from orgainse.live.
-- **Add the missing sections**, using orgainse.live's own wording:
-  - **Positioning**: "Service-Backed Delivery Governance by Orgainse", headlined "See the Work. Govern the Delivery. Move With Confidence."
-  - **Three principles**: Real Work, Not Demo Theatre; Industry-Native by Design; Artificial Intelligence With Operating Boundaries.
-  - **Two operating experiences**: IT Services and Software (with its key outcomes), and Canvas Business Management.
-  - **Five pillars**: Plan, Execute, Understand, Govern, Connect.
-  - **Moving existing project data in**: Prepare, Validate, Configure, Operate.
-  - **AI grounded in approved knowledge**: Index, Retrieve, Generate, Review, with the note that AI output may contain errors.
-  - **AI agents**: Project Advisor, RAID Analyst, Vendor Intelligence, Governance Copilot, the Site Reliability Engineering and Incident Assistant, Canvas Business-Function Agents, and Custom Agents.
-  - **Connector categories**, with the note that each connector's availability must be confirmed before purchase.
-  - **Team collaboration**: channels, direct messages, mentions, work-linked context and role-aware access.
-  - **Two evaluation paths**:
-    - Delivery organisations: guided pilot.
-    - Individual leaders and small teams: 7-day trial.
-  - **Plans**: Trial, Startup, Small and Medium-Sized Business, and Enterprise. No prices are shown, only the statement that pricing depends on scope.
-  - **Six operational controls**, with the disclaimer that product controls alone do not establish compliance.
-  - **Closing call to action**: "Bring One Live Project, Not a Generic Demo", with the no-guaranteed-outcomes statement.
-- **Questions and answers**: orgainse.live's 9 questions appear on the page.
-  - Answers are written now from orgainse.live's own wording, using only facts stated there.
-  - They are swapped for your exact answers when you send them.
-- **Remove unsupported claims**: anything this site says about ORQYNE that orgainse.live does not say (for example Earned Value Management) is removed or reworded.
-- **Product contact**: product contact details use support@orgainse.com, as on orgainse.live.
-- **Request a Guided Pilot**:
-  - **The form**: opens a short form with full name, work email, organisation, team size, operating experience, and which project or workflow the pilot should cover.
-  - **Where requests go**: each request is saved in the Admin Dashboard's leads area, labelled "ORQYNE Pilot". You also get an email notification.
-- **Start a 7-Day Trial**: opens orgainse.live in a new tab.
-- **Search, answer engines and AI accuracy** (every page):
-  - **Products page tags**: title, description, keywords and share card are aligned with orgainse.live's positioning ("AI project management and delivery governance software").
-  - **Structured data**: the Products page's structured data for search engines lists ORQYNE's real features, the two experiences and the four plans without prices. Its question list matches the 9 visible questions.
-  - **Other pages**: every other page that mentions ORQYNE uses the same corrected facts. This covers Home, Services, About, the search-engine company details, the AI-assistant summary files and the share cards.
-  - **ORQYNE and Orgainse linked**: both sites are marked as belonging together, so search engines and AI assistants connect ORQYNE with Orgainse.
-  - **Search engines told about the changes**: the sitemaps refresh and Bing and similar engines are notified on publish.
+- **Layers of Intelligence section**: the heading "Nine layers of intelligence, built into IT Services and Canvas Business Management.", followed by nine cards that are all visible at once, with nothing to click:
+  1. Delivery Intelligence
+  2. Money Intelligence
+  3. People Intelligence
+  4. Organisational Intelligence
+  5. Knowledge Intelligence
+  6. Decision Intelligence
+  7. Signal Intelligence
+  8. Meeting & Voice Intelligence
+  9. Governed Agentic Intelligence
+- **What each card shows**: the layer name, its one-line summary from orgainse.live (for example "Shows the effect of a choice before anyone makes it."), and its listed features, each with a short description.
+  - Features marked "Deep Intelligence" on orgainse.live carry the same small tag.
+  - Where orgainse.live says which product a layer or feature belongs to (IT Services, Canvas, or both), the card says so too.
+- **Deep Intelligence note** under the cards: "Features marked Deep Intelligence are part of ORQYNE. Contact Sales for access." The Contact Sales button uses the page's existing sales action.
+- **Key terms**: each layer's glossary terms from orgainse.live (RAID log, earned value, SPI, CPI, EAC, what-if simulation, Signal, watch agent and others). They sit below the cards in one compact glossary.
+- **Wording kept exactly as orgainse.live has it**, including earned value, cost and schedule measures, and "what is likely to happen next". This reverses the earlier rule that kept earned value off the site, but only where orgainse.live itself uses the term.
+- **Updated AI steps**: the four steps become Index, Retrieve, Answer, Approve, with orgainse.live's new descriptions. The AI-error disclaimer stays.
+- **Updated agents list**: the seven current agent cards are replaced with orgainse.live's current six:
+  - IT Services · Client Status Pack
+  - IT Services · RAID Clean-up
+  - IT Services · Change and Vendor Packs
+  - Canvas · Value and Budget Review
+  - Canvas · Story Triage and Org Health
+  - Both · Board Pack, Custom and Watch Agents
+
+  The Custom Agents card stays.
+- **Expanded FAQs**: the 9 existing questions stay. orgainse.live's new questions are added, grouped by layer and tagged IT Services, Canvas or Both products. Answers are taken from orgainse.live only.
+- **Search and AI summaries kept consistent**: the page's search data and summary files are updated in the same way:
+  - the page description mentions the nine layers and agents that wait for approval
+  - the FAQ data includes the new questions
+  - the AI-readable site summary lists the nine layers
+  - the Home, Services and About descriptions of ORQYNE are checked for anything the new facts contradict
 
 ## User flow
-1. A visitor reaches the Products page and reads accurate ORQYNE information section by section.
-2. A delivery organisation clicks "Request a Guided Pilot", fills in the short form, and sees a confirmation.
-3. You see the pilot request in the Admin Dashboard and receive an email.
-4. An individual or small team clicks "Start a 7-Day Trial" and continues on orgainse.live.
-5. Search engines and AI assistants read the updated, consistent ORQYNE facts after the next publish.
+1. A visitor reaches the AI knowledge section.
+2. They scroll into Layers of Intelligence and scan all nine cards at once.
+3. They notice the Deep Intelligence tags and read the note, with a Contact Sales option.
+4. They continue to the updated agents, connectors and plans, then the longer FAQ.
+5. They finish at "Bring One Live Project", where they request a guided pilot or start the 7-day trial on orgainse.live.
 
 ## UI/UX feel
-- **Current design kept**: the same fonts, colours, card style and spacing as today's Products page.
-- **New sections fit in**: they follow the same section rhythm, alternating white and light-grey bands.
-- **Experience switch**: the two operating experiences use a simple two-tab switch.
-- **Answer list**: questions keep their answers readable to search engines even when collapsed.
-- **No invented numbers**: no performance figures, savings or outcomes that orgainse.live does not state.
+- Matches the current Products page: the same cards, fonts, colours, spacing and gentle entrance animations. There is no new visual style and no 3D.
+- The grid is 3 columns on desktop, 2 on tablet and 1 on phone. Cards are the same height in each row.
+- The Deep Intelligence tag and the product tags are small, quiet pills.
+- The glossary is a collapsed list so it doesn't take over the page.
 
 ## Implementation phases
 - **Phase 1 (MVP, built now)**:
-  - Products page brought in line with orgainse.live, with the missing sections added.
-  - The 9 questions answered from orgainse.live's wording.
-  - The guided-pilot form saving to the Admin Dashboard with an email alert.
-  - The trial button linked to orgainse.live.
-  - A site-wide check of what search engines, answer engines and AI assistants read about ORQYNE.
-- **Phase 2**:
-  - Your exact answers to the 9 questions swapped in.
-  - A status for each pilot request in the Admin Dashboard: new, contacted, in pilot, closed.
-- **Phase 3**:
-  - A routine check that compares this site's ORQYNE facts with orgainse.live and flags differences after orgainse.live changes.
+  - add the nine-layer cards with their features, tags, Deep Intelligence note and key terms
+  - update the AI steps, agents list and FAQs to match orgainse.live
+  - update the page's search data and the AI-readable summary
+  - notify search engines on publish, the way it is already set up
+- **Phase 2**: each layer card gets its own share link and share image, like the share buttons on orgainse.live.
+- **Phase 3**: a periodic check that flags when orgainse.live wording changes, so the Products page can be refreshed.
 
 ## Assumptions
-- orgainse.live is the single source of truth for ORQYNE facts. Where the current site differs, orgainse.live wins.
-- orgainse.live gives only a name for the Canvas Business Management experience and lists its function areas (operations, delivery, finance, sales, marketing, people, legal, procurement, portfolio management). It is described using only those facts.
-- **Plans**: the four plans are shown without prices, as orgainse.live does. The "Contact Sales" buttons on plans open the same pilot form.
-- **Pilot emails may not send yet**: email alerts use the existing email service, whose key was previously reported invalid. Until it is updated, pilot requests are still saved in the Admin Dashboard, but the email may not arrive.
-- Wording elsewhere on the site that is not about ORQYNE is not changed, apart from search tags and summaries that mention ORQYNE.
-- No new pages are added. The work happens on the existing Products page, plus search details on the existing pages.
-- No ranking position can be guaranteed. The work makes the information complete, consistent and machine-readable, which is what search engines and AI assistants reward.
+- "Snapshots" means content cards built into the page, not pictures taken from orgainse.live.
+- Wording comes straight from orgainse.live on the day it is built, with no rewriting. Facts that appear only on the deeper layer views (for example People, Organisational, Knowledge, Meeting & Voice and Governed Agentic) are taken from those views on orgainse.live.
+- Every new section uses orgainse.live's own words. This includes earned value and "what is likely to happen next". Nothing else on orgainse.com changes, and no new claims or ranking promises are added.
+- Where orgainse.live tags features or FAQs by product, the cards show the product labels rather than an IT Services / Canvas toggle. That fits the no-clicking choice.
+- The new section goes right after the AI knowledge steps, where orgainse.live places it.
+- The existing guided pilot form, 7-day trial link, plans, controls and closing section stay as they are.
+- No new pages are created. The orgainse.live share links for each layer are not copied in Phase 1.
+- Pilot alert emails stay paused until a working email key is entered. That is a separate item and outside this plan.

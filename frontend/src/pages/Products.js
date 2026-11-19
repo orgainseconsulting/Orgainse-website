@@ -35,6 +35,8 @@ import OrbitDiagram from "../components/brand/OrbitDiagram";
 import UiMockPanel from "../components/brand/UiMockPanel";
 import { OrqyneLogo } from "../components/OrqyneLogo";
 import { useCalendly } from "../context/CalendlyContext";
+import { IntelligenceLayers } from "../components/products/IntelligenceLayers";
+import { LAYERS, LAYER_FAQS, PRODUCT_LABELS } from "../data/orqyneLayers";
 
 const ORQYNE_SITE = "https://orgainse.live";
 
@@ -115,20 +117,19 @@ const IMPLEMENTATION_STEPS = [
 ];
 
 const RAG_STEPS = [
-  { title: "Index", body: "Add approved operational knowledge to the tenant environment.", icon: Database },
-  { title: "Retrieve", body: "Select relevant information according to the question and the user's access.", icon: Radar },
-  { title: "Generate", body: "Use the configured model to prepare an answer, draft, summary, analysis, or proposed action.", icon: Bot },
-  { title: "Review", body: "Require appropriate user review before important decisions or external actions.", icon: BadgeCheck },
+  { title: "Index", body: "Records, project files and connected-tool content are indexed by meaning and by exact words, inside your workspace only.", icon: Database },
+  { title: "Retrieve", body: "Only records the person is allowed to see are used, and linked records are checked again at every step.", icon: Radar },
+  { title: "Answer", body: "Answers link to their sources and say when information is missing, out of date or contradictory. Follow-ups keep their context.", icon: Bot },
+  { title: "Approve", body: "Suggested changes arrive as drafts. Nothing changes until an authorised person approves.", icon: BadgeCheck },
 ];
 
 const AGENTS = [
-  { name: "Project Advisor", body: "Supports project planning, delivery interpretation, schedule and cost context, forecasting, and status reporting from available tenant data.", icon: ClipboardList },
-  { name: "RAID Analyst", body: "Helps review Risks, Assumptions, Issues, and Dependencies with scoring, ownership, mitigation context, and staleness visibility.", icon: Radar },
-  { name: "Vendor Intelligence", body: "Supports vendor scorecards, renewal awareness, bid evaluation, contract context, and total-cost analysis.", icon: Landmark },
-  { name: "Governance Copilot", body: "Supports governance, control mapping, audit evidence, policy drafts, and approval workflows as a starting point for professional review.", icon: ScrollText },
-  { name: "Site Reliability Engineering and Incident Assistant", body: "Supports incident triage, runbook retrieval, service-level context, incident analysis, and post-incident documentation.", icon: Server },
-  { name: "Canvas Business-Function Agents", body: "Use function-focused agents for operations, delivery, finance, sales, marketing, people, legal, procurement, and portfolio management.", icon: PanelsTopLeft },
-  { name: "Custom Agents", body: "Where enabled, create controlled agent workflows with defined instructions, approved data access, triggers, autonomy levels, and approval gates.", icon: Bot },
+  { name: "IT Services · Client Status Pack", body: "Gathers tasks, RAID, change requests and earned value, and drafts the monthly client status pack for the project manager to approve.", icon: ClipboardList },
+  { name: "IT Services · RAID Clean-up", body: "Finds risks and issues with no owner, past their target date or untouched for weeks, and prepares fixes for each owner to approve.", icon: Radar },
+  { name: "IT Services · Change and Vendor Packs", body: "Drafts change-request impact packs and vendor renewal briefs from live delivery and contract data.", icon: Landmark },
+  { name: "Canvas · Value and Budget Review", body: "Compares budgets with verified value each month and drafts the review and follow-up requests.", icon: ScrollText },
+  { name: "Canvas · Story Triage and Org Health", body: "Flags stories with no owner, overdue or stalled, and drafts an organisation health action plan.", icon: PanelsTopLeft },
+  { name: "Both · Board Pack, Custom and Watch Agents", body: "Board packs, custom jobs that admins build, and watch agents that prepare the fix for a new Signal. Every output waits for approval.", icon: Server },
 ];
 
 const CONNECTORS = [
@@ -168,6 +169,16 @@ const FAQS = [
   { q: "How should we evaluate ORQYNE?", a: "Services and delivery organisations can use a guided pilot on one live project, multi-team workflow, or reporting problem, with Orgainse supporting workflow mapping, configuration, import, onboarding, governance, and executive review. Scope, data handling, responsibilities, and success criteria are agreed before the pilot begins." },
   { q: "Is a trial available?", a: "Yes. Individual project leaders and small teams can start a 7-day trial or entry plan, configure a focused workspace, and expand only after the operating model proves useful." },
 ];
+
+const FAQ_GROUPS = (() => {
+  let n = 0;
+  const tag = (list) => list.map((f) => ({ ...f, i: n++ }));
+  return [
+    ["about", "About ORQYNE", tag(FAQS)],
+    ...LAYERS.map((l) => [l.id, l.t, tag(LAYER_FAQS.filter((f) => f.layer === l.id))]),
+  ].filter(([, , items]) => items.length);
+})();
+const ALL_FAQS = FAQ_GROUPS.flatMap(([, , items]) => items);
 
 const Products = () => {
   const { openCalendly } = useCalendly();
@@ -227,7 +238,9 @@ const Products = () => {
         "Risk, Assumption, Issue and Dependency (RAID) management, decisions and approvals",
         "Resources, costs, vendors, stakeholders and executive reporting",
         "Retrieval-Augmented Generation grounded in approved tenant knowledge",
-        "AI agents: Project Advisor, RAID Analyst, Vendor Intelligence, Governance Copilot, SRE and Incident Assistant, Canvas Business-Function Agents, Custom Agents",
+        "Nine Layers of Intelligence: Delivery, Money, People, Organisational, Knowledge, Decision, Signal, Meeting & Voice, and Governed Agentic Intelligence",
+        "Cited answers using only records the person may see: Index, Retrieve, Answer, Approve",
+        "AI agents that prepare drafts and wait for an authorised person to approve: Client Status Pack, RAID Clean-up, Change and Vendor Packs, Value and Budget Review, Story Triage and Org Health, Board Pack, Custom and Watch Agents",
         "Connector catalogue, team channels and direct messages",
         "Role-based permissions, audit records, Bring Your Own Key and optional physical data segregation",
       ],
@@ -235,7 +248,7 @@ const Products = () => {
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: FAQS.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+      mainEntity: ALL_FAQS.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
     },
     {
       "@context": "https://schema.org",
@@ -249,7 +262,7 @@ const Products = () => {
     <div className="min-h-screen bg-white text-slate-900 font-manrope antialiased" data-testid="products-page">
       <SEOHead
         title="ORQYNE: AI Project Management and Delivery Governance"
-        description="ORQYNE by Orgainse: AI project management and delivery governance software for IT services, software teams and business workflows, with AI agents and governed RAG knowledge."
+        description="ORQYNE by Orgainse: AI project management and delivery governance software for IT services, software teams and business workflows, with nine Layers of Intelligence and AI agents that wait for a person to approve."
         canonical="https://www.orgainse.com/products"
         keywords="ORQYNE, AI project management software, delivery governance software, project portfolio governance, RAID management, AI agents for project management, RAG knowledge, Canvas Business Management, guided pilot"
         structuredData={structuredData}
@@ -499,8 +512,10 @@ const Products = () => {
         </div>
       </section>
 
+      <IntelligenceLayers onContactSales={openCalendly} />
+
       {/* ── SECTION 5 · Industry-Scoped Agents ─────────────────────── */}
-      <section className="py-24 bg-slate-50 border-y border-slate-200" data-testid="product-agents">
+      <section className="py-24" data-testid="product-agents">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
             Artificial Intelligence Agents Designed Around the Work
@@ -732,23 +747,31 @@ const Products = () => {
               <ArrowUpRight className="h-[14px] w-[14px]" />
             </button>
           </div>
-          <div className="lg:col-span-8 min-w-0" data-testid="product-faq-accordion">
-            {FAQS.map((f, i) => (
-              <div key={f.q} className="border-b border-slate-200 last:border-b-0">
-                <button
-                  type="button"
-                  data-testid={`product-faq-question-${i}`}
-                  aria-expanded={openFaq === i}
-                  onClick={() => setOpenFaq(openFaq === i ? -1 : i)}
-                  className="flex w-full items-center justify-between gap-4 py-6 text-left font-outfit text-base sm:text-lg font-semibold tracking-[-0.01em] text-slate-900"
-                >
-                  <span className="flex-1 min-w-0 break-words">{f.q}</span>
-                  <ChevronDown className={`h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} />
-                </button>
-                {/* Always in the HTML (crawlers, AI); collapsed visually. */}
-                <p data-testid={`product-faq-answer-${i}`} hidden={openFaq !== i} className="pb-6 text-sm text-slate-600 leading-relaxed">
-                  {f.a}
-                </p>
+          <div className="lg:col-span-8 min-w-0 space-y-10" data-testid="product-faq-accordion">
+            {FAQ_GROUPS.map(([gid, label, items]) => (
+              <div key={gid} data-testid={`product-faq-group-${gid}`}>
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-blue-700">{label}</p>
+                {items.map((f) => (
+                  <div key={f.q} className="border-b border-slate-200 last:border-b-0">
+                    <button
+                      type="button"
+                      data-testid={`product-faq-question-${f.i}`}
+                      aria-expanded={openFaq === f.i}
+                      onClick={() => setOpenFaq(openFaq === f.i ? -1 : f.i)}
+                      className="flex w-full items-center justify-between gap-4 py-6 text-left font-outfit text-base sm:text-lg font-semibold tracking-[-0.01em] text-slate-900"
+                    >
+                      <span className="flex-1 min-w-0 break-words">
+                        {f.q}
+                        {f.p && <span className="ml-2 align-middle text-[10px] font-bold uppercase tracking-[0.15em] text-blue-700">{PRODUCT_LABELS[f.p]}</span>}
+                      </span>
+                      <ChevronDown className={`h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 ${openFaq === f.i ? "rotate-180" : ""}`} />
+                    </button>
+                    {/* Always in the HTML (crawlers, AI); collapsed visually. */}
+                    <p data-testid={`product-faq-answer-${f.i}`} hidden={openFaq !== f.i} className="pb-6 text-sm text-slate-600 leading-relaxed">
+                      {f.a}
+                    </p>
+                  </div>
+                ))}
               </div>
             ))}
           </div>

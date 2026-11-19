@@ -343,7 +343,7 @@ Share
 ## ORQYNE: AI Project Management and Delivery Governance
 
 URL: https://www.orgainse.com/products
-Summary: ORQYNE by Orgainse: AI project management and delivery governance software for IT services, software teams and business workflows, with AI agents and governed RAG knowledge.
+Summary: ORQYNE by Orgainse: AI project management and delivery governance software for IT services, software teams and business workflows, with nine Layers of Intelligence and AI agents that wait for a person to approve.
 
 ORQYNE · AI Project Management and Delivery Governance Software by Orgainse
 See the Work. Govern the Delivery. Move With Confidence.
@@ -407,29 +407,182 @@ Launch the workspace, onboard users, and review adoption and visibility using re
 Ground Artificial Intelligence in Your Approved Operating Knowledge
 ORQYNE can retrieve relevant information from tenant-approved documents, projects, decisions, work items, and knowledge sources before generating an Artificial Intelligence-assisted response. The objective is to make Artificial Intelligence more context-aware while retaining user permissions, provider configuration, approval controls, and human accountability. Artificial Intelligence-generated output may contain errors. Users remain responsible for reviewing material recommendations and actions.
 Index
-Add approved operational knowledge to the tenant environment.
+Records, project files and connected-tool content are indexed by meaning and by exact words, inside your workspace only.
 Retrieve
-Select relevant information according to the question and the user's access.
-Generate
-Use the configured model to prepare an answer, draft, summary, analysis, or proposed action.
-Review
-Require appropriate user review before important decisions or external actions.
+Only records the person is allowed to see are used, and linked records are checked again at every step.
+Answer
+Answers link to their sources and say when information is missing, out of date or contradictory. Follow-ups keep their context.
+Approve
+Suggested changes arrive as drafts. Nothing changes until an authorised person approves.
 Artificial Intelligence output may be incomplete or incorrect. Material operational, financial, legal, security, healthcare, or employment decisions must retain appropriate human review.
+Layers of Intelligence
+Nine layers of intelligence, built into IT Services and Canvas Business Management.
+01
+Delivery Intelligence
+Knows how the work is going and what is likely to happen next.
+Projects, sprints and RAID IT Services
+Cited answers across projects, sprints, risks, assumptions, issues and dependencies (RAID), change requests, vendors and earned value.
+Client status pack IT Services Deep Intelligence
+An agent gathers tasks, RAID, change requests and earned value and drafts the monthly pack for the project manager to approve.
+RAID clean-up IT Services Deep Intelligence
+An agent finds entries with no owner, past their target date or untouched for weeks, and prepares fixes for each owner to approve.
+Change-request impact pack IT Services Deep Intelligence
+An agent drafts the effect of a change request on scope, dates and cost.
+Stories, goals and decisions Canvas
+Cited answers across stories, goals, decisions and the people working on them.
+Story triage Canvas Deep Intelligence
+An agent finds stories with no owner, overdue or stalled, and prepares fixes for approval.
+02
+Money Intelligence
+Connects the work to budgets, cost, revenue and value.
+Cost and margin IT Services
+Earned value, cost performance and estimate at completion for each project.
+Vendor renewal brief IT Services Deep Intelligence
+An agent drafts a brief for vendor contracts renewing in the next 60 days.
+Budgets and verified value Canvas
+Each unit's budget shown next to the value its people have verified, with units that are over-allocated flagged.
+Value and budget review Canvas Deep Intelligence
+An agent drafts the monthly value and budget review and its follow-up requests.
+03
+People Intelligence
+Understands who contributes what, and who has room for more.
+Ownership and time IT Services
+Ask who owns which tasks, risks and actions, and see the time logged on each project.
+People and Value Canvas
+Contribution claims, verification and scoring, disputes and calibration, goals and recognition, appraisal packs and a Value Map.
+Capacity forecasts Canvas
+People-time available set against planned work.
+Self-service profiles Canvas
+People update their own profile details, and each change waits for approval.
+04
+Organisational Intelligence
+Knows how the organisation is structured and who decides.
+Owners and approvers IT Services
+Changes and agent drafts go to the record owner or a workspace admin, as each workspace chooses.
+Organisation Structure Canvas
+Units, positions, people, reporting and dotted lines, history, imports and legal entities.
+Approval routing Canvas
+Requests routed by decision rights and spending limits, with escalation and temporary covers when an approver is away.
+Future plans and health checks Canvas
+Future structure plans and organisation health checks.
+Organisation health action plan Canvas Deep Intelligence
+An agent turns health-check findings into an action plan for approval.
+05
+Knowledge Intelligence
+Finds the right information and answers with sources.
+Where to ask IT Services
+Ask from the IT agents hub or from any project.
+Canvas Copilot Canvas
+Ask across stories, departments, organisation structure, files, meetings and chat.
+Cited answers Both products
+Plain-language questions answered with links to their sources, searching by meaning and exact words, using only records the person may see, and saying when information is missing, out of date or contradictory. Follow-up questions keep their context.
+Project files Both products
+Any file type up to 100 MB, folders, version history and in-browser previews of PDFs and images, with file contents searchable.
+Company Brain Both products Deep Intelligence
+Answers follow links between related records, show the path they took and check every claim and number against the sources.
+Outside tools Both products Deep Intelligence
+Agents read connected tools such as Slack, Teams, Notion, Jira and GitHub.
+Learns per workspace Both products Deep Intelligence
+Team terms, corrections and house styles. An admin approves each one and can undo it. Nothing is shared between customers.
+06 Deep Intelligence
+Decision Intelligence
+Shows the effect of a choice before anyone makes it.
+What-ifs IT Services Deep Intelligence
+A project slips, a vendor is lost, sprint scope changes, prices or revenue change, or the rate card changes.
+Goal planning IT Services Deep Intelligence
+Plan towards a margin target or a finish date, comparing options such as raising prices, cutting delivery cost or renegotiating the lowest-margin work.
+What-ifs Canvas Deep Intelligence
+Someone moves to another unit, a budget changes, an approver is away, a reorganisation from a future structure plan, a hiring plan, or prices change.
+Goal planning Canvas Deep Intelligence
+Plan towards a value target, such as reaching 1.2M in value with no new hires.
+Read-only previews Both products Deep Intelligence
+Save several scenarios and compare them side by side. Nothing changes until someone turns a result into a draft for approval.
+07
+Signal Intelligence
+Spots problems early and tells the right person.
+IT Signals IT Services
+Project slipping, sprint at risk, RAID entry without an owner, scope creep and vendor renewal due.
+Canvas Signals Canvas
+Story at risk, person overloaded, approval bottleneck, budget ahead of value, conflicting decisions and organisation health issues.
+Digests and reports Both products
+Each person can mute Signal types, with a weekly digest and scheduled reports.
+Watch agents Both products Deep Intelligence
+When a new Signal appears, a watch agent prepares its fix and waits for approval. Workspace admins choose which Signal types are watched.
+08
+Meeting & Voice Intelligence
+Brings answers into the conversation.
+Meeting transcripts Both products
+Recorded meetings are transcribed with the workspace AI key and become searchable sources.
+Voice Ask Both products Deep Intelligence
+Hold to speak a question and get a cited answer.
+Live meeting answers Both products Deep Intelligence
+ORQYNE listens to the whole meeting and answers the questions it hears, with sources.
+09
+Governed Agentic Intelligence
+Agents that prepare the work and wait for a person to approve it.
+Ready-made IT agents IT Services Deep Intelligence
+Monthly client status pack, RAID clean-up, change-request impact pack, vendor renewal brief and board pack.
+Ready-made Canvas agents Canvas Deep Intelligence
+Monthly value and budget review, story triage, organisation health action plan and board pack.
+Draft, then approve Both products
+The AI prepares changes as drafts. Nothing happens until an authorised person approves.
+Your own AI key Both products
+Use your own AI key. ORQYNE's backup AI is used only if you allow it.
+Custom agents Both products Deep Intelligence
+Workspace admins build their own jobs.
+Approvals anywhere Both products Deep Intelligence
+Approve from the Approvals inbox, an email or a notification, after signing in.
+Outside-tool posts Both products Deep Intelligence
+Posts that agents prepare for Slack, Teams, Notion, Jira or GitHub wait for an admin's approval.
+Deep Intelligence, part of ORQYNE Features marked Deep Intelligence are part of ORQYNE. Contact Sales for access.
+Contact Sales
+Key terms
+RAID log IT Services A register of Risks, Assumptions, Issues and Dependencies for a project or programme.
+Earned value IT Services A method that compares planned work, completed work and actual cost to measure project performance.
+Schedule performance index (SPI) IT Services Earned value divided by planned value; below 1 means the project is behind schedule.
+Sprint scope IT Services The work, usually in story points, committed to a sprint.
+Velocity IT Services The amount of work a team completes in a sprint, used to plan future sprints.
+Change request IT Services A formal proposal to change a project's scope, schedule or cost.
+Delivery governance Both products The rules, roles and reviews that keep delivery on track, visible and accountable.
+Portfolio management Both products Managing a group of projects and programmes together to meet business goals.
+Project management office (PMO) Both products The team that sets standards and oversees projects across an organisation.
+Cost performance index (CPI) IT Services Earned value divided by actual cost; below 1 means the project is over budget.
+Estimate at completion (EAC) IT Services The forecast total cost of a project when it finishes.
+Rate card IT Services The agreed prices for roles or services, used for time-and-materials billing.
+Time and materials IT Services A contract where the client pays for time spent and materials used.
+Verified value Canvas Value from people's contributions that reviewers have checked and confirmed.
+Value Map Canvas A view of where verified value comes from across the organisation.
+Capacity forecast Canvas A projection of the people-time available against planned work.
+Approval routing Canvas Sending each request to the person with the right decision rights and spending limit.
+Spending limit Canvas The largest amount a role can approve before a request goes higher.
+Temporary cover Canvas A person who takes an approver's decisions for a set period.
+Dotted-line reporting Canvas A secondary reporting relationship alongside a person's main manager.
+Organisation health check Canvas Automatic checks for gaps such as empty positions, wide spans of control or missing approvers.
+Legal entity Canvas A registered company within a group, used to separate budgets and approvals.
+Retrieval-augmented generation (RAG) Both products An AI method that finds relevant records first and then writes an answer based on them, with sources.
+Cited answer Both products An AI answer where each statement links to the source it came from.
+Access-aware retrieval Both products Searching only the records a person is allowed to see before the AI answers.
+What-if simulation Both products A read-only preview of how a change would affect plans, people or money.
+Goal planning Both products Comparing ways to reach a target, such as a value, margin or finish date.
+Signal Both products An early warning about a problem, such as a project slipping or an approval waiting too long.
+Watch agent Both products An AI agent that picks up a new warning and prepares its fix for approval.
+Voice Ask Both products Asking ORQYNE a question by speaking instead of typing, with a cited answer.
+Draft-then-approve Both products A way of working where AI prepares a change and a person must approve it before it happens.
+Job agent Both products An AI agent that runs a defined job, such as a status pack, and prepares drafts for approval.
+Bring your own key (BYOK) Both products Using your own AI provider key instead of the vendor's.
 Artificial Intelligence Agents Designed Around the Work
-Project Advisor
-Supports project planning, delivery interpretation, schedule and cost context, forecasting, and status reporting from available tenant data.
-RAID Analyst
-Helps review Risks, Assumptions, Issues, and Dependencies with scoring, ownership, mitigation context, and staleness visibility.
-Vendor Intelligence
-Supports vendor scorecards, renewal awareness, bid evaluation, contract context, and total-cost analysis.
-Governance Copilot
-Supports governance, control mapping, audit evidence, policy drafts, and approval workflows as a starting point for professional review.
-Site Reliability Engineering and Incident Assistant
-Supports incident triage, runbook retrieval, service-level context, incident analysis, and post-incident documentation.
-Canvas Business-Function Agents
-Use function-focused agents for operations, delivery, finance, sales, marketing, people, legal, procurement, and portfolio management.
-Custom Agents
-Where enabled, create controlled agent workflows with defined instructions, approved data access, triggers, autonomy levels, and approval gates.
+IT Services · Client Status Pack
+Gathers tasks, RAID, change requests and earned value, and drafts the monthly client status pack for the project manager to approve.
+IT Services · RAID Clean-up
+Finds risks and issues with no owner, past their target date or untouched for weeks, and prepares fixes for each owner to approve.
+IT Services · Change and Vendor Packs
+Drafts change-request impact packs and vendor renewal briefs from live delivery and contract data.
+Canvas · Value and Budget Review
+Compares budgets with verified value each month and drafts the review and follow-up requests.
+Canvas · Story Triage and Org Health
+Flags stories with no owner, overdue or stalled, and drafts an organisation health action plan.
+Both · Board Pack, Custom and Watch Agents
+Board packs, custom jobs that admins build, and watch agents that prepare the fix for a new Signal. Every output waits for approval.
 Custom agent builder
 Where enabled, customers can configure agent instructions, inputs, data access, triggers, autonomy levels, and approval requirements.
 See ORQYNE AI Capabilities Discuss Agent Governance
@@ -467,7 +620,6 @@ Start a 7-Day Trial
 Choose the Level of Control, Scale, and Support You Need
 Trial
 Evaluate the core workspace with a limited-time trial before selecting a paid plan.
-Contact Sales
 Startup
 For small teams that need structured projects, boards, knowledge, collaboration, and essential governance.
 Small and Medium-Sized Business
@@ -495,6 +647,7 @@ Answers
 Frequently Asked Questions
 Still evaluating? Write to support@orgainse.com or request a guided pilot.
 Schedule a Product Discussion
+About ORQYNE
 What is ORQYNE? ORQYNE is service-backed delivery governance software by Orgainse. It brings project execution, portfolio visibility, business workflows, knowledge, decisions, governance, and Artificial Intelligence assistance into one tenant-aware platform for Information Technology services, software delivery, and cross-functional business operations.
 Which operating experiences does ORQYNE support? Two: Information Technology Services and Software, and Canvas Business Management. Each tenant operates in one supported experience, with terminology, roles, modules, workflows, and analytics separated by experience.
 How is ORQYNE different from a task-management tool? ORQYNE helps teams move beyond disconnected task tracking. Projects, portfolios, risks, dependencies, decisions, resources, costs, knowledge, and governance are managed together, so teams operate with clearer ownership, stronger reporting, and better decision context.
@@ -504,6 +657,23 @@ Can we use our own Artificial Intelligence provider keys? ORQYNE supports Bring 
 Does ORQYNE provide security and compliance certifications? Product controls alone do not establish regulatory compliance or certification. ORQYNE includes controls such as tenant-aware data controls, role-based permissions, administrative authentication, audit capabilities, and secret management. Customers must assess their own legal, security, privacy, contractual, and operational responsibilities.
 How should we evaluate ORQYNE? Services and delivery organisations can use a guided pilot on one live project, multi-team workflow, or reporting problem, with Orgainse supporting workflow mapping, configuration, import, onboarding, governance, and executive review. Scope, data handling, responsibilities, and success criteria are agreed before the pilot begins.
 Is a trial available? Yes. Individual project leaders and small teams can start a 7-day trial or entry plan, configure a focused workspace, and expand only after the operating model proves useful.
+Can ORQYNE keep a RAID log tidy automatically? IT Services The RAID clean-up agent finds entries with no owner, past their target date or untouched for weeks, and prepares fixes that each owner approves.
+Does ORQYNE prepare client status reports? IT Services Yes. The monthly client status pack agent gathers tasks, risks, changes and earned value and drafts the pack for the project manager to approve.
+Can ORQYNE compare budgets with verified value? Canvas Yes. Canvas shows each unit's budget next to the value its people have verified, and flags units that are over-allocated.
+How does Canvas measure contribution? Canvas People record contribution claims that are verified and scored, with disputes and calibration, goals, recognition, appraisal packs and a Value Map.
+Does ORQYNE support approval routing by spending limit? Canvas Yes. Canvas routes approvals by decision rights and spending limits through the organisation structure, with escalation and temporary covers when an approver is away.
+Can ORQYNE answer questions with sources? Both products Yes. ORQYNE Intelligence answers plain-language questions with links to the records and files it used, and says when information is missing, out of date or contradictory.
+What are the Layers of Intelligence in ORQYNE? Both products ORQYNE Intelligence is organised in nine layers: Delivery, Money, People, Organisational, Knowledge, Decision, Signal, Meeting & Voice, and Governed Agentic Intelligence. Each layer works in both IT Services and Canvas Business Management, with features that fit each product.
+Does ORQYNE only use records a person is allowed to see? Both products Yes. Every search and every linked record is checked against that person's access before it is used in an answer.
+Is our data used to train other customers' AI? Both products No. Learning such as team terms, corrections and house styles stays inside one workspace and is never shared between customers.
+What is Deep Intelligence? Both products Deep Intelligence is part of ORQYNE. It adds the Company Brain, workspace learning, Decision Intelligence (what-if previews and goal planning), job and watch agents, outside-tool agents and Voice Ask. Contact Sales for access.
+Can ORQYNE show the effect of a project slipping before it happens? IT Services Yes. The project slip what-if shows the new finish date, tasks pushed past it, cost of extra time and contracts ending before the new date, without changing any data.
+Can ORQYNE plan towards a margin target? IT Services Yes. Goal planning compares options such as raising prices, cutting delivery cost or renegotiating the lowest-margin work, using earned-value forecasts.
+Can we test a reorganisation before publishing it? Canvas Yes. Future structure plans can be previewed as a what-if that shows moves, manager changes, re-routed approvals and problems in the plan.
+Does ORQYNE warn us about problems early? Both products Yes. Signals flag problems such as a project slipping, a sprint at risk, a story at risk or an approval bottleneck, and send them to the people who need to act.
+Can ORQYNE answer questions during a meeting? Both products Yes. With Voice Ask, people can hold to speak a question, or let ORQYNE listen during a recorded meeting and answer questions live with sources.
+Can AI agents change data without approval? Both products No. Agents prepare drafts. Nothing changes until an authorised person approves it, and posts to outside tools wait for an admin's approval.
+Can we use our own AI key? Both products Yes. Customers can use their own AI key. ORQYNE's backup AI is used only if the customer allows it.
 Bring One Live Project, Not a Generic Demo
 A guided ORQYNE pilot starts with one real project or workflow. Together, we define the success measures, configure the operating model, import relevant work, onboard the required users, and evaluate whether ORQYNE improves visibility, governance, and execution before any wider commitment.
 No guaranteed savings, delivery improvements, or compliance outcomes are assumed. Scope, data handling, responsibilities, and success criteria are agreed before the pilot begins.
