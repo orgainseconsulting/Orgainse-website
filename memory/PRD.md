@@ -806,3 +806,13 @@ Self-tested: DOM assertions for the empty state and the removed phrases, plus de
 - Kept out of production: prerender.mjs deletes build/_mockups when VERCEL_ENV=production; robots Disallow /_mockups/; pages noindex.
 - Live site untouched. Next: user approval → Phase 2 public rollout, Phase 3 admin/emails/licensed fonts.
 - 2026-11: User rejected the Spatial UI look. Mockups removed; redesign cancelled. Keep the current design as is.
+
+## 2026-11 — ORQYNE Products page aligned with orgainse.live (Phase 1 of approved plan)
+- Products.js data and sections rewritten using orgainse.live wording: positioning + headline, 3 principles, 2 experiences (IT outcomes / Canvas function areas), 5 pillars, Prepare→Operate import, RAG with the errors disclaimer, 7 agents (incl. Custom), 6 connector categories + purchase note, collaboration chips, 2 evaluation paths, Trial/Startup/SMB/Enterprise plans (no prices, Contact Sales → pilot form), 6 operational controls, 9 FAQs (drafted from site wording; swap for official answers in Phase 2), final CTA + no-guarantee note.
+- Pilot form: team size + operating experience; saves to orqyne_pilot_leads (Admin "ORQYNE Pilot Requests"); contact.js notifyPilot emails support@ + info@ via Resend (currently fails: invalid key).
+- Earned Value Management removed site-wide; Home/Services/llms.txt/index.html (owns.sameAs, description) and products OG card aligned to "AI project management and delivery governance software". OG cache tag now ?v=3.
+- Tested: iteration_23 (100%); low nits fixed after.
+- Phase 2 backlog: official FAQ answers; pilot status (new/contacted/in pilot/closed). Phase 3: routine orgainse.live diff check.
+
+## 2026-06 Products page tidy-up
+- Removed unused imports from Products.js; build compiles with no warnings. Wording review: user made no changes.

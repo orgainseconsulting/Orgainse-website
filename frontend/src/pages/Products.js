@@ -11,7 +11,6 @@ import {
   CircuitBoard,
   ClipboardList,
   Database,
-  FileSpreadsheet,
   Fingerprint,
   GitBranch,
   Landmark,
@@ -182,6 +181,7 @@ const Products = () => {
 
   const handlePilotSubmit = async (e) => {
     e.preventDefault();
+    setSubmitted(false);
     setSubmitting(true);
     try {
       await api.contact({
@@ -263,7 +263,7 @@ const Products = () => {
             <div className="lg:col-span-7">
               <h1 className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/70 backdrop-blur-sm text-[11px] font-normal uppercase tracking-[0.2em] text-slate-500 shadow-sm" data-testid="product-eyebrow">
                 <Layers className="h-3 w-3 text-blue-600" />
-                ORQYNE · Project Portfolio and Delivery Governance Software by Orgainse
+                ORQYNE · AI Project Management and Delivery Governance Software by Orgainse
               </h1>
 
               <div className="mt-7">
@@ -469,7 +469,7 @@ const Products = () => {
       </section>
 
       {/* ── SECTION 4 · AI and Knowledge ───────────────────────────── */}
-      <section className="py-24 bg-slate-50 border-y border-slate-200" data-testid="product-rag">
+      <section className="py-24" data-testid="product-rag">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
             Ground Artificial Intelligence in Your Approved Operating Knowledge
@@ -500,7 +500,7 @@ const Products = () => {
       </section>
 
       {/* ── SECTION 5 · Industry-Scoped Agents ─────────────────────── */}
-      <section className="py-24" data-testid="product-agents">
+      <section className="py-24 bg-slate-50 border-y border-slate-200" data-testid="product-agents">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
             Artificial Intelligence Agents Designed Around the Work
@@ -547,7 +547,7 @@ const Products = () => {
       </section>
 
       {/* ── SECTION 6 · Connectors ─────────────────────────────────── */}
-      <section className="py-24 bg-slate-50 border-y border-slate-200" data-testid="product-connectors">
+      <section className="py-24" data-testid="product-connectors">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
             Connect ORQYNE to the Systems Your Teams Already Use
@@ -570,7 +570,7 @@ const Products = () => {
       </section>
 
       {/* ── SECTION 7 · Team Collaboration ─────────────────────────── */}
-      <section className="py-24" data-testid="product-collaboration">
+      <section className="py-24 bg-slate-50 border-y border-slate-200" data-testid="product-collaboration">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-6">
             <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-slate-900 max-w-lg">
@@ -607,7 +607,7 @@ const Products = () => {
       </section>
 
       {/* ── SECTION 8 · Plans and Evaluation ───────────────────────── */}
-      <section id="plans" className="scroll-mt-28 py-24 bg-slate-50 border-y border-slate-200" data-testid="product-plans">
+      <section id="plans" className="scroll-mt-28 py-24" data-testid="product-plans">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
             Start With the Evaluation Path That Matches Your Team
@@ -682,7 +682,7 @@ const Products = () => {
       </section>
 
       {/* ── SECTION 9 · Security and Governance ────────────────────── */}
-      <section className="py-24" data-testid="product-security">
+      <section className="py-24 bg-slate-50 border-y border-slate-200" data-testid="product-security">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-[-0.03em] max-w-3xl text-slate-900">
             Operational Controls for Business-Critical Work
@@ -711,7 +711,7 @@ const Products = () => {
       </section>
 
       {/* ── SECTION 10 · FAQ ──────────────────────────────────────── */}
-      <section className="py-24 bg-slate-50 border-y border-slate-200" data-testid="product-faq">
+      <section className="py-24" data-testid="product-faq">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4">
             <p className="text-[11px] uppercase tracking-[0.24em] text-slate-500 mb-3">Answers</p>
@@ -756,7 +756,7 @@ const Products = () => {
       </section>
 
       {/* ── SECTION 11 · Final CTA + pilot form ───────────────────── */}
-      <section id="pilot" className="scroll-mt-28 py-24" data-testid="product-final-cta">
+      <section id="pilot" className="scroll-mt-28 py-24 bg-slate-50 border-y border-slate-200" data-testid="product-final-cta">
         <div className="max-w-5xl mx-auto px-6 lg:px-10">
           <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 lg:p-14 shadow-[0_30px_80px_-40px_rgba(15,23,42,0.25)]">
             <div aria-hidden="true" className="absolute -top-32 -right-32 w-[420px] h-[420px] rounded-full blur-3xl" style={{ background: "radial-gradient(circle, rgba(37,99,235,0.25), transparent 60%)" }} />
@@ -811,7 +811,7 @@ const Products = () => {
                         type="button"
                         role="radio"
                         aria-checked={form.team_size === t}
-                        data-testid={`pilot-team-size-${t.replace(/\D+/g, "-").replace(/^-|-$/g, "") || "200-plus"}`}
+                        data-testid={`pilot-team-size-${t === "200+" ? "200-plus" : t.replace(/\D+/g, "-")}`}
                         onClick={() => setForm({ ...form, team_size: t })}
                         className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${form.team_size === t ? "bg-slate-900 text-white border-slate-900" : "border-slate-300 text-slate-700 hover:bg-slate-50"}`}
                       >

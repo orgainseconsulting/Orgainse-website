@@ -345,7 +345,7 @@ Share
 URL: https://www.orgainse.com/products
 Summary: ORQYNE by Orgainse: AI project management and delivery governance software for IT services, software teams and business workflows, with AI agents and governed RAG knowledge.
 
-ORQYNE · Project Portfolio and Delivery Governance Software by Orgainse
+ORQYNE · AI Project Management and Delivery Governance Software by Orgainse
 See the Work. Govern the Delivery. Move With Confidence.
 Service-Backed Delivery Governance by Orgainse ORQYNE brings project execution, portfolio visibility, business workflows, knowledge, decisions, governance, and Artificial Intelligence assistance into one tenant-aware platform. Built for Information Technology services, software delivery, and cross-functional business operations, ORQYNE helps teams move beyond disconnected task tracking and operate with clearer ownership, stronger reporting, and better decision context.
 Orgainse supports workflow mapping, configuration, import, onboarding, governance, and executive review, so customers are not left to configure a complex operating system alone.
