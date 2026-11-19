@@ -117,7 +117,7 @@ const FAQS = [
   },
   {
     q: "What is ORQYNE?",
-    a: "ORQYNE is project portfolio and delivery governance software built by Orgainse. It brings projects, portfolios, RAID registers, decisions, knowledge and Artificial Intelligence-assisted workflows into one governed workspace, and is implemented with Orgainse support rather than left for customers to configure alone.",
+    a: "ORQYNE is AI project management and delivery governance software built by Orgainse. It brings project execution, portfolio visibility, business workflows, knowledge, decisions, governance and Artificial Intelligence assistance into one tenant-aware platform, and is service-backed: Orgainse supports workflow mapping, configuration, import, onboarding and governance.",
   },
   {
     q: "How can delivery teams adopt Artificial Intelligence practically?",

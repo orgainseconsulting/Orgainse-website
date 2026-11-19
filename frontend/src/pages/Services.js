@@ -249,7 +249,7 @@ const Services = () => {
     {
       id: 'orqyne-implementation',
       title: "ORQYNE Implementation and Adoption",
-      description: "Roll out ORQYNE, project portfolio and delivery governance software, around the way your organisation actually operates. We support workspace design, roles and access, workflow configuration, work import, templates, governance controls, integrations, onboarding, and adoption reviews.",
+      description: "Roll out ORQYNE, AI project management and delivery governance software, around the way your organisation actually operates. We support workspace design, roles and access, workflow configuration, work import, templates, governance controls, integrations, onboarding, and adoption reviews.",
       features: [
         "Workspace design, roles and access",
         "Workflow configuration, templates and governance controls",
@@ -642,7 +642,7 @@ const Services = () => {
                   )}
                   {svc.productLink && (
                     <Link to={svc.productLink.href} className="sm:col-span-2 inline-flex items-center gap-1.5 font-semibold text-slate-900 hover:text-blue-700 transition-colors" data-testid={`service-detail-product-${svc.id}`}>
-                      {svc.productLink.label}: ORQYNE project portfolio and delivery governance software <ArrowRight className="h-3.5 w-3.5" />
+                      {svc.productLink.label}: ORQYNE AI project management and delivery governance software <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
                   )}
                 </div>

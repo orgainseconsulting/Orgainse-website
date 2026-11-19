@@ -12,7 +12,7 @@ fs.mkdirSync(OUT, { recursive: true });
 export const CARDS = [
   ['home', 'navy', 'cluster', 'Delivery Governance Consulting', 'Turn fragmented work into visible, governed execution'],
   ['services', 'cream', 'arc', 'Services', 'PMaaS, outsourced PMO and delivery governance'],
-  ['products', 'deepTeal', 'orbit', 'ORQYNE by Orgainse', 'Project portfolio and delivery governance software'],
+  ['products', 'deepTeal', 'orbit', 'ORQYNE by Orgainse', 'AI project management and delivery governance'],
   ['about', 'ivory', 'orbit', 'About Orgainse', 'A senior delivery team in Austin and Bengaluru'],
   ['contact', 'ember', 'arc', 'Contact Orgainse', 'Bring one important execution problem'],
   ['ai-assessment', 'ink', 'orbit', 'Free assessment', 'How ready is your delivery for governed execution?'],
