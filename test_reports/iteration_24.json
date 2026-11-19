@@ -1,0 +1,27 @@
+{
+  "summary": "Frontend-only check of /products: the new Layers of Intelligence section, the RAG steps, the agent cards, the grouped FAQ with JSON-LD, layout at 1920/800/768/390 px, and regressions (pilot form, trial links). Every requested item passed. No pilot leads were submitted.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Products > Layers grid (desktop/tablet)", "issues": ["Because cards in a row are equal height, the shorter cards (e.g. Meeting & Voice next to Governed Agentic) end with large empty white space. This is expected from the spec and is cosmetic only."]},
+      {"screen": "Products > Layer features", "issues": ["Inside a card, the 'Deep Intelligence' pill often wraps onto its own line under the feature name. It is readable but looks uneven. Optional fix: put the pills on one line under the title."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Optional, pre-existing: src/components/MobilePerformanceOptimizer.js preloads /static/css/main.css and /static/js/main.js, which return 404 (CRA uses hashed filenames). These are the only console errors on the page. Remove the preloads or point them at the real files."
+  ],
+  "critical_code_review_comments": [
+    "Products.js is 916 lines. Consider moving the FAQS/AGENTS/PLANS constants to src/data, as was done with orqyneLayers.js.",
+    "FAQ indexes come from FAQ_GROUPS order (about first, then layers in LAYERS order). They are not in LAYER_FAQS source order, so product-faq-question-9 is the first Delivery FAQ (RAID log). Keep this in mind in future tests.",
+    "Glossary keys and testids come from term.t. They are unique today, but a duplicate term would cause a React key collision."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped)", "frontend": "100%"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Verified: section order rag -> intelligence-layers-section -> agents; 9 layer cards with summaries, features, product pills and Deep pills (only layer-deep-tag-decision exists at card level); grid 3/2/1 columns with equal heights per row and no overflow at 390; Contact Sales opens the existing 'Book a call' host-picker modal (role=dialog), not a Calendly iframe; glossary collapsed by default, 33 terms in the HTML; rag-step-0..3 = Index/Retrieve/Answer/Approve; agent-card-0..5 with no -6; 10 FAQ groups with 26 questions, each answer toggles and only one opens at a time; FAQPage JSON-LD has 26 entries; all trial links go to https://orgainse.live with target=_blank."
+}

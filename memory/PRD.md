@@ -816,3 +816,11 @@ Self-tested: DOM assertions for the empty state and the removed phrases, plus de
 
 ## 2026-06 Products page tidy-up
 - Removed unused imports from Products.js; build compiles with no warnings. Wording review: user made no changes.
+
+## 2026-06 ORQYNE Layers of Intelligence + orgainse.live sync (Phase 1)
+- New section `components/products/IntelligenceLayers.js` after RAG steps: 9 layer cards (always visible), product pills, Deep Intelligence pills, dark Deep note + Contact Sales (Calendly), collapsed Key terms glossary.
+- Verbatim data in `src/data/orqyneLayers.js` (extracted from orgainse.live bundle JSON: layers, features, terms, 17 layer FAQs). Earned value wording allowed only where orgainse.live uses it.
+- RAG steps → Index, Retrieve, Answer, Approve. Agents → 6 live agents (custom agent builder box kept).
+- FAQ grouped: About ORQYNE (9) + per-layer groups (17) = 26, all in FAQPage JSON-LD. SEO description + featureList updated; llms.txt updated (layers, agents, steps).
+- Tested: iteration_24 (100% frontend); pill-row nit fixed after.
+- Backlog: Phase 2 per-layer share links/images; Phase 3 periodic orgainse.live wording-change check. Resend key still invalid (pilot/careers emails).

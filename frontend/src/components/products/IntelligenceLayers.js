@@ -23,8 +23,8 @@ const LayerCard = ({ layer, index }) => (
     <ul className="mt-5 space-y-4 border-t border-slate-100 pt-5">
       {layer.features.map((f, i) => (
         <li key={`${f.p}-${f.t}`} data-testid={`layer-feature-${layer.id}-${i}`}>
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-[13px] font-semibold text-slate-900 mr-1">{f.t}</span>
+          <p className="text-[13px] font-semibold text-slate-900">{f.t}</p>
+          <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
             <Pill>{PRODUCT_LABELS[f.p]}</Pill>
             {f.deep && <Pill tone="deep">Deep Intelligence</Pill>}
           </div>
